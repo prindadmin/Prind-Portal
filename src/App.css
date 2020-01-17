@@ -1,0 +1,317 @@
+/* Grid system */
+@import "~bootstrap/dist/css/bootstrap-grid.min.css";
+/* UI library */
+@import "~@blueprintjs/core/lib/css/blueprint.css";
+
+:root {
+  --footer-height: 50px;
+  --header-height: 75px;
+}
+
+
+.App {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Lato', 'Roboto', sans-serif;
+  font-weight: 400;
+  background-color: white;
+  min-height: 100vh;
+}
+
+.full-height {
+    height: 100%
+}
+
+.full-width {
+  width: 100%
+}
+
+.fill {
+  height: 100%;
+  width: 100%;
+}
+
+.All-Content {
+  display: flex;
+  flex-direction: row;
+  height: calc(100vh - var(--header-height) - var(--footer-height));
+}
+
+hr {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    overflow: hidden;
+    border-style: inset;
+    border-width: 1px;
+    border-color: #BBB;
+    width: 80%;
+}
+
+/* ================================ */
+/* ======== sidebar section ======= */
+/* ================================ */
+
+.chooser-section {
+  border-right: 1px solid black;
+  height: calc(100vh - var(--header-height) - var(--footer-height));
+  overflow: scroll;
+  padding: 0 0 10px 0;
+}
+
+.content-section {
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.sidebar h2 {
+  margin: 0.3em 0;
+  font-size: calc(14px + ((30 - 20) * (100vw - 300px) / (1600 - 300)));
+}
+
+/* ================================ */
+/* ====== header bar section ====== */
+/* ================================ */
+
+#header-bar {
+  display: flex;
+  align-content: space-between;
+  align-items: center;
+  height: var(--header-height);
+  background-color: #000;
+  margin: 0;
+}
+
+#header-bar .header-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 1140px;
+  margin: auto;
+}
+
+#header-bar .company-name {
+  color: white;
+  float: left;
+  margin-left: 20px;
+  text-align: left;
+}
+
+#header-bar a {
+  color: inherit;
+  font-style: normal;
+  text-decoration-line: none;
+}
+
+#header-bar h1 {
+  font-size: 1.8em;
+  font-weight: 600;
+}
+
+#header-bar .nav-links {
+  color: red;
+  float: right;
+  margin-left: auto;
+  text-align: right;
+}
+
+#header-bar .menu-container {
+  display: flex;
+  flex-direction: row;
+}
+
+#header-bar .menu-item {
+  color: white;
+  margin-left: 20px;
+}
+
+/* ================================== */
+/* ====== working area section ====== */
+/* ================================== */
+
+#working-area {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* ================================== */
+/* ========= inception page ========= */
+/* ================================== */
+
+#generic-page {
+}
+
+#generic-page .page-title h1 {
+  font-size: calc(20px + ((50 - 20) * (100vw - 300px) / (1600 - 300)));
+  margin-bottom: 0.3em;
+}
+
+#generic-page .page-title {
+  margin-bottom: 40px;
+}
+
+
+#generic-page .form h2 {
+  margin-bottom: 0;
+}
+
+#generic-page .field-container {
+  width: 80%;
+  min-width: 300px;
+}
+
+#generic-page .field {
+  width: 100%;
+}
+
+#generic-page .button {
+  min-width: 130px;
+}
+
+#generic-page .col-margin {
+  margin-top: 20px;
+}
+
+#generic-page .spinner-section {
+  margin-top: 40px;
+}
+
+#generic-page .result-section {
+  margin-top: 40px;
+}
+
+#generic-page .error-section {
+  margin-top: 40px;
+}
+
+#generic-page .hash-section span {
+  word-wrap:break-word;
+}
+
+#generic-page .result-details span {
+  word-wrap:break-word;
+}
+
+/* adds border between projects in sidebar */
+.list-item-container:after {
+    content:'';
+    width:95%;
+    height:2px;
+    background: rgba(138, 155, 168, 0.3);
+    position:absolute;
+    bottom: 0;
+  }
+
+/* adds background color to list */
+.list-item-container {
+    display: flex;
+    align-items: center;
+    background: none;
+}
+
+.list-item-container.bp3-callout svg {
+    width: 50px;
+}
+
+.list-item-container.selected,
+.list-item-container:hover {
+    background-color: rgba(138, 155, 168, 0.15)
+}
+
+/* ================================== */
+/* ========= status section ========= */
+/* ================================== */
+
+#generic-page .status-section {
+
+}
+
+#generic-page .status-section .status-circle {
+  padding: 10px;
+  margin: 20px;
+  display: inline-block;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+
+#generic-page .missing-active {
+  background-color: red;
+}
+
+#generic-page .signature-active {
+  background-color: orange;
+}
+
+#generic-page .completed-active {
+  background-color: green;
+}
+
+#generic-page .not-active {
+  background-color: grey;
+}
+
+/* ================================== */
+/* ========= training page ========== */
+/* ================================== */
+
+#generic-page .training-page {
+
+}
+
+#generic-page .provider-details-section h2 {
+  margin-bottom: 20px;
+}
+
+#generic-page .course-details {
+    margin: 20px 0 10px 0;
+    display: flex;
+    align-items: center;
+    text-align: left;
+}
+
+#generic-page .course-name {
+  padding-left: 10%;
+}
+
+#generic-page .course-tick-box {
+  margin-left: 10px;
+}
+
+#generic-page .course-table-heading {
+  font-weight: bold;
+}
+
+#generic-page .provider-course-section {
+  flex-direction: row;
+  display: flex;
+  text-align: left;
+}
+
+/* ================================== */
+/* ============= footer ============= */
+/* ================================== */
+
+#footer-bar {
+  background-color: #000;
+  height: var(--footer-height);
+  display: flex;
+  flex-direction: column;
+}
+
+#footer-bar .footer-content {
+  height: 100%;
+}
+
+#footer-bar .footer-text {
+  color: #888;
+  height: 1.3em;
+  margin: auto;
+}
+
+#footer-bar .footer-text a {
+  color: #888;
+  height: 1.3em;
+  margin: auto;
+}

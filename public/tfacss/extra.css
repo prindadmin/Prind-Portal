@@ -1,0 +1,398 @@
+/* Extra CSS that is not the app, and added additionally*/
+.maintenance-banner {
+    width: 100%;
+    background-image: linear-gradient(#FF3232, red);
+    /*background-color: #ff5a5f;*/
+
+    height: auto;
+    padding: .75em;
+    color: white;
+    text-align: center;
+    font-size: 18pt;
+}
+
+
+.testnet-banner {
+    background-image: linear-gradient(#2C3539, #3e3e3d);
+    /*background-color: #ff5a5f;*/
+
+    width: 100%;
+    height: auto;
+    padding: .75em;
+    color: white;
+    text-align: center;
+    font-size: 18pt;
+}
+
+.pending-banner {
+    /*background-image: linear-gradient(#8a6d3b, #8a6d3b);*/
+    /*background-color: #ff5a5f;*/
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-color: #faebcc;
+
+    width: 100%;
+    height: auto;
+    padding: .75em;
+    /*color: white;*/
+    text-align: center;
+    font-size: 18pt;
+}
+
+
+.has-tip-slim {
+    position: relative;
+    display: inline-block;
+    font-weight: bold;
+    cursor: help;
+}
+
+#block-summary, #pending-summary {
+    color:black;
+}
+
+#block-summary thead th, #pending-summary thead th {
+    color: #53346d;
+    font-size: 1.2em;
+
+    padding: 0.5rem 0.625rem .3rem !important;
+}
+
+#block-summary, #pending-summary {
+    margin-bottom: 50px;
+}
+
+
+.center-text {
+    text-align: center;
+}
+
+#data-tables select {
+    width: auto !important;
+    height: auto !important;
+    padding-top: 0rem !important;
+    padding-bottom: 0rem !important;
+    margin-bottom: 10px;
+}
+
+#data-tables table {
+    /*font-size: 13px;*/
+    font-size: 11.05px;
+}
+
+#data-tables td {
+    font-family: monospace;
+}
+
+.mono, #data-table_info, .dataTables_info{
+    font-family: monospace;
+}
+
+.date-selection {
+    margin-left: 50%;
+    margin-bottom: -35px;
+    text-align: right;
+    z-index: 100;
+    position: relative
+}
+
+#data-table_wrapper {
+    z-index: 1;
+    position: relative
+}
+
+.nested-table {
+    padding: 0px;
+    margin: 0px;
+    line-height: 1;
+    /*font-size: 1rem;*/
+    /*background: black;*/
+    /*pointer-events: none;*/
+}
+
+/*.disabled-hover > table > tbody > tr:hover{*/
+    /*background: red;*/
+/*}*/
+
+.disabled-hover:hover {
+    /*cursor: inherit !important;;*/
+    background: #e6e6e6 !important;
+    color: inherit !important;
+}
+
+/*.nested-table tr:hover {*/
+    /*background: blue !important;*/
+    /*color: red !important;*/
+/*}*/
+
+
+
+.btn {
+    cursor: pointer;
+}
+
+/* */
+
+.multilevel-accordion-menu .is-accordion-submenu-parent a {
+    background: #53346d;
+}
+
+.multilevel-accordion-menu .is-accordion-submenu a {
+    background: #534161;
+}
+
+
+.multilevel-accordion-menu .is-accordion-submenu p {
+    background: #534161;
+    padding: 5px;
+    margin-bottom: 0px !important;
+}
+
+.multilevel-accordion-menu .sublevel-1 {
+    /*text-indent: 1rem;*/
+    /*text-indent: -1rem;*/
+    /*padding-left: 1rem;*/
+}
+
+.multilevel-accordion-menu .sublevel-2 {
+    text-indent: 2rem;
+}
+
+.multilevel-accordion-menu .sublevel-3 {
+    text-indent: 3rem;
+}
+
+.multilevel-accordion-menu .sublevel-4 {
+    text-indent: 4rem;
+}
+
+.multilevel-accordion-menu .sublevel-5 {
+    text-indent: 5rem;
+}
+
+.multilevel-accordion-menu .sublevel-6 {
+    text-indent: 6rem;
+}
+
+.multilevel-accordion-menu a {
+    color: #fefefe;
+    box-shadow: inset 0 -1px #41444a;
+}
+
+.multilevel-accordion-menu p {
+    color: #fefefe;
+    box-shadow: inset 0 -1px #41444a;
+}
+
+.multilevel-accordion-menu a::after {
+    border-color: #fefefe transparent transparent;
+}
+
+.multilevel-accordion-menu .menu > li:not(.menu-text) > a {
+    padding: 0.5rem 1rem;
+}
+
+.multilevel-accordion-menu .is-accordion-submenu-parent[aria-expanded="true"] a.subitem::before {
+    /*content: "\f016";*/
+    /*font-family: FontAwesome;*/
+    margin-right: 1rem;
+}
+
+.multilevel-accordion-menu .is-accordion-submenu-parent[aria-expanded="true"] a::before {
+    /*content: "\f07c";*/
+    /*font-family: FontAwesome;*/
+    margin-right: 1rem;
+}
+
+.multilevel-accordion-menu .is-accordion-submenu-parent[aria-expanded="false"] a::before {
+    /*content: "\f07b";*/
+    /*font-family: FontAwesome;*/
+    margin-right: 1rem;
+}
+
+
+/* */
+
+.radio-option-label {
+    font-size: 1em;
+}
+
+input[type=checkbox],
+input[type=radio] {
+    opacity: 0;
+    position: absolute;
+}
+input[type=checkbox]:checked + label:before,
+input[type=radio]:checked + label:before {
+    background: #007095;
+}
+input[type=checkbox] + label:before,
+input[type=radio] + label:before {
+    display: inline-block;
+    text-align: center;
+    line-height: 1;
+    border: 0.0625rem solid #007095;
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.5rem;
+    font-size: 0.875rem;
+    color: white;
+    background: white;
+}
+input[type=checkbox] + label:before {
+    content: "\2715";
+    padding-right: 1px;
+    border-radius: 0.125rem;
+}
+input[type=radio] + label:before {
+    content: "\2713";
+    /*border-radius: 50%;*/
+}
+
+.div-striped {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 100%;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.div-striped:nth-child(even) {
+    background-color: #F5F7F9;
+}
+
+.div-striped:nth-child(odd) {
+    background-color: white;
+}
+
+.stat-icon {
+    cursor: pointer;
+}
+
+.stat-header {
+    font-size: 2em;
+}
+
+.entry-content {
+    white-space: pre-wrap;       /* Since CSS 2.1 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+
+    padding: 20px;
+    margin: 10px;
+    background-color: #f8f2ff;
+}
+
+.extid-row {
+    font-size: 1.2em;
+    /*padding-top: 5px;*/
+    /*padding-bottom: 5px;*/
+}
+
+.search-error {
+    /*background-color: indianred !important;*/
+    background-color: #534161 !important;
+    /*padding-left: 120px !important;*/
+    /*padding-top: 20px;*/
+    /*padding-bottom: 20px;*/
+}
+
+.error-data {
+    background-color: indianred !important;
+    margin-left: 60px !important;
+    padding-left: 20px;
+    color: black;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+
+}
+
+
+td.details-control {
+    /*background: url('../img/details_open.png') no-repeat center center;*/
+    /*background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAQAAABIkb+zAAABD0lEQVR4Ae3PgQYCQRSF4QFkRfQEAbCguU8XoYIAAT1LEAgCYV9oWqmBRDq1R/zfBWDmP+l/AAAAAAAAAAAAIBbtNCVdO50vHfn7KNHVCUJ+dFFi78gv6oSa31/epeHkXZR6XUzUfGWCkF/v8tmEmNT8x20HyI9N/U6a0Odfnl+ar9Ov5VUUccJzfr28SgJxQjv25usTzu9NaMd6vmVCzT8L+YYJYr5hQjTphWiE/AEnnKJ5kX8S8n0ThHz/BCHfP2E2SnezkZDvm5CPtwl9fj4K+e4JWr5/wkHM90/Q8/0T9Hz/BD3fP0HP90+Q8v0TpHz/BCnfP0HK90+Q8v0TpHz/hG/nAwAAAAAAAAAAXAFf1UvB0RuGTQAAAABJRU5ErkJggg==);*/
+    cursor: pointer;
+    background: url('../img/tri-right.png') no-repeat center center;
+    padding: 8px 15px;
+}
+tr.shown td.details-control {
+    /*background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAQAAABIkb+zAAABEElEQVR4Ae3PAQYCURSF4QtIIiIAAmDAvLu9MAUBAlpLEAgCIWg5UzyZeAKnedfwfws4/mMAAAAAAAAAAAD/lbrUTTrfe+9TN+l8/UJ4vn4hPF++EJ8vX4jPly/E54sX4vOFC/H5woX4fOFCfH46p7NwITz/spltZukiXIjOtzfhQmS+X3N+vuBX4UJMvs/ti8+FC7H5woX4/OLCrcIFOf9W5n80iwoX1PxmYSX5Qnx+/AUhv7xwH+2CkH//mV/w5VgXhHxf2tsELvhezB8uPMqldmfjS0c1P2tWxYWDZVUvPHK+fiEdrR4/ffKblQnyBTFfuDDkKxee3vvJ6mt3OV/VrtutAQAAAAAAAAAAYDJeeA5LziNlLMgAAAAASUVORK5CYII=);*/
+    background: url('../img/tri-down.png') no-repeat center center;
+    /*background: url('../img/details_close.png') no-repeat center center;*/
+}
+
+/* https://martinwolf.org/before-2018/blog/2015/01/pure-css-savingloading-dots-animation/ */
+@keyframes blink {
+    /**
+     * At the start of the animation the dot
+     * has an opacity of .2
+     */
+    0% {
+        opacity: .2;
+    }
+    /**
+     * At 20% the dot is fully visible and
+     * then fades out slowly
+     */
+    20% {
+        opacity: 1;
+    }
+    /**
+     * Until it reaches an opacity of .2 and
+     * the animation can start again
+     */
+    100% {
+        opacity: .2;
+    }
+}
+
+.loading-dots span {
+    /**
+     * Use the blink animation, which is defined above
+     */
+    animation-name: blink;
+    /**
+     * The animation should take 1.4 seconds
+     */
+    animation-duration: 1.4s;
+    /**
+     * It will repeat itself forever
+     */
+    animation-iteration-count: infinite;
+    /**
+     * This makes sure that the starting style (opacity: .2)
+     * of the animation is applied before the animation starts.
+     * Otherwise we would see a short flash or would have
+     * to set the default styling of the dots to the same
+     * as the animation. Same applies for the ending styles.
+     */
+    animation-fill-mode: both;
+}
+
+.loading-dots span:nth-child(2) {
+    /**
+     * Starts the animation of the third dot
+     * with a delay of .2s, otherwise all dots
+     * would animate at the same time
+     */
+    animation-delay: .2s;
+}
+
+.loading-dots span:nth-child(3) {
+    /**
+     * Starts the animation of the third dot
+     * with a delay of .4s, otherwise all dots
+     * would animate at the same time
+     */
+    animation-delay: .4s;
+}
+
+.fat-token-select {
+    font-size: inherit !important;
+    line-height: 2;
+    margin: 0px !important;
+}
