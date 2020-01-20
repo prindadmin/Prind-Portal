@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 
+import * as Endpoints from '../../endpoints'
+
 import {
   Label,
   Button,
@@ -51,15 +53,6 @@ class SignUp extends Component {
         </Label>
         <Label>
           <Field
-            name="company"
-            validate={[validators.maxLength32]}
-            component={FormInputs.TextInput}
-            placeholder='Company'
-            type="text"
-          />
-        </Label>
-        <Label>
-          <Field
             name="email"
             validate={[validators.required, validators.maxLength64, validators.email]}
             component={FormInputs.TextInput}
@@ -94,7 +87,7 @@ class SignUp extends Component {
             text='Cancel Sign Up'
             intent='primary'
             className='bim-dark-blue'
-            onClick={() => {this.props.history.push('/signin')}}
+            onClick={() => {this.props.history.push(Endpoints.defaultPage)}}
           />
         </ButtonGroup>
       </form>
@@ -117,7 +110,7 @@ class SignUp extends Component {
           intent='primary'
           fill
           text='Back to login page'
-          onClick={() => {this.props.history.push('/signin')}}
+          onClick={() => {this.props.history.push(Endpoints.signInPage)}}
         />
       </div>
     )
@@ -127,7 +120,7 @@ class SignUp extends Component {
     const { auth } = this.props
 
     return (
-      <div className='row align-items-center justify-content-center full-height'>
+      <div id='signup' className='row align-items-center justify-content-center'>
         {auth.hasSignedUp === state.AUTH_UNKNOWN
           ? this.signUpForm()
           : this.signedUp()}

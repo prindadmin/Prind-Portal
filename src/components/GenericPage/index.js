@@ -1,3 +1,3 @@
-import GenericPage from './GenericPage'
+import GenericPage from './GenericPageContainer'
 
 export default GenericPage

@@ -1,9 +1,8 @@
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
 
 import * as reducer from '../../reducers/awsReducer'
 
-import SignUpComponent from './SignUp'
+import ForgotPasswordComponent from './ForgotPassword'
 
 const mapStatetoProps = state => {
   return {
@@ -16,12 +15,14 @@ const mapDispatchToProps = dispatch => {
     init: () => {
       dispatch(reducer.init())
     },
-    signUp: (values) => {
+    sendCode: (values) => {
+      const email = values.email
+
       return new Promise((resolve, reject) => {
-        dispatch(reducer.signUp(values, resolve, reject))
+        dispatch(reducer.forgotPassword(email, resolve, reject))
       })
     }
   }
 }
 
-export default withRouter(connect(mapStatetoProps, mapDispatchToProps)(SignUpComponent))
+export default connect(mapStatetoProps, mapDispatchToProps)(ForgotPasswordComponent)

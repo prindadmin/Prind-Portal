@@ -3,6 +3,8 @@ import { Field, reduxForm } from 'redux-form'
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types'
 
+import * as Endpoints from '../../endpoints'
+
 import {
   Label,
   Button,
@@ -75,7 +77,7 @@ class SignIn extends Component {
             intent='primary'
             className='bim-light-blue'
             text='New User? Create Account'
-            onClick={() => {this.props.history.push('/signup')}} />
+            onClick={() => {this.props.history.push(Endpoints.signUpPage)}} />
         </ButtonGroup>
         <ButtonGroup fill>
           <Button
@@ -92,8 +94,8 @@ class SignIn extends Component {
   render () {
     const { auth } = this.props
     return (
-      <div className='row align-items-center justify-content-center full-height'>
-        {auth.isSignedIn === state.AUTH_SUCCESS ? <Redirect to='/projects' /> : this.renderSignIn()}
+      <div id='signin' className='row align-items-center justify-content-center'>
+        {auth.isSignedIn === state.AUTH_SUCCESS ? <Redirect to={Endpoints.defaultLoggedInPage} /> : this.renderSignIn()}
       </div>
     )
   }
@@ -102,4 +104,3 @@ class SignIn extends Component {
 export default reduxForm({
   form: 'signIn'
 })(SignIn)
-

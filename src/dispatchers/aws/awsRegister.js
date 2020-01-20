@@ -6,7 +6,6 @@ export default function (payload) {
   const {
     email,
     password,
-    company,
     firstName,
     lastName
   } = payload
@@ -25,13 +24,6 @@ export default function (payload) {
       Value: lastName
     })
   ]
-
-  if (company) {
-    attributeList.push(new CognitoUserAttribute({
-      Name: 'custom:company',
-      Value: company
-    }))
-  }
 
   return new Promise((resolve, reject) => {
     userPool.signUp(email, password, attributeList, null, (err, result) => {

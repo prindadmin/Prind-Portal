@@ -8,7 +8,7 @@ class Auth extends React.Component {
     getUser: PropTypes.func
   }
 
-  componentWillMount() {
+  componentDidMount() {
     config.set({
       region: process.env.REACT_APP_REGION,
       UserPoolId: process.env.REACT_APP_USER_POOL_ID,

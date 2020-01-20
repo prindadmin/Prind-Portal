@@ -7,12 +7,13 @@ export const email = value => validator.isEmail(value) ? undefined : 'Not Valid 
 export const minLength = value => (value.length >= 8 ? undefined : 'Min Length 8')
 
 export const isValidPassword = value => {
-  const alphanumericAndSpecial = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]/
+  //const alphanumericAndSpecial = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]/
+  const alphanumericOnly = /^(?=.*[0-9])[a-zA-Z0-9]/
   const hasUppercase = /[A-Z]/
 
   return value.length >= 8 &&
-    alphanumericAndSpecial.test(value) &&
-    hasUppercase.test(value) ? undefined : 'Password must be at least 8 characters in length and contain a lowercase, uppercase, digit and special character (!@#$%^&)'
+    alphanumericOnly.test(value) &&
+    hasUppercase.test(value) ? undefined : 'Password must be at least 8 characters in length and contain at least one lowercase, one uppercase, and one digit'
 }
 
 export const maxLength32 = value => {

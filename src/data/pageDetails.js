@@ -1,30 +1,9 @@
-import React, { Component } from 'react';
-import './App.css';
-
-import {
-  HashRouter as Router,
-  Route,
-  Redirect,
-  Switch
-} from "react-router-dom";
-
-import { AUTH_SUCCESS } from './states'
-
-import PrivateRoute from './components/PrivateRoute';
-
-import Auth from './components/Auth';
-import SignIn from './components/SignIn';
-import SignUp from './components/SignUp';
-import ForgotPassword from './components/ForgotPassword';
-import ChangePassword from './components/ChangePassword';
-
-import WelcomePage from './components/WelcomePage';
-import InceptionPage from './components/InceptionPage';
-
-import GenericPage from './components/GenericPage';
-import TrainingPage from './components/TrainingPage';
-
 const pageDetails = {
+  Welcome: {
+    name: "Welcome",
+    title: "Welcome to Prin-D",
+    description: "Prin-D is is a Blockchain enabled platform designed to ensure compliance CDM2015 regulations.  Prin-D uses the Principal Designer work-flow to assist project clients and designers with their CDM duties.  Further TRAINING is available at...",
+  },
   Training: {
     name: "Training",
     title: "Training Courses",
@@ -59,6 +38,35 @@ const pageDetails = {
             passed: false,
           },
         ]
+      }
+    ]
+  },
+  Inception: {
+    name: "Inception",
+    title: "Project Inception",
+    description: "Inception of a project begins with the Idea.  This Idea is captured in a project brief.",
+    questions: [
+      {
+        id: 0,
+        title: "Please upload your project brief",
+        prompt: "Choose File...",
+        hasChosen: false,
+        hasHash: false,
+        hasSubmitted: false,
+        hasReceived: false,
+        hasSuccess: false,
+        status: "missing",
+      },
+      {
+        id: 1,
+        title: "Please upload your XXXXXXXXXXXX",
+        prompt: "Choose File...",
+        hasChosen: false,
+        hasHash: false,
+        hasSubmitted: false,
+        hasReceived: false,
+        hasSuccess: false,
+        status: "missing",
       }
     ]
   },
@@ -177,88 +185,4 @@ const pageDetails = {
   }
 }
 
-class App extends Component{
-
-  componentDidMount() {
-    this.setState({
-      pageDetails: pageDetails,
-    })
-  }
-
-
-  render() {
-
-    const { auth } = this.props // the props exposed are defined in the container
-
-    return (
-      <div className="App full-height">
-        <Router>
-          <Auth />
-
-          <Switch>
-            <Route path='/SignIn' component={SignIn} />
-            <Route path='/SignUp' component={SignUp} />
-            <Route path='/forgot-password' component={ForgotPassword} />
-            <Route path='/change-password' component={ChangePassword} />
-
-            <PrivateRoute path='/Welcome' component={WelcomePage} />
-            <PrivateRoute path='/Training' component={TrainPage} />
-            <PrivateRoute path='/Inception' component={InceptionPage} />
-            <PrivateRoute path='/Feasibility' component={FeasibilityPage} />
-            <PrivateRoute path='/Design' component={DesignPage} />
-            <PrivateRoute path='/Tender' component={TenderPage} />
-            <PrivateRoute path='/Construction' component={ConstructionPage} />
-            <PrivateRoute path='/Handover' component={HandoverPage} />
-            <PrivateRoute path='/Occupation' component={OccupationPage} />
-            <PrivateRoute path='/Refurbishment' component={RefurbishmentPage} />
-
-            <Route path='/'
-              render={() =>
-                auth.isSignedIn === AUTH_SUCCESS ? (
-                  <Redirect to='/Welcome' />
-                ) : (
-                  <Redirect to='/SignIn' />
-                )
-              }
-            />
-          </Switch>
-
-        </Router>
-      </div>
-    )
-  }
-}
-
-function TrainPage() {
-  return <TrainingPage pageDetails={pageDetails["Training"]} />
-}
-
-function FeasibilityPage() {
-  return <GenericPage pageDetails={pageDetails["Feasibility"]} />
-}
-
-function DesignPage() {
-  return <GenericPage pageDetails={pageDetails["Design"]} />
-}
-
-function TenderPage() {
-  return <GenericPage pageDetails={pageDetails["Tender"]} />
-}
-
-function ConstructionPage() {
-  return <GenericPage pageDetails={pageDetails["Construction"]} />
-}
-
-function HandoverPage() {
-  return <GenericPage pageDetails={pageDetails["Handover"]} />
-}
-
-function OccupationPage() {
-  return <GenericPage pageDetails={pageDetails["Occupation"]} />
-}
-
-function RefurbishmentPage() {
-  return <GenericPage pageDetails={pageDetails["Refurbishment"]} />
-}
-
-export default App;
+export default pageDetails
