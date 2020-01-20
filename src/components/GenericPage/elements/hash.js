@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import { Button } from '@blueprintjs/core'
 
-import ContactUsDispatch from '../../../dispatchers/notify'
+import ContactUsDispatch from '../../../dispatchers/foundations/notify'
 
 export class Hash extends Component {
   static propTypes = {

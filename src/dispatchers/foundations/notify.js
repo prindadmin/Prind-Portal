@@ -1,8 +1,6 @@
 import axios from 'axios'
 import https from 'https'
 
-import * as endpoint from './endpoints.js'
-
 export default function( values ) {
 
   return new Promise((resolve, reject) => {
@@ -16,7 +14,7 @@ export default function( values ) {
       }
     });
 
-    instance.post(`${endpoint.checkStatus}`, values)
+    instance.post(`${process.env.REACT_APP_FOUNDATIONS_SEND_NOTIFICATION}`, values)
     .then(res => {
       //console.log("success")
       //console.log(res)

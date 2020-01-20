@@ -3,7 +3,10 @@ import './App.css';
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
+import { AUTH_SUCCESS } from './states'
+
 import HeaderBar from './components/common/HeaderBar';
+import Auth from './components/Auth';
 import GenericPage from './components/GenericPage';
 import TrainingPage from './components/TrainingPage';
 import ListItem from './components/common/page-tile'
@@ -203,10 +206,13 @@ class App extends Component{
 
   render() {
 
+    const { auth } = this.props // the props exposed are defined in the container
+
     return (
       <div className="App">
         <Router>
           <div className="App-header">
+            <Auth />
             <HeaderBar
               companyName='Prin-D'
             />
