@@ -2,12 +2,12 @@ import * as auth from 'aws-cognito-promises'
 
 import { call, put, takeLatest } from 'redux-saga/effects'
 
-import { register, changePasswordAccount, getStsTokenPromise } from '../dispatchers/aws'
+import { register, changePasswordAccount } from '../dispatchers/aws'
 import * as actions from '../actions'
 import * as states from '../states'
 
 
-// auth is stateless. Each call to a auth action resets all state EXCEPT for completeNewPassword and getStsToken
+// auth is stateless. Each call to a auth action resets all state EXCEPT for completeNewPassword
 let defaultState = {
   info: {},
   error: {},
@@ -32,7 +32,6 @@ function * getUser () {
   try {
     let user = auth.config.getUser()
     let session = yield call(auth.getSession)
-    let { data: stsToken } = yield call(getStsTokenPromise, user.username)
     yield put({
       type: actions.AUTH_SET_STATE,
       payload: {
@@ -41,7 +40,6 @@ function * getUser () {
         isConfirmed: states.AUTH_SUCCESS,
         info: { username: user.username, ...session },
         finished: true,
-        stsToken: stsToken
       }
     })
   } catch (e) {
@@ -54,22 +52,6 @@ function * getUser () {
         finished: true
       }
     })
-  }
-}
-
-function * getStsToken (action) {
-  const { userName } = action.payload
-  try {
-    const { data: stsToken } = yield call(getStsTokenPromise, userName)
-    yield put({
-      type: actions.AUTH_SET_STATE,
-      payload: {
-        stsToken
-      }
-    })
-    }
-    catch (e) {
-      console.log(e)
   }
 }
 
@@ -235,5 +217,4 @@ export default function * sagas () {
   yield takeLatest(actions.AUTH_FORGOT_PASSWORD, forgotPassword)
   yield takeLatest(actions.AUTH_CHANGE_PASSWORD, changePassword)
   yield takeLatest(actions.AUTH_COMPLETE_NEW_PASSWORD, completeNewPassword)
-  yield takeLatest(actions.AUTH_GET_STS_TOKEN, getStsToken)
 }

@@ -5,37 +5,45 @@ import HeaderBar from '../common/HeaderBar';
 import PageChooserSection from '../layouts/PageChooserSection'
 import Footer from '../common/footer'
 
-import SingleFieldRequirement from '../common/uploadfields/RequiredFileTile'
+import ProviderDetails from './elements/provider-details'
 
 import pageDetails from '../../data/pageDetails'
 
-const pageName = "Inception"
+const pageName = "Training"
 
 export class Page extends Component {
   static propTypes = {
     pageDetails: PropTypes.object,
   }
 
+
   render() {
 
+    const { title, description, providers } = pageDetails[pageName]
+
     return (
-      <div id='inception-page'>
+      <div id='training-page'>
         <div className="App-header">
-          <HeaderBar companyName='Prin-D' />
+          <HeaderBar />
         </div>
         <div className='content-with-sidebar full-height row'>
           <PageChooserSection />
           <div className='page-content col-xl-10 col-lg-9 col-md-9 col-sm-9'>
             <div className='page-title'>
-              <h1>{pageDetails[pageName].title}</h1>
-              <span>{pageDetails[pageName].description}</span>
+              <h1>{title}</h1>
+              <span>{description}</span>
             </div>
             {
-              pageDetails[pageName].questions != null ? pageDetails[pageName].questions.map((singleQuestion) => {
-                return <SingleFieldRequirement key={singleQuestion.id} details={singleQuestion} />
+              providers != null ? providers.map((singleProvider) => {
+                return (
+                  <div className='form' key={singleProvider.name}>
+                    <ProviderDetails details={singleProvider} />
+                    <hr />
+                  </div>
+                )
               }) : null
             }
-          </div>
+            </div>
           <Footer />
         </div>
       </div>

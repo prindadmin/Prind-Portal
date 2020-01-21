@@ -13,7 +13,7 @@ export class CourseDetails extends Component {
     const { details } = this.props
 
     return (
-      <div className='course-details'>
+      <div className='course-details row'>
         <div className='course-name col-8'>
           { details.name }
         </div>

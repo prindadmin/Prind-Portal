@@ -17,6 +17,10 @@ export class Page extends Component {
   }
 
 
+  componentDidMount() {
+    this.props.requestS3UploadToken(this.props.auth.info.idToken.jwtToken)
+  }
+
   startProject = (e) => {
     console.log("should go to inception page")
     this.props.history.push('/Inception')
@@ -27,7 +31,7 @@ export class Page extends Component {
     return (
       <div id='welcome-page'>
         <div className="App-header">
-          <HeaderBar companyName='Prin-D' />
+          <HeaderBar />
         </div>
         <div className='content-with-sidebar full-height row'>
           <PageChooserSection />

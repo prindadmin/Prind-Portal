@@ -68,13 +68,6 @@ export const completeNewPassword = (oldPassword, newPassword) => {
   }
 }
 
-export const getStsToken = ( userName ) => {
-  return {
-    type: action.AUTH_GET_STS_TOKEN,
-    payload: { userName }
-  }
-}
-
 export const changeSuccess = () => {
   return {
     type: action.AUTH_SET_STATE,
@@ -83,12 +76,11 @@ export const changeSuccess = () => {
 }
 
 const ACTION_HANDLERS = {
-  [action.AUTH_SET_STATE]: (state, action) => {
-    return { ...state, ...action.payload }
-  },
-  [action.AUTH_INIT]: (state, action) => {
-    return { ...state, ...action.payload }
-  }
+  [action.USER_S3_UPLOAD_TOKEN_REQUESTED]: state => ({ ...state }),
+
+  [action.AUTH_INIT]: (state, action) => { return { ...state, ...action.payload }},
+  [action.AUTH_SET_STATE]: (state, action) => { return { ...state, ...action.payload }},
+  [action.USER_S3_UPLOAD_TOKEN_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
 }
 
 let defaultState = {

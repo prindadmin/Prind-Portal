@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import PropTypes from 'prop-types'
 
-//import SideMenu from './side-menu'
+import ProjectSelector from './ProjectSelector';
+
+const defaultName = "Prin-D"
+
 
 export class HeaderBar extends Component {
   static propTypes = {
@@ -12,52 +15,25 @@ export class HeaderBar extends Component {
 
   constructor() {
     super();
-    this.state = {
-      width:  800,
-      height: 600
-    }
+    this.state = {}
   }
 
-  /**
-   * Calculate & Update state of new dimensions
-   */
-  updateDimensions() {
-    let update_width  = window.innerWidth;
-    let update_height = window.innerHeight;
-    this.setState({ width: update_width, height: update_height });
-  }
-
-  /**
-   * Add event listener
-   */
   componentDidMount() {
-    this.updateDimensions();
-    window.addEventListener("resize", this.updateDimensions.bind(this));
-  }
 
-  /**
-   * Remove event listener
-   */
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.updateDimensions.bind(this));
-  }
+    if (this.props.companyName === undefined) {
+      this.setState({
+        companyName: defaultName,
+      })
+    } else {
+      this.setState({
+        companyName: this.props.companyName,
+      })
+    }
 
+  }
 
   getMenu = () => {
-    //const menuItems = this.props.menuItems;
 
-    if (this.state.width < 750) {
-      return null
-      //return <SideMenu />
-      //TODO: Make the burger open a SideMenu
-    }
-    /*
-    const links = menuItems.map(item => (
-      <div className='menu-item' key={item.id}>
-        <Link to={item.Target}>{item.Text}</Link>
-      </div>
-    ))
-    */
     const links = null
 
     return (
@@ -69,18 +45,30 @@ export class HeaderBar extends Component {
 
   render() {
 
-    const companyName = this.props.companyName;
+    //const companyName = this.state.companyName;
+
+    const projects = [
+      { id: 1234, name: "Project 1", siteDescription: "Project 1 Description.  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." },
+      { id: 5678, name: "Project 2", siteDescription: "Project 2 Description" },
+      { id: 2468, name: "Project 3", siteDescription: "Project 3 Description" },
+      { id: 3333, name: "Project 4", siteDescription: "Project 4 Description" },
+    ]
 
     return (
       <div id='header-bar' className='col-12'>
         <div className='header-content row'>
-          <div className='company-name col-5'>
+          {/*
+          <div className='company-name'>
             <Link to='/'>
               <h1>{companyName}</h1>
             </Link>
           </div>
-          <div className='nav-links col-3 col-auto'>
-            {this.getMenu()}
+          */}
+          <ProjectSelector projects={projects} />
+          <div className='nav-links'>
+            {
+              this.getMenu()
+            }
           </div>
         </div>
       </div>

@@ -146,7 +146,6 @@ hr {
   display: flex;
   align-items: center;
   width: 100%;
-  max-width: 1140px;
   margin: auto;
 }
 
@@ -154,6 +153,7 @@ hr {
   color: white;
   float: left;
   margin-left: 20px;
+  margin-right: 30px;
   text-align: left;
 }
 
@@ -185,6 +185,11 @@ hr {
   margin-left: 20px;
 }
 
+#header-bar Button {
+  margin-left: 1em;
+  min-width: 300px;
+}
+
 /* ================================== */
 /* ====== working area section ====== */
 /* ================================== */
@@ -202,13 +207,13 @@ hr {
 
 }
 
-#welcome-page Button {
+#welcome-page .page-content Button {
   margin-top: 2em;
 }
 
 
 /* ================================== */
-/* ========= inception page ========= */
+/* ========== generic page ========== */
 /* ================================== */
 
 #generic-page {
@@ -346,6 +351,57 @@ hr {
 /* ========= training page ========== */
 /* ================================== */
 
+#training-page {
+
+}
+
+#training-page .form {
+  min-width: 400px;
+  width: 80%;
+}
+
+#training-page .provider-details-section h2 {
+  margin-bottom: 20px;
+}
+
+#training-page .course-details {
+    margin: 20px 0 10px 0;
+    display: flex;
+    align-items: center;
+    text-align: left;
+}
+
+#training-page .course-name {
+  padding-left: 10%;
+}
+
+#training-page .course-tick-box {
+  padding-left: 35px;
+}
+
+#training-page .course-table-heading {
+  font-weight: bold;
+}
+
+#training-page .provider-course-section {
+  flex-direction: row;
+  display: flex;
+  text-align: left;
+}
+
+/* ================================== */
+/* ======== project selector ======== */
+/* ================================== */
+
+.project-selector {
+  color: white;
+}
+
+
+/* ================================== */
+/* ========= generic page ========== */
+/* ================================== */
+
 #generic-page .training-page {
 
 }
@@ -406,7 +462,78 @@ hr {
   margin: auto;
 }
 
+/* ================================== */
+/* ======== selector popover ======== */
+/* ================================== */
 
-/* ================================== */
-/* ============= footer ============= */
-/* ================================== */
+.project-selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-selector .bp3-button {
+  margin-top: 0;
+}
+
+#popup-greyer {
+  background-color: rgba(0,0,0, 0.5);
+  z-index: 1000;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+#popup-box {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: 15%;
+  bottom: 15%;
+  margin: auto;
+  border-radius: 20px;
+  background: white;
+  padding: 20px
+}
+
+#popOver {
+}
+
+#popup-greyer .column {
+  float: left;
+  width: 50%;
+  padding-right: 10px;
+}
+
+#popup-greyer .column .bp3-button-text {
+  width: 100%
+}
+
+#project-scroll-box {
+  margin-top: 1em;
+}
+
+.project-select-tile {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  width: 100%;
+  height: 150px;
+  border: 2px solid rgba(138, 155, 168, 0.5);
+}
+
+.project-select-tile.bp3-callout svg {
+  width: 50px;
+  margin-right: 20px;
+}
+
+.project-select-tile.selected,
+.project-select-tile:hover {
+  background-color: rgba(138, 155, 168, 0.15)
+}

@@ -9,6 +9,7 @@ class Auth extends React.Component {
   }
 
   componentDidMount() {
+
     config.set({
       region: process.env.REACT_APP_REGION,
       UserPoolId: process.env.REACT_APP_USER_POOL_ID,

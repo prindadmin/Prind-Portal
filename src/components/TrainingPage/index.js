@@ -1,3 +1,3 @@
-import TrainingPage from './TrainingPage'
+import Page from './PageContainer'
 
-export default TrainingPage
+export default Page

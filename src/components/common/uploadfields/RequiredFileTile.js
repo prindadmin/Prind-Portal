@@ -3,10 +3,12 @@ import PropTypes from 'prop-types'
 
 import { FileInput, Button } from '@blueprintjs/core'
 
-import Hash from './hash'
+import HashSection from './hash'
 import SpinnerSection from './spinner'
 import FoundationsSuccess from './foundations-result'
 import StatusSection from './status'
+
+var hash = require('hash.js')
 
 export class RequiredFileTile extends Component {
   static propTypes = {
@@ -25,9 +27,7 @@ export class RequiredFileTile extends Component {
 
     var details = this.state.details
 
-    //TODO: Remove the "C:/fakepath/" from the filename
-
-    details.prompt = e.target.value
+    details.prompt = e.target.value.replace("C:\\fakepath\\", "")
     details.hasChosen = true
 
     this.setState({
@@ -35,14 +35,30 @@ export class RequiredFileTile extends Component {
     })
   }
 
+  submitFile = (e) => {
+    // Once the user clicks the submit button, send the data to Foundations
+    // TODO: For now, this doesn't send the data anywhere.
+
+    var details = this.state.details
+
+    var hashResult = hash.sha256().update(details.prompt).digest('hex')
+
+    details.hasHash = true
+    details.hash = hashResult
+    details.hasSubmitted = true
+    details.status = "signature"
+
+    this.setState({
+      details: details
+    })
+
+  }
+
 
 
   render() {
 
     var classNameForFilePicker = "field bp3-fill"
-
-
-
     const details = this.state != null ? this.state.details : this.props.details
 
     return (
@@ -68,7 +84,7 @@ export class RequiredFileTile extends Component {
             </label>
           </div>
           {/* Load the hash value if data has been hashed */}
-          { details.hasHash ? <Hash id={ details.id } hashValue={ details.hash } signatureListener={ this.onRequestSignatureClick } /> : null }
+          { details.hasHash ? <HashSection id={ details.id } hashValue={ details.hash } signatureListener={ this.onRequestSignatureClick } /> : null }
           {/* Load a spinner if data is still being fetched */}
           { details.hasSubmitted && !details.hasReceived ? <SpinnerSection /> : null }
           {/* Load the result if the data has been fetched */}
