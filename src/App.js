@@ -20,6 +20,7 @@ import ChangePassword from './components/ChangePassword';
 
 import WelcomePage from './components/WelcomePage';
 import InceptionPage from './components/InceptionPage';
+import NewProjectPage from './components/NewProjectPage';
 
 import GenericPage from './components/GenericPage';
 import TrainingPage from './components/TrainingPage';
@@ -174,6 +175,7 @@ class App extends Component{
             <PrivateRoute path='/Handover' component={HandoverPage} />
             <PrivateRoute path='/Occupation' component={OccupationPage} />
             <PrivateRoute path='/Refurbishment' component={RefurbishmentPage} />
+            <PrivateRoute path='/NewProject' component={NewProjectPage} />
 
             <Route path='/'
               render={() =>

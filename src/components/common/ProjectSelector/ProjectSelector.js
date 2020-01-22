@@ -8,7 +8,7 @@ import { faThLarge } from '@fortawesome/free-solid-svg-icons'
 import ProjectSelectorPopUp from './ProjectSelectorPopUp'
 import PopOverHandler from '../popOverHandler'
 
-const defaultButtonText = "Please select a project..."
+import * as strings from '../../../data/Strings'
 
 class ProjectSelector extends React.Component {
   static propTypes = {
@@ -21,7 +21,7 @@ class ProjectSelector extends React.Component {
     this.state = {
       showPopup: false,
       chosenProject: {
-        name: defaultButtonText
+        name: strings.NO_PROJECT_SELECTED,
       }
     };
   }
@@ -31,7 +31,7 @@ class ProjectSelector extends React.Component {
     if (this.props.chosenProject === undefined) {
       this.setState({
         chosenProject: {
-          name: defaultButtonText
+          name: strings.NO_PROJECT_SELECTED,
         }
       })
     } else {
@@ -61,6 +61,14 @@ class ProjectSelector extends React.Component {
     this.setState({ showPopup: false })
   }
 
+  createNewProject = () => {
+    this.projectChosen({
+      name: "Creating new project..."
+    })
+
+    this.props.history.push('/NewProject')
+  }
+
   render() {
     const { chosenProject } = this.state
     let buttonText = chosenProject.name
@@ -86,6 +94,7 @@ class ProjectSelector extends React.Component {
               projects={ this.props.projects }
               onCancelPopup={this.cancelPopup}
               onProjectChosen={this.projectChosen}
+              onCreateNewProject={this.createNewProject}
             />
           </PopOverHandler>
           :

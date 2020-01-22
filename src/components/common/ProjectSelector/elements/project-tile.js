@@ -9,10 +9,10 @@ import ItemIcon from '../../ItemIcon'
 const ProjectTile = props => {
   const { project, selected } = props
   let className = 'site-select-tile'
-  let bodyText = project.siteDescription
+  let bodyText = project.description
 
-  if (project.siteDescription.length > 150) {
-    bodyText = project.siteDescription.substr(0,147) + '...'
+  if (project.description.length > 300) {
+    bodyText = project.description.substr(0,297) + '...'
   }
 
   if (selected) {

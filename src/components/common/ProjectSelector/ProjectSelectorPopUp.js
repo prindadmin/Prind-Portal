@@ -2,14 +2,18 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import ProjectTile from './elements/project-tile'
-
 import { Button } from '@blueprintjs/core'
+
+import * as strings from '../../../data/Strings'
+
+// TODO: Implement onCreateNewProject in parent component
 
 export class ProjectSelectorPopUp extends Component {
   static propTypes = {
     projects: PropTypes.array.isRequired,
     onCancelPopup: PropTypes.func.isRequired,
     onProjectChosen: PropTypes.func.isRequired,
+    onCreateNewProject: PropTypes.func.isRequired,
   }
 
   // perform this if the user clicks close popup
@@ -19,6 +23,11 @@ export class ProjectSelectorPopUp extends Component {
 
   siteChosen(project, event) {
     this.props.onProjectChosen(project)
+  }
+
+
+  createNewProject(e) {
+    this.props.onCreateNewProject()
   }
 
   siteSelectorPopupContent = () => {
@@ -41,7 +50,10 @@ export class ProjectSelectorPopUp extends Component {
         onClick={this.cancelPopup}
       >
         <div id='popup-box'>
-          <div id='sites-scroll-box'>
+          <div className='projects-pop-up-header'>
+            <h2>Select a project</h2>
+          </div>
+          <div className='project-scroll-box row'>
             <div className='column'>
               {
                 evens.map(project => (
@@ -77,7 +89,16 @@ export class ProjectSelectorPopUp extends Component {
                 ))
               }
             </div>
-
+          </div>
+          <div className='projects-pop-up-footer'>
+            <Button
+              active={true}
+              large={true}
+              icon="cube-add"
+              intent='success'
+              onClick={(e) => this.createNewProject(e)}
+              text={strings.CREATE_NEW_PROJECT}
+            />
           </div>
         </div>
       </div>

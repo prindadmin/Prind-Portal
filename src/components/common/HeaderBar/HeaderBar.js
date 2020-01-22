@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 //import { Link } from "react-router-dom";
 import PropTypes from 'prop-types'
 
-import ProjectSelector from './ProjectSelector';
+import ProjectSelector from '../ProjectSelector';
 
 const defaultName = "Prin-D"
 
@@ -13,12 +13,16 @@ export class HeaderBar extends Component {
     menuItems: PropTypes.array,
   }
 
+
+
   constructor() {
     super();
     this.state = {}
   }
 
   componentDidMount() {
+
+    this.props.getAccessibleProjects(this.props.auth.info.idToken.jwtToken)
 
     if (this.props.companyName === undefined) {
       this.setState({
@@ -47,13 +51,6 @@ export class HeaderBar extends Component {
 
     //const companyName = this.state.companyName;
 
-    const projects = [
-      { id: 1234, name: "Project 1", siteDescription: "Project 1 Description.  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." },
-      { id: 5678, name: "Project 2", siteDescription: "Project 2 Description" },
-      { id: 2468, name: "Project 3", siteDescription: "Project 3 Description" },
-      { id: 3333, name: "Project 4", siteDescription: "Project 4 Description" },
-    ]
-
     return (
       <div id='header-bar' className='col-12'>
         <div className='header-content row'>
@@ -64,7 +61,9 @@ export class HeaderBar extends Component {
             </Link>
           </div>
           */}
-          <ProjectSelector projects={projects} />
+          {
+            this.props.projects !== undefined ? <ProjectSelector projects={this.props.projects.accessibleProjects} />  : null
+          }
           <div className='nav-links'>
             {
               this.getMenu()

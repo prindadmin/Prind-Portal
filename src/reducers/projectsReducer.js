@@ -1,8 +1,10 @@
 import * as action from '../actions'
+import * as strings from '../data/Strings'
 
 const defaultState = {
+  accessibleProjects: [],
   chosenProject: {
-    name: "Please select a project..."
+    name: strings.NO_PROJECT_SELECTED,
   }
 }
 
@@ -10,6 +12,15 @@ export const init = () => {
   return {
     type: action.PROJECT_INIT,
     payload: defaultState
+  }
+}
+
+export const getAccessibleProjects = ( jwtToken ) => {
+  return {
+    type: action.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUESTED,
+    payload: {
+      jwtToken: jwtToken,
+    }
   }
 }
 
@@ -25,9 +36,13 @@ export const updateChosenProject = ( project ) => {
 
 const ACTION_HANDLERS = {
 
+  [action.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUESTED]: state => ({ ...state }),
+
   [action.PROJECT_INIT]: (state, action) => { return { ...state, ...action.payload }},
   [action.PROJECT_SET_STATE]: (state, action) => { return { ...state, ...action.payload }},
   [action.PROJECT_PROJECT_CHOSEN]: (state, action) => { return { ...state, ...action.payload }},
+
+  [action.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
 }
 
 

@@ -8,7 +8,7 @@ import { reducer as formReducer } from 'redux-form'
 const reducers = combineReducers({
   auth: authReducer.reducer,
   user: userReducer.reducer,
-  project: projectsReducer.reducer,
+  projects: projectsReducer.reducer,
   form: formReducer,
 })
 
