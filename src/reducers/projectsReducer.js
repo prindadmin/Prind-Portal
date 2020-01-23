@@ -33,16 +33,28 @@ export const updateChosenProject = ( project ) => {
   }
 }
 
+export const createProject = ( jwtToken, projectValues ) => {
+  return {
+    type: action.PROJECT_CREATE_PROJECT_REQUESTED,
+    payload: {
+      jwtToken,
+      projectValues,
+    }
+  }
+}
+
 
 const ACTION_HANDLERS = {
 
   [action.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUESTED]: state => ({ ...state }),
+  [action.PROJECT_CREATE_PROJECT_REQUESTED]: state => ({ ...state }),
 
   [action.PROJECT_INIT]: (state, action) => { return { ...state, ...action.payload }},
   [action.PROJECT_SET_STATE]: (state, action) => { return { ...state, ...action.payload }},
   [action.PROJECT_PROJECT_CHOSEN]: (state, action) => { return { ...state, ...action.payload }},
 
   [action.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
+  [action.PROJECT_CREATE_PROJECT_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
 }
 
 

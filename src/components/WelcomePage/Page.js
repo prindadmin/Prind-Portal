@@ -5,6 +5,7 @@ import { Button } from '@blueprintjs/core'
 
 import HeaderBar from '../../components/common/HeaderBar';
 import PageChooserSection from '../../components/layouts/PageChooserSection'
+import ProjectLoading from '../common/ProjectLoading'
 import Footer from '../../components/common/footer'
 
 import pageDetails from '../../data/pageDetails'

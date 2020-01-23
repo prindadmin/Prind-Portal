@@ -80,28 +80,6 @@ hr {
     margin-bottom: 50px;
 }
 
-/* ================================ */
-/* ======== sign-in section ======= */
-/* ================================ */
-
-#signup {
-  margin: auto;
-}
-
-.auth-form {
-    width: 330px;
-    padding: 15px;
-    margin: 0 auto;
-}
-
-.auth-form label.bp3-label {
-    margin-bottom: 20px;
-}
-
-.auth-form label.bp3-label:last-of-type {
-    margin-bottom: 50px;
-}
-
 #signup small {
   position: static !important;
 }
@@ -213,6 +191,41 @@ hr {
   margin-top: 2em;
 }
 
+/* ================================ */
+/* ======= New Project Page ======= */
+/* ================================ */
+
+#new-project-page {
+}
+
+#new-project-page .header-section {
+  margin: 2em 0 0 0;
+}
+
+#new-project-page label.bp3-label {
+    margin-bottom: 0.5em;
+    text-align: left;
+    font-weight: bold;
+}
+
+#new-project-page .bp3-input-group {
+    margin-bottom: 0.33em;
+}
+
+#new-project-page .bp3-form-group {
+    margin-bottom: 1.33em;
+}
+
+#new-project-page .last {
+    margin-bottom: 3em;
+}
+
+#new-project-page .bp3-form-content {
+}
+
+#new-project-page .bp3-button-group {
+  margin-bottom: 10px;
+}
 
 /* ================================== */
 /* ========== generic page ========== */
@@ -476,6 +489,16 @@ hr {
 }
 
 .no-project-selected {
+}
+
+.project-loading-container {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.project-loading-container .section-spinner {
+  margin-bottom: 2em;
 }
 
 

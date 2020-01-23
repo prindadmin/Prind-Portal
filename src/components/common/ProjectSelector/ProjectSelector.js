@@ -20,37 +20,18 @@ class ProjectSelector extends React.Component {
     super(props);
     this.state = {
       showPopup: false,
-      chosenProject: {
-        name: strings.NO_PROJECT_SELECTED,
-      }
     };
   }
 
   componentDidMount() {
 
-    if (this.props.chosenProject === undefined) {
-      this.setState({
-        chosenProject: {
-          name: strings.NO_PROJECT_SELECTED,
-        }
-      })
-    } else {
-      this.setState({
-        chosenProject: this.props.chosenProject,
-      })
-    }
-
   }
+
 
   // Fired when the user clicks on a project on the project selector popup
   projectChosen = (project) => {
     this.setState({ showPopup: false })
     this.props.updateChosenProject(project)
-
-    this.setState({
-      chosenProject: project,
-    })
-
   }
 
   changeProject = () => {
@@ -70,8 +51,13 @@ class ProjectSelector extends React.Component {
   }
 
   render() {
-    const { chosenProject } = this.state
-    let buttonText = chosenProject.name
+    const { chosenProject } = this.props
+
+    var buttonText = strings.NO_PROJECT_SELECTED
+
+    if (chosenProject !== undefined) {
+      buttonText = chosenProject.name
+    }
 
     const ico = <FontAwesomeIcon icon={faThLarge} />
 
@@ -92,9 +78,9 @@ class ProjectSelector extends React.Component {
           <PopOverHandler>
             <ProjectSelectorPopUp
               projects={ this.props.projects }
-              onCancelPopup={this.cancelPopup}
-              onProjectChosen={this.projectChosen}
-              onCreateNewProject={this.createNewProject}
+              onCancelPopup={ this.cancelPopup }
+              onProjectChosen={ this.projectChosen }
+              onCreateNewProject={ this.createNewProject }
             />
           </PopOverHandler>
           :

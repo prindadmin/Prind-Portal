@@ -1,35 +1,161 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import { Field, reduxForm } from 'redux-form'
+
+import {
+  FormGroup,
+  Button,
+  ButtonGroup,
+  Callout,
+  TextArea,
+  Intent
+} from '@blueprintjs/core'
 
 import HeaderBar from '../common/HeaderBar';
 import PageChooserSection from '../layouts/PageChooserSection'
 import Footer from '../common/footer'
 
-import * as strings from '../../data/Strings'
-import pageDetails from '../../data/pageDetails'
+import * as FormInputs from '../shared/formInputs'
 
-const pageName = "Create a new project"
+import * as strings from '../../data/Strings'
+import * as validators from '../../validators'
 
 export class Page extends Component {
   static propTypes = {
-    pageDetails: PropTypes.object,
   }
 
+  createProject = async (values) => {
+    console.log("new project creation in progress")
+    console.log(values)
 
-  notDoneYet = () => {
-    return(
-      <div className='no-project-selected-container fill'>
-        <div className='no-project-selected'>
-          Page content creation is not done yet
-        </div>
+    // TODO: Show the creating project spinner
+
+    await this.props.createProject(this.props.auth.info.idToken.jwtToken, values)
+  }
+
+  newProjectPageHeader = () => {
+    return (
+      <div className='header-section'>
+        <h2>Create a new project</h2>
       </div>
     )
   }
 
+  newProjectForm = () => {
+
+    const { handleSubmit, auth } = this.props
+
+    return (
+      <form onSubmit={handleSubmit(this.createProject)} className='auth-form'>
+        {
+          this.props.submitFailed ?
+          <Callout style={{marginBottom: '15px'}} intent='danger' title='Registration failed'>
+            <div>{auth.error.message}</div>
+          </Callout> :
+          null
+        }
+        <FormGroup
+          label={strings.PROJECT_NAME}
+          labelFor="projectName"
+          labelInfo="(required)"
+        >
+          <Field
+            name="projectName"
+            validate={[validators.required, validators.maxLength64]}
+            component={FormInputs.TextInput}
+            placeholder={strings.PROJECT_NAME}
+          />
+        </FormGroup>
+
+        <FormGroup
+          label={strings.PROJECT_ADDRESS}
+          labelFor="projectAddressLine1"
+          labelInfo=""
+        >
+          <Field
+            name="projectAddressLine1"
+            component={FormInputs.TextInput}
+            placeholder={strings.ADDRESS_LINE_1}
+          />
+          <Field
+            name="projectAddressLine2"
+            component={FormInputs.TextInput}
+            placeholder={strings.ADDRESS_LINE_2}
+          />
+          <Field
+            name="projectAddressLine3"
+            component={FormInputs.TextInput}
+            placeholder={strings.ADDRESS_LINE_3}
+          />
+          <Field
+            name="projectAddressTown"
+            component={FormInputs.TextInput}
+            placeholder={strings.ADDRESS_LINE_TOWN}
+          />
+          <Field
+            name="projectAddressRegion"
+            component={FormInputs.TextInput}
+            placeholder={strings.ADDRESS_LINE_REGION}
+          />
+          <Field
+            name="projectAddressPostalCode"
+            component={FormInputs.TextInput}
+            placeholder={strings.ADDRESS_LINE_POSTAL_CODE}
+          />
+          <Field
+            name="projectAddressCountry"
+            component={FormInputs.TextInput}
+            placeholder={strings.ADDRESS_LINE_COUNTRY}
+          />
+        </FormGroup>
+
+        <FormGroup
+          label={strings.PROJECT_DESCRIPTION}
+          labelFor="projectDescription"
+          labelInfo=""
+          className="last"
+        >
+          <TextArea
+            name="projectDescription"
+            growVertically={true}
+            fill={true}
+            intent={Intent.PRIMARY}
+            placeholder={strings.PROJECT_DESCRIPTION}
+          />
+        </FormGroup>
+
+        <ButtonGroup fill>
+          <Button
+            loading={this.props.submitting}
+            disabled={this.props.invalid}
+            type='submit'
+            intent='primary'
+            text={strings.BUTTON_CREATE_PROJECT}
+          />
+        </ButtonGroup>
+        <ButtonGroup fill>
+          <Button
+            text={strings.BUTTON_CANCEL}
+            intent='none'
+            onClick={() => {this.props.history.push('/Welcome')}}
+          />
+        </ButtonGroup>
+      </form>
+    )
+  }
+
+  newProjectPageFooter = () => {
+    return (
+      <div>
+        {/*new project page footer here*/}
+      </div>
+    )
+  }
+
+
   render() {
 
     return (
-      <div id='inception-page'>
+      <div id='new-project-page'>
         <div className="App-header">
           <HeaderBar />
         </div>
@@ -38,7 +164,9 @@ export class Page extends Component {
         <div className='content-with-sidebar full-height row'>
           <PageChooserSection />
           <div className='page-content col-xl-10 col-lg-9 col-md-9 col-sm-9'>
-            {this.notDoneYet()}
+            {this.newProjectPageHeader()}
+            {this.newProjectForm()}
+            {this.newProjectPageFooter()}
           </div>
           <Footer />
         </div>
@@ -47,4 +175,6 @@ export class Page extends Component {
   }
 }
 
-export default Page
+export default reduxForm({
+  form: 'newproject'
+})(Page)

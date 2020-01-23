@@ -1,8 +1,9 @@
 import React from 'react'
 
 import { Callout } from '@blueprintjs/core'
-
 import ItemIcon from '../../ItemIcon'
+
+import * as strings from '../../../../data/Strings'
 
 // TODO: FUTURE: Tidy site tiles
 
@@ -11,8 +12,13 @@ const ProjectTile = props => {
   let className = 'site-select-tile'
   let bodyText = project.description
 
-  if (project.description.length > 300) {
-    bodyText = project.description.substr(0,297) + '...'
+
+  if (bodyText === undefined) {
+    bodyText = strings.NO_PROJECT_DESCRIPTION
+  }
+
+  if (bodyText > 300) {
+    bodyText = bodyText.substr(0,297) + '...'
   }
 
   if (selected) {

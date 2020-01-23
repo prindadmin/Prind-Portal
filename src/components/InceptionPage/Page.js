@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import HeaderBar from '../common/HeaderBar';
 import PageChooserSection from '../layouts/PageChooserSection'
+import ProjectLoading from '../common/ProjectLoading'
 import Footer from '../common/footer'
 
 import SingleFieldRequirement from '../common/uploadfields/RequiredFileTile'

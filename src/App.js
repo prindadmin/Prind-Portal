@@ -10,6 +10,8 @@ import {
 
 import { AUTH_SUCCESS } from './states'
 
+import * as Endpoints from './endpoints'
+
 import PrivateRoute from './components/PrivateRoute';
 
 import Auth from './components/Auth';
@@ -180,9 +182,9 @@ class App extends Component{
             <Route path='/'
               render={() =>
                 auth.isSignedIn === AUTH_SUCCESS ? (
-                  <Redirect to='/Welcome' />
+                  <Redirect to={Endpoints.defaultLoggedInPage} />
                 ) : (
-                  <Redirect to='/SignIn' />
+                  <Redirect to={Endpoints.signInPage} />
                 )
               }
             />
