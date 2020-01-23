@@ -65,7 +65,7 @@ export class RequiredFileTile extends Component {
         <div className='required-field' key={details.id}>
           <h2>{details.title}</h2>
           <div className='row'>
-            <label className="bp3-fill bp3-file-input col-9 col-margin">
+            <label className="bp3-fill bp3-file-input col-xl-9 col-lg-9 col-md-8 col-sm-7 col-margin">
               <FileInput
                 className={classNameForFilePicker}
                 ref='fileInput'
@@ -74,7 +74,7 @@ export class RequiredFileTile extends Component {
               />
             </label>
 
-            <label className="bp3-fill bp3-file-input button col-3 col-margin">
+            <label className="bp3-fill bp3-file-input button col-xl-3 col-lg-3 col-md-4 col-sm-5 col-margin">
               <Button
                 className='submit-button bp3-intent-primary'
                 ref='submitButton'

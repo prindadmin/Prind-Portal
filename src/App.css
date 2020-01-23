@@ -300,7 +300,7 @@ hr {
 }
 
 .required-field {
-  width: 800px;
+  width: 100%;
 }
 
 /* adds border between projects in sidebar */
