@@ -1,46 +1,4 @@
 const pageDetails = {
-  Welcome: {
-    name: "Welcome",
-    title: "Welcome to Prin-D",
-    description: "Prin-D is is a Blockchain enabled platform designed to ensure compliance CDM2015 regulations.  Prin-D uses the Principal Designer work-flow to assist project clients and designers with their CDM duties.  Further TRAINING is available at...",
-  },
-  Training: {
-    name: "Training",
-    title: "Training Courses",
-    description: "Training course description.",
-    providers: [
-      {
-        name: "Association for Project Safety",
-        courses: [
-          {
-            id: 0,
-            name: "Design Risk Management and CDM2015",
-            passed: false,
-          },
-          {
-            id: 1,
-            name: "Introduction to Principal Designer role",
-            passed: true,
-          },
-        ]
-      },
-      {
-        name: "University of Salford",
-        courses: [
-          {
-            id: 0,
-            name: "course x",
-            passed: false,
-          },
-          {
-            id: 1,
-            name: "course y",
-            passed: false,
-          },
-        ]
-      }
-    ]
-  },
   Inception: {
     name: "Inception",
     title: "Project Inception",

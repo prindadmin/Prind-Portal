@@ -57,7 +57,9 @@ export class Page extends Component {
           <PageChooserSection />
           <div className='page-content col-xl-10 col-lg-9 col-md-9 col-sm-9'>
             {
-              this.props.projects.chosenProject.name === strings.NO_PROJECT_SELECTED ? this.showEmptyPage() : this.showFilledPage()
+              this.props.projects !== undefined ? 
+              this.props.projects.chosenProject.name === strings.NO_PROJECT_SELECTED ? this.showEmptyPage() : this.showFilledPage() :
+              null
             }
           </div>
           <Footer />

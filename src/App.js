@@ -14,19 +14,22 @@ import * as Endpoints from './endpoints'
 
 import PrivateRoute from './components/PrivateRoute';
 
+/* Before sign in pages */
 import Auth from './components/Auth';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import ForgotPassword from './components/ForgotPassword';
 import ChangePassword from './components/ChangePassword';
 
-import WelcomePage from './components/WelcomePage';
+/* Completed pages */
 import InceptionPage from './components/InceptionPage';
 import NewProjectPage from './components/NewProjectPage';
 
+/* Old pages */
 import GenericPage from './components/GenericPage';
 import TrainingPage from './components/TrainingPage';
 
+/* Other pages */
 import Error404 from './components/Error404'
 
 const pageDetails = {
@@ -169,7 +172,6 @@ class App extends Component{
             <Route path='/forgot-password' component={ForgotPassword} />
             <Route path='/change-password' component={ChangePassword} />
 
-            <PrivateRoute path='/Welcome' component={WelcomePage} />
             <PrivateRoute path='/Training' component={TrainPage} />
             <PrivateRoute path='/Inception' component={InceptionPage} />
             <PrivateRoute path='/Feasibility' component={FeasibilityPage} />
@@ -179,6 +181,7 @@ class App extends Component{
             <PrivateRoute path='/Handover' component={HandoverPage} />
             <PrivateRoute path='/Occupation' component={OccupationPage} />
             <PrivateRoute path='/Refurbishment' component={RefurbishmentPage} />
+
             <PrivateRoute path='/NewProject' component={NewProjectPage} />
 
             <Route path='/'
