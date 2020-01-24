@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import * as reducer from '../../reducers/pageReducers/inceptionReducer'
+import * as reducer from '../../reducers/pageReducers/feasibilityReducer'
 
 import PageComponent from './Page'
 

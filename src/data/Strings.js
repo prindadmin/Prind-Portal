@@ -20,3 +20,9 @@ export const NO_PROJECT_DESCRIPTION = "No project description provided"
 
 export const BUTTON_CREATE_PROJECT = "Create Project"
 export const BUTTON_CANCEL = "Cancel"
+
+export const INCEPTION_PAGE_TITLE = "Project Inception"
+export const INCEPTION_PAGE_DESCRIPTION = "Inception of a project begins with the idea. This idea is captured in a project brief."
+
+export const FEASIBILITY_PAGE_TITLE = "Project Feasibility"
+export const FEASIBILITY_PAGE_DESCRIPTION = "To confirm that the project brief is feasible it will be necessary to perform investigations which can be compiled into a feasibility study."

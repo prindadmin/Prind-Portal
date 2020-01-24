@@ -1,0 +1,24 @@
+[
+  {
+    "id": "123",
+    "title": "Please upload your project brief",
+    "prompt": "Choose File...",
+    "hasChosen": false,
+    "hasHash": false,
+    "hasSubmitted": false,
+    "hasReceived": false,
+    "hasSuccess": false,
+    "status": "missing"
+  },
+  {
+    "id": "456",
+    "title": "Please upload your XXXXXXXXXXXX",
+    "prompt": "Choose File...",
+    "hasChosen": false,
+    "hasHash": false,
+    "hasSubmitted": false,
+    "hasReceived": false,
+    "hasSuccess": false,
+    "status": "missing"
+  }
+]

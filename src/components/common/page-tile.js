@@ -2,8 +2,10 @@ import React from 'react'
 
 import { Callout } from '@blueprintjs/core'
 
+// TODO: Selected highlighting doesn't work yet
+
 const ListItem = props => {
-  const { pageDetails, selected } = props
+  const { pageName, selected } = props
   let className = 'list-item-container'
 
   if (selected) {
@@ -13,7 +15,7 @@ const ListItem = props => {
   return (
     <Callout className={className}>
       <div className='details' >
-        <h2>{pageDetails.name}</h2>
+        <h2>{pageName}</h2>
       </div>
     </Callout>
   )

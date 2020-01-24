@@ -5,6 +5,7 @@ const defaultState = {
   accessibleProjects: [],
   chosenProject: {
     name: strings.NO_PROJECT_SELECTED,
+    id: "",
   }
 }
 

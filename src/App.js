@@ -23,34 +23,16 @@ import ChangePassword from './components/ChangePassword';
 
 /* Completed pages */
 import InceptionPage from './components/InceptionPage';
+import FeasibilityPage from './components/FeasibilityPage';
 import NewProjectPage from './components/NewProjectPage';
 
 /* Old pages */
 import GenericPage from './components/GenericPage';
-import TrainingPage from './components/TrainingPage';
 
 /* Other pages */
 import Error404 from './components/Error404'
 
 const pageDetails = {
-  Feasibility: {
-    name: "Feasibility",
-    title: "Project Feasibility",
-    description: "To confirm that the project brief is feasible it will be necessary to perform investigations which can be compiled into a feasibility study.",
-    questions: [
-      {
-        id: 0,
-        title: "Please upload your feasibility study",
-        prompt: "Choose File...",
-        hasChosen: false,
-        hasHash: false,
-        hasSubmitted: false,
-        hasReceived: false,
-        hasSuccess: false,
-        status: "missing",
-      }
-    ]
-  },
   Design: {
     name: "Design",
     title: "Project Design",
@@ -172,7 +154,6 @@ class App extends Component{
             <Route path='/forgot-password' component={ForgotPassword} />
             <Route path='/change-password' component={ChangePassword} />
 
-            <PrivateRoute path='/Training' component={TrainPage} />
             <PrivateRoute path='/Inception' component={InceptionPage} />
             <PrivateRoute path='/Feasibility' component={FeasibilityPage} />
             <PrivateRoute path='/Design' component={DesignPage} />
@@ -200,14 +181,6 @@ class App extends Component{
       </div>
     )
   }
-}
-
-function TrainPage() {
-  return <TrainingPage pageDetails={pageDetails["Training"]} />
-}
-
-function FeasibilityPage() {
-  return <GenericPage pageDetails={pageDetails["Feasibility"]} />
 }
 
 function DesignPage() {

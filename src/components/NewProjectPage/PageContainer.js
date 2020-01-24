@@ -9,7 +9,7 @@ const mapStatetoProps = state => {
   return {
     auth: state.auth,
     projects: state.projects,
-    pageDetails: state.pageDetails,
+    pageContent: state.pageContent,
   }
 }
 

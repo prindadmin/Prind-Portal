@@ -1,51 +1,6 @@
 const pageDetails = {
-  Inception: {
-    name: "Inception",
-    title: "Project Inception",
-    description: "Inception of a project begins with the Idea.  This Idea is captured in a project brief.",
-    questions: [
-      {
-        id: 0,
-        title: "Please upload your project brief",
-        prompt: "Choose File...",
-        hasChosen: false,
-        hasHash: false,
-        hasSubmitted: false,
-        hasReceived: false,
-        hasSuccess: false,
-        status: "missing",
-      },
-      {
-        id: 1,
-        title: "Please upload your XXXXXXXXXXXX",
-        prompt: "Choose File...",
-        hasChosen: false,
-        hasHash: false,
-        hasSubmitted: false,
-        hasReceived: false,
-        hasSuccess: false,
-        status: "missing",
-      }
-    ]
-  },
-  Feasibility: {
-    name: "Feasibility",
-    title: "Project Feasibility",
-    description: "To confirm that the project brief is feasible it will be necessary to perform investigations which can be compiled into a feasibility study.",
-    questions: [
-      {
-        id: 0,
-        title: "Please upload your feasibility study",
-        prompt: "Choose File...",
-        hasChosen: false,
-        hasHash: false,
-        hasSubmitted: false,
-        hasReceived: false,
-        hasSuccess: false,
-        status: "missing",
-      }
-    ]
-  },
+  Inception: {},
+  Feasibility: {},
   Design: {
     name: "Design",
     title: "Project Design",

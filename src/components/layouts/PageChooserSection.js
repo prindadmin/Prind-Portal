@@ -14,10 +14,10 @@ const PageChooserSection = props => {
 
                 <ListItem
                   key={pageDetails[key].name + "item"}
-                  pageDetails={pageDetails[key]}
-                  selected={pageDetails[key].name.toString() === window.location.pathname.replace("/", "")}
+                  pageName={key}
+                  selected={key.toString() === window.location.pathname.replace("/", "")}
                   onClick={() => {
-                    this.props.history.push(`/#/${pageDetails[key].name}`)
+                    this.props.history.push(`/#/${key}`)
                   }}
                 />
               </a>

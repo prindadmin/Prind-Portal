@@ -44,8 +44,8 @@ export class Page extends Component {
     return(
       <div className='page-content col-xl-10 col-lg-9 col-md-9 col-sm-9'>
         <div className='page-title'>
-          <h1>{strings.INCEPTION_PAGE_TITLE}</h1>
-          <span>{strings.INCEPTION_PAGE_DESCRIPTION}</span>
+          <h1>{strings.FEASIBILITY_PAGE_TITLE}</h1>
+          <span>{strings.FEASIBILITY_PAGE_DESCRIPTION}</span>
         </div>
         {
           fields != null ? fields.map((singleField) => {
@@ -61,7 +61,7 @@ export class Page extends Component {
   render() {
 
     return (
-      <div id='inception-page'>
+      <div id='feasibility-page'>
         <div className="App-header">
           <HeaderBar companyName='Prin-D' />
         </div>
@@ -74,7 +74,7 @@ export class Page extends Component {
               this.props.projects !== undefined ?
                 this.props.projects.chosenProject.name === strings.NO_PROJECT_SELECTED ?
                 this.showEmptyPage() :
-                  this.props.pageContent.inception.fetching ?
+                  this.props.pageContent.feasibility.fetching ?
                   this.showLoadingPage() :
                   this.showFilledPage() :
               null
