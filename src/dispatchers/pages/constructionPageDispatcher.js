@@ -15,7 +15,7 @@ export default function(identityToken, projectID) {
       }
     });
 
-    instance.get(`${process.env.PUBLIC_URL}/pageData/feasibilityPage.json`, projectID)
+    instance.get(`${process.env.PUBLIC_URL}/pageData/constructionPage.json`, projectID)
     .then(res => {
       //console.log(res)
 

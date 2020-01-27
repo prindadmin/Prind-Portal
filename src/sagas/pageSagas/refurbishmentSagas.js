@@ -2,7 +2,7 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
 import * as actions from '../../actions'
 
-import { feasibilityPageDispatcher } from '../../dispatchers/pages'
+import { refurbishmentPageDispatcher } from '../../dispatchers/pages'
 
 const defaultState = {
   fields: [],
@@ -16,15 +16,15 @@ function * getPageContent (action) {
 
   try {
     yield put({
-      type: actions.PAGE_GET_CONTENT_FEASIBILITY_REQUEST_SENT,
+      type: actions.PAGE_GET_CONTENT_REFURBISHMENT_REQUEST_SENT,
       payload: {
         ...defaultState,
         fetching: true
       }
     })
-    const { data: result } = yield call(feasibilityPageDispatcher, identityToken, projectID )
+    const { data: result } = yield call(refurbishmentPageDispatcher, identityToken, projectID )
     yield put({
-      type: actions.PAGE_FEASIBILITY_SET_STATE,
+      type: actions.PAGE_REFURBISHMENT_SET_STATE,
       payload: {
         ...defaultState,
         fields: result,
@@ -38,5 +38,5 @@ function * getPageContent (action) {
 
 
 export default function * sagas () {
-  yield takeLatest(actions.PAGE_GET_CONTENT_FEASIBILITY_REQUESTED, getPageContent)
+  yield takeLatest(actions.PAGE_GET_CONTENT_REFURBISHMENT_REQUESTED, getPageContent)
 }

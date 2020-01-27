@@ -1,0 +1,13 @@
+[
+  {
+    "id": "123",
+    "title": "Please Upload your Design Risk Assessment (DRA)",
+    "prompt": "Choose File...",
+    "hasChosen": false,
+    "hasHash": false,
+    "hasSubmitted": false,
+    "hasReceived": false,
+    "hasSuccess": false,
+    "status": "missing"
+  }
+]

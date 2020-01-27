@@ -16,6 +16,10 @@ export class Page extends Component {
     pageContent: PropTypes.object,
   }
 
+  componentDidMount() {
+    this.props.getContent(this.props.auth.info.idToken.jwtToken, this.props.projects.chosenProject.id)
+  }
+
   componentDidUpdate(prevProps) {
 
     if (this.props.projects.chosenProject.id !== prevProps.projects.chosenProject.id) {

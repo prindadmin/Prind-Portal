@@ -44,7 +44,6 @@ export const createProject = ( jwtToken, projectValues ) => {
   }
 }
 
-
 const ACTION_HANDLERS = {
 
   [action.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUESTED]: state => ({ ...state }),

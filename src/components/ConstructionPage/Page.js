@@ -17,9 +17,7 @@ export class Page extends Component {
   }
 
   componentDidMount() {
-      // TODO: Edit this so it doesn't reload every time the screen changes
-      // TODO: Edit this so it refreshes when the project changes
-      this.props.getContent(this.props.auth.info.idToken.jwtToken, this.props.projects.chosenProject.id)
+    this.props.getContent(this.props.auth.info.idToken.jwtToken, this.props.projects.chosenProject.id)
   }
 
   componentDidUpdate(prevProps) {
@@ -44,14 +42,14 @@ export class Page extends Component {
 
   showFilledPage = () => {
 
-    const { fields }  = this.props.pageContent.inception
+    const { fields }  = this.props.pageContent.construction
 
 
     return(
       <div className='page-content col-xl-10 col-lg-9 col-md-9 col-sm-9'>
         <div className='page-title'>
-          <h1>{strings.INCEPTION_PAGE_TITLE}</h1>
-          <span>{strings.INCEPTION_PAGE_DESCRIPTION}</span>
+          <h1>{strings.CONSTRUCTION_PAGE_TITLE}</h1>
+          <span>{strings.CONSTRUCTION_PAGE_DESCRIPTION}</span>
         </div>
         {
           fields != null ? fields.map((singleField) => {
@@ -67,7 +65,7 @@ export class Page extends Component {
   render() {
 
     return (
-      <div id='inception-page'>
+      <div id='construction-page'>
         <div className="App-header">
           <HeaderBar companyName='Prin-D' />
         </div>
@@ -80,7 +78,7 @@ export class Page extends Component {
               this.props.projects !== undefined ?
                 this.props.projects.chosenProject.name === strings.NO_PROJECT_SELECTED ?
                 this.showEmptyPage() :
-                  this.props.pageContent.inception.fetching ?
+                  this.props.pageContent.construction.fetching ?
                   this.showLoadingPage() :
                   this.showFilledPage() :
               null
