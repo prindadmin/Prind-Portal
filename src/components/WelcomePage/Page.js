@@ -8,13 +8,13 @@ import PageChooserSection from '../../components/layouts/PageChooserSection'
 import ProjectLoading from '../common/ProjectLoading'
 import Footer from '../../components/common/footer'
 
-import pageDetails from '../../data/pageDetails'
+import pageNames from '../../data/pageNames'
 
 const pageName = "Welcome"
 
 export class Page extends Component {
   static propTypes = {
-    pageDetails: PropTypes.object,
+    pageNames: PropTypes.object,
   }
 
 
@@ -38,8 +38,8 @@ export class Page extends Component {
           <PageChooserSection />
           <div className='page-content col-xl-10 col-lg-9 col-md-9 col-sm-9'>
             <div className='page-title'>
-              <h1>{pageDetails[pageName].title}</h1>
-              <span>{pageDetails[pageName].description}</span>
+              <h1>{pageNames[pageName].title}</h1>
+              <span>{pageNames[pageName].description}</span>
             </div>
             {
               <Button

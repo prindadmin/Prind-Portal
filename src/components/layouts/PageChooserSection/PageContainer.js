@@ -1,12 +1,13 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import PageComponent from './Page'
+import PageComponent from './PageChooserSection'
 
 const mapStatetoProps = state => {
   return {
     auth: state.auth,
-    pageNames: state.pageNames,
+    projects: state.projects,
+    pageContent: state.pageContent,
   }
 }
 

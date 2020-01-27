@@ -32,9 +32,7 @@ import OccupationPage from './components/OccupationPage';
 import RefurbishmentPage from './components/RefurbishmentPage';
 
 import NewProjectPage from './components/NewProjectPage';
-
-/* Old pages */
-import GenericPage from './components/GenericPage';
+import EditProjectPage from './components/EditProjectPage';
 
 /* Other pages */
 import Error404 from './components/Error404'
@@ -64,6 +62,7 @@ class App extends Component{
             <PrivateRoute path='/Handover' component={HandoverPage} />
             <PrivateRoute path='/Occupation' component={OccupationPage} />
             <PrivateRoute path='/Refurbishment' component={RefurbishmentPage} />
+            <PrivateRoute path='/Project' component={EditProjectPage} />
 
             <PrivateRoute path='/NewProject' component={NewProjectPage} />
 

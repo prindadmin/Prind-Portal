@@ -44,3 +44,5 @@ export const OCCUPATION_PAGE_DESCRIPTION = "The Principal Designer has finalised
 
 export const REFURBISHMENT_PAGE_TITLE = "Project Refurbishment"
 export const REFURBISHMENT_PAGE_DESCRIPTION = "Time for refurbishment? If your project will last more that 30 days, start new project.  Demolition? - look forward to helping you.\n\nStart new project"
+
+export const EDIT_PROJECT_DETAILS = "Edit Project Details"

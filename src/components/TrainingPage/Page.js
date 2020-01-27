@@ -8,19 +8,19 @@ import Footer from '../common/footer'
 
 import ProviderDetails from './elements/provider-details'
 
-import pageDetails from '../../data/pageDetails'
+import pageNames from '../../data/pageNames'
 
 const pageName = "Training"
 
 export class Page extends Component {
   static propTypes = {
-    pageDetails: PropTypes.object,
+    pageNames: PropTypes.object,
   }
 
 
   render() {
 
-    const { title, description, providers } = pageDetails[pageName]
+    const { title, description, providers } = pageNames[pageName]
 
     return (
       <div id='training-page'>

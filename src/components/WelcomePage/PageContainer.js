@@ -9,7 +9,7 @@ import PageComponent from './Page'
 const mapStatetoProps = state => {
   return {
     auth: state.auth,
-    pageDetails: state.pageDetails,
+    pageNames: state.pageNames,
   }
 }
 

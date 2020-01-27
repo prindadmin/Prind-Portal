@@ -12,6 +12,7 @@ import {
 
 import HeaderBar from '../common/HeaderBar';
 import PageChooserSection from '../layouts/PageChooserSection'
+import NoProjectSelected from '../common/NoProjectSelected'
 import Footer from '../common/footer'
 
 import * as FormInputs from '../shared/formInputs'
@@ -25,20 +26,27 @@ export class Page extends Component {
   static propTypes = {
   }
 
+
+  componentDidUpdate(prevProps) {
+    if (this.props.projects.chosenProject.id !== prevProps.projects.chosenProject.id) {
+      this.props.reset()
+    }
+  }
+
   createProject = async (values) => {
     await this.props.createProject(this.props.auth.info.idToken.jwtToken, values)
     this.props.history.push(Endpoints.defaultLoggedInPage)
   }
 
-  newProjectPageHeader = () => {
+  projectPageHeader = () => {
     return (
       <div className='header-section'>
-        <h2>Create a new project</h2>
+        <h2>{strings.EDIT_PROJECT_DETAILS}</h2>
       </div>
     )
   }
 
-  newProjectForm = () => {
+  projectForm = () => {
 
     const { handleSubmit, auth } = this.props
 
@@ -53,11 +61,11 @@ export class Page extends Component {
         }
         <FormGroup
           label={strings.PROJECT_NAME}
-          labelFor="projectName"
+          labelFor="name"
           labelInfo={strings.FIELD_IS_REQUIRED}
         >
           <Field
-            name="projectName"
+            name="name"
             validate={[validators.required, validators.maxLength64]}
             component={FormInputs.TextInput}
             placeholder={strings.PROJECT_NAME}
@@ -108,12 +116,12 @@ export class Page extends Component {
 
         <FormGroup
           label={strings.PROJECT_DESCRIPTION}
-          labelFor="projectDescription"
+          labelFor="description"
           labelInfo=""
           className="last"
         >
           <TextArea
-            name="projectDescription"
+            name="description"
             growVertically={true}
             fill={true}
             intent={Intent.PRIMARY}
@@ -141,11 +149,28 @@ export class Page extends Component {
     )
   }
 
-  newProjectPageFooter = () => {
+  projectPageFooter = () => {
     return (
       <div>
         {/*new project page footer here*/}
       </div>
+    )
+  }
+
+  projectDetails = () => {
+    return (
+      <div>
+        {this.projectPageHeader()}
+        {this.projectForm()}
+        {this.projectPageFooter()}
+      </div>
+    )
+  }
+
+
+  showEmptyPage = () => {
+    return(
+      <NoProjectSelected />
     )
   }
 
@@ -162,9 +187,13 @@ export class Page extends Component {
         <div className='content-with-sidebar full-height row'>
           <PageChooserSection />
           <div className='page-content col-xl-10 col-lg-9 col-md-9 col-sm-9'>
-            {this.newProjectPageHeader()}
-            {this.newProjectForm()}
-            {this.newProjectPageFooter()}
+            {
+              this.props.projects !== undefined ?
+                this.props.projects.chosenProject.name === strings.NO_PROJECT_SELECTED ?
+                  this.showEmptyPage() :
+                  this.projectDetails() :
+              this.showEmptyPage()
+            }
           </div>
           <Footer />
         </div>
@@ -174,5 +203,6 @@ export class Page extends Component {
 }
 
 export default reduxForm({
-  form: 'newproject'
+  enableReinitialize: true,
+  form: 'editproject'
 })(Page)
