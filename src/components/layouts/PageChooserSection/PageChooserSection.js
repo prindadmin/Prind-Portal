@@ -16,9 +16,9 @@ export class PageChooserSection extends Component {
                   <ListItem
                     key={pageNames[key].name + "item"}
                     pageName={pageNames[key].name}
-                    selected={key.toString() === this.props.location.pathname.replace("/", "")}
+                    selected={pageNames[key].linkTo.replace("/", "") === this.props.location.pathname.replace("/", "")}
                     onClick={() => {
-                      this.props.history.push(`/#/${key}`)
+                      this.props.history.push(`/#/${pageNames[key].linkTo}`)
                     }}
                   />
                 </a>

@@ -1,4 +1,12 @@
 const pageNames = {
+  Project: {
+    name: "Project Details",
+    linkTo: "/Project"
+  },
+  Team: {
+    name: "Project Team",
+    linkTo: "/Team"
+  },
   Inception: {
     name: "Inception",
     linkTo: "/Inception"
@@ -30,10 +38,6 @@ const pageNames = {
   Refurbishment: {
     name: "Refurbishment",
     linkTo: "/Refurbishment"
-  },
-  Project: {
-    name: "Project Details",
-    linkTo: "/Project"
   },
 }
 

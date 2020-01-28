@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { InputGroup, Button, Icon, TextArea } from '@blueprintjs/core'
+import { InputGroup, Button, Icon, TextArea, MenuItem } from '@blueprintjs/core'
+import { Select } from "@blueprintjs/select";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
@@ -30,7 +31,7 @@ export const TextInput = (field) => {
 }
 
 export const TextBoxInput = (field) => {
-  const { touched, invalid, error, active } = field.meta
+  const { touched, invalid, active } = field.meta
   return (
     <React.Fragment>
       <TextArea
@@ -40,29 +41,48 @@ export const TextBoxInput = (field) => {
         name={field.input.name}
         placeholder={field.placeholder}
         />
-        { touched && invalid && !active ? <small style={validationErrorStyle}>{error}</small> : null }
     </React.Fragment>
   )
 }
-/*
-if a more in depth sel;ector is required later install blueprintjs/select
+
+
+function itemRenderer(item, { handleClick }) {
+  return(
+    <MenuItem
+        key={item.roleID}
+        text={item.roleName}
+        onClick={handleClick}
+        shouldDismissPopover={true}
+      />
+    )
+}
 
 export const SelectInput = (field) => {
-  const { touched, invalid, error, active } = field.meta
+
+  const buttonText = field.selectedItem
+
   return (
     <React.Fragment>
       <Select
-        {...field.input}
-        items
-        intent={touched && invalid && !active ? 'danger' : 'none'}
         name={field.input.name}
-        placeholder={field.placeholder}
-        />
-        { touched && invalid && !active ? <small style={validationErrorStyle}>{error}</small> : null }
+        items={field.children}
+        itemRenderer={itemRenderer}
+        filterable={false}
+        onItemSelect={field.onItemSelected}
+        noResults={<MenuItem disabled={true} text="No results." />}
+        >
+        <Button
+          text={buttonText}
+          rightIcon="double-caret-vertical"
+          alignText="left"
+          />
+      </Select>
     </React.Fragment>
   )
 }
-*/
+
+
+
 export class PasswordInput extends React.Component {
   static propTypes = {
     field: PropTypes.object

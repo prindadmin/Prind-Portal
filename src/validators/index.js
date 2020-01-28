@@ -33,3 +33,10 @@ export const maxLength64 = value => {
 export const passwordMatch = (value, values) => {
   return values.password !== values.passwordMatch && 'Passwords must match'
 }
+
+export const isEmailAddress = value => {
+  if (value) {
+    return value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i) ? undefined : `Not a valid email address`
+  }
+  return undefined
+}

@@ -33,6 +33,7 @@ import RefurbishmentPage from './components/RefurbishmentPage';
 
 import NewProjectPage from './components/NewProjectPage';
 import EditProjectPage from './components/EditProjectPage';
+import ProjectTeamPage from './components/ProjectTeamPage';
 
 /* Other pages */
 import Error404 from './components/Error404'
@@ -53,7 +54,9 @@ class App extends Component{
             <Route path='/SignUp' component={SignUp} />
             <Route path='/forgot-password' component={ForgotPassword} />
             <Route path='/change-password' component={ChangePassword} />
-
+            
+            <PrivateRoute path='/Project' component={EditProjectPage} />
+            <PrivateRoute path='/Team' component={ProjectTeamPage} />
             <PrivateRoute path='/Inception' component={InceptionPage} />
             <PrivateRoute path='/Feasibility' component={FeasibilityPage} />
             <PrivateRoute path='/Design' component={DesignPage} />
@@ -62,7 +65,6 @@ class App extends Component{
             <PrivateRoute path='/Handover' component={HandoverPage} />
             <PrivateRoute path='/Occupation' component={OccupationPage} />
             <PrivateRoute path='/Refurbishment' component={RefurbishmentPage} />
-            <PrivateRoute path='/Project' component={EditProjectPage} />
 
             <PrivateRoute path='/NewProject' component={NewProjectPage} />
 

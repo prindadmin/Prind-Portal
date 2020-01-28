@@ -47,3 +47,18 @@ export const REFURBISHMENT_PAGE_TITLE = "Project Refurbishment"
 export const REFURBISHMENT_PAGE_DESCRIPTION = "Time for refurbishment? If your project will last more that 30 days, start new project.  Demolition? - look forward to helping you.\n\nStart new project"
 
 export const EDIT_PROJECT_DETAILS = "Edit Project Details"
+
+export const PROJECT_DIRECTORY_TITLE = "Project Directory"
+
+export const PROJECT_DIRECTORY_ADD_NEW_TITLE = "Add New Project Member"
+
+export const BUTTON_ADD_MEMBER_TO_PROJECT = "Add New Member"
+
+export const MEMBER_DETAILS = "Member Details"
+export const MEMBER_FIRST_NAME = "First Name"
+export const MEMBER_LAST_NAME = "Surname"
+export const MEMBER_EMAIL_ADDRESS = "Email"
+export const MEMBER_PROJECT_ROLE = "Role"
+export const MEMBER_STATUS = "Status"
+
+export const NO_ROLE_SELECTED = "Please select a role..."

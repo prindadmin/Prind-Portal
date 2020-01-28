@@ -249,9 +249,79 @@ hr {
 }
 
 /* ================================== */
-/* ========== generic page ========== */
+/* ======= project team page ======== */
 /* ================================== */
 
+#project-team-page {
+
+}
+
+#project-team-page .add-member-form {
+
+}
+
+#project-team-page .header-section {
+  margin: 2em 0 0 0;
+}
+
+#project-team-page label.bp3-label {
+    margin-bottom: 0.5em;
+    text-align: left;
+    font-weight: bold;
+}
+
+#project-team-page .bp3-input-group {
+    margin-bottom: 0.33em;
+}
+
+#project-team-page .bp3-form-group {
+    margin-bottom: 2em;
+}
+
+#project-team-page textarea {
+    width: 100%;
+    min-height: 150px;
+}
+
+#project-team-page .last {
+    margin-bottom: 3em;
+}
+
+#project-team-page .bp3-form-content {
+  text-align: left;
+}
+
+#project-team-page .bp3-button-group {
+  margin-bottom: 10px;
+}
+
+#project-team-page .form-container {
+  width: 80%;
+  max-width: 430px;
+}
+
+#project-team-page .project-form {
+    width: 100%;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+#project-team-page .bp3-popover-target {
+    width: 100%;
+}
+
+.bp3-popover-content a {
+    min-height: 30px;
+}
+
+#project-team-page .bp3-button {
+    width: 100%;
+}
+
+/* ================================== */
+/* ========== generic page ========== */
+/* ================================== */
+/*
 #generic-page {
 }
 
@@ -305,7 +375,7 @@ hr {
 #generic-page .result-details span {
   word-wrap:break-word;
 }
-
+*/
 
 
 /* ================================== */
