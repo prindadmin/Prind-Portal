@@ -1,0 +1,31 @@
+import React, { Component } from 'react'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
+
+import {
+  Popover,
+  Menu,
+  Icon
+} from '@blueprintjs/core'
+
+const ico = <FontAwesomeIcon icon={faUserCircle} size='3x' />
+
+class UserMenu extends Component {
+  signOut = async (values) => {
+    await this.props.signOut(values)
+  }
+
+  dropdownContent = <Menu>
+    <Menu.Item text='Profile' />
+    <Menu.Item text='Sign Out' onClick={this.signOut} />
+  </Menu>
+
+  render () {
+    return <Popover content={this.dropdownContent} position='bottom'>
+      <Icon icon={ico} />
+    </Popover>
+  }
+}
+
+export default UserMenu

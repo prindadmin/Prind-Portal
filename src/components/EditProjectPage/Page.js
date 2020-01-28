@@ -6,8 +6,6 @@ import {
   Button,
   ButtonGroup,
   Callout,
-  TextArea,
-  Intent
 } from '@blueprintjs/core'
 
 import HeaderBar from '../common/HeaderBar';
@@ -51,7 +49,7 @@ export class Page extends Component {
     const { handleSubmit, auth } = this.props
 
     return (
-      <form onSubmit={handleSubmit(this.createProject)} className='auth-form'>
+      <form onSubmit={handleSubmit(this.createProject)} className='project-form'>
         {
           this.props.submitFailed ?
           <Callout style={{marginBottom: '15px'}} intent='danger' title='Registration failed'>
@@ -61,11 +59,11 @@ export class Page extends Component {
         }
         <FormGroup
           label={strings.PROJECT_NAME}
-          labelFor="name"
+          labelFor="projectName"
           labelInfo={strings.FIELD_IS_REQUIRED}
         >
           <Field
-            name="name"
+            name="projectName"
             validate={[validators.required, validators.maxLength64]}
             component={FormInputs.TextInput}
             placeholder={strings.PROJECT_NAME}
@@ -116,18 +114,19 @@ export class Page extends Component {
 
         <FormGroup
           label={strings.PROJECT_DESCRIPTION}
-          labelFor="description"
+          labelFor="projectDescription"
           labelInfo=""
           className="last"
         >
-          <TextArea
-            name="description"
-            growVertically={true}
-            fill={true}
-            intent={Intent.PRIMARY}
+          <Field
+            name="projectDescription"
+            component="textarea"
+            className="bp3-input"
             placeholder={strings.PROJECT_DESCRIPTION}
           />
         </FormGroup>
+
+
 
         <ButtonGroup fill>
           <Button
@@ -135,19 +134,14 @@ export class Page extends Component {
             disabled={this.props.invalid}
             type='submit'
             intent='primary'
-            text={strings.BUTTON_CREATE_PROJECT}
-          />
-        </ButtonGroup>
-        <ButtonGroup fill>
-          <Button
-            text={strings.BUTTON_CANCEL}
-            intent='none'
-            onClick={() => {this.props.history.push(Endpoints.defaultLoggedInPage)}}
+            text={strings.BUTTON_SAVE_CHANGES_TO_PROJECT}
           />
         </ButtonGroup>
       </form>
     )
   }
+
+  // TODO: Fix these buttons
 
   projectPageFooter = () => {
     return (
@@ -159,7 +153,7 @@ export class Page extends Component {
 
   projectDetails = () => {
     return (
-      <div>
+      <div className="form-container">
         {this.projectPageHeader()}
         {this.projectForm()}
         {this.projectPageFooter()}
@@ -189,7 +183,7 @@ export class Page extends Component {
           <div className='page-content col-xl-10 col-lg-9 col-md-9 col-sm-9'>
             {
               this.props.projects !== undefined ?
-                this.props.projects.chosenProject.name === strings.NO_PROJECT_SELECTED ?
+                this.props.projects.chosenProject.projectName === strings.NO_PROJECT_SELECTED ?
                   this.showEmptyPage() :
                   this.projectDetails() :
               this.showEmptyPage()

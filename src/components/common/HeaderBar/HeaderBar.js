@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import ProjectSelector from '../ProjectSelector';
+import UserMenu from '../UserMenu'
 
 const defaultName = "Prin-D"
 
@@ -12,7 +13,6 @@ export class HeaderBar extends Component {
     companyName: PropTypes.string,
     menuItems: PropTypes.array,
   }
-
 
 
   constructor() {
@@ -38,11 +38,9 @@ export class HeaderBar extends Component {
 
   getMenu = () => {
 
-    const links = null
-
     return (
       <div className='menu-container'>
-        {links}
+        <UserMenu />
       </div>
     )
   }

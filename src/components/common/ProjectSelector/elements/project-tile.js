@@ -10,7 +10,7 @@ import * as strings from '../../../../data/Strings'
 const ProjectTile = props => {
   const { project, selected } = props
   let className = 'site-select-tile'
-  let bodyText = project.description
+  let bodyText = project.projectDescription
 
 
   if (bodyText === undefined) {
@@ -29,7 +29,7 @@ const ProjectTile = props => {
     <Callout className={className}>
       <ItemIcon size='4x' type='building' />
       <div className='details' >
-        <h4>{project.name}</h4>
+        <h4>{project.projectName}</h4>
         <span>{bodyText}</span><br />
       </div>
     </Callout>

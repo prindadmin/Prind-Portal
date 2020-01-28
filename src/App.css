@@ -8,6 +8,7 @@
   --header-height: 75px;
   --pop-up-padding: 20px;
   --heading-text-color: #000;
+  --sidebar-text-color: #106ba3;
   --pop-up-project-tile-margin: 5px;
 }
 
@@ -67,7 +68,8 @@ hr {
 }
 
 .auth-form {
-    width: 330px;
+    max-width: 400px;
+    width: 80%;
     padding: 15px;
     margin: 0 auto;
 }
@@ -149,10 +151,13 @@ hr {
 }
 
 #header-bar .nav-links {
-  color: red;
   float: right;
   margin-left: auto;
   text-align: right;
+}
+
+#header-bar .nav-links svg {
+  color: white;
 }
 
 #header-bar .menu-container {
@@ -166,7 +171,6 @@ hr {
 }
 
 #header-bar Button {
-  margin-left: 1em;
   min-width: 300px;
 }
 
@@ -213,7 +217,12 @@ hr {
 }
 
 #new-project-page .bp3-form-group {
-    margin-bottom: 1.33em;
+    margin-bottom: 2em;
+}
+
+#new-project-page textarea {
+    width: 100%;
+    min-height: 150px;
 }
 
 #new-project-page .last {
@@ -221,10 +230,22 @@ hr {
 }
 
 #new-project-page .bp3-form-content {
+  text-align: left;
 }
 
 #new-project-page .bp3-button-group {
   margin-bottom: 10px;
+}
+
+#new-project-page .form-container {
+  width: 80%;
+  max-width: 430px;
+}
+
+#new-project-page .project-form {
+    width: 100%;
+    padding: 15px;
+    margin: 0 auto;
 }
 
 /* ================================== */

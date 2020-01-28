@@ -4,7 +4,7 @@ import * as strings from '../data/Strings'
 const defaultState = {
   accessibleProjects: [],
   chosenProject: {
-    name: strings.NO_PROJECT_SELECTED,
+    projectName: strings.NO_PROJECT_SELECTED,
     id: "",
   }
 }

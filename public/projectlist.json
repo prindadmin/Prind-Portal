@@ -1,57 +1,57 @@
 [
   {
     "id": "0001",
-    "name": "Studytel Penryn",
-    "description": "This scheme will include a mix of self-contained studios and cluster apartments with shared kitchen and communal space, for more than 500 students.  The accommodation will be complemented by a unique concept space called the Winter Garden Library®, this will comprise of a flexible space for both students and business start-ups to use which will encourage collaborative working.",
+    "projectName": "Studytel Penryn",
+    "projectDescription": "This scheme will include a mix of self-contained studios and cluster apartments with shared kitchen and communal space, for more than 500 students.  The accommodation will be complemented by a unique concept space called the Winter Garden Library®, this will comprise of a flexible space for both students and business start-ups to use which will encourage collaborative working.",
     "projectColor": "blue"
   },
   {
     "id": "1234",
-    "name": "Project 1",
-    "description": "Project 1 Description.  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    "projectName": "Project 1",
+    "projectDescription": "Project 1 Description.  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
   },
   {
     "id": "5678",
-    "name": "Project 2",
-    "description": "Project 2 Description"
+    "projectName": "Project 2",
+    "projectDescription": "Project 2 Description"
   },
   {
     "id": "2468",
-    "name": "Project 3",
-    "description": "Project 3 Description"
+    "projectName": "Project 3",
+    "projectDescription": "Project 3 Description"
   },
   {
     "id": "3333",
-    "name": "Project 4"
+    "projectName": "Project 4"
   },
   {
     "id": "4444",
-    "name": "Project 5",
-    "description": "Project 5 Description"
+    "projectName": "Project 5",
+    "projectDescription": "Project 5 Description"
   },
   {
     "id": "5555",
-    "name": "Project 6",
-    "description": "Project 6 Description"
+    "projectName": "Project 6",
+    "projectDescription": "Project 6 Description"
   },
   {
     "id": "6666",
-    "name": "Project 7",
-    "description": "Project 7 Description"
+    "projectName": "Project 7",
+    "projectDescription": "Project 7 Description"
   },
   {
     "id": "7777",
-    "name": "Project 8",
-    "description": "Project 8 Description"
+    "projectName": "Project 8",
+    "projectDescription": "Project 8 Description"
   },
   {
     "id": "8888",
-    "name": "Project 9",
-    "description": "Project 9 Description"
+    "projectName": "Project 9",
+    "projectDescription": "Project 9 Description"
   },
   {
     "id": "9999",
-    "name": "Project 10",
-    "description": "Project 10 Description"
+    "projectName": "Project 10",
+    "projectDescription": "Project 10 Description"
   }
 ]

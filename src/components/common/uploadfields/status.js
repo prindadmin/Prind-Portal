@@ -19,8 +19,12 @@ export class Status extends Component {
     })
   }
 
-  componentWillReceiveProps(props) {
-    this.setState({status: props.status})
+  componentDidUpdate(prevProps) {
+    if(this.props.status !== prevProps.status) {
+      this.setState({
+        status: this.props.status
+      })
+    }
   }
 
   render() {

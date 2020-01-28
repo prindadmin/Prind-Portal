@@ -56,7 +56,7 @@ class ProjectSelector extends React.Component {
     var buttonText = strings.NO_PROJECT_SELECTED
 
     if (chosenProject !== undefined) {
-      buttonText = chosenProject.name
+      buttonText = chosenProject.projectName
     }
 
     const ico = <FontAwesomeIcon icon={faThLarge} />

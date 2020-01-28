@@ -25,14 +25,7 @@ export default function(identityToken, newProjectDetails) {
 
     instance.get(`${process.env.PUBLIC_URL}/createdProject.json`, newProjectDetails)
     .then(res => {
-
-      //Remove the next 5 lines and remove the comment from the 5th line
-      console.log(res)
-      var editedResult = res
-      editedResult.data.name = newProjectDetails.projectName
-      console.log(editedResult)
-      resolve(editedResult)
-      //resolve(res)
+      resolve(res)
     })
     .catch((error) => {
       console.log(error)

@@ -20,6 +20,7 @@ export const NO_PROJECT_DESCRIPTION = "No project description provided"
 
 export const BUTTON_CREATE_PROJECT = "Create Project"
 export const BUTTON_CANCEL = "Cancel"
+export const BUTTON_SAVE_CHANGES_TO_PROJECT = "Save Changes"
 
 export const INCEPTION_PAGE_TITLE = "Project Inception"
 export const INCEPTION_PAGE_DESCRIPTION = "Inception of a project begins with the idea. This idea is captured in a project brief."
