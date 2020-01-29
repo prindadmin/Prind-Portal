@@ -54,7 +54,7 @@ class App extends Component{
             <Route path='/SignUp' component={SignUp} />
             <Route path='/forgot-password' component={ForgotPassword} />
             <Route path='/change-password' component={ChangePassword} />
-            
+
             <PrivateRoute path='/Project' component={EditProjectPage} />
             <PrivateRoute path='/Team' component={ProjectTeamPage} />
             <PrivateRoute path='/Inception' component={InceptionPage} />
@@ -71,9 +71,9 @@ class App extends Component{
             <Route path='/'
               render={() =>
                 auth.isSignedIn === AUTH_SUCCESS ? (
-                  <Redirect to={Endpoints.defaultLoggedInPage} />
+                  <Redirect to={Endpoints.DEFAULTLOGGEDINPAGE} />
                 ) : (
-                  <Redirect to={Endpoints.signInPage} />
+                  <Redirect to={Endpoints.SIGNINPAGE} />
                 )
               }
             />

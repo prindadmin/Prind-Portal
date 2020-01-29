@@ -70,7 +70,6 @@ function * createNewProject (action) {
     }
 }
 
-
 export default function * sagas () {
   yield takeLatest(actions.PROJECT_INIT, init)
   yield takeLatest(actions.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUESTED, getAccessibleProjects)

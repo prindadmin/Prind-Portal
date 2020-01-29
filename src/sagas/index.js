@@ -3,6 +3,7 @@ import { all, fork } from 'redux-saga/effects'
 import awssagas from './awsSagas'
 import userSagas from './userSagas'
 import projectSagas from './projectSagas'
+import memberSagas from './memberSagas'
 import pageSagas from './pageSagas'
 
 export default function * root () {
@@ -10,6 +11,7 @@ export default function * root () {
     fork(awssagas),
     fork(userSagas),
     fork(projectSagas),
+    fork(memberSagas),
     fork(pageSagas),
   ])
 }

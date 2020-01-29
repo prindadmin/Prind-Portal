@@ -87,7 +87,7 @@ class SignUp extends Component {
             text='Cancel Sign Up'
             intent='primary'
             className='bim-dark-blue'
-            onClick={() => {this.props.history.push(Endpoints.defaultPage)}}
+            onClick={() => {this.props.history.push(Endpoints.DEFAULTPAGE)}}
           />
         </ButtonGroup>
       </form>
@@ -110,7 +110,7 @@ class SignUp extends Component {
           intent='primary'
           fill
           text='Back to login page'
-          onClick={() => {this.props.history.push(Endpoints.signInPage)}}
+          onClick={() => {this.props.history.push(Endpoints.SIGNINPAGE)}}
         />
       </div>
     )

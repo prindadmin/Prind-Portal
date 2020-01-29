@@ -77,7 +77,7 @@ class SignIn extends Component {
             intent='primary'
             className='bim-light-blue'
             text='New User? Create Account'
-            onClick={() => {this.props.history.push(Endpoints.signUpPage)}} />
+            onClick={() => {this.props.history.push(Endpoints.SIGNUPPAGE)}} />
         </ButtonGroup>
         <ButtonGroup fill>
           <Button
@@ -95,7 +95,7 @@ class SignIn extends Component {
     const { auth } = this.props
     return (
       <div id='signin' className='row align-items-center justify-content-center'>
-        {auth.isSignedIn === state.AUTH_SUCCESS ? <Redirect to={Endpoints.defaultLoggedInPage} /> : this.renderSignIn()}
+        {auth.isSignedIn === state.AUTH_SUCCESS ? <Redirect to={Endpoints.DEFAULTLOGGEDINPAGE} /> : this.renderSignIn()}
       </div>
     )
   }

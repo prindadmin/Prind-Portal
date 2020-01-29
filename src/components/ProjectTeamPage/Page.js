@@ -16,7 +16,6 @@ import * as FormInputs from '../shared/formInputs'
 
 import * as strings from '../../data/Strings'
 import * as validators from '../../validators'
-import * as Endpoints from '../../endpoints'
 
 const rolesArray = [
   {
@@ -53,12 +52,20 @@ export class Page extends Component {
   }
 
   addMember = async (values) => {
+
+    var newValues = values
+    newValues.roleID = this.state.selectedRoleID
+
     await this.props.addMember(
       this.props.auth.info.idToken.jwtToken,
       this.props.projects.chosenProject.id,
-      values
+      newValues
     )
-    this.props.history.push(Endpoints.defaultLoggedInPage)
+
+    this.setState({
+      creatingNewUser: false,
+    })
+
   }
 
   pageHeader = () => {
@@ -89,7 +96,6 @@ export class Page extends Component {
     const { handleSubmit } = this.props
 
     // TODO: Improve formatting so that invalid messages aren't on top of the next box
-    // FIXME: Work out why the button is still disabled once all fields are filled
 
     return (
       <form onSubmit={handleSubmit(this.addMember)} className='add-member-form'>
@@ -115,16 +121,21 @@ export class Page extends Component {
             component={FormInputs.TextInput}
             placeholder={strings.MEMBER_EMAIL_ADDRESS}
           />
+        </FormGroup>
+
+        <FormGroup
+          label={strings.MEMBER_PROJECT_ROLE}
+          labelFor="role"
+        >
           <Field
             name="role"
-            validate={[validators.required]}
+            values={rolesArray}
             component={FormInputs.SelectInput}
             placeholder={strings.MEMBER_PROJECT_ROLE}
-            onItemSelected={this.onItemSelected}
+            onItemSelect={this.onItemSelected}
+            value={this.state.selectedRoleName}
             selectedItem={this.state.selectedRoleName}
-          >
-            {rolesArray}
-          </Field>
+          />
         </FormGroup>
 
 

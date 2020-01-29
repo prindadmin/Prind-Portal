@@ -33,7 +33,7 @@ export class Page extends Component {
 
   createProject = async (values) => {
     await this.props.createProject(this.props.auth.info.idToken.jwtToken, values)
-    this.props.history.push(Endpoints.defaultLoggedInPage)
+    this.props.history.push(Endpoints.DEFAULTLOGGEDINPAGE)
   }
 
   projectPageHeader = () => {

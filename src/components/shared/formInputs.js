@@ -46,40 +46,58 @@ export const TextBoxInput = (field) => {
 }
 
 
-function itemRenderer(item, { handleClick }) {
-  return(
-    <MenuItem
-        key={item.roleID}
-        text={item.roleName}
-        onClick={handleClick}
-        shouldDismissPopover={true}
-      />
-    )
-}
 
-export const SelectInput = (field) => {
 
-  const buttonText = field.selectedItem
+export class SelectInput extends React.Component {
+  static propTypes = {
+    field: PropTypes.object
+  }
 
-  return (
-    <React.Fragment>
-      <Select
-        name={field.input.name}
-        items={field.children}
-        itemRenderer={itemRenderer}
-        filterable={false}
-        onItemSelect={field.onItemSelected}
-        noResults={<MenuItem disabled={true} text="No results." />}
+  itemRenderer = (item, { handleClick }) => {
+
+    return(
+      <MenuItem
+          {...this.props.input}
+          key={item.roleID}
+          text={item.roleName}
+          onClick={handleClick}
+          shouldDismissPopover={true}
+        />
+      )
+  }
+
+
+  render () {
+
+    const { input, values, selectedItem, onItemSelect } = this.props
+    const { touched, invalid, error, active } = this.props.meta
+
+    return (
+      <React.Fragment>
+        <Select
+          {...input}
+          name={input.name}
+          intent={touched && invalid && !active ? 'danger' : 'none'}
+          items={values}
+          itemRenderer={this.itemRenderer}
+          filterable={false}
+          onItemSelect={onItemSelect}
+          noResults={<MenuItem disabled={true} text="No results." />}
         >
-        <Button
-          text={buttonText}
-          rightIcon="double-caret-vertical"
-          alignText="left"
+          <Button
+            text={selectedItem}
+            {...input}
+            rightIcon="double-caret-vertical"
+            alignText="left"
           />
-      </Select>
-    </React.Fragment>
-  )
+          { touched && invalid && !active ? <small style={validationErrorStyle}>{error}</small> : null }
+        </Select>
+      </React.Fragment>
+    )
+  }
+
 }
+
 
 
 

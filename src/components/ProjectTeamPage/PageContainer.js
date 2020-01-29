@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import * as reducer from '../../reducers/projectsReducer'
+import * as reducer from '../../reducers/memberReducer'
 
 import PageComponent from './Page'
 
@@ -15,9 +15,12 @@ const mapStatetoProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    createProject: (jwtToken, values) => {
-      dispatch(reducer.createProject(jwtToken, values))
-    }
+    addMember: (jwtToken, projectID, memberValues) => {
+      dispatch(reducer.addMemberToProject(jwtToken, projectID, memberValues))
+    },
+    removeMember: (jwtToken, projectID, memberEmail) => {
+      dispatch(reducer.removeMemberFromProject(jwtToken, projectID, memberEmail))
+    },
   }
 }
 
