@@ -62,3 +62,10 @@ export const MEMBER_PROJECT_ROLE = "Role"
 export const MEMBER_STATUS = "Status"
 
 export const NO_ROLE_SELECTED = "Please select a role..."
+
+export const FILE_PROMPT = "Choose a file..."
+export const FILE_NOT_SELECTED = "No file selected"
+export const FILE_READY_TO_UPLOAD = "Ready to upload"
+export const FILE_UPLOAD_FAILED = "Upload failed"
+export const FILE_UPLOADING = "Upload in progress"
+export const FILE_SUCCESSFULLY_UPLOADED = "Successfully uploaded"

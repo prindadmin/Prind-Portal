@@ -11,6 +11,8 @@ import NoProjectSelected from '../common/NoProjectSelected'
 
 import * as strings from '../../data/Strings'
 
+import { FileUpload } from '../common/ProjectDataFields'
+
 export class Page extends Component {
   static propTypes = {
     pageContent: PropTypes.object,
@@ -18,7 +20,6 @@ export class Page extends Component {
 
   componentDidMount() {
       // TODO: Edit this so it doesn't reload every time the screen changes
-      // TODO: Edit this so it refreshes when the project changes
       this.props.getContent(this.props.auth.info.idToken.jwtToken, this.props.projects.chosenProject.id)
   }
 
@@ -46,6 +47,11 @@ export class Page extends Component {
 
     const { fields }  = this.props.pageContent.inception
 
+    const content = {
+      id: 1,
+      title: "Please upload your project brief",
+      description: "The project brief is required for the project to start.  Everyone will use this document.",
+    }
 
     return(
       <div className='page-content col-xl-10 col-lg-9 col-md-9 col-sm-9'>
@@ -58,6 +64,9 @@ export class Page extends Component {
             return <SingleFieldRequirement key={singleField.id} details={singleField} />
           }) : null
         }
+        <FileUpload
+          elementContent={content}
+        />
       </div>
     )
   }

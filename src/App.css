@@ -340,6 +340,58 @@ hr {
 }
 
 /* ================================== */
+/* ======= file upload element ====== */
+/* ================================== */
+
+#file-upload-element {
+  width: 100%;
+}
+
+#file-upload-element .file-upload-element-container {
+  margin: auto;
+  width: 100%;
+  background-color: #add8e6;
+  border-radius: 10px;
+  padding: 10px;
+  position: relative;
+  text-align: left;
+}
+
+#file-upload-element .element-title {
+  font-size: 20px;
+  font-weight: bold;
+  padding-bottom: 0.33em;
+}
+
+#file-upload-element .element-description {
+}
+
+#file-upload-element .row {
+  margin: 0;
+}
+
+#file-upload-element .bp3-file-input {
+  margin-bottom: 0.5em;
+}
+
+#file-upload-element .element-file-uploader {
+}
+
+#file-upload-element .bp3-button {
+}
+
+#file-upload-element .row {
+  width: 100%;
+  align-items: center;
+  display:flex;
+  margin-bottom: 0.3em;
+}
+
+#file-upload-element .file-status {
+  margin-left: 6em;
+}
+
+/* ================================== */
 /* ========== generic page ========== */
 /* ================================== */
 /*
