@@ -67,18 +67,17 @@ hr {
   margin: auto;
 }
 
-.auth-form {
-    max-width: 400px;
-    width: 80%;
+#signin .auth-form {
+    width: 400px;
     padding: 15px;
     margin: 0 auto;
 }
 
-.auth-form label.bp3-label {
+#signin .auth-form label.bp3-label {
     margin-bottom: 20px;
 }
 
-.auth-form label.bp3-label:last-of-type {
+#signin .auth-form label.bp3-label:last-of-type {
     margin-bottom: 50px;
 }
 
@@ -316,6 +315,28 @@ hr {
 
 #project-team-page .bp3-button {
     width: 100%;
+}
+
+#project-team-page .member-list {
+}
+
+/* ================================== */
+/* ====== contact tile element ====== */
+/* ================================== */
+
+#contact-tile {
+  text-align: left;
+}
+
+#contact-tile .bp3-callout {
+  margin-bottom: 10px;
+}
+
+#contact-tile .bp3-heading {
+}
+
+#contact-tile h4 {
+  margin-bottom: 0.5em;
 }
 
 /* ================================== */

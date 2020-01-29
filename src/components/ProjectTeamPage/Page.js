@@ -14,6 +14,8 @@ import Footer from '../common/footer'
 
 import * as FormInputs from '../shared/formInputs'
 
+import ContactTile from './elements/ContactTile'
+
 import * as strings from '../../data/Strings'
 import * as validators from '../../validators'
 
@@ -45,8 +47,26 @@ export class Page extends Component {
     }
   }
 
+  componentDidMount() {
+
+    if (this.props.projects.chosenProject.id !== "" && this.props.projects.memberList.length === 0) {
+      this.props.getCurrentMembers(
+        this.props.auth.info.idToken.jwtToken,
+        this.props.projects.chosenProject.id
+      )
+    }
+  }
+
   componentDidUpdate(prevProps) {
     if (this.props.projects.chosenProject.id !== prevProps.projects.chosenProject.id) {
+
+      // Get the current members of the project
+      this.props.getCurrentMembers(
+        this.props.auth.info.idToken.jwtToken,
+        this.props.projects.chosenProject.id
+      )
+
+      // Reset the whole page
       this.props.reset()
     }
   }
@@ -66,6 +86,11 @@ export class Page extends Component {
       creatingNewUser: false,
     })
 
+    // Get the current members of the project
+    this.props.getCurrentMembers(
+      this.props.auth.info.idToken.jwtToken,
+      this.props.projects.chosenProject.id
+    )
   }
 
   pageHeader = () => {
@@ -154,10 +179,8 @@ export class Page extends Component {
 
   memberList = () => {
 
-    // TODO: Add existing members list to screen
-
     return (
-      <div>
+      <div className="member-list-container">
         <ButtonGroup fill>
           <Button
             onClick={(e) => this.setState({creatingNewUser: true})}
@@ -165,6 +188,20 @@ export class Page extends Component {
             text={strings.BUTTON_ADD_MEMBER_TO_PROJECT}
           />
         </ButtonGroup>
+
+        <div className="member-list">
+          {
+            this.props.projects.memberList.map((memberDetails, index) => {
+              return (
+                <ContactTile
+                  key={index}
+                  memberDetails={memberDetails}
+                />
+              )
+            })
+          }
+        </div>
+
       </div>
     )
   }

@@ -1,0 +1,26 @@
+[
+  {
+    "foundationsID": "did:fnds:12gnpaodbgojntnrsnpojnnn434n3dank233",
+    "emailAddress": "a@b.com",
+    "firstName": "Tom",
+    "lastName": "Smith",
+    "roleID": 3,
+    "roleName": "Client"
+  },
+  {
+    "foundationsID": "did:fnds:12gnpaodbgojntnrsnpojnnn434n3dank232",
+    "emailAddress": "c@d.com",
+    "firstName": "Ryan",
+    "lastName": "Jones",
+    "roleID": 2,
+    "roleName": "Principal Contractor"
+  },
+  {
+    "foundationsID": "did:fnds:12gnpaodbgojntnrsnpojnnn434n3dank231",
+    "emailAddress": "e@f.com",
+    "firstName": "Stephanie",
+    "lastName": "Challis",
+    "roleID": 1,
+    "roleName": "Principal Designer"
+  }
+]
