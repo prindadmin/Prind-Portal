@@ -3,6 +3,7 @@
     "id": 1,
     "title": "Please Upload your Design Risk Assessment (DRA)",
     "description": "This document is required before any design work can start.",
+    "type": "file",
     "fileDetails": [
       {
         "ver": 0,

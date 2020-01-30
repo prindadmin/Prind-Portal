@@ -21,16 +21,16 @@ import * as validators from '../../validators'
 
 const rolesArray = [
   {
-    roleID: 1,
-    roleName: "Principal Designer",
+    id: 1,
+    name: "Principal Designer",
   },
   {
-    roleID: 2,
-    roleName: "Principal Contractor",
+    id: 2,
+    name: "Principal Contractor",
   },
   {
-    roleID: 3,
-    roleName: "Client",
+    id: 3,
+    name: "Client",
   },
 ]
 
@@ -74,7 +74,7 @@ export class Page extends Component {
   addMember = async (values) => {
 
     var newValues = values
-    newValues.roleID = this.state.selectedRoleID
+    newValues.id = this.state.selectedRoleID
 
     await this.props.addMember(
       this.props.auth.info.idToken.jwtToken,
@@ -111,8 +111,8 @@ export class Page extends Component {
 
   onItemSelected = (item) => {
     this.setState({
-      selectedRoleID: item.roleID,
-      selectedRoleName: item.roleName,
+      selectedRoleID: item.id,
+      selectedRoleName: item.name,
     })
   }
 
@@ -170,7 +170,7 @@ export class Page extends Component {
             disabled={this.props.invalid}
             type='submit'
             intent='primary'
-            text={strings.BUTTON_SAVE_CHANGES_TO_PROJECT}
+            text={strings.BUTTON_SAVE_CHANGES}
           />
         </ButtonGroup>
       </form>

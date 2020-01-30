@@ -3,6 +3,7 @@
     "id": 1,
     "title": "Please upload your project brief",
     "description": "The project brief is required for the project to start.  Everyone will use this document.",
+    "type": "file",
     "fileDetails": [
       {
         "ver": 0,
@@ -70,6 +71,25 @@
     "id": 2,
     "title": "Please upload your other document",
     "description": "This document is required for the project to start.  Nobody will use this document.",
+    "type": "file",
     "fileDetails": []
+  },
+  {
+    "id": 3,
+    "title": "Will any parts of the building / site be occupied during the works?",
+    "description": "This is asked to ensure that any plans will take into account any members of the public who might be moving around the building / site.",
+    "type": "dropdown",
+    "fieldDetails": {
+      "currentValue": "lorem ipsum"
+    }
+  },
+  {
+    "id": 4,
+    "title": "Planned Start Date",
+    "description": "This is asked to ensure that the project starts on schedule.",
+    "type": "calendar",
+    "fieldDetails": {
+      "currentValue": "lorem ipsum"
+    }
   }
 ]

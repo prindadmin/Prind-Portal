@@ -3,6 +3,7 @@
     "id": 1,
     "title": "Please upload your feasibility study",
     "description": "The project feasibility study is required for ...",
+    "type": "file",
     "fileDetails": [
       {
         "ver": 0,
@@ -54,6 +55,7 @@
     "id": 2,
     "title": "Please upload your other document",
     "description": "This document is required for the project to start.  Nobody will use this document.",
+    "type": "file",
     "fileDetails": []
   }
 ]

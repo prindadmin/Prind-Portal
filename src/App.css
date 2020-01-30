@@ -345,13 +345,15 @@ hr {
 /* ======= file upload element ====== */
 /* ================================== */
 
-#file-upload-element {
+#file-upload-element,
+#drop-down-element {
   width: 100%;
   max-width: 1140px;
   margin-bottom: 15px;
 }
 
-#file-upload-element .file-upload-element-container {
+#file-upload-element .file-upload-element-container,
+#drop-down-element .drop-down-element-container {
   margin: auto;
   width: 100%;
   background-color: #ffcccb;
@@ -369,17 +371,20 @@ hr {
   background-color: #d2e9af;
 }
 
-#file-upload-element .element-title {
+#file-upload-element .element-title,
+#drop-down-element .element-title {
   font-size: 20px;
   font-weight: bold;
   padding-bottom: 0.33em;
 }
 
-#file-upload-element .element-description {
+#file-upload-element .element-description,
+#drop-down-element .element-description {
   margin-bottom: 1em;
 }
 
-#file-upload-element .row {
+#file-upload-element .row,
+#drop-down-element .row {
   margin: 0;
 }
 
@@ -390,15 +395,18 @@ hr {
 #file-upload-element .element-file-uploader {
 }
 
-#file-upload-element .bp3-button {
+#file-upload-element .bp3-button,
+#drop-down-element .bp3-button {
   width: 150px;
 }
 
-#file-upload-element .container{
+#file-upload-element .container,
+#drop-down-element .container {
   padding: 0;
 }
 
-#file-upload-element .row {
+#file-upload-element .row,
+#drop-down-element .row {
   width: 100%;
   align-items: center;
   display:flex;
@@ -412,7 +420,11 @@ hr {
 #file-upload-element .col,
 #file-upload-element .col-3,
 #file-upload-element .col-4,
-#file-upload-element .col-5 {
+#file-upload-element .col-5,
+#drop-down-element .col,
+#drop-down-element .col-3,
+#drop-down-element .col-4,
+#drop-down-element .col-5 {
   padding: 0;
 }
 
@@ -445,6 +457,23 @@ hr {
 
 #file-upload-element .bp3-label {
   margin-bottom: 0;
+}
+
+/* ================================== */
+/* ======= drop down element ======== */
+/* ================================== */
+
+#drop-down-element .drop-down-element-container {
+  background-color: #ededed;
+}
+
+#drop-down-element .bp3-button  {
+  width: 250px;
+  margin-bottom: 0.5em;
+}
+
+#drop-down-element label {
+  padding-left: 0.3em;
 }
 
 /* ================================== */

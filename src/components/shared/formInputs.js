@@ -58,8 +58,8 @@ export class SelectInput extends React.Component {
     return(
       <MenuItem
           {...this.props.input}
-          key={item.roleID}
-          text={item.roleName}
+          key={item.id}
+          text={item.name}
           onClick={handleClick}
           shouldDismissPopover={true}
         />

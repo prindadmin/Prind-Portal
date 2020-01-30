@@ -6,7 +6,7 @@ import PageChooserSection from '../layouts/PageChooserSection'
 import ProjectLoading from '../common/ProjectLoading'
 import Footer from '../common/footer'
 
-import { FileUpload } from '../common/ProjectDataFields'
+import { FileUpload, DropDown, CalendarPicker } from '../common/ProjectDataFields'
 import NoProjectSelected from '../common/NoProjectSelected'
 
 import * as strings from '../../data/Strings'
@@ -52,9 +52,21 @@ export class Page extends Component {
           <span>{strings.INCEPTION_PAGE_DESCRIPTION}</span>
         </div>
         {
-          fields != null ? fields.map((singleField) => {
-            return <FileUpload key={singleField.id} elementContent={singleField} />
-          }) : null
+          fields.map((singleField) => {
+
+            if (singleField.type === 'file') {
+              return <FileUpload key={singleField.id} elementContent={singleField} />
+            }
+
+            if (singleField.type === 'dropdown') {
+              return <DropDown key={singleField.id} elementContent={singleField} />
+            }
+
+            if (singleField.type === 'calendar') {
+              return <CalendarPicker key={singleField.id} elementContent={singleField} />
+            }
+
+          })
         }
       </div>
     )

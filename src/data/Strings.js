@@ -1,4 +1,10 @@
 
+export const YES = "Yes"
+export const NO = "No"
+
+export const IF_YES_PROVIDE_DETAILS = "If yes, please provide extra details below"
+export const PLEASE_PROVIDE_DETAILS = "Please provide extra details here..."
+
 export const PROJECT_LOADING = "Project loading, please wait..."
 export const NO_PROJECT_SELECTED = "Please select a project..."
 export const CREATE_NEW_PROJECT = "Create a new project"
@@ -20,7 +26,7 @@ export const NO_PROJECT_DESCRIPTION = "No project description provided"
 
 export const BUTTON_CREATE_PROJECT = "Create Project"
 export const BUTTON_CANCEL = "Cancel"
-export const BUTTON_SAVE_CHANGES_TO_PROJECT = "Save Changes"
+export const BUTTON_SAVE_CHANGES = "Save Changes"
 
 export const INCEPTION_PAGE_TITLE = "Project Inception"
 export const INCEPTION_PAGE_DESCRIPTION = "Inception of a project begins with the idea. This idea is captured in a project brief."
@@ -62,6 +68,7 @@ export const MEMBER_PROJECT_ROLE = "Role"
 export const MEMBER_STATUS = "Status"
 
 export const NO_ROLE_SELECTED = "Please select a role..."
+export const NO_VALUE_SELECTED = "Please select an option..."
 
 export const FILE_PROMPT = "Choose a file..."
 export const FILE_NOT_SELECTED = "No file selected"

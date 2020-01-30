@@ -2,15 +2,20 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import {
-  FileInput,
   Button,
-  Label,
+  MenuItem,
+  TextArea,
+  FormGroup,
   Intent,
-  InputGroup,
+  Alignment,
 } from '@blueprintjs/core'
 
+import { Select } from "@blueprintjs/select";
 
 import * as strings from '../../../../data/Strings'
+
+// TODO: Implement FORM wrapper
+// TODO: Disable save button until changes are made
 
 export class Element extends Component {
   static propTypes = {
@@ -18,253 +23,134 @@ export class Element extends Component {
       id: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
       description: PropTypes.string,
-      fileDetails: PropTypes.array.isRequired,
+      fieldDetails: PropTypes.object.isRequired,
     })
   }
-
-  // TODO: Create functionality to say file has uploaded successfully
-  // TODO: Create functionality to calculate the hash of the file
 
   constructor() {
     super()
     this.state = {
-      detailedView: false,
-      filePrompt: strings.FILE_PROMPT,
-      hasChosenFile: false,
-      uploadFileRequsted: false,
-      fileHasUploaded: false,
-      fileHasAnchor: false,
-      fileState: '',
-      hash: null,
+      selectedValue: strings.NO_VALUE_SELECTED,
     }
   }
 
   componentDidMount() {
-    //console.log(this.props.elementContent)
-
-    const { fileDetails } = this.props.elementContent
-
-    if (fileDetails.length !== 0) {
-      if (fileDetails[0].proofLink !== null) {
-        this.setState({
-          fileState: ' has-anchor'
-        })
-      }
-      else {
-        this.setState({
-          fileState: ' has-upload'
-        })
-      }
-    }
   }
 
   componentDidUpdate(prevProps) {
   }
 
-  // Toggle between the detailed and minimized views of the element
-  onElementClick = () => {
-    this.setState({
-      detailedView: !this.state.detailedView,
-    })
-  }
 
   // ---------------------- DEFAULT FUNCTIONALITY ABOVE THIS LINE -----------------------
 
-  // Update the text inside the file picker
-  fileChosen = (e) => {
+  onItemSelected = (item) => {
     this.setState({
-      filePrompt: e.target.value.replace("C:\\fakepath\\", ""),
-      hasChosenFile: true,
+      selectedValue: item.name,
     })
   }
 
-  // TODO: Perform actions to upload file
-  uploadFile = (e) => {
-    console.log("file submit clicked")
-    this.setState({
-      hasChosenFile: false,
-      uploadFileRequsted: true,
-      fileState: '',
-    })
-    e.stopPropagation();
+  itemRenderer = (item, { handleClick }) => {
+
+    return(
+      <MenuItem
+          key={item.id}
+          text={item.name}
+          onClick={handleClick}
+          shouldDismissPopover={true}
+        />
+      )
   }
 
-  onFileUploadSuccess = () => {
-    this.setState({
-      fileHasUploaded: true,
-      fileState: ' has-upload',
-    })
-  }
-
-  onFileAnchorSuccess = () => {
-    this.setState({
-      fileHasAnchor: true,
-      fileState: ' has-anchor',
-    })
-  }
-
-
-  // TODO: Perform actions to requst a signature
-  requestSignature = (e) => {
-    console.log("signature requested")
-    e.stopPropagation();
-  }
-
-  uploadHistory = () => {
-    return (
-      <div className='upload-history'>
-        <Label>
-           Upload history
-           <InputGroup
-            id="upload-history"
-            placeholder="This will be the file's upload history"
-          />
-        </Label>
-      </div>
-    )
-  }
-
-  signatureHistory = () => {
-    return (
-      <div className='signature-history'>
-        <Label>
-           Signature history
-           <InputGroup
-            id="signature-history"
-            placeholder="This will be the file's signature history"
-          />
-        </Label>
-      </div>
-    )
-  }
-
-  fileStatus = () => {
-
-    var status = null
-
-    if (this.state.hasChosenFile) {
-      status = strings.FILE_READY_TO_UPLOAD
-    }
-
-    if (this.state.uploadFileRequsted) {
-      status = strings.FILE_UPLOADING
-    }
-
-    if (this.state.fileHasUploaded) {
-      status = strings.FILE_SUCCESSFULLY_UPLOADED
-    }
-
-    if (status === null) {
-      status = strings.FILE_NOT_SELECTED
-    }
-
-    return (
-      <div>
-        <b>Status: </b>
-        {status}
-      </div>
-    )
-
-  }
-
-  hashStatus = () => {
-
-    const { hash } = this.state
-
-    var status = strings.NO_HASH_YET
-
-    if (hash !== null) {
-      status = hash
-    }
-
-    return (
-      <div>
-        <b>Hash: </b>
-        {status}
-      </div>
-    )
-
+  saveChanges = (e) => {
+    console.log(e)
   }
 
   // ------------------------------ RENDER BELOW THIS LINE ------------------------------
 
   render() {
 
-    const { detailedView, filePrompt, fileHasUploaded, fileHasAnchor, fileState } = this.state
-    const { elementContent } = this.props
+    const { title, description, fieldDetails } = this.props.elementContent
+    const { selectedValue } = this.state
 
+    const values = [
+      {
+        id: 1,
+        name: strings.YES
+      },
+      {
+        id: 2,
+        name: strings.NO
+      },
+    ]
 
-    // TODO: Make the request signature a field for searching for project members and a click to add
-    // TODO: Add expand transition to make it smooth
+    const input = {
+      name: title
+    }
 
     return (
-      <div id='file-upload-element'>
-        <div className={'file-upload-element-container' + fileState} onClick={(e) => this.onElementClick()}>
+      <div id='drop-down-element'>
+        <div className={'drop-down-element-container'}>
           <div className='element-title'>
-            {elementContent.title}
+            {title}
           </div>
+
           <div className='element-description'>
-            {elementContent.description}
+            {description}
           </div>
-          <div className='element-file-uploader container'>
+
+          <div className='container'>
 
             <div className='row'>
-              {
-                elementContent.fileDetails.length > 0 ?
-                <CurrentVersion
-                  details={elementContent.fileDetails[0]}
-                /> :
-                <CurrentVersion
-                  details={null}
-                />
-              }
+              <div className='col'>
+                <Select
+                  items={values}
+                  noResults={<MenuItem disabled={true} text="No results." />}
+                  itemRenderer={this.itemRenderer}
+                  onItemSelect={this.onItemSelected}
+                >
+                  <Button
+                    text={selectedValue}
+                    rightIcon="double-caret-vertical"
+                    alignText={Alignment.LEFT}
+                  />
+                </Select>
+              </div>
             </div>
 
+            <div className='row'>
+              <div className='col'>
+                {
+                  selectedValue === strings.YES ?
+                  <FormGroup
+                    label={strings.IF_YES_PROVIDE_DETAILS}
+                    labelFor="extraInfo"
+                    labelInfo=""
+                    className="last"
+                  >
+                    <TextArea
+                      name="extraInfo"
+                      growVertically={true}
+                      fill={true}
+                      placeholder={strings.IF_YES_PROVIDE_DETAILS}
+                    />
+                  </FormGroup> :
+                  null
+                }
+              </div>
+            </div>
 
             <div className='row'>
-              <FileInput
-                className="field bp3-fill"
-                ref='fileInput'
-                onInputChange={(e) => this.fileChosen(e)}
-                text={filePrompt}
+              <div className='col'>
+              <Button
+                text={strings.BUTTON_SAVE_CHANGES}
+                intent={Intent.PRIMARY}
+                onClick={e => this.saveChanges(e)}
               />
-
-
-              <div className='row'>
-                <div className='col-5 col-lg-4 col-xl-3'>
-                  <Button
-                    intent={Intent.PRIMARY}
-                    onClick={(e) => this.uploadFile(e)}
-                    disabled={!this.state.hasChosenFile}
-                    text='Upload File'
-                  />
-                </div>
-                <div className='file-status col-auto'>
-                  {
-                    this.fileStatus()
-                  }
-                </div>
-              </div>
-
-
-              <div className="row">
-                <div className='col-5 col-lg-4 col-xl-3'>
-                  <Button
-                    intent={Intent.PRIMARY}
-                    onClick={(e) => this.requestSignature(e)}
-                    disabled={!this.state.fileHasUploaded}
-                    text='Request Signature'
-                  />
-                </div>
-                <div className='col-auto'>
-                  {
-                    this.hashStatus()
-                  }
-                </div>
               </div>
             </div>
+
           </div>
-          {detailedView ? <UploadHistory details={elementContent.fileDetails}/> : null}
+
         </div>
       </div>
     )

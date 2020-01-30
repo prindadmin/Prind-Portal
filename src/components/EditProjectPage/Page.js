@@ -134,7 +134,7 @@ export class Page extends Component {
             disabled={this.props.invalid}
             type='submit'
             intent='primary'
-            text={strings.BUTTON_SAVE_CHANGES_TO_PROJECT}
+            text={strings.BUTTON_SAVE_CHANGES}
           />
         </ButtonGroup>
       </form>
