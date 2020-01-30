@@ -3,6 +3,25 @@
     "id": 1,
     "title": "Please Upload your Design Risk Assessment (DRA)",
     "description": "This document is required before any design work can start.",
-    "fileDetails": []
+    "fileDetails": [
+      {
+        "ver": 0,
+        "uploadName": "file-v001.txt",
+        "uploadDateTime": "2020-01-30T12:04:59",
+        "uploadedBy": "Tom Smith",
+        "hash": "6c434ff047a8baff01375d4f744fd7508b68f36b19fa9111692504f6b2df9baf",
+        "proofLink": null,
+        "signatures": []
+      },
+      {
+        "ver": 1,
+        "uploadName": "file-v001.txt",
+        "uploadDateTime": "2020-01-30T12:04:59",
+        "uploadedBy": "Tom Smith",
+        "hash": "6c434ff047a8baff01375d4f744fd7508b68f36b19fa9111692504f6b2df9baf",
+        "proofLink": null,
+        "signatures": []
+      }
+    ]
   }
 ]
