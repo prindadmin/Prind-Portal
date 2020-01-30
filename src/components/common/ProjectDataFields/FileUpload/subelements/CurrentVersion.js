@@ -30,12 +30,20 @@ export class Element extends Component {
             <div>{strings.FILE_NAME}</div>
             <div>{strings.UPLOAD_DATE_TIME}</div>
             <div>{strings.UPLOADED_BY}</div>
+            <div>{strings.PROOF}</div>
           </div>
 
           <div className='field-values col-auto'>
             <div>{details.uploadName}</div>
             <div>{details.uploadDateTime}</div>
             <div>{details.uploadedBy}</div>
+            {
+              details.proofLink === null ?
+                strings.NO_PROOF_AVAILABLE :
+                <div onClick={e => e.stopPropagation()}>
+                  <a href={details.proofLink}>{strings.LINK_TO_PROOF}</a>
+                </div>
+            }
           </div>
         </div>
 

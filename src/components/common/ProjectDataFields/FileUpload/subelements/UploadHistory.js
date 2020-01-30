@@ -87,11 +87,19 @@ export class Element extends Component {
               <b>{strings.PROOF}</b>
               {
                 details.map((fileUpload, index) => {
-                  return (
-                    <div key={index}>
-                      <a onClick={e => this.openProof(e)} href={fileUpload.proofLink}>{strings.LINK_TO_PROOF}</a>
-                    </div>
-                  )
+                  if (details.proofLink === undefined) {
+                    return (
+                      <div key={index}>
+                        {strings.NO_PROOF_AVAILABLE}
+                      </div>
+                    )
+                  } else {
+                    return (
+                      <div key={index}>
+                        <a onClick={e => this.openProof(e)} href={fileUpload.proofLink}>{strings.LINK_TO_PROOF}</a>
+                      </div>
+                    )
+                  }
                 })
               }
             </Label>
