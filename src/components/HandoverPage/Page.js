@@ -6,7 +6,7 @@ import PageChooserSection from '../layouts/PageChooserSection'
 import ProjectLoading from '../common/ProjectLoading'
 import Footer from '../common/footer'
 
-import SingleFieldRequirement from '../common/uploadfields/RequiredFileTile'
+import { FileUpload } from '../common/ProjectDataFields'
 import NoProjectSelected from '../common/NoProjectSelected'
 
 import * as strings from '../../data/Strings'
@@ -53,7 +53,7 @@ export class Page extends Component {
         </div>
         {
           fields != null ? fields.map((singleField) => {
-            return <SingleFieldRequirement key={singleField.id} details={singleField} />
+            return <FileUpload key={singleField.id} elementContent={singleField} />
           }) : null
         }
       </div>

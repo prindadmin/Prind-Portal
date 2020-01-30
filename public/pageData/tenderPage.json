@@ -1,13 +1,8 @@
 [
   {
-    "id": "123",
+    "id": 1,
     "title": "Please upload you Pre-construction information pack.",
-    "prompt": "Choose File...",
-    "hasChosen": false,
-    "hasHash": false,
-    "hasSubmitted": false,
-    "hasReceived": false,
-    "hasSuccess": false,
-    "status": "missing"
+    "description": "",
+    "fileDetails": []
   }
 ]

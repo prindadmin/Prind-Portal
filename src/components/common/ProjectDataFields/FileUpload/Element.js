@@ -3,10 +3,17 @@ import PropTypes from 'prop-types'
 
 import {
   FileInput,
-  ButtonGroup,
   Button,
+  Label,
   Intent,
+  InputGroup,
 } from '@blueprintjs/core'
+
+import {
+  CurrentVersion,
+  UploadHistory,
+} from './subelements'
+
 
 import * as strings from '../../../../data/Strings'
 
@@ -16,10 +23,12 @@ export class Element extends Component {
       id: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
       description: PropTypes.string,
+      fileDetails: PropTypes.array.isRequired,
     })
   }
 
   // TODO: Create functionality to say file has uploaded successfully
+  // TODO: Create functionality to calculate the hash of the file
 
   constructor() {
     super()
@@ -29,11 +38,29 @@ export class Element extends Component {
       hasChosenFile: false,
       uploadFileRequsted: false,
       fileHasUploaded: false,
+      fileHasAnchor: false,
+      fileState: '',
+      hash: null,
     }
   }
 
   componentDidMount() {
     //console.log(this.props.elementContent)
+
+    const { fileDetails } = this.props.elementContent
+
+    if (fileDetails.length !== 0) {
+      if (fileDetails[0].proofLink !== null) {
+        this.setState({
+          fileState: ' has-anchor'
+        })
+      }
+      else {
+        this.setState({
+          fileState: ' has-upload'
+        })
+      }
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -56,20 +83,48 @@ export class Element extends Component {
     })
   }
 
-  // Perform actions to upload file
-  submitFile = (e) => {
+  // TODO: Perform actions to upload file
+  uploadFile = (e) => {
     console.log("file submit clicked")
     this.setState({
       hasChosenFile: false,
       uploadFileRequsted: true,
+      fileState: '',
     })
+    e.stopPropagation();
+  }
+
+  onFileUploadSuccess = () => {
+    this.setState({
+      fileHasUploaded: true,
+      fileState: ' has-upload',
+    })
+  }
+
+  onFileAnchorSuccess = () => {
+    this.setState({
+      fileHasAnchor: true,
+      fileState: ' has-anchor',
+    })
+  }
+
+
+  // TODO: Perform actions to requst a signature
+  requestSignature = (e) => {
+    console.log("signature requested")
     e.stopPropagation();
   }
 
   uploadHistory = () => {
     return (
       <div className='upload-history'>
-        This will be the file's upload history
+        <Label>
+           Upload history
+           <InputGroup
+            id="upload-history"
+            placeholder="This will be the file's upload history"
+          />
+        </Label>
       </div>
     )
   }
@@ -77,7 +132,13 @@ export class Element extends Component {
   signatureHistory = () => {
     return (
       <div className='signature-history'>
-        This will be the file's signature history
+        <Label>
+           Signature history
+           <InputGroup
+            id="signature-history"
+            placeholder="This will be the file's signature history"
+          />
+        </Label>
       </div>
     )
   }
@@ -86,16 +147,16 @@ export class Element extends Component {
 
     var status = null
 
-    if (this.state.fileHasUploaded) {
-      status = strings.FILE_SUCCESSFULLY_UPLOADED
+    if (this.state.hasChosenFile) {
+      status = strings.FILE_READY_TO_UPLOAD
     }
 
     if (this.state.uploadFileRequsted) {
       status = strings.FILE_UPLOADING
     }
 
-    if (this.state.hasChosenFile) {
-      status = strings.FILE_READY_TO_UPLOAD
+    if (this.state.fileHasUploaded) {
+      status = strings.FILE_SUCCESSFULLY_UPLOADED
     }
 
     if (status === null) {
@@ -103,7 +164,29 @@ export class Element extends Component {
     }
 
     return (
-      "Status: " + status
+      <div>
+        <b>Status: </b>
+        {status}
+      </div>
+    )
+
+  }
+
+  hashStatus = () => {
+
+    const { hash } = this.state
+
+    var status = strings.NO_HASH_YET
+
+    if (hash !== null) {
+      status = hash
+    }
+
+    return (
+      <div>
+        <b>Hash: </b>
+        {status}
+      </div>
     )
 
   }
@@ -112,21 +195,37 @@ export class Element extends Component {
 
   render() {
 
-    const { detailedView, filePrompt } = this.state
+    const { detailedView, filePrompt, fileHasUploaded, fileHasAnchor, fileState } = this.state
     const { elementContent } = this.props
 
+
     // TODO: Make the request signature a field for searching for project members and a click to add
+    // TODO: Add expand transition to make it smooth
 
     return (
       <div id='file-upload-element'>
-        <div className='file-upload-element-container' onClick={(e) => this.onElementClick()}>
+        <div className={'file-upload-element-container' + fileState} onClick={(e) => this.onElementClick()}>
           <div className='element-title'>
             {elementContent.title}
           </div>
           <div className='element-description'>
-
+            {elementContent.description}
           </div>
-          <div className='element-file-uploader'>
+          <div className='element-file-uploader container'>
+
+            <div className='row'>
+              {
+                elementContent.fileDetails.length > 0 ?
+                <CurrentVersion
+                  details={elementContent.fileDetails[0]}
+                /> :
+                <CurrentVersion
+                  details={null}
+                />
+              }
+            </div>
+
+
             <div className='row'>
               <FileInput
                 className="field bp3-fill"
@@ -134,34 +233,43 @@ export class Element extends Component {
                 onInputChange={(e) => this.fileChosen(e)}
                 text={filePrompt}
               />
+
+
               <div className='row'>
-                <Button
-                  intent={Intent.SUCCESS}
-                  onClick={(e) => this.submitFile(e)}
-                  disabled={!this.state.hasChosenFile}
-                  text='Upload File'
-                />
-                <div className='file-status'>
+                <div className='col-5 col-lg-4 col-xl-3'>
+                  <Button
+                    intent={Intent.PRIMARY}
+                    onClick={(e) => this.uploadFile(e)}
+                    disabled={!this.state.hasChosenFile}
+                    text='Upload File'
+                  />
+                </div>
+                <div className='file-status col-auto'>
                   {
                     this.fileStatus()
                   }
                 </div>
               </div>
+
+
               <div className="row">
-                <Button
-                  intent={Intent.SUCCESS}
-                  onClick={(e) => this.submitFile(e)}
-                  disabled={!this.state.fileHasUploaded}
-                  text='Request Signature'
-                />
+                <div className='col-5 col-lg-4 col-xl-3'>
+                  <Button
+                    intent={Intent.PRIMARY}
+                    onClick={(e) => this.requestSignature(e)}
+                    disabled={!this.state.fileHasUploaded}
+                    text='Request Signature'
+                  />
+                </div>
+                <div className='col-auto'>
+                  {
+                    this.hashStatus()
+                  }
+                </div>
               </div>
             </div>
           </div>
-          {detailedView ? <p>This is the element in detailed view</p> : <p>This is the element in minimized view</p>}
-          {detailedView ? <p>This is the element in detailed view</p> : null}
-          {detailedView ? <p>This is the element in detailed view</p> : null}
-          {detailedView ? this.uploadHistory() : null}
-          {detailedView ? this.signatureHistory() : null}
+          {detailedView ? <UploadHistory details={elementContent.fileDetails}/> : null}
         </div>
       </div>
     )

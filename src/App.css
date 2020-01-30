@@ -95,6 +95,7 @@ hr {
   height: calc(100vh - var(--header-height) - var(--footer-height));
   overflow: scroll;
   padding: 0 0 10px 0;
+  min-height: calc(100vh - var(--footer-height));
 }
 
 .page-content {
@@ -103,6 +104,7 @@ hr {
   align-items: center;
   display: flex;
   flex-direction: column;
+  min-height: calc(100vh - var(--footer-height));
 }
 
 .sidebar h2 {
@@ -345,16 +347,26 @@ hr {
 
 #file-upload-element {
   width: 100%;
+  max-width: 1140px;
+  margin-bottom: 15px;
 }
 
 #file-upload-element .file-upload-element-container {
   margin: auto;
   width: 100%;
-  background-color: #add8e6;
+  background-color: #ffcccb;
   border-radius: 10px;
   padding: 10px;
   position: relative;
   text-align: left;
+}
+
+#file-upload-element .has-upload {
+  background-color: #fffcbb;
+}
+
+#file-upload-element .has-anchor {
+  background-color: #d2e9af;
 }
 
 #file-upload-element .element-title {
@@ -364,6 +376,7 @@ hr {
 }
 
 #file-upload-element .element-description {
+  margin-bottom: 1em;
 }
 
 #file-upload-element .row {
@@ -378,6 +391,11 @@ hr {
 }
 
 #file-upload-element .bp3-button {
+  width: 150px;
+}
+
+#file-upload-element .container{
+  padding: 0;
 }
 
 #file-upload-element .row {
@@ -387,8 +405,46 @@ hr {
   margin-bottom: 0.3em;
 }
 
+#file-upload-element .row .signatures {
+  padding-left: 1em;
+}
+
+#file-upload-element .col,
+#file-upload-element .col-3,
+#file-upload-element .col-4,
+#file-upload-element .col-5 {
+  padding: 0;
+}
+
 #file-upload-element .file-status {
-  margin-left: 6em;
+}
+
+
+#file-upload-element .current-version-container {
+  background-color: #EEE;
+  width: 100%;
+  border-radius: 5px;
+  padding: 10px;
+  position: relative;
+  text-align: left;
+  margin-bottom: 1em;
+}
+
+#file-upload-element .field-names {
+  font-weight: bold;
+}
+
+#file-upload-element .signature-container {
+  padding: 0;
+  width: 100%;
+}
+
+#file-upload-element .section-margin {
+  margin-top: 1em;
+}
+
+#file-upload-element .bp3-label {
+  margin-bottom: 0;
 }
 
 /* ================================== */
@@ -459,7 +515,14 @@ hr {
 
 }
 
-#inception-page .page-title {
+#inception-page .page-title,
+#feasibility-page .page-title,
+#design-page .page-title,
+#tender-page .page-title,
+#construction-page .page-title,
+#handover-page .page-title,
+#occupation-page .page-title,
+#refurbishment-page .page-title {
   margin-bottom: 2em;
 }
 

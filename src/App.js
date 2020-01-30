@@ -38,6 +38,9 @@ import ProjectTeamPage from './components/ProjectTeamPage';
 /* Other pages */
 import Error404 from './components/Error404'
 
+// TODO: Add functionality below 800px width to not show the site
+// TODO: make mobile friendly in future
+
 class App extends Component{
 
   render() {

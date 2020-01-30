@@ -6,12 +6,10 @@ import PageChooserSection from '../layouts/PageChooserSection'
 import ProjectLoading from '../common/ProjectLoading'
 import Footer from '../common/footer'
 
-import SingleFieldRequirement from '../common/uploadfields/RequiredFileTile'
+import { FileUpload } from '../common/ProjectDataFields'
 import NoProjectSelected from '../common/NoProjectSelected'
 
 import * as strings from '../../data/Strings'
-
-import { FileUpload } from '../common/ProjectDataFields'
 
 export class Page extends Component {
   static propTypes = {
@@ -47,12 +45,6 @@ export class Page extends Component {
 
     const { fields }  = this.props.pageContent.inception
 
-    const content = {
-      id: 1,
-      title: "Please upload your project brief",
-      description: "The project brief is required for the project to start.  Everyone will use this document.",
-    }
-
     return(
       <div className='page-content col-xl-10 col-lg-9 col-md-9 col-sm-9'>
         <div className='page-title'>
@@ -61,12 +53,9 @@ export class Page extends Component {
         </div>
         {
           fields != null ? fields.map((singleField) => {
-            return <SingleFieldRequirement key={singleField.id} details={singleField} />
+            return <FileUpload key={singleField.id} elementContent={singleField} />
           }) : null
         }
-        <FileUpload
-          elementContent={content}
-        />
       </div>
     )
   }
