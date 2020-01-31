@@ -19,21 +19,6 @@ import ContactTile from './elements/ContactTile'
 import * as strings from '../../data/Strings'
 import * as validators from '../../validators'
 
-const rolesArray = [
-  {
-    id: 1,
-    name: "Principal Designer",
-  },
-  {
-    id: 2,
-    name: "Principal Contractor",
-  },
-  {
-    id: 3,
-    name: "Client",
-  },
-]
-
 export class Page extends Component {
   static propTypes = {
   }
@@ -54,6 +39,12 @@ export class Page extends Component {
         this.props.auth.info.idToken.jwtToken,
         this.props.projects.chosenProject.id
       )
+
+      // Get the available roles for this project
+      this.props.getRoles(
+        this.props.auth.info.idToken.jwtToken,
+        this.props.projects.chosenProject.id
+      )
     }
   }
 
@@ -66,8 +57,11 @@ export class Page extends Component {
         this.props.projects.chosenProject.id
       )
 
-      // Reset the whole page
-      this.props.reset()
+      // Get the available roles for this project
+      this.props.getRoles(
+        this.props.auth.info.idToken.jwtToken,
+        this.props.projects.chosenProject.id
+      )
     }
   }
 
@@ -119,6 +113,7 @@ export class Page extends Component {
   addNewMember = () => {
 
     const { handleSubmit } = this.props
+    const { roles } = this.props.members
 
     // TODO: Improve formatting so that invalid messages aren't on top of the next box
 
@@ -154,7 +149,7 @@ export class Page extends Component {
         >
           <Field
             name="role"
-            values={rolesArray}
+            values={roles}
             component={FormInputs.SelectInput}
             placeholder={strings.MEMBER_PROJECT_ROLE}
             onItemSelect={this.onItemSelected}

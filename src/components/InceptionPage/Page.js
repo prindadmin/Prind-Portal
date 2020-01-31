@@ -66,6 +66,8 @@ export class Page extends Component {
               return <CalendarPicker key={singleField.id} elementContent={singleField} />
             }
 
+            return null
+
           })
         }
       </div>

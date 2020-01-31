@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "name": "Principal Designer"
+  },
+  {
+    "id": 2,
+    "name": "Principal Contractor"
+  },
+  {
+    "id": 3,
+    "name": "Client"
+  },
+  {
+    "id": 4,
+    "name": "Designer (non-principal)"
+  }
+]

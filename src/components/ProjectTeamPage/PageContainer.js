@@ -9,6 +9,7 @@ import PageComponent from './Page'
 const mapStatetoProps = state => {
   return {
     auth: state.auth,
+    members: state.members,
     projects: state.projects,
     pageContent: state.pageContent,
   }
@@ -24,6 +25,9 @@ const mapDispatchToProps = dispatch => {
     },
     getCurrentMembers: (jwtToken, projectID) => {
       dispatch(projectReducer.getCurrentMembers(jwtToken, projectID))
+    },
+    getRoles: (jwtToken, projectID) => {
+      dispatch(memberReducer.getRoles(jwtToken, projectID))
     },
   }
 }

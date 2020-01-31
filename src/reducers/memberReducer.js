@@ -3,6 +3,7 @@ import * as action from '../actions'
 const defaultState = {
   fetching: false,
   currentMember: null,
+  roles: [],
 }
 
 export const init = () => {
@@ -34,6 +35,17 @@ export const removeMemberFromProject = ( jwtToken, projectID, memberDetails ) =>
   }
 }
 
+export const getRoles = ( jwtToken, projectID ) => {
+
+  return {
+    type: action.MEMBER_GET_AVAILABLE_ROLES_REQUESTED,
+    payload: {
+      jwtToken,
+      projectID,
+    }
+  }
+}
+
 const ACTION_HANDLERS = {
 
   [action.MEMBER_INIT]: (state, action) => { return { ...state, ...action.payload }},
@@ -41,9 +53,11 @@ const ACTION_HANDLERS = {
 
   [action.MEMBER_ADD_MEMBER_REQUESTED]: state => ({ ...state }),
   [action.MEMBER_REMOVE_MEMBER_REQUESTED]: state => ({ ...state }),
+  [action.MEMBER_GET_AVAILABLE_ROLES_REQUESTED]: state => ({ ...state }),
 
   [action.MEMBER_ADD_MEMBER_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
   [action.MEMBER_REMOVE_MEMBER_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
+  [action.MEMBER_GET_AVAILABLE_ROLES_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
 }
 
 
