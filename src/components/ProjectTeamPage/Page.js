@@ -239,7 +239,7 @@ export class Page extends Component {
 
         <div className='content-with-sidebar full-height row'>
           <PageChooserSection />
-          <div className='page-content col-xl-10 col-lg-9 col-md-9 col-sm-9'>
+          <div className='page-content-section col-xl-10 col-lg-9 col-md-9 col-sm-9'>
             {
               this.props.projects !== undefined ?
                 this.props.projects.chosenProject.projectName === strings.NO_PROJECT_SELECTED ?

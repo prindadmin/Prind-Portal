@@ -23,21 +23,52 @@ export class Element extends Component {
       id: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
       description: PropTypes.string,
-      fieldDetails: PropTypes.object.isRequired,
+      fieldDetails: PropTypes.shape({
+        dropdownValue: PropTypes.string,
+        textboxValue: PropTypes.string,
+      }),
     })
   }
 
   constructor() {
     super()
     this.state = {
-      selectedValue: strings.NO_VALUE_SELECTED,
+      dropdownValue: strings.NO_VALUE_SELECTED,
+      textboxValue: strings.IF_YES_PROVIDE_DETAILS,
     }
   }
 
   componentDidMount() {
+
+    const { dropdownValue, textboxValue } = this.props.elementContent.fieldDetails
+
+    var stateUpdate = []
+
+    if (dropdownValue !== null && dropdownValue !== undefined) {
+      stateUpdate += {dropdownValue: dropdownValue}
+    }
+
+    if (textboxValue !== null  && textboxValue !== undefined) {
+      stateUpdate += {textboxValue:textboxValue}
+    }
+
+    console.log(stateUpdate)
+
+    if (stateUpdate.length !== 0) {
+      this.setState({
+        ...stateUpdate,
+      })
+    }
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevState, prevProps) {
+
+    /*
+    if(prevState.dropdownValue !== this.state.dropdownValue) {
+
+    }
+    */
+
   }
 
 
@@ -45,7 +76,7 @@ export class Element extends Component {
 
   onItemSelected = (item) => {
     this.setState({
-      selectedValue: item.name,
+      dropdownValue: item.name,
     })
   }
 
@@ -70,7 +101,9 @@ export class Element extends Component {
   render() {
 
     const { title, description, fieldDetails } = this.props.elementContent
-    const { selectedValue } = this.state
+    const { dropdownValue, textboxValue } = this.state
+
+    console.log(textboxValue)
 
     const values = [
       {
@@ -109,7 +142,7 @@ export class Element extends Component {
                   onItemSelect={this.onItemSelected}
                 >
                   <Button
-                    text={selectedValue}
+                    text={dropdownValue}
                     rightIcon="double-caret-vertical"
                     alignText={Alignment.LEFT}
                   />
@@ -120,7 +153,7 @@ export class Element extends Component {
             <div className='row'>
               <div className='col'>
                 {
-                  selectedValue === strings.YES ?
+                  dropdownValue === strings.YES ?
                   <FormGroup
                     label={strings.IF_YES_PROVIDE_DETAILS}
                     labelFor="extraInfo"
@@ -131,6 +164,7 @@ export class Element extends Component {
                       name="extraInfo"
                       growVertically={true}
                       fill={true}
+                      value={textboxValue}
                       placeholder={strings.IF_YES_PROVIDE_DETAILS}
                     />
                   </FormGroup> :

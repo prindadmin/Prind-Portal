@@ -94,6 +94,11 @@ export class Element extends Component {
     e.stopPropagation();
   }
 
+  sendSelfSignRequest = (e) => {
+    console.log("Self sign file clicked")
+  }
+
+
   onFileUploadSuccess = () => {
     this.setState({
       fileHasUploaded: true,
@@ -241,7 +246,7 @@ export class Element extends Component {
                     intent={Intent.PRIMARY}
                     onClick={(e) => this.uploadFile(e)}
                     disabled={!this.state.hasChosenFile}
-                    text='Upload File'
+                    text={strings.BUTTON_UPLOAD_FILE}
                   />
                 </div>
                 <div className='file-status col-auto'>
@@ -256,9 +261,9 @@ export class Element extends Component {
                 <div className='col-5 col-lg-4 col-xl-3'>
                   <Button
                     intent={Intent.PRIMARY}
-                    onClick={(e) => this.requestSignature(e)}
+                    onClick={(e) => this.sendSelfSignRequest(e)}
                     disabled={!this.state.fileHasUploaded}
-                    text='Request Signature'
+                    text={strings.BUTTON_SELF_SIGN_FILE}
                   />
                 </div>
                 <div className='col-auto'>
@@ -267,6 +272,20 @@ export class Element extends Component {
                   }
                 </div>
               </div>
+
+
+              <div className="row">
+                <div className='col-5 col-lg-4 col-xl-3'>
+                  <Button
+                    intent={Intent.PRIMARY}
+                    onClick={(e) => this.requestSignature(e)}
+                    disabled={!this.state.fileHasUploaded}
+                    text={strings.BUTTON_REQUEST_SIGNATURE}
+                  />
+                </div>
+              </div>
+
+
             </div>
           </div>
           {detailedView ? <UploadHistory details={elementContent.fileDetails}/> : null}

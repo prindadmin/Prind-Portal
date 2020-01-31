@@ -95,16 +95,22 @@ hr {
   height: calc(100vh - var(--header-height) - var(--footer-height));
   overflow: scroll;
   padding: 0 0 10px 0;
-  min-height: calc(100vh - var(--footer-height));
+}
+
+.page-content-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: calc(100vh - var(--header-height) - var(--footer-height));
 }
 
 .page-content {
-  overflow-x: hidden;
-  overflow-y: scroll;
   align-items: center;
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - var(--footer-height));
+  width: 90%;
 }
 
 .sidebar h2 {

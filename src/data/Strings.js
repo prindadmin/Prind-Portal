@@ -86,6 +86,12 @@ export const NO_CURRENT_VERSION = 'There is no current version of this file.'
 export const NO_SIGNATURES = 'There are no signatures for this file'
 export const NO_PROOF_AVAILABLE = "Proof still processing"
 
+
+export const BUTTON_SELF_SIGN_FILE = "Self Sign Document"
+export const BUTTON_REQUEST_SIGNATURE = "Request Signature"
+export const BUTTON_UPLOAD_FILE = "Upload File"
+
+
 export const SIGNATURE_ELEMENT = "Signatures"
 export const LINK_TO_PROOF = "Link to Proof"
 export const SIGNED_BY = "Signed By:"

@@ -1,8 +1,14 @@
 [
   {
     "id": 1,
-    "title": "Please upload your Construction phase plan (CPP)",
+    "title": "Please upload your Construction Phase Plan (CPP)",
     "description": "",
+    "fileDetails": []
+  },
+  {
+    "id": 2,
+    "title": "Please upload your Meeting notes for any meetings",
+    "description": "These are meeting notes",
     "fileDetails": []
   }
 ]
