@@ -3,6 +3,7 @@
     "id": 1,
     "title": "Please upload your Practical Completion Certification",
     "description": "",
+    "editable": true,
     "fileDetails": []
   }
 ]

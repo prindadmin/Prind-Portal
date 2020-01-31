@@ -4,6 +4,7 @@
     "title": "Please upload your feasibility study",
     "description": "The project feasibility study is required for ...",
     "type": "file",
+    "editable": true,
     "fileDetails": [
       {
         "ver": 0,

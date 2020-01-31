@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Field, reduxForm } from 'redux-form'
 import PropTypes from 'prop-types'
 
 import {
@@ -12,10 +13,14 @@ import {
 
 import { Select } from "@blueprintjs/select";
 
+import * as FormInputs from '../../../shared/formInputs'
+
 import * as strings from '../../../../data/Strings'
 
-// TODO: Implement FORM wrapper
 // TODO: Disable save button until changes are made
+// TODO: Implement editable prop
+// TODO: Get the drop down and text area to send initial and current values to the store
+// TODO: Add in props so that opening the text box can be an optional feature
 
 export class Element extends Component {
   static propTypes = {
@@ -23,9 +28,11 @@ export class Element extends Component {
       id: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
       description: PropTypes.string,
+      editable: PropTypes.bool,
       fieldDetails: PropTypes.shape({
         dropdownValue: PropTypes.string,
         textboxValue: PropTypes.string,
+        dropdownOptions: PropTypes.array,
       }),
     })
   }
@@ -42,17 +49,15 @@ export class Element extends Component {
 
     const { dropdownValue, textboxValue } = this.props.elementContent.fieldDetails
 
-    var stateUpdate = []
+    var stateUpdate = {}
 
     if (dropdownValue !== null && dropdownValue !== undefined) {
-      stateUpdate += {dropdownValue: dropdownValue}
+      stateUpdate.dropdownValue = dropdownValue
     }
 
     if (textboxValue !== null  && textboxValue !== undefined) {
-      stateUpdate += {textboxValue:textboxValue}
+      stateUpdate.textboxValue = textboxValue
     }
-
-    console.log(stateUpdate)
 
     if (stateUpdate.length !== 0) {
       this.setState({
@@ -62,12 +67,6 @@ export class Element extends Component {
   }
 
   componentDidUpdate(prevState, prevProps) {
-
-    /*
-    if(prevState.dropdownValue !== this.state.dropdownValue) {
-
-    }
-    */
 
   }
 
@@ -100,25 +99,13 @@ export class Element extends Component {
 
   render() {
 
+    const { handleSubmit } = this.props
     const { title, description, fieldDetails } = this.props.elementContent
     const { dropdownValue, textboxValue } = this.state
 
-    console.log(textboxValue)
+    // Check if drop down options has been provided or not
+    const dropdownOptions = fieldDetails.dropdownOptions !== undefined ? fieldDetails.dropdownOptions : []
 
-    const values = [
-      {
-        id: 1,
-        name: strings.YES
-      },
-      {
-        id: 2,
-        name: strings.NO
-      },
-    ]
-
-    const input = {
-      name: title
-    }
 
     return (
       <div id='drop-down-element'>
@@ -132,57 +119,56 @@ export class Element extends Component {
           </div>
 
           <div className='container'>
-
-            <div className='row'>
-              <div className='col'>
-                <Select
-                  items={values}
-                  noResults={<MenuItem disabled={true} text="No results." />}
-                  itemRenderer={this.itemRenderer}
-                  onItemSelect={this.onItemSelected}
-                >
-                  <Button
-                    text={dropdownValue}
-                    rightIcon="double-caret-vertical"
-                    alignText={Alignment.LEFT}
+            <form onSubmit={handleSubmit(this.saveChanges)} className='add-member-form'>
+              <div className='row'>
+                <div className='col'>
+                  <Field
+                    name="dropdownValue"
+                    values={dropdownOptions}
+                    component={FormInputs.SelectInput}
+                    onItemSelect={this.onItemSelected}
+                    value={dropdownValue}
+                    selectedItem={dropdownValue}
                   />
-                </Select>
+                </div>
               </div>
-            </div>
 
-            <div className='row'>
-              <div className='col'>
-                {
-                  dropdownValue === strings.YES ?
-                  <FormGroup
-                    label={strings.IF_YES_PROVIDE_DETAILS}
-                    labelFor="extraInfo"
-                    labelInfo=""
-                    className="last"
-                  >
-                    <TextArea
-                      name="extraInfo"
-                      growVertically={true}
-                      fill={true}
-                      value={textboxValue}
-                      placeholder={strings.IF_YES_PROVIDE_DETAILS}
-                    />
-                  </FormGroup> :
-                  null
-                }
+              <div className='row'>
+                <div className='col'>
+                  {
+                    dropdownValue === strings.YES ?
+                    <FormGroup
+                      label={strings.IF_YES_PROVIDE_DETAILS}
+                      labelFor="extraInfo"
+                      labelInfo=""
+                      className="last"
+                    >
+                      {console.log(textboxValue)}
+                      <Field
+                        name="textboxValue"
+                        component={FormInputs.TextBoxInput}
+                        className="bp3-input"
+                        props={{value: textboxValue}}
+                        value={textboxValue}
+                      />
+                    </FormGroup> :
+                    null
+                  }
+                </div>
               </div>
-            </div>
 
-            <div className='row'>
-              <div className='col'>
-              <Button
-                text={strings.BUTTON_SAVE_CHANGES}
-                intent={Intent.PRIMARY}
-                onClick={e => this.saveChanges(e)}
-              />
+              <div className='row'>
+                <div className='col'>
+                <Button
+                  loading={this.props.submitting}
+                  disabled={this.props.pristine}
+                  text={strings.BUTTON_SAVE_CHANGES}
+                  intent={Intent.PRIMARY}
+                  type='submit'
+                />
+                </div>
               </div>
-            </div>
-
+            </form>
           </div>
 
         </div>
@@ -190,5 +176,10 @@ export class Element extends Component {
     )
   }
 }
+
+Element = reduxForm({
+  enableReinitialize: true,
+  form: 'dropdown'
+})(Element)
 
 export default Element

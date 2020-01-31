@@ -32,6 +32,7 @@ export const TextInput = (field) => {
 
 export const TextBoxInput = (field) => {
   const { touched, invalid, active } = field.meta
+
   return (
     <React.Fragment>
       <TextArea
@@ -39,6 +40,7 @@ export const TextBoxInput = (field) => {
         intent={touched && invalid && !active ? 'danger' : 'none'}
         type='text'
         name={field.input.name}
+        value={field.value}
         placeholder={field.placeholder}
         />
     </React.Fragment>

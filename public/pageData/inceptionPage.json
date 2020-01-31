@@ -4,6 +4,7 @@
     "title": "Please upload your project brief",
     "description": "The project brief is required for the project to start.  Everyone will use this document.",
     "type": "file",
+    "editable": true,
     "fileDetails": [
       {
         "ver": 0,
@@ -72,18 +73,39 @@
     "title": "Will any parts of the building / site be occupied during the works?",
     "description": "This is asked to ensure that any plans will take into account any members of the public who might be moving around the building / site.",
     "type": "dropdown",
+    "editable": true,
     "fieldDetails": {
-      "dropdownValue": "No",
-      "textboxValue": "lorem ipsum"
+      "dropdownValue": "Yes",
+      "textboxValue": "The 3rd floor will be occupied by the critical operations team at all times during the works.  They cannot be relocated due to the criticality of their role.",
+      "dropdownOptions": [
+        {
+          "id": 1,
+          "name": "Yes"
+        },
+        {
+          "id": 2,
+          "name": "No"
+        }
+      ]
     }
   },
   {
     "id": 3,
+    "title": "Will any parts of the building / site be occupied during the works?",
+    "description": "This is asked to ensure that any plans will take into account any members of the public who might be moving around the building / site.",
+    "type": "dropdown",
+    "editable": true,
+    "fieldDetails": {
+    }
+  },
+  {
+    "id": 4,
     "title": "Planned Start Date",
     "description": "This is asked to ensure that the project starts on schedule.",
     "type": "calendar",
+    "editable": true,
     "fieldDetails": {
-      "currentValue": "lorem ipsum"
+      "dateValue": "lorem ipsum"
     }
   }
 ]
