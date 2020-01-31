@@ -59,7 +59,7 @@ export class Page extends Component {
             }
 
             if (singleField.type === 'dropdown') {
-              return <DropDown key={singleField.id} elementContent={singleField} />
+              return <DropDown key={singleField.id} form={"field-" + singleField.id} elementContent={singleField} initialValues={singleField.fieldDetails}/>
             }
 
             if (singleField.type === 'calendar') {

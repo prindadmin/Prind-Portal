@@ -6,8 +6,10 @@ import {
   Button,
 } from '@blueprintjs/core'
 
-
 import * as strings from '../../../../data/Strings'
+
+// TODO: Implement 'editable' prop.  i.e. make field locked when editable = false
+// TODO: Implement calls to server
 
 export class Element extends Component {
   static propTypes = {

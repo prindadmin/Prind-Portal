@@ -71,14 +71,13 @@ export class SelectInput extends React.Component {
 
   render () {
 
-    const { input, values, selectedItem, onItemSelect } = this.props
+    const { input, values, onItemSelect } = this.props
     const { touched, invalid, error, active } = this.props.meta
 
     return (
       <React.Fragment>
         <Select
           {...input}
-          name={input.name}
           intent={touched && invalid && !active ? 'danger' : 'none'}
           items={values}
           itemRenderer={this.itemRenderer}
@@ -87,8 +86,7 @@ export class SelectInput extends React.Component {
           noResults={<MenuItem disabled={true} text="No results." />}
         >
           <Button
-            text={selectedItem}
-            {...input}
+            text={input.value}
             rightIcon="double-caret-vertical"
             alignText="left"
           />

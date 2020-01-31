@@ -2,8 +2,9 @@
 export const YES = "Yes"
 export const NO = "No"
 
-export const IF_YES_PROVIDE_DETAILS = "If yes, please provide extra details below"
-export const PLEASE_PROVIDE_DETAILS = "Please provide extra details here..."
+export const IF_YES_PROVIDE_DETAILS_BELOW = "If yes, please provide extra details below"
+export const IF_XXX_PROVIDE_DETAILS_BELOW = "If XXX, please provide extra details below"
+export const PLEASE_PROVIDE_DETAILS_HERE = "Please provide extra details here..."
 
 export const PROJECT_LOADING = "Project loading, please wait..."
 export const NO_PROJECT_SELECTED = "Please select a project..."

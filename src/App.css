@@ -478,6 +478,11 @@ hr {
   margin-bottom: 0.5em;
 }
 
+#drop-down-element select  {
+  width: 250px;
+  margin-bottom: 0.5em;
+}
+
 #drop-down-element label {
   padding-left: 0.3em;
 }

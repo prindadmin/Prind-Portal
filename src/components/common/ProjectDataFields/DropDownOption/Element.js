@@ -5,22 +5,16 @@ import PropTypes from 'prop-types'
 import {
   Button,
   MenuItem,
-  TextArea,
   FormGroup,
   Intent,
-  Alignment,
 } from '@blueprintjs/core'
-
-import { Select } from "@blueprintjs/select";
 
 import * as FormInputs from '../../../shared/formInputs'
 
 import * as strings from '../../../../data/Strings'
 
-// TODO: Disable save button until changes are made
-// TODO: Implement editable prop
-// TODO: Get the drop down and text area to send initial and current values to the store
-// TODO: Add in props so that opening the text box can be an optional feature
+// TODO: Implement 'editable' prop.  i.e. make field locked when editable = false
+// TODO: Implement calls to server
 
 export class Element extends Component {
   static propTypes = {
@@ -33,6 +27,7 @@ export class Element extends Component {
         dropdownValue: PropTypes.string,
         textboxValue: PropTypes.string,
         dropdownOptions: PropTypes.array,
+        optionOpensTextBox: PropTypes.string,
       }),
     })
   }
@@ -41,7 +36,7 @@ export class Element extends Component {
     super()
     this.state = {
       dropdownValue: strings.NO_VALUE_SELECTED,
-      textboxValue: strings.IF_YES_PROVIDE_DETAILS,
+      textboxValue: strings.PLEASE_PROVIDE_DETAILS_HERE,
     }
   }
 
@@ -77,6 +72,10 @@ export class Element extends Component {
     this.setState({
       dropdownValue: item.name,
     })
+
+    this.props.change(
+      'dropdownValue', item.name
+    )
   }
 
   itemRenderer = (item, { handleClick }) => {
@@ -120,6 +119,8 @@ export class Element extends Component {
 
           <div className='container'>
             <form onSubmit={handleSubmit(this.saveChanges)} className='add-member-form'>
+
+
               <div className='row'>
                 <div className='col'>
                   <Field
@@ -127,28 +128,26 @@ export class Element extends Component {
                     values={dropdownOptions}
                     component={FormInputs.SelectInput}
                     onItemSelect={this.onItemSelected}
-                    value={dropdownValue}
                     selectedItem={dropdownValue}
                   />
                 </div>
               </div>
 
+
               <div className='row'>
                 <div className='col'>
                   {
-                    dropdownValue === strings.YES ?
+                    dropdownValue === fieldDetails.optionOpensTextBox ?
                     <FormGroup
-                      label={strings.IF_YES_PROVIDE_DETAILS}
+                      label={strings.IF_XXX_PROVIDE_DETAILS_BELOW.replace("XXX", fieldDetails.optionOpensTextBox)}
                       labelFor="extraInfo"
                       labelInfo=""
                       className="last"
                     >
-                      {console.log(textboxValue)}
                       <Field
                         name="textboxValue"
-                        component={FormInputs.TextBoxInput}
+                        component='textarea'
                         className="bp3-input"
-                        props={{value: textboxValue}}
                         value={textboxValue}
                       />
                     </FormGroup> :
@@ -178,8 +177,7 @@ export class Element extends Component {
 }
 
 Element = reduxForm({
-  enableReinitialize: true,
-  form: 'dropdown'
+  enableReinitialize: true
 })(Element)
 
 export default Element

@@ -86,20 +86,12 @@
           "id": 2,
           "name": "No"
         }
-      ]
+      ],
+      "optionOpensTextBox": "Yes"
     }
   },
   {
     "id": 3,
-    "title": "Will any parts of the building / site be occupied during the works?",
-    "description": "This is asked to ensure that any plans will take into account any members of the public who might be moving around the building / site.",
-    "type": "dropdown",
-    "editable": true,
-    "fieldDetails": {
-    }
-  },
-  {
-    "id": 4,
     "title": "Planned Start Date",
     "description": "This is asked to ensure that the project starts on schedule.",
     "type": "calendar",

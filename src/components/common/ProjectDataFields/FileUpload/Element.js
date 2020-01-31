@@ -27,8 +27,10 @@ export class Element extends Component {
     })
   }
 
+  // TODO: Implement 'editable' prop.  i.e. make field locked when editable = false
   // TODO: Create functionality to say file has uploaded successfully
   // TODO: Create functionality to calculate the hash of the file
+  // TODO: Implement calls to server
 
   constructor() {
     super()
