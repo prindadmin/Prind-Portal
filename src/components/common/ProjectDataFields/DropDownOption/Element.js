@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 
 import {
   Button,
-  MenuItem,
   FormGroup,
   Intent,
 } from '@blueprintjs/core'
@@ -76,18 +75,6 @@ export class Element extends Component {
     this.props.change(
       'dropdownValue', item.name
     )
-  }
-
-  itemRenderer = (item, { handleClick }) => {
-
-    return(
-      <MenuItem
-          key={item.id}
-          text={item.name}
-          onClick={handleClick}
-          shouldDismissPopover={true}
-        />
-      )
   }
 
   saveChanges = (e) => {

@@ -1,13 +1,9 @@
 import axios from 'axios'
 import https from 'https'
 
-// TODO: Make this return something useful rather than a JSON
+export default function(identityToken, fileDetails) {
 
-// The returned data should include at least two fields:
-//    id
-//    name
-
-export default function(identityToken, newProjectDetails) {
+  console.log(fileDetails)
 
   return new Promise((resolve, reject) => {
 
@@ -22,8 +18,7 @@ export default function(identityToken, newProjectDetails) {
     });
 
 
-
-    instance.post(`${process.env.PUBLIC_URL}/createdProject.json`, newProjectDetails)
+    instance.post(`${process.env.PUBLIC_URL}/project/file.js`, fileDetails)
     .then(res => {
       resolve(res)
     })

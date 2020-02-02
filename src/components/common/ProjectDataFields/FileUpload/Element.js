@@ -24,7 +24,8 @@ export class Element extends Component {
       title: PropTypes.string.isRequired,
       description: PropTypes.string,
       fileDetails: PropTypes.array.isRequired,
-    })
+    }),
+    pageName: PropTypes.string.isRequired,
   }
 
   // TODO: Implement 'editable' prop.  i.e. make field locked when editable = false
@@ -88,16 +89,33 @@ export class Element extends Component {
   // TODO: Perform actions to upload file
   uploadFile = (e) => {
     console.log("file submit clicked")
+
+    // FIXME: This doesn't send any value
+    this.props.uploadFile(
+      this.props.auth.info.idToken.jwtToken,
+      this.props.pageName,
+      e.target.value,
+    )
+
     this.setState({
       hasChosenFile: false,
       uploadFileRequsted: true,
       fileState: '',
     })
+
     e.stopPropagation();
+
   }
 
+  // TODO: Perform actions to requst a signature
   sendSelfSignRequest = (e) => {
     console.log("Self sign file clicked")
+  }
+
+  // TODO: Perform actions to requst a signature
+  requestSignature = (e) => {
+    console.log("signature requested")
+    e.stopPropagation();
   }
 
 
@@ -113,13 +131,6 @@ export class Element extends Component {
       fileHasAnchor: true,
       fileState: ' has-anchor',
     })
-  }
-
-
-  // TODO: Perform actions to requst a signature
-  requestSignature = (e) => {
-    console.log("signature requested")
-    e.stopPropagation();
   }
 
   uploadHistory = () => {

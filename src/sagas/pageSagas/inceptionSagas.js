@@ -38,4 +38,5 @@ function * getPageContent (action) {
 
 export default function * sagas () {
   yield takeLatest(actions.PAGE_GET_CONTENT_INCEPTION_REQUESTED, getPageContent)
+  yield takeLatest(actions.PROJECT_UPLOAD_FILE_REQUEST_SUCCESSFUL_INCEPTION, getPageContent)
 }

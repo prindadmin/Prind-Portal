@@ -8,6 +8,7 @@ const defaultState = {
     id: "",
   },
   memberList: [],
+  fileDetails: {},
 }
 
 export const init = () => {
@@ -55,11 +56,26 @@ export const getCurrentMembers = ( jwtToken, projectID ) => {
   }
 }
 
+export const uploadFile = ( jwtToken, pageName, fileDetails ) => {
+
+  console.log(fileDetails)
+
+  return {
+    type: action.PROJECT_UPLOAD_FILE_REQUESTED,
+    payload: {
+      jwtToken,
+      pageName,
+      fileDetails,
+    }
+  }
+}
+
 const ACTION_HANDLERS = {
 
   [action.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUESTED]: state => ({ ...state }),
   [action.PROJECT_CREATE_PROJECT_REQUESTED]: state => ({ ...state }),
   [action.PROJECT_GET_CURRENT_MEMBERS_REQUESTED]: state => ({ ...state }),
+  [action.PROJECT_UPLOAD_FILE_REQUESTED]: state => ({ ...state }),
 
   [action.PROJECT_INIT]: (state, action) => { return { ...state, ...action.payload }},
   [action.PROJECT_SET_STATE]: (state, action) => { return { ...state, ...action.payload }},
@@ -68,6 +84,7 @@ const ACTION_HANDLERS = {
   [action.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
   [action.PROJECT_CREATE_PROJECT_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
   [action.PROJECT_GET_CURRENT_MEMBERS_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
+  [action.PROJECT_UPLOAD_FILE_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
 }
 
 

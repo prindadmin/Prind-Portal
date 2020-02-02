@@ -56,7 +56,6 @@ export class SelectInput extends React.Component {
   }
 
   itemRenderer = (item, { handleClick }) => {
-
     return(
       <MenuItem
           {...this.props.input}

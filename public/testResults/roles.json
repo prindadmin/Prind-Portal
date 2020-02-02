@@ -5,14 +5,22 @@
   },
   {
     "id": 2,
-    "name": "Principal Contractor"
+    "name": "Designer (non-principal)"
   },
   {
     "id": 3,
-    "name": "Client"
+    "name": "Principal Contractor"
   },
   {
     "id": 4,
-    "name": "Designer (non-principal)"
+    "name": "Contractor (non-principal)"
+  },
+  {
+    "id": 5,
+    "name": "Client"
+  },
+  {
+    "id": 6,
+    "name": "Project Consultant"
   }
 ]

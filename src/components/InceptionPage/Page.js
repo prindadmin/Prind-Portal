@@ -11,6 +11,8 @@ import NoProjectSelected from '../common/NoProjectSelected'
 
 import * as strings from '../../data/Strings'
 
+const pageName = 'inception'
+
 export class Page extends Component {
   static propTypes = {
     pageContent: PropTypes.object,
@@ -55,15 +57,29 @@ export class Page extends Component {
           fields.map((singleField) => {
 
             if (singleField.type === 'file') {
-              return <FileUpload key={singleField.id} elementContent={singleField} />
+              return <FileUpload
+                        key={singleField.id}
+                        elementContent={singleField}
+                        pageName={pageName}
+                        />
             }
 
             if (singleField.type === 'dropdown') {
-              return <DropDown key={singleField.id} form={"field-" + singleField.id} elementContent={singleField} initialValues={singleField.fieldDetails}/>
+              return <DropDown
+                        key={singleField.id}
+                        form={"field-" + singleField.id}
+                        elementContent={singleField}
+                        initialValues={singleField.fieldDetails}
+                        pageName={pageName}
+                        />
             }
 
             if (singleField.type === 'calendar') {
-              return <CalendarPicker key={singleField.id} elementContent={singleField} />
+              return <CalendarPicker
+                        key={singleField.id}
+                        elementContent={singleField}
+                        pageName={pageName}
+                        />
             }
 
             return null
