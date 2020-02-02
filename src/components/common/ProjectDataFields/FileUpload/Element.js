@@ -90,11 +90,13 @@ export class Element extends Component {
   uploadFile = (e) => {
     console.log("file submit clicked")
 
-    // FIXME: This doesn't send any value
+    // TODO: Upload the file to S3
+    const fileName = "this will be a filename.txt"
+
     this.props.uploadFile(
       this.props.auth.info.idToken.jwtToken,
       this.props.pageName,
-      e.target.value,
+      fileName,
     )
 
     this.setState({
