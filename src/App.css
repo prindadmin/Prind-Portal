@@ -378,14 +378,16 @@ hr {
 }
 
 #file-upload-element .element-title,
-#drop-down-element .element-title {
+#drop-down-element .element-title,
+#popup-box .element-title {
   font-size: 20px;
   font-weight: bold;
   padding-bottom: 0.33em;
 }
 
 #file-upload-element .element-description,
-#drop-down-element .element-description {
+#drop-down-element .element-description,
+#popup-box .element-description {
   margin-bottom: 1em;
 }
 
@@ -492,64 +494,27 @@ hr {
 }
 
 /* ================================== */
-/* ========== generic page ========== */
+/* ==== uploader popover element ==== */
 /* ================================== */
-/*
-#generic-page {
-}
 
-#generic-page .page-title h1 {
-  font-size: calc(20px + ((50 - 20) * (100vw - 300px) / (1600 - 300)));
-  margin-bottom: 0.3em;
-}
-
-#generic-page .page-title {
-  margin-bottom: 40px;
-}
-
-
-#generic-page .required-field h2 {
-  margin-bottom: 0;
-}
-
-#generic-page .field-container {
-  width: 80%;
-  min-width: 300px;
-}
-
-#generic-page .field {
+#uploader-popover {
+  height: 100%;
   width: 100%;
 }
 
-#generic-page .button {
-  min-width: 130px;
+#uploader-popover .uploader-popover-container {
+  height: calc(100% - 2 * var(--pop-up-padding));
+  margin: var(--pop-up-padding);
 }
 
-#generic-page .col-margin {
-  margin-top: 20px;
+#uploader-popover .bp3-progress-bar {
+  margin-bottom: 1em;
 }
 
-#generic-page .spinner-section {
-  margin-top: 40px;
+#uploader-popover #popup-box {
+  height: auto;
+  bottom: auto;
 }
-
-#generic-page .result-section {
-  margin-top: 40px;
-}
-
-#generic-page .error-section {
-  margin-top: 40px;
-}
-
-#generic-page .hash-section span {
-  word-wrap:break-word;
-}
-
-#generic-page .result-details span {
-  word-wrap:break-word;
-}
-*/
-
 
 /* ================================== */
 /* ========= inception page ========= */

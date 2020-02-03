@@ -13,7 +13,7 @@ let defaultState = {
     id: "",
   },
   memberList: [],
-  fileDetails: {},
+  fetching: false,
 }
 
 function * init (action) {
@@ -161,7 +161,6 @@ function * uploadFile (action) {
       type: action,
       payload: {
         fetching: false,
-        fileDetails,
       }
     })
   }

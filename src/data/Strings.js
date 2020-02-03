@@ -80,9 +80,9 @@ export const FILE_SUCCESSFULLY_UPLOADED = "Successfully uploaded"
 export const NO_HASH_YET = "File not uploaded yet"
 
 export const CURRENT_VERSION_ELEMENT = "Current Version"
-export const FILE_NAME = 'File Name:'
-export const UPLOAD_DATE_TIME = 'Uploaded At:'
-export const UPLOADED_BY = 'Uploaded By:'
+export const FILE_NAME = 'File Name: '
+export const UPLOAD_DATE_TIME = 'Uploaded At: '
+export const UPLOADED_BY = 'Uploaded By: '
 export const NO_CURRENT_VERSION = 'There is no current version of this file.'
 export const NO_SIGNATURES = 'There are no signatures for this file'
 export const NO_PROOF_AVAILABLE = "Proof still processing"
@@ -95,9 +95,12 @@ export const BUTTON_UPLOAD_FILE = "Upload File"
 
 export const SIGNATURE_ELEMENT = "Signatures"
 export const LINK_TO_PROOF = "Link to Proof"
-export const SIGNED_BY = "Signed By:"
-export const SIGNED_DATE_TIME = "Signed At:"
-export const PROOF = "Proof:"
+export const SIGNED_BY = "Signed By: "
+export const SIGNED_DATE_TIME = "Signed At: "
+export const PROOF = "Proof: "
 
 export const UPLOAD_HISTORY_ELEMENT = "Upload History"
 export const NO_PREVIOUS_VERSIONS = "There are no previous version of this file"
+
+export const UPLOAD_IN_PROGESS = "Upload in progress.  Please wait..."
+export const UPLOADED_SIZE = "Uploaded: "

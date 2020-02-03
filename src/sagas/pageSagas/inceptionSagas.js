@@ -18,7 +18,6 @@ function * getPageContent (action) {
     yield put({
       type: actions.PAGE_GET_CONTENT_INCEPTION_REQUEST_SENT,
       payload: {
-        ...defaultState,
         fetching: true
       }
     })

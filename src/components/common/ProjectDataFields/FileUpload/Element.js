@@ -12,6 +12,7 @@ import {
 import {
   CurrentVersion,
   UploadHistory,
+  UploaderPopOver,
 } from './subelements'
 
 
@@ -23,6 +24,7 @@ export class Element extends Component {
       id: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
       description: PropTypes.string,
+      editable: PropTypes.bool,
       fileDetails: PropTypes.array.isRequired,
     }),
     pageName: PropTypes.string.isRequired,
@@ -38,8 +40,9 @@ export class Element extends Component {
     this.state = {
       detailedView: false,
       filePrompt: strings.FILE_PROMPT,
+      fileDetails: {},
       hasChosenFile: false,
-      uploadFileRequsted: false,
+      uploadFileRequested: false,
       fileHasUploaded: false,
       fileHasAnchor: false,
       fileState: '',
@@ -82,6 +85,7 @@ export class Element extends Component {
   fileChosen = (e) => {
     this.setState({
       filePrompt: e.target.value.replace("C:\\fakepath\\", ""),
+      fileDetails: e.target,
       hasChosenFile: true,
     })
   }
@@ -90,23 +94,34 @@ export class Element extends Component {
   uploadFile = (e) => {
     console.log("file submit clicked")
 
-    // TODO: Upload the file to S3
-    const fileName = "this will be a filename.txt"
-
-    this.props.uploadFile(
-      this.props.auth.info.idToken.jwtToken,
-      this.props.pageName,
-      fileName,
-    )
-
     this.setState({
       hasChosenFile: false,
-      uploadFileRequsted: true,
+      uploadFileRequested: true,
       fileState: '',
     })
 
     e.stopPropagation();
 
+  }
+
+  cancelPopup = () => {
+    this.setState({
+      uploadFileRequested: false,
+    })
+  }
+
+  onFileUploadSuccess = () => {
+    this.setState({
+      fileHasUploaded: true,
+      fileState: ' has-upload',
+    })
+  }
+
+  onFileUploadFailure = () => {
+    this.setState({
+      fileHasUploaded: false,
+      fileState: '',
+    })
   }
 
   // TODO: Perform actions to requst a signature
@@ -118,14 +133,6 @@ export class Element extends Component {
   requestSignature = (e) => {
     console.log("signature requested")
     e.stopPropagation();
-  }
-
-
-  onFileUploadSuccess = () => {
-    this.setState({
-      fileHasUploaded: true,
-      fileState: ' has-upload',
-    })
   }
 
   onFileAnchorSuccess = () => {
@@ -171,7 +178,7 @@ export class Element extends Component {
       status = strings.FILE_READY_TO_UPLOAD
     }
 
-    if (this.state.uploadFileRequsted) {
+    if (this.state.uploadFileRequested) {
       status = strings.FILE_UPLOADING
     }
 
@@ -215,7 +222,7 @@ export class Element extends Component {
 
   render() {
 
-    const { detailedView, filePrompt, fileHasUploaded, fileHasAnchor, fileState } = this.state
+    const { detailedView, filePrompt, fileHasUploaded, fileHasAnchor, fileState, fileDetails } = this.state
     const { elementContent } = this.props
 
 
@@ -305,6 +312,18 @@ export class Element extends Component {
           </div>
           {detailedView ? <UploadHistory details={elementContent.fileDetails}/> : null}
         </div>
+
+        {
+          this.state.uploadFileRequested ?
+            <UploaderPopOver
+              details={fileDetails}
+              onCancelPopup={ this.cancelPopup }
+              onUploadSuccess={ this.onFileUploadSuccess }
+              onUploadFailure={ this.onFileUploadFailure }
+              /> :
+            null
+        }
+
       </div>
     )
   }
