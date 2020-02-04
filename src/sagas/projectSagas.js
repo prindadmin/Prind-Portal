@@ -153,6 +153,8 @@ function * uploadFile (action) {
 
     const { data: result } = yield call(Dispatchers.uploadFileDispatcher, jwtToken, fileDetails)
 
+    console.log(result)
+
     // Decide which action to dispatch to update the correct page's content
     const action = actionSwitcher(pageName)
 

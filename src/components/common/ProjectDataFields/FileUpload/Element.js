@@ -83,6 +83,11 @@ export class Element extends Component {
 
   // Update the text inside the file picker
   fileChosen = (e) => {
+
+    console.log(e)
+
+    e.persist()
+
     this.setState({
       filePrompt: e.target.value.replace("C:\\fakepath\\", ""),
       fileDetails: e.target,
@@ -316,7 +321,7 @@ export class Element extends Component {
         {
           this.state.uploadFileRequested ?
             <UploaderPopOver
-              details={fileDetails}
+              details={ fileDetails }
               onCancelPopup={ this.cancelPopup }
               onUploadSuccess={ this.onFileUploadSuccess }
               onUploadFailure={ this.onFileUploadFailure }

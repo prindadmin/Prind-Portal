@@ -18,7 +18,7 @@ export default function(identityToken, fileDetails) {
     });
 
 
-    instance.post(`${process.env.PUBLIC_URL}/project/file.js`, fileDetails)
+    instance.get(`${process.env.PUBLIC_URL}/project/file.json`, fileDetails)
     .then(res => {
       resolve(res)
     })
