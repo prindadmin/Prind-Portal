@@ -1,7 +1,11 @@
 /* Grid system */
 @import "~bootstrap/dist/css/bootstrap-grid.min.css";
 /* UI library */
+@import "~normalize.css";
 @import "~@blueprintjs/core/lib/css/blueprint.css";
+@import "~@blueprintjs/icons/lib/css/blueprint-icons.css";
+@import "~@blueprintjs/select/lib/css/blueprint-select.css";
+@import "~@blueprintjs/datetime/lib/css/blueprint-datetime.css";
 
 :root {
   --footer-height: 50px;
@@ -352,14 +356,16 @@ hr {
 /* ================================== */
 
 #file-upload-element,
-#drop-down-element {
+#drop-down-element,
+#calendar-picker-element {
   width: 100%;
   max-width: 1140px;
   margin-bottom: 15px;
 }
 
 #file-upload-element .file-upload-element-container,
-#drop-down-element .drop-down-element-container {
+#drop-down-element .drop-down-element-container,
+#calendar-picker-element .calendar-picker-element-container {
   margin: auto;
   width: 100%;
   background-color: #ffcccb;
@@ -379,6 +385,7 @@ hr {
 
 #file-upload-element .element-title,
 #drop-down-element .element-title,
+#calendar-picker-element .element-title,
 #popup-box .element-title {
   font-size: 20px;
   font-weight: bold;
@@ -387,12 +394,14 @@ hr {
 
 #file-upload-element .element-description,
 #drop-down-element .element-description,
+#calendar-picker-element .element-description,
 #popup-box .element-description {
   margin-bottom: 1em;
 }
 
 #file-upload-element .row,
-#drop-down-element .row {
+#drop-down-element .row,
+#calendar-picker-element .row {
   margin: 0;
 }
 
@@ -409,12 +418,14 @@ hr {
 }
 
 #file-upload-element .container,
-#drop-down-element .container {
+#drop-down-element .container,
+#calendar-picker-element .container {
   padding: 0;
 }
 
 #file-upload-element .row,
-#drop-down-element .row {
+#drop-down-element .row,
+#calendar-picker-element .row {
   width: 100%;
   align-items: center;
   display:flex;
@@ -432,7 +443,11 @@ hr {
 #drop-down-element .col,
 #drop-down-element .col-3,
 #drop-down-element .col-4,
-#drop-down-element .col-5 {
+#drop-down-element .col-5,
+#calendar-picker-element .col,
+#calendar-picker-element .col-3,
+#calendar-picker-element .col-4,
+#calendar-picker-element .col-5 {
   padding: 0;
 }
 
@@ -514,6 +529,30 @@ hr {
 #uploader-popover #popup-box {
   height: auto;
   bottom: auto;
+}
+
+/* ================================== */
+/* ====== date picker element ======= */
+/* ================================== */
+
+#calendar-picker-element .col {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+#calendar-picker-element .calendar-picker-element-container {
+  background-color: #ededed;
+}
+
+#calendar-picker-element .bp3-datepicker {
+  padding: 0.5em 1em;
+  border-radius: 10px;
+  margin-bottom: 1em;
+}
+
+#calendar-picker-element .entry-button {
+  width: 250px;
 }
 
 /* ================================== */

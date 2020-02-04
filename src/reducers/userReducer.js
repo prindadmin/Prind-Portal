@@ -10,11 +10,11 @@ export const init = () => {
   }
 }
 
-export const getS3UploadToken = ( jwt ) => {
+export const getS3UploadToken = ( jwtToken ) => {
   return {
     type: action.USER_S3_UPLOAD_TOKEN_REQUESTED,
     payload: {
-      identityToken: jwt,
+      identityToken: jwtToken,
     }
   }
 }

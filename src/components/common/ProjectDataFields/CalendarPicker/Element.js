@@ -2,9 +2,13 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import {
-  FileInput,
   Button,
+  Intent,
 } from '@blueprintjs/core'
+
+import {
+  DatePicker,
+} from '@blueprintjs/datetime'
 
 import * as strings from '../../../../data/Strings'
 
@@ -19,10 +23,6 @@ export class Element extends Component {
       description: PropTypes.string,
       fieldDetails: PropTypes.object.isRequired,
     })
-  }
-
-  constructor() {
-    super()
   }
 
   componentDidMount() {
@@ -40,11 +40,19 @@ export class Element extends Component {
 
   render() {
 
+    // TODO: Implement onChange to date picker
+
     const { title, description, fieldDetails } = this.props.elementContent
 
+    var dateValue = new Date()
+
+    if (fieldDetails.dateValue !== undefined) {
+      dateValue = new Date(fieldDetails.dateValue)
+    }
+
     return (
-      <div id='drop-down-element'>
-        <div className={'drop-down-element-container'}>
+      <div id='calendar-picker-element'>
+        <div className='calendar-picker-element-container'>
           <div className='element-title'>
             {title}
           </div>
@@ -57,10 +65,19 @@ export class Element extends Component {
 
             <div className='row'>
               <div className='col'>
-                Calendar picker here
+                <DatePicker
+                  value={dateValue}
+                  />
               </div>
+            </div>
+
+            <div className='row'>
               <div className='col'>
-                Button to save here
+                <Button
+                  className='entry-button'
+                  intent={Intent.PRIMARY}
+                  text={strings.BUTTON_SAVE_CHANGES}
+                  />
               </div>
             </div>
 

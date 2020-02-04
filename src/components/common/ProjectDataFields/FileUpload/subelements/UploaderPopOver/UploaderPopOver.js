@@ -54,35 +54,32 @@ export class Element extends Component {
   uploadToS3 = () => {
 
     const { details, auth } = this.props
+    const file = details.files[0]
+    const now = new Date();
+    const isoDateTime = now.toISOString().split('.')[0]
 
-    var fileName = details.value.replace("C:\\fakepath\\", "")
+    var fileName = file.name
 
     // Create the S3
     AWS.config.update({
       region: process.env.REACT_APP_S3_REGION,
-      accessKeyId: this.props.auth.stsToken.AccessKeyId,
-      secretAccessKey: this.props.auth.stsToken.SecretAccessKey,
-      sessionToken: this.props.auth.stsToken.SessionToken
+      accessKeyId: auth.s3Token.body.AccessKeyId,
+      secretAccessKey: auth.s3Token.body.SecretAccessKey,
+      sessionToken: auth.s3Token.body.SessionToken
     })
 
     const s3 = new AWS.S3()
-    const bucketName = process.env.AWS_S3_BUCKET_NAME
+    const bucketName = process.env.REACT_APP_AWS_S3_USER_UPLOAD_BUCKET_NAME
     const userName = auth.info.username
-    const key = userName + '/' + details.name
-
-
-    var fs = require('fs');
-    var fileStream = fs.createReadStream(details.value);
-
-    fileStream.on('error', function(err) {
-      console.log('File Error', err);
-    });
+    const key = userName + '/' + isoDateTime + '_' + fileName
 
     // Create the parameters to upload the file with
     var uploadParams = {
-      Bucket: process.env.AWS_S3_BUCKET_NAME,
-      Key: fileName,
-      Body: fileStream
+      Bucket: bucketName,
+      Key: key,
+      Body: file,
+      ContentType: file.type,
+      ACL: 'private'
     };
 
 

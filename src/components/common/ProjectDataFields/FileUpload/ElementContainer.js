@@ -1,6 +1,8 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
+import * as userReducer from '../../../../reducers/userReducer'
+
 import Element from './Element'
 
 const mapStatetoProps = state => {
@@ -11,7 +13,11 @@ const mapStatetoProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-  return {}
+  return {
+    requestS3UploadToken: (jwtToken) => {
+      dispatch(userReducer.getS3UploadToken(jwtToken))
+    }
+  }
 }
 
 export default withRouter(connect(mapStatetoProps, mapDispatchToProps)(Element))

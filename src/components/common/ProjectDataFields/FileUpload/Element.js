@@ -51,7 +51,8 @@ export class Element extends Component {
   }
 
   componentDidMount() {
-    //console.log(this.props.elementContent)
+
+    this.props.requestS3UploadToken(this.props.auth.info.idToken.jwtToken)
 
     const { fileDetails } = this.props.elementContent
 
@@ -83,8 +84,6 @@ export class Element extends Component {
 
   // Update the text inside the file picker
   fileChosen = (e) => {
-
-    console.log(e)
 
     e.persist()
 

@@ -97,7 +97,17 @@
     "type": "calendar",
     "editable": true,
     "fieldDetails": {
-      "dateValue": "lorem ipsum"
+      "dateValue": "2020-01-13"
+    }
+  },
+  {
+    "id": 4,
+    "title": "Planned End Date",
+    "description": "This is asked to ensure that the project ends on schedule.",
+    "type": "calendar",
+    "editable": true,
+    "fieldDetails": {
+      "dateValue": "2020-11-01"
     }
   }
 ]

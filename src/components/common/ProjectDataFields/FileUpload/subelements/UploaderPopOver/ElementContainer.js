@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import * as reducer from '../../../../../../reducers/projectsReducer'
+import * as projectsreducer from '../../../../../../reducers/projectsReducer'
 
 import Element from './UploaderPopOver'
 
@@ -15,8 +15,8 @@ const mapStatetoProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     uploadFile: (jwtToken, pageName, fileDetails) => {
-      dispatch(reducer.uploadFile(jwtToken, pageName, fileDetails))
-    },
+      dispatch(projectsreducer.uploadFile(jwtToken, pageName, fileDetails))
+    }
   }
 }
 
