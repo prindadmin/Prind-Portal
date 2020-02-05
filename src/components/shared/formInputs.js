@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { InputGroup, Button, Icon, TextArea, MenuItem } from '@blueprintjs/core'
+import { DatePicker } from '@blueprintjs/datetime'
 import { Select } from "@blueprintjs/select";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -96,6 +97,34 @@ export class SelectInput extends React.Component {
   }
 
 }
+
+
+
+export class CalendarPicker extends React.Component {
+  static propTypes = {
+    field: PropTypes.object
+  }
+
+  render () {
+    const { input, value } = this.props
+    const { touched, invalid, error, active } = this.props.meta
+
+    return (
+      <React.Fragment>
+        <DatePicker
+          {...input}
+          intent={touched && invalid && !active ? 'danger' : 'none'}
+          onChange={(newDate) => input.onChange(newDate)}
+          highlightCurrentDay={true}
+          reverseMonthAndYearMenus={true}
+          value={new Date(input.value)}
+          />
+        { touched && invalid && !active ? <small style={validationErrorStyle}>{error}</small> : null }
+      </React.Fragment>
+    )
+  }
+}
+
 
 
 

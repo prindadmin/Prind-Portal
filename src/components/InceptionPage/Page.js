@@ -77,7 +77,9 @@ export class Page extends Component {
             if (singleField.type === 'calendar') {
               return <CalendarPicker
                         key={singleField.id}
+                        form={"field-" + singleField.id}
                         elementContent={singleField}
+                        initialValues={singleField.fieldDetails}
                         pageName={pageName}
                         />
             }

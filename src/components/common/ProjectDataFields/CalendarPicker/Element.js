@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Field, reduxForm } from 'redux-form'
 import PropTypes from 'prop-types'
 
 import {
@@ -6,9 +7,7 @@ import {
   Intent,
 } from '@blueprintjs/core'
 
-import {
-  DatePicker,
-} from '@blueprintjs/datetime'
+import * as FormInputs from '../../../shared/formInputs'
 
 import * as strings from '../../../../data/Strings'
 
@@ -21,8 +20,17 @@ export class Element extends Component {
       id: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
       description: PropTypes.string,
-      fieldDetails: PropTypes.object.isRequired,
+      fieldDetails: PropTypes.shape({
+        dateValue: PropTypes.string.isRequired,
+      }),
     })
+  }
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      chosenDate: this.props.elementContent.fieldDetails.dateValue
+    }
   }
 
   componentDidMount() {
@@ -34,14 +42,16 @@ export class Element extends Component {
 
   // ---------------------- DEFAULT FUNCTIONALITY ABOVE THIS LINE -----------------------
 
-
+  // TODO: Implement the server call for the data
+  saveChanges = (e) => {
+    console.log(e)
+  }
 
   // ------------------------------ RENDER BELOW THIS LINE ------------------------------
 
   render() {
 
-    // TODO: Implement onChange to date picker
-
+    const { handleSubmit } = this.props
     const { title, description, fieldDetails } = this.props.elementContent
 
     var dateValue = new Date()
@@ -62,25 +72,35 @@ export class Element extends Component {
           </div>
 
           <div className='container'>
+            <form onSubmit={handleSubmit(this.saveChanges)} className='add-member-form'>
 
-            <div className='row'>
-              <div className='col'>
-                <DatePicker
-                  value={dateValue}
-                  />
+
+              <div className='row'>
+                <div className='col'>
+                  <Field
+                    name="dateValue"
+                    component={FormInputs.CalendarPicker}
+                    value={dateValue}
+                    />
+                </div>
               </div>
-            </div>
 
-            <div className='row'>
-              <div className='col'>
-                <Button
-                  className='entry-button'
-                  intent={Intent.PRIMARY}
-                  text={strings.BUTTON_SAVE_CHANGES}
-                  />
+
+              <div className='row'>
+                <div className='col'>
+                  <Button
+                    loading={this.props.submitting}
+                    disabled={this.props.pristine}
+                    className='entry-button'
+                    intent={Intent.PRIMARY}
+                    text={strings.BUTTON_SAVE_CHANGES}
+                    type='submit'
+                    />
+                </div>
               </div>
-            </div>
 
+
+            </form>
           </div>
 
         </div>
@@ -88,5 +108,9 @@ export class Element extends Component {
     )
   }
 }
+
+Element = reduxForm({
+  enableReinitialize: true
+})(Element)
 
 export default Element

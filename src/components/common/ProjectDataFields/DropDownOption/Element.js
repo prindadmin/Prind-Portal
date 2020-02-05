@@ -72,11 +72,13 @@ export class Element extends Component {
       dropdownValue: item.name,
     })
 
+    // TODO: Move this functionality into the FormInputs
     this.props.change(
       'dropdownValue', item.name
     )
   }
 
+  // TODO: Implement the server call for the data
   saveChanges = (e) => {
     console.log(e)
   }
@@ -149,6 +151,7 @@ export class Element extends Component {
                   loading={this.props.submitting}
                   disabled={this.props.pristine}
                   text={strings.BUTTON_SAVE_CHANGES}
+                  className='entry-button'
                   intent={Intent.PRIMARY}
                   type='submit'
                 />
