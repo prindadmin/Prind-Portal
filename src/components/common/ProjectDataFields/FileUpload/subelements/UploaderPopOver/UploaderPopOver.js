@@ -68,6 +68,9 @@ export class Element extends Component {
       sessionToken: auth.s3Token.body.SessionToken
     })
 
+    // FIXME: The key will by projectID/pageName/fieldID
+    // FIXME: The filename for the S3 file will be the uploaded filename
+
     const s3 = new AWS.S3()
     const bucketName = process.env.REACT_APP_AWS_S3_USER_UPLOAD_BUCKET_NAME
     const userName = auth.info.username
@@ -88,7 +91,7 @@ export class Element extends Component {
       if (err) {
         console.log("Error", err);
       } if (data) {
-        console.log("Upload Success", data.Location);
+        console.log("Upload Success", data);
       }
     })
 

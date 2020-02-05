@@ -41,7 +41,7 @@ export const TextBoxInput = (field) => {
         intent={touched && invalid && !active ? 'danger' : 'none'}
         type='text'
         name={field.input.name}
-        value={field.value}
+        value={field.input.value}
         placeholder={field.placeholder}
         />
     </React.Fragment>
@@ -106,20 +106,18 @@ export class CalendarPicker extends React.Component {
   }
 
   render () {
-    const { input, value } = this.props
-    const { touched, invalid, error, active } = this.props.meta
+    const { input } = this.props
 
     return (
       <React.Fragment>
         <DatePicker
           {...input}
-          intent={touched && invalid && !active ? 'danger' : 'none'}
           onChange={(newDate) => input.onChange(newDate)}
           highlightCurrentDay={true}
           reverseMonthAndYearMenus={true}
+          shortcuts={false}
           value={new Date(input.value)}
           />
-        { touched && invalid && !active ? <small style={validationErrorStyle}>{error}</small> : null }
       </React.Fragment>
     )
   }

@@ -14,7 +14,12 @@
   --heading-text-color: #000;
   --sidebar-text-color: #106ba3;
   --pop-up-project-tile-margin: 5px;
+  --field-element-red: #ffcccb;
+  --field-element-yellow: #fffcbb;
+  --field-element-green: #d2e9af;
+  --field-element-grey: #ededed;
 }
+
 
 .App {
   text-align: center;
@@ -352,12 +357,13 @@ hr {
 }
 
 /* ================================== */
-/* ======= file upload element ====== */
+/* ====== field element common ====== */
 /* ================================== */
 
 #file-upload-element,
 #drop-down-element,
-#calendar-picker-element {
+#calendar-picker-element,
+#long-text-element {
   width: 100%;
   max-width: 1140px;
   margin-bottom: 15px;
@@ -365,27 +371,21 @@ hr {
 
 #file-upload-element .file-upload-element-container,
 #drop-down-element .drop-down-element-container,
-#calendar-picker-element .calendar-picker-element-container {
+#calendar-picker-element .calendar-picker-element-container,
+#long-text-element .long-text-element-container {
   margin: auto;
   width: 100%;
-  background-color: #ffcccb;
+  background-color: var(--field-element-red);
   border-radius: 10px;
   padding: 10px;
   position: relative;
   text-align: left;
 }
 
-#file-upload-element .has-upload {
-  background-color: #fffcbb;
-}
-
-#file-upload-element .has-anchor {
-  background-color: #d2e9af;
-}
-
 #file-upload-element .element-title,
 #drop-down-element .element-title,
 #calendar-picker-element .element-title,
+#long-text-element .element-title,
 #popup-box .element-title {
   font-size: 20px;
   font-weight: bold;
@@ -395,46 +395,36 @@ hr {
 #file-upload-element .element-description,
 #drop-down-element .element-description,
 #calendar-picker-element .element-description,
+#long-text-element .element-description,
 #popup-box .element-description {
   margin-bottom: 1em;
 }
 
 #file-upload-element .row,
 #drop-down-element .row,
-#calendar-picker-element .row {
+#calendar-picker-element .row,
+#long-text-element .row {
   margin: 0;
-}
-
-#file-upload-element .bp3-file-input {
-  margin-bottom: 0.5em;
-}
-
-#file-upload-element .element-file-uploader {
-}
-
-#file-upload-element .bp3-button,
-#drop-down-element .bp3-button {
-  width: 150px;
 }
 
 #file-upload-element .container,
 #drop-down-element .container,
-#calendar-picker-element .container {
+#calendar-picker-element .container,
+#long-text-element .container {
   padding: 0;
 }
 
+
 #file-upload-element .row,
 #drop-down-element .row,
-#calendar-picker-element .row {
+#calendar-picker-element .row,
+#long-text-element .row {
   width: 100%;
   align-items: center;
   display:flex;
   margin-bottom: 0.3em;
 }
 
-#file-upload-element .row .signatures {
-  padding-left: 1em;
-}
 
 #file-upload-element .col,
 #file-upload-element .col-3,
@@ -447,13 +437,44 @@ hr {
 #calendar-picker-element .col,
 #calendar-picker-element .col-3,
 #calendar-picker-element .col-4,
-#calendar-picker-element .col-5 {
+#calendar-picker-element .col-5,
+#long-text-element .col,
+#long-text-element .col-3,
+#long-text-element .col-4,
+#long-text-element .col-5 {
   padding: 0;
+}
+
+
+/* ================================== */
+/* ======= file upload element ====== */
+/* ================================== */
+
+#file-upload-element .has-upload {
+  background-color: var(--field-element-yellow);
+}
+
+#file-upload-element .has-anchor {
+  background-color: var(--field-element-green);
+}
+
+#file-upload-element .bp3-file-input {
+  margin-bottom: 0.5em;
+}
+
+#file-upload-element .element-file-uploader {
+}
+
+#file-upload-element .bp3-button {
+  width: 150px;
+}
+
+#file-upload-element .row .signatures {
+  padding-left: 1em;
 }
 
 #file-upload-element .file-status {
 }
-
 
 #file-upload-element .current-version-container {
   background-color: #EEE;
@@ -487,7 +508,7 @@ hr {
 /* ================================== */
 
 #drop-down-element .drop-down-element-container {
-  background-color: #ededed;
+  background-color: var(--field-element-grey);
 }
 
 #drop-down-element .bp3-button  {
@@ -542,7 +563,7 @@ hr {
 }
 
 #calendar-picker-element .calendar-picker-element-container {
-  background-color: #ededed;
+  background-color: var(--field-element-grey);
 }
 
 #calendar-picker-element .bp3-datepicker {
@@ -554,6 +575,28 @@ hr {
 #calendar-picker-element .entry-button {
   width: 250px;
 }
+
+/* ================================== */
+/* ======= long text element ======== */
+/* ================================== */
+
+
+#long-text-element .col {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+#long-text-element .long-text-element-container {
+  background-color: var(--field-element-grey);
+}
+
+#long-text-element textarea {
+  width: 100%;
+  min-height: 8em;
+}
+
+
 
 /* ================================== */
 /* ========= inception page ========= */

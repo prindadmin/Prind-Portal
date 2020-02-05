@@ -6,7 +6,7 @@ import PageChooserSection from '../layouts/PageChooserSection'
 import ProjectLoading from '../common/ProjectLoading'
 import Footer from '../common/footer'
 
-import { FileUpload, DropDown, CalendarPicker } from '../common/ProjectDataFields'
+import { FileUpload, DropDown, CalendarPicker, LongText } from '../common/ProjectDataFields'
 import NoProjectSelected from '../common/NoProjectSelected'
 
 import * as strings from '../../data/Strings'
@@ -77,7 +77,19 @@ export class Page extends Component {
             if (singleField.type === 'calendar') {
               return <CalendarPicker
                         key={singleField.id}
+                        form={"field-" + singleField.id}
                         elementContent={singleField}
+                        initialValues={singleField.fieldDetails}
+                        pageName={pageName}
+                        />
+            }
+
+            if (singleField.type === 'longText') {
+              return <LongText
+                        key={singleField.id}
+                        form={"field-" + singleField.id}
+                        elementContent={singleField}
+                        initialValues={singleField.fieldDetails}
                         pageName={pageName}
                         />
             }

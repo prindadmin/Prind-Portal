@@ -13,7 +13,6 @@ import * as strings from '../../../../data/Strings'
 
 // TODO: Implement 'editable' prop.  i.e. make field locked when editable = false
 // TODO: Implement calls to server
-// TODO: Implement max and min dates to the date picker
 
 export class Element extends Component {
   static propTypes = {
@@ -22,16 +21,9 @@ export class Element extends Component {
       title: PropTypes.string.isRequired,
       description: PropTypes.string,
       fieldDetails: PropTypes.shape({
-        dateValue: PropTypes.string,
+        textValue: PropTypes.string,
       }).isRequired,
     })
-  }
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      chosenDate: this.props.elementContent.fieldDetails.dateValue
-    }
   }
 
   componentDidMount() {
@@ -55,15 +47,9 @@ export class Element extends Component {
     const { handleSubmit } = this.props
     const { title, description, fieldDetails } = this.props.elementContent
 
-    var dateValue = new Date()
-
-    if (fieldDetails.dateValue !== undefined) {
-      dateValue = new Date(fieldDetails.dateValue)
-    }
-
     return (
-      <div id='calendar-picker-element'>
-        <div className='calendar-picker-element-container'>
+      <div id='long-text-element'>
+        <div className='long-text-element-container'>
           <div className='element-title'>
             {title}
           </div>
@@ -73,15 +59,16 @@ export class Element extends Component {
           </div>
 
           <div className='container'>
-            <form onSubmit={handleSubmit(this.saveChanges)} className='add-member-form'>
+            <form onSubmit={handleSubmit(this.saveChanges)} className='form'>
 
 
               <div className='row'>
                 <div className='col'>
                   <Field
-                    name="dateValue"
-                    component={FormInputs.CalendarPicker}
-                    value={dateValue}
+                    name="textValue"
+                    component={FormInputs.TextBoxInput}
+                    value={fieldDetails.textValue}
+                    placeholder={strings.PLEASE_PROVIDE_DETAILS_HERE}
                     />
                 </div>
               </div>
