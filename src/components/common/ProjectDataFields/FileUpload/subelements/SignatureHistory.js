@@ -74,7 +74,6 @@ export class Element extends Component {
     )
   }
 
-  // TODO: Test this
   signaturesNotProvided = () => {
     return (
       <div>

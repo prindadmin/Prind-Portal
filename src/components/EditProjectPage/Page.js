@@ -141,8 +141,6 @@ export class Page extends Component {
     )
   }
 
-  // TODO: Fix these buttons
-
   projectPageFooter = () => {
     return (
       <div>

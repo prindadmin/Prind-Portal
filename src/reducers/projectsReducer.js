@@ -70,12 +70,38 @@ export const uploadFile = ( jwtToken, pageName, fileDetails ) => {
   }
 }
 
+export const createField = ( jwtToken, pageName, fieldDetails ) => {
+
+  return {
+    type: action.PROJECT_CREATE_FIELD_REQUESTED,
+    payload: {
+      jwtToken,
+      pageName,
+      fieldDetails,
+    }
+  }
+}
+
+export const updateField = ( jwtToken, pageName, fieldDetails ) => {
+
+  return {
+    type: action.PROJECT_UPDATE_FIELD_REQUESTED,
+    payload: {
+      jwtToken,
+      pageName,
+      fieldDetails,
+    }
+  }
+}
+
 const ACTION_HANDLERS = {
 
   [action.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUESTED]: state => ({ ...state }),
   [action.PROJECT_CREATE_PROJECT_REQUESTED]: state => ({ ...state }),
   [action.PROJECT_GET_CURRENT_MEMBERS_REQUESTED]: state => ({ ...state }),
   [action.PROJECT_UPLOAD_FILE_REQUESTED]: state => ({ ...state }),
+  [action.PROJECT_CREATE_FIELD_REQUESTED]: state => ({ ...state }),
+  [action.PROJECT_UPDATE_FIELD_REQUESTED]: state => ({ ...state }),
 
   [action.PROJECT_INIT]: (state, action) => { return { ...state, ...action.payload }},
   [action.PROJECT_SET_STATE]: (state, action) => { return { ...state, ...action.payload }},
@@ -85,6 +111,8 @@ const ACTION_HANDLERS = {
   [action.PROJECT_CREATE_PROJECT_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
   [action.PROJECT_GET_CURRENT_MEMBERS_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
   [action.PROJECT_UPLOAD_FILE_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
+  [action.PROJECT_CREATE_FIELD_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
+  [action.PROJECT_UPDATE_FIELD_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
 }
 
 

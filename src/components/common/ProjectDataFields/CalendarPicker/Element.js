@@ -12,7 +12,6 @@ import * as FormInputs from '../../../shared/formInputs'
 import * as strings from '../../../../data/Strings'
 
 // TODO: Implement 'editable' prop.  i.e. make field locked when editable = false
-// TODO: Implement calls to server
 // TODO: Implement max and min dates to the date picker
 
 export class Element extends Component {
@@ -24,14 +23,8 @@ export class Element extends Component {
       fieldDetails: PropTypes.shape({
         dateValue: PropTypes.string,
       }).isRequired,
-    })
-  }
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      chosenDate: this.props.elementContent.fieldDetails.dateValue
-    }
+    }),
+    pageName: PropTypes.string.isRequired,
   }
 
   componentDidMount() {
@@ -43,9 +36,23 @@ export class Element extends Component {
 
   // ---------------------- DEFAULT FUNCTIONALITY ABOVE THIS LINE -----------------------
 
-  // TODO: Implement the server call for the data
+  // When the user wants to save the changes, update the server
   saveChanges = (e) => {
-    console.log(e)
+
+    const { auth, pageName, projects, elementContent } = this.props
+
+    var details = {
+      projectID: projects.chosenProject.id,
+      pageName,
+      fieldID: elementContent.id,
+      fieldDetails: {...e},
+    }
+
+    this.props.updateField(
+      auth.info.idToken.jwtToken,
+      pageName,
+      details,
+    )
   }
 
   // ------------------------------ RENDER BELOW THIS LINE ------------------------------
@@ -55,10 +62,10 @@ export class Element extends Component {
     const { handleSubmit } = this.props
     const { title, description, fieldDetails } = this.props.elementContent
 
-    var dateValue = new Date()
+    var currentDateValue = new Date()
 
-    if (fieldDetails.dateValue !== undefined) {
-      dateValue = new Date(fieldDetails.dateValue)
+    if (fieldDetails.dateValue !== undefined  && fieldDetails.dateValue !== null) {
+      currentDateValue = new Date(fieldDetails.dateValue)
     }
 
     return (
@@ -81,7 +88,7 @@ export class Element extends Component {
                   <Field
                     name="dateValue"
                     component={FormInputs.CalendarPicker}
-                    value={dateValue}
+                    value={currentDateValue}
                     />
                 </div>
               </div>

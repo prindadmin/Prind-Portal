@@ -13,7 +13,6 @@ import * as FormInputs from '../../../shared/formInputs'
 import * as strings from '../../../../data/Strings'
 
 // TODO: Implement 'editable' prop.  i.e. make field locked when editable = false
-// TODO: Implement calls to server
 
 export class Element extends Component {
   static propTypes = {
@@ -27,23 +26,20 @@ export class Element extends Component {
         textboxValue: PropTypes.string,
         dropdownOptions: PropTypes.array,
         optionOpensTextBox: PropTypes.string,
-      }),
-    })
+      }).isRequired,
+    }),
+    pageName: PropTypes.string.isRequired,
   }
 
-  constructor() {
-    super()
-    this.state = {
+  constructor(props) {
+    super(props)
+
+    const { dropdownValue, textboxValue } = props.elementContent.fieldDetails
+
+    var stateUpdate = {
       dropdownValue: strings.NO_VALUE_SELECTED,
       textboxValue: strings.PLEASE_PROVIDE_DETAILS_HERE,
     }
-  }
-
-  componentDidMount() {
-
-    const { dropdownValue, textboxValue } = this.props.elementContent.fieldDetails
-
-    var stateUpdate = {}
 
     if (dropdownValue !== null && dropdownValue !== undefined) {
       stateUpdate.dropdownValue = dropdownValue
@@ -53,11 +49,10 @@ export class Element extends Component {
       stateUpdate.textboxValue = textboxValue
     }
 
-    if (stateUpdate.length !== 0) {
-      this.setState({
-        ...stateUpdate,
-      })
-    }
+    this.state = stateUpdate
+  }
+
+  componentDidMount() {
   }
 
   componentDidUpdate(prevState, prevProps) {
@@ -78,9 +73,23 @@ export class Element extends Component {
     )
   }
 
-  // TODO: Implement the server call for the data
+  // When the user wants to save the changes, update the server
   saveChanges = (e) => {
-    console.log(e)
+
+    const { auth, pageName, projects, elementContent } = this.props
+
+    var details = {
+      projectID: projects.chosenProject.id,
+      pageName,
+      fieldID: elementContent.id,
+      fieldDetails: {...e},
+    }
+
+    this.props.updateField(
+      auth.info.idToken.jwtToken,
+      pageName,
+      details,
+    )
   }
 
   // ------------------------------ RENDER BELOW THIS LINE ------------------------------
@@ -93,7 +102,6 @@ export class Element extends Component {
 
     // Check if drop down options has been provided or not
     const dropdownOptions = fieldDetails.dropdownOptions !== undefined ? fieldDetails.dropdownOptions : []
-
 
     return (
       <div id='drop-down-element'>

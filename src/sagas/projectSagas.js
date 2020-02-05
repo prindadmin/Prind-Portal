@@ -179,10 +179,92 @@ function * uploadFile (action) {
 }
 
 
+function * createField (action) {
+
+  const { jwtToken, pageName, fieldDetails } = action.payload
+
+  try {
+
+    // Pre-fetch update to store
+    yield put({
+      type: actions.PROJECT_CREATE_FIELD_REQUEST_SENT,
+      payload: {
+        fetching: true,
+      }
+    })
+
+    const { data: result } = yield call(Dispatchers.createFieldDispatcher, jwtToken, fieldDetails)
+
+    // Decide which action to dispatch to update the correct page's content
+    const action = actionSwitcher(pageName)
+
+    // Post-fetch update to store
+    yield put({
+      type: action,
+      payload: {
+        fetching: false,
+      }
+    })
+  }
+  catch (error) {
+    console.log(error)
+    yield put({
+      type: actions.PROJECT_CREATE_FIELD_REQUEST_FAILED,
+        payload: {
+          fetching: false,
+          error,
+        }
+    })
+  }
+}
+
+
+function * updateField (action) {
+
+  const { jwtToken, pageName, fieldDetails } = action.payload
+
+  try {
+
+    // Pre-fetch update to store
+    yield put({
+      type: actions.PROJECT_UPDATE_FIELD_REQUEST_SENT,
+      payload: {
+        fetching: true,
+      }
+    })
+
+    const { data: result } = yield call(Dispatchers.updateFieldDispatcher, jwtToken, fieldDetails)
+
+    // Decide which action to dispatch to update the correct page's content
+    const action = actionSwitcher(pageName)
+
+    // Post-fetch update to store
+    yield put({
+      type: action,
+      payload: {
+        fetching: false,
+      }
+    })
+  }
+  catch (error) {
+    console.log(error)
+    yield put({
+      type: actions.PROJECT_UPDATE_FIELD_REQUEST_FAILED,
+        payload: {
+          fetching: false,
+          error,
+        }
+    })
+  }
+}
+
+
 export default function * sagas () {
   yield takeLatest(actions.PROJECT_INIT, init)
   yield takeLatest(actions.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUESTED, getAccessibleProjects)
   yield takeLatest(actions.PROJECT_CREATE_PROJECT_REQUESTED, createNewProject)
   yield takeLatest(actions.PROJECT_GET_CURRENT_MEMBERS_REQUESTED, getCurrentMembers)
   yield takeLatest(actions.PROJECT_UPLOAD_FILE_REQUESTED, uploadFile)
+  yield takeLatest(actions.PROJECT_CREATE_FIELD_REQUESTED, createField)
+  yield takeLatest(actions.PROJECT_UPDATE_FIELD_REQUESTED, updateField)
 }

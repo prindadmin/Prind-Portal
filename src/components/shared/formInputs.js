@@ -71,7 +71,7 @@ export class SelectInput extends React.Component {
 
   render () {
 
-    const { input, values, onItemSelect } = this.props
+    const { input, values, onItemSelect, selectedItem } = this.props
     const { touched, invalid, error, active } = this.props.meta
 
     return (
@@ -86,7 +86,7 @@ export class SelectInput extends React.Component {
           noResults={<MenuItem disabled={true} text="No results." />}
         >
           <Button
-            text={input.value}
+            text={selectedItem}
             rightIcon="double-caret-vertical"
             alignText="left"
           />
@@ -108,6 +108,12 @@ export class CalendarPicker extends React.Component {
   render () {
     const { input } = this.props
 
+    var currentDateValue = new Date()
+
+    if (input.value !== "") {
+      currentDateValue = new Date(input.value)
+    }
+
     return (
       <React.Fragment>
         <DatePicker
@@ -116,7 +122,7 @@ export class CalendarPicker extends React.Component {
           highlightCurrentDay={true}
           reverseMonthAndYearMenus={true}
           shortcuts={false}
-          value={new Date(input.value)}
+          value={currentDateValue}
           />
       </React.Fragment>
     )

@@ -56,7 +56,6 @@ export class Element extends Component {
     )
   }
 
-  // TODO: Test this
   currentVersionNotProvided = () => {
     return (
       <div>

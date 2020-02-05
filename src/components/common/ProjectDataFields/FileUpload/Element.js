@@ -314,13 +314,18 @@ export class Element extends Component {
 
             </div>
           </div>
-          {detailedView ? <UploadHistory details={elementContent.fileDetails}/> : null}
+          {detailedView ? <UploadHistory
+            details={ elementContent.fileDetails }
+            /> : null}
         </div>
 
         {
           this.state.uploadFileRequested ?
             <UploaderPopOver
-              details={ fileDetails }
+              fileDetails={ fileDetails }
+              projectID={this.props.projects.chosenProject.id}
+              pageName={this.props.pageName}
+              fieldID={elementContent.id}
               onCancelPopup={ this.cancelPopup }
               onUploadSuccess={ this.onFileUploadSuccess }
               onUploadFailure={ this.onFileUploadFailure }

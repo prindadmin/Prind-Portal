@@ -14,7 +14,10 @@ import * as strings from '../../../../../../data/Strings'
 
 export class Element extends Component {
   static propTypes = {
-    details: PropTypes.object.isRequired,
+    fileDetails: PropTypes.object.isRequired,
+    projectID: PropTypes.any.isRequired,
+    pageName: PropTypes.any.isRequired,
+    fieldID: PropTypes.any.isRequired,
     onCancelPopup: PropTypes.func.isRequired,
     onUploadSuccess: PropTypes.func.isRequired,
     onUploadFailure: PropTypes.func.isRequired,
@@ -30,9 +33,7 @@ export class Element extends Component {
 
   componentDidMount() {
 
-    const { details } = this.props
-
-    console.log(details)
+    const { fileDetails } = this.props
 
     // TODO: Replace this with an upload and fire cancel when complete
     setTimeout(() => {
@@ -53,8 +54,10 @@ export class Element extends Component {
 
   uploadToS3 = () => {
 
-    const { details, auth } = this.props
-    const file = details.files[0]
+    console.log(this.props)
+
+    const { fileDetails, auth, projectID, pageName, fieldID } = this.props
+    const file = fileDetails.files[0]
     const now = new Date();
     const isoDateTime = now.toISOString().split('.')[0]
 
@@ -74,7 +77,8 @@ export class Element extends Component {
     const s3 = new AWS.S3()
     const bucketName = process.env.REACT_APP_AWS_S3_USER_UPLOAD_BUCKET_NAME
     const userName = auth.info.username
-    const key = userName + '/' + isoDateTime + '_' + fileName
+    const key = fieldID.toString()
+    //const key = projectID + '/' + pageName + '/' + fieldID
 
     // Create the parameters to upload the file with
     var uploadParams = {
@@ -85,8 +89,10 @@ export class Element extends Component {
       ACL: 'private'
     };
 
+    console.log(uploadParams)
 
 
+    // FIXME: Getting error access denied; I'm not sure if this is a problem getting access to the file (because it's not a stream) or accessing the bucket.
     s3.upload(uploadParams, function (err, data) {
       if (err) {
         console.log("Error", err);
@@ -105,15 +111,12 @@ export class Element extends Component {
 
 
 
-
-
-
   render() {
 
-    const { details } = this.props
+    const { fileDetails } = this.props
     const { uploadProgress } = this.state
 
-    const progressValue = uploadProgress / details.size
+    const progressValue = uploadProgress / fileDetails.size
 
     return(
       <PopOverHandler>
@@ -125,8 +128,8 @@ export class Element extends Component {
                   {strings.UPLOAD_IN_PROGESS}
                 </div>
                 <div className='element-description'>
-                  <p><b>{strings.FILE_NAME}</b> {details.value.replace("C:\\fakepath\\", "")}</p>
-                  <p><b>{strings.UPLOADED_SIZE}</b> {uploadProgress + " / " + details.size}</p>
+                  <p><b>{strings.FILE_NAME}</b> {fileDetails.value.replace("C:\\fakepath\\", "")}</p>
+                  <p><b>{strings.UPLOADED_SIZE}</b> {uploadProgress + " / " + fileDetails.size}</p>
                 </div>
                 <ProgressBar
                   intent={Intent.PRIMARY}
