@@ -89,21 +89,22 @@ export class Element extends Component {
     // Create a request
     var request = s3.putObject(uploadParams);
 
-    request.
-      on('httpUploadProgress', function (progress) {
+    request.on('httpUploadProgress', function (progress) {
         that.setState({
           uploadProgress: progress.loaded
         })
-      }).
-      on('success', function(response) {
 
+      })
+
+      .on('success', function(response) {
         // Timer to keep the window open for a few seconds after upload completes
         setTimeout(() => {
           that.informServer(response)
         }, windowCloseDelay);
 
-      }).
-      on('error', function(error, response) {
+      })
+
+      .on('error', function(error, response) {
         console.log("Error!");
         console.log(error)
 

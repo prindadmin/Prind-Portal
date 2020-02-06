@@ -6,5 +6,27 @@
     "type": "file",
     "editable": true,
     "fileDetails": []
+  },
+  {
+    "id": 2,
+    "title": "Has the Health and Safety File has been uploaded to the Occupation Phase tab?",
+    "description": "Where projects involve more than one contractor, the CDM Regulations requires a Health and Safety file so that, at the end of the project, the client is in possession of information and anyone carrying out subsequent work on the building will know how to plan and carry out that work safely.",
+    "type": "dropdown",
+    "editable": true,
+    "fieldDetails": {
+      "dropdownValue": "No",
+      "textboxValue": "",
+      "dropdownOptions": [
+        {
+          "id": 1,
+          "name": "Yes"
+        },
+        {
+          "id": 2,
+          "name": "No"
+        }
+      ],
+      "optionOpensTextBox": null
+    }
   }
 ]

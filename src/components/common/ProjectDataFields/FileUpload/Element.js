@@ -4,9 +4,7 @@ import PropTypes from 'prop-types'
 import {
   FileInput,
   Button,
-  Label,
   Intent,
-  InputGroup,
 } from '@blueprintjs/core'
 
 import {
@@ -31,8 +29,6 @@ export class Element extends Component {
   }
 
   // TODO: Implement 'editable' prop.  i.e. make field locked when editable = false
-  // TODO: Create functionality to say file has uploaded successfully
-  // TODO: Create functionality to calculate the hash of the file
   // TODO: Implement calls to server
 
   constructor() {
@@ -43,8 +39,6 @@ export class Element extends Component {
       fileDetails: {},
       hasChosenFile: false,
       uploadFileRequested: false,
-      fileHasUploaded: false,
-      fileHasAnchor: false,
       fileState: '',
       hash: null,
     }
@@ -94,7 +88,7 @@ export class Element extends Component {
     })
   }
 
-  // TODO: Perform actions to upload file
+  // Updates state which triggers pop-over
   uploadFile = (e) => {
     console.log("file submit clicked")
 
@@ -114,65 +108,6 @@ export class Element extends Component {
     })
   }
 
-  onFileUploadSuccess = () => {
-    this.setState({
-      fileHasUploaded: true,
-      fileState: ' has-upload',
-    })
-  }
-
-  onFileUploadFailure = () => {
-    this.setState({
-      fileHasUploaded: false,
-      fileState: '',
-    })
-  }
-
-  // TODO: Perform actions to requst a signature
-  sendSelfSignRequest = (e) => {
-    console.log("Self sign file clicked")
-  }
-
-  // TODO: Perform actions to requst a signature
-  requestSignature = (e) => {
-    console.log("signature requested")
-    e.stopPropagation();
-  }
-
-  onFileAnchorSuccess = () => {
-    this.setState({
-      fileHasAnchor: true,
-      fileState: ' has-anchor',
-    })
-  }
-
-  uploadHistory = () => {
-    return (
-      <div className='upload-history'>
-        <Label>
-           Upload history
-           <InputGroup
-            id="upload-history"
-            placeholder="This will be the file's upload history"
-          />
-        </Label>
-      </div>
-    )
-  }
-
-  signatureHistory = () => {
-    return (
-      <div className='signature-history'>
-        <Label>
-           Signature history
-           <InputGroup
-            id="signature-history"
-            placeholder="This will be the file's signature history"
-          />
-        </Label>
-      </div>
-    )
-  }
 
   fileStatus = () => {
 
@@ -203,31 +138,13 @@ export class Element extends Component {
 
   }
 
-  hashStatus = () => {
-
-    const { hash } = this.state
-
-    var status = strings.NO_HASH_YET
-
-    if (hash !== null) {
-      status = hash
-    }
-
-    return (
-      <div>
-        <b>Hash: </b>
-        {status}
-      </div>
-    )
-
-  }
 
   // ------------------------------ RENDER BELOW THIS LINE ------------------------------
 
   render() {
 
-    const { detailedView, filePrompt, fileHasUploaded, fileHasAnchor, fileState, fileDetails } = this.state
-    const { elementContent } = this.props
+    const { detailedView, filePrompt, fileState, fileDetails } = this.state
+    const { elementContent, pageName, projects } = this.props
 
 
     // TODO: Make the request signature a field for searching for project members and a click to add
@@ -249,6 +166,9 @@ export class Element extends Component {
                 elementContent.fileDetails.length > 0 ?
                 <CurrentVersion
                   details={elementContent.fileDetails[0]}
+                  projectID={projects.chosenProject.id}
+                  pageName={pageName}
+                  fieldID={elementContent.id}
                 /> :
                 <CurrentVersion
                   details={null}
@@ -279,35 +199,6 @@ export class Element extends Component {
                   {
                     this.fileStatus()
                   }
-                </div>
-              </div>
-
-
-              <div className="row">
-                <div className='col-5 col-lg-4 col-xl-3'>
-                  <Button
-                    intent={Intent.PRIMARY}
-                    onClick={(e) => this.sendSelfSignRequest(e)}
-                    disabled={!this.state.fileHasUploaded}
-                    text={strings.BUTTON_SELF_SIGN_FILE}
-                  />
-                </div>
-                <div className='col-auto'>
-                  {
-                    this.hashStatus()
-                  }
-                </div>
-              </div>
-
-
-              <div className="row">
-                <div className='col-5 col-lg-4 col-xl-3'>
-                  <Button
-                    intent={Intent.PRIMARY}
-                    onClick={(e) => this.requestSignature(e)}
-                    disabled={!this.state.fileHasUploaded}
-                    text={strings.BUTTON_REQUEST_SIGNATURE}
-                  />
                 </div>
               </div>
 

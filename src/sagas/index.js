@@ -5,6 +5,7 @@ import userSagas from './userSagas'
 import projectSagas from './projectSagas'
 import memberSagas from './memberSagas'
 import pageSagas from './pageSagas'
+import foundationsSagas from './foundationsSagas'
 
 export default function * root () {
   yield all([
@@ -13,5 +14,6 @@ export default function * root () {
     fork(projectSagas),
     fork(memberSagas),
     fork(pageSagas),
+    fork(foundationsSagas),
   ])
 }

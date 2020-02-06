@@ -22,5 +22,13 @@
     "type": "file",
     "editable": true,
     "fileDetails": []
+  },
+  {
+    "id": 4,
+    "title": "Please upload any design change records",
+    "description": "This field should be used to upload any design change records that require sign off by the project team as defined under CDM.",
+    "type": "file",
+    "editable": true,
+    "fileDetails": []
   }
 ]

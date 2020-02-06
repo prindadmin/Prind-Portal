@@ -371,7 +371,7 @@ hr {
 #long-text-element {
   width: 100%;
   max-width: 1140px;
-  margin-bottom: 15px;
+  margin-bottom: 40px;
 }
 
 #file-upload-element .file-upload-element-container,
@@ -472,6 +472,7 @@ hr {
 
 #file-upload-element .bp3-button {
   width: 150px;
+  margin-right: 1em;
 }
 
 #file-upload-element .row .signatures {
@@ -506,6 +507,10 @@ hr {
 
 #file-upload-element .bp3-label {
   margin-bottom: 0;
+}
+
+#file-upload-element .button-row {
+  margin-top: 0.5em;
 }
 
 /* ================================== */
