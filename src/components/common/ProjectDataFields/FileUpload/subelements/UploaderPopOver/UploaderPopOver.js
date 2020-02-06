@@ -6,6 +6,7 @@ import PopOverHandler from '../../../../popOverHandler'
 import {
   ProgressBar,
   Intent,
+  Button,
 } from '@blueprintjs/core'
 
 import AWS from 'aws-sdk';
@@ -26,83 +27,104 @@ export class Element extends Component {
   constructor() {
     super()
     this.state = {
-      uploadProgress: 10,
+      uploadProgress: 0,
+      uploadError: true,
     }
   }
 
 
   componentDidMount() {
-
-    const { fileDetails } = this.props
-
-    // TODO: Replace this with an upload and fire cancel when complete
-    setTimeout(() => {
-      this.cancelPopup();
-    }, 25000);
-
-
-    // TODO: Upload the file to S3
-    const fileName = this.uploadToS3()
-
-    // TODO: Upload details to the database
-    this.props.uploadFile(
-      this.props.auth.info.idToken.jwtToken,
-      this.props.pageName,
-      fileName,
-    )
+    // Upload the file to S3
+    this.uploadToS3()
   }
+
 
   uploadToS3 = () => {
 
-    console.log(this.props)
-
     const { fileDetails, auth, projectID, pageName, fieldID } = this.props
     const file = fileDetails.files[0]
-    const now = new Date();
-    const isoDateTime = now.toISOString().split('.')[0]
 
-    var fileName = file.name
+    const { AccessKeyId, SecretAccessKey, SessionToken } = auth.s3Token.body
 
-    // Create the S3
+    // Update credentials to allow access to S3
     AWS.config.update({
-      region: process.env.REACT_APP_S3_REGION,
-      accessKeyId: auth.s3Token.body.AccessKeyId,
-      secretAccessKey: auth.s3Token.body.SecretAccessKey,
-      sessionToken: auth.s3Token.body.SessionToken
-    })
+      credentials: {
+        accessKeyId: AccessKeyId,
+        secretAccessKey: SecretAccessKey,
+        sessionToken: SessionToken
+      }
+    });
 
-    // FIXME: The key will by projectID/pageName/fieldID
+    // TODO: Remove this logger
+    AWS.config.logger = console;
+
     // FIXME: The filename for the S3 file will be the uploaded filename
-
     const s3 = new AWS.S3()
     const bucketName = process.env.REACT_APP_AWS_S3_USER_UPLOAD_BUCKET_NAME
-    const userName = auth.info.username
-    const key = fieldID.toString()
-    //const key = projectID + '/' + pageName + '/' + fieldID
+    const key = `${projectID}/${pageName}/${fieldID}`
 
     // Create the parameters to upload the file with
     var uploadParams = {
-      Bucket: bucketName,
-      Key: key,
+      ACL: 'private',
       Body: file,
+      Bucket: bucketName,
       ContentType: file.type,
-      ACL: 'private'
+      Key: key,
     };
 
-    console.log(uploadParams)
+    // Create a virtual version of the react object so it can be used in the request
+    const that = this;
 
+    // Create a request
+    var request = s3.putObject(uploadParams);
 
-    // FIXME: Getting error access denied; I'm not sure if this is a problem getting access to the file (because it's not a stream) or accessing the bucket.
-    s3.upload(uploadParams, function (err, data) {
-      if (err) {
-        console.log("Error", err);
-      } if (data) {
-        console.log("Upload Success", data);
-      }
-    })
+    request.
+      on('httpUploadProgress', function (progress) {
+        that.setState({
+          uploadProgress: progress.loaded
+        })
+      }).
+      on('success', function(response) {
+        that.informServer(response)
+      }).
+      on('error', function(error, response) {
+        console.log("Error!");
+        console.log(error)
 
-    return fileName
+        that.setState({
+          uploadError: true
+        })
+      })
+
+    request.send();
   }
+
+  // Tell the Prin-D server that there has been an upload with the following details
+  informServer = (response) => {
+    const { auth, fileDetails, projectID, pageName, fieldID } = this.props
+    const { params } = response.request
+
+    // Build parameters
+    var uploadDetails = {
+      userFileName: fileDetails.files[0].name,
+      bucket: params.Bucket,
+      key: params.Key,
+      projectID,
+      pageName,
+      fieldID,
+    }
+
+    // Send to the reducer
+    this.props.uploadFile(
+      auth.info.idToken.jwtToken,
+      pageName,
+      uploadDetails
+    )
+
+    // Close the popup
+    this.cancelPopup();
+  }
+
 
   // perform this when the pop up needs to close
   cancelPopup = () => {
@@ -110,31 +132,57 @@ export class Element extends Component {
   }
 
 
+  getErrorBlock = () => {
+
+    return(
+      <div>
+        <div>
+          <b>ERROR: There was an error uploading the file, please try again</b>
+        </div>
+        <div>
+          <Button
+            text={strings.CLOSE_WINDOW}
+            onClick={(e) => this.cancelPopup()}
+            intent={Intent.DANGER}
+            />
+        </div>
+      </div>
+    )
+
+  }
+
 
   render() {
 
     const { fileDetails } = this.props
-    const { uploadProgress } = this.state
+    const { uploadProgress, uploadError } = this.state
 
-    const progressValue = uploadProgress / fileDetails.size
+    var fileSize = fileDetails.files[0].size
+
+    const progressValue = uploadProgress / fileSize
+    const uploadStatus = uploadError ? "error" : ""
+
 
     return(
       <PopOverHandler>
         <div id='popup-greyer'>
           <div id='uploader-popover'>
-            <div id='popup-box'>
+            <div id='popup-box' className={uploadStatus}>
               <div className='uploader-popover-container'>
                 <div className='element-title'>
                   {strings.UPLOAD_IN_PROGESS}
                 </div>
                 <div className='element-description'>
                   <p><b>{strings.FILE_NAME}</b> {fileDetails.value.replace("C:\\fakepath\\", "")}</p>
-                  <p><b>{strings.UPLOADED_SIZE}</b> {uploadProgress + " / " + fileDetails.size}</p>
+                  <p><b>{strings.UPLOADED_SIZE}</b> {uploadProgress + " / " + fileSize + " bytes"}</p>
                 </div>
                 <ProgressBar
-                  intent={Intent.PRIMARY}
+                  intent={uploadError? Intent.DANGER : Intent.PRIMARY}
                   value={progressValue}
                   />
+                {
+                  uploadError ? this.getErrorBlock() : null
+                }
               </div>
             </div>
           </div>

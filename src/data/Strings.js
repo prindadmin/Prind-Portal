@@ -104,3 +104,4 @@ export const NO_PREVIOUS_VERSIONS = "There are no previous version of this file"
 
 export const UPLOAD_IN_PROGESS = "Upload in progress.  Please wait..."
 export const UPLOADED_SIZE = "Uploaded: "
+export const CLOSE_WINDOW = "Close"

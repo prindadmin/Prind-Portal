@@ -550,6 +550,15 @@ hr {
 #uploader-popover #popup-box {
   height: auto;
   bottom: auto;
+  background-color: var(--field-element-grey)
+}
+
+#uploader-popover #popup-box.error {
+}
+
+#uploader-popover button {
+  margin-top: 1em;
+  width: 250px;
 }
 
 /* ================================== */

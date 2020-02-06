@@ -82,14 +82,14 @@ export const createField = ( jwtToken, pageName, fieldDetails ) => {
   }
 }
 
-export const updateField = ( jwtToken, pageName, fieldDetails ) => {
+export const updateField = ( jwtToken, pageName, fileDetails ) => {
 
   return {
     type: action.PROJECT_UPDATE_FIELD_REQUESTED,
     payload: {
       jwtToken,
       pageName,
-      fieldDetails,
+      fileDetails,
     }
   }
 }
