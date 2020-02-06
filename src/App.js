@@ -40,6 +40,7 @@ import Error404 from './components/Error404'
 
 // TODO: Add functionality below 800px width to not show the site
 // TODO: make mobile friendly in future
+// TODO: Remove aws-cognito-promises dependency from the system as it uses a very old AWS-SDK version
 
 class App extends Component{
 

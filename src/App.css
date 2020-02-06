@@ -72,25 +72,30 @@ hr {
 /* ======== sign-in section ======= */
 /* ================================ */
 
+#signup,
 #signin {
   margin: auto;
 }
 
+#signup .auth-form,
 #signin .auth-form {
     width: 400px;
     padding: 15px;
     margin: 0 auto;
 }
 
+#signup .auth-form label.bp3-label,
 #signin .auth-form label.bp3-label {
     margin-bottom: 20px;
 }
 
+#signup .auth-form label.bp3-label:last-of-type,
 #signin .auth-form label.bp3-label:last-of-type {
     margin-bottom: 50px;
 }
 
-#signup small {
+#signup small,
+#signin small {
   position: static !important;
 }
 
