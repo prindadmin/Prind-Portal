@@ -13,6 +13,9 @@ import AWS from 'aws-sdk';
 
 import * as strings from '../../../../../../data/Strings'
 
+
+const windowCloseDelay = 1500
+
 export class Element extends Component {
   static propTypes = {
     fileDetails: PropTypes.object.isRequired,
@@ -28,7 +31,7 @@ export class Element extends Component {
     super()
     this.state = {
       uploadProgress: 0,
-      uploadError: true,
+      uploadError: false,
     }
   }
 
@@ -36,6 +39,7 @@ export class Element extends Component {
   componentDidMount() {
     // Upload the file to S3
     this.uploadToS3()
+
   }
 
 
@@ -43,6 +47,13 @@ export class Element extends Component {
 
     const { fileDetails, auth, projectID, pageName, fieldID } = this.props
     const file = fileDetails.files[0]
+
+    if (auth.s3Token === undefined) {
+      this.setState({
+        uploadError: true
+      })
+      return;
+    }
 
     const { AccessKeyId, SecretAccessKey, SessionToken } = auth.s3Token.body
 
@@ -85,7 +96,12 @@ export class Element extends Component {
         })
       }).
       on('success', function(response) {
-        that.informServer(response)
+
+        // Timer to keep the window open for a few seconds after upload completes
+        setTimeout(() => {
+          that.informServer(response)
+        }, windowCloseDelay);
+
       }).
       on('error', function(error, response) {
         console.log("Error!");
