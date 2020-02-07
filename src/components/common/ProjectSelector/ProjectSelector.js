@@ -10,6 +10,8 @@ import PopOverHandler from '../popOverHandler'
 
 import * as strings from '../../../data/Strings'
 
+import * as Endpoints from '../../../endpoints'
+
 class ProjectSelector extends React.Component {
   static propTypes = {
     projects: PropTypes.array.isRequired,
@@ -30,8 +32,16 @@ class ProjectSelector extends React.Component {
 
   // Fired when the user clicks on a project on the project selector popup
   projectChosen = (project) => {
+
+    const { pathname } = this.props.location
+
     this.setState({ showPopup: false })
     this.props.updateChosenProject(project)
+
+    if (pathname === '/NewProject') {
+      this.props.history.push(Endpoints.DEFAULTLOGGEDINPAGE)
+    }
+
   }
 
   changeProject = () => {
@@ -44,7 +54,7 @@ class ProjectSelector extends React.Component {
 
   createNewProject = () => {
     this.projectChosen({
-      name: "Creating new project..."
+      projectName: "Creating new project..."
     })
 
     this.props.history.push('/NewProject')

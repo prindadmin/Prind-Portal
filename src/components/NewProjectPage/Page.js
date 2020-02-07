@@ -134,7 +134,10 @@ export class Page extends Component {
           <Button
             text={strings.BUTTON_CANCEL}
             intent='none'
-            onClick={() => {this.props.history.push(Endpoints.DEFAULTLOGGEDINPAGE)}}
+            onClick={() => {
+              this.props.resetChosenProject()
+              this.props.history.push(Endpoints.DEFAULTLOGGEDINPAGE)
+            }}
           />
         </ButtonGroup>
       </form>

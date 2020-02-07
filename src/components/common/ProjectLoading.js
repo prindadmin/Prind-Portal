@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 
-import { Spinner } from '@blueprintjs/core'
+import { Spinner, Intent } from '@blueprintjs/core'
 
 import * as strings from '../../data/Strings'
-
-// TODO: Improve the styling of this component
 
 export class ProjectLoading extends Component {
 
@@ -14,7 +12,7 @@ export class ProjectLoading extends Component {
       <div className='project-loading-container fill'>
         <div className='project-loading'>
           <div className='section-spinner'>
-            <Spinner size='100'/>
+            <Spinner size='100' intent={Intent.PRIMARY}/>
           </div>
           <div>
             {strings.PROJECT_LOADING}

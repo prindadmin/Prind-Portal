@@ -5,6 +5,8 @@ import {
   Label,
 } from '@blueprintjs/core'
 
+import FileDetailPopover from './FileDetailPopover'
+
 import * as strings from '../../../../../data/Strings'
 
 export class Element extends Component {
@@ -12,12 +14,35 @@ export class Element extends Component {
     details: PropTypes.array.isRequired,
   }
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      showFileDetails: false,
+      fileDetails: {}
+    }
+  }
+
+  fileDetailsRequired = (e, fileDetails) => {
+    this.setState({
+      showFileDetails: true,
+      fileDetails,
+    })
+    e.stopPropagation()
+  }
+
+  closeFileDetails = () => {
+    this.setState({
+      showFileDetails: false,
+      fileDetails: {}
+    })
+  }
+
+
   openProof = (e) => {
     e.stopPropagation()
   }
 
   // TODO: Add popover when clicking filename that opens with lots of details
-  // TODO: Make scrollable after a certain max height
 
   uploadHistoryProvided = () => {
 
@@ -43,7 +68,7 @@ export class Element extends Component {
               {
                 details.map((fileUpload, index) => {
                   return (
-                    <div key={index}>
+                    <div key={index} onClick={(e) => this.fileDetailsRequired(e, fileUpload)}>
                       {fileUpload.uploadName}
                     </div>
                   )
@@ -58,7 +83,7 @@ export class Element extends Component {
               {
                 details.map((fileUpload, index) => {
                   return (
-                    <div key={index}>
+                    <div key={index}  onClick={(e) => this.fileDetailsRequired(e, fileUpload)}>
                       {fileUpload.uploadedBy}
                     </div>
                   )
@@ -73,7 +98,7 @@ export class Element extends Component {
               {
                 details.map((fileUpload, index) => {
                   return (
-                    <div key={index}>
+                    <div key={index} onClick={(e) => this.fileDetailsRequired(e, fileUpload)}>
                       {fileUpload.uploadDateTime}
                     </div>
                   )
@@ -87,7 +112,7 @@ export class Element extends Component {
               <b>{strings.PROOF}</b>
               {
                 details.map((fileUpload, index) => {
-                  if (details.proofLink === undefined) {
+                  if (fileUpload.proofLink === undefined) {
                     return (
                       <div key={index}>
                         {strings.NO_PROOF_AVAILABLE}
@@ -122,11 +147,15 @@ export class Element extends Component {
   render() {
 
     const { details } = this.props
+    const { showFileDetails, fileDetails } = this.state
 
     return(
-      <div className='current-version-container'>
+      <div className='upload-history-container'>
         {
-          details === null ? this.uploadHistoryNotProvided() : this.uploadHistoryProvided()
+          details.length === 0 ? this.uploadHistoryNotProvided() : this.uploadHistoryProvided()
+        }
+        {
+          showFileDetails ? <FileDetailPopover fileDetails={fileDetails} onClosePopup={this.closeFileDetails} /> : null
         }
       </div>
     )

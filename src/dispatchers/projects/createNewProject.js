@@ -1,8 +1,6 @@
 import axios from 'axios'
 import https from 'https'
 
-// TODO: Make this return something useful rather than a JSON
-
 // The returned data should include at least two fields:
 //    id
 //    name

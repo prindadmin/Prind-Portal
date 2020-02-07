@@ -11,10 +11,25 @@ const defaultState = {
   fileDetails: {},
 }
 
+const blankChosenState = {
+  chosenProject: {
+    projectName: strings.NO_PROJECT_SELECTED,
+    id: "",
+  }
+}
+
+
 export const init = () => {
   return {
     type: action.PROJECT_INIT,
     payload: defaultState
+  }
+}
+
+export const resetChosenProject = () => {
+  return {
+    type: action.PROJECT_RESET_CHOSEN_PROJECT,
+    payload: blankChosenState
   }
 }
 
@@ -113,6 +128,8 @@ const ACTION_HANDLERS = {
   [action.PROJECT_UPLOAD_FILE_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
   [action.PROJECT_CREATE_FIELD_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
   [action.PROJECT_UPDATE_FIELD_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
+
+  [action.PROJECT_RESET_CHOSEN_PROJECT]: (state, action) => ({ ...state, ...action.payload }),
 }
 
 

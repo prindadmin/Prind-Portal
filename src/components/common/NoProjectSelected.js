@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 
+import ItemIcon from './ItemIcon'
 import * as strings from '../../data/Strings'
-
-// TODO: Improve the styling of this component
 
 export class NoProjectSelected extends Component {
 
@@ -11,7 +10,8 @@ export class NoProjectSelected extends Component {
     return (
       <div className='no-project-selected-container fill'>
         <div className='no-project-selected'>
-          {strings.NO_PROJECT_SELECTED}
+          <ItemIcon size='6x' type='city' />
+          <p>{strings.NO_PROJECT_SELECTED}</p>
         </div>
       </div>
     )

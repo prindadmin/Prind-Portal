@@ -7,7 +7,7 @@ export const IF_XXX_PROVIDE_DETAILS_BELOW = "If XXX, please provide extra detail
 export const PLEASE_PROVIDE_DETAILS_HERE = "Please provide extra details here..."
 
 export const PROJECT_LOADING = "Project loading, please wait..."
-export const NO_PROJECT_SELECTED = "Please select a project..."
+export const NO_PROJECT_SELECTED = "Please select a project"
 export const CREATE_NEW_PROJECT = "Create a new project"
 
 export const PROJECT_NAME = "Project Name"

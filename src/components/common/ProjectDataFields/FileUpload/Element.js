@@ -29,7 +29,6 @@ export class Element extends Component {
   }
 
   // TODO: Implement 'editable' prop.  i.e. make field locked when editable = false
-  // TODO: Implement calls to server
 
   constructor() {
     super()
@@ -147,7 +146,7 @@ export class Element extends Component {
     const { elementContent, pageName, projects } = this.props
 
 
-    // TODO: Make the request signature a field for searching for project members and a click to add
+    // TODO: Make the request signature a popover for searching for project members and a click to add
     // TODO: Add expand transition to make it smooth
 
     return (

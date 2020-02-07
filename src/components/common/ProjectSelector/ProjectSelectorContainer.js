@@ -17,7 +17,7 @@ const mapDispatchToProps = dispatch => {
   return {
     updateChosenProject: (project) => {
       dispatch(reducer.updateChosenProject(project))
-    },
+    }
   }
 }
 

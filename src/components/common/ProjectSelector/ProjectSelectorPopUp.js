@@ -6,7 +6,6 @@ import { Button } from '@blueprintjs/core'
 
 import * as strings from '../../../data/Strings'
 
-// TODO: Implement onCreateNewProject in parent component
 
 export class ProjectSelectorPopUp extends Component {
   static propTypes = {
@@ -24,7 +23,6 @@ export class ProjectSelectorPopUp extends Component {
   siteChosen(project, event) {
     this.props.onProjectChosen(project)
   }
-
 
   createNewProject(e) {
     this.props.onCreateNewProject()

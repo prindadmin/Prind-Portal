@@ -66,11 +66,10 @@ export class Element extends Component {
       }
     });
 
-    // TODO: Remove this logger
-    AWS.config.logger = console;
-
-    // FIXME: The filename for the S3 file will be the uploaded filename
+    // Create an S3 service provider
     const s3 = new AWS.S3()
+
+    // Fetch the parameters
     const bucketName = process.env.REACT_APP_AWS_S3_USER_UPLOAD_BUCKET_NAME
     const key = `${projectID}/${pageName}/${fieldID}`
 

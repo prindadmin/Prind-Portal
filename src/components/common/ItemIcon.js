@@ -6,10 +6,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import {
   faIndustry,
+  faCity,
 } from '@fortawesome/free-solid-svg-icons'
 
 let icons = {
   building: faIndustry,
+  city: faCity,
 }
 
 const ItemIcon = props => {
