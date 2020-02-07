@@ -19,9 +19,7 @@ export default function(identityToken, newProjectDetails) {
       }
     });
 
-
-
-    instance.post(`${process.env.PUBLIC_URL}/createdProject.json`, newProjectDetails)
+    instance.post(`${process.env.REACT_APP_API_LOCAL_ENDPOINT}/createdProject.json`, newProjectDetails)
     .then(res => {
       resolve(res)
     })

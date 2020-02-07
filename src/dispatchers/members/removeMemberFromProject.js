@@ -20,7 +20,7 @@ export default function(identityToken, projectID, memberDetails) {
       memberDetails,
     }
 
-    instance.get(`${process.env.PUBLIC_URL}/testResults/removeMember.json`, values)
+    instance.get(`${process.env.REACT_APP_API_LOCAL_ENDPOINT}/testResults/removeMember.json`, values)
     .then(res => {
       //console.log(res)
 

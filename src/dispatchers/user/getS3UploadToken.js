@@ -15,7 +15,7 @@ export default function(identityToken) {
       }
     });
 
-    instance.get(`${process.env.REACT_APP_API_ENDPOINT}user/get-sts`)
+    instance.get(`${process.env.REACT_APP_API_ENDPOINT}/user/get-sts`)
     .then(res => {
       //console.log(res)
       resolve(res)

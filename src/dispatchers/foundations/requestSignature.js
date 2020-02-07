@@ -15,7 +15,7 @@ export default function(identityToken, fieldDetails) {
       }
     });
 
-    instance.get(`${process.env.PUBLIC_URL}/foundations/request-signature.json`, fieldDetails)
+    instance.get(`${process.env.REACT_APP_API_LOCAL_ENDPOINT}/foundations/request-signature.json`, fieldDetails)
     .then(res => {
       resolve(res)
     })

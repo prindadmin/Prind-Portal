@@ -18,7 +18,7 @@ export default function(identityToken, fileDetails) {
     });
 
 
-    instance.get(`${process.env.PUBLIC_URL}/project/file.json`, fileDetails)
+    instance.get(`${process.env.REACT_APP_API_LOCAL_ENDPOINT}/project/file.json`, fileDetails)
     .then(res => {
       resolve(res)
     })

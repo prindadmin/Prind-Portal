@@ -15,7 +15,7 @@ export default function(identityToken, projectID) {
       }
     });
 
-    instance.get(`${process.env.PUBLIC_URL}/pageData/constructionPage.json`, projectID)
+    instance.get(`${process.env.REACT_APP_API_LOCAL_ENDPOINT}/pageData/constructionPage.json`, projectID)
     .then(res => {
       //console.log(res)
 

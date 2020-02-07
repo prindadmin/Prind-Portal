@@ -15,7 +15,7 @@ export default function(identityToken, fieldDetails) {
       }
     });
 
-    instance.post(`${process.env.PUBLIC_URL}/project/create-field.json`, fieldDetails)
+    instance.post(`${process.env.REACT_APP_API_LOCAL_ENDPOINT}/project/create-field.json`, fieldDetails)
     .then(res => {
       resolve(res)
     })

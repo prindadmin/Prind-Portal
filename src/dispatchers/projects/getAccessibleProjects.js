@@ -15,7 +15,7 @@ export default function(identityToken) {
       }
     });
 
-    instance.get(`${process.env.PUBLIC_URL}/projectlist.json`)
+    instance.get(`${process.env.REACT_APP_API_LOCAL_ENDPOINT}/projectlist.json`)
     .then(res => {
       //console.log(res)
       resolve(res)

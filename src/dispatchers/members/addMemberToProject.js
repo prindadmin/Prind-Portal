@@ -22,7 +22,7 @@ export default function(identityToken, projectID, memberDetails) {
 
     console.log("sending add user to endpoints")
 
-    instance.get(`${process.env.PUBLIC_URL}/testResults/addMember.json`, values)
+    instance.get(`${process.env.REACT_APP_API_LOCAL_ENDPOINT}/testResults/addMember.json`, values)
     .then(res => {
       console.log(res)
 
