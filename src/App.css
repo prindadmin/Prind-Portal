@@ -985,3 +985,31 @@ hr {
 .project-select-tile:hover {
   background-color: rgba(138, 155, 168, 0.15)
 }
+
+/* ================================== */
+/* =========== test page ============ */
+/* ================================== */
+
+#test-page {
+  background: repeating-linear-gradient(
+    45deg,
+    #606dbc,
+    #606dbc 10px,
+    #465298 10px,
+    #465298 20px
+  );
+  width: 100%;
+  height: 100%;
+}
+
+#test-page .center-container {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: 10%;
+  bottom: 10%;
+  background-color: white;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}

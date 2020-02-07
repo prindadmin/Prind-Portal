@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 import * as reducer from '../../../reducers/projectsReducer'
 
@@ -23,4 +24,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStatetoProps, mapDispatchToProps)(HeaderBarComponent)
+export default withRouter(connect(mapStatetoProps, mapDispatchToProps)(HeaderBarComponent))

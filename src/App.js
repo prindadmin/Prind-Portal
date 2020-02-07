@@ -37,6 +37,7 @@ import ProjectTeamPage from './components/ProjectTeamPage';
 
 /* Other pages */
 import Error404 from './components/Error404'
+import TestPage from './components/TestPage'
 
 // TODO: Add functionality below 800px width to not show the site
 // TODO: make mobile friendly in future
@@ -71,6 +72,8 @@ class App extends Component{
             <PrivateRoute path='/Refurbishment' component={RefurbishmentPage} />
 
             <PrivateRoute path='/NewProject' component={NewProjectPage} />
+
+            <PrivateRoute path='/TestPage' component={TestPage} />
 
             <Route path='/'
               render={() =>
