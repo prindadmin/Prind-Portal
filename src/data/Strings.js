@@ -67,6 +67,7 @@ export const MEMBER_LAST_NAME = "Surname"
 export const MEMBER_EMAIL_ADDRESS = "Email"
 export const MEMBER_PROJECT_ROLE = "Role"
 export const MEMBER_STATUS = "Status"
+export const MEMBER_NAME = "Name"
 
 export const NO_ROLE_SELECTED = "Please select a role..."
 export const NO_VALUE_SELECTED = "Please select an option..."
@@ -108,3 +109,4 @@ export const CLOSE_WINDOW = "Close"
 
 export const PICK_DOCUMENT_SIGNER = "Pick a Document Signer"
 export const SEARCH = "Search"
+export const BUTTON_SUBMIT = "Submit"

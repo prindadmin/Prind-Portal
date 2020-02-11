@@ -18,6 +18,7 @@
   --field-element-yellow: #fffcbb;
   --field-element-green: #d2e9af;
   --field-element-grey: #ededed;
+  --tile-selected-green: #d2e9af;
 }
 
 
@@ -621,9 +622,20 @@ hr {
 
 #pick-signer-popover .member-tile {
   margin-bottom: 0.5em;
-  border-color: black;
-  border-radius: 5px;
-  padding: 0.5em 0em;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 0.5em 0.5em;
+}
+
+#pick-signer-popover .selected {
+  background-color: var(--tile-selected-green);
+}
+
+#pick-signer-popover .col-xs-12,
+#pick-signer-popover .col-sm-12,
+#pick-signer-popover .col-md-6,
+#pick-signer-popover .col-lg-4,
+#pick-signer-popover .col-xl-3 {
 }
 
 /* ================================== */

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import {
   InputGroup,
+  Button,
 } from '@blueprintjs/core'
 
 import PopOverHandler from '../popOverHandler'
@@ -33,7 +34,8 @@ export class Element extends Component {
     super()
     this.state = {
       requestStatus: false,
-      searchTerm: ""
+      searchTerm: "",
+      selectedMembers: [],
     }
   }
 
@@ -41,6 +43,7 @@ export class Element extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    console.log(this.state)
   }
 
 
@@ -57,10 +60,6 @@ export class Element extends Component {
   }
 
   onSearchChange = (e) => {
-    //e.persist()
-    //console.log(e)
-    console.log(e.target.value)
-
     this.setState({
       searchTerm: e.target.value,
     })
@@ -68,26 +67,38 @@ export class Element extends Component {
     e.stopPropagation()
   }
 
+  onSubmit = (e) => {
+    console.log("on submit clicked")
+    e.stopPropagation()
+  }
+
+  tileClicked = (e, memberDetails) => {
+    console.log(memberDetails)
+
+    var { selectedMembers } = this.state
+
+    // If the member is already selected, remove it, or add the member if they have not been chosen
+    if (selectedMembers.includes(memberDetails)) {
+      selectedMembers = selectedMembers.filter(item => item !== memberDetails)
+    } else {
+      selectedMembers.push(memberDetails)
+    }
+
+    this.setState({
+      selectedMembers: selectedMembers
+    })
+
+    e.stopPropagation()
+  }
 
   memberTileRenderer = (memberDetails, index) => {
 
+    const { selectedMembers } = this.state
+
     return(
-      <div className="member-tile" key={index}>
-        <div className="row">
-
-          <div className="col">
-            {memberDetails.firstName}
-          </div>
-
-          <div className="col">
-            {memberDetails.lastName}
-          </div>
-
-          <div className="col">
-            {memberDetails.emailAddress}
-          </div>
-
-        </div>
+      <div className={`member-tile${selectedMembers.includes(memberDetails) ? " selected" : ""}`} key={index} onClick={(e) => this.tileClicked(e, memberDetails)}>
+        <p>{`${strings.MEMBER_NAME}: ${memberDetails.firstName} ${memberDetails.lastName}`}</p>
+        <p>{`${strings.MEMBER_EMAIL_ADDRESS}: ${memberDetails.emailAddress}`}</p>
       </div>
     )
   }
@@ -110,13 +121,17 @@ export class Element extends Component {
 
     return(
       <div className="member-tile-container">
-        {
-          filteredMembers.map((memberDetails, index) => {
-            return (
-              this.memberTileRenderer(memberDetails, index)
-            )
-          })
-        }
+        <div className="row" noGutters={true}>
+          {
+            filteredMembers.map((memberDetails, index) => {
+              return (
+                <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                  {this.memberTileRenderer(memberDetails, index)}
+                </div>
+              )
+            })
+          }
+        </div>
       </div>
     )
   }
@@ -139,6 +154,17 @@ export class Element extends Component {
     )
   }
 
+
+  getSubmitButton = () => {
+    return(
+      <div className="submit-button-container">
+        <Button
+          text={strings.BUTTON_SUBMIT}
+          onClick={(e) => this.onSubmit(e)}
+        />
+      </div>
+    )
+  }
 
   // ------------------------------ RENDER BELOW THIS LINE ------------------------------
 
@@ -163,6 +189,7 @@ export class Element extends Component {
                 <div className='element-description'>
                   {this.getSearchBar()}
                   {this.getTiles()}
+                  {this.getSubmitButton()}
                 </div>
               </div>
             </div>
