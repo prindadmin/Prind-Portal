@@ -25,7 +25,11 @@ const mapStatetoProps = state => {
 
 
 const mapDispatchToProps = dispatch => {
-  return {}
+  return {
+    getProjectMembers: () => {
+      dispatch(projectsReducer.getCurrentMembers())
+    },
+  }
 }
 
 export default withRouter(connect(mapStatetoProps, mapDispatchToProps)(PageComponent))

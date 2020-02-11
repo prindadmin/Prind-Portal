@@ -582,6 +582,50 @@ hr {
   width: 250px;
 }
 
+/* ===================================== */
+/* === signer select popover element === */
+/* ===================================== */
+
+#pick-signer-popover {
+  height: 100%;
+  width: 100%;
+}
+
+#pick-signer-popover .pick-signer-popover-container {
+  height: calc(100% - 2 * var(--pop-up-padding));
+  margin: var(--pop-up-padding);
+}
+
+#pick-signer-popover .bp3-progress-bar {
+  margin-bottom: 1em;
+}
+
+#pick-signer-popover #popup-box {
+  height: auto;
+  bottom: auto;
+  background-color: var(--field-element-grey)
+}
+
+#pick-signer-popover #popup-box.error {
+}
+
+#pick-signer-popover button {
+  margin-top: 1em;
+  width: 250px;
+}
+
+#pick-signer-popover .search-bar-container {
+  margin-top: 0.3em;
+  margin-bottom: 0.5em;
+}
+
+#pick-signer-popover .member-tile {
+  margin-bottom: 0.5em;
+  border-color: black;
+  border-radius: 5px;
+  padding: 0.5em 0em;
+}
+
 /* ================================== */
 /* ====== date picker element ======= */
 /* ================================== */

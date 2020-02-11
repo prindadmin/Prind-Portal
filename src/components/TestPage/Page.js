@@ -3,15 +3,9 @@ import PropTypes from 'prop-types'
 
 import HeaderBar from '../common/HeaderBar';
 import PageChooserSection from '../layouts/PageChooserSection'
-import ProjectLoading from '../common/ProjectLoading'
 import Footer from '../common/footer'
 
-import { FileUpload, DropDown, CalendarPicker, LongText } from '../common/ProjectDataFields'
-import NoProjectSelected from '../common/NoProjectSelected'
-
-import * as strings from '../../data/Strings'
-
-const pageName = 'tender'
+import PickSignerPopover from "../common/PickSignerPopover"
 
 export class Page extends Component {
   static propTypes = {
@@ -20,6 +14,7 @@ export class Page extends Component {
 
   constructor(props) {
     super(props)
+    this.props.getProjectMembers()
   }
 
   componentDidMount() {
@@ -28,11 +23,20 @@ export class Page extends Component {
   componentDidUpdate(prevProps) {
   }
 
+  onClosePopup = () => {
+    console.log("popup close request")
+  }
+
+
   loadTestElement = () => {
     return(
       <div id="test-page">
         <div className="center-container">
-          <p>hello world</p>
+          <PickSignerPopover
+            fileDetails={{}}
+            teamMembers={this.props.projects.memberList}
+            onClosePopup={this.onClosePopup}
+          />
         </div>
       </div>
     )

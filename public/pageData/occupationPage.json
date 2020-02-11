@@ -1,8 +1,8 @@
 [
   {
     "id": 1,
-    "title": "Please upload the Residual Hazards file",
-    "description": "The design risk register will have hazards which were not mitigated during the Construction phase.  These hazards will become the residual hazards file.",
+    "title": "Residual Hazards",
+    "description": "The design risk register will have hazards which were not mitigated during the Construction phase.  These hazards will become the residual hazards.",
     "type": "file",
     "editable": true,
     "default": true,
@@ -10,7 +10,7 @@
   },
   {
     "id": 2,
-    "title": "Please upload the Key Structural Principles file",
+    "title": "Key Structural Principles",
     "description": "This will be the relevant documents and calculations which are critical to the safe operation of the building.",
     "type": "file",
     "editable": true,
@@ -19,7 +19,7 @@
   },
   {
     "id": 3,
-    "title": "Please upload the Hazards Relating to Materials Used file",
+    "title": "Hazards Relating to Materials Used",
     "description": "This will be a document detailing any materials used in the construction which might be hazardous to health or the environment.",
     "type": "file",
     "editable": true,
@@ -28,7 +28,7 @@
   },
   {
     "id": 4,
-    "title": "Please upload the instructions on Removing/Dismantling Plant and Equipment",
+    "title": "Instructions on Removing/Dismantling Plant and Equipment",
     "description": "This will be a document detailing any plant or equipment used in the building that will need specific removal or dismantling instructions for refurbishments, repairs, or replacement.",
     "type": "file",
     "editable": true,
@@ -37,7 +37,7 @@
   },
   {
     "id": 5,
-    "title": "Please upload a record of the Equipment Provided for Cleaning and Maintenance",
+    "title": "Record of the Equipment Provided for Cleaning and Maintenance",
     "description": "May include information about Mansafe on the roof, or abseiling bolt-on points, window-cleaning rigs, etc.",
     "type": "file",
     "editable": true,
@@ -46,7 +46,7 @@
   },
   {
     "id": 6,
-    "title": "Please upload a record of the Location and Nature of Significant Services",
+    "title": "Location and Nature of Significant Services",
     "description": "",
     "type": "file",
     "editable": true,
@@ -55,7 +55,7 @@
   },
   {
     "id": 7,
-    "title": "Please upload the As-Built Drawing file",
+    "title": "As-Built Drawing file",
     "description": "",
     "type": "file",
     "editable": true,
