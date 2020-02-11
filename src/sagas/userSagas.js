@@ -19,10 +19,10 @@ function * init (action) {
 */
 function * getS3UploadToken (action) {
 
-  const { identityToken } = action.payload
+  const { identityToken, project_id, pageName } = action.payload
 
   try {
-    const { data: s3Token } = yield call(s3UploadTokenDispatcher, identityToken)
+    const { data: s3Token } = yield call(s3UploadTokenDispatcher, identityToken, project_id, pageName)
     yield put({
       type: actions.AUTH_SET_STATE,
       payload: {

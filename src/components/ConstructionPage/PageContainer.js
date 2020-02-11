@@ -16,8 +16,8 @@ const mapStatetoProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    requestS3UploadToken: (jwtToken) => {
-      dispatch(userReducer.getS3UploadToken(jwtToken))
+    requestS3UploadToken: (jwtToken, project_id, pageName) => {
+      dispatch(userReducer.requestS3UploadToken(jwtToken, project_id, pageName))
     },
     getContent: (identityToken, projectID) => {
       dispatch(reducer.getPageContent(identityToken, projectID))

@@ -23,8 +23,6 @@ export class Element extends Component {
     pageName: PropTypes.any.isRequired,
     fieldID: PropTypes.any.isRequired,
     onCancelPopup: PropTypes.func.isRequired,
-    onUploadSuccess: PropTypes.func.isRequired,
-    onUploadFailure: PropTypes.func.isRequired,
   }
 
   constructor() {

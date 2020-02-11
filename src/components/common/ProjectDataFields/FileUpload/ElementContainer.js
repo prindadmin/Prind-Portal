@@ -1,7 +1,6 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import * as userReducer from '../../../../reducers/userReducer'
 import * as projectsReducer from '../../../../reducers/projectsReducer'
 
 import Element from './Element'
@@ -15,9 +14,6 @@ const mapStatetoProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    requestS3UploadToken: (jwtToken) => {
-      dispatch(userReducer.getS3UploadToken(jwtToken))
-    },
     createField: (jwtToken, pageName, fieldDetails) => {
       dispatch(projectsReducer.createField(jwtToken, pageName, fieldDetails))
     },

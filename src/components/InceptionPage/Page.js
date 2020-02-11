@@ -19,14 +19,22 @@ export class Page extends Component {
   }
 
   componentDidMount() {
-      // TODO: Edit this so it doesn't reload every time the screen changes
-      this.props.getContent(this.props.auth.info.idToken.jwtToken, this.props.projects.chosenProject.id)
+
+    const { projects, auth, getContent, requestS3UploadToken } = this.props
+
+    if (projects.chosenProject.projectName !== strings.NO_PROJECT_SELECTED) {
+      requestS3UploadToken(auth.info.idToken.jwtToken, projects.chosenProject.id, pageName)
+      getContent(auth.info.idToken.jwtToken, projects.chosenProject.id)
+    }
   }
 
   componentDidUpdate(prevProps) {
 
-    if (this.props.projects.chosenProject.id !== prevProps.projects.chosenProject.id) {
-      this.props.getContent(this.props.auth.info.idToken.jwtToken, this.props.projects.chosenProject.id)
+    const { projects, auth, getContent, requestS3UploadToken } = this.props
+
+    if (projects.chosenProject.id !== prevProps.projects.chosenProject.id) {
+      requestS3UploadToken(auth.info.idToken.jwtToken, projects.chosenProject.id, pageName)
+      getContent(auth.info.idToken.jwtToken, projects.chosenProject.id)
     }
 
   }

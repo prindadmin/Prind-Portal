@@ -1,7 +1,7 @@
 import axios from 'axios'
 import https from 'https'
 
-export default function(identityToken) {
+export default function(identityToken, project_id, pageName) {
 
   return new Promise((resolve, reject) => {
 
@@ -15,7 +15,7 @@ export default function(identityToken) {
       }
     });
 
-    instance.get(`${process.env.REACT_APP_API_ENDPOINT}/user/get-sts`)
+    instance.get(`${process.env.REACT_APP_API_ENDPOINT}/project/${project_id}/page/${pageName}/get-sts`)
     .then(res => {
       //console.log(res)
       resolve(res)

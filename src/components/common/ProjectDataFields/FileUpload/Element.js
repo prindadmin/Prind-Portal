@@ -45,8 +45,6 @@ export class Element extends Component {
 
   componentDidMount() {
 
-    this.props.requestS3UploadToken(this.props.auth.info.idToken.jwtToken)
-
     const { fileDetails } = this.props.elementContent
 
     if (fileDetails.length !== 0) {
@@ -217,8 +215,6 @@ export class Element extends Component {
               pageName={this.props.pageName}
               fieldID={elementContent.id}
               onCancelPopup={ this.cancelPopup }
-              onUploadSuccess={ this.onFileUploadSuccess }
-              onUploadFailure={ this.onFileUploadFailure }
               /> :
             null
         }
