@@ -8,6 +8,8 @@ import {
 
 import SignatureHistory from '../SignatureHistory'
 
+import PickSignerPopover from '../../../../PickSignerPopover'
+
 import * as strings from '../../../../../../data/Strings'
 
 export class Element extends Component {
@@ -23,7 +25,14 @@ export class Element extends Component {
     this.state = {
       fileIsSelfSigned: false,
       fileCanBeSign: true,
+      signerPickerOpen: false,
     }
+  }
+
+  onClosePopover = () => {
+    this.setState({
+      signerPickerOpen: false,
+    })
   }
 
 
@@ -60,24 +69,13 @@ export class Element extends Component {
   requestSignature = (e) => {
     console.log("Signature requested")
 
-    const { projectID, pageName, fieldID, auth } = this.props
-
-    // TODO: Create the arguments for the request
-    const fileDetails = {
-      projectID,
-      pageName,
-      fieldID,
-      signer: "TODO@TODO.com",
-    }
-
-    // Send the request
-    this.props.requestFileSignature(
-      auth.info.idToken.jwtToken,
-      fileDetails,
-    )
-
     // Stop the click proporgating up and opening the upload history section
     e.stopPropagation();
+
+    this.setState({
+      signerPickerOpen: true,
+    })
+
   }
 
 
@@ -119,15 +117,15 @@ export class Element extends Component {
         <div className='row button-row'>
           <Button
             intent={Intent.PRIMARY}
-            onClick={(e) => this.sendSelfSignRequest(e)}
-            disabled={this.state.fileIsSelfSigned}
-            text={strings.BUTTON_SELF_SIGN_FILE}
+            onClick={(e) => this.requestSignature(e)}
+            disabled={!this.state.fileCanBeSign}
+            text={strings.BUTTON_REQUEST_SIGNATURES}
           />
           <Button
             intent={Intent.PRIMARY}
-            onClick={(e) => this.requestSignature(e)}
-            disabled={!this.state.fileCanBeSign}
-            text={strings.BUTTON_REQUEST_SIGNATURE}
+            onClick={(e) => this.sendSelfSignRequest(e)}
+            disabled={this.state.fileIsSelfSigned}
+            text={strings.BUTTON_SELF_SIGN_FILE}
           />
         </div>
 
@@ -150,12 +148,23 @@ export class Element extends Component {
 
   render() {
 
-    const { details } = this.props
+    const { details, projectID, pageName, fieldID } = this.props
+    const { signerPickerOpen } = this.state
 
     return(
       <div className='current-version-container'>
         {
           details === null ? this.currentVersionNotProvided() : this.currentVersionProvided()
+        }
+        {
+          signerPickerOpen ? <PickSignerPopover
+            fileDetails={details}
+            teamMembers={this.props.projects.memberList}
+            projectID={projectID}
+            pageName={pageName}
+            fieldID={fieldID}
+            onClosePopover={this.onClosePopover}
+          /> : null
         }
       </div>
 

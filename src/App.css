@@ -617,14 +617,19 @@ hr {
 
 #pick-signer-popover .search-bar-container {
   margin-top: 0.3em;
-  margin-bottom: 0.5em;
+  margin-bottom: 1em;
 }
 
 #pick-signer-popover .member-tile {
   margin-bottom: 0.5em;
   border: 1px solid black;
   border-radius: 10px;
-  padding: 0.5em 0.5em;
+  padding: 0.5em 1.0em;
+  position: relative;
+}
+
+#pick-signer-popover .member-tile p:first-of-type {
+  margin-top: 10px;
 }
 
 #pick-signer-popover .selected {
@@ -636,6 +641,23 @@ hr {
 #pick-signer-popover .col-md-6,
 #pick-signer-popover .col-lg-4,
 #pick-signer-popover .col-xl-3 {
+
+}
+
+
+#pick-signer-popover .member-tile-tickbox {
+  position: absolute;
+  right: 1em;
+  bottom: calc(50% - 14px);
+}
+
+#pick-signer-popover .negative-margins {
+  margin-left: -15px !important;
+  margin-right: -15px !important;
+}
+
+#pick-signer-popover button {
+  margin-right: 1em;
 }
 
 /* ================================== */

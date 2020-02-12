@@ -87,7 +87,7 @@
           "name": "No"
         }
       ],
-      "optionOpensTextBox": "Yes"
+      "optionOpensTextBox": ["Yes"]
     }
   },
   {
@@ -129,7 +129,7 @@
           "name": "No"
         }
       ],
-      "optionOpensTextBox": "Yes"
+      "optionOpensTextBox": ["Yes"]
     }
   },
   {

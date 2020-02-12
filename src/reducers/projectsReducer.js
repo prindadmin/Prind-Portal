@@ -109,6 +109,7 @@ export const updateField = ( jwtToken, pageName, fileDetails ) => {
   }
 }
 
+
 const ACTION_HANDLERS = {
 
   [action.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUESTED]: state => ({ ...state }),

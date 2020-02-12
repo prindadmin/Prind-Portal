@@ -4,30 +4,38 @@ import PropTypes from 'prop-types'
 import {
   InputGroup,
   Button,
+  Intent,
 } from '@blueprintjs/core'
+
+import ItemIcon from '../ItemIcon'
 
 import PopOverHandler from '../popOverHandler'
 
 import * as strings from '../../../data/Strings'
 
 // TODO: Implement 'editable' prop.  i.e. make field locked when editable = false
+// TODO: Future: Make this wait for response before closing
 
 export class Element extends Component {
   static propTypes = {
     teamMembers: PropTypes.arrayOf(
       PropTypes.shape({
-        foundationsID: PropTypes.string.isRequired,
+        username: PropTypes.string.isRequired,
+        foundationsID: PropTypes.string,
         emailAddress: PropTypes.string.isRequired,
         firstName: PropTypes.string.isRequired,
         lastName: PropTypes.string.isRequired,
-        roleID: PropTypes.number.isRequired,
+        roleID: PropTypes.string.isRequired,
         roleName: PropTypes.string.isRequired,
       })
     ).isRequired,
     fileDetails: PropTypes.shape({
       // TODO: Build this shape
     }).isRequired,
-    onClosePopup: PropTypes.func.isRequired,
+    projectID: PropTypes.string.isRequired,
+    pageName: PropTypes.string.isRequired,
+    fieldID: PropTypes.number.isRequired,
+    onClosePopover: PropTypes.func.isRequired,
   }
 
   constructor() {
@@ -43,7 +51,6 @@ export class Element extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log(this.state)
   }
 
 
@@ -51,12 +58,30 @@ export class Element extends Component {
 
   // When the user wants to send the signing request, this is called
   sendSigningRequest = (e) => {
-    console.log("sendSigningRequest clicked")
+    e.stopPropagation()
+
+    const { fileDetails, auth, projectID, pageName, fieldID } = this.props
+    const { selectedMembers } = this.state
+
+    var members = selectedMembers.map(value => value.username);
+
+    this.props.requestSignatures(
+      auth.info.idToken.jwtToken,
+      projectID,
+      pageName,
+      fieldID,
+      fileDetails,
+      members,
+    )
+
+    // Close the popover now the
+    this.closePopover()
+
   }
 
-  closePopup = () => {
-    //this.props.onClosePopup()
-    console.log("popup close called")
+  // Trigger the closing of the popover
+  closePopover = () => {
+    this.props.onClosePopover()
   }
 
   onSearchChange = (e) => {
@@ -67,13 +92,8 @@ export class Element extends Component {
     e.stopPropagation()
   }
 
-  onSubmit = (e) => {
-    console.log("on submit clicked")
-    e.stopPropagation()
-  }
-
+  // When a tile it clicked, add or remove it from the selected members list
   tileClicked = (e, memberDetails) => {
-    console.log(memberDetails)
 
     var { selectedMembers } = this.state
 
@@ -95,10 +115,15 @@ export class Element extends Component {
 
     const { selectedMembers } = this.state
 
+    const isSelected = selectedMembers.includes(memberDetails)
+
     return(
-      <div className={`member-tile${selectedMembers.includes(memberDetails) ? " selected" : ""}`} key={index} onClick={(e) => this.tileClicked(e, memberDetails)}>
+      <div className={`member-tile${isSelected ? " selected" : ""}`} key={index} onClick={(e) => this.tileClicked(e, memberDetails)}>
         <p>{`${strings.MEMBER_NAME}: ${memberDetails.firstName} ${memberDetails.lastName}`}</p>
         <p>{`${strings.MEMBER_EMAIL_ADDRESS}: ${memberDetails.emailAddress}`}</p>
+        <div className="member-tile-tickbox">
+          {isSelected ? <ItemIcon size='2x' type='ticked' /> : <ItemIcon size='2x' type='unticked' />}
+        </div>
       </div>
     )
   }
@@ -108,8 +133,6 @@ export class Element extends Component {
 
     const { teamMembers } = this.props
     const { searchTerm } = this.state
-
-    // item.lastName.toLowerCase().includes(searchTerm.toLowerCase())
 
     const filteredMembers = searchTerm !== "" ?
       teamMembers.filter((item) => {
@@ -121,11 +144,11 @@ export class Element extends Component {
 
     return(
       <div className="member-tile-container">
-        <div className="row" noGutters={true}>
+        <div className="row negative-margins">
           {
             filteredMembers.map((memberDetails, index) => {
               return (
-                <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                <div key={index} className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-4">
                   {this.memberTileRenderer(memberDetails, index)}
                 </div>
               )
@@ -155,12 +178,24 @@ export class Element extends Component {
   }
 
 
-  getSubmitButton = () => {
+  getButtons = () => {
+
+    const { selectedMembers } = this.state
+
     return(
-      <div className="submit-button-container">
+      <div className="buttons-container">
         <Button
           text={strings.BUTTON_SUBMIT}
-          onClick={(e) => this.onSubmit(e)}
+          intent={Intent.PRIMARY}
+          disabled={selectedMembers.length === 0}
+          onClick={(e) => this.sendSigningRequest(e)}
+        />
+        <Button
+          text={strings.BUTTON_CANCEL}
+          onClick={(e) => {
+            this.closePopover()
+            e.stopPropagation()
+          }}
         />
       </div>
     )
@@ -171,7 +206,6 @@ export class Element extends Component {
   render() {
 
     const { requestError } = this.state
-
     const requestStatus = requestError ? "error" : ""
 
     return (
@@ -180,16 +214,16 @@ export class Element extends Component {
           <div id='pick-signer-popover'>
             <div id='popup-box' className={requestStatus}>
               <div className='pick-signer-popover-container' onClick={(e) => {
-                this.closePopup()
+                this.closePopover()
                 e.stopPropagation()
                 }}>
                 <div className='element-title'>
-                  {strings.PICK_DOCUMENT_SIGNER}
+                  {strings.PICK_DOCUMENT_SIGNERS}
                 </div>
                 <div className='element-description'>
                   {this.getSearchBar()}
                   {this.getTiles()}
-                  {this.getSubmitButton()}
+                  {this.getButtons()}
                 </div>
               </div>
             </div>

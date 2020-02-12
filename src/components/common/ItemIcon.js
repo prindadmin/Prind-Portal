@@ -9,9 +9,16 @@ import {
   faCity,
 } from '@fortawesome/free-solid-svg-icons'
 
+import {
+  faCheckCircle,
+  faCircle,
+} from '@fortawesome/free-regular-svg-icons'
+
 let icons = {
   building: faIndustry,
   city: faCity,
+  unticked: faCircle,
+  ticked: faCheckCircle,
 }
 
 const ItemIcon = props => {

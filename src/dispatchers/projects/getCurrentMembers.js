@@ -15,9 +15,7 @@ export default function(identityToken, projectID) {
       }
     });
 
-
-
-    instance.get(`${process.env.REACT_APP_API_LOCAL_ENDPOINT}/testResults/memberList.json`, projectID)
+    instance.get(`${process.env.REACT_APP_API_ENDPOINT}/project/${projectID}/members`, projectID)
     .then(res => {
       resolve(res)
     })

@@ -16,9 +16,6 @@ const mapDispatchToProps = dispatch => {
   return {
     selfSignFile: (jwtToken, fieldDetails) => {
       dispatch(foundationsReducer.selfSignFile(jwtToken, fieldDetails))
-    },
-    requestFileSignature: (jwtToken, fieldDetails) => {
-      dispatch(foundationsReducer.requestFileSignature(jwtToken, fieldDetails))
     }
   }
 }

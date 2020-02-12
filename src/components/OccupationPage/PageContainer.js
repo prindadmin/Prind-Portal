@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 
 import * as reducer from '../../reducers/pageReducers/occupationReducer'
 import * as userReducer from '../../reducers/userReducer'
+import * as projectsReducer from '../../reducers/projectsReducer'
 
 import PageComponent from './Page'
 
@@ -21,6 +22,9 @@ const mapDispatchToProps = dispatch => {
     },
     getContent: (identityToken, projectID) => {
       dispatch(reducer.getPageContent(identityToken, projectID))
+    },
+    getProjectMembers: (identityToken, projectID) => {
+      dispatch(projectsReducer.getCurrentMembers(identityToken, projectID))
     }
   }
 }

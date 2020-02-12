@@ -96,7 +96,7 @@ function * getCurrentMembers (action) {
       type: actions.PROJECT_SET_STATE,
       payload: {
         fetching: false,
-        memberList: result,
+        memberList: result.body,
       }
     })
   }

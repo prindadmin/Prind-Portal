@@ -5,7 +5,7 @@ import HeaderBar from '../common/HeaderBar';
 import PageChooserSection from '../layouts/PageChooserSection'
 import Footer from '../common/footer'
 
-import PickSignerPopover from "../common/PickSignerPopover"
+import CreateCustomFieldPopover from "../common/CreateCustomFieldPopover"
 
 export class Page extends Component {
   static propTypes = {
@@ -14,7 +14,6 @@ export class Page extends Component {
 
   constructor(props) {
     super(props)
-    this.props.getProjectMembers()
   }
 
   componentDidMount() {
@@ -32,10 +31,10 @@ export class Page extends Component {
     return(
       <div id="test-page">
         <div className="center-container">
-          <PickSignerPopover
-            fileDetails={{}}
-            teamMembers={this.props.projects.memberList}
-            onClosePopup={this.onClosePopup}
+          <CreateCustomFieldPopover
+            projectID={"ProjectNumberFour"}
+            pageName={"inception"}
+            onClosePopover={this.onClosePopup}
           />
         </div>
       </div>
@@ -57,7 +56,7 @@ export class Page extends Component {
           <PageChooserSection />
 
           <div className='page-content-section col-xl-10 col-lg-9 col-md-9 col-sm-9'>
-            {this.loadTestElement()}
+            {/*this.loadTestElement()*/}
           </div>
 
           <Footer />

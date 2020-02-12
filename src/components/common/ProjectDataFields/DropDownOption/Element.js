@@ -25,7 +25,7 @@ export class Element extends Component {
         dropdownValue: PropTypes.string,
         textboxValue: PropTypes.string,
         dropdownOptions: PropTypes.array,
-        optionOpensTextBox: PropTypes.string,
+        optionOpensTextBox: PropTypes.array,
       }).isRequired,
     }),
     pageName: PropTypes.string.isRequired,
@@ -134,9 +134,9 @@ export class Element extends Component {
               <div className='row'>
                 <div className='col'>
                   {
-                    dropdownValue === fieldDetails.optionOpensTextBox ?
+                    fieldDetails.optionOpensTextBox.includes(dropdownValue) ?
                     <FormGroup
-                      label={strings.IF_XXX_PROVIDE_DETAILS_BELOW.replace("XXX", fieldDetails.optionOpensTextBox)}
+                      label={strings.IF_XXX_PROVIDE_DETAILS_BELOW.replace("XXX", dropdownValue)}
                       labelFor="extraInfo"
                       labelInfo=""
                       className="last"

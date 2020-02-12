@@ -90,7 +90,7 @@ export const NO_PROOF_AVAILABLE = "Proof still processing"
 
 
 export const BUTTON_SELF_SIGN_FILE = "Self Sign Document"
-export const BUTTON_REQUEST_SIGNATURE = "Request Signature"
+export const BUTTON_REQUEST_SIGNATURES = "Request Signatures"
 export const BUTTON_UPLOAD_FILE = "Upload File"
 
 
@@ -107,6 +107,8 @@ export const UPLOAD_IN_PROGESS = "Upload in progress.  Please wait..."
 export const UPLOADED_SIZE = "Uploaded: "
 export const CLOSE_WINDOW = "Close"
 
-export const PICK_DOCUMENT_SIGNER = "Pick a Document Signer"
+export const PICK_DOCUMENT_SIGNERS = "Pick Document Signatories"
 export const SEARCH = "Search"
 export const BUTTON_SUBMIT = "Submit"
+
+export const CREATE_CUSTOM_FIELD = "Create Custom Field"

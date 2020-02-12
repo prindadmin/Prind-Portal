@@ -21,12 +21,16 @@ export const selfSignFile = ( jwtToken, fieldDetails ) => {
   }
 }
 
-export const requestFileSignature = ( jwtToken, fieldDetails ) => {
+export const requestSignatures = ( jwtToken, projectID, pageName, fieldID, fieldDetails, members ) => {
   return {
     type: action.FOUNDATIONS_FILE_SIGNATURE_REQUEST_REQUESTED,
     payload: {
       jwtToken,
+      projectID,
+      pageName,
+      fieldID,
       fieldDetails,
+      members,
     }
   }
 }

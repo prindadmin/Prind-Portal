@@ -26,7 +26,7 @@ export class Page extends Component {
   constructor() {
     super()
     this.state = {
-      selectedRoleID: 0,
+      selectedRoleID: "0",
       selectedRoleName: strings.NO_ROLE_SELECTED,
       creatingNewUser: false,
     }

@@ -20,20 +20,22 @@ export class Page extends Component {
 
   componentDidMount() {
 
-    const { projects, auth, getContent, requestS3UploadToken } = this.props
+    const { projects, auth, getContent, requestS3UploadToken, getProjectMembers } = this.props
 
     if (projects.chosenProject.projectName !== strings.NO_PROJECT_SELECTED) {
       requestS3UploadToken(auth.info.idToken.jwtToken, projects.chosenProject.id, pageName)
+      getProjectMembers(auth.info.idToken.jwtToken, projects.chosenProject.id)
       getContent(auth.info.idToken.jwtToken, projects.chosenProject.id)
     }
   }
 
   componentDidUpdate(prevProps) {
 
-    const { projects, auth, getContent, requestS3UploadToken } = this.props
+    const { projects, auth, getContent, requestS3UploadToken, getProjectMembers } = this.props
 
     if (projects.chosenProject.id !== prevProps.projects.chosenProject.id) {
       requestS3UploadToken(auth.info.idToken.jwtToken, projects.chosenProject.id, pageName)
+      getProjectMembers(auth.info.idToken.jwtToken, projects.chosenProject.id)
       getContent(auth.info.idToken.jwtToken, projects.chosenProject.id)
     }
 

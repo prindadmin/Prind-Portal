@@ -62,7 +62,7 @@ function * selfSignFile (action) {
 
 function * requestFileSignature (action) {
 
-  const { jwtToken, fieldDetails } = action.payload
+  const { jwtToken, projectID, pageName, fieldID, fieldDetails, members } = action.payload
 
   try {
 
@@ -75,7 +75,7 @@ function * requestFileSignature (action) {
       }
     })
 
-    const { data: result } = yield call(requestSignatureDispatcher, jwtToken, fieldDetails)
+    const { data: result } = yield call(requestSignatureDispatcher, jwtToken, projectID, pageName, fieldID, fieldDetails, members)
 
     // Post-fetch update to store
     yield put({
