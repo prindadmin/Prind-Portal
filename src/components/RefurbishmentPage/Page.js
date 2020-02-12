@@ -6,7 +6,6 @@ import PageChooserSection from '../layouts/PageChooserSection'
 import ProjectLoading from '../common/ProjectLoading'
 import Footer from '../common/footer'
 
-import CreateCustomFieldPopover from '../common/CreateCustomFieldPopover'
 import { FileUpload, DropDown, CalendarPicker, LongText } from '../common/ProjectDataFields'
 import NoProjectSelected from '../common/NoProjectSelected'
 
@@ -22,13 +21,6 @@ const pageName = 'refurbishment'
 export class Page extends Component {
   static propTypes = {
     pageContent: PropTypes.object,
-  }
-
-  constructor() {
-    super()
-    this.state = {
-      createFieldIsOpen: false
-    }
   }
 
   componentDidMount() {
@@ -52,25 +44,6 @@ export class Page extends Component {
       getContent(auth.info.idToken.jwtToken, projects.chosenProject.id)
     }
 
-  }
-
-  onClosePopup = () => {
-    this.setState({
-      createFieldIsOpen: false
-    })
-  }
-
-  getCreateFieldButton = () => {
-    return (
-      <div className="create-custom-field-button-container">
-        <Button
-          text={strings.CREATE_CUSTOM_FIELD}
-          intent={Intent.PRIMARY}
-          onClick={(e) => this.setState({createFieldIsOpen: true})}
-          />
-
-      </div>
-    )
   }
 
   showEmptyPage = () => {
@@ -139,7 +112,6 @@ export class Page extends Component {
 
           })
         }
-        {/*this.getCreateFieldButton()*/}
       </div>
     )
   }

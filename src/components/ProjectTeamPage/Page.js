@@ -23,6 +23,8 @@ export class Page extends Component {
   static propTypes = {
   }
 
+  // TODO: Load members list async
+
   constructor() {
     super()
     this.state = {
