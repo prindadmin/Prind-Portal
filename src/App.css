@@ -69,6 +69,15 @@ hr {
   margin: auto 0px;
 }
 
+
+.create-custom-field-button-container {
+  margin-bottom: 2em;
+}
+
+.create-custom-field-button-container button {
+  width: 400px;
+}
+
 /* ================================ */
 /* ======== sign-in section ======= */
 /* ================================ */
@@ -660,6 +669,42 @@ hr {
   margin-right: 1em;
 }
 
+/* =========================================== */
+/* === create custom field popover element === */
+/* =========================================== */
+
+#create-custom-field-popover {
+  height: 100%;
+  width: 100%;
+}
+
+#create-custom-field-popover .create-custom-field-popover-container {
+  height: calc(100% - 2 * var(--pop-up-padding));
+  margin: var(--pop-up-padding);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#create-custom-field-popover .form-container {
+  width: 400px;
+}
+
+#create-custom-field-popover #popup-box {
+  height: auto;
+  bottom: auto;
+  background-color: var(--field-element-grey)
+}
+
+#create-custom-field-popover .no-options {
+  color: red;
+  font-style: italic;
+}
+
+#create-custom-field-popover button {
+  margin-bottom: 0.8em;
+}
+
 /* ================================== */
 /* ====== date picker element ======= */
 /* ================================== */
@@ -1063,6 +1108,9 @@ hr {
 .project-select-tile:hover {
   background-color: rgba(138, 155, 168, 0.15)
 }
+
+
+
 
 /* ================================== */
 /* =========== test page ============ */

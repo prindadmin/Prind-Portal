@@ -181,7 +181,7 @@ function * uploadFile (action) {
 
 function * createField (action) {
 
-  const { jwtToken, pageName, fieldDetails } = action.payload
+  const { jwtToken, projectID, pageName, fieldDetails } = action.payload
 
   try {
 
@@ -193,7 +193,7 @@ function * createField (action) {
       }
     })
 
-    const { data: result } = yield call(Dispatchers.createFieldDispatcher, jwtToken, fieldDetails)
+    const { data: result } = yield call(Dispatchers.createFieldDispatcher, jwtToken, projectID, pageName, fieldDetails)
 
     // Decide which action to dispatch to update the correct page's content
     const action = actionSwitcher(pageName)

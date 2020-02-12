@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { InputGroup, Button, Icon, TextArea, MenuItem } from '@blueprintjs/core'
+import { InputGroup, Button, Icon, TextArea, MenuItem, RadioGroup, Radio, Checkbox } from '@blueprintjs/core'
 import { DatePicker } from '@blueprintjs/datetime'
 import { Select } from "@blueprintjs/select";
 
@@ -48,6 +48,20 @@ export const TextBoxInput = (field) => {
   )
 }
 
+export const CheckBoxInput = (field) => {
+
+  return (
+    <React.Fragment>
+      <Checkbox
+        {...field.input}
+        name={field.input.name}
+        label={field.label}
+        checked={field.isChecked}
+        />
+    </React.Fragment>
+  )
+}
+
 
 
 
@@ -64,6 +78,7 @@ export class SelectInput extends React.Component {
           text={item.name}
           onClick={handleClick}
           shouldDismissPopover={true}
+          className="high-z"
         />
       )
   }
@@ -124,6 +139,37 @@ export class CalendarPicker extends React.Component {
           shortcuts={false}
           value={currentDateValue}
           />
+      </React.Fragment>
+    )
+  }
+}
+
+
+
+export class RadioOptions extends React.Component {
+  static propTypes = {
+    field: PropTypes.object
+  }
+
+  render () {
+    const { options, onRadioChange, selectedValue } = this.props
+
+    return (
+      <React.Fragment>
+        <RadioGroup
+          selectedValue={selectedValue}
+          onChange={(e) => onRadioChange(e.currentTarget.value)}
+        >
+
+
+          {
+            options.map((fieldType, index) => {
+              return (
+                <Radio key={index} label={fieldType.label} value={fieldType.value} />
+              )
+            })
+          }
+        </RadioGroup>
       </React.Fragment>
     )
   }

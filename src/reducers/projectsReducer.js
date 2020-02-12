@@ -85,12 +85,13 @@ export const uploadFile = ( jwtToken, pageName, fileDetails ) => {
   }
 }
 
-export const createField = ( jwtToken, pageName, fieldDetails ) => {
+export const createField = ( jwtToken, projectID, pageName, fieldDetails ) => {
 
   return {
     type: action.PROJECT_CREATE_FIELD_REQUESTED,
     payload: {
       jwtToken,
+      projectID,
       pageName,
       fieldDetails,
     }

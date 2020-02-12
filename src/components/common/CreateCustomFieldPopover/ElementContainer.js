@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import * as foundationsReducer from '../../../reducers/foundationsReducer'
+import * as projectsReducer from '../../../reducers/projectsReducer'
 
 import Element from './Element'
 
@@ -9,13 +9,16 @@ const mapStatetoProps = state => {
   return {
     auth: state.auth,
     projects: state.projects,
+    initialValues: {
+      type: "file"
+    }
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    requestSignatures: (jwtToken, projectID, pageName, fieldID, fieldDetails, members) => {
-      dispatch(foundationsReducer.requestSignatures(jwtToken, projectID, pageName, fieldID, fieldDetails, members))
+    createField: (jwtToken, projectID, pageName, fieldDetails) => {
+      dispatch(projectsReducer.createField(jwtToken, projectID, pageName, fieldDetails))
     }
   }
 }

@@ -6,8 +6,14 @@ import PageChooserSection from '../layouts/PageChooserSection'
 import ProjectLoading from '../common/ProjectLoading'
 import Footer from '../common/footer'
 
+import CreateCustomFieldPopover from '../common/CreateCustomFieldPopover'
 import { FileUpload, DropDown, CalendarPicker, LongText } from '../common/ProjectDataFields'
 import NoProjectSelected from '../common/NoProjectSelected'
+
+import {
+  Button,
+  Intent,
+} from '@blueprintjs/core'
 
 import * as strings from '../../data/Strings'
 
@@ -16,6 +22,13 @@ const pageName = 'construction'
 export class Page extends Component {
   static propTypes = {
     pageContent: PropTypes.object,
+  }
+
+  constructor() {
+    super()
+    this.state = {
+      createFieldIsOpen: false
+    }
   }
 
   componentDidMount() {
@@ -39,6 +52,25 @@ export class Page extends Component {
       getContent(auth.info.idToken.jwtToken, projects.chosenProject.id)
     }
 
+  }
+
+  onClosePopup = () => {
+    this.setState({
+      createFieldIsOpen: false
+    })
+  }
+
+  getCreateFieldButton = () => {
+    return (
+      <div className="create-custom-field-button-container">
+        <Button
+          text={strings.CREATE_CUSTOM_FIELD}
+          intent={Intent.PRIMARY}
+          onClick={(e) => this.setState({createFieldIsOpen: true})}
+          />
+
+      </div>
+    )
   }
 
   showEmptyPage = () => {
@@ -109,6 +141,7 @@ export class Page extends Component {
 
           })
         }
+        {this.getCreateFieldButton()}
       </div>
     )
   }
@@ -116,6 +149,9 @@ export class Page extends Component {
 
 
   render() {
+
+    const { projects } = this.props
+    const { createFieldIsOpen } = this.state
 
     return (
       <div id='construction-page'>
@@ -135,6 +171,15 @@ export class Page extends Component {
                   this.showLoadingPage() :
                   this.showFilledPage() :
               null
+            }
+            {
+              createFieldIsOpen ?
+              <CreateCustomFieldPopover
+                projectID={projects.chosenProject.id}
+                pageName={pageName}
+                onClosePopover={this.onClosePopup}
+                />
+              : null
             }
           </div>
           <Footer />
