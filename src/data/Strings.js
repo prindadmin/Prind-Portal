@@ -121,3 +121,6 @@ export const BUTTON_CREATE_FIELD = "Create Field"
 export const FIELD_IS_REQUIRED_COMMA_SEPARATED = "(Required, separate options with commas)"
 export const DROP_DOWN_OPTIONS_OPENING_TEXT_BOX = "Options that open a \"More Details\" text box:"
 export const PLEASE_ENTER_SOME_OPTIONS = "Please enter some options"
+
+export const FILE_DETAILS = "File Details"
+export const DOWNLOAD = "Download"

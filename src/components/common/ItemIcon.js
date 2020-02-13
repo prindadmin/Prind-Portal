@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faIndustry,
   faCity,
+  faDownload,
 } from '@fortawesome/free-solid-svg-icons'
 
 import {
@@ -19,6 +20,7 @@ let icons = {
   city: faCity,
   unticked: faCircle,
   ticked: faCheckCircle,
+  download: faDownload,
 }
 
 const ItemIcon = props => {

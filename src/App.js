@@ -21,7 +21,7 @@ import SignUp from './components/SignUp';
 import ForgotPassword from './components/ForgotPassword';
 import ChangePassword from './components/ChangePassword';
 
-/* Completed pages */
+/* Stage pages */
 import InceptionPage from './components/InceptionPage';
 import FeasibilityPage from './components/FeasibilityPage';
 import DesignPage from './components/DesignPage';
@@ -31,6 +31,7 @@ import HandoverPage from './components/HandoverPage';
 import OccupationPage from './components/OccupationPage';
 import RefurbishmentPage from './components/RefurbishmentPage';
 
+/* Project pages */
 import NewProjectPage from './components/NewProjectPage';
 import EditProjectPage from './components/EditProjectPage';
 import ProjectTeamPage from './components/ProjectTeamPage';

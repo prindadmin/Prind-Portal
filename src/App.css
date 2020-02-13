@@ -705,6 +705,54 @@ hr {
   margin-bottom: 0.8em;
 }
 
+
+/* ==================================== */
+/* === file-details popover element === */
+/* ==================================== */
+
+#file-details-popover {
+  height: 100%;
+  width: 100%;
+}
+
+#file-details-popover .file-details-popover-container {
+  height: calc(100% - 2 * var(--pop-up-padding));
+  margin: var(--pop-up-padding);
+}
+
+#file-details-popover #popup-box {
+  height: auto;
+  bottom: auto;
+  background-color: var(--field-element-grey)
+}
+
+#file-details-popover button {
+  margin-bottom: 0.8em;
+}
+
+#file-details-popover .download-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-weight: bold;
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  border: 1px solid grey;
+  border-radius: 10px;
+}
+
+#file-details-popover .download-box:hover {
+  transition: background-color 0.7s linear;
+  background-color: var(--field-element-green);
+}
+
+#file-details-popover svg {
+  margin-bottom: 10px;
+}
+
 /* ================================== */
 /* ====== date picker element ======= */
 /* ================================== */
