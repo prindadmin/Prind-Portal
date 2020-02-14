@@ -23,16 +23,6 @@ export class Element extends Component {
     onClosePopover: PropTypes.func.isRequired,
   }
 
-  /*
-  constructor() {
-    super()
-    this.state = {
-      uploadError: false,
-    }
-  }
-  */
-
-
   componentDidUpdate(prevProps) {
 
     const { projects } = this.props
