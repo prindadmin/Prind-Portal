@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-//import * as projectsreducer from '../../../../../../reducers/projectsReducer'
+import * as projectsreducer from '../../../../../../reducers/projectsReducer'
 
 import Element from './FileDetailPopover'
 
@@ -13,7 +13,14 @@ const mapStatetoProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-  return {}
+  return {
+    downloadFile: (jwtToken, projectID, pageName, fieldID, version) => {
+      dispatch(projectsreducer.downloadFile(jwtToken, projectID, pageName, fieldID, version))
+    },
+    resetDownloadURL: () => {
+      dispatch(projectsreducer.resetDownloadURL())
+    }
+  }
 }
 
 export default withRouter(connect(mapStatetoProps, mapDispatchToProps)(Element))

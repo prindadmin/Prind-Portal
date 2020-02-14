@@ -13,6 +13,7 @@ let defaultState = {
     id: "",
   },
   memberList: [],
+  downloadURL: "",
   fetching: false,
 }
 
@@ -179,6 +180,46 @@ function * uploadFile (action) {
 }
 
 
+function * downloadFile (action) {
+
+  const { jwtToken, projectID, pageName, fieldID, version } = action.payload
+
+  try {
+
+    // Pre-fetch update to store
+    yield put({
+      type: actions.PROJECT_DOWNLOAD_FILE_REQUEST_SENT,
+      payload: {
+        fetching: true,
+      }
+    })
+
+    const { data: result } = yield call(Dispatchers.downloadFileDispatcher, jwtToken, projectID, pageName, fieldID, version)
+
+    // Post-fetch update to store
+    yield put({
+      type: actions.PROJECT_SET_STATE,
+      payload: {
+        fetching: false,
+        downloadURL: result.body.url
+      }
+    })
+  }
+  catch (error) {
+    console.log(error)
+    yield put({
+      type: actions.PROJECT_DOWNLOAD_FILE_REQUEST_FAILED,
+        payload: {
+          fetching: false,
+          error,
+        }
+    })
+  }
+}
+
+
+
+
 function * createField (action) {
 
   const { jwtToken, projectID, pageName, fieldDetails } = action.payload
@@ -265,6 +306,7 @@ export default function * sagas () {
   yield takeLatest(actions.PROJECT_CREATE_PROJECT_REQUESTED, createNewProject)
   yield takeLatest(actions.PROJECT_GET_CURRENT_MEMBERS_REQUESTED, getCurrentMembers)
   yield takeLatest(actions.PROJECT_UPLOAD_FILE_REQUESTED, uploadFile)
+  yield takeLatest(actions.PROJECT_DOWNLOAD_FILE_REQUESTED, downloadFile)
   yield takeLatest(actions.PROJECT_CREATE_FIELD_REQUESTED, createField)
   yield takeLatest(actions.PROJECT_UPDATE_FIELD_REQUESTED, updateField)
 }

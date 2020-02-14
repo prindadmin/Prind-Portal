@@ -77,10 +77,6 @@ export class Page extends Component {
     pageContent: PropTypes.object,
   }
 
-  constructor(props) {
-    super(props)
-  }
-
   componentDidMount() {
   }
 

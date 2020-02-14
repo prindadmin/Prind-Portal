@@ -8,6 +8,7 @@ const defaultState = {
     id: "",
   },
   memberList: [],
+  downloadURL: "",
   fileDetails: {},
 }
 
@@ -30,6 +31,15 @@ export const resetChosenProject = () => {
   return {
     type: action.PROJECT_RESET_CHOSEN_PROJECT,
     payload: blankChosenState
+  }
+}
+
+export const resetDownloadURL = () => {
+  return {
+    type: action.PROJECT_RESET_DOWNLOAD_URL,
+    payload: {
+      downloadURL: "",
+    }
   }
 }
 
@@ -73,8 +83,6 @@ export const getCurrentMembers = ( jwtToken, projectID ) => {
 
 export const uploadFile = ( jwtToken, pageName, fileDetails ) => {
 
-  console.log(fileDetails)
-
   return {
     type: action.PROJECT_UPLOAD_FILE_REQUESTED,
     payload: {
@@ -84,6 +92,21 @@ export const uploadFile = ( jwtToken, pageName, fileDetails ) => {
     }
   }
 }
+
+export const downloadFile = ( jwtToken, projectID, pageName, fieldID, version ) => {
+
+  return {
+    type: action.PROJECT_DOWNLOAD_FILE_REQUESTED,
+    payload: {
+      jwtToken,
+      projectID,
+      pageName,
+      fieldID,
+      version,
+    }
+  }
+}
+
 
 export const createField = ( jwtToken, projectID, pageName, fieldDetails ) => {
 
@@ -117,6 +140,7 @@ const ACTION_HANDLERS = {
   [action.PROJECT_CREATE_PROJECT_REQUESTED]: state => ({ ...state }),
   [action.PROJECT_GET_CURRENT_MEMBERS_REQUESTED]: state => ({ ...state }),
   [action.PROJECT_UPLOAD_FILE_REQUESTED]: state => ({ ...state }),
+  [action.PROJECT_DOWNLOAD_FILE_REQUESTED]: state => ({ ...state }),
   [action.PROJECT_CREATE_FIELD_REQUESTED]: state => ({ ...state }),
   [action.PROJECT_UPDATE_FIELD_REQUESTED]: state => ({ ...state }),
 
@@ -128,10 +152,12 @@ const ACTION_HANDLERS = {
   [action.PROJECT_CREATE_PROJECT_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
   [action.PROJECT_GET_CURRENT_MEMBERS_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
   [action.PROJECT_UPLOAD_FILE_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
+  [action.PROJECT_DOWNLOAD_FILE_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
   [action.PROJECT_CREATE_FIELD_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
   [action.PROJECT_UPDATE_FIELD_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
 
   [action.PROJECT_RESET_CHOSEN_PROJECT]: (state, action) => ({ ...state, ...action.payload }),
+  [action.PROJECT_RESET_DOWNLOAD_URL]: (state, action) => ({ ...state, ...action.payload }),
 }
 
 

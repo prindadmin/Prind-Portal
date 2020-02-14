@@ -730,6 +730,26 @@ hr {
   margin-bottom: 0.8em;
 }
 
+#file-details-popover .col {
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+#file-details-popover .file-details {
+  width: 100%;
+}
+
+#file-details-popover .signature-details {
+  margin-top: 2em;
+  width: 100%;
+}
+
+#file-details-popover .field-names,
+#file-details-popover .field-values  {
+  padding: 0;
+}
+
 #file-details-popover .download-box {
   display: flex;
   flex-direction: column;
@@ -739,9 +759,11 @@ hr {
   font-weight: bold;
   width: 100px;
   height: 100px;
-  margin: auto;
+  margin-left: auto;
   border: 1px solid grey;
   border-radius: 10px;
+  bottom: 2em;
+  position: relative;
 }
 
 #file-details-popover .download-box:hover {

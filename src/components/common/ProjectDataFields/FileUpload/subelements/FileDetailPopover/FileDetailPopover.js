@@ -3,9 +3,11 @@ import PropTypes from 'prop-types'
 
 import ItemIcon from '../../../../ItemIcon'
 import PopOverHandler from '../../../../popOverHandler'
+
+import SignatureHistory from '../SignatureHistory'
+
 import * as strings from '../../../../../../data/Strings'
 
-// TODO: Displaying of file Details
 // TODO: Downloading of file version
 
 
@@ -30,9 +32,69 @@ export class Element extends Component {
   }
   */
 
-  downloadFile = (e) => {
-    console.log("file download starts")
+
+  componentDidUpdate(prevProps) {
+
+    const { projects } = this.props
+
+    if (projects.downloadURL !== prevProps.projects.downloadURL && projects.downloadURL !== "") {
+
+      // TODO: Once signed URLs from the API are sorted, then uncomment the commented line and delete the current line
+      //window.location.href = projects.downloadURL
+      window.open(projects.downloadURL, "_blank")
+    }
+
   }
+
+  componentWillUnmount() {
+    this.props.resetDownloadURL()
+  }
+
+  downloadFile = (e) => {
+
+    const { auth, projectID, pageName, fieldID, chosenFileDetails } = this.props
+
+    this.props.downloadFile(
+      auth.info.idToken.jwtToken,
+      projectID,
+      pageName,
+      fieldID,
+      chosenFileDetails.ver,
+    )
+
+  }
+
+  getFileDetailsArea = () => {
+
+    const { chosenFileDetails } = this.props
+
+    return (
+      <div className="file-details">
+        <div className='row'>
+          <div className='field-names col-4'>
+            <div>{strings.FILE_NAME}</div>
+            <div>{strings.UPLOAD_DATE_TIME}</div>
+            <div>{strings.UPLOADED_BY}</div>
+            <div>{strings.PROOF}</div>
+          </div>
+
+          <div className='field-values col-auto'>
+            <div>{chosenFileDetails.uploadName}</div>
+            <div>{chosenFileDetails.uploadDateTime}</div>
+            <div>{chosenFileDetails.uploadedBy}</div>
+            {
+              chosenFileDetails.proofLink === null ?
+                strings.NO_PROOF_AVAILABLE :
+                <div onClick={e => e.stopPropagation()}>
+                  <a href={chosenFileDetails.proofLink}>{strings.LINK_TO_PROOF}</a>
+                </div>
+            }
+          </div>
+        </div>
+      </div>
+    )
+  }
+
 
   getDownloadBox = () => {
     return (
@@ -40,6 +102,22 @@ export class Element extends Component {
         <div>
           <ItemIcon size='4x' type='download' />
           {strings.DOWNLOAD}
+        </div>
+      </div>
+    )
+  }
+
+
+  getSignaturesArea = () => {
+
+    const { chosenFileDetails } = this.props
+
+    return (
+      <div className="signature-details">
+        <div>
+          <SignatureHistory
+            details={chosenFileDetails.signatures}
+          />
         </div>
       </div>
     )
@@ -54,7 +132,7 @@ export class Element extends Component {
         <div className="row">
 
           <div className="col">
-            this will be the file details
+            {this.getFileDetailsArea()}
           </div>
 
           <div className="col download-box-cell">
@@ -65,7 +143,7 @@ export class Element extends Component {
         <div className="row">
 
           <div className="col">
-            this will be the signatures area
+            {this.getSignaturesArea()}
           </div>
 
         </div>
@@ -73,20 +151,9 @@ export class Element extends Component {
     )
   }
 
-
-  getVersionNumber = () => {
-    return (
-      <div className="version-box">
-        this will be the version box
-      </div>
-    )
-  }
-
   render() {
 
     const { fileDetails } = this.props
-    //const { uploadError } = this.state
-
 
     return(
       <PopOverHandler>
@@ -102,7 +169,6 @@ export class Element extends Component {
                 </div>
                 <div className='element-description'>
                   {this.getContent()}
-                  {this.getVersionNumber()}
                 </div>
               </div>
             </div>

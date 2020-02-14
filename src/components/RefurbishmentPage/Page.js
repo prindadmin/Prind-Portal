@@ -9,11 +9,6 @@ import Footer from '../common/footer'
 import { FileUpload, DropDown, CalendarPicker, LongText } from '../common/ProjectDataFields'
 import NoProjectSelected from '../common/NoProjectSelected'
 
-import {
-  Button,
-  Intent,
-} from '@blueprintjs/core'
-
 import * as strings from '../../data/Strings'
 
 const pageName = 'refurbishment'
