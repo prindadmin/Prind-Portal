@@ -8,37 +8,49 @@ import SignatureHistory from '../SignatureHistory'
 
 import * as strings from '../../../../../../data/Strings'
 
-// TODO: Downloading of file version
-
+// TODO: Add error handling when URL cannot be loaded
 
 export class Element extends Component {
   static propTypes = {
-    latestFileDetails:  PropTypes.object.isRequired,
-    chosenFileDetails: PropTypes.object.isRequired,
-    nextFileDetails: PropTypes.object.isRequired,
-    previousFileDetails: PropTypes.object.isRequired,
+    //latestFileDetails:  PropTypes.object.isRequired,
+    chosenFileDetails: PropTypes.shape({
+      uploadName: PropTypes.string.isRequired,
+      uploadDateTime: PropTypes.string.isRequired,
+      uploadedBy: PropTypes.string.isRequired,
+      proofLink: PropTypes.string,
+    }).isRequired,
+    //nextFileDetails: PropTypes.object.isRequired,
+    //previousFileDetails: PropTypes.object.isRequired,
     projectID: PropTypes.any.isRequired,
     pageName: PropTypes.any.isRequired,
     fieldID: PropTypes.any.isRequired,
     onClosePopover: PropTypes.func.isRequired,
   }
 
+
+
   componentDidUpdate(prevProps) {
 
     const { projects } = this.props
 
     if (projects.downloadURL !== prevProps.projects.downloadURL && projects.downloadURL !== "") {
-
       // TODO: Once signed URLs from the API are sorted, then uncomment the commented line and delete the current line
       //window.location.href = projects.downloadURL
       window.open(projects.downloadURL, "_blank")
     }
-
   }
+
 
   componentWillUnmount() {
     this.props.resetDownloadURL()
   }
+
+
+  // Trigger the closing of the popover
+  closePopover = () => {
+    this.props.onClosePopover()
+  }
+
 
   downloadFile = (e) => {
 

@@ -18,6 +18,7 @@
   --field-element-yellow: #fffcbb;
   --field-element-green: #d2e9af;
   --field-element-grey: #ededed;
+  --field-element-dark-grey: #bcbcbc;
   --tile-selected-green: #d2e9af;
 }
 
@@ -487,8 +488,8 @@ hr {
   margin-right: 1em;
 }
 
-#file-upload-element .row .signatures {
-  padding-left: 1em;
+#file-upload-element .row.signatures {
+  padding-left: 0;
 }
 
 #file-upload-element .file-status {
@@ -531,6 +532,19 @@ hr {
 
 #file-upload-element .button-row {
   margin-top: 0.5em;
+}
+
+#file-upload-element .upload-history-container .row.signatures {
+  border-radius: 5px;
+}
+
+#file-upload-element .upload-history-container .col {
+  padding: 0.3em;
+}
+
+#file-upload-element .upload-history-container .row.signatures:hover {
+  background-color: var(--field-element-dark-grey);
+  transition: background-color 1s ease;
 }
 
 /* ================================== */
@@ -767,7 +781,7 @@ hr {
 }
 
 #file-details-popover .download-box:hover {
-  transition: background-color 0.7s linear;
+  transition: background-color 0.3s ease-in;
   background-color: var(--field-element-green);
 }
 

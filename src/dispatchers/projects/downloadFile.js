@@ -1,16 +1,6 @@
 import axios from 'axios'
 import https from 'https'
 
-// TODO: Replace this with the real return
-const fakeResponse = {
-  data: {
-    body: {
-      url: "https://portal-dev.prind.tech/images/download.png"
-    }
-  }
-}
-
-
 export default function(identityToken, projectID, pageName, fieldID, version) {
 
   return new Promise((resolve, reject) => {
@@ -25,11 +15,15 @@ export default function(identityToken, projectID, pageName, fieldID, version) {
       }
     });
 
-
-    instance.get(`${process.env.REACT_APP_API_LOCAL_ENDPOINT}/project/file.json`)
+    instance.get(`${process.env.REACT_APP_API_ENDPOINT}/project/${projectID}/${pageName}/${fieldID}/${version}/get-file-url`)
     .then(res => {
-      resolve(fakeResponse)
-      //resolve(res)
+
+      if (res.data.errorMessage !== undefined) {
+        reject(res.data)
+        return
+      }
+
+      resolve(res)
     })
     .catch((error) => {
       console.log(error)
