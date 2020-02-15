@@ -35,7 +35,7 @@ function * getAccessibleProjects (action) {
     yield put({
       type: actions.PROJECT_SET_STATE,
       payload: {
-        accessibleProjects: projects
+        accessibleProjects: projects.body
       }
     })
     }

@@ -15,7 +15,9 @@ export default function(identityToken) {
       }
     });
 
-    instance.get(`${process.env.REACT_APP_API_LOCAL_ENDPOINT}/projectlist.json`)
+    // TODO: Fix CORS issue here
+    //instance.get(`${process.env.REACT_APP_API_ENDPOINT}/user/get-accessible-projects`)
+    instance.get(`${process.env.REACT_APP_API_LOCAL_ENDPOINT}/user/get-accessible-projects`)
     .then(res => {
       //console.log(res)
       resolve(res)

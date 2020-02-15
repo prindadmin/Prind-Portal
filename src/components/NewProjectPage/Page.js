@@ -26,6 +26,9 @@ export class Page extends Component {
   }
 
   createProject = async (values) => {
+
+    console.log(values)
+
     await this.props.createProject(this.props.auth.info.idToken.jwtToken, values)
     this.props.history.push(Endpoints.DEFAULTLOGGEDINPAGE)
   }
@@ -112,11 +115,9 @@ export class Page extends Component {
           labelInfo=""
           className="last"
         >
-          <TextArea
+          <Field
             name="projectDescription"
-            growVertically={true}
-            fill={true}
-            intent={Intent.PRIMARY}
+            component={FormInputs.TextBoxInput}
             placeholder={strings.PROJECT_DESCRIPTION}
           />
         </FormGroup>

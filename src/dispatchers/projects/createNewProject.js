@@ -7,6 +7,8 @@ import https from 'https'
 
 export default function(identityToken, newProjectDetails) {
 
+  console.log(newProjectDetails)
+
   return new Promise((resolve, reject) => {
 
     const instance = axios.create({
@@ -19,7 +21,9 @@ export default function(identityToken, newProjectDetails) {
       }
     });
 
-    instance.post(`${process.env.REACT_APP_API_LOCAL_ENDPOINT}/createdProject.json`, newProjectDetails)
+    // TODO: Awaiting update by Simon on back end
+    instance.get(`${process.env.REACT_APP_API_LOCAL_ENDPOINT}/project/create`, newProjectDetails)
+    //instance.post(`${process.env.REACT_APP_API_ENDPOINT}/project/create`, newProjectDetails)
     .then(res => {
       resolve(res)
     })
