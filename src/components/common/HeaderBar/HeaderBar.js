@@ -12,7 +12,10 @@ export class HeaderBar extends Component {
 
   constructor(props) {
     super(props);
-    this.props.getAccessibleProjects(this.props.auth.info.idToken.jwtToken)
+
+    const { auth } = this.props
+
+    this.props.getAccessibleProjects(auth.info.idToken.jwtToken)
     this.state = {}
   }
 
@@ -31,11 +34,13 @@ export class HeaderBar extends Component {
 
   render() {
 
+    const { projects } = this.props
+
     return (
       <div id='header-bar' className='col-12'>
         <div className='header-content row'>
           {
-            this.props.projects !== undefined ? <ProjectSelector projects={this.props.projects.accessibleProjects} />  : null
+            projects !== undefined ? <ProjectSelector projects={projects.accessibleProjects} />  : null
           }
           <div className='nav-links'>
             {

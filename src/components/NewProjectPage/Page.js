@@ -6,8 +6,6 @@ import {
   Button,
   ButtonGroup,
   Callout,
-  TextArea,
-  Intent
 } from '@blueprintjs/core'
 
 import HeaderBar from '../common/HeaderBar';

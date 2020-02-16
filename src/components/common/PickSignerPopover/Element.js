@@ -34,7 +34,7 @@ export class Element extends Component {
     }).isRequired,
     projectID: PropTypes.string.isRequired,
     pageName: PropTypes.string.isRequired,
-    fieldID: PropTypes.number.isRequired,
+    fieldID: PropTypes.string.isRequired,
     onClosePopover: PropTypes.func.isRequired,
   }
 

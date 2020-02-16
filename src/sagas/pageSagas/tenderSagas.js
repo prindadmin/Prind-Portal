@@ -27,7 +27,7 @@ function * getPageContent (action) {
       type: actions.PAGE_TENDER_SET_STATE,
       payload: {
         ...defaultState,
-        fields: result,
+        fields: result.body,
       }
     })
     }

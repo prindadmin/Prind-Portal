@@ -19,7 +19,7 @@ import * as strings from '../../../../data/Strings'
 export class Element extends Component {
   static propTypes = {
     elementContent: PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       description: PropTypes.string,
       editable: PropTypes.bool,
@@ -163,7 +163,7 @@ export class Element extends Component {
                 elementContent.fileDetails.length > 0 ?
                 <CurrentVersion
                   details={elementContent.fileDetails[0]}
-                  projectID={projects.chosenProject.id}
+                  projectID={projects.chosenProject.projectId}
                   pageName={pageName}
                   fieldID={elementContent.id}
                 /> :
@@ -204,7 +204,7 @@ export class Element extends Component {
           </div>
           {detailedView ? <UploadHistory
             details={ elementContent.fileDetails }
-            projectID={projects.chosenProject.id}
+            projectID={projects.chosenProject.projectId}
             pageName={pageName}
             fieldID={elementContent.id}
             /> : null}
@@ -214,7 +214,7 @@ export class Element extends Component {
           this.state.uploadFileRequested ?
             <UploaderPopOver
               fileDetails={ fileDetails }
-              projectID={projects.chosenProject.id}
+              projectID={projects.chosenProject.projectId}
               pageName={pageName}
               fieldID={elementContent.id}
               onCancelPopup={ this.cancelPopup }

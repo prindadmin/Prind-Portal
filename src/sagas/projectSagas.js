@@ -7,7 +7,10 @@ import * as actions from '../actions'
 import * as strings from '../data/Strings'
 
 let defaultState = {
-  accessibleProjects: [],
+  accessibleProjects: {
+    projectOwner: [],
+    projectRole: []
+  },
   chosenProject: {
     projectName: strings.NO_PROJECT_SELECTED,
     id: "",
@@ -28,10 +31,10 @@ function * init (action) {
 
 function * getAccessibleProjects (action) {
 
-  const { identityToken } = action.payload.jwtToken
+  const { jwtToken } = action.payload
 
   try {
-    const { data: projects } = yield call(Dispatchers.getAccessibleProjectsDispatcher, identityToken)
+    const { data: projects } = yield call(Dispatchers.getAccessibleProjectsDispatcher, jwtToken)
     yield put({
       type: actions.PROJECT_SET_STATE,
       payload: {

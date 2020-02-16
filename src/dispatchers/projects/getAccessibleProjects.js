@@ -1,6 +1,7 @@
 import axios from 'axios'
 import https from 'https'
 
+
 export default function(identityToken) {
 
   return new Promise((resolve, reject) => {
@@ -15,9 +16,8 @@ export default function(identityToken) {
       }
     });
 
-    // TODO: Fix CORS issue here
-    //instance.get(`${process.env.REACT_APP_API_ENDPOINT}/user/get-accessible-projects`)
-    instance.get(`${process.env.REACT_APP_API_LOCAL_ENDPOINT}/user/get-accessible-projects`)
+    //instance.get(`${process.env.REACT_APP_API_LOCAL_ENDPOINT}/user/get-accessible-projects`)
+    instance.get(`${process.env.REACT_APP_API_ENDPOINT}/user/get-accessible-projects`)
     .then(res => {
       //console.log(res)
       resolve(res)

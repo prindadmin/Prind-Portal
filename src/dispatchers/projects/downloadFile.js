@@ -18,6 +18,7 @@ export default function(identityToken, projectID, pageName, fieldID, version) {
     instance.get(`${process.env.REACT_APP_API_ENDPOINT}/project/${projectID}/${pageName}/${fieldID}/${version}/get-file-url`)
     .then(res => {
 
+      // TODO: Do something with this error handling
       if (res.data.errorMessage !== undefined) {
         reject(res.data)
         return

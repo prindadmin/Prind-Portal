@@ -26,7 +26,7 @@ function * getPageContent (action) {
       type: actions.PAGE_INCEPTION_SET_STATE,
       payload: {
         ...defaultState,
-        fields: result,
+        fields: result.body,
       }
     })
     }

@@ -36,33 +36,33 @@ export class Page extends Component {
 
   componentDidMount() {
 
-    if (this.props.projects.chosenProject.id !== "" && this.props.projects.memberList.length === 0) {
+    if (this.props.projects.chosenProject.projectId !== "" && this.props.projects.memberList.length === 0) {
       this.props.getCurrentMembers(
         this.props.auth.info.idToken.jwtToken,
-        this.props.projects.chosenProject.id
+        this.props.projects.chosenProject.projectId
       )
 
       // Get the available roles for this project
       this.props.getRoles(
         this.props.auth.info.idToken.jwtToken,
-        this.props.projects.chosenProject.id
+        this.props.projects.chosenProject.projectId
       )
     }
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.projects.chosenProject.id !== prevProps.projects.chosenProject.id) {
+    if (this.props.projects.chosenProject.projectId !== prevProps.projects.chosenProject.projectId) {
 
       // Get the current members of the project
       this.props.getCurrentMembers(
         this.props.auth.info.idToken.jwtToken,
-        this.props.projects.chosenProject.id
+        this.props.projects.chosenProject.projectId
       )
 
       // Get the available roles for this project
       this.props.getRoles(
         this.props.auth.info.idToken.jwtToken,
-        this.props.projects.chosenProject.id
+        this.props.projects.chosenProject.projectId
       )
     }
   }
@@ -74,7 +74,7 @@ export class Page extends Component {
 
     await this.props.addMember(
       this.props.auth.info.idToken.jwtToken,
-      this.props.projects.chosenProject.id,
+      this.props.projects.chosenProject.projectId,
       newValues
     )
 
@@ -85,7 +85,7 @@ export class Page extends Component {
     // Get the current members of the project
     this.props.getCurrentMembers(
       this.props.auth.info.idToken.jwtToken,
-      this.props.projects.chosenProject.id
+      this.props.projects.chosenProject.projectId
     )
   }
 

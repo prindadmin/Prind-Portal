@@ -15,16 +15,18 @@ export default function(identityToken, projectID) {
       }
     });
 
-    instance.get(`${process.env.REACT_APP_API_LOCAL_ENDPOINT}/pageData/refurbishmentPage.json`, projectID)
+    //instance.get(`${process.env.REACT_APP_API_LOCAL_ENDPOINT}/pageData/refurbishmentPage.json`, projectID)
+    instance.get(`${process.env.REACT_APP_API_ENDPOINT}/project/${projectID}/page/refurbishment`)
     .then(res => {
-      //console.log(res)
+      console.log(res)
 
-      // DELAY added for testing
-      setTimeout(() => {
-          resolve(res)
-        }, 1000)
+      // TODO: Do something with this error handling
+      if (res.data.errorMessage !== undefined) {
+        reject(res.data)
+        return
+      }
 
-      //resolve(res)
+      resolve(res)
     })
     .catch((error) => {
       console.log(error)

@@ -17,7 +17,7 @@ import * as strings from '../../../../data/Strings'
 export class Element extends Component {
   static propTypes = {
     elementContent: PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       description: PropTypes.string,
       editable: PropTypes.bool,
@@ -79,7 +79,7 @@ export class Element extends Component {
     const { auth, pageName, projects, elementContent } = this.props
 
     var details = {
-      projectID: projects.chosenProject.id,
+      projectID: projects.chosenProject.projectId,
       pageName,
       fieldID: elementContent.id,
       fieldDetails: {...e},

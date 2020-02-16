@@ -9,7 +9,10 @@ import * as strings from '../../../data/Strings'
 
 export class ProjectSelectorPopUp extends Component {
   static propTypes = {
-    projects: PropTypes.array.isRequired,
+    projects: PropTypes.shape({
+      projectOwner: PropTypes.array.isRequired,
+      projectRole: PropTypes.array.isRequired,
+    }).isRequired,
     onCancelPopup: PropTypes.func.isRequired,
     onProjectChosen: PropTypes.func.isRequired,
     onCreateNewProject: PropTypes.func.isRequired,
@@ -32,13 +35,16 @@ export class ProjectSelectorPopUp extends Component {
 
     const { projects } = this.props
 
+    const allProjects = projects.projectOwner.concat(projects.projectRole)
+
+
     // filter the sites list into evens and odds so that they can be
     // displayed in 2 columns
-    let evens = projects.filter((project, index) => {
+    let evens = allProjects.filter((project, index) => {
       return index % 2 === 0;
     })
 
-    let odds = projects.filter((project, index) => {
+    let odds = allProjects.filter((project, index) => {
       return index % 2 === 1;
     })
 
@@ -57,7 +63,7 @@ export class ProjectSelectorPopUp extends Component {
                 evens.map(project => (
                   <Button
                     className={'full-width'}
-                    key={project.id}
+                    key={project.projectId}
                     minimal={true}
                     onClick={(e) => this.siteChosen(project, e)}
                   >
@@ -75,7 +81,7 @@ export class ProjectSelectorPopUp extends Component {
                 odds.map(project => (
                   <Button
                     className={'full-width'}
-                    key={project.id}
+                    key={project.projectId}
                     minimal={true}
                     onClick={(e) => this.siteChosen(project, e)}
                   >

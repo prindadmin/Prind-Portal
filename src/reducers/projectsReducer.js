@@ -2,7 +2,10 @@ import * as action from '../actions'
 import * as strings from '../data/Strings'
 
 const defaultState = {
-  accessibleProjects: [],
+  accessibleProjects: {
+    projectOwner: [],
+    projectRole: []
+  },
   chosenProject: {
     projectName: strings.NO_PROJECT_SELECTED,
     id: "",

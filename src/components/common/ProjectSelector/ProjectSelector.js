@@ -14,7 +14,10 @@ import * as Endpoints from '../../../endpoints'
 
 class ProjectSelector extends React.Component {
   static propTypes = {
-    projects: PropTypes.array.isRequired,
+    projects: PropTypes.shape({
+      projectOwner: PropTypes.array.isRequired,
+      projectRole: PropTypes.array.isRequired,
+    }).isRequired,
     chosenProject: PropTypes.object.isRequired,
   }
 

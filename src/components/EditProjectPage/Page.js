@@ -26,7 +26,7 @@ export class Page extends Component {
 
 
   componentDidUpdate(prevProps) {
-    if (this.props.projects.chosenProject.id !== prevProps.projects.chosenProject.id) {
+    if (this.props.projects.chosenProject.projectId !== prevProps.projects.chosenProject.projectId) {
       this.props.reset()
     }
   }

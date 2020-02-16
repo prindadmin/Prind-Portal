@@ -36,9 +36,9 @@ export class Page extends Component {
     const { projects, auth, getContent, requestS3UploadToken, getProjectMembers } = this.props
 
     if (projects.chosenProject.projectName !== strings.NO_PROJECT_SELECTED) {
-      requestS3UploadToken(auth.info.idToken.jwtToken, projects.chosenProject.id, pageName)
-      getProjectMembers(auth.info.idToken.jwtToken, projects.chosenProject.id)
-      getContent(auth.info.idToken.jwtToken, projects.chosenProject.id)
+      requestS3UploadToken(auth.info.idToken.jwtToken, projects.chosenProject.projectId, pageName)
+      getProjectMembers(auth.info.idToken.jwtToken, projects.chosenProject.projectId)
+      getContent(auth.info.idToken.jwtToken, projects.chosenProject.projectId)
     }
   }
 
@@ -46,10 +46,10 @@ export class Page extends Component {
 
     const { projects, auth, getContent, requestS3UploadToken, getProjectMembers } = this.props
 
-    if (projects.chosenProject.id !== prevProps.projects.chosenProject.id) {
-      requestS3UploadToken(auth.info.idToken.jwtToken, projects.chosenProject.id, pageName)
-      getProjectMembers(auth.info.idToken.jwtToken, projects.chosenProject.id)
-      getContent(auth.info.idToken.jwtToken, projects.chosenProject.id)
+    if (projects.chosenProject.projectId !== prevProps.projects.chosenProject.projectId) {
+      requestS3UploadToken(auth.info.idToken.jwtToken, projects.chosenProject.projectId, pageName)
+      getProjectMembers(auth.info.idToken.jwtToken, projects.chosenProject.projectId)
+      getContent(auth.info.idToken.jwtToken, projects.chosenProject.projectId)
     }
 
   }
@@ -175,7 +175,7 @@ export class Page extends Component {
             {
               createFieldIsOpen ?
               <CreateCustomFieldPopover
-                projectID={projects.chosenProject.id}
+                projectID={projects.chosenProject.projectId}
                 pageName={pageName}
                 onClosePopover={this.onClosePopup}
                 />
