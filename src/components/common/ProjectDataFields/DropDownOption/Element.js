@@ -25,7 +25,10 @@ export class Element extends Component {
         dropdownValue: PropTypes.string,
         textboxValue: PropTypes.string,
         dropdownOptions: PropTypes.array,
-        optionOpensTextBox: PropTypes.array,
+        optionOpensTextBox: PropTypes.oneOfType([
+          PropTypes.array,
+          PropTypes.string,
+        ]),
       }).isRequired,
     }),
     pageName: PropTypes.string.isRequired,
