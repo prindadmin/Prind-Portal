@@ -114,7 +114,7 @@ export class Element extends Component {
               <div className='row signatures' key={index} onClick={(e) => this.fileDetailsOpen(e, fileUpload)}>
 
                 <div className='col'>
-                  {fileUpload.uploadName}
+                  {fileUpload.uploadName === undefined ? strings.NO_UPLOAD_NAME : fileUpload.uploadName}
                 </div>
 
                 <div className='col'>
@@ -122,7 +122,7 @@ export class Element extends Component {
                 </div>
 
                 <div className='col'>
-                  {fileUpload.uploadDateTime}
+                  {fileUpload.uploadedDateTime}
                 </div>
 
                 <div className='col'>

@@ -15,7 +15,7 @@ export default function(identityToken, projectID) {
       }
     });
 
-    //instance.get(`${process.env.REACT_APP_API_LOCAL_ENDPOINT}user/get-roles`)
+    //instance.get(`${process.env.REACT_APP_API_ENDPOINT}/project/$(projectID)/get-roles`)
     instance.get(`${process.env.REACT_APP_API_LOCAL_ENDPOINT}testResults/roles.json`, projectID)
     .then(res => {
       console.log(res)

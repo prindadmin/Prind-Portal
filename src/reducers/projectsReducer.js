@@ -8,7 +8,7 @@ const defaultState = {
   },
   chosenProject: {
     projectName: strings.NO_PROJECT_SELECTED,
-    id: "",
+    projectId: "",
   },
   memberList: [],
   downloadURL: "",

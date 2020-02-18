@@ -11,7 +11,7 @@
         {
           "ver": 0,
           "uploadName": "file-v002.txt",
-          "uploadDateTime": "2020-01-30T12:04:59",
+          "uploadedDateTime": "2020-01-30T12:04:59",
           "uploadedBy": "Jim Moriaty",
           "hash": "6c434ff047a8baff01375d4f744fd7508b68f36b19fa9111692504f6b2df9baf",
           "proofLink": "https://explorer.factoid.org/entry?hash=6c434ff047a8baff01375d4f744fd7508b68f36b19fa9111692504f6b2df9baf",
@@ -33,7 +33,7 @@
         {
           "ver": 1,
           "uploadName": "file-v001.txt",
-          "uploadDateTime": "2020-01-29T12:04:59",
+          "uploadedDateTime": "2020-01-29T12:04:59",
           "uploadedBy": "Jim Moriaty",
           "hash": "ee78b5ad676d1855fff856a2cfae44ca41e84aaebd9ecca20cc975ea0c1b8c21",
           "proofLink": "https://explorer.factoid.org/entry?hash=ee78b5ad676d1855fff856a2cfae44ca41e84aaebd9ecca20cc975ea0c1b8c21",
@@ -49,7 +49,7 @@
         {
           "ver": 2,
           "uploadName": "file-v002.txt",
-          "uploadDateTime": "2020-01-30T12:04:59",
+          "uploadedDateTime": "2020-01-30T12:04:59",
           "uploadedBy": "Jim Moriaty",
           "hash": "6c434ff047a8baff01375d4f744fd7508b68f36b19fa9111692504f6b2df9baf",
           "proofLink": "https://explorer.factoid.org/entry?hash=6c434ff047a8baff01375d4f744fd7508b68f36b19fa9111692504f6b2df9baf",

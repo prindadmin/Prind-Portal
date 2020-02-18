@@ -36,33 +36,39 @@ export class Page extends Component {
 
   componentDidMount() {
 
-    if (this.props.projects.chosenProject.projectId !== "" && this.props.projects.memberList.length === 0) {
-      this.props.getCurrentMembers(
-        this.props.auth.info.idToken.jwtToken,
-        this.props.projects.chosenProject.projectId
+    const { auth, projects, getCurrentMembers, getRoles } = this.props
+
+    if (projects.chosenProject.projectId !== "" && projects.chosenProject.projectId !== undefined && projects.memberList.length === 0) {
+
+      getCurrentMembers(
+        auth.info.idToken.jwtToken,
+        projects.chosenProject.projectId
       )
 
       // Get the available roles for this project
-      this.props.getRoles(
-        this.props.auth.info.idToken.jwtToken,
-        this.props.projects.chosenProject.projectId
+      getRoles(
+        auth.info.idToken.jwtToken,
+        projects.chosenProject.projectId
       )
     }
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.projects.chosenProject.projectId !== prevProps.projects.chosenProject.projectId) {
+
+    const { auth, projects, getCurrentMembers, getRoles } = this.props
+
+    if (projects.chosenProject.projectId !== prevProps.projects.chosenProject.projectId && projects.chosenProject.projectId !== undefined) {
 
       // Get the current members of the project
-      this.props.getCurrentMembers(
-        this.props.auth.info.idToken.jwtToken,
-        this.props.projects.chosenProject.projectId
+      getCurrentMembers(
+        auth.info.idToken.jwtToken,
+        projects.chosenProject.projectId
       )
 
       // Get the available roles for this project
-      this.props.getRoles(
-        this.props.auth.info.idToken.jwtToken,
-        this.props.projects.chosenProject.projectId
+      getRoles(
+        auth.info.idToken.jwtToken,
+        projects.chosenProject.projectId
       )
     }
   }

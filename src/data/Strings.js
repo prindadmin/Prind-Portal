@@ -124,3 +124,4 @@ export const PLEASE_ENTER_SOME_OPTIONS = "Please enter some options"
 
 export const FILE_DETAILS = "File Details"
 export const DOWNLOAD = "Download"
+export const NO_UPLOAD_NAME = "No name supplied"
