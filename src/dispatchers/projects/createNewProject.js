@@ -21,10 +21,10 @@ export default function(identityToken, newProjectDetails) {
       }
     });
 
-    // TODO: Awaiting update by Simon on back end
-    instance.get(`${process.env.REACT_APP_API_LOCAL_ENDPOINT}/project/create`, newProjectDetails)
-    //instance.post(`${process.env.REACT_APP_API_ENDPOINT}/project/create`, newProjectDetails)
+    //instance.get(`${process.env.REACT_APP_API_LOCAL_ENDPOINT}/project/create`, newProjectDetails)
+    instance.post(`${process.env.REACT_APP_API_ENDPOINT}/project/create`, newProjectDetails)
     .then(res => {
+      console.log(res)
       resolve(res)
     })
     .catch((error) => {

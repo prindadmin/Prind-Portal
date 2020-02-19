@@ -15,10 +15,9 @@ export default function(identityToken, projectID) {
       }
     });
 
-    //instance.get(`${process.env.REACT_APP_API_LOCAL_ENDPOINT}/pageData/constructionPage.json`, projectID)
     instance.get(`${process.env.REACT_APP_API_ENDPOINT}/project/${projectID}/page/construction`)
     .then(res => {
-      console.log(res)
+      //console.log(res)
 
       // TODO: Do something with this error handling
       if (res.data.errorMessage !== undefined) {

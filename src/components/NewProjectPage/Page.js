@@ -23,12 +23,18 @@ export class Page extends Component {
   static propTypes = {
   }
 
-  createProject = async (values) => {
+  createProject = (values) => {
 
-    console.log(values)
+    // TODO: add popover to say project is creating
 
-    await this.props.createProject(this.props.auth.info.idToken.jwtToken, values)
-    this.props.history.push(Endpoints.DEFAULTLOGGEDINPAGE)
+    const { createProject, setCurrentProject, history } = this.props
+
+    createProject(this.props.auth.info.idToken.jwtToken, values)
+
+    // TODO: Make this not just a fixed delay
+    setTimeout(() => {
+        history.push(Endpoints.PROJECTDETAILSPAGE)
+      }, 5000)
   }
 
   newProjectPageHeader = () => {

@@ -34,11 +34,11 @@ function * getAccessibleProjects (action) {
   const { jwtToken } = action.payload
 
   try {
-    const { data: projects } = yield call(Dispatchers.getAccessibleProjectsDispatcher, jwtToken)
+    const { data: result } = yield call(Dispatchers.getAccessibleProjectsDispatcher, jwtToken)
     yield put({
       type: actions.PROJECT_SET_STATE,
       payload: {
-        accessibleProjects: projects.body
+        accessibleProjects: result.body
       }
     })
     }
@@ -63,7 +63,7 @@ function * createNewProject (action) {
     yield put({
       type: actions.PROJECT_SET_STATE,
       payload: {
-        chosenProject: result
+        chosenProject: result.body
       }
     })
     }

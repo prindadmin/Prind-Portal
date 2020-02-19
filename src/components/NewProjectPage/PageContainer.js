@@ -18,6 +18,9 @@ const mapDispatchToProps = dispatch => {
     createProject: (jwtToken, values) => {
       dispatch(reducer.createProject(jwtToken, values))
     },
+    setCurrentProject: (values) => {
+      dispatch(reducer.updateChosenProject(values))
+    },
     resetChosenProject: () => {
       dispatch(reducer.resetChosenProject())
     }
