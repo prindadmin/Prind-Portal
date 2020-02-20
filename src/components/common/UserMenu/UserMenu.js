@@ -16,8 +16,12 @@ class UserMenu extends Component {
     await this.props.signOut(values)
   }
 
+  openProfile = (values) => {
+    this.props.history.push('/Profile')
+  }
+
   dropdownContent = <Menu>
-    <Menu.Item text='Profile' />
+    <Menu.Item text='Profile' onClick={this.openProfile}/>
     <Menu.Item text='Sign Out' onClick={this.signOut} />
   </Menu>
 

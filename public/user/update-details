@@ -1,0 +1,8 @@
+{
+  "statusCode": 201,
+  "body": {
+    "firstName": "Joe",
+    "lastName": "Bloggs",
+    "emailAddress": "joe.bloggs@prind.tech"
+  }
+}

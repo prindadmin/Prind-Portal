@@ -37,6 +37,7 @@ import EditProjectPage from './components/EditProjectPage';
 import ProjectTeamPage from './components/ProjectTeamPage';
 
 /* Other pages */
+import ProfilePage from './components/ProfilePage'
 import Error404 from './components/Error404'
 import TestPage from './components/TestPage'
 
@@ -73,6 +74,8 @@ class App extends Component{
             <PrivateRoute path='/Refurbishment' component={RefurbishmentPage} />
 
             <PrivateRoute path='/NewProject' component={NewProjectPage} />
+
+            <PrivateRoute path='/Profile' component={ProfilePage} />
 
             <PrivateRoute path='/TestPage' component={TestPage} />
 

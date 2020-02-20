@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 import * as reducer from '../../../reducers/awsReducer'
 
@@ -21,4 +22,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStatetoProps, mapDispatchToProps)(UserMenuComponent)
+export default withRouter(connect(mapStatetoProps, mapDispatchToProps)(UserMenuComponent))
