@@ -8,6 +8,8 @@ import PageComponent from './Page'
 const mapStatetoProps = state => {
   return {
     auth: state.auth,
+    user: state.user,
+    initialValues: state.user.details,
   }
 }
 

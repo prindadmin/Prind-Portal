@@ -64,10 +64,21 @@ export const BUTTON_ADD_MEMBER_TO_PROJECT = "Add New Member"
 export const MEMBER_DETAILS = "Member Details"
 export const MEMBER_FIRST_NAME = "First Name"
 export const MEMBER_LAST_NAME = "Surname"
+export const MEMBER_LANDLINE_PHONE_NUMBER_WORK = "Phone"
+export const MEMBER_MOBILE_PHONE_NUMBER_WORK = "Mobile"
 export const MEMBER_EMAIL_ADDRESS = "Email"
+export const MEMBER_POSTAL_ADDRESS_WORK = "Address"
 export const MEMBER_PROJECT_ROLE = "Role"
 export const MEMBER_STATUS = "Status"
 export const MEMBER_NAME = "Name"
+export const MEMBER_UPLOAD_DIFFERENT_AVATAR = 'Upload a different photo...'
+
+export const USER_DETAILS_LOADING = "Fetching details, please wait..."
+
+export const TAB_DETAILS = "Details"
+export const TAB_HISTORY = "History"
+export const TAB_REQUESTS = "Requests"
+
 
 export const NO_ROLE_SELECTED = "Please select a role..."
 export const NO_VALUE_SELECTED = "Please select an option..."

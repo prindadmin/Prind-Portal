@@ -1,6 +1,7 @@
 export const DEFAULTPAGE = ""
-export const DEFAULTLOGGEDINPAGE = "/Inception"
+//export const DEFAULTLOGGEDINPAGE = "/Inception"
 //export const DEFAULTLOGGEDINPAGE = "/TestPage"
+export const DEFAULTLOGGEDINPAGE = "/Profile"
 export const PROJECTDETAILSPAGE = "/Project"
 export const SIGNINPAGE = "/SignIn"
 export const SIGNUPPAGE = "/SignUp"

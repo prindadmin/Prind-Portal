@@ -47,7 +47,7 @@ export const updateUserDetails = ( jwtToken, userDetails ) => {
   }
 }
 
-
+// TODO: Implement REQUEST_SENT ACTION HANDLERS for all pages
 const ACTION_HANDLERS = {
   [action.USER_S3_UPLOAD_TOKEN_REQUESTED]: state => ({ ...state }),
 
@@ -62,6 +62,11 @@ const ACTION_HANDLERS = {
   [action.USER_S3_UPLOAD_TOKEN_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
   [action.USER_GET_DETAILS_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
   [action.USER_UPDATE_DETAILS_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
+
+
+  [action.USER_S3_UPLOAD_TOKEN_REQUEST_SENT]: (state, action) => ({ ...state, ...action.payload }),
+  [action.USER_GET_DETAILS_REQUEST_SENT]: (state, action) => { return { ...state, ...action.payload }},
+  [action.USER_UPDATE_DETAILS_REQUEST_SENT]: (state, action) => ({ ...state, ...action.payload }),
 }
 
 export const reducer = (state = defaultState, action) => {

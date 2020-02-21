@@ -852,7 +852,8 @@ hr {
 #construction-page .page-title,
 #handover-page .page-title,
 #occupation-page .page-title,
-#refurbishment-page .page-title {
+#refurbishment-page .page-title,
+#profile-page .page-title {
   margin-bottom: 2em;
 }
 
@@ -886,38 +887,42 @@ hr {
     background-color: rgba(138, 155, 168, 0.15)
 }
 
+
 /* ================================== */
-/* ========= status section ========= */
+/* ========== profile page ========== */
 /* ================================== */
 
-#generic-page .status-section {
+#profile-page {
 
 }
 
-#generic-page .status-section .status-circle {
-  padding: 10px;
-  margin: 20px;
-  display: inline-block;
+#profile-page label {
+  text-align: left;
+}
+
+#profile-page .page-content,
+#profile-page .row {
+  width: 100%;
+}
+
+#profile-page .img-thumbnail {
+  padding: 4px;
+  background-color: #fff;
+  border: 1px solid #ddd;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
 }
 
-#generic-page .missing-active {
-  background-color: red;
+#profile-page h6 {
+  margin: 10px 0;
+  font-size: 12px;
 }
 
-#generic-page .signature-active {
-  background-color: orange;
+#profile-page .button-row button {
+  margin-right: 1em;
+  margin-top: 1.5em;
+  width: 200px;
 }
 
-#generic-page .completed-active {
-  background-color: green;
-}
-
-#generic-page .not-active {
-  background-color: grey;
-}
 
 /* ================================== */
 /* ========= training page ========== */
