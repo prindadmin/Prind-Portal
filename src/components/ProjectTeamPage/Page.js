@@ -123,6 +123,14 @@ export class Page extends Component {
     const { handleSubmit } = this.props
     const { roles } = this.props.members
 
+    // re-key the roles array so the keys match those required by the drop down
+    var formattedRoles = roles.map(item => {
+      return {
+        id: item.roleId,
+        name: item.roleName
+      };
+    });
+
     // TODO: Improve formatting so that invalid messages aren't on top of the next box
 
     return (
@@ -157,7 +165,7 @@ export class Page extends Component {
         >
           <Field
             name="role"
-            values={roles}
+            values={formattedRoles}
             component={FormInputs.SelectInput}
             placeholder={strings.MEMBER_PROJECT_ROLE}
             onItemSelect={this.onItemSelected}

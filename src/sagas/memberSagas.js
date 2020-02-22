@@ -104,7 +104,7 @@ function * removeMemberFromProject (action) {
 
 
 function * getRoles (action) {
-  
+
   const { jwtToken, projectID } = action.payload
 
   try {
@@ -127,7 +127,7 @@ function * getRoles (action) {
       type: actions.MEMBER_SET_STATE,
       payload: {
         ...defaultState,
-        roles: result
+        roles: result.body
       }
     })
   }

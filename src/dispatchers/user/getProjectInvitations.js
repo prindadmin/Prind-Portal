@@ -1,7 +1,9 @@
 import axios from 'axios'
 import https from 'https'
 
-export default function(identityToken, projectID) {
+// TODO: connect to saga and reducer
+
+export default function(jwtToken) {
 
   return new Promise((resolve, reject) => {
 
@@ -11,11 +13,11 @@ export default function(identityToken, projectID) {
       }),
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': identityToken,
+        'Authorization': jwtToken,
       }
     });
 
-    instance.get(`${process.env.REACT_APP_API_ENDPOINT}/roles/get-roles`, projectID)
+    instance.get(`${process.env.REACT_APP_API_ENDPOINT}/user/get-project-invitations`)
     .then(res => {
       console.log(res)
       resolve(res)

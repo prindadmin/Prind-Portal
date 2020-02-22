@@ -1,0 +1,13 @@
+{
+    "statusCode": 200,
+    "body": [
+        {
+            "requestedBy": "778bd486-4684-482b-9565-1c2a51367b8c",
+            "requestedAt": "1582120920",
+            "accepted": true,
+            "respondedAt": "1582121015",
+            "projectId": "responded_ProjectNumberFive",
+            "roleId": "projectConsultant"
+        }
+    ]
+}
