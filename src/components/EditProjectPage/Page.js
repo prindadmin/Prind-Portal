@@ -31,9 +31,17 @@ export class Page extends Component {
     }
   }
 
-  createProject = async (values) => {
-    await this.props.createProject(this.props.auth.info.idToken.jwtToken, values)
-    this.props.history.push(Endpoints.DEFAULTLOGGEDINPAGE)
+  updateProject = async (values) => {
+
+    const { updateProjectDetails, history, auth, projects } = this.props
+
+    await updateProjectDetails(
+      auth.info.idToken.jwtToken,
+      projects.chosenProject.projectId,
+      values
+    )
+
+    history.push(Endpoints.DEFAULTLOGGEDINPAGE)
   }
 
   projectPageHeader = () => {
@@ -49,14 +57,7 @@ export class Page extends Component {
     const { handleSubmit, auth } = this.props
 
     return (
-      <form onSubmit={handleSubmit(this.createProject)} className='project-form'>
-        {
-          this.props.submitFailed ?
-          <Callout style={{marginBottom: '15px'}} intent='danger' title='Registration failed'>
-            <div>{auth.error.message}</div>
-          </Callout> :
-          null
-        }
+      <form onSubmit={handleSubmit(this.updateProject)} className='project-form'>
         <FormGroup
           label={strings.PROJECT_NAME}
           labelFor="projectName"
@@ -67,6 +68,17 @@ export class Page extends Component {
             validate={[validators.required, validators.maxLength64]}
             component={FormInputs.TextInput}
             placeholder={strings.PROJECT_NAME}
+          />
+        </FormGroup>
+
+        <FormGroup
+          label={strings.PROJECT_REFERENCE}
+          labelFor="projectReference"
+        >
+          <Field
+            name="projectReference"
+            component={FormInputs.TextInput}
+            placeholder={strings.PROJECT_REFERENCE}
           />
         </FormGroup>
 

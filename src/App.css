@@ -923,6 +923,10 @@ hr {
   width: 200px;
 }
 
+#profile-page .page-content {
+  max-width: 1200px;
+}
+
 
 /* ================================== */
 /* ========= training page ========== */

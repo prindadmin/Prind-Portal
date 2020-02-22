@@ -5,7 +5,6 @@ import {
   FormGroup,
   Button,
   ButtonGroup,
-  Callout,
 } from '@blueprintjs/core'
 
 import HeaderBar from '../common/HeaderBar';
@@ -51,13 +50,6 @@ export class Page extends Component {
 
     return (
       <form onSubmit={handleSubmit(this.createProject)} className='auth-form'>
-        {
-          this.props.submitFailed ?
-          <Callout style={{marginBottom: '15px'}} intent='danger' title='Registration failed'>
-            <div>{auth.error.message}</div>
-          </Callout> :
-          null
-        }
         <FormGroup
           label={strings.PROJECT_NAME}
           labelFor="projectName"
@@ -68,6 +60,17 @@ export class Page extends Component {
             validate={[validators.required, validators.maxLength64]}
             component={FormInputs.TextInput}
             placeholder={strings.PROJECT_NAME}
+          />
+        </FormGroup>
+
+        <FormGroup
+          label={strings.PROJECT_REFERENCE}
+          labelFor="projectReference"
+        >
+          <Field
+            name="projectReference"
+            component={FormInputs.TextInput}
+            placeholder={strings.PROJECT_REFERENCE}
           />
         </FormGroup>
 

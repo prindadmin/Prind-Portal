@@ -11,6 +11,7 @@ export const NO_PROJECT_SELECTED = "Please select a project"
 export const CREATE_NEW_PROJECT = "Create a new project"
 
 export const PROJECT_NAME = "Project Name"
+export const PROJECT_REFERENCE = "Project Reference"
 export const PROJECT_ADDRESS = "Project Address"
 export const FIELD_IS_REQUIRED = "(required)"
 

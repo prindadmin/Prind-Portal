@@ -15,8 +15,8 @@ const mapStatetoProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    createProject: (jwtToken, values) => {
-      dispatch(reducer.createProject(jwtToken, values))
+    updateProjectDetails: (jwtToken, projectID, values) => {
+      dispatch(reducer.updateProjectDetails(jwtToken, projectID, values))
     }
   }
 }

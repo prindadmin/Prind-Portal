@@ -79,6 +79,82 @@ function * createNewProject (action) {
 }
 
 
+function * updateChosenProject (action) {
+
+  const { jwtToken, project } = action.payload
+
+  try {
+
+    // Pre-fetch update to store
+    yield put({
+      type: actions.PROJECT_UPDATE_PROJECT_CHOSEN_REQUEST_SENT,
+      payload: {
+        fetching: true,
+      }
+    })
+
+    const { data: result } = yield call(Dispatchers.fetchProjectDetailsDispatcher, jwtToken, project.projectId)
+
+    // Post-fetch update to store
+    yield put({
+      type: actions.PROJECT_SET_STATE,
+      payload: {
+        fetching: false,
+        chosenProject: result.body,
+      }
+    })
+  }
+  catch (error) {
+    console.log(error)
+    yield put({
+      type: actions.PROJECT_UPDATE_PROJECT_CHOSEN_REQUEST_FAILED,
+        payload: {
+          fetching: false,
+          error,
+        }
+    })
+  }
+}
+
+
+function * updateProjectDetails (action) {
+
+  const { jwtToken, projectID, projectValues } = action.payload
+
+  try {
+
+    // Pre-fetch update to store
+    yield put({
+      type: actions.PROJECT_UPDATE_PROJECT_DETAILS_REQUEST_SENT,
+      payload: {
+        fetching: true,
+      }
+    })
+
+    const { data: result } = yield call(Dispatchers.updateProjectDetailsDispatcher, jwtToken, projectID, projectValues)
+
+    // Post-fetch update to store
+    yield put({
+      type: actions.PROJECT_SET_STATE,
+      payload: {
+        fetching: false,
+        chosenProject: projectValues,
+      }
+    })
+  }
+  catch (error) {
+    console.log(error)
+    yield put({
+      type: actions.PROJECT_GET_CURRENT_MEMBERS_REQUEST_FAILED,
+        payload: {
+          fetching: false,
+          error,
+        }
+    })
+  }
+}
+
+
 function * getCurrentMembers (action) {
 
   const { jwtToken, projectID } = action.payload
@@ -307,6 +383,8 @@ export default function * sagas () {
   yield takeLatest(actions.PROJECT_INIT, init)
   yield takeLatest(actions.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUESTED, getAccessibleProjects)
   yield takeLatest(actions.PROJECT_CREATE_PROJECT_REQUESTED, createNewProject)
+  yield takeLatest(actions.PROJECT_UPDATE_PROJECT_CHOSEN_REQUESTED, updateChosenProject)
+  yield takeLatest(actions.PROJECT_UPDATE_PROJECT_DETAILS_REQUESTED, updateProjectDetails)
   yield takeLatest(actions.PROJECT_GET_CURRENT_MEMBERS_REQUESTED, getCurrentMembers)
   yield takeLatest(actions.PROJECT_UPLOAD_FILE_REQUESTED, uploadFile)
   yield takeLatest(actions.PROJECT_DOWNLOAD_FILE_REQUESTED, downloadFile)

@@ -57,9 +57,9 @@ export const getAccessibleProjects = ( jwtToken ) => {
 
 export const updateChosenProject = ( project ) => {
   return {
-    type: action.PROJECT_PROJECT_CHOSEN,
+    type: action.PROJECT_UPDATE_PROJECT_CHOSEN_REQUESTED,
     payload: {
-      chosenProject: project,
+      project,
     }
   }
 }
@@ -69,6 +69,17 @@ export const createProject = ( jwtToken, projectValues ) => {
     type: action.PROJECT_CREATE_PROJECT_REQUESTED,
     payload: {
       jwtToken,
+      projectValues,
+    }
+  }
+}
+
+export const updateProjectDetails = ( jwtToken, projectID, projectValues ) => {
+  return {
+    type: action.PROJECT_UPDATE_PROJECT_DETAILS_REQUESTED,
+    payload: {
+      jwtToken,
+      projectID,
       projectValues,
     }
   }
@@ -141,6 +152,8 @@ const ACTION_HANDLERS = {
 
   [action.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUESTED]: state => ({ ...state }),
   [action.PROJECT_CREATE_PROJECT_REQUESTED]: state => ({ ...state }),
+  [action.PROJECT_UPDATE_PROJECT_DETAILS_REQUESTED]: state => ({ ...state }),
+  [action.PROJECT_UPDATE_PROJECT_CHOSEN_REQUESTED]: state => ({ ...state }),
   [action.PROJECT_GET_CURRENT_MEMBERS_REQUESTED]: state => ({ ...state }),
   [action.PROJECT_UPLOAD_FILE_REQUESTED]: state => ({ ...state }),
   [action.PROJECT_DOWNLOAD_FILE_REQUESTED]: state => ({ ...state }),
@@ -149,7 +162,6 @@ const ACTION_HANDLERS = {
 
   [action.PROJECT_INIT]: (state, action) => { return { ...state, ...action.payload }},
   [action.PROJECT_SET_STATE]: (state, action) => { return { ...state, ...action.payload }},
-  [action.PROJECT_PROJECT_CHOSEN]: (state, action) => { return { ...state, ...action.payload }},
 
   [action.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
   [action.PROJECT_CREATE_PROJECT_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
@@ -161,6 +173,17 @@ const ACTION_HANDLERS = {
 
   [action.PROJECT_RESET_CHOSEN_PROJECT]: (state, action) => ({ ...state, ...action.payload }),
   [action.PROJECT_RESET_DOWNLOAD_URL]: (state, action) => ({ ...state, ...action.payload }),
+
+
+  [action.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUEST_SENT]: (state, action) => { return { ...state, ...action.payload }},
+  [action.PROJECT_UPDATE_PROJECT_CHOSEN_REQUEST_SENT]: (state, action) => { return { ...state, ...action.payload }},
+  [action.PROJECT_CREATE_PROJECT_REQUEST_SENT]: (state, action) => { return { ...state, ...action.payload }},
+  [action.PROJECT_UPDATE_PROJECT_DETAILS_REQUEST_SENT]: (state, action) => { return { ...state, ...action.payload }},
+  [action.PROJECT_GET_CURRENT_MEMBERS_REQUEST_SENT]: (state, action) => { return { ...state, ...action.payload }},
+  [action.PROJECT_UPLOAD_FILE_REQUEST_SENT]: (state, action) => { return { ...state, ...action.payload }},
+  [action.PROJECT_CREATE_FIELD_REQUEST_SENT]: (state, action) => { return { ...state, ...action.payload }},
+  [action.PROJECT_UPDATE_FIELD_REQUEST_SENT]: (state, action) => { return { ...state, ...action.payload }},
+  [action.PROJECT_DOWNLOAD_FILE_REQUEST_SENT]: (state, action) => { return { ...state, ...action.payload }},
 }
 
 
