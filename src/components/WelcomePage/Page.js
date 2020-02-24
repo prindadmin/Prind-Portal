@@ -19,7 +19,7 @@ export class Page extends Component {
 
 
   componentDidMount() {
-    this.props.requestS3UploadToken(this.props.auth.info.idToken.jwtToken)
+    this.props.requestS3ProjectFileUploadToken(this.props.auth.info.idToken.jwtToken)
   }
 
   startProject = (e) => {

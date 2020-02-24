@@ -46,73 +46,74 @@ export const resetDownloadURL = () => {
   }
 }
 
-export const getAccessibleProjects = ( jwtToken ) => {
+export const getAccessibleProjects = ( identityToken ) => {
   return {
     type: action.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUESTED,
     payload: {
-      jwtToken: jwtToken,
+      identityToken: identityToken,
     }
   }
 }
 
-export const updateChosenProject = ( project ) => {
+export const updateChosenProject = ( identityToken, project ) => {
   return {
     type: action.PROJECT_UPDATE_PROJECT_CHOSEN_REQUESTED,
     payload: {
+      identityToken,
       project,
     }
   }
 }
 
-export const createProject = ( jwtToken, projectValues ) => {
+export const createProject = ( identityToken, projectValues ) => {
   return {
     type: action.PROJECT_CREATE_PROJECT_REQUESTED,
     payload: {
-      jwtToken,
+      identityToken,
       projectValues,
     }
   }
 }
 
-export const updateProjectDetails = ( jwtToken, projectID, projectValues ) => {
+export const updateProjectDetails = ( identityToken, projectID, projectValues ) => {
   return {
     type: action.PROJECT_UPDATE_PROJECT_DETAILS_REQUESTED,
     payload: {
-      jwtToken,
+      identityToken,
       projectID,
       projectValues,
     }
   }
 }
 
-export const getCurrentMembers = ( jwtToken, projectID ) => {
+export const getCurrentMembers = ( identityToken, projectID ) => {
   return {
     type: action.PROJECT_GET_CURRENT_MEMBERS_REQUESTED,
     payload: {
-      jwtToken,
+      identityToken,
       projectID,
     }
   }
 }
 
-export const uploadFile = ( jwtToken, pageName, fileDetails ) => {
+export const uploadFile = ( identityToken, pageName, fileDetails ) => {
 
   return {
     type: action.PROJECT_UPLOAD_FILE_REQUESTED,
     payload: {
-      jwtToken,
+      identityToken,
       pageName,
       fileDetails,
     }
   }
 }
 
-export const downloadFile = ( jwtToken, projectID, pageName, fieldID, version ) => {
+export const downloadFile = ( identityToken, projectID, pageName, fieldID, version ) => {
 
   return {
     type: action.PROJECT_DOWNLOAD_FILE_REQUESTED,
     payload: {
-      jwtToken,
+      identityToken,
       projectID,
       pageName,
       fieldID,
@@ -122,12 +123,12 @@ export const downloadFile = ( jwtToken, projectID, pageName, fieldID, version ) 
 }
 
 
-export const createField = ( jwtToken, projectID, pageName, fieldDetails ) => {
+export const createField = ( identityToken, projectID, pageName, fieldDetails ) => {
 
   return {
     type: action.PROJECT_CREATE_FIELD_REQUESTED,
     payload: {
-      jwtToken,
+      identityToken,
       projectID,
       pageName,
       fieldDetails,
@@ -135,12 +136,12 @@ export const createField = ( jwtToken, projectID, pageName, fieldDetails ) => {
   }
 }
 
-export const updateField = ( jwtToken, pageName, fileDetails ) => {
+export const updateField = ( identityToken, pageName, fileDetails ) => {
 
   return {
     type: action.PROJECT_UPDATE_FIELD_REQUESTED,
     payload: {
-      jwtToken,
+      identityToken,
       pageName,
       fileDetails,
     }
@@ -165,6 +166,7 @@ const ACTION_HANDLERS = {
 
   [action.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
   [action.PROJECT_CREATE_PROJECT_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
+  [action.PROJECT_UPDATE_PROJECT_CHOSEN_REQUEST_FAILED]: (state, action) => { return { ...state, ...action.payload }},
   [action.PROJECT_GET_CURRENT_MEMBERS_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
   [action.PROJECT_UPLOAD_FILE_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
   [action.PROJECT_DOWNLOAD_FILE_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),

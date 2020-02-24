@@ -927,6 +927,20 @@ hr {
   max-width: 1200px;
 }
 
+#profile-page .row {
+  margin: 0;
+}
+
+#profile-page .col-md-12,
+#profile-page .col-lg-3,
+#profile-page .col-lg-9,  {
+  margin-bottom: 15px !important;
+}
+
+#profile-page .tab-pane {
+  margin-top: 30px;
+}
+
 
 /* ================================== */
 /* ========= training page ========== */

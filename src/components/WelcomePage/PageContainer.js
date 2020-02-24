@@ -18,8 +18,8 @@ const mapDispatchToProps = dispatch => {
     init: () => {
       dispatch(userReducer.init())
     },
-    requestS3UploadToken: (jwt) => {
-      dispatch(userReducer.requestS3UploadToken(jwt))
+    requestS3ProjectFileUploadToken: (jwt) => {
+      dispatch(userReducer.requestS3ProjectFileUploadToken(jwt))
     }
   }
 }

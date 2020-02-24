@@ -43,17 +43,17 @@ export class Element extends Component {
 
   uploadToS3 = () => {
 
-    const { fileDetails, auth, projectID, pageName, fieldID } = this.props
+    const { fileDetails, user, projectID, pageName, fieldID } = this.props
     const file = fileDetails.files[0]
 
-    if (auth.s3Token === undefined) {
+    if (user.projectS3Token === undefined) {
       this.setState({
         uploadError: true
       })
       return;
     }
 
-    const { AccessKeyId, SecretAccessKey, SessionToken } = auth.s3Token.body
+    const { AccessKeyId, SecretAccessKey, SessionToken } = user.projectS3Token
 
     // Update credentials to allow access to S3
     AWS.config.update({

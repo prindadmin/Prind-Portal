@@ -8,7 +8,8 @@ import Element from './UploaderPopOver'
 const mapStatetoProps = state => {
   return {
     auth: state.auth,
-    projects: state.projects
+    user: state.user,
+    projects: state.projects,
   }
 }
 

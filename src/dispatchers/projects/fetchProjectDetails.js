@@ -4,6 +4,9 @@ import https from 'https'
 
 export default function(identityToken, projectId) {
 
+  console.log(identityToken)
+  console.log(projectId)
+
   return new Promise((resolve, reject) => {
 
     const instance = axios.create({
@@ -20,13 +23,12 @@ export default function(identityToken, projectId) {
     .then(res => {
       console.log(res)
 
-      if (res.data.status !== 200) {
-        reject(res)
+      if (res.data.statusCode == 200) {
+        resolve(res)
         return
       }
 
-
-      resolve(res)
+      reject(res)
     })
     .catch((error) => {
       console.log(error)

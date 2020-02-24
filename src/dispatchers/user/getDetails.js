@@ -1,9 +1,7 @@
 import axios from 'axios'
 import https from 'https'
 
-// TODO: Remove delay and connect to real API
-
-export default function(jwtToken) {
+export default function(identityToken) {
 
   return new Promise((resolve, reject) => {
 
@@ -13,21 +11,14 @@ export default function(jwtToken) {
       }),
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': jwtToken,
+        'Authorization': identityToken,
       }
     });
 
-    instance.get(`${process.env.REACT_APP_API_LOCAL_ENDPOINT}/user/get-details`)
+    instance.get(`${process.env.REACT_APP_API_ENDPOINT}/user/profile`)
     .then(res => {
       console.log(res)
-
-      // DELAY added for testing
-      setTimeout(() => {
-          resolve(res)
-        }, 1000)
-
-
-      //resolve(res)
+      resolve(res)
     })
     .catch((error) => {
       console.log(error)

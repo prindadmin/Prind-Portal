@@ -3,7 +3,8 @@ import * as action from '../actions'
 let defaultState = {
   fetching: false,
   details: {},
-  s3Token: "",
+  projectS3Token: "",
+  userS3Token: "",
 }
 
 
@@ -15,11 +16,11 @@ export const init = () => {
 }
 
 
-export const requestS3UploadToken = ( jwtToken, project_id, pageName ) => {
+export const requestS3ProjectFileUploadToken = ( identityToken, project_id, pageName ) => {
   return {
-    type: action.USER_S3_UPLOAD_TOKEN_REQUESTED,
+    type: action.USER_S3_UPLOAD_PROJECT_FILE_TOKEN_REQUESTED,
     payload: {
-      jwtToken,
+      identityToken,
       project_id,
       pageName,
     }
@@ -27,21 +28,32 @@ export const requestS3UploadToken = ( jwtToken, project_id, pageName ) => {
 }
 
 
-export const getUserDetails = ( jwtToken ) => {
+export const requestS3UserFileUploadToken = ( identityToken, fileType ) => {
   return {
-    type: action.USER_GET_DETAILS_REQUESTED,
+    type: action.USER_S3_UPLOAD_USER_FILE_TOKEN_REQUESTED,
     payload: {
-      jwtToken,
+      identityToken,
+      fileType,
     }
   }
 }
 
 
-export const updateUserDetails = ( jwtToken, userDetails ) => {
+export const getUserDetails = ( identityToken ) => {
+  return {
+    type: action.USER_GET_DETAILS_REQUESTED,
+    payload: {
+      identityToken,
+    }
+  }
+}
+
+
+export const updateUserDetails = ( identityToken, userDetails ) => {
   return {
     type: action.USER_UPDATE_DETAILS_REQUESTED,
     payload: {
-      jwtToken,
+      identityToken,
       userDetails,
     }
   }
@@ -49,7 +61,7 @@ export const updateUserDetails = ( jwtToken, userDetails ) => {
 
 // TODO: Implement REQUEST_SENT ACTION HANDLERS for all pages
 const ACTION_HANDLERS = {
-  [action.USER_S3_UPLOAD_TOKEN_REQUESTED]: state => ({ ...state }),
+  [action.USER_S3_UPLOAD_PROJECT_FILE_TOKEN_REQUESTED]: state => ({ ...state }),
 
   [action.USER_INIT]: (state, action) => { return { ...state, ...action.payload }},
   [action.USER_SET_STATE]: (state, action) => { return { ...state, ...action.payload }},
@@ -59,12 +71,14 @@ const ACTION_HANDLERS = {
   [action.USER_UPDATE_DETAILS_REQUESTED]: state => ({ ...state }),
 
 
-  [action.USER_S3_UPLOAD_TOKEN_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
+  [action.USER_S3_UPLOAD_PROJECT_FILE_TOKEN_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
+  [action.USER_S3_UPLOAD_USER_FILE_TOKEN_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
   [action.USER_GET_DETAILS_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
   [action.USER_UPDATE_DETAILS_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
 
 
-  [action.USER_S3_UPLOAD_TOKEN_REQUEST_SENT]: (state, action) => ({ ...state, ...action.payload }),
+  [action.USER_S3_UPLOAD_PROJECT_FILE_TOKEN_REQUEST_SENT]: (state, action) => ({ ...state, ...action.payload }),
+  [action.USER_S3_UPLOAD_USER_FILE_TOKEN_REQUEST_SENT]: (state, action) => ({ ...state, ...action.payload }),
   [action.USER_GET_DETAILS_REQUEST_SENT]: (state, action) => { return { ...state, ...action.payload }},
   [action.USER_UPDATE_DETAILS_REQUEST_SENT]: (state, action) => ({ ...state, ...action.payload }),
 }

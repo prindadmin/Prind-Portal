@@ -15,8 +15,8 @@ const mapStatetoProps = state => {
 // This defines all the actions that can be fetched from the reducer
 const mapDispatchToProps = dispatch => {
   return {
-    updateChosenProject: (project) => {
-      dispatch(reducer.updateChosenProject(project))
+    updateChosenProject: (jwtToken, project) => {
+      dispatch(reducer.updateChosenProject(jwtToken, project))
     }
   }
 }

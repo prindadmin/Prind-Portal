@@ -1,7 +1,7 @@
 import axios from 'axios'
 import https from 'https'
 
-export default function(jwtToken, userDetails) {
+export default function(identityToken, userDetails) {
 
   return new Promise((resolve, reject) => {
 
@@ -11,7 +11,7 @@ export default function(jwtToken, userDetails) {
       }),
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': jwtToken,
+        'Authorization': identityToken,
       }
     });
 

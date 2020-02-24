@@ -31,10 +31,10 @@ function * init (action) {
 
 function * getAccessibleProjects (action) {
 
-  const { jwtToken } = action.payload
+  const { identityToken } = action.payload
 
   try {
-    const { data: result } = yield call(Dispatchers.getAccessibleProjectsDispatcher, jwtToken)
+    const { data: result } = yield call(Dispatchers.getAccessibleProjectsDispatcher, identityToken)
     yield put({
       type: actions.PROJECT_SET_STATE,
       payload: {
@@ -56,10 +56,10 @@ function * getAccessibleProjects (action) {
 
 function * createNewProject (action) {
 
-  const { jwtToken, projectValues } = action.payload
+  const { identityToken, projectValues } = action.payload
 
   try {
-    const { data: result } = yield call(Dispatchers.createNewProjectDispatcher, jwtToken, projectValues)
+    const { data: result } = yield call(Dispatchers.createNewProjectDispatcher, identityToken, projectValues)
     yield put({
       type: actions.PROJECT_SET_STATE,
       payload: {
@@ -81,7 +81,7 @@ function * createNewProject (action) {
 
 function * updateChosenProject (action) {
 
-  const { jwtToken, project } = action.payload
+  const { identityToken, project } = action.payload
 
   try {
 
@@ -93,7 +93,7 @@ function * updateChosenProject (action) {
       }
     })
 
-    const { data: result } = yield call(Dispatchers.fetchProjectDetailsDispatcher, jwtToken, project.projectId)
+    const { data: result } = yield call(Dispatchers.fetchProjectDetailsDispatcher, identityToken, project.projectId)
 
     // Post-fetch update to store
     yield put({
@@ -119,7 +119,7 @@ function * updateChosenProject (action) {
 
 function * updateProjectDetails (action) {
 
-  const { jwtToken, projectID, projectValues } = action.payload
+  const { identityToken, projectID, projectValues } = action.payload
 
   try {
 
@@ -131,7 +131,7 @@ function * updateProjectDetails (action) {
       }
     })
 
-    const { data: result } = yield call(Dispatchers.updateProjectDetailsDispatcher, jwtToken, projectID, projectValues)
+    const { data: result } = yield call(Dispatchers.updateProjectDetailsDispatcher, identityToken, projectID, projectValues)
 
     // Post-fetch update to store
     yield put({
@@ -157,7 +157,7 @@ function * updateProjectDetails (action) {
 
 function * getCurrentMembers (action) {
 
-  const { jwtToken, projectID } = action.payload
+  const { identityToken, projectID } = action.payload
 
   try {
 
@@ -169,7 +169,7 @@ function * getCurrentMembers (action) {
       }
     })
 
-    const { data: result } = yield call(Dispatchers.getCurrentMembersDispatcher, jwtToken, projectID)
+    const { data: result } = yield call(Dispatchers.getCurrentMembersDispatcher, identityToken, projectID)
 
     // Post-fetch update to store
     yield put({
@@ -219,7 +219,7 @@ function actionSwitcher(pageName) {
 
 function * uploadFile (action) {
 
-  const { jwtToken, pageName, fileDetails } = action.payload
+  const { identityToken, pageName, fileDetails } = action.payload
 
   try {
 
@@ -231,7 +231,7 @@ function * uploadFile (action) {
       }
     })
 
-    const { data: result } = yield call(Dispatchers.uploadFileDispatcher, jwtToken, fileDetails)
+    const { data: result } = yield call(Dispatchers.uploadFileDispatcher, identityToken, fileDetails)
 
     console.log(result)
 
@@ -242,9 +242,19 @@ function * uploadFile (action) {
     yield put({
       type: action,
       payload: {
+        identityToken,
+        projectID: fileDetails.projectID,
+      }
+    })
+
+    // Post-fetch update to store
+    yield put({
+      type: actions.PROJECT_SET_STATE,
+      payload: {
         fetching: false,
       }
     })
+
   }
   catch (error) {
     console.log(error)
@@ -261,7 +271,7 @@ function * uploadFile (action) {
 
 function * downloadFile (action) {
 
-  const { jwtToken, projectID, pageName, fieldID, version } = action.payload
+  const { identityToken, projectID, pageName, fieldID, version } = action.payload
 
   try {
 
@@ -273,7 +283,7 @@ function * downloadFile (action) {
       }
     })
 
-    const { data: result } = yield call(Dispatchers.downloadFileDispatcher, jwtToken, projectID, pageName, fieldID, version)
+    const { data: result } = yield call(Dispatchers.downloadFileDispatcher, identityToken, projectID, pageName, fieldID, version)
 
     // Post-fetch update to store
     yield put({
@@ -301,7 +311,7 @@ function * downloadFile (action) {
 
 function * createField (action) {
 
-  const { jwtToken, projectID, pageName, fieldDetails } = action.payload
+  const { identityToken, projectID, pageName, fieldDetails } = action.payload
 
   try {
 
@@ -313,7 +323,7 @@ function * createField (action) {
       }
     })
 
-    const { data: result } = yield call(Dispatchers.createFieldDispatcher, jwtToken, projectID, pageName, fieldDetails)
+    const { data: result } = yield call(Dispatchers.createFieldDispatcher, identityToken, projectID, pageName, fieldDetails)
 
     // Decide which action to dispatch to update the correct page's content
     const action = actionSwitcher(pageName)
@@ -341,7 +351,7 @@ function * createField (action) {
 
 function * updateField (action) {
 
-  const { jwtToken, pageName, fieldDetails } = action.payload
+  const { identityToken, pageName, fieldDetails } = action.payload
 
   try {
 
@@ -353,7 +363,7 @@ function * updateField (action) {
       }
     })
 
-    const { data: result } = yield call(Dispatchers.updateFieldDispatcher, jwtToken, fieldDetails)
+    const { data: result } = yield call(Dispatchers.updateFieldDispatcher, identityToken, fieldDetails)
 
     // Decide which action to dispatch to update the correct page's content
     const action = actionSwitcher(pageName)

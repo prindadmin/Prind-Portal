@@ -36,10 +36,14 @@ class ProjectSelector extends React.Component {
   // Fired when the user clicks on a project on the project selector popup
   projectChosen = (project) => {
 
+    const { auth } = this.props
     const { pathname } = this.props.location
 
     this.setState({ showPopup: false })
-    this.props.updateChosenProject(project)
+    this.props.updateChosenProject(
+      auth.info.idToken.jwtToken,
+      project
+    )
 
     if (pathname === '/NewProject') {
       this.props.history.push(Endpoints.DEFAULTLOGGEDINPAGE)

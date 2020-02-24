@@ -20,10 +20,10 @@ export class Page extends Component {
 
   componentDidMount() {
 
-    const { projects, auth, getContent, requestS3UploadToken, getProjectMembers } = this.props
+    const { projects, auth, getContent, requestS3ProjectFileUploadToken, getProjectMembers } = this.props
 
     if (projects.chosenProject.projectName !== strings.NO_PROJECT_SELECTED) {
-      requestS3UploadToken(auth.info.idToken.jwtToken, projects.chosenProject.projectId, pageName)
+      requestS3ProjectFileUploadToken(auth.info.idToken.jwtToken, projects.chosenProject.projectId, pageName)
       getProjectMembers(auth.info.idToken.jwtToken, projects.chosenProject.projectId)
       getContent(auth.info.idToken.jwtToken, projects.chosenProject.projectId)
     }
@@ -31,10 +31,10 @@ export class Page extends Component {
 
   componentDidUpdate(prevProps) {
 
-    const { projects, auth, getContent, requestS3UploadToken, getProjectMembers } = this.props
+    const { projects, auth, getContent, requestS3ProjectFileUploadToken, getProjectMembers } = this.props
 
     if (projects.chosenProject.projectId !== prevProps.projects.chosenProject.projectId) {
-      requestS3UploadToken(auth.info.idToken.jwtToken, projects.chosenProject.projectId, pageName)
+      requestS3ProjectFileUploadToken(auth.info.idToken.jwtToken, projects.chosenProject.projectId, pageName)
       getProjectMembers(auth.info.idToken.jwtToken, projects.chosenProject.projectId)
       getContent(auth.info.idToken.jwtToken, projects.chosenProject.projectId)
     }
@@ -115,6 +115,8 @@ export class Page extends Component {
 
   render() {
 
+    const { projects, pageContent } = this.props
+
     return (
       <div id='refurbishment-page'>
         <div className="App-header">
@@ -129,7 +131,7 @@ export class Page extends Component {
               this.props.projects !== undefined ?
                 this.props.projects.chosenProject.projectName === strings.NO_PROJECT_SELECTED ?
                 this.showEmptyPage() :
-                  this.props.pageContent.refurbishment.fetching ?
+                  pageContent[pageName].fetching ?
                   this.showLoadingPage() :
                   this.showFilledPage() :
               null

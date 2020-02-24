@@ -13,34 +13,34 @@ export const init = () => {
   }
 }
 
-export const addMemberToProject = ( jwtToken, projectID, memberDetails ) => {
+export const addMemberToProject = ( identityToken, projectID, memberDetails ) => {
   return {
     type: action.MEMBER_ADD_MEMBER_REQUESTED,
     payload: {
-      jwtToken,
+      identityToken,
       projectID,
       memberDetails,
     }
   }
 }
 
-export const removeMemberFromProject = ( jwtToken, projectID, memberDetails ) => {
+export const removeMemberFromProject = ( identityToken, projectID, memberDetails ) => {
   return {
     type: action.MEMBER_REMOVE_MEMBER_REQUESTED,
     payload: {
-      jwtToken,
+      identityToken,
       projectID,
       memberDetails,
     }
   }
 }
 
-export const getRoles = ( jwtToken, projectID ) => {
+export const getRoles = ( identityToken, projectID ) => {
 
   return {
     type: action.MEMBER_GET_AVAILABLE_ROLES_REQUESTED,
     payload: {
-      jwtToken,
+      identityToken,
       projectID,
     }
   }

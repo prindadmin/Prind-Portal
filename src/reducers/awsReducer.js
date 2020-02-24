@@ -76,11 +76,8 @@ export const changeSuccess = () => {
 }
 
 const ACTION_HANDLERS = {
-  [action.USER_S3_UPLOAD_TOKEN_REQUESTED]: state => ({ ...state }),
-
   [action.AUTH_INIT]: (state, action) => { return { ...state, ...action.payload }},
   [action.AUTH_SET_STATE]: (state, action) => { return { ...state, ...action.payload }},
-  [action.USER_S3_UPLOAD_TOKEN_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
 }
 
 let defaultState = {

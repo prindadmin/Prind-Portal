@@ -22,16 +22,35 @@ function * init (action) {
 
 
 
-function * getS3UploadToken (action) {
+function * getS3ProjectFileUploadToken (action) {
 
-  const { jwtToken, project_id, pageName } = action.payload
+  const { identityToken, project_id, pageName } = action.payload
 
   try {
-    const { data: s3Token } = yield call(Dispatchers.s3UploadTokenDispatcher, jwtToken, project_id, pageName)
+    const { data: result } = yield call(Dispatchers.s3UploadProjectFileTokenDispatcher, identityToken, project_id, pageName)
     yield put({
-      type: actions.AUTH_SET_STATE,
+      type: actions.USER_SET_STATE,
       payload: {
-        s3Token: s3Token
+        projectS3Token: result.body,
+      }
+    })
+    }
+    catch (e) {
+      console.log(e)
+  }
+}
+
+
+function * getS3UserFileUploadToken (action) {
+
+  const { identityToken, fileType } = action.payload
+
+  try {
+    const { data: result } = yield call(Dispatchers.s3UploadUserFileTokenDispatcher, identityToken, fileType)
+    yield put({
+      type: actions.USER_SET_STATE,
+      payload: {
+        userS3Token: result.body
       }
     })
     }
@@ -44,7 +63,7 @@ function * getS3UploadToken (action) {
 
 function * getUserDetails (action) {
 
-  const { jwtToken } = action.payload
+  const { identityToken } = action.payload
 
   try {
 
@@ -56,7 +75,7 @@ function * getUserDetails (action) {
       }
     })
 
-    const { data: result } = yield call(Dispatchers.getUserDetailsDispatcher, jwtToken)
+    const { data: result } = yield call(Dispatchers.getUserDetailsDispatcher, identityToken)
 
     // Post-fetch update to store
     yield put({
@@ -83,7 +102,7 @@ function * getUserDetails (action) {
 
 function * updateUserDetails (action) {
 
-  const { jwtToken, userDetails } = action.payload
+  const { identityToken, userDetails } = action.payload
 
   try {
 
@@ -95,7 +114,7 @@ function * updateUserDetails (action) {
       }
     })
 
-    const { data: result } = yield call(Dispatchers.updateUserDetailsDispatcher, jwtToken, userDetails)
+    const { data: result } = yield call(Dispatchers.updateUserDetailsDispatcher, identityToken, userDetails)
 
     // Post-fetch update to store
     yield put({
@@ -121,7 +140,8 @@ function * updateUserDetails (action) {
 
 
 export default function * sagas () {
-  yield takeLatest(actions.USER_S3_UPLOAD_TOKEN_REQUESTED, getS3UploadToken)
+  yield takeLatest(actions.USER_S3_UPLOAD_PROJECT_FILE_TOKEN_REQUESTED, getS3ProjectFileUploadToken)
+  yield takeLatest(actions.USER_S3_UPLOAD_USER_FILE_TOKEN_REQUESTED, getS3UserFileUploadToken)
   yield takeLatest(actions.USER_GET_DETAILS_REQUESTED, getUserDetails)
   yield takeLatest(actions.USER_UPDATE_DETAILS_REQUESTED, updateUserDetails)
 }

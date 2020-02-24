@@ -1,9 +1,7 @@
 import axios from 'axios'
 import https from 'https'
 
-// TODO: Connect to saga and reducer
-
-export default function(identityToken) {
+export default function(identityToken, fileType) {
 
   return new Promise((resolve, reject) => {
 
@@ -17,7 +15,7 @@ export default function(identityToken) {
       }
     });
 
-    instance.get(`${process.env.REACT_APP_API_ENDPOINT}/user/get-signature-requests`)
+    instance.get(`${process.env.REACT_APP_API_ENDPOINT}/user/get-sts/${fileType}`)
     .then(res => {
       console.log(res)
       resolve(res)

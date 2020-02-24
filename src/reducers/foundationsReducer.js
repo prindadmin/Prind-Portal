@@ -11,21 +11,21 @@ export const init = () => {
   }
 }
 
-export const selfSignFile = ( jwtToken, fieldDetails ) => {
+export const selfSignFile = ( identityToken, fieldDetails ) => {
   return {
     type: action.FOUNDATIONS_SELF_SIGN_FILE_REQUESTED,
     payload: {
-      jwtToken,
+      identityToken,
       fieldDetails,
     }
   }
 }
 
-export const requestSignatures = ( jwtToken, projectID, pageName, fieldID, fieldDetails, members ) => {
+export const requestSignatures = ( identityToken, projectID, pageName, fieldID, fieldDetails, members ) => {
   return {
     type: action.FOUNDATIONS_FILE_SIGNATURE_REQUEST_REQUESTED,
     payload: {
-      jwtToken,
+      identityToken,
       projectID,
       pageName,
       fieldID,

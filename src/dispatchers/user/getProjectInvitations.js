@@ -3,7 +3,7 @@ import https from 'https'
 
 // TODO: connect to saga and reducer
 
-export default function(jwtToken) {
+export default function(identityToken) {
 
   return new Promise((resolve, reject) => {
 
@@ -13,7 +13,7 @@ export default function(jwtToken) {
       }),
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': jwtToken,
+        'Authorization': identityToken,
       }
     });
 

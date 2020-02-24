@@ -27,7 +27,7 @@ function * init (action) {
 
 function * addMemberToProject (action) {
 
-  const { jwtToken, projectID, memberDetails } = action.payload
+  const { identityToken, projectID, memberDetails } = action.payload
 
   try {
 
@@ -40,7 +40,7 @@ function * addMemberToProject (action) {
       }
     })
 
-    const { data: result } = yield call(addMemberToProjectDispatcher, jwtToken, projectID, memberDetails)
+    const { data: result } = yield call(addMemberToProjectDispatcher, identityToken, projectID, memberDetails)
 
     // Post-fetch update to store
     yield put({
@@ -66,7 +66,7 @@ function * addMemberToProject (action) {
 
 function * removeMemberFromProject (action) {
 
-  const { jwtToken, projectID, memberDetails } = action.payload
+  const { identityToken, projectID, memberDetails } = action.payload
 
   try {
 
@@ -79,7 +79,7 @@ function * removeMemberFromProject (action) {
       }
     })
 
-    const { data: result } = yield call(removeMemberFromProjectDispatcher, jwtToken, projectID, memberDetails)
+    const { data: result } = yield call(removeMemberFromProjectDispatcher, identityToken, projectID, memberDetails)
 
     // Post-fetch update to store
     yield put({
@@ -105,7 +105,7 @@ function * removeMemberFromProject (action) {
 
 function * getRoles (action) {
 
-  const { jwtToken, projectID } = action.payload
+  const { identityToken, projectID } = action.payload
 
   try {
 
@@ -118,7 +118,7 @@ function * getRoles (action) {
       }
     })
 
-    const { data: result } = yield call(getRolesDispatcher, jwtToken, projectID)
+    const { data: result } = yield call(getRolesDispatcher, identityToken, projectID)
 
     console.log(result)
 
