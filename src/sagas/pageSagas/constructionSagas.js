@@ -31,9 +31,16 @@ function * getPageContent (action) {
       }
     })
     }
-    catch (e) {
-      console.log(e)
-  }
+    catch (error) {
+      console.log(error)
+      yield put({
+        type: actions.PAGE_GET_CONTENT_CONSTRUCTION_REQUEST_FAILED,
+          payload: {
+            fetching: false,
+            error,
+          }
+      })
+    }
 }
 
 

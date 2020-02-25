@@ -59,6 +59,7 @@ export const updateUserDetails = ( identityToken, userDetails ) => {
   }
 }
 
+
 // TODO: Implement REQUEST_SENT ACTION HANDLERS for all pages
 const ACTION_HANDLERS = {
   [action.USER_S3_UPLOAD_PROJECT_FILE_TOKEN_REQUESTED]: state => ({ ...state }),

@@ -23,7 +23,7 @@ export default function(identityToken, projectId) {
     .then(res => {
       console.log(res)
 
-      if (res.data.statusCode == 200) {
+      if (res.data.statusCode === 200) {
         resolve(res)
         return
       }

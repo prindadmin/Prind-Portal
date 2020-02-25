@@ -198,6 +198,7 @@ function * completeNewPassword (action) {
         hasChangedPassword: states.AUTH_SUCCESS
       }
     })
+    action.payload.resolve()
   } catch (e) {
     yield put({
       type: actions.AUTH_SET_STATE,
@@ -205,6 +206,7 @@ function * completeNewPassword (action) {
         error: e
       }
     })
+    action.payload.reject()
   }
 }
 

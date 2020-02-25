@@ -23,6 +23,7 @@ function * getPageContent (action) {
       }
     })
     const { data: result } = yield call(feasibilityPageDispatcher, identityToken, projectID )
+
     yield put({
       type: actions.PAGE_FEASIBILITY_SET_STATE,
       payload: {
@@ -30,9 +31,16 @@ function * getPageContent (action) {
         fields: result.body,
       }
     })
-    }
-    catch (e) {
-      console.log(e)
+  }
+  catch (error) {
+    console.log(error)
+    yield put({
+      type: actions.PAGE_GET_CONTENT_FEASIBILITY_REQUEST_FAILED,
+        payload: {
+          fetching: false,
+          error,
+        }
+    })
   }
 }
 

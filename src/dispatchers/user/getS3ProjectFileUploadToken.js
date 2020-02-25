@@ -19,7 +19,7 @@ export default function(identityToken, project_id, pageName) {
     .then(res => {
 
       // If the status code is correct, then resolve and return
-      if (res.data.statusCode == 200) {
+      if (res.data.statusCode === 200) {
         resolve(res)
         return
       }

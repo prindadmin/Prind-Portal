@@ -73,6 +73,8 @@ export const MEMBER_PROJECT_ROLE = "Role"
 export const MEMBER_STATUS = "Status"
 export const MEMBER_NAME = "Name"
 export const MEMBER_UPLOAD_DIFFERENT_AVATAR = 'Upload a different photo...'
+export const MEMBER_FOUNDATIONS_ID = "Foundations ID"
+export const MEMBER_FOUNDATIONS_ID_NOT_FOUND = "No Foundations ID for this Email"
 
 export const USER_DETAILS_LOADING = "Fetching details, please wait..."
 
@@ -140,3 +142,11 @@ export const NO_UPLOAD_NAME = "No name supplied"
 
 export const PROFILE_PAGE_TITLE = "Edit Profile"
 export const PROFILE_PAGE_DESCRIPTION = ""
+
+export const CURRENT_PASSWORD = "Current Password"
+export const NEW_PASSWORD = "New Password"
+export const REPEAT_NEW_PASSWORD = "Repeat New Password"
+export const CHANGE_PASSWORD_UNSUCCESSFUL = "Change unsuccessful, please try again"
+export const PASSWORDS_DO_NOT_MATCH = "New passwords do not match"
+
+export const USER_UNABLE_TO_FETCH_DETAILS = "Unable to fetch profile details, please try again!"

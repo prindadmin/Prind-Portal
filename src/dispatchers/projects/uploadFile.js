@@ -21,11 +21,20 @@ export default function(identityToken, projectID, pageName, fieldID, fileDetails
       }
     });
 
-    instance.post(`${process.env.REACT_APP_API_ENDPOINT}/project/${projectID}/page/${pageName}/field/${fieldID}`, fileDetails)
+    var body = {
+      fieldData: {
+        filename: fileDetails.userFileName,
+        tags: []
+      },
+      type: "file"
+    }
+
+
+    instance.post(`${process.env.REACT_APP_API_ENDPOINT}/project/${projectID}/page/${pageName}/field/${fieldID}`, body)
     .then(res => {
 
       // If the status code is correct, then resolve and return
-      if (res.data.statusCode == 201) {
+      if (res.data.statusCode === 200 || res.data.statusCode == 201) {
         resolve(res)
         return
       }

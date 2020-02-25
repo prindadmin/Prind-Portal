@@ -21,7 +21,7 @@ export default function(identityToken, userDetails) {
     .then(res => {
 
       // If the status code is correct, then resolve and return
-      if (res.data.statusCode == 201) {
+      if (res.data.statusCode === 201) {
         resolve(res)
         return
       }

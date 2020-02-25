@@ -101,11 +101,11 @@ export class Element extends Component {
           </div>
 
           <div className='field-values col-auto'>
-            <div>{details.uploadName}</div>
-            <div>{details.uploadDateTime}</div>
-            <div>{details.uploadedBy}</div>
+            <div>{details.uploadName !== undefined ? details.uploadName : <br />}</div>
+            <div>{details.uploadedDateTime !== undefined ? details.uploadedDateTime : <br />}</div>
+            <div>{details.uploadedBy !== undefined ? details.uploadedBy : <br />}</div>
             {
-              details.proofLink === null ?
+              details.proofLink === null  || details.proofLink === undefined ?
                 strings.NO_PROOF_AVAILABLE :
                 <div onClick={e => e.stopPropagation()}>
                   <a href={details.proofLink}>{strings.LINK_TO_PROOF}</a>

@@ -7,24 +7,12 @@ import PageComponent from './Page'
 
 const mapStatetoProps = state => {
   return {
-    auth: state.auth,
-    user: state.user,
-    initialValues: state.user.details,
+    fetching: state.user.fetching
   }
 }
 
 const mapDispatchToProps = dispatch => {
-  return {
-    getUserDetails: (jwtToken) => {
-      dispatch(userReducer.getUserDetails(jwtToken))
-    },
-    updateUserDetails: (jwtToken, userDetails) => {
-      dispatch(userReducer.updateUserDetails(jwtToken, userDetails))
-    },
-    requestS3UserFileUploadToken: (jwtToken, fileType) => {
-      dispatch(userReducer.requestS3UserFileUploadToken(jwtToken, fileType))
-    }
-  }
+  return {}
 }
 
 export default withRouter(connect(mapStatetoProps, mapDispatchToProps)(PageComponent))

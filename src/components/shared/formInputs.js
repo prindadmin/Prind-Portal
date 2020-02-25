@@ -16,6 +16,7 @@ const validationErrorStyle = {
 }
 
 export const TextInput = (field) => {
+  
   const { touched, invalid, error, active } = field.meta
   return (
     <React.Fragment>
@@ -25,6 +26,7 @@ export const TextInput = (field) => {
         type='text'
         name={field.input.name}
         placeholder={field.placeholder}
+        disabled={field.disabled !== undefined ? field.disabled : false}
       />
       { touched && invalid && !active ? <small style={validationErrorStyle}>{error}</small> : null }
     </React.Fragment>

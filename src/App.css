@@ -18,6 +18,8 @@
   --field-element-yellow: #fffcbb;
   --field-element-green: #d2e9af;
   --field-element-grey: #ededed;
+  --field-element-blue: rgba(19,124,189,.15);
+  --field-element-dark-blue: #106ba3;
   --field-element-dark-grey: #bcbcbc;
   --tile-selected-green: #d2e9af;
 }
@@ -77,6 +79,12 @@ hr {
 
 .create-custom-field-button-container button {
   width: 400px;
+}
+
+.horizontal-line {
+  border-top: 1px solid #999;
+  width: 80%;
+  margin: 1em auto;
 }
 
 /* ================================ */
@@ -331,25 +339,31 @@ hr {
 
 #project-team-page .form-container {
   width: 80%;
-  max-width: 430px;
+  max-width: 1180px;
 }
 
 #project-team-page .project-form {
-    width: 100%;
-    padding: 15px;
-    margin: 0 auto;
+  width: 100%;
+  padding: 15px;
+  margin: 0 auto;
 }
 
 #project-team-page .bp3-popover-target {
-    width: 100%;
+  width: 100%;
 }
 
 .bp3-popover-content a {
-    min-height: 30px;
+  min-height: 30px;
 }
 
-#project-team-page .bp3-button {
-    width: 100%;
+#project-team-page .page-content-section .bp3-button {
+  width: 430px;
+}
+
+#project-team-page .member-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #project-team-page .member-list {
@@ -361,17 +375,38 @@ hr {
 
 #contact-tile {
   text-align: left;
+  display: flex;
+  background-color: var(--field-element-blue);
+  padding: 10px;
+  margin-top: 1em;
+  margin-bottom: 1.5em;
+  border-radius: 0.5em;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
 }
 
-#contact-tile .bp3-callout {
-  margin-bottom: 10px;
-}
 
 #contact-tile .bp3-heading {
+  margin-left: 15px;
+}
+
+#contact-tile .col-3 {
+  padding: 0;
 }
 
 #contact-tile h4 {
   margin-bottom: 0.5em;
+}
+
+#contact-tile .img-thumbnail {
+  padding: 2px;
+  background-color: #aaa;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+}
+
+#contact-tile .avatar {
+  height: 97px;
+  width: 97px;
 }
 
 /* ================================== */
@@ -912,6 +947,11 @@ hr {
   border-radius: 50%;
 }
 
+#profile-page .avatar {
+  height: 150px;
+  width: 150px;
+}
+
 #profile-page h6 {
   margin: 10px 0;
   font-size: 12px;
@@ -941,6 +981,17 @@ hr {
   margin-top: 30px;
 }
 
+
+#password-change-section {
+  width: 100%;
+  max-width: 430px;
+  margin: 2em auto;
+}
+
+#password-change-section button {
+  width: 100%;
+  max-width: 430px;
+}
 
 /* ================================== */
 /* ========= training page ========== */

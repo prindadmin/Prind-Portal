@@ -192,22 +192,26 @@ export class Page extends Component {
 
     return (
       <div className="member-list-container">
-        <ButtonGroup fill>
-          <Button
-            onClick={(e) => this.setState({creatingNewUser: true})}
-            intent='primary'
-            text={strings.BUTTON_ADD_MEMBER_TO_PROJECT}
-          />
-        </ButtonGroup>
+        <div className="row">
+          <ButtonGroup fill>
+            <Button
+              onClick={(e) => this.setState({creatingNewUser: true})}
+              intent='primary'
+              text={strings.BUTTON_ADD_MEMBER_TO_PROJECT}
+            />
+          </ButtonGroup>
+        </div>
 
-        <div className="member-list">
+        <div className="member-list row">
           {
             this.props.projects.memberList.map((memberDetails, index) => {
               return (
-                <ContactTile
-                  key={index}
-                  memberDetails={memberDetails}
-                />
+                <div className="col-md-12 col-lg-12 col-xl-6">
+                  <ContactTile
+                    key={index}
+                    memberDetails={memberDetails}
+                  />
+                </div>
               )
             })
           }

@@ -20,7 +20,7 @@ export default function(identityToken) {
       console.log(res)
 
       // If the status code is correct, then resolve and return
-      if (res.data.statusCode == 200) {
+      if (res.data.statusCode === 200) {
         resolve(res)
         return
       }
