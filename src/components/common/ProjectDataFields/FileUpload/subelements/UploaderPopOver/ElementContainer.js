@@ -15,8 +15,8 @@ const mapStatetoProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    uploadFile: (jwtToken, pageName, fileDetails) => {
-      dispatch(projectsreducer.uploadFile(jwtToken, pageName, fileDetails))
+    uploadFile: (identityToken, projectID, pageName, fieldID, fileDetails) => {
+      dispatch(projectsreducer.uploadFile(identityToken, projectID, pageName, fieldID, fileDetails))
     }
   }
 }

@@ -17,8 +17,16 @@ export default function(identityToken, fileType) {
 
     instance.get(`${process.env.REACT_APP_API_ENDPOINT}/user/get-sts/${fileType}`)
     .then(res => {
-      console.log(res)
-      resolve(res)
+
+      // If the status code is correct, then resolve and return
+      if (res.data.statusCode == 200) {
+        resolve(res)
+        return
+      }
+
+      // If the status code is wrong, reject
+      reject(res)
+
     })
     .catch((error) => {
       console.log(error)

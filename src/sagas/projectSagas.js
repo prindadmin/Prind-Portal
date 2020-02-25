@@ -219,7 +219,7 @@ function actionSwitcher(pageName) {
 
 function * uploadFile (action) {
 
-  const { identityToken, pageName, fileDetails } = action.payload
+  const { identityToken, projectID, pageName, fieldID, fileDetails } = action.payload
 
   try {
 
@@ -231,7 +231,7 @@ function * uploadFile (action) {
       }
     })
 
-    const { data: result } = yield call(Dispatchers.uploadFileDispatcher, identityToken, fileDetails)
+    const { data: result } = yield call(Dispatchers.uploadFileDispatcher, identityToken, projectID, pageName, fieldID, fileDetails)
 
     console.log(result)
 
@@ -243,7 +243,7 @@ function * uploadFile (action) {
       type: action,
       payload: {
         identityToken,
-        projectID: fileDetails.projectID,
+        projectID,
       }
     })
 

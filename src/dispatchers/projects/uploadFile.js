@@ -1,8 +1,12 @@
 import axios from 'axios'
 import https from 'https'
 
-export default function(identityToken, fileDetails) {
+export default function(identityToken, projectID, pageName, fieldID, fileDetails) {
 
+  console.log(identityToken)
+  console.log(projectID)
+  console.log(pageName)
+  console.log(fieldID)
   console.log(fileDetails)
 
   return new Promise((resolve, reject) => {
@@ -17,10 +21,18 @@ export default function(identityToken, fileDetails) {
       }
     });
 
-
-    instance.get(`${process.env.REACT_APP_API_LOCAL_ENDPOINT}/project/file.json`, fileDetails)
+    instance.post(`${process.env.REACT_APP_API_ENDPOINT}/project/${projectID}/page/${pageName}/field/${fieldID}`, fileDetails)
     .then(res => {
-      resolve(res)
+
+      // If the status code is correct, then resolve and return
+      if (res.data.statusCode == 201) {
+        resolve(res)
+        return
+      }
+
+      // If the status code is wrong, reject
+      reject(res)
+
     })
     .catch((error) => {
       console.log(error)

@@ -1,6 +1,8 @@
 import axios from 'axios'
 import https from 'https'
 
+// TODO: Connect to API once endpoint is built
+
 export default function(identityToken, userDetails) {
 
   return new Promise((resolve, reject) => {
@@ -15,10 +17,18 @@ export default function(identityToken, userDetails) {
       }
     });
 
-    instance.post(`${process.env.REACT_APP_API_LOCAL_ENDPOINT}/user/update-details`, userDetails)
+    instance.post(`${process.env.REACT_APP_API_LOCAL_ENDPOINT}/user/profile`, userDetails)
     .then(res => {
-      console.log(res)
-      resolve(res)
+
+      // If the status code is correct, then resolve and return
+      if (res.data.statusCode == 201) {
+        resolve(res)
+        return
+      }
+
+      // If the status code is wrong, reject
+      reject(res)
+
     })
     .catch((error) => {
       console.log(error)

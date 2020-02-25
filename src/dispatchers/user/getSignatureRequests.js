@@ -1,8 +1,6 @@
 import axios from 'axios'
 import https from 'https'
 
-// TODO: Connect to saga and reducer
-
 export default function(identityToken) {
 
   return new Promise((resolve, reject) => {
@@ -19,8 +17,16 @@ export default function(identityToken) {
 
     instance.get(`${process.env.REACT_APP_API_ENDPOINT}/user/get-signature-requests`)
     .then(res => {
-      console.log(res)
-      resolve(res)
+
+      // If the status code is correct, then resolve and return
+      if (res.data.statusCode == 200) {
+        resolve(res)
+        return
+      }
+
+      // If the status code is wrong, reject
+      reject(res)
+
     })
     .catch((error) => {
       console.log(error)

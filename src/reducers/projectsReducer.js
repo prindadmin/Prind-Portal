@@ -96,13 +96,15 @@ export const getCurrentMembers = ( identityToken, projectID ) => {
   }
 }
 
-export const uploadFile = ( identityToken, pageName, fileDetails ) => {
+export const uploadFile = ( identityToken, projectID, pageName, fieldID, fileDetails ) => {
 
   return {
     type: action.PROJECT_UPLOAD_FILE_REQUESTED,
     payload: {
       identityToken,
+      projectID,
       pageName,
+      fieldID,
       fileDetails,
     }
   }

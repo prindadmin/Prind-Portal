@@ -117,24 +117,20 @@ export class Element extends Component {
 
   // Tell the Prin-D server that there has been an upload with the following details
   informServer = (response) => {
-    const { auth, fileDetails, projectID, pageName, fieldID } = this.props
-    const { params } = response.request
+    const { auth, uploadFile, fileDetails, projectID, pageName, fieldID } = this.props
 
     // Build parameters
     var uploadDetails = {
-      userFileName: fileDetails.files[0].name,
-      bucket: params.Bucket,
-      key: params.Key,
-      projectID,
-      pageName,
-      fieldID,
+      userFileName: fileDetails.files[0].name
     }
 
     // Send to the reducer
-    this.props.uploadFile(
+    uploadFile(
       auth.info.idToken.jwtToken,
+      projectID,
       pageName,
-      uploadDetails
+      fieldID,
+      uploadDetails,
     )
 
     // Close the popup
