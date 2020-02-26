@@ -210,13 +210,13 @@ export class Element extends Component {
 
     return (
       <PopOverHandler>
-        <div id='popup-greyer'>
+        <div id='popup-greyer' onClick={(e) => {
+          this.closePopover()
+          e.stopPropagation()
+          }}>
           <div id='pick-signer-popover'>
-            <div id='popup-box' className={requestStatus}>
-              <div className='pick-signer-popover-container' onClick={(e) => {
-                this.closePopover()
-                e.stopPropagation()
-                }}>
+            <div id='popup-box' className={requestStatus} onClick={(e) => e.stopPropagation()}>
+              <div className='pick-signer-popover-container'>
                 <div className='element-title'>
                   {strings.PICK_DOCUMENT_SIGNERS}
                 </div>

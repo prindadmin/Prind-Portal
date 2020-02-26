@@ -15,9 +15,7 @@ let defaultState = {
 function * init (action) {
   yield put({
     type: actions.FOUNDATIONS_SET_STATE,
-    payload: {
-      defaultState
-    }
+    payload: defaultState
   })
 }
 

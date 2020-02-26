@@ -1,15 +1,11 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+//import PropTypes from 'prop-types'
 
 import UserDetailsForm from './elements/UserDetailsForm'
 import PasswordForm from './elements/PasswordForm'
 
 export class Page extends Component {
-  static propTypes = {
-    auth: PropTypes.object.isRequired,
-    user: PropTypes.object.isRequired,
-    initialValues: PropTypes.object.isRequired,
-  }
+  static propTypes = {}
 
   render() {
 

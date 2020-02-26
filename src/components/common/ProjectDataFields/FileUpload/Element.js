@@ -22,7 +22,7 @@ export class Element extends Component {
       id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       description: PropTypes.string,
-      editable: PropTypes.bool,
+      editable: PropTypes.bool.isRequired,
       fileDetails: PropTypes.array.isRequired,
     }),
     pageName: PropTypes.string.isRequired,
@@ -48,7 +48,7 @@ export class Element extends Component {
     const { fileDetails } = this.props.elementContent
 
     if (fileDetails.length !== 0) {
-      if (fileDetails[0].proofLink !== null) {
+      if (fileDetails[0].proofLink !== undefined) {
         this.setState({
           fileState: ' has-anchor'
         })
@@ -166,6 +166,7 @@ export class Element extends Component {
                   projectID={projects.chosenProject.projectId}
                   pageName={pageName}
                   fieldID={elementContent.id}
+                  editable={elementContent.editable}
                 /> :
                 <CurrentVersion
                   details={null}
@@ -180,6 +181,7 @@ export class Element extends Component {
                 ref='fileInput'
                 onInputChange={(e) => this.fileChosen(e)}
                 text={filePrompt}
+                disabled={!elementContent.editable}
               />
 
 

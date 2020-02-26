@@ -3,6 +3,7 @@ import * as action from '../actions'
 let defaultState = {
   fetching: false,
   details: {},
+  projectInvitations: [],
   projectS3Token: "",
   userS3Token: "",
 }
@@ -60,28 +61,52 @@ export const updateUserDetails = ( identityToken, userDetails ) => {
 }
 
 
+export const getProjectInvitations = ( identityToken ) => {
+  return {
+    type: action.USER_GET_PROJECT_INVITATIONS_REQUESTED,
+    payload: {
+      identityToken,
+    }
+  }
+}
+
+export const respondToProjectInvitation = ( identityToken, projectID, response ) => {
+  return {
+    type: action.USER_PROJECT_INVITATION_SEND_RESPONSE_REQUESTED,
+    payload: {
+      identityToken,
+      projectID,
+      response,
+    }
+  }
+}
+
+
 // TODO: Implement REQUEST_SENT ACTION HANDLERS for all pages
 const ACTION_HANDLERS = {
-  [action.USER_S3_UPLOAD_PROJECT_FILE_TOKEN_REQUESTED]: state => ({ ...state }),
 
   [action.USER_INIT]: (state, action) => { return { ...state, ...action.payload }},
   [action.USER_SET_STATE]: (state, action) => { return { ...state, ...action.payload }},
 
-
+  [action.USER_S3_UPLOAD_PROJECT_FILE_TOKEN_REQUESTED]: state => ({ ...state }),
   [action.USER_GET_DETAILS_REQUESTED]: state => ({ ...state }),
   [action.USER_UPDATE_DETAILS_REQUESTED]: state => ({ ...state }),
-
-
-  [action.USER_S3_UPLOAD_PROJECT_FILE_TOKEN_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
-  [action.USER_S3_UPLOAD_USER_FILE_TOKEN_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
-  [action.USER_GET_DETAILS_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
-  [action.USER_UPDATE_DETAILS_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
-
+  [action.USER_GET_PROJECT_INVITATIONS_REQUESTED]: state => ({ ...state }),
+  [action.USER_PROJECT_INVITATION_SEND_RESPONSE_REQUESTED]: state => ({ ...state }),
 
   [action.USER_S3_UPLOAD_PROJECT_FILE_TOKEN_REQUEST_SENT]: (state, action) => ({ ...state, ...action.payload }),
   [action.USER_S3_UPLOAD_USER_FILE_TOKEN_REQUEST_SENT]: (state, action) => ({ ...state, ...action.payload }),
   [action.USER_GET_DETAILS_REQUEST_SENT]: (state, action) => { return { ...state, ...action.payload }},
   [action.USER_UPDATE_DETAILS_REQUEST_SENT]: (state, action) => ({ ...state, ...action.payload }),
+  [action.USER_GET_PROJECT_INVITATIONS_REQUEST_SENT]: (state, action) => ({ ...state, ...action.payload }),
+  [action.USER_PROJECT_INVITATION_SEND_RESPONSE_REQUEST_SENT]: (state, action) => ({ ...state, ...action.payload }),
+
+  [action.USER_S3_UPLOAD_PROJECT_FILE_TOKEN_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
+  [action.USER_S3_UPLOAD_USER_FILE_TOKEN_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
+  [action.USER_GET_DETAILS_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
+  [action.USER_UPDATE_DETAILS_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
+  [action.USER_GET_PROJECT_INVITATIONS_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
+  [action.USER_PROJECT_INVITATION_SEND_RESPONSE_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
 }
 
 export const reducer = (state = defaultState, action) => {

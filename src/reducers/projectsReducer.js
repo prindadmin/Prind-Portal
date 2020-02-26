@@ -153,6 +153,9 @@ export const updateField = ( identityToken, pageName, fileDetails ) => {
 
 const ACTION_HANDLERS = {
 
+  [action.PROJECT_INIT]: (state, action) => { return { ...state, ...action.payload }},
+  [action.PROJECT_SET_STATE]: (state, action) => { return { ...state, ...action.payload }},
+
   [action.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUESTED]: state => ({ ...state }),
   [action.PROJECT_CREATE_PROJECT_REQUESTED]: state => ({ ...state }),
   [action.PROJECT_UPDATE_PROJECT_DETAILS_REQUESTED]: state => ({ ...state }),
@@ -162,9 +165,6 @@ const ACTION_HANDLERS = {
   [action.PROJECT_DOWNLOAD_FILE_REQUESTED]: state => ({ ...state }),
   [action.PROJECT_CREATE_FIELD_REQUESTED]: state => ({ ...state }),
   [action.PROJECT_UPDATE_FIELD_REQUESTED]: state => ({ ...state }),
-
-  [action.PROJECT_INIT]: (state, action) => { return { ...state, ...action.payload }},
-  [action.PROJECT_SET_STATE]: (state, action) => { return { ...state, ...action.payload }},
 
   [action.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
   [action.PROJECT_CREATE_PROJECT_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
@@ -177,7 +177,6 @@ const ACTION_HANDLERS = {
 
   [action.PROJECT_RESET_CHOSEN_PROJECT]: (state, action) => ({ ...state, ...action.payload }),
   [action.PROJECT_RESET_DOWNLOAD_URL]: (state, action) => ({ ...state, ...action.payload }),
-
 
   [action.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUEST_SENT]: (state, action) => { return { ...state, ...action.payload }},
   [action.PROJECT_UPDATE_PROJECT_CHOSEN_REQUEST_SENT]: (state, action) => { return { ...state, ...action.payload }},

@@ -7,8 +7,19 @@ import Footer from '../common/footer'
 
 //import FileDetailPopover from "../common/ProjectDataFields/FileUpload/subelements/FileDetailPopover"
 
-import CreatingProjectPopover from "../NewProjectPage/elements/CreatingProjectPopover"
+//import CreatingProjectPopover from "../NewProjectPage/elements/CreatingProjectPopover"
+import {
+  RequestTile
+} from "../ProfilePage/elements/requestsTab/elements"
 
+const details = {
+  "requestedBy": "a0c1bf48-52d0-4eb8-97ba-ed6cbaaff9ea",
+  "requestedAt": "1582729783",
+  "projectId": "BenTest12020-02-26",
+  "roleId": "projectConsultant",
+  "projectName": "Ben Test 1",
+  "requestedByUser": "1d28cb63-d052-442a-ba82-4943b3ffe62f"
+}
 
 export class Page extends Component {
   static propTypes = {
@@ -31,7 +42,7 @@ export class Page extends Component {
     return(
       <div id="test-page">
         <div className="center-container">
-          <CreatingProjectPopover />
+          <RequestTile requestDetails={details}/>
         </div>
       </div>
     )

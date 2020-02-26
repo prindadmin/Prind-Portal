@@ -76,7 +76,7 @@ export class Page extends Component {
   addMember = async (values) => {
 
     var newValues = values
-    newValues.id = this.state.selectedRoleID
+    newValues.roleId = this.state.selectedRoleID
 
     await this.props.addMember(
       this.props.auth.info.idToken.jwtToken,
@@ -137,23 +137,11 @@ export class Page extends Component {
       <form onSubmit={handleSubmit(this.addMember)} className='add-member-form'>
         <FormGroup
           label={strings.MEMBER_DETAILS}
-          labelFor="firstName"
+          labelFor="emailAddress"
         >
           <Field
-            name="firstName"
-            validate={[validators.required, validators.maxLength64]}
-            component={FormInputs.TextInput}
-            placeholder={strings.MEMBER_FIRST_NAME}
-          />
-          <Field
-            name="lastName"
-            validate={[validators.required, validators.maxLength64]}
-            component={FormInputs.TextInput}
-            placeholder={strings.MEMBER_LAST_NAME}
-          />
-          <Field
-            name="emailAddress"
-            validate={[validators.required, validators.isEmailAddress]}
+            name="username"
+            validate={[validators.required]}
             component={FormInputs.TextInput}
             placeholder={strings.MEMBER_EMAIL_ADDRESS}
           />
@@ -161,10 +149,10 @@ export class Page extends Component {
 
         <FormGroup
           label={strings.MEMBER_PROJECT_ROLE}
-          labelFor="role"
+          labelFor="roleId"
         >
           <Field
-            name="role"
+            name="roleId"
             values={formattedRoles}
             component={FormInputs.SelectInput}
             placeholder={strings.MEMBER_PROJECT_ROLE}

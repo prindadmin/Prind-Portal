@@ -3,18 +3,40 @@ import PropTypes from 'prop-types'
 
 //import * as strings from '../../../../data/Strings'
 
+import {
+  RequestTile
+} from './elements'
+
 export class Page extends Component {
   static propTypes = {
     auth: PropTypes.object.isRequired,
     user: PropTypes.object.isRequired,
+    getProjectInvitations: PropTypes.func.isRequired,
   }
+
+  constructor(props) {
+    super()
+  }
+
 
   render() {
 
+    const { user } = this.props
+
     return(
       <div className="tab-pane active">
-        <div id="requests-tab-container">
-          This will soon contain all the requests the user has received
+        <div className='row'>
+          <div id="requests-tab-container">
+            {
+              user.projectInvitations.length > 0 ? user.projectInvitations.map((request, index) => {
+                return (
+                  <div className="col-md-12 col-lg-6 col-xl-4">
+                    <RequestTile id={index} requestDetails={request} />
+                  </div>
+                )
+              }) : null
+            }
+          </div>
         </div>
       </div>
     )

@@ -22,10 +22,14 @@ import {
 export class Page extends Component {
   static propTypes = {
     tabToOpen: PropTypes.string,
+    getProjectInvitations: PropTypes.func.isRequired,
   }
 
   constructor(props) {
     super(props)
+    props.getUserDetails(props.auth.info.idToken.jwtToken)
+    props.getProjectInvitations(props.auth.info.idToken.jwtToken)
+
 
     var tabName = "user"
 

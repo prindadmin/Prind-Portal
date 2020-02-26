@@ -87,6 +87,10 @@ hr {
   margin: 1em auto;
 }
 
+.bp3-tabs {
+  width: 100%;
+}
+
 /* ================================ */
 /* ======== sign-in section ======= */
 /* ================================ */
@@ -336,11 +340,12 @@ hr {
 }
 
 #project-team-page .add-member-form {
-
+  max-width: 430px;
+  margin: auto;
 }
 
 #project-team-page .header-section {
-  margin: 2em 0 0 0;
+  margin: 2em 0 2em 0;
 }
 
 #project-team-page label.bp3-label {
@@ -353,7 +358,7 @@ hr {
     margin-bottom: 0.33em;
 }
 
-#project-team-page .bp3-form-group {
+#project-team-page .bp3-form-group:last-of-type {
     margin-bottom: 2em;
 }
 
@@ -404,6 +409,7 @@ hr {
 }
 
 #project-team-page .member-list {
+  width: 100%;
 }
 
 /* ================================== */
@@ -1028,6 +1034,53 @@ hr {
 #password-change-section button {
   width: 100%;
   max-width: 430px;
+}
+
+
+/* ============================================ */
+/* ====== requests-tab-container element ====== */
+/* ============================================ */
+
+#requests-tab-container {
+  width: 100%;
+}
+
+/* ================================================ */
+/* ====== project-invitation-request element ====== */
+/* ================================================ */
+
+#project-invitation-request {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--field-element-blue);
+  padding: 10px;
+  margin-top: 1em;
+  margin-bottom: 1.5em;
+  border-radius: 0.5em;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+  width: 100%;
+}
+
+
+#project-invitation-request h4 {
+  margin-bottom: 0.5em;
+}
+
+#project-invitation-request .button-row {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1em;
+  width: 100%;
+}
+
+#project-invitation-request button {
+  margin: 0 !important;
+  width: calc((100% - 15px) / 2) !important;
+}
+
+#project-invitation-request button:last-of-type {
+  margin-left: 15px !important;
 }
 
 /* ================================== */

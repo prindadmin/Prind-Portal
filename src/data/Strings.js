@@ -154,3 +154,7 @@ export const USER_UNABLE_TO_FETCH_DETAILS = "Unable to fetch profile details, pl
 
 export const PROJECT_CREATION_IN_PROGRESS = "Project Creation In Progress"
 export const PROJECT_CREATION_BILLING_WARNING = "You will only be billed for the project you once you begin uploading data to one of the project tabs (e.g. inception, feasibility, design, etc)"
+
+export const PROJECT_INVITATION = "Project Invitation"
+export const BUTTON_ACCEPT = "Accept"
+export const BUTTON_REJECT = "Reject"

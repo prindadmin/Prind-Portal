@@ -49,10 +49,6 @@ export class Page extends Component {
       errorText: "",
     }
 
-    if (Object.keys(props.user.details).length === 0) {
-      props.getUserDetails(props.auth.info.idToken.jwtToken)
-    }
-
     this.getImage(props)
   }
 

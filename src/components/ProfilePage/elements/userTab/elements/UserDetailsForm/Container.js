@@ -15,9 +15,6 @@ const mapStatetoProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getUserDetails: (jwtToken) => {
-      dispatch(userReducer.getUserDetails(jwtToken))
-    },
     updateUserDetails: (jwtToken, userDetails) => {
       dispatch(userReducer.updateUserDetails(jwtToken, userDetails))
     },

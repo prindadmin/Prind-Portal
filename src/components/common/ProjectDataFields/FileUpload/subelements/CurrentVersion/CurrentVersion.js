@@ -15,9 +15,10 @@ import * as strings from '../../../../../../data/Strings'
 export class Element extends Component {
   static propTypes = {
     details: PropTypes.object,
-    projectID: PropTypes.any,
-    pageName: PropTypes.any,
-    fieldID: PropTypes.any,
+    projectID: PropTypes.string,
+    pageName: PropTypes.string,
+    fieldID: PropTypes.string,
+    editable: PropTypes.bool,
   }
 
   constructor() {
@@ -118,13 +119,13 @@ export class Element extends Component {
           <Button
             intent={Intent.PRIMARY}
             onClick={(e) => this.requestSignature(e)}
-            disabled={!this.state.fileCanBeSign}
+            disabled={!this.state.fileCanBeSign || !this.props.editable}
             text={strings.BUTTON_REQUEST_SIGNATURES}
           />
           <Button
             intent={Intent.PRIMARY}
             onClick={(e) => this.sendSelfSignRequest(e)}
-            disabled={this.state.fileIsSelfSigned}
+            disabled={this.state.fileIsSelfSigned || !this.props.editable}
             text={strings.BUTTON_SELF_SIGN_FILE}
           />
         </div>

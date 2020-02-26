@@ -20,6 +20,7 @@ export class Element extends Component {
       id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       description: PropTypes.string,
+      editable: PropTypes.bool.isRequired,
       fieldDetails: PropTypes.shape({
         dateValue: PropTypes.string,
       }).isRequired,
@@ -60,7 +61,7 @@ export class Element extends Component {
   render() {
 
     const { handleSubmit } = this.props
-    const { title, description, fieldDetails } = this.props.elementContent
+    const { title, description, editable, fieldDetails } = this.props.elementContent
 
     var currentDateValue = new Date()
 
@@ -89,6 +90,7 @@ export class Element extends Component {
                     name="dateValue"
                     component={FormInputs.CalendarPicker}
                     value={currentDateValue}
+                    disabled={!editable}
                     />
                 </div>
               </div>

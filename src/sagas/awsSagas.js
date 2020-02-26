@@ -81,10 +81,36 @@ function * signUp (action) {
 function * signOut () {
   try {
     yield call(auth.signOut)
+
     yield put({
       type: actions.AUTH_SET_STATE,
       payload: { isSignedIn: states.AUTH_FAIL }
     })
+
+    // Clear the project store
+    yield put({
+      type: actions.PROJECT_INIT,
+      payload: {}
+    })
+
+    // Clear the member store
+    yield put({
+      type: actions.MEMBER_INIT,
+      payload: {}
+    })
+
+    // Clear the foundations store
+    yield put({
+      type: actions.FOUNDATIONS_INIT,
+      payload: {}
+    })
+
+    // Clear the user store
+    yield put({
+      type: actions.USER_INIT,
+      payload: {}
+    })
+
   } catch (e) {
     yield put({
       type: actions.AUTH_SET_STATE,
