@@ -131,7 +131,7 @@ function * updateProjectDetails (action) {
       }
     })
 
-    const { data: result } = yield call(Dispatchers.updateProjectDetailsDispatcher, identityToken, projectID, projectValues)
+    yield call(Dispatchers.updateProjectDetailsDispatcher, identityToken, projectID, projectValues)
 
     // Post-fetch update to store
     yield put({
@@ -323,7 +323,7 @@ function * createField (action) {
       }
     })
 
-    const { data: result } = yield call(Dispatchers.createFieldDispatcher, identityToken, projectID, pageName, fieldDetails)
+    yield call(Dispatchers.createFieldDispatcher, identityToken, projectID, pageName, fieldDetails)
 
     // Decide which action to dispatch to update the correct page's content
     const action = actionSwitcher(pageName)
@@ -331,6 +331,15 @@ function * createField (action) {
     // Post-fetch update to store
     yield put({
       type: action,
+      payload: {
+        identityToken,
+        projectID,
+      }
+    })
+
+    // Post-fetch update to store
+    yield put({
+      type: actions.PROJECT_SET_STATE,
       payload: {
         fetching: false,
       }
@@ -363,10 +372,19 @@ function * updateField (action) {
       }
     })
 
-    const { data: result } = yield call(Dispatchers.updateFieldDispatcher, identityToken, fieldDetails)
+    yield call(Dispatchers.updateFieldDispatcher, identityToken, fieldDetails)
 
     // Decide which action to dispatch to update the correct page's content
     const action = actionSwitcher(pageName)
+
+    // Post-fetch update to store
+    yield put({
+      type: action,
+      payload: {
+        identityToken,
+        projectID: fieldDetails.projectID,
+      }
+    })
 
     // Post-fetch update to store
     yield put({

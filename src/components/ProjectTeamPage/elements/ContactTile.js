@@ -1,13 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import {
-  Callout,
-  Intent,
-} from '@blueprintjs/core'
-
-// TODO: Improve look of tiles
-
 import * as strings from '../../../data/Strings'
 
 

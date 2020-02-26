@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Field, reduxForm } from 'redux-form'
 import PropTypes from 'prop-types'
 
 import HeaderBar from '../common/HeaderBar';
@@ -8,28 +7,17 @@ import ProjectLoading from '../common/ProjectLoading'
 import Footer from '../common/footer'
 
 import {
-  FormGroup,
-  Button,
-  Intent,
-  FileInput,
   Tab,
   Tabs,
 } from '@blueprintjs/core'
 
-import AWS from 'aws-sdk';
-
 import * as strings from '../../data/Strings'
-import * as validators from '../../validators'
-
-import * as FormInputs from '../shared/formInputs'
 
 import {
   UserTab,
   HistoryTab,
-  RequeetsTab,
+  RequestsTab,
 } from './elements'
-
-// TODO: Add spinner to image when loading / updating
 
 export class Page extends Component {
   static propTypes = {
@@ -65,30 +53,6 @@ export class Page extends Component {
   }
 
 
-  historyPanel = () => {
-
-    // TODO: Create data for history panel
-
-    return(
-      <div>
-        This will soon contain all the projects the user has joined (and when), all the documents uploaded, and all the documents signed
-      </div>
-    )
-  }
-
-  requestsPanel = () => {
-
-    // TODO: Create data for requests panel
-
-    return(
-      <div>
-        This will soon contain all the requests the user has received
-      </div>
-    )
-  }
-
-
-  // TODO: See if any of the social media stuff could be useful in the final product
   showFilledPage = () => {
 
     const { activeTab }  = this.state
@@ -103,8 +67,8 @@ export class Page extends Component {
         <div className="row">
           <Tabs id='profileTabs' className="nav nav-tabs" onChange={this.handleTabChange} selectedTabId={activeTab}>
             <Tab id="user" title={strings.TAB_DETAILS} panel={<UserTab />} />
-            <Tab id="history" title={strings.TAB_HISTORY} panel={this.historyPanel()} />
-            <Tab id="requests" title={strings.TAB_REQUESTS} panel={this.requestsPanel()} />
+            <Tab id="history" title={strings.TAB_HISTORY} panel={<HistoryTab />} />
+            <Tab id="requests" title={strings.TAB_REQUESTS} panel={<RequestsTab />} />
             <Tabs.Expander />
           </Tabs>
         </div>

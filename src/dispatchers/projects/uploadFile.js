@@ -34,7 +34,7 @@ export default function(identityToken, projectID, pageName, fieldID, fileDetails
     .then(res => {
 
       // If the status code is correct, then resolve and return
-      if (res.data.statusCode === 200 || res.data.statusCode == 201) {
+      if (res.data.statusCode === 200 || res.data.statusCode === 201) {
         resolve(res)
         return
       }

@@ -23,6 +23,7 @@ const defaultAvatar = `images/default-avatar.png`
 
 export class Page extends Component {
   static propTypes = {
+    user: PropTypes.object.isRequired,
   }
 
   constructor(props) {
@@ -197,7 +198,7 @@ export class Page extends Component {
 
     const { auth, updateUserDetails } = this.props
 
-    this.props.updateUserDetails(
+    updateUserDetails(
       auth.info.idToken.jwtToken,
       values,
     )
@@ -292,6 +293,7 @@ export class Page extends Component {
                     validate={[validators.required, validators.isEmailAddress]}
                     component={FormInputs.TextInput}
                     placeholder={strings.MEMBER_EMAIL_ADDRESS}
+                    disabled={true}
                   />
                 </FormGroup>
 

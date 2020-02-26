@@ -154,7 +154,7 @@ export class Element extends Component {
   render() {
 
     const { details, projectID, pageName, fieldID } = this.props
-    const { showFileDetails, fileDetails, chosenFileDetails } = this.state
+    const { showFileDetails, chosenFileDetails } = this.state
 
     return(
       <div className='upload-history-container'>

@@ -127,8 +127,6 @@ export class Element extends Component {
 
   getContent = () => {
 
-    const { chosenFileDetails, projectID, pageName, fieldID } = this.props
-
     return (
       <React.Fragment>
         <div className="row">
@@ -154,8 +152,6 @@ export class Element extends Component {
   }
 
   render() {
-
-    const { fileDetails } = this.props
 
     return(
       <PopOverHandler>

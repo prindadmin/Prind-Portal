@@ -24,11 +24,10 @@ export class Page extends Component {
 
   createProject = (values) => {
 
-    // TODO: add popover to say project is creating
+    // TODO: add popover to say project is creating and will cost money
+    const { createProject, history, auth } = this.props
 
-    const { createProject, setCurrentProject, history } = this.props
-
-    createProject(this.props.auth.info.idToken.jwtToken, values)
+    createProject(auth.info.idToken.jwtToken, values)
 
     // TODO: Make this not just a fixed delay
     setTimeout(() => {
@@ -46,7 +45,7 @@ export class Page extends Component {
 
   newProjectForm = () => {
 
-    const { handleSubmit, auth } = this.props
+    const { handleSubmit } = this.props
 
     return (
       <form onSubmit={handleSubmit(this.createProject)} className='auth-form'>

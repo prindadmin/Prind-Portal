@@ -6,20 +6,13 @@ import {
   FormGroup,
   Button,
   Intent,
-  FileInput,
   Callout,
 } from '@blueprintjs/core'
-
-import AWS from 'aws-sdk';
 
 import * as strings from '../../../../../../data/Strings'
 import * as validators from '../../../../../../validators'
 
 import * as FormInputs from '../../../../../shared/formInputs'
-
-const defaultAvatar = `images/default-avatar.png`
-
-// TODO: Add spinner to image when loading / updating
 
 export class Page extends Component {
   static propTypes = {
@@ -56,7 +49,7 @@ export class Page extends Component {
 
   render() {
 
-    const { user, handleSubmit } = this.props
+    const { handleSubmit } = this.props
 
     return (
       <div id='password-change-section'>

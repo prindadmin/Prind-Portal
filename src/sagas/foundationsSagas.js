@@ -37,7 +37,7 @@ function * selfSignFile (action) {
       }
     })
 
-    const { data: result } = yield call(selfSignFileDispatcher, identityToken, fieldDetails)
+    yield call(selfSignFileDispatcher, identityToken, fieldDetails)
 
     // Post-fetch update to store
     yield put({
@@ -75,7 +75,7 @@ function * requestFileSignature (action) {
       }
     })
 
-    const { data: result } = yield call(requestSignatureDispatcher, identityToken, projectID, pageName, fieldID, fieldDetails, members)
+    yield call(requestSignatureDispatcher, identityToken, projectID, pageName, fieldID, fieldDetails, members)
 
     // Post-fetch update to store
     yield put({

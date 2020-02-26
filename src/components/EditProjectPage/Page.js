@@ -5,7 +5,6 @@ import {
   FormGroup,
   Button,
   ButtonGroup,
-  Callout,
 } from '@blueprintjs/core'
 
 import HeaderBar from '../common/HeaderBar';
@@ -54,7 +53,7 @@ export class Page extends Component {
 
   projectForm = () => {
 
-    const { handleSubmit, auth } = this.props
+    const { handleSubmit } = this.props
 
     return (
       <form onSubmit={handleSubmit(this.updateProject)} className='project-form'>
