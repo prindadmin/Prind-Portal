@@ -11,6 +11,8 @@ import {
 
 const ico = <FontAwesomeIcon icon={faUserCircle} size='3x' />
 
+// TODO: Show how many requests a user has
+
 class UserMenu extends Component {
   signOut = async (values) => {
     await this.props.signOut(values)

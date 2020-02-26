@@ -7,6 +7,9 @@ import {
   RequestTile
 } from './elements'
 
+// TODO: Handle  other types of request (sign document)
+// TODO: Add in a "no requests" placeholder
+
 export class Page extends Component {
   static propTypes = {
     auth: PropTypes.object.isRequired,
