@@ -17,12 +17,28 @@ import * as strings from '../../data/Strings'
 import * as validators from '../../validators'
 import * as Endpoints from '../../endpoints'
 
+import {
+  CreatingProjectPopover
+} from "./elements"
 
 export class Page extends Component {
   static propTypes = {
   }
 
+  constructor() {
+    super()
+
+    this.state = {
+      showCreatingPopover: false
+    }
+  }
+
+
   createProject = (values) => {
+
+    this.setState({
+      showCreatingPopover: true
+    })
 
     // TODO: add popover to say project is creating and will cost money
     const { createProject, history, auth } = this.props
@@ -167,7 +183,9 @@ export class Page extends Component {
         <div className="App-header">
           <HeaderBar />
         </div>
-        {}
+        {
+          this.state.showCreatingPopover ? <CreatingProjectPopover /> : null
+        }
 
         <div className='content-with-sidebar full-height row'>
           <PageChooserSection />

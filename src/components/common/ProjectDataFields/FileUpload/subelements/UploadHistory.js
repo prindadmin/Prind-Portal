@@ -66,7 +66,7 @@ export class Element extends Component {
     const  { details } = this.props
 
     const reversedDetails = details.reverse().filter(function(fileUpload) {
-      return(fileUpload.ver !== 0)
+      return(fileUpload.ver !== "0" && fileUpload.ver !== 0)
     })
 
     return (
@@ -90,6 +90,12 @@ export class Element extends Component {
           <div className='col'>
             <Label>
               <b>{strings.UPLOADED_BY}</b>
+            </Label>
+          </div>
+
+          <div className='col'>
+            <Label>
+              <b>{strings.UPLOAD_VERSION}</b>
             </Label>
           </div>
 
@@ -119,6 +125,10 @@ export class Element extends Component {
 
                 <div className='col'>
                   {fileUpload.uploadedBy}
+                </div>
+
+                <div className='col'>
+                  {fileUpload.ver}
                 </div>
 
                 <div className='col'>

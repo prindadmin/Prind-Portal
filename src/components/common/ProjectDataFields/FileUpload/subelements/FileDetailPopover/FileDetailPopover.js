@@ -9,6 +9,7 @@ import SignatureHistory from '../SignatureHistory'
 import * as strings from '../../../../../../data/Strings'
 
 // TODO: Add error handling when URL cannot be loaded
+// TODO: Fix file downloading
 
 export class Element extends Component {
   static propTypes = {
@@ -81,11 +82,11 @@ export class Element extends Component {
           </div>
 
           <div className='field-values col-auto'>
-            <div>{chosenFileDetails.uploadName}</div>
-            <div>{chosenFileDetails.uploadDateTime}</div>
-            <div>{chosenFileDetails.uploadedBy}</div>
+            <div>{chosenFileDetails.uploadName !== undefined ? chosenFileDetails.uploadName : strings.NO_UPLOAD_NAME}</div>
+            <div>{chosenFileDetails.uploadedDateTime !== undefined ? chosenFileDetails.uploadedDateTime : <br />}</div>
+            <div>{chosenFileDetails.uploadedBy !== undefined ? chosenFileDetails.uploadedBy : <br />}</div>
             {
-              chosenFileDetails.proofLink === null ?
+              chosenFileDetails.proofLink === undefined ?
                 strings.NO_PROOF_AVAILABLE :
                 <div onClick={e => e.stopPropagation()}>
                   <a href={chosenFileDetails.proofLink}>{strings.LINK_TO_PROOF}</a>

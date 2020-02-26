@@ -60,12 +60,15 @@ function * createNewProject (action) {
 
   try {
     const { data: result } = yield call(Dispatchers.createNewProjectDispatcher, identityToken, projectValues)
+
     yield put({
-      type: actions.PROJECT_SET_STATE,
+      type: actions.PROJECT_UPDATE_PROJECT_CHOSEN_REQUESTED,
       payload: {
-        chosenProject: result.body
+        identityToken,
+        project: result.body,
       }
     })
+
     }
     catch (error) {
       console.log(error)

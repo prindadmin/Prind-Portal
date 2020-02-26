@@ -98,6 +98,7 @@ export const CURRENT_VERSION_ELEMENT = "Current Version"
 export const FILE_NAME = 'File Name: '
 export const UPLOAD_DATE_TIME = 'Uploaded At: '
 export const UPLOADED_BY = 'Uploaded By: '
+export const UPLOAD_VERSION = "Version: "
 export const NO_CURRENT_VERSION = 'There is no current version of this file.'
 export const NO_SIGNATURES = 'There are no signatures for this file'
 export const NO_PROOF_AVAILABLE = "Proof still processing"
@@ -150,3 +151,6 @@ export const CHANGE_PASSWORD_UNSUCCESSFUL = "Change unsuccessful, please try aga
 export const PASSWORDS_DO_NOT_MATCH = "New passwords do not match"
 
 export const USER_UNABLE_TO_FETCH_DETAILS = "Unable to fetch profile details, please try again!"
+
+export const PROJECT_CREATION_IN_PROGRESS = "Project Creation In Progress"
+export const PROJECT_CREATION_BILLING_WARNING = "You will only be billed for the project you once you begin uploading data to one of the project tabs (e.g. inception, feasibility, design, etc)"

@@ -18,7 +18,7 @@ export default function(identityToken) {
 
     instance.get(`${process.env.REACT_APP_API_ENDPOINT}/user/get-accessible-projects`)
     .then(res => {
-      //console.log(res)
+      console.log(res)
       resolve(res)
     })
     .catch((error) => {

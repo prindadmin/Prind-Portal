@@ -290,6 +290,43 @@ hr {
     margin: 0 auto;
 }
 
+/* ======================================== */
+/* === project-creation popover element === */
+/* ======================================== */
+
+#project-creation-popover {
+  height: 100%;
+  width: 100%;
+}
+
+#project-creation-popover .project-creation-popover-container {
+  height: calc(100% - 2 * var(--pop-up-padding));
+  min-height: 450px;
+  margin: var(--pop-up-padding);
+}
+
+#project-creation-popover #popup-box {
+  height: auto;
+  bottom: auto;
+  background-color: var(--field-element-grey)
+}
+
+#project-creation-popover .project-creation-popover-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#project-creation-popover .bp3-spinner {
+  margin-top: 3em;
+}
+
+#project-creation-popover .element-description {
+  max-width: 600px;
+  text-align: center;
+}
+
 /* ================================== */
 /* ======= project team page ======== */
 /* ================================== */
