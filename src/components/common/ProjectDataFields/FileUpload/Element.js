@@ -106,36 +106,6 @@ export class Element extends Component {
   }
 
 
-  fileStatus = () => {
-
-    var status = null
-
-    if (this.state.hasChosenFile) {
-      status = strings.FILE_READY_TO_UPLOAD
-    }
-
-    if (this.state.uploadFileRequested) {
-      status = strings.FILE_UPLOADING
-    }
-
-    if (this.state.fileHasUploaded) {
-      status = strings.FILE_SUCCESSFULLY_UPLOADED
-    }
-
-    if (status === null) {
-      status = strings.FILE_NOT_SELECTED
-    }
-
-    return (
-      <div>
-        <b>Status: </b>
-        {status}
-      </div>
-    )
-
-  }
-
-
   // ------------------------------ RENDER BELOW THIS LINE ------------------------------
 
   render() {
@@ -143,8 +113,6 @@ export class Element extends Component {
     const { detailedView, filePrompt, fileState, fileDetails } = this.state
     const { elementContent, pageName, projects } = this.props
 
-
-    // TODO: Make the request signature a popover for searching for project members and a click to add
     // TODO: Add expand transition to make it smooth
 
     return (
@@ -194,22 +162,20 @@ export class Element extends Component {
                     text={strings.BUTTON_UPLOAD_FILE}
                   />
                 </div>
-                <div className='file-status col-auto'>
-                  {
-                    this.fileStatus()
-                  }
-                </div>
               </div>
 
 
             </div>
           </div>
-          {detailedView ? <UploadHistory
-            details={ elementContent.fileDetails }
-            projectID={projects.chosenProject.projectId}
-            pageName={pageName}
-            fieldID={elementContent.id}
-            /> : null}
+          {
+            detailedView ? <UploadHistory
+              details={ elementContent.fileDetails }
+              projectID={projects.chosenProject.projectId}
+              pageName={pageName}
+              fieldID={elementContent.id}
+              /> :
+            null
+          }
         </div>
 
         {

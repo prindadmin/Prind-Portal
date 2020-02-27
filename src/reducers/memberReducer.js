@@ -55,6 +55,10 @@ const ACTION_HANDLERS = {
   [action.MEMBER_REMOVE_MEMBER_REQUESTED]: state => ({ ...state }),
   [action.MEMBER_GET_AVAILABLE_ROLES_REQUESTED]: state => ({ ...state }),
 
+  [action.MEMBER_ADD_MEMBER_REQUEST_SENT]: (state, action) => ({ ...state, ...action.payload }),
+  [action.MEMBER_REMOVE_MEMBER_REQUEST_SENT]: (state, action) => ({ ...state, ...action.payload }),
+  [action.MEMBER_GET_AVAILABLE_ROLES_REQUEST_SENT]: (state, action) => ({ ...state, ...action.payload }),
+
   [action.MEMBER_ADD_MEMBER_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
   [action.MEMBER_REMOVE_MEMBER_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
   [action.MEMBER_GET_AVAILABLE_ROLES_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),

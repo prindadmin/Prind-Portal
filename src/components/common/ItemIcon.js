@@ -12,12 +12,14 @@ import {
 
 import {
   faCheckCircle,
+  faTimesCircle,
   faCircle,
 } from '@fortawesome/free-regular-svg-icons'
 
 let icons = {
   building: faIndustry,
   city: faCity,
+  timesCircle: faTimesCircle,
   unticked: faCircle,
   ticked: faCheckCircle,
   download: faDownload,

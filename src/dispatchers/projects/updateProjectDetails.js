@@ -1,10 +1,6 @@
 import axios from 'axios'
 import https from 'https'
 
-// The returned data should include at least two fields:
-//    id
-//    name
-
 export default function(identityToken, projectID, newProjectDetails) {
 
   console.log(newProjectDetails)
@@ -21,7 +17,6 @@ export default function(identityToken, projectID, newProjectDetails) {
       }
     });
 
-    //instance.get(`${process.env.REACT_APP_API_LOCAL_ENDPOINT}/project/create`, newProjectDetails)
     instance.post(`${process.env.REACT_APP_API_ENDPOINT}/project/${projectID}/update`, newProjectDetails)
     .then(res => {
       console.log(res)

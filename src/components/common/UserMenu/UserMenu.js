@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
@@ -11,15 +12,73 @@ import {
 
 const ico = <FontAwesomeIcon icon={faUserCircle} size='3x' />
 
-// TODO: Show how many requests a user has
-
 class UserMenu extends Component {
+  static propTypes = {
+    user: PropTypes.object.isRequired,
+    getUserProjectInvitations: PropTypes.func.isRequired,
+    getUserSignatureInvitations: PropTypes.func.isRequired,
+  }
+
+  constructor(props) {
+    super()
+    const { auth, getUserProjectInvitations, getUserSignatureInvitations } = props
+
+    getUserProjectInvitations(
+      auth.info.idToken.jwtToken
+    )
+
+    getUserSignatureInvitations(
+      auth.info.idToken.jwtToken
+    )
+
+  }
+
+  getRequestBadge = () => {
+
+    const { user } = this.props
+
+    return (
+      <div className='request-badge'>
+        { user.signatureInvitations.length + user.projectInvitations.length < 10 ? user.signatureInvitations.length + user.projectInvitations.length : "+" }
+      </div>
+    )
+  }
+
+
+  getIcon = () => {
+
+    const { user } = this.props
+
+    return (
+      <React.Fragment>
+        <Icon icon={ico} />
+        {
+          user.signatureInvitations.length !== 0 || user.projectInvitations.length !== 0 ? this.getRequestBadge() : null
+        }
+      </React.Fragment>
+    )
+  }
+
   signOut = async (values) => {
     await this.props.signOut(values)
   }
 
   openProfile = (values) => {
-    this.props.history.push('/Profile')
+
+    const { user } = this.props
+
+    if (user.signatureInvitations.length !== 0 || user.projectInvitations.length !== 0) {
+      this.props.history.push({
+        pathname: '/Profile',
+        state: { tabToOpen: 'requests' },
+      })
+      return;
+    }
+
+    this.props.history.push({
+      pathname: '/Profile',
+    })
+
   }
 
   dropdownContent = <Menu>
@@ -28,8 +87,9 @@ class UserMenu extends Component {
   </Menu>
 
   render () {
+
     return <Popover content={this.dropdownContent} position='bottom'>
-      <Icon icon={ico} />
+      {this.getIcon()}
     </Popover>
   }
 }

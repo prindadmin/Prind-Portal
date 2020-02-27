@@ -9,6 +9,7 @@ let defaultState = {
   fetching: false,
   details: {},
   projectInvitations: [],
+  signatureInvitations: [],
   projectS3Token: "",
   userS3Token: "",
 }

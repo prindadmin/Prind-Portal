@@ -65,9 +65,11 @@ export class Element extends Component {
 
     const  { details } = this.props
 
-    const reversedDetails = details.reverse().filter(function(fileUpload) {
+    var reversedDetails = details.filter(function(fileUpload) {
       return(fileUpload.ver !== "0" && fileUpload.ver !== 0)
     })
+
+    reversedDetails.reverse()
 
     return (
       <React.Fragment>

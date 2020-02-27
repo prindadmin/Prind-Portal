@@ -3,6 +3,7 @@ import * as action from '../../actions'
 const defaultState = {
   fetching: false,
   fields: [],
+  error: null,
 }
 
 export const init = () => {

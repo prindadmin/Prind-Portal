@@ -95,7 +95,6 @@ export class Element extends Component {
 
       .on('success', function(response) {
         // Timer to keep the window open for a few seconds after upload completes
-        // TODO: Get the version ID of the uploaded document to send to server
 
         setTimeout(() => {
           that.informServer(response)

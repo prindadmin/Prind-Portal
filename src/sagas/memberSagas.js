@@ -33,7 +33,6 @@ function * addMemberToProject (action) {
     yield put({
       type: actions.MEMBER_ADD_MEMBER_REQUEST_SENT,
       payload: {
-        ...defaultState,
         fetching: true
       }
     })
@@ -72,7 +71,6 @@ function * removeMemberFromProject (action) {
     yield put({
       type: actions.MEMBER_REMOVE_MEMBER_REQUEST_SENT,
       payload: {
-        ...defaultState,
         fetching: true
       }
     })
@@ -111,7 +109,6 @@ function * getRoles (action) {
     yield put({
       type: actions.MEMBER_GET_AVAILABLE_ROLES_REQUEST_SENT,
       payload: {
-        ...defaultState,
         fetching: true,
       }
     })

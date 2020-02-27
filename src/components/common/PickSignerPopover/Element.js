@@ -30,7 +30,14 @@ export class Element extends Component {
       })
     ).isRequired,
     fileDetails: PropTypes.shape({
-      // TODO: Build this shape
+      uploadedDateTime: PropTypes.string.isRequired,
+      hash: PropTypes.string.isRequired,
+      proofLink: PropTypes.string,
+      uploadedBy: PropTypes.string.isRequired,
+      ver: PropTypes.string.isRequired,
+      signatures: PropTypes.array.isRequired,
+      s3VersionId: PropTypes.string.isRequired,
+      uploadName: PropTypes.string.isRequired,
     }).isRequired,
     projectID: PropTypes.string.isRequired,
     pageName: PropTypes.string.isRequired,

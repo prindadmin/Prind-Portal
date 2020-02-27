@@ -19,13 +19,12 @@ export default function(identityToken, projectID) {
     .then(res => {
       //console.log(res)
 
-      // TODO: Do something with this error handling
-      if (res.data.errorMessage !== undefined) {
-        reject(res.data)
+      if (res.data.statusCode === 200 || res.data.statusCode === 201) {
+        resolve(res)
         return
       }
 
-      resolve(res)
+      reject(res.data)
     })
     .catch((error) => {
       console.log(error)

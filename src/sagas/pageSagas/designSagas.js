@@ -7,6 +7,7 @@ import { designPageDispatcher } from '../../dispatchers/pages'
 const defaultState = {
   fields: [],
   fetching: false,
+  error: null,
 }
 
 

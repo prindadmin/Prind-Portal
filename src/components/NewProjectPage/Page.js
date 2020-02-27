@@ -40,7 +40,6 @@ export class Page extends Component {
       showCreatingPopover: true
     })
 
-    // TODO: add popover to say project is creating and will cost money
     const { createProject, history, auth } = this.props
 
     createProject(auth.info.idToken.jwtToken, values)

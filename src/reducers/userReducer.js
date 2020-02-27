@@ -4,6 +4,7 @@ let defaultState = {
   fetching: false,
   details: {},
   projectInvitations: [],
+  signatureInvitations: [],
   projectS3Token: "",
   userS3Token: "",
 }
@@ -82,7 +83,6 @@ export const respondToProjectInvitation = ( identityToken, projectID, response )
 }
 
 
-// TODO: Implement REQUEST_SENT ACTION HANDLERS for all pages
 const ACTION_HANDLERS = {
 
   [action.USER_INIT]: (state, action) => { return { ...state, ...action.payload }},

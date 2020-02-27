@@ -23,8 +23,6 @@ export class Page extends Component {
   static propTypes = {
   }
 
-  // TODO: Load members list async
-
   constructor() {
     super()
     this.state = {
@@ -140,8 +138,8 @@ export class Page extends Component {
           labelFor="emailAddress"
         >
           <Field
-            name="username"
-            validate={[validators.required]}
+            name="emailAddress"
+            validate={[validators.required, validators.isEmailAddress]}
             component={FormInputs.TextInput}
             placeholder={strings.MEMBER_EMAIL_ADDRESS}
           />

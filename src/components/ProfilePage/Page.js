@@ -30,11 +30,14 @@ export class Page extends Component {
     props.getUserDetails(props.auth.info.idToken.jwtToken)
     props.getProjectInvitations(props.auth.info.idToken.jwtToken)
 
+    console.log(props)
 
     var tabName = "user"
 
-    if (props.tabToOpen !== undefined && props.tabToOpen !== "") {
-      tabName = props.tabToOpen
+    if (props.location.state !== undefined) {
+      if (props.location.state.tabToOpen !== undefined && props.location.state.tabToOpen !== "") {
+        tabName = props.location.state.tabToOpen
+      }
     }
 
     this.state = {

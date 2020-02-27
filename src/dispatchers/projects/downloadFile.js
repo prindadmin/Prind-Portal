@@ -17,14 +17,15 @@ export default function(identityToken, projectID, pageName, fieldID, version) {
 
     instance.get(`${process.env.REACT_APP_API_ENDPOINT}/project/${projectID}/${pageName}/${fieldID}/${version}/get-file-url`)
     .then(res => {
+      console.log(res)
 
-      // TODO: Do something with this error handling
-      if (res.data.errorMessage !== undefined) {
-        reject(res.data)
+      // TODO: Do something if an error is returned
+      if (res.data.statusCode === 200 || res.data.statusCode === 201) {
+        resolve(res)
         return
       }
 
-      resolve(res)
+      reject(res)
     })
     .catch((error) => {
       console.log(error)

@@ -9,6 +9,7 @@ import Footer from '../common/footer'
 import CreateCustomFieldPopover from '../common/CreateCustomFieldPopover'
 import { FileUpload, DropDown, CalendarPicker, LongText } from '../common/ProjectDataFields'
 import NoProjectSelected from '../common/NoProjectSelected'
+import ErrorFetchingContent from '../common/ErrorFetchingContent'
 
 import {
   Button,
@@ -85,6 +86,12 @@ export class Page extends Component {
     )
   }
 
+  showErrorPage = () => {
+    return(
+      <ErrorFetchingContent />
+    )
+  }
+
   showFilledPage = () => {
 
     const { fields }  = this.props.pageContent.feasibility
@@ -144,6 +151,25 @@ export class Page extends Component {
     )
   }
 
+  chooseContent = () => {
+
+    const { projects, pageContent } = this.props
+
+    if (projects.chosenProject.projectName === strings.NO_PROJECT_SELECTED) {
+      return this.showEmptyPage()
+    }
+
+    if (pageContent[pageName].fetching) {
+      return this.showLoadingPage()
+    }
+
+    if (pageContent[pageName].error !== null) {
+      return this.showErrorPage()
+    }
+
+    return this.showFilledPage()
+  }
+
 
 
   render() {
@@ -162,13 +188,7 @@ export class Page extends Component {
           <PageChooserSection />
           <div className='page-content-section col-xl-10 col-lg-9 col-md-9 col-sm-9'>
             {
-              this.props.projects !== undefined ?
-                this.props.projects.chosenProject.projectName === strings.NO_PROJECT_SELECTED ?
-                this.showEmptyPage() :
-                  pageContent[pageName].fetching ?
-                  this.showLoadingPage() :
-                  this.showFilledPage() :
-              null
+              projects !== undefined ? this.chooseContent() : this.showErrorPage()
             }
             {
               createFieldIsOpen ?

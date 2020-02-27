@@ -1218,8 +1218,8 @@ hr {
 .no-project-selected svg {
 }
 
-.no-project-selected p {
-
+.no-project-selected p,
+.no-requests p {
   margin-top: 1.5em;
   font-size: 18px;
   font-weight: bold;
@@ -1233,6 +1233,20 @@ hr {
 
 .project-loading-container .section-spinner {
   margin-bottom: 2em;
+}
+
+.request-badge {
+  background-color: red;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  color: white;
+  text-align: center;
+  font-weight:600;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  border: 1px solid #8b0000;
 }
 
 

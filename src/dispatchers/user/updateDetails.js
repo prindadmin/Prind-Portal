@@ -1,7 +1,7 @@
 import axios from 'axios'
 import https from 'https'
 
-// TODO: Connect to API once endpoint is built
+// TODO: Implement API endpoint
 
 export default function(identityToken, userDetails) {
 
