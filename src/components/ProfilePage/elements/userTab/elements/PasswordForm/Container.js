@@ -13,8 +13,8 @@ const mapStatetoProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    updatePassword: (currentPassword, newPassword) => {
-      dispatch(awsReducer.completeNewPassword(currentPassword, newPassword))
+    updatePassword: (currentPassword, newPassword, resolve, reject) => {
+      dispatch(awsReducer.completeNewPassword(currentPassword, newPassword, resolve, reject))
     }
   }
 }

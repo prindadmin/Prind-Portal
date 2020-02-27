@@ -10,6 +10,7 @@ export const PROJECT_LOADING = "Project loading, please wait..."
 export const UNABLE_TO_FETCH_CONTENT = "Unable to load the content for this page.  Please try again.  If this problem persists, please contact technical support."
 export const NO_PROJECT_SELECTED = "Please select a project"
 export const CREATE_NEW_PROJECT = "Create a new project"
+export const ERROR_CREATING_NEW_PROJECT = "There was an error creating a new project, please try again.  If the problem persists, please contact technical support."
 
 export const PROJECT_NAME = "Project Name"
 export const PROJECT_REFERENCE = "Project Reference"
@@ -62,6 +63,8 @@ export const PROJECT_DIRECTORY_TITLE = "Project Directory"
 export const PROJECT_DIRECTORY_ADD_NEW_TITLE = "Add New Project Member"
 
 export const BUTTON_ADD_MEMBER_TO_PROJECT = "Add New Member"
+export const ERROR_ADDING_MEMBER_TO_PROJECT = "There was an error adding member to the project, please try again.  If the problem persists, please contact technical support."
+export const ERROR_REMOVING_MEMBER_FROM_PROJECT = "There was an error removing a member from the project, please try again.  If the problem persists, please contact technical support."
 
 export const MEMBER_DETAILS = "Member Details"
 export const MEMBER_FIRST_NAME = "First Name"
@@ -76,6 +79,7 @@ export const MEMBER_NAME = "Name"
 export const MEMBER_UPLOAD_DIFFERENT_AVATAR = 'Upload a different photo...'
 export const MEMBER_FOUNDATIONS_ID = "Foundations ID"
 export const MEMBER_FOUNDATIONS_ID_NOT_FOUND = "No Foundations ID for this Email"
+export const BUTTON_REMOVE_MEMBER = "Remove From Project"
 
 export const USER_DETAILS_LOADING = "Fetching details, please wait..."
 
@@ -137,10 +141,12 @@ export const BUTTON_CREATE_FIELD = "Create Field"
 export const FIELD_IS_REQUIRED_COMMA_SEPARATED = "(Required, separate options with commas)"
 export const DROP_DOWN_OPTIONS_OPENING_TEXT_BOX = "Options that open a \"More Details\" text box:"
 export const PLEASE_ENTER_SOME_OPTIONS = "Please enter some options"
+export const ERROR_CREATING_CUSTOM_FIELD = "There was an error creating the custom field, please try again.  If the problem persists, please contact technical support."
 
 export const FILE_DETAILS = "File Details"
 export const DOWNLOAD = "Download"
 export const NO_UPLOAD_NAME = "No name supplied"
+export const ERROR_FETCHING_DOWNLOAD_LINK = "There was an error fetching the file, please try again.  If the problem persists, please contact technical support."
 
 export const PROFILE_PAGE_TITLE = "Edit Profile"
 export const PROFILE_PAGE_DESCRIPTION = ""
@@ -156,7 +162,11 @@ export const USER_UNABLE_TO_FETCH_DETAILS = "Unable to fetch profile details, pl
 export const PROJECT_CREATION_IN_PROGRESS = "Project Creation In Progress"
 export const PROJECT_CREATION_BILLING_WARNING = "You will only be billed for the project you once you begin uploading data to one of the project tabs (e.g. inception, feasibility, design, etc)"
 
+export const PROJECT_INVITATIONS = "Project Invitations"
 export const PROJECT_INVITATION = "Project Invitation"
+export const SIGNATURE_REQUESTS = "Signature Requests"
+export const SIGNATURE_REQUEST = "Signature Request"
 export const BUTTON_ACCEPT = "Accept"
 export const BUTTON_REJECT = "Reject"
 export const NO_REQUESTS = "You have no requests right now"
+export const ERROR_SENDING_SIGNATURE_REQUEST = "There was an error requesting signatures, please try again.  If the problem persists, please contact technical support."

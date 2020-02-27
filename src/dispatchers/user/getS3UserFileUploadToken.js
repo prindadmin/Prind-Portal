@@ -29,7 +29,7 @@ export default function(identityToken, fileType) {
 
     })
     .catch((error) => {
-      console.log(error)
+      console.error(error)
       reject(error)
     })
   })

@@ -18,6 +18,7 @@ let defaultState = {
   memberList: [],
   downloadURL: "",
   fetching: false,
+  error: null,
 }
 
 function * init (action) {
@@ -41,7 +42,7 @@ function * getAccessibleProjects (action) {
     })
     }
     catch (error) {
-      console.log(error)
+      console.error(error)
       yield put({
         type: actions.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUEST_FAILED,
           payload: {
@@ -67,15 +68,19 @@ function * createNewProject (action) {
       }
     })
 
+    action.payload.resolve()
+
     }
     catch (error) {
-      console.log(error)
+      console.error(error)
       yield put({
         type: actions.PROJECT_CREATE_PROJECT_REQUEST_FAILED,
           payload: {
             error
           }
       })
+
+      action.payload.reject()
     }
 }
 
@@ -106,7 +111,7 @@ function * updateChosenProject (action) {
     })
   }
   catch (error) {
-    console.log(error)
+    console.error(error)
     yield put({
       type: actions.PROJECT_UPDATE_PROJECT_CHOSEN_REQUEST_FAILED,
         payload: {
@@ -144,7 +149,7 @@ function * updateProjectDetails (action) {
     })
   }
   catch (error) {
-    console.log(error)
+    console.error(error)
     yield put({
       type: actions.PROJECT_GET_CURRENT_MEMBERS_REQUEST_FAILED,
         payload: {
@@ -182,7 +187,7 @@ function * getCurrentMembers (action) {
     })
   }
   catch (error) {
-    console.log(error)
+    console.error(error)
     yield put({
       type: actions.PROJECT_GET_CURRENT_MEMBERS_REQUEST_FAILED,
         payload: {
@@ -258,7 +263,7 @@ function * uploadFile (action) {
 
   }
   catch (error) {
-    console.log(error)
+    console.error(error)
     yield put({
       type: actions.PROJECT_UPLOAD_FILE_REQUEST_FAILED,
         payload: {
@@ -291,12 +296,14 @@ function * downloadFile (action) {
       type: actions.PROJECT_SET_STATE,
       payload: {
         fetching: false,
-        downloadURL: result.body.url
+        downloadURL: result.body
       }
     })
+
+    action.payload.resolve()
   }
   catch (error) {
-    console.log(error)
+    console.error(error)
     yield put({
       type: actions.PROJECT_DOWNLOAD_FILE_REQUEST_FAILED,
         payload: {
@@ -304,6 +311,8 @@ function * downloadFile (action) {
           error,
         }
     })
+
+    action.payload.reject()
   }
 }
 
@@ -345,9 +354,11 @@ function * createField (action) {
         fetching: false,
       }
     })
+
+    action.payload.resolve()
   }
   catch (error) {
-    console.log(error)
+    console.error(error)
     yield put({
       type: actions.PROJECT_CREATE_FIELD_REQUEST_FAILED,
         payload: {
@@ -355,6 +366,8 @@ function * createField (action) {
           error,
         }
     })
+
+    action.payload.reject()
   }
 }
 
@@ -396,7 +409,7 @@ function * updateField (action) {
     })
   }
   catch (error) {
-    console.log(error)
+    console.error(error)
     yield put({
       type: actions.PROJECT_UPDATE_FIELD_REQUEST_FAILED,
         payload: {
@@ -404,6 +417,48 @@ function * updateField (action) {
           error,
         }
     })
+  }
+}
+
+
+function * requestFileSignature (action) {
+
+  const { identityToken, projectID, pageName, fieldID, members } = action.payload
+
+  try {
+
+    // Pre-fetch update to store
+    yield put({
+      type: actions.PROJECT_FILE_SIGNATURE_REQUEST_REQUEST_SENT,
+      payload: {
+        fetching: true
+      }
+    })
+
+    yield call(Dispatchers.requestSignatureDispatcher, identityToken, projectID, pageName, fieldID, members)
+
+    // Post-fetch update to store
+    yield put({
+      type: actions.PROJECT_SET_STATE,
+      payload: {
+        fetching: false,
+        error: null,
+      }
+    })
+
+    action.payload.resolve()
+  }
+  catch (error) {
+    console.error(error)
+    yield put({
+      type: actions.PROJECT_FILE_SIGNATURE_REQUEST_REQUEST_FAILED,
+        payload: {
+          fetching: false,
+          error
+        }
+    })
+
+    action.payload.reject()
   }
 }
 
@@ -419,4 +474,5 @@ export default function * sagas () {
   yield takeLatest(actions.PROJECT_DOWNLOAD_FILE_REQUESTED, downloadFile)
   yield takeLatest(actions.PROJECT_CREATE_FIELD_REQUESTED, createField)
   yield takeLatest(actions.PROJECT_UPDATE_FIELD_REQUESTED, updateField)
+  yield takeLatest(actions.PROJECT_FILE_SIGNATURE_REQUEST_REQUESTED, requestFileSignature)
 }

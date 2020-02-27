@@ -47,9 +47,11 @@ function * addMemberToProject (action) {
         currentMember: result
       }
     })
+
+    action.payload.resolve()
   }
   catch (error) {
-    console.log(error)
+    console.error(error)
     yield put({
       type: actions.MEMBER_ADD_MEMBER_REQUEST_FAILED,
         payload: {
@@ -57,13 +59,15 @@ function * addMemberToProject (action) {
           error
         }
     })
+
+    action.payload.reject()
   }
 }
 
 
 function * removeMemberFromProject (action) {
 
-  const { identityToken, projectID, memberDetails } = action.payload
+  const { identityToken, projectID, memberUsername } = action.payload
 
   try {
 
@@ -75,7 +79,7 @@ function * removeMemberFromProject (action) {
       }
     })
 
-    const { data: result } = yield call(removeMemberFromProjectDispatcher, identityToken, projectID, memberDetails)
+    const { data: result } = yield call(removeMemberFromProjectDispatcher, identityToken, projectID, memberUsername)
 
     // Post-fetch update to store
     yield put({
@@ -85,9 +89,11 @@ function * removeMemberFromProject (action) {
         currentMember: result
       }
     })
+
+    action.payload.resolve()
   }
   catch (error) {
-    console.log(error)
+    console.error(error)
     yield put({
       type: actions.MEMBER_REMOVE_MEMBER_REQUEST_FAILED,
         payload: {
@@ -95,6 +101,8 @@ function * removeMemberFromProject (action) {
           error
         }
     })
+
+    action.payload.reject()
   }
 }
 
@@ -127,7 +135,7 @@ function * getRoles (action) {
     })
   }
   catch (error) {
-    console.log(error)
+    console.error(error)
     yield put({
       type: actions.MEMBER_GET_AVAILABLE_ROLES_REQUEST_FAILED,
         payload: {

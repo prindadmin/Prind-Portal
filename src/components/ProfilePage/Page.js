@@ -30,8 +30,6 @@ export class Page extends Component {
     props.getUserDetails(props.auth.info.idToken.jwtToken)
     props.getProjectInvitations(props.auth.info.idToken.jwtToken)
 
-    console.log(props)
-
     var tabName = "user"
 
     if (props.location.state !== undefined) {

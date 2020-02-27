@@ -13,24 +13,28 @@ export const init = () => {
   }
 }
 
-export const addMemberToProject = ( identityToken, projectID, memberDetails ) => {
+export const addMemberToProject = ( identityToken, projectID, memberDetails, resolve, reject ) => {
   return {
     type: action.MEMBER_ADD_MEMBER_REQUESTED,
     payload: {
       identityToken,
       projectID,
       memberDetails,
+      resolve,
+      reject,
     }
   }
 }
 
-export const removeMemberFromProject = ( identityToken, projectID, memberDetails ) => {
+export const removeMemberFromProject = ( identityToken, projectID, memberUsername, resolve, reject ) => {
   return {
     type: action.MEMBER_REMOVE_MEMBER_REQUESTED,
     payload: {
       identityToken,
       projectID,
-      memberDetails,
+      memberUsername,
+      resolve,
+      reject,
     }
   }
 }

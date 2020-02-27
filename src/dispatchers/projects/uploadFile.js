@@ -44,7 +44,7 @@ export default function(identityToken, projectID, pageName, fieldID, fileDetails
 
     })
     .catch((error) => {
-      console.log(error)
+      console.error(error)
       reject(error)
     })
   })

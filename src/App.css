@@ -452,6 +452,10 @@ hr {
   width: 97px;
 }
 
+#contact-tile button {
+  margin-top: 1em;
+}
+
 /* ================================== */
 /* ====== field element common ====== */
 /* ================================== */
@@ -484,7 +488,8 @@ hr {
 #drop-down-element .element-title,
 #calendar-picker-element .element-title,
 #long-text-element .element-title,
-#popup-box .element-title {
+#popup-box .element-title,
+#requests-tab-container .element-title {
   font-size: 20px;
   font-weight: bold;
   padding-bottom: 0.33em;
@@ -1043,6 +1048,10 @@ hr {
 
 #requests-tab-container {
   width: 100%;
+}
+
+#requests-tab-container .requests-section {
+  text-align: left;
 }
 
 /* ================================================ */

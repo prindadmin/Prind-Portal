@@ -26,9 +26,27 @@ export class Page extends Component {
     }
   }
 
+  passwordUpdatedSuccessfully = (e) => {
+    console.log("passwordUpdatedSuccessfully")
+    console.log(e)
+  }
+
+  passwordUpdateFailed = () => {
+    console.log("passwordUpdateFailed")
+
+    this.setState({
+      passwordError: true,
+      errorText: this.props.auth.error.message
+    })
+  }
+
 
   updatePassword = (values) => {
     console.log(values)
+
+    this.setState({
+      passwordError: false,
+    })
 
     const { updatePassword } = this.props
 
@@ -42,7 +60,9 @@ export class Page extends Component {
 
     updatePassword(
       values.currentPassword,
-      values.newPassword
+      values.newPassword,
+      this.passwordUpdatedSuccessfully,
+      this.passwordUpdateFailed,
     )
 
   }

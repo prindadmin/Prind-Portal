@@ -9,7 +9,7 @@ import Footer from '../common/footer'
 
 //import CreatingProjectPopover from "../NewProjectPage/elements/CreatingProjectPopover"
 import {
-  RequestTile
+  ProjectInvitationTile
 } from "../ProfilePage/elements/requestsTab/elements"
 
 const details = {
@@ -42,7 +42,7 @@ export class Page extends Component {
     return(
       <div id="test-page">
         <div className="center-container">
-          <RequestTile requestDetails={details}/>
+          <ProjectInvitationTile requestDetails={details}/>
         </div>
       </div>
     )

@@ -16,18 +16,18 @@ class UserMenu extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
     getUserProjectInvitations: PropTypes.func.isRequired,
-    getUserSignatureInvitations: PropTypes.func.isRequired,
+    getUserSignatureRequests: PropTypes.func.isRequired,
   }
 
   constructor(props) {
     super()
-    const { auth, getUserProjectInvitations, getUserSignatureInvitations } = props
+    const { auth, getUserProjectInvitations, getUserSignatureRequests } = props
 
     getUserProjectInvitations(
       auth.info.idToken.jwtToken
     )
 
-    getUserSignatureInvitations(
+    getUserSignatureRequests(
       auth.info.idToken.jwtToken
     )
 
@@ -39,7 +39,7 @@ class UserMenu extends Component {
 
     return (
       <div className='request-badge'>
-        { user.signatureInvitations.length + user.projectInvitations.length < 10 ? user.signatureInvitations.length + user.projectInvitations.length : "+" }
+        { user.signatureRequests.length + user.projectInvitations.length < 10 ? user.signatureRequests.length + user.projectInvitations.length : "+" }
       </div>
     )
   }
@@ -53,7 +53,7 @@ class UserMenu extends Component {
       <React.Fragment>
         <Icon icon={ico} />
         {
-          user.signatureInvitations.length !== 0 || user.projectInvitations.length !== 0 ? this.getRequestBadge() : null
+          user.signatureRequests.length + user.projectInvitations.length > 0 ? this.getRequestBadge() : null
         }
       </React.Fragment>
     )
@@ -67,7 +67,7 @@ class UserMenu extends Component {
 
     const { user } = this.props
 
-    if (user.signatureInvitations.length !== 0 || user.projectInvitations.length !== 0) {
+    if (user.signatureRequests.length + user.projectInvitations.length > 0) {
       this.props.history.push({
         pathname: '/Profile',
         state: { tabToOpen: 'requests' },

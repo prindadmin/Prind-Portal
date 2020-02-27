@@ -4,12 +4,11 @@ import PropTypes from 'prop-types'
 import * as strings from '../../../../data/Strings'
 
 import {
-  RequestTile
+  ProjectInvitationTile,
+  SignatureRequestTile,
 } from './elements'
 
 import ItemIcon from '../../../common/ItemIcon'
-
-// TODO: Handle  other types of request (sign document)
 
 export class Page extends Component {
   static propTypes = {
@@ -27,15 +26,43 @@ export class Page extends Component {
 
     return (
       <React.Fragment>
+        <div className='requests-section project-invitations'>
+          {
+            user.projectInvitations.length > 0 ?
+            <div className='element-title'>
+              {strings.PROJECT_INVITATIONS}
+            </div> : null
+          }
+          {
+            user.projectInvitations.length > 0 ? user.projectInvitations.map((request, index) => {
+              return (
+                <div key={index} className="col-md-12 col-lg-6 col-xl-4">
+                  <ProjectInvitationTile requestDetails={request} />
+                </div>
+              )
+            }) : null
+          }
+        </div>
         {
-          user.projectInvitations.length > 0 ? user.projectInvitations.map((request, index) => {
-            return (
-              <div key={index} className="col-md-12 col-lg-6 col-xl-4">
-                <RequestTile requestDetails={request} />
-              </div>
-            )
-          }) : null
+          user.projectInvitations.length > 0 && user.signatureRequests.length > 0 ? <div className='horizontal-line' /> : null
         }
+        <div className='requests-section signature-requests'>
+          {
+            user.signatureRequests.length > 0 ?
+            <div className='element-title'>
+              {strings.SIGNATURE_REQUESTS}
+            </div> : null
+          }
+          {
+            user.signatureRequests.length > 0 ? user.signatureRequests.map((request, index) => {
+              return (
+                <div key={index} className="col-md-12 col-lg-6 col-xl-4">
+                  <SignatureRequestTile requestDetails={request} />
+                </div>
+              )
+            }) : null
+          }
+        </div>
       </React.Fragment>
     )
   }

@@ -7,6 +7,7 @@ import uploadFileDispatcher from './uploadFile'
 import downloadFileDispatcher from './downloadFile'
 import createFieldDispatcher from './createField'
 import updateFieldDispatcher from './updateField'
+import requestSignatureDispatcher from './requestSignature'
 
 export {
   getAccessibleProjectsDispatcher,
@@ -18,4 +19,5 @@ export {
   downloadFileDispatcher,
   createFieldDispatcher,
   updateFieldDispatcher,
+  requestSignatureDispatcher,
 }

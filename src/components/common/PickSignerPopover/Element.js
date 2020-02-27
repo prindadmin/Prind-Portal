@@ -5,6 +5,7 @@ import {
   InputGroup,
   Button,
   Intent,
+  Callout,
 } from '@blueprintjs/core'
 
 import ItemIcon from '../ItemIcon'
@@ -14,7 +15,6 @@ import PopOverHandler from '../popOverHandler'
 import * as strings from '../../../data/Strings'
 
 // TODO: Implement 'editable' prop.  i.e. make field locked when editable = false
-// TODO: Future: Make this wait for response before closing
 
 export class Element extends Component {
   static propTypes = {
@@ -48,9 +48,10 @@ export class Element extends Component {
   constructor() {
     super()
     this.state = {
-      requestStatus: false,
       searchTerm: "",
       selectedMembers: [],
+      sendError: false,
+      errorText: ""
     }
   }
 
@@ -67,23 +68,31 @@ export class Element extends Component {
   sendSigningRequest = (e) => {
     e.stopPropagation()
 
-    const { fileDetails, auth, projectID, pageName, fieldID } = this.props
+    const { auth, projectID, pageName, fieldID } = this.props
     const { selectedMembers } = this.state
 
     var members = selectedMembers.map(value => value.username);
 
-    this.props.requestSignatures(
+    this.props.requestSignature(
       auth.info.idToken.jwtToken,
       projectID,
       pageName,
       fieldID,
-      fileDetails,
       members,
+      this.sendResolve,
+      this.sendReject,
     )
+  }
 
-    // Close the popover now the
+  sendResolve = () => {
     this.closePopover()
+  }
 
+  sendReject = () => {
+    this.setState({
+      sendError: true,
+      errorText: strings.ERROR_SENDING_SIGNATURE_REQUEST,
+    })
   }
 
   // Trigger the closing of the popover
@@ -212,8 +221,9 @@ export class Element extends Component {
 
   render() {
 
-    const { requestError } = this.state
-    const requestStatus = requestError ? "error" : ""
+    const { sendError, errorText } = this.state
+
+
 
     return (
       <PopOverHandler>
@@ -222,12 +232,19 @@ export class Element extends Component {
           e.stopPropagation()
           }}>
           <div id='pick-signer-popover'>
-            <div id='popup-box' className={requestStatus} onClick={(e) => e.stopPropagation()}>
+            <div id='popup-box' onClick={(e) => e.stopPropagation()}>
               <div className='pick-signer-popover-container'>
                 <div className='element-title'>
                   {strings.PICK_DOCUMENT_SIGNERS}
                 </div>
                 <div className='element-description'>
+                  {
+                    sendError ?
+                    <Callout style={{marginBottom: '15px'}} intent='danger'>
+                      <div>{errorText}</div>
+                    </Callout> :
+                    null
+                  }
                   {this.getSearchBar()}
                   {this.getTiles()}
                   {this.getButtons()}

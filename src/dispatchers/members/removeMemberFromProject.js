@@ -3,7 +3,7 @@ import https from 'https'
 
 // TODO: Implement API endpoint
 
-export default function(identityToken, projectID, memberDetails) {
+export default function(identityToken, projectID, username) {
 
   return new Promise((resolve, reject) => {
 
@@ -18,23 +18,24 @@ export default function(identityToken, projectID, memberDetails) {
     });
 
     let values = {
-      projectID,
-      memberDetails,
+      username,
     }
 
-    instance.get(`${process.env.REACT_APP_API_LOCAL_ENDPOINT}/testResults/removeMember.json`, values)
+    instance.post(`${process.env.REACT_APP_API_ENDPOINT}/project/${projectID}/remove-member`, values)
     .then(res => {
-      //console.log(res)
+      console.log(res)
 
-      // DELAY added for testing
-      setTimeout(() => {
-          resolve(res)
-        }, 1000)
+      // If the status code is correct, then resolve and return
+      if (res.data.statusCode === 200 || res.data.statusCode === 201) {
+        resolve(res)
+        return
+      }
 
-      //resolve(res)
+      // If the status code is wrong, reject
+      reject(res)
     })
     .catch((error) => {
-      console.log(error)
+      console.error(error)
       reject(error)
     })
   })

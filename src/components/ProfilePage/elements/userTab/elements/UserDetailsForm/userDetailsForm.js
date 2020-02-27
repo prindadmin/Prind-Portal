@@ -175,7 +175,7 @@ export class Page extends Component {
 
       .on('error', function(error, response) {
         console.log("Error!");
-        console.log(error)
+        console.error(error)
 
         that.setState({
           avatarFile: {},
@@ -204,7 +204,7 @@ export class Page extends Component {
 
   render() {
 
-    const { handleSubmit }  = this.props
+    const { handleSubmit, initialValues }  = this.props
     const { avatarLink } = this.state
 
     return(
@@ -249,6 +249,7 @@ export class Page extends Component {
                     validate={[validators.required, validators.maxLength64]}
                     component={FormInputs.TextInput}
                     placeholder={strings.MEMBER_FIRST_NAME}
+                    disabled={initialValues.foundationsID !== null}
                   />
                 </FormGroup>
 
@@ -263,6 +264,7 @@ export class Page extends Component {
                     validate={[validators.required, validators.maxLength64]}
                     component={FormInputs.TextInput}
                     placeholder={strings.MEMBER_LAST_NAME}
+                    disabled={initialValues.foundationsID !== null}
                   />
                 </FormGroup>
 
@@ -303,6 +305,7 @@ export class Page extends Component {
                     validate={[validators.maxLength32]}
                     component={FormInputs.TextInput}
                     placeholder={strings.MEMBER_LANDLINE_PHONE_NUMBER_WORK}
+                    disabled={initialValues.foundationsID !== null}
                   />
                 </FormGroup>
 
@@ -316,6 +319,7 @@ export class Page extends Component {
                     validate={[validators.maxLength32]}
                     component={FormInputs.TextInput}
                     placeholder={strings.MEMBER_MOBILE_PHONE_NUMBER_WORK}
+                    disabled={initialValues.foundationsID !== null}
                   />
                 </FormGroup>
               </div>

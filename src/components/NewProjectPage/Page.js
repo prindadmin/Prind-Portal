@@ -5,6 +5,7 @@ import {
   FormGroup,
   Button,
   ButtonGroup,
+  Callout,
 } from '@blueprintjs/core'
 
 import HeaderBar from '../common/HeaderBar';
@@ -29,7 +30,9 @@ export class Page extends Component {
     super()
 
     this.state = {
-      showCreatingPopover: false
+      showCreatingPopover: false,
+      createError: false,
+      errorText: "",
     }
   }
 
@@ -37,17 +40,31 @@ export class Page extends Component {
   createProject = (values) => {
 
     this.setState({
-      showCreatingPopover: true
+      showCreatingPopover: true,
+      createError: false,
     })
 
-    const { createProject, history, auth } = this.props
+    const { createProject, auth } = this.props
 
-    createProject(auth.info.idToken.jwtToken, values)
+    createProject(
+      auth.info.idToken.jwtToken,
+      values,
+      this.createResolve,
+      this.createReject,
+    )
+  }
 
-    // TODO: Make this not just a fixed delay
-    setTimeout(() => {
-        history.push(Endpoints.PROJECTDETAILSPAGE)
-      }, 5000)
+  createResolve = () => {
+    const { history } = this.props
+    history.push(Endpoints.PROJECTDETAILSPAGE)
+  }
+
+  createReject = () => {
+    this.setState({
+      showCreatingPopover: false,
+      createError: true,
+      errorText: strings.ERROR_CREATING_NEW_PROJECT,
+    })
   }
 
   newProjectPageHeader = () => {
@@ -177,19 +194,28 @@ export class Page extends Component {
 
   render() {
 
+    const { showCreatingPopover, createError, errorText } = this.state
+
     return (
       <div id='new-project-page'>
         <div className="App-header">
           <HeaderBar />
         </div>
         {
-          this.state.showCreatingPopover ? <CreatingProjectPopover /> : null
+          showCreatingPopover ? <CreatingProjectPopover /> : null
         }
 
         <div className='content-with-sidebar full-height row'>
           <PageChooserSection />
           <div className='page-content-section col-xl-10 col-lg-9 col-md-9 col-sm-9'>
             {this.newProjectPageHeader()}
+            {
+              createError ?
+              <Callout style={{marginBottom: '15px'}} intent='danger'>
+                <div>{errorText}</div>
+              </Callout> :
+              null
+            }
             {this.newProjectForm()}
             {this.newProjectPageFooter()}
           </div>

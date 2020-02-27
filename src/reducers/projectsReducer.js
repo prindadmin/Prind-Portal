@@ -13,6 +13,7 @@ const defaultState = {
   memberList: [],
   downloadURL: "",
   fileDetails: {},
+  error: null,
 }
 
 const blankChosenState = {
@@ -65,12 +66,14 @@ export const updateChosenProject = ( identityToken, project ) => {
   }
 }
 
-export const createProject = ( identityToken, projectValues ) => {
+export const createProject = ( identityToken, projectValues, resolve, reject ) => {
   return {
     type: action.PROJECT_CREATE_PROJECT_REQUESTED,
     payload: {
       identityToken,
       projectValues,
+      resolve,
+      reject,
     }
   }
 }
@@ -110,7 +113,7 @@ export const uploadFile = ( identityToken, projectID, pageName, fieldID, fileDet
   }
 }
 
-export const downloadFile = ( identityToken, projectID, pageName, fieldID, version ) => {
+export const downloadFile = ( identityToken, projectID, pageName, fieldID, version, resolve, reject ) => {
 
   return {
     type: action.PROJECT_DOWNLOAD_FILE_REQUESTED,
@@ -120,12 +123,14 @@ export const downloadFile = ( identityToken, projectID, pageName, fieldID, versi
       pageName,
       fieldID,
       version,
+      resolve,
+      reject,
     }
   }
 }
 
 
-export const createField = ( identityToken, projectID, pageName, fieldDetails ) => {
+export const createField = ( identityToken, projectID, pageName, fieldDetails, resolve, reject ) => {
 
   return {
     type: action.PROJECT_CREATE_FIELD_REQUESTED,
@@ -134,6 +139,8 @@ export const createField = ( identityToken, projectID, pageName, fieldDetails ) 
       projectID,
       pageName,
       fieldDetails,
+      resolve,
+      reject,
     }
   }
 }
@@ -146,6 +153,22 @@ export const updateField = ( identityToken, pageName, fileDetails ) => {
       identityToken,
       pageName,
       fileDetails,
+    }
+  }
+}
+
+export const requestSignature = ( identityToken, projectID, pageName, fieldID, members, resolve, reject ) => {
+
+  return {
+    type: action.PROJECT_FILE_SIGNATURE_REQUEST_REQUESTED,
+    payload: {
+      identityToken,
+      projectID,
+      pageName,
+      fieldID,
+      members,
+      resolve,
+      reject,
     }
   }
 }
@@ -165,18 +188,7 @@ const ACTION_HANDLERS = {
   [action.PROJECT_DOWNLOAD_FILE_REQUESTED]: state => ({ ...state }),
   [action.PROJECT_CREATE_FIELD_REQUESTED]: state => ({ ...state }),
   [action.PROJECT_UPDATE_FIELD_REQUESTED]: state => ({ ...state }),
-
-  [action.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
-  [action.PROJECT_CREATE_PROJECT_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
-  [action.PROJECT_UPDATE_PROJECT_CHOSEN_REQUEST_FAILED]: (state, action) => { return { ...state, ...action.payload }},
-  [action.PROJECT_GET_CURRENT_MEMBERS_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
-  [action.PROJECT_UPLOAD_FILE_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
-  [action.PROJECT_DOWNLOAD_FILE_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
-  [action.PROJECT_CREATE_FIELD_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
-  [action.PROJECT_UPDATE_FIELD_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
-
-  [action.PROJECT_RESET_CHOSEN_PROJECT]: (state, action) => ({ ...state, ...action.payload }),
-  [action.PROJECT_RESET_DOWNLOAD_URL]: (state, action) => ({ ...state, ...action.payload }),
+  [action.PROJECT_FILE_SIGNATURE_REQUEST_REQUESTED]: state => ({ ...state }),
 
   [action.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUEST_SENT]: (state, action) => { return { ...state, ...action.payload }},
   [action.PROJECT_UPDATE_PROJECT_CHOSEN_REQUEST_SENT]: (state, action) => { return { ...state, ...action.payload }},
@@ -187,6 +199,20 @@ const ACTION_HANDLERS = {
   [action.PROJECT_CREATE_FIELD_REQUEST_SENT]: (state, action) => { return { ...state, ...action.payload }},
   [action.PROJECT_UPDATE_FIELD_REQUEST_SENT]: (state, action) => { return { ...state, ...action.payload }},
   [action.PROJECT_DOWNLOAD_FILE_REQUEST_SENT]: (state, action) => { return { ...state, ...action.payload }},
+  [action.PROJECT_FILE_SIGNATURE_REQUEST_REQUEST_SENT]: (state, action) => { return { ...state, ...action.payload }},
+
+  [action.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
+  [action.PROJECT_CREATE_PROJECT_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
+  [action.PROJECT_UPDATE_PROJECT_CHOSEN_REQUEST_FAILED]: (state, action) => { return { ...state, ...action.payload }},
+  [action.PROJECT_GET_CURRENT_MEMBERS_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
+  [action.PROJECT_UPLOAD_FILE_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
+  [action.PROJECT_DOWNLOAD_FILE_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
+  [action.PROJECT_CREATE_FIELD_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
+  [action.PROJECT_UPDATE_FIELD_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
+  [action.PROJECT_FILE_SIGNATURE_REQUEST_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
+
+  [action.PROJECT_RESET_CHOSEN_PROJECT]: (state, action) => ({ ...state, ...action.payload }),
+  [action.PROJECT_RESET_DOWNLOAD_URL]: (state, action) => ({ ...state, ...action.payload }),
 }
 
 

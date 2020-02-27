@@ -141,7 +141,7 @@ export class Page extends Component {
 
   render() {
 
-    const { projects, pageContent } = this.props
+    const { projects } = this.props
 
     return (
       <div id='refurbishment-page'>

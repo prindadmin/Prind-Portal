@@ -17,11 +17,8 @@ const mapStatetoProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addMember: (jwtToken, projectID, memberValues) => {
-      dispatch(memberReducer.addMemberToProject(jwtToken, projectID, memberValues))
-    },
-    removeMember: (jwtToken, projectID, memberEmail) => {
-      dispatch(memberReducer.removeMemberFromProject(jwtToken, projectID, memberEmail))
+    addMember: (jwtToken, projectID, memberValues, resolve, reject) => {
+      dispatch(memberReducer.addMemberToProject(jwtToken, projectID, memberValues, resolve, reject))
     },
     getCurrentMembers: (jwtToken, projectID) => {
       dispatch(projectReducer.getCurrentMembers(jwtToken, projectID))

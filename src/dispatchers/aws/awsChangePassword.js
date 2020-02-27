@@ -19,7 +19,7 @@ export default function (oldPassword, newPassword) {
         console.log(result)
         reject(result)
       } else {
-        console.log(error)
+        console.error(error)
         resolve(error)
       }
     })

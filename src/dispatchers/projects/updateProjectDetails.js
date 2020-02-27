@@ -23,7 +23,7 @@ export default function(identityToken, projectID, newProjectDetails) {
       resolve(res)
     })
     .catch((error) => {
-      console.log(error)
+      console.error(error)
       reject(error)
     })
   })

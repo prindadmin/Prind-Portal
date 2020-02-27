@@ -22,7 +22,7 @@ export default function(identityToken, fieldDetails) {
       resolve(res)
     })
     .catch((error) => {
-      console.log(error)
+      console.error(error)
       reject(error)
     })
   })

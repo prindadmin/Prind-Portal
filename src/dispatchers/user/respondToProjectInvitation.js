@@ -33,7 +33,7 @@ export default function(identityToken, projectID, response) {
 
     })
     .catch((error) => {
-      console.log(error)
+      console.error(error)
       reject(error)
     })
   })

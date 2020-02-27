@@ -9,7 +9,7 @@ let defaultState = {
   fetching: false,
   details: {},
   projectInvitations: [],
-  signatureInvitations: [],
+  signatureRequests: [],
   projectS3Token: "",
   userS3Token: "",
 }
@@ -37,7 +37,7 @@ function * getS3ProjectFileUploadToken (action) {
     })
     }
     catch (e) {
-      console.log(e)
+      console.error(e)
   }
 }
 
@@ -56,7 +56,7 @@ function * getS3UserFileUploadToken (action) {
     })
     }
     catch (e) {
-      console.log(e)
+      console.error(e)
   }
 }
 
@@ -88,7 +88,7 @@ function * getUserDetails (action) {
     })
   }
   catch (error) {
-    console.log(error)
+    console.error(error)
     yield put({
       type: actions.USER_GET_DETAILS_REQUEST_FAILED,
         payload: {
@@ -127,7 +127,7 @@ function * getProjectInvitations (action) {
     })
   }
   catch (error) {
-    console.log(error)
+    console.error(error)
     yield put({
       type: actions.USER_GET_PROJECT_INVITATIONS_REQUEST_FAILED,
         payload: {
@@ -174,9 +174,95 @@ function * respondToProjectInvitation (action) {
 
   }
   catch (error) {
-    console.log(error)
+    console.error(error)
     yield put({
       type: actions.USER_PROJECT_INVITATION_SEND_RESPONSE_REQUEST_FAILED,
+        payload: {
+          fetching: false,
+          error,
+        }
+    })
+  }
+}
+
+
+
+function * getSignatureRequests (action) {
+
+  const { identityToken } = action.payload
+
+  try {
+
+    // Pre-fetch update to store
+    yield put({
+      type: actions.USER_GET_PROJECT_SIGNATURES_REQUEST_SENT,
+      payload: {
+        fetching: true,
+      }
+    })
+
+    const { data: result } = yield call(Dispatchers.getSignatureRequestsDispatcher, identityToken)
+
+    // Post-fetch update to store
+    yield put({
+      type: actions.USER_SET_STATE,
+      payload: {
+        fetching: false,
+        signatureRequests: result.body,
+      }
+    })
+  }
+  catch (error) {
+    console.error(error)
+    yield put({
+      type: actions.USER_GET_PROJECT_SIGNATURES_REQUEST_FAILED,
+        payload: {
+          fetching: false,
+          error,
+        }
+    })
+  }
+}
+
+
+
+function * respondToSignatureRequests (action) {
+
+  const { identityToken, projectID, pageName, fieldID, response } = action.payload
+
+  try {
+
+    // Pre-fetch update to store
+    yield put({
+      type: actions.USER_PROJECT_SIGNATURE_SEND_RESPONSE_REQUEST_SENT,
+      payload: {
+        fetching: true,
+      }
+    })
+
+    yield call(Dispatchers.respondToSignatureRequestDispatcher, identityToken, projectID, pageName, fieldID, response)
+
+    // Post-fetch update to store
+    yield put({
+      type: actions.USER_SET_STATE,
+      payload: {
+        fetching: false,
+      }
+    })
+
+    // Trigger a fetch of the requests list again
+    yield put({
+      type: actions.USER_GET_PROJECT_SIGNATURES_REQUESTED,
+      payload: {
+        identityToken,
+      }
+    })
+
+  }
+  catch (error) {
+    console.error(error)
+    yield put({
+      type: actions.USER_PROJECT_SIGNATURE_SEND_RESPONSE_REQUEST_FAILED,
         payload: {
           fetching: false,
           error,
@@ -213,7 +299,7 @@ function * updateUserDetails (action) {
     })
   }
   catch (error) {
-    console.log(error)
+    console.error(error)
     yield put({
       type: actions.USER_UPDATE_DETAILS_REQUEST_FAILED,
         payload: {
@@ -234,4 +320,6 @@ export default function * sagas () {
   yield takeLatest(actions.USER_UPDATE_DETAILS_REQUESTED, updateUserDetails)
   yield takeLatest(actions.USER_GET_PROJECT_INVITATIONS_REQUESTED, getProjectInvitations)
   yield takeLatest(actions.USER_PROJECT_INVITATION_SEND_RESPONSE_REQUESTED, respondToProjectInvitation)
+  yield takeLatest(actions.USER_GET_PROJECT_SIGNATURES_REQUESTED, getSignatureRequests)
+  yield takeLatest(actions.USER_PROJECT_SIGNATURE_SEND_RESPONSE_REQUESTED, respondToSignatureRequests)
 }

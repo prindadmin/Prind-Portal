@@ -1,9 +1,7 @@
 import axios from 'axios'
 import https from 'https'
 
-// TODO: Implement API endpoint
-
-export default function(identityToken, projectID, pageName, fieldID, fieldDetails, members) {
+export default function(identityToken, projectID, pageName, fieldID, members) {
 
   return new Promise((resolve, reject) => {
 
@@ -17,22 +15,16 @@ export default function(identityToken, projectID, pageName, fieldID, fieldDetail
       }
     });
 
-    const values = {
-      projectID,
-      pageName,
-      fieldID,
-      fieldDetails,
-      members
+    const value = {
+      members,
     }
 
-    console.log(values)
-
-    instance.post(`${process.env.REACT_APP_API_LOCAL_ENDPOINT}/foundations/request-signature.json`, values)
+    instance.post(`${process.env.REACT_APP_API_ENDPOINT}/project/${projectID}/${pageName}/${fieldID}/request-signature`, value)
     .then(res => {
       resolve(res)
     })
     .catch((error) => {
-      console.log(error)
+      console.error(error)
       reject(error)
     })
   })

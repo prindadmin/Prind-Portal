@@ -104,7 +104,7 @@ export class Element extends Component {
 
       .on('error', function(error, response) {
         console.log("Error!");
-        console.log(error)
+        console.error(error)
 
         that.setState({
           uploadError: true

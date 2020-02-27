@@ -4,6 +4,8 @@ import getUserDetailsDispatcher from './getDetails'
 import updateUserDetailsDispatcher from './updateDetails'
 import getProjectInvitationsDispatcher from './getProjectInvitations'
 import respondToProjectInvitationDispatcher from './respondToProjectInvitation'
+import getSignatureRequestsDispatcher from './getSignatureRequests'
+import respondToSignatureRequestDispatcher from './respondToSignatureRequest'
 
 export {
   s3UploadProjectFileTokenDispatcher,
@@ -12,4 +14,6 @@ export {
   updateUserDetailsDispatcher,
   getProjectInvitationsDispatcher,
   respondToProjectInvitationDispatcher,
+  getSignatureRequestsDispatcher,
+  respondToSignatureRequestDispatcher,
 }

@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import {
+  Callout,
+} from '@blueprintjs/core'
+
 import ItemIcon from '../../../../ItemIcon'
 import PopOverHandler from '../../../../popOverHandler'
 
@@ -8,7 +12,6 @@ import SignatureHistory from '../SignatureHistory'
 
 import * as strings from '../../../../../../data/Strings'
 
-// TODO: Add error handling when URL cannot be loaded
 // TODO: Fix file downloading
 
 export class Element extends Component {
@@ -29,15 +32,11 @@ export class Element extends Component {
   }
 
 
-
-  componentDidUpdate(prevProps) {
-
-    const { projects } = this.props
-
-    if (projects.downloadURL !== prevProps.projects.downloadURL && projects.downloadURL !== "") {
-      // TODO: Once signed URLs from the API are sorted, then uncomment the commented line and delete the current line
-      //window.location.href = projects.downloadURL
-      window.open(projects.downloadURL, "_blank")
+  constructor() {
+    super()
+    this.state = {
+      fetchError: false,
+      errorText: ""
     }
   }
 
@@ -52,10 +51,26 @@ export class Element extends Component {
     this.props.onClosePopover()
   }
 
+  downloadResolve = () => {
+    const { projects } = this.props
+    window.open(projects.downloadURL, "_blank")
+  }
+
+  downloadReject = () => {
+    this.setState({
+      fetchError: true,
+      errorText: strings.ERROR_FETCHING_DOWNLOAD_LINK
+    })
+  }
+
 
   downloadFile = (e) => {
 
     const { auth, projectID, pageName, fieldID, chosenFileDetails } = this.props
+
+    this.setState({
+      fetchError: false,
+    })
 
     this.props.downloadFile(
       auth.info.idToken.jwtToken,
@@ -63,6 +78,8 @@ export class Element extends Component {
       pageName,
       fieldID,
       chosenFileDetails.ver,
+      this.downloadResolve,
+      this.downloadReject,
     )
 
   }
@@ -141,6 +158,15 @@ export class Element extends Component {
           </div>
 
         </div>
+        {
+          this.state.fetchError ?
+          <div className="row">
+            <Callout style={{marginBottom: '15px'}} intent='danger'>
+              <div>{this.state.errorText}</div>
+            </Callout>
+          </div> :
+          null
+        }
         <div className="row">
 
           <div className="col">

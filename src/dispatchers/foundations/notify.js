@@ -22,7 +22,7 @@ export default function( values ) {
     })
     .catch((error) => {
       //console.log("error")
-      //console.log(error)
+      //console.error(error)
       reject(error)
     })
   })

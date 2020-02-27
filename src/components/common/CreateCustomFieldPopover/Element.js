@@ -7,6 +7,7 @@ import {
   FormGroup,
   Button,
   ButtonGroup,
+  Callout,
 } from '@blueprintjs/core'
 
 import PopOverHandler from '../popOverHandler'
@@ -14,8 +15,6 @@ import PopOverHandler from '../popOverHandler'
 import * as strings from '../../../data/Strings'
 import * as validators from '../../../validators'
 import * as FormInputs from '../../shared/formInputs'
-
-// TODO: Future: Make this wait for response before closing
 
 const fieldTypes = [
   {
@@ -49,6 +48,8 @@ export class Element extends Component {
     this.state = {
       selectedTypeValue: fieldTypes[0].value,
       optionsArray: [],
+      createError: false,
+      errorText: "",
     }
   }
 
@@ -68,7 +69,24 @@ export class Element extends Component {
     this.props.onClosePopover()
   }
 
+  createResolve = () => {
+    this.closePopover()
+  }
+
+  createReject = () => {
+    this.setState({
+      createError: true,
+      errorText: strings.ERROR_CREATING_CUSTOM_FIELD,
+    })
+  }
+
+
   createField = (e) => {
+
+    this.setState({
+      createError: false,
+      errorText: "",
+    })
 
     const { auth, projectID, pageName } = this.props
 
@@ -107,10 +125,10 @@ export class Element extends Component {
       auth.info.idToken.jwtToken,
       projectID,
       pageName,
-      newFieldDetails
+      newFieldDetails,
+      this.createResolve,
+      this.createReject,
     )
-
-    this.closePopover()
   }
 
 
@@ -162,6 +180,13 @@ export class Element extends Component {
 
     return (
       <div className='form-container'>
+        {
+          this.state.createError ?
+          <Callout style={{marginBottom: '15px'}} intent='danger'>
+            <div>{this.state.errorText}</div>
+          </Callout> :
+          null
+        }
         <form onSubmit={handleSubmit(this.createField)} className='create-field-form'>
           <FormGroup
             label={strings.FIELD_TITLE}

@@ -31,7 +31,7 @@ export default function(identityToken, projectID, memberDetails) {
       reject(res)
     })
     .catch((error) => {
-      console.log(error)
+      console.error(error)
       reject(error)
     })
   })

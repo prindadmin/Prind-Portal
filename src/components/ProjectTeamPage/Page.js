@@ -5,6 +5,7 @@ import {
   FormGroup,
   Button,
   ButtonGroup,
+  Callout,
 } from '@blueprintjs/core'
 
 import HeaderBar from '../common/HeaderBar';
@@ -28,7 +29,9 @@ export class Page extends Component {
     this.state = {
       selectedRoleID: "0",
       selectedRoleName: strings.NO_ROLE_SELECTED,
-      creatingNewUser: false,
+      addingMember: false,
+      addMemberError: false,
+      errorText: ""
     }
   }
 
@@ -71,19 +74,9 @@ export class Page extends Component {
     }
   }
 
-  addMember = async (values) => {
-
-    var newValues = values
-    newValues.roleId = this.state.selectedRoleID
-
-    await this.props.addMember(
-      this.props.auth.info.idToken.jwtToken,
-      this.props.projects.chosenProject.projectId,
-      newValues
-    )
-
+  addMemberResolve = () => {
     this.setState({
-      creatingNewUser: false,
+      addingMember: false,
     })
 
     // Get the current members of the project
@@ -91,6 +84,35 @@ export class Page extends Component {
       this.props.auth.info.idToken.jwtToken,
       this.props.projects.chosenProject.projectId
     )
+  }
+
+
+  addMemberReject = () => {
+    this.setState({
+      addingMember: false,
+      addMemberError: true,
+      errorText: strings.ERROR_ADDING_MEMBER_TO_PROJECT
+    })
+  }
+
+  addMember = (values) => {
+
+    this.setState({
+      addingMember: true,
+      addMemberError: false,
+    })
+
+    var newValues = values
+    newValues.roleId = this.state.selectedRoleID
+
+    this.props.addMember(
+      this.props.auth.info.idToken.jwtToken,
+      this.props.projects.chosenProject.projectId,
+      newValues,
+      this.addMemberResolve,
+      this.addMemberReject,
+    )
+
   }
 
   pageHeader = () => {
@@ -120,6 +142,7 @@ export class Page extends Component {
 
     const { handleSubmit } = this.props
     const { roles } = this.props.members
+    const { addMemberError, errorText } = this.state
 
     // re-key the roles array so the keys match those required by the drop down
     var formattedRoles = roles.map(item => {
@@ -133,6 +156,13 @@ export class Page extends Component {
 
     return (
       <form onSubmit={handleSubmit(this.addMember)} className='add-member-form'>
+        {
+          addMemberError ?
+          <Callout style={{marginBottom: '15px'}} intent='danger'>
+            <div>{errorText}</div>
+          </Callout> :
+          null
+        }
         <FormGroup
           label={strings.MEMBER_DETAILS}
           labelFor="emailAddress"
@@ -174,6 +204,16 @@ export class Page extends Component {
     )
   }
 
+  onMemberRemove = () => {
+
+    const { getCurrentMembers, auth, projects } = this.props
+
+    getCurrentMembers(
+      auth.info.idToken.jwtToken,
+      projects.chosenProject.projectId
+    )
+  }
+
   memberList = () => {
 
     return (
@@ -181,7 +221,7 @@ export class Page extends Component {
         <div className="row">
           <ButtonGroup fill>
             <Button
-              onClick={(e) => this.setState({creatingNewUser: true})}
+              onClick={(e) => this.setState({addingMember: true})}
               intent='primary'
               text={strings.BUTTON_ADD_MEMBER_TO_PROJECT}
             />
@@ -192,10 +232,10 @@ export class Page extends Component {
           {
             this.props.projects.memberList.map((memberDetails, index) => {
               return (
-                <div className="col-md-12 col-lg-12 col-xl-6">
+                <div key={index} className="col-md-12 col-lg-12 col-xl-6">
                   <ContactTile
-                    key={index}
                     memberDetails={memberDetails}
+                    onMemberRemove={this.onMemberRemove}
                   />
                 </div>
               )
@@ -219,8 +259,8 @@ export class Page extends Component {
   teamDetails = () => {
     return (
       <div className="form-container">
-        {this.state.creatingNewUser ? this.newMemberPageHeader() : this.pageHeader()}
-        {this.state.creatingNewUser ? this.addNewMember() : this.memberList()}
+        {this.state.addingMember ? this.newMemberPageHeader() : this.pageHeader()}
+        {this.state.addingMember ? this.addNewMember() : this.memberList()}
         {this.pageFooter()}
       </div>
     )

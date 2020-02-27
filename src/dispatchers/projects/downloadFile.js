@@ -19,7 +19,6 @@ export default function(identityToken, projectID, pageName, fieldID, version) {
     .then(res => {
       console.log(res)
 
-      // TODO: Do something if an error is returned
       if (res.data.statusCode === 200 || res.data.statusCode === 201) {
         resolve(res)
         return
@@ -28,7 +27,7 @@ export default function(identityToken, projectID, pageName, fieldID, version) {
       reject(res)
     })
     .catch((error) => {
-      console.log(error)
+      console.error(error)
       reject(error)
     })
   })

@@ -58,12 +58,14 @@ export const changePassword = (values, resolve, reject) => {
   }
 }
 
-export const completeNewPassword = (oldPassword, newPassword) => {
+export const completeNewPassword = (oldPassword, newPassword, resolve, reject) => {
   return {
     type: action.AUTH_COMPLETE_NEW_PASSWORD,
     payload: {
       oldPassword,
-      newPassword
+      newPassword,
+      resolve,
+      reject,
     }
   }
 }

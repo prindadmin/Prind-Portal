@@ -31,7 +31,7 @@ export default function(identityToken, userDetails) {
 
     })
     .catch((error) => {
-      console.log(error)
+      console.error(error)
       reject(error)
     })
   })

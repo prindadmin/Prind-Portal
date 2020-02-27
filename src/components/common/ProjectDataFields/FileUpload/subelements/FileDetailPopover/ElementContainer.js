@@ -14,8 +14,8 @@ const mapStatetoProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    downloadFile: (jwtToken, projectID, pageName, fieldID, version) => {
-      dispatch(projectsreducer.downloadFile(jwtToken, projectID, pageName, fieldID, version))
+    downloadFile: (jwtToken, projectID, pageName, fieldID, version, resolve, reject) => {
+      dispatch(projectsreducer.downloadFile(jwtToken, projectID, pageName, fieldID, version, resolve, reject))
     },
     resetDownloadURL: () => {
       dispatch(projectsreducer.resetDownloadURL())

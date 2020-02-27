@@ -33,7 +33,7 @@ function * getPageContent (action) {
     })
     }
     catch (error) {
-      console.log(error)
+      console.error(error)
       yield put({
         type: actions.PAGE_GET_CONTENT_OCCUPATION_REQUEST_FAILED,
           payload: {

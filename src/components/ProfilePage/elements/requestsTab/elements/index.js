@@ -1,5 +1,7 @@
-import RequestTile from './RequestTile'
+import ProjectInvitationTile from './ProjectInvitationTile'
+import SignatureRequestTile from './SignatureRequestTile'
 
 export {
-  RequestTile,
+  ProjectInvitationTile,
+  SignatureRequestTile,
 }
