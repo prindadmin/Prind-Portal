@@ -145,14 +145,18 @@ export const createField = ( identityToken, projectID, pageName, fieldDetails, r
   }
 }
 
-export const updateField = ( identityToken, pageName, fileDetails ) => {
+export const updateField = ( identityToken, projectID, pageName, fieldID, fieldDetails, resolve, reject ) => {
 
   return {
     type: action.PROJECT_UPDATE_FIELD_REQUESTED,
     payload: {
       identityToken,
+      projectID,
       pageName,
-      fileDetails,
+      fieldID,
+      fieldDetails,
+      resolve,
+      reject,
     }
   }
 }

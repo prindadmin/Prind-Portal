@@ -242,11 +242,11 @@ function * uploadFile (action) {
     console.log(result)
 
     // Decide which action to dispatch to update the correct page's content
-    const action = actionSwitcher(pageName)
+    const nextAction = actionSwitcher(pageName)
 
     // Post-fetch update to store
     yield put({
-      type: action,
+      type: nextAction,
       payload: {
         identityToken,
         projectID,
@@ -336,11 +336,11 @@ function * createField (action) {
     yield call(Dispatchers.createFieldDispatcher, identityToken, projectID, pageName, fieldDetails)
 
     // Decide which action to dispatch to update the correct page's content
-    const action = actionSwitcher(pageName)
+    const nextAction = actionSwitcher(pageName)
 
     // Post-fetch update to store
     yield put({
-      type: action,
+      type: nextAction,
       payload: {
         identityToken,
         projectID,
@@ -374,7 +374,7 @@ function * createField (action) {
 
 function * updateField (action) {
 
-  const { identityToken, pageName, fieldDetails } = action.payload
+  const { identityToken, projectID, pageName, fieldID, fieldDetails } = action.payload
 
   try {
 
@@ -386,17 +386,19 @@ function * updateField (action) {
       }
     })
 
-    yield call(Dispatchers.updateFieldDispatcher, identityToken, fieldDetails)
+    yield call(Dispatchers.updateFieldDispatcher, identityToken, projectID, pageName, fieldID, fieldDetails)
 
     // Decide which action to dispatch to update the correct page's content
-    const action = actionSwitcher(pageName)
+    const nextAction = actionSwitcher(pageName)
+
+    action.payload.resolve()
 
     // Post-fetch update to store
     yield put({
-      type: action,
+      type: nextAction,
       payload: {
         identityToken,
-        projectID: fieldDetails.projectID,
+        projectID,
       }
     })
 
@@ -417,6 +419,8 @@ function * updateField (action) {
           error,
         }
     })
+
+    action.payload.reject()
   }
 }
 

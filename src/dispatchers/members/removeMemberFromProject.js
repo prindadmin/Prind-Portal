@@ -1,8 +1,6 @@
 import axios from 'axios'
 import https from 'https'
 
-// TODO: Implement API endpoint
-
 export default function(identityToken, projectID, username) {
 
   return new Promise((resolve, reject) => {

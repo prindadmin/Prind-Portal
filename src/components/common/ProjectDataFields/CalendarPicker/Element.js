@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import {
   Button,
   Intent,
+  Callout,
 } from '@blueprintjs/core'
 
 import * as FormInputs from '../../../shared/formInputs'
@@ -28,6 +29,15 @@ export class Element extends Component {
     pageName: PropTypes.string.isRequired,
   }
 
+  constructor() {
+    super()
+    this.state = {
+      updateInProgress: false,
+      updateError: false,
+      errorText: "",
+    }
+  }
+
   componentDidMount() {
   }
 
@@ -38,22 +48,38 @@ export class Element extends Component {
   // ---------------------- DEFAULT FUNCTIONALITY ABOVE THIS LINE -----------------------
 
   // When the user wants to save the changes, update the server
-  saveChanges = (e) => {
+  saveChanges = (fieldDetails) => {
 
     const { auth, pageName, projects, elementContent } = this.props
 
-    var details = {
-      projectID: projects.chosenProject.projectId,
-      pageName,
-      fieldID: elementContent.id,
-      fieldDetails: {...e},
-    }
+    this.setState({
+      updateError: false,
+      updateInProgress: true,
+    })
 
     this.props.updateField(
       auth.info.idToken.jwtToken,
+      projects.chosenProject.projectId,
       pageName,
-      details,
+      elementContent.id,
+      fieldDetails,
+      this.saveResolve,
+      this.saveReject,
     )
+  }
+
+  saveResolve = () => {
+    this.setState({
+      updateInProgress: false,
+    })
+  }
+
+  saveReject = () => {
+    this.setState({
+      updateError: true,
+      updateInProgress: false,
+      errorText: strings.ERROR_SAVING_CHANGES_TO_FIELD
+    })
   }
 
   // ------------------------------ RENDER BELOW THIS LINE ------------------------------
@@ -81,8 +107,16 @@ export class Element extends Component {
           </div>
 
           <div className='container'>
-            <form onSubmit={handleSubmit(this.saveChanges)} className='add-member-form'>
+            <form onSubmit={handleSubmit(this.saveChanges)} className='calendar-picker-form'>
 
+              {
+                this.state.updateError ?
+                <div className='row'>
+                  <Callout style={{marginBottom: '15px'}} intent='danger'>
+                    <div>{this.state.errorText}</div>
+                  </Callout>
+                </div> : null
+              }
 
               <div className='row'>
                 <div className='col'>

@@ -3,8 +3,12 @@ import https from 'https'
 
 // TODO: Implement API endpoint
 
-export default function(identityToken, fieldDetails) {
+export default function(identityToken, projectID, pageName, fieldID, fieldDetails) {
 
+  console.log(identityToken)
+  console.log(projectID)
+  console.log(pageName)
+  console.log(fieldID)
   console.log(fieldDetails)
 
   return new Promise((resolve, reject) => {
@@ -19,9 +23,16 @@ export default function(identityToken, fieldDetails) {
       }
     });
 
-    instance.post(`${process.env.REACT_APP_API_LOCAL_ENDPOINT}/project/update-field.json`, fieldDetails)
+    instance.post(`${process.env.REACT_APP_API_ENDPOINT}/project/${projectID}/page/${pageName}/field/${fieldID}`, fieldDetails)
     .then(res => {
-      resolve(res)
+      console.log(res)
+
+      if (res.data.statusCode === 200 || res.data.statusCode === 201) {
+        resolve(res)
+        return
+      }
+
+      reject(res)
     })
     .catch((error) => {
       console.error(error)

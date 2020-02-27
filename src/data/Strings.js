@@ -142,6 +142,7 @@ export const FIELD_IS_REQUIRED_COMMA_SEPARATED = "(Required, separate options wi
 export const DROP_DOWN_OPTIONS_OPENING_TEXT_BOX = "Options that open a \"More Details\" text box:"
 export const PLEASE_ENTER_SOME_OPTIONS = "Please enter some options"
 export const ERROR_CREATING_CUSTOM_FIELD = "There was an error creating the custom field, please try again.  If the problem persists, please contact technical support."
+export const ERROR_SAVING_CHANGES_TO_FIELD = "There was an error saving changes to the field, please try again.  If the problem persists, please contact technical support."
 
 export const FILE_DETAILS = "File Details"
 export const DOWNLOAD = "Download"

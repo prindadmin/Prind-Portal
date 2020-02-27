@@ -3,7 +3,7 @@ import https from 'https'
 
 // TODO: Implement API endpoint
 
-export default function(identityToken, fieldDetails) {
+export default function(identityToken, projectID, fieldDetails) {
 
   return new Promise((resolve, reject) => {
 
@@ -17,7 +17,7 @@ export default function(identityToken, fieldDetails) {
       }
     });
 
-    instance.post(`${process.env.REACT_APP_API_LOCAL_ENDPOINT}/project/create-field.json`, fieldDetails)
+    instance.post(`${process.env.REACT_APP_API_LOCAL_ENDPOINT}/project/${projectID}/create-field.json`, fieldDetails)
     .then(res => {
       resolve(res)
     })

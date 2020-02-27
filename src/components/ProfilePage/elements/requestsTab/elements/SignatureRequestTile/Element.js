@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+// TODO: Implement the signature request rather than project join request
+
 import * as strings from '../../../../../../data/Strings'
 
 import {
@@ -12,12 +14,13 @@ export class Element extends Component {
   static propTypes = {
     auth: PropTypes.object.isRequired,
     requestDetails: PropTypes.shape({
-      projectId: PropTypes.string.isRequired,
-      projectName: PropTypes.string.isRequired,
-      requestedBy: PropTypes.string.isRequired,
+      documentDid: PropTypes.string.isRequired,
       requestedAt: PropTypes.string.isRequired,
-      roleId: PropTypes.string.isRequired,
-      requestedByUser: PropTypes.string.isRequired,
+      requestedBy: PropTypes.shape({
+        username: PropTypes.string.isRequired,
+        firstName: PropTypes.string.isRequired,
+        lastName: PropTypes.string.isRequired,
+      }).isRequired,
     }).isRequired,
     respondToProjectInvitation: PropTypes.func.isRequired,
   }
