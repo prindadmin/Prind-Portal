@@ -125,6 +125,8 @@ function * getProjectInvitations (action) {
         projectInvitations: result.body,
       }
     })
+
+    action.payload.resolve()
   }
   catch (error) {
     console.error(error)
@@ -135,6 +137,8 @@ function * getProjectInvitations (action) {
           error,
         }
     })
+
+    action.payload.reject()
   }
 }
 
@@ -211,6 +215,8 @@ function * getSignatureRequests (action) {
         signatureRequests: result.body,
       }
     })
+
+    action.payload.resolve()
   }
   catch (error) {
     console.error(error)
@@ -221,6 +227,8 @@ function * getSignatureRequests (action) {
           error,
         }
     })
+
+    action.payload.reject()
   }
 }
 
@@ -312,6 +320,49 @@ function * updateUserDetails (action) {
 
 
 
+function * getHistory (action) {
+
+  const { identityToken } = action.payload
+
+  try {
+
+    // Pre-fetch update to store
+    yield put({
+      type: actions.USER_GET_HISTORY_REQUEST_SENT,
+      payload: {
+        fetching: true,
+      }
+    })
+
+    const { data: result } = yield call(Dispatchers.getHistoryDispatcher, identityToken)
+
+    // Post-fetch update to store
+    yield put({
+      type: actions.USER_SET_STATE,
+      payload: {
+        fetching: false,
+        history: result.body,
+      }
+    })
+
+    action.payload.resolve()
+  }
+  catch (error) {
+    console.error(error)
+    yield put({
+      type: actions.USER_GET_HISTORY_REQUEST_FAILED,
+        payload: {
+          fetching: false,
+          error,
+        }
+    })
+
+    action.payload.reject()
+  }
+}
+
+
+
 export default function * sagas () {
   yield takeLatest(actions.USER_INIT, init)
   yield takeLatest(actions.USER_S3_UPLOAD_PROJECT_FILE_TOKEN_REQUESTED, getS3ProjectFileUploadToken)
@@ -322,4 +373,5 @@ export default function * sagas () {
   yield takeLatest(actions.USER_PROJECT_INVITATION_SEND_RESPONSE_REQUESTED, respondToProjectInvitation)
   yield takeLatest(actions.USER_GET_PROJECT_SIGNATURES_REQUESTED, getSignatureRequests)
   yield takeLatest(actions.USER_PROJECT_SIGNATURE_SEND_RESPONSE_REQUESTED, respondToSignatureRequests)
+  yield takeLatest(actions.USER_GET_HISTORY_REQUESTED, getHistory)
 }

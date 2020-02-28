@@ -24,13 +24,29 @@ class UserMenu extends Component {
     const { auth, getUserProjectInvitations, getUserSignatureRequests } = props
 
     getUserProjectInvitations(
-      auth.info.idToken.jwtToken
+      auth.info.idToken.jwtToken,
+      this.projectRequestsResolve,
+      this.projectRequestsReject,
     )
 
     getUserSignatureRequests(
-      auth.info.idToken.jwtToken
+      auth.info.idToken.jwtToken,
+      this.signatureRequestsResolve,
+      this.signatureRequestsReject,
     )
 
+  }
+
+  projectRequestsResolve = () => {
+  }
+
+  projectRequestsReject = () => {
+  }
+
+  signatureRequestsResolve = () => {
+  }
+
+  signatureRequestsReject = () => {
   }
 
   getRequestBadge = () => {

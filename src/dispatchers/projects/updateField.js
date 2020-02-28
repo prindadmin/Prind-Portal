@@ -1,15 +1,9 @@
 import axios from 'axios'
 import https from 'https'
 
-// TODO: Implement API endpoint
+// TODO: Remove Type once BE hasn't marked it as required
 
 export default function(identityToken, projectID, pageName, fieldID, fieldDetails) {
-
-  console.log(identityToken)
-  console.log(projectID)
-  console.log(pageName)
-  console.log(fieldID)
-  console.log(fieldDetails)
 
   return new Promise((resolve, reject) => {
 
@@ -23,7 +17,13 @@ export default function(identityToken, projectID, pageName, fieldID, fieldDetail
       }
     });
 
-    instance.post(`${process.env.REACT_APP_API_ENDPOINT}/project/${projectID}/page/${pageName}/field/${fieldID}`, fieldDetails)
+    const body = {
+      fieldDetails,
+      type: "dropdown"
+    }
+
+
+    instance.post(`${process.env.REACT_APP_API_ENDPOINT}/project/${projectID}/${pageName}/${fieldID}`, body)
     .then(res => {
       console.log(res)
 

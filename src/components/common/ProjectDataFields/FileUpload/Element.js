@@ -112,6 +112,7 @@ export class Element extends Component {
     const { elementContent, pageName, projects } = this.props
 
     // TODO: Add expand transition to make it smooth
+    // TODO: Indicate that there is more data if you click the box
 
     return (
       <div id='file-upload-element'>

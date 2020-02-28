@@ -1,7 +1,7 @@
 import axios from 'axios'
 import https from 'https'
 
-export default function(identityToken, projectID) {
+export default function(identityToken) {
 
   return new Promise((resolve, reject) => {
 
@@ -15,17 +15,18 @@ export default function(identityToken, projectID) {
       }
     });
 
-    //instance.get(`${process.env.REACT_APP_API_LOCAL_ENDPOINT}/project/ProjectNumberFour/page/inception`)
-    instance.get(`${process.env.REACT_APP_API_ENDPOINT}/project/${projectID}/page/inception`)
+    instance.get(`${process.env.REACT_APP_API_ENDPOINT}/user/history`)
     .then(res => {
-      console.log(res)
 
-      if (res.data.statusCode === 200 || res.data.statusCode === 201) {
+      // If the status code is correct, then resolve and return
+      if (res.data.statusCode === 200) {
         resolve(res)
         return
       }
 
-      reject(res.data)
+      // If the status code is wrong, reject
+      reject(res)
+
     })
     .catch((error) => {
       console.error(error)

@@ -62,11 +62,13 @@ export const updateUserDetails = ( identityToken, userDetails ) => {
 }
 
 
-export const getProjectInvitations = ( identityToken ) => {
+export const getProjectInvitations = ( identityToken, resolve, reject  ) => {
   return {
     type: action.USER_GET_PROJECT_INVITATIONS_REQUESTED,
     payload: {
       identityToken,
+      resolve,
+      reject,
     }
   }
 }
@@ -83,11 +85,13 @@ export const respondToProjectInvitation = ( identityToken, projectID, response )
 }
 
 
-export const getSignatureRequests = ( identityToken ) => {
+export const getSignatureRequests = ( identityToken, resolve, reject  ) => {
   return {
     type: action.USER_GET_PROJECT_SIGNATURES_REQUESTED,
     payload: {
       identityToken,
+      resolve,
+      reject,
     }
   }
 }
@@ -105,6 +109,16 @@ export const respondToSignatureRequest = ( identityToken, projectID, pageName, f
   }
 }
 
+export const getHistory = ( identityToken, resolve, reject ) => {
+  return {
+    type: action.USER_GET_HISTORY_REQUESTED,
+    payload: {
+      identityToken,
+      resolve,
+      reject,
+    }
+  }
+}
 
 const ACTION_HANDLERS = {
 
@@ -118,6 +132,7 @@ const ACTION_HANDLERS = {
   [action.USER_PROJECT_INVITATION_SEND_RESPONSE_REQUESTED]: state => ({ ...state }),
   [action.USER_GET_PROJECT_SIGNATURES_REQUESTED]: state => ({ ...state }),
   [action.USER_PROJECT_SIGNATURE_SEND_RESPONSE_REQUESTED]: state => ({ ...state }),
+  [action.USER_GET_HISTORY_REQUESTED]: state => ({ ...state }),
 
   [action.USER_S3_UPLOAD_PROJECT_FILE_TOKEN_REQUEST_SENT]: (state, action) => ({ ...state, ...action.payload }),
   [action.USER_S3_UPLOAD_USER_FILE_TOKEN_REQUEST_SENT]: (state, action) => ({ ...state, ...action.payload }),
@@ -127,6 +142,7 @@ const ACTION_HANDLERS = {
   [action.USER_PROJECT_INVITATION_SEND_RESPONSE_REQUEST_SENT]: (state, action) => ({ ...state, ...action.payload }),
   [action.USER_GET_PROJECT_SIGNATURES_REQUEST_SENT]: (state, action) => ({ ...state, ...action.payload }),
   [action.USER_PROJECT_SIGNATURE_SEND_RESPONSE_REQUEST_SENT]: (state, action) => ({ ...state, ...action.payload }),
+  [action.USER_GET_HISTORY_REQUEST_SENT]: (state, action) => ({ ...state, ...action.payload }),
 
   [action.USER_S3_UPLOAD_PROJECT_FILE_TOKEN_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
   [action.USER_S3_UPLOAD_USER_FILE_TOKEN_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
@@ -136,6 +152,7 @@ const ACTION_HANDLERS = {
   [action.USER_PROJECT_INVITATION_SEND_RESPONSE_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
   [action.USER_GET_PROJECT_SIGNATURES_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
   [action.USER_PROJECT_SIGNATURE_SEND_RESPONSE_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
+  [action.USER_GET_HISTORY_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
 }
 
 export const reducer = (state = defaultState, action) => {

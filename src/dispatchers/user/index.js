@@ -6,6 +6,7 @@ import getProjectInvitationsDispatcher from './getProjectInvitations'
 import respondToProjectInvitationDispatcher from './respondToProjectInvitation'
 import getSignatureRequestsDispatcher from './getSignatureRequests'
 import respondToSignatureRequestDispatcher from './respondToSignatureRequest'
+import getHistoryDispatcher from './getHistory'
 
 export {
   s3UploadProjectFileTokenDispatcher,
@@ -16,4 +17,5 @@ export {
   respondToProjectInvitationDispatcher,
   getSignatureRequestsDispatcher,
   respondToSignatureRequestDispatcher,
+  getHistoryDispatcher,
 }

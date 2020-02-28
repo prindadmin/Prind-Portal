@@ -70,7 +70,12 @@ export const CheckBoxInput = (field) => {
 
 export class SelectInput extends React.Component {
   static propTypes = {
-    field: PropTypes.object
+    input: PropTypes.object.isRequired,
+    values: PropTypes.array.isRequired,
+    placeholder: PropTypes.string.isRequired,
+    meta: PropTypes.object.isRequired,
+    onItemSelect: PropTypes.func,
+    disabled: PropTypes.bool,
   }
 
   itemRenderer = (item, { handleClick }) => {
@@ -88,8 +93,6 @@ export class SelectInput extends React.Component {
 
 
   render () {
-
-    console.log(this.props)
 
     const { input, values, onItemSelect, disabled, placeholder } = this.props
     const { touched, invalid, error, active } = this.props.meta

@@ -3,12 +3,6 @@ import https from 'https'
 
 export default function(identityToken, projectID, pageName, fieldID, fileDetails) {
 
-  console.log(identityToken)
-  console.log(projectID)
-  console.log(pageName)
-  console.log(fieldID)
-  console.log(fileDetails)
-
   return new Promise((resolve, reject) => {
 
     const instance = axios.create({
@@ -22,7 +16,7 @@ export default function(identityToken, projectID, pageName, fieldID, fileDetails
     });
 
     var body = {
-      fieldData: {
+      fieldDetails: {
         filename: fileDetails.userFileName,
         tags: []
       },
@@ -30,7 +24,7 @@ export default function(identityToken, projectID, pageName, fieldID, fileDetails
     }
 
 
-    instance.post(`${process.env.REACT_APP_API_ENDPOINT}/project/${projectID}/page/${pageName}/field/${fieldID}`, body)
+    instance.post(`${process.env.REACT_APP_API_ENDPOINT}/project/${projectID}/${pageName}/${fieldID}`, body)
     .then(res => {
 
       // If the status code is correct, then resolve and return

@@ -89,7 +89,7 @@ export class Page extends Component {
         <div className='row'>
           <div id="requests-tab-container">
             {
-              user.projectInvitations.length === 0 ? this.hasNoContent() : this.hasContent()
+              user.projectInvitations.length + user.signatureRequests.length === 0 ? this.hasNoContent() : this.hasContent()
             }
           </div>
         </div>

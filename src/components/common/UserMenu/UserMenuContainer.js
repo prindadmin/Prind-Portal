@@ -21,11 +21,11 @@ const mapDispatchToProps = dispatch => {
     signOut: () => {
       dispatch(awsReducer.signOut())
     },
-    getUserProjectInvitations: (identityToken) => {
-      dispatch(userReducer.getProjectInvitations(identityToken))
+    getUserProjectInvitations: (identityToken, resolve, reject) => {
+      dispatch(userReducer.getProjectInvitations(identityToken, resolve, reject))
     },
-    getUserSignatureRequests: (identityToken) => {
-      dispatch(userReducer.getSignatureRequests(identityToken))
+    getUserSignatureRequests: (identityToken, resolve, reject) => {
+      dispatch(userReducer.getSignatureRequests(identityToken, resolve, reject))
     }
   }
 }

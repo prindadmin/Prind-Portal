@@ -19,6 +19,12 @@ const mapDispatchToProps = dispatch => {
     },
     getProjectInvitations: (identityToken) => {
       dispatch(userReducer.getProjectInvitations(identityToken))
+    },
+    getSignatureRequests: (identityToken) => {
+      dispatch(userReducer.getSignatureRequests(identityToken))
+    },
+    getHistory: (identityToken, resolve, reject) => {
+      dispatch(userReducer.getHistory(identityToken, resolve, reject))
     }
   }
 }

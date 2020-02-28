@@ -9,6 +9,7 @@ export const PLEASE_PROVIDE_DETAILS_HERE = "Please provide extra details here...
 export const PROJECT_LOADING = "Project loading, please wait..."
 export const UNABLE_TO_FETCH_CONTENT = "Unable to load the content for this page.  Please try again.  If this problem persists, please contact technical support."
 export const NO_PROJECT_SELECTED = "Please select a project"
+export const NO_ITEM_CHOSEN = "Please select an option"
 export const CREATE_NEW_PROJECT = "Create a new project"
 export const ERROR_CREATING_NEW_PROJECT = "There was an error creating a new project, please try again.  If the problem persists, please contact technical support."
 
@@ -150,7 +151,7 @@ export const DOWNLOAD = "Download"
 export const NO_UPLOAD_NAME = "No name supplied"
 export const ERROR_FETCHING_DOWNLOAD_LINK = "There was an error fetching the file, please try again.  If the problem persists, please contact technical support."
 
-export const PROFILE_PAGE_TITLE = "Edit Profile"
+export const PROFILE_PAGE_TITLE = "Profile"
 export const PROFILE_PAGE_DESCRIPTION = ""
 
 export const CURRENT_PASSWORD = "Current Password"
@@ -172,3 +173,8 @@ export const BUTTON_ACCEPT = "Accept"
 export const BUTTON_REJECT = "Reject"
 export const NO_REQUESTS = "You have no requests right now"
 export const ERROR_SENDING_SIGNATURE_REQUEST = "There was an error requesting signatures, please try again.  If the problem persists, please contact technical support."
+
+export const ERROR_FETCHING_USER_HISTORY = "There was an error fetching your history, please try again.  If the problem persists, please contact technical support."
+export const ERROR_FETCHING_USER_PROFILE = "There was an error fetching your profile, please try again.  If the problem persists, please contact technical support."
+export const ERROR_FETCHING_USER_PROJECT_REQUESTS = "There was an error fetching your requests, please try again.  If the problem persists, please contact technical support."
+export const ERROR_FETCHING_USER_SIGNATURE_REQUESTS = "There was an error fetching your requests, please try again.  If the problem persists, please contact technical support."

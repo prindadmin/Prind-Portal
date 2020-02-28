@@ -155,6 +155,7 @@ export class Element extends Component {
                     values={dropdownOptions}
                     component={FormInputs.SelectInput}
                     onItemSelect={this.onItemSelected}
+                    placeholder={strings.NO_ITEM_CHOSEN}
                     disabled={!editable}
                   />
                 </div>
