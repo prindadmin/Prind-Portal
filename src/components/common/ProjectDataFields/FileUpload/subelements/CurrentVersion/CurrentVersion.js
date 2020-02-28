@@ -6,6 +6,8 @@ import {
   Intent,
 } from '@blueprintjs/core'
 
+// TODO: Add File Download to current version tile
+
 import SignatureHistory from '../SignatureHistory'
 
 import PickSignerPopover from '../../../../PickSignerPopover'

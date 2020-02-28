@@ -13,6 +13,8 @@ import {
 
 import AWS from 'aws-sdk';
 
+// TODO: Add spinner to user image when an upload is happening
+
 import * as strings from '../../../../../../data/Strings'
 import * as validators from '../../../../../../validators'
 

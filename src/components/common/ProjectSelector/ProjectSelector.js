@@ -33,6 +33,8 @@ class ProjectSelector extends React.Component {
   }
 
   // TODO: Add resolver and rejector to updateChosenProject
+  // TODO: Add loading spinner when fetching project list
+  // TODO: Add error handling if projects cannot be fetched
 
   // Fired when the user clicks on a project on the project selector popup
   projectChosen = (project) => {
