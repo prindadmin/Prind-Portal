@@ -20,7 +20,14 @@ export default function(identityToken, newProjectDetails) {
     instance.post(`${process.env.REACT_APP_API_ENDPOINT}/project/create`, newProjectDetails)
     .then(res => {
       console.log(res)
-      resolve(res)
+
+      if (res.data.statusCode === 200 || res.data.statusCode === 201) {
+        resolve(res)
+        return
+      }
+
+      console.error(res)
+      reject(res)
     })
     .catch((error) => {
       console.error(error)

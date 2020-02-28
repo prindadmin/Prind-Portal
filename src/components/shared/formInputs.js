@@ -8,6 +8,8 @@ import { Select } from "@blueprintjs/select";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 
+import * as strings from '../../data/Strings'
+
 const validationErrorStyle = {
   color: '#db3737',
   position: 'absolute',
@@ -107,7 +109,7 @@ export class SelectInput extends React.Component {
           filterable={false}
           onItemSelect={(e) => {
             input.onChange(e.name)
-            onItemSelect(e.name)
+            onItemSelect(e)
           }}
           noResults={<MenuItem disabled={true} text="No results." />}
           disabled={disabled === true}
@@ -138,7 +140,8 @@ export class CalendarPicker extends React.Component {
 
     const { input, disabled } = this.props
 
-    var currentDateValue = new Date()
+    const today = new Date()
+    var currentDateValue = today
 
     if (input.value !== "") {
       currentDateValue = new Date(input.value)
@@ -148,17 +151,68 @@ export class CalendarPicker extends React.Component {
     const disabledMaxDate = new Date(currentDateValue.getTime() + 86400000 - 1000)
 
     var disablingObject = {}
+    var dateRangeObject = {}
 
+
+    // If disabled, set the min and max days to the selected date. This means only that date can be selected.
     if (disabled) {
       disablingObject.minDate = disabledMinDate
       disablingObject.maxDate = disabledMaxDate
     }
+
+    // If not disabled, set a range of allowable dates that is today +/- 10 years (to the beginning/end of the year)
+    if (!disabled) {
+      dateRangeObject.minDate = new Date(Math.min(today.getFullYear(), currentDateValue.getFullYear()) - 10,1,1,0,0,0)
+      dateRangeObject.maxDate = new Date(today.getFullYear() + 9,11,31,23,59,59)
+    }
+
+    const shortcuts = [
+      {
+        date: new Date(today.getFullYear() + 3, today.getMonth(), today.getDate()),
+        label: strings.THREE_YEARS_HENCE
+      },
+      {
+        date: new Date(today.getFullYear() + 1, today.getMonth(), today.getDate()),
+        label: strings.ONE_YEAR_HENCE
+      },
+      {
+        date: new Date(today.getFullYear(), today.getMonth() + 6, today.getDate()),
+        label: strings.SIX_MONTHS_HENCE
+      },
+      {
+        date: new Date(today.getFullYear(), today.getMonth() + 3, today.getDate()),
+        label: strings.THREE_MONTHS_HENCE
+      },
+      {
+        date: new Date(today),
+        label: strings.TODAY
+      },
+      {
+        date: new Date(today.getFullYear(), today.getMonth() - 3, today.getDate()),
+        label: strings.THREE_MONTHS_AGO
+      },
+      {
+        date: new Date(today.getFullYear(), today.getMonth() - 6, today.getDate()),
+        label: strings.SIX_MONTHS_AGO
+      },
+      {
+        date: new Date(today.getFullYear() - 1, today.getMonth(), today.getDate()),
+        label: strings.ONE_YEAR_AGO
+      },
+      /*
+      {
+        date: new Date(today.getFullYear() - 3, today.getMonth(), today.getDate()),
+        label: strings.THREE_YEARS_AGO
+      }
+      */
+    ]
 
     return (
       <React.Fragment>
         <DatePicker
           {...input}
           {...disablingObject}
+          {...dateRangeObject}
           onChange={(newDate) => {
             if (newDate !== null){
               input.onChange(newDate)
@@ -166,7 +220,7 @@ export class CalendarPicker extends React.Component {
           }}
           highlightCurrentDay={true}
           reverseMonthAndYearMenus={true}
-          shortcuts={true}
+          shortcuts={shortcuts}
           value={currentDateValue}
           />
       </React.Fragment>

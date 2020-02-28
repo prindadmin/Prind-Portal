@@ -1,7 +1,6 @@
 import axios from 'axios'
 import https from 'https'
 
-
 export default function(identityToken, projectId) {
 
   return new Promise((resolve, reject) => {
@@ -20,11 +19,12 @@ export default function(identityToken, projectId) {
     .then(res => {
       console.log(res)
 
-      if (res.data.statusCode === 200) {
+      if (res.data.statusCode === 200 || res.data.statusCode === 201) {
         resolve(res)
         return
       }
 
+      console.error(res)
       reject(res)
     })
     .catch((error) => {

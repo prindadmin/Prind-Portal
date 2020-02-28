@@ -3,6 +3,8 @@ import https from 'https'
 
 export default function(identityToken, projectID, pageName, fieldID, members) {
 
+  console.log(members)
+
   return new Promise((resolve, reject) => {
 
     const instance = axios.create({
@@ -21,7 +23,15 @@ export default function(identityToken, projectID, pageName, fieldID, members) {
 
     instance.post(`${process.env.REACT_APP_API_ENDPOINT}/project/${projectID}/${pageName}/${fieldID}/request-signature`, value)
     .then(res => {
-      resolve(res)
+      console.log(res)
+
+      if (res.data.statusCode === 200 || res.data.statusCode === 201) {
+        resolve(res)
+        return
+      }
+
+      console.error(res)
+      reject(res)
     })
     .catch((error) => {
       console.error(error)

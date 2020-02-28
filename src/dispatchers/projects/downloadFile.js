@@ -24,6 +24,7 @@ export default function(identityToken, projectID, pageName, fieldID, version) {
         return
       }
 
+      console.error(res)
       reject(res)
     })
     .catch((error) => {

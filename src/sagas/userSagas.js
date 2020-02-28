@@ -126,7 +126,9 @@ function * getProjectInvitations (action) {
       }
     })
 
-    action.payload.resolve()
+    if (action.payload.resolve !== undefined) {
+      action.payload.resolve()
+    }
   }
   catch (error) {
     console.error(error)
@@ -138,7 +140,9 @@ function * getProjectInvitations (action) {
         }
     })
 
-    action.payload.reject()
+    if (action.payload.reject !== undefined) {
+      action.payload.reject()
+    }
   }
 }
 

@@ -1,6 +1,8 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
+// TODO: Add resolver and rejector to updateChosenProject
+
 import * as reducer from '../../../reducers/projectsReducer'
 
 import ProjectSelectorComponent from './ProjectSelector'

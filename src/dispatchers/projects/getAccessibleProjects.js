@@ -19,7 +19,14 @@ export default function(identityToken) {
     instance.get(`${process.env.REACT_APP_API_ENDPOINT}/user/get-accessible-projects`)
     .then(res => {
       console.log(res)
-      resolve(res)
+
+      if (res.data.statusCode === 200 || res.data.statusCode === 201) {
+        resolve(res)
+        return
+      }
+
+      console.error(res)
+      reject(res)
     })
     .catch((error) => {
       console.error(error)

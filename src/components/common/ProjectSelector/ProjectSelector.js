@@ -32,6 +32,7 @@ class ProjectSelector extends React.Component {
 
   }
 
+  // TODO: Add resolver and rejector to updateChosenProject
 
   // Fired when the user clicks on a project on the project selector popup
   projectChosen = (project) => {

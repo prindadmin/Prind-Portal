@@ -178,3 +178,13 @@ export const ERROR_FETCHING_USER_HISTORY = "There was an error fetching your his
 export const ERROR_FETCHING_USER_PROFILE = "There was an error fetching your profile, please try again.  If the problem persists, please contact technical support."
 export const ERROR_FETCHING_USER_PROJECT_REQUESTS = "There was an error fetching your requests, please try again.  If the problem persists, please contact technical support."
 export const ERROR_FETCHING_USER_SIGNATURE_REQUESTS = "There was an error fetching your requests, please try again.  If the problem persists, please contact technical support."
+
+export const THREE_YEARS_HENCE = "3 Years Ahead"
+export const ONE_YEAR_HENCE = "1 Year Ahead"
+export const SIX_MONTHS_HENCE = "6 Months Ahead"
+export const THREE_MONTHS_HENCE = "3 Months Ahead"
+export const TODAY = "Today"
+export const THREE_MONTHS_AGO = "3 Months Ago"
+export const SIX_MONTHS_AGO = "6 Months Ago"
+export const ONE_YEAR_AGO = "1 Year Ago"
+export const THREE_YEARS_AGO = "3 Years Ago"

@@ -23,13 +23,12 @@ export default function(identityToken, projectID, username) {
     .then(res => {
       console.log(res)
 
-      // If the status code is correct, then resolve and return
       if (res.data.statusCode === 200 || res.data.statusCode === 201) {
         resolve(res)
         return
       }
 
-      // If the status code is wrong, reject
+      console.error(res)
       reject(res)
     })
     .catch((error) => {

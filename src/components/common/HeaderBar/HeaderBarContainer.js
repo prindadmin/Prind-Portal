@@ -18,9 +18,6 @@ const mapDispatchToProps = dispatch => {
     getAccessibleProjects: (jwtToken) => {
       dispatch(reducer.getAccessibleProjects(jwtToken))
     },
-    updateChosenProject: (jwtToken, project) => {
-      dispatch(reducer.updateChosenProject(jwtToken, project))
-    },
   }
 }
 

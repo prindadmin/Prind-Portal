@@ -17,16 +17,15 @@ export default function(identityToken) {
 
     instance.get(`${process.env.REACT_APP_API_ENDPOINT}/user/history`)
     .then(res => {
+      console.log(res)
 
-      // If the status code is correct, then resolve and return
-      if (res.data.statusCode === 200) {
+      if (res.data.statusCode === 200 || res.data.statusCode === 201) {
         resolve(res)
         return
       }
 
-      // If the status code is wrong, reject
+      console.error(res)
       reject(res)
-
     })
     .catch((error) => {
       console.error(error)

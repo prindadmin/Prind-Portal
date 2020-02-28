@@ -17,14 +17,15 @@ export default function(identityToken, projectID) {
 
     instance.get(`${process.env.REACT_APP_API_ENDPOINT}/project/${projectID}/page/refurbishment`)
     .then(res => {
-      //console.log(res)
+      console.log(res)
 
       if (res.data.statusCode === 200 || res.data.statusCode === 201) {
         resolve(res)
         return
       }
 
-      reject(res.data)
+      console.error(res)
+      reject(res)
     })
     .catch((error) => {
       console.error(error)

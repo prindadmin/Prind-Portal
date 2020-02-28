@@ -25,7 +25,8 @@ export default function(identityToken, projectID) {
         return
       }
 
-      reject(res.data)
+      console.error(res)
+      reject(res)
     })
     .catch((error) => {
       console.error(error)
