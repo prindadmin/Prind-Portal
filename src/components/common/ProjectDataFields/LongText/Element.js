@@ -12,14 +12,13 @@ import * as FormInputs from '../../../shared/formInputs'
 
 import * as strings from '../../../../data/Strings'
 
-// TODO: Implement 'editable' prop.  i.e. make field locked when editable = false
-
 export class Element extends Component {
   static propTypes = {
     elementContent: PropTypes.shape({
       id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       description: PropTypes.string,
+      editable: PropTypes.bool.isRequired,
       fieldDetails: PropTypes.shape({
         textValue: PropTypes.string,
       }).isRequired,
@@ -85,7 +84,7 @@ export class Element extends Component {
   render() {
 
     const { handleSubmit } = this.props
-    const { title, description, fieldDetails } = this.props.elementContent
+    const { title, description, fieldDetails, editable } = this.props.elementContent
 
     return (
       <div id='long-text-element'>
@@ -117,6 +116,7 @@ export class Element extends Component {
                     component={FormInputs.TextBoxInput}
                     value={fieldDetails.textValue}
                     placeholder={strings.PLEASE_PROVIDE_DETAILS_HERE}
+                    disabled={!editable}
                     />
                 </div>
               </div>

@@ -22,6 +22,8 @@
   --field-element-dark-blue: #106ba3;
   --field-element-dark-grey: #bcbcbc;
   --tile-selected-green: #d2e9af;
+  --profile-avatar-height: 150px;
+  --avatar-padding: 4px;
 }
 
 
@@ -441,7 +443,7 @@ hr {
 }
 
 #contact-tile .img-thumbnail {
-  padding: 2px;
+  padding: var(--avatar-padding);
   background-color: #aaa;
   border: 1px solid #ddd;
   border-radius: 50%;
@@ -989,15 +991,15 @@ hr {
 }
 
 #profile-page .img-thumbnail {
-  padding: 4px;
+  padding: var(--avatar-padding);
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 50%;
 }
 
 #profile-page .avatar {
-  height: 150px;
-  width: 150px;
+  height: var(--profile-avatar-height);
+  width: var(--profile-avatar-height);
 }
 
 #profile-page h6 {
@@ -1041,6 +1043,36 @@ hr {
   max-width: 430px;
 }
 
+
+/* ============================================ */
+/* ====== profile-tab-container element ======= */
+/* ============================================ */
+
+#profile-tab-container {
+}
+
+#profile-tab-container .avatar-container {
+  height: 100%;
+  width: 100%;
+}
+
+
+#profile-tab-container .avatar-greyer {
+  position: absolute;
+  height: calc(var(--profile-avatar-height) - (var(--avatar-padding) * 2 + 2));
+  width: calc(var(--profile-avatar-height) - (var(--avatar-padding) * 2 + 2));
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.6);
+  top: calc(var(--avatar-padding) + 1);
+  left: calc((100% - var(--profile-avatar-height) + (var(--avatar-padding) * 2 + 2)) / 2);
+  margin: auto;
+}
+
+#profile-tab-container .avatar-spinner {
+  position: absolute;
+  left: calc((100% - 75px) / 2);
+  top: calc(75px / 2);
+}
 
 /* ============================================ */
 /* ====== requests-tab-container element ====== */

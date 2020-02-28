@@ -13,15 +13,13 @@ import * as FormInputs from '../../../shared/formInputs'
 
 import * as strings from '../../../../data/Strings'
 
-// TODO: Implement 'editable' prop.  i.e. make field locked when editable = false
-
 export class Element extends Component {
   static propTypes = {
     elementContent: PropTypes.shape({
       id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       description: PropTypes.string,
-      editable: PropTypes.bool,
+      editable: PropTypes.bool.isRequired,
       fieldDetails: PropTypes.shape({
         dropdownValue: PropTypes.string,
         textboxValue: PropTypes.string,
@@ -126,7 +124,7 @@ export class Element extends Component {
   render() {
 
     const { handleSubmit } = this.props
-    const { title, description, fieldDetails } = this.props.elementContent
+    const { title, description, fieldDetails, editable } = this.props.elementContent
     const { dropdownValue, textboxValue } = this.state
 
     // Check if drop down options has been provided or not
@@ -163,6 +161,7 @@ export class Element extends Component {
                     component={FormInputs.SelectInput}
                     onItemSelect={this.onItemSelected}
                     selectedItem={dropdownValue}
+                    disabled={!editable}
                   />
                 </div>
               </div>
@@ -183,6 +182,7 @@ export class Element extends Component {
                         component='textarea'
                         className="bp3-input"
                         value={textboxValue}
+                        disabled={!editable}
                       />
                     </FormGroup> :
                     null

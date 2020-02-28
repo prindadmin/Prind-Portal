@@ -18,9 +18,6 @@ import * as strings from '../../data/Strings'
 import * as validators from '../../validators'
 import * as Endpoints from '../../endpoints'
 
-// TODO: Get BE to correctly send the data (projectDescription rather than description)
-// TODO: Get BE to correctly send the data (siteAddress as individual fields, not an object)
-
 export class Page extends Component {
   static propTypes = {
   }

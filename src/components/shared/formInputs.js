@@ -16,7 +16,7 @@ const validationErrorStyle = {
 }
 
 export const TextInput = (field) => {
-  
+
   const { touched, invalid, error, active } = field.meta
   return (
     <React.Fragment>
@@ -45,6 +45,7 @@ export const TextBoxInput = (field) => {
         name={field.input.name}
         value={field.input.value}
         placeholder={field.placeholder}
+        disabled={field.disabled !== undefined ? field.disabled : false}
         />
     </React.Fragment>
   )
@@ -88,7 +89,7 @@ export class SelectInput extends React.Component {
 
   render () {
 
-    const { input, values, onItemSelect, selectedItem } = this.props
+    const { input, values, onItemSelect, selectedItem, disabled } = this.props
     const { touched, invalid, error, active } = this.props.meta
 
     return (
@@ -101,11 +102,13 @@ export class SelectInput extends React.Component {
           filterable={false}
           onItemSelect={onItemSelect}
           noResults={<MenuItem disabled={true} text="No results." />}
+          disabled={disabled === true}
         >
           <Button
             text={selectedItem}
             rightIcon="double-caret-vertical"
             alignText="left"
+            disabled={disabled === true}
           />
           { touched && invalid && !active ? <small style={validationErrorStyle}>{error}</small> : null }
         </Select>
@@ -122,8 +125,10 @@ export class CalendarPicker extends React.Component {
     field: PropTypes.object
   }
 
+
   render () {
-    const { input } = this.props
+
+    const { input, disabled } = this.props
 
     var currentDateValue = new Date()
 
@@ -131,14 +136,29 @@ export class CalendarPicker extends React.Component {
       currentDateValue = new Date(input.value)
     }
 
+    const disabledMinDate = new Date(currentDateValue.setHours(0,0,0,0))
+    const disabledMaxDate = new Date(currentDateValue.getTime() + 86400000 - 1000)
+
+    var disablingObject = {}
+
+    if (disabled) {
+      disablingObject.minDate = disabledMinDate
+      disablingObject.maxDate = disabledMaxDate
+    }
+
     return (
       <React.Fragment>
         <DatePicker
           {...input}
-          onChange={(newDate) => input.onChange(newDate)}
+          {...disablingObject}
+          onChange={(newDate) => {
+            if (newDate !== null){
+              input.onChange(newDate)
+            }
+          }}
           highlightCurrentDay={true}
           reverseMonthAndYearMenus={true}
-          shortcuts={false}
+          shortcuts={true}
           value={currentDateValue}
           />
       </React.Fragment>

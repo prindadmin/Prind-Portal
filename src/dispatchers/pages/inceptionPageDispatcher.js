@@ -15,7 +15,8 @@ export default function(identityToken, projectID) {
       }
     });
 
-    instance.get(`${process.env.REACT_APP_API_ENDPOINT}/project/${projectID}/page/inception`)
+    instance.get(`${process.env.REACT_APP_API_LOCAL_ENDPOINT}/project/ProjectNumberFour/page/inception`)
+    //instance.get(`${process.env.REACT_APP_API_ENDPOINT}/project/${projectID}/page/inception`)
     .then(res => {
       console.log(res)
 

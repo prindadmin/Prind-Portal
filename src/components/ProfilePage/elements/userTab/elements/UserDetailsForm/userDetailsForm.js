@@ -8,6 +8,7 @@ import {
   Intent,
   FileInput,
   Callout,
+  Spinner,
 } from '@blueprintjs/core'
 
 import AWS from 'aws-sdk';
@@ -18,8 +19,6 @@ import * as validators from '../../../../../../validators'
 import * as FormInputs from '../../../../../shared/formInputs'
 
 const defaultAvatar = `images/default-avatar.png`
-
-// TODO: Add spinner to image when loading / updating
 
 export class Page extends Component {
   static propTypes = {
@@ -35,6 +34,7 @@ export class Page extends Component {
     if (props.user.error !== undefined) {
       this.state = {
         avatarLink: defaultAvatar,
+        avatarLoading: false,
         avatarFile: {},
         detailsFetchError: true,
         errorText: strings.USER_UNABLE_TO_FETCH_DETAILS,
@@ -44,6 +44,7 @@ export class Page extends Component {
 
     this.state = {
       avatarLink: defaultAvatar,
+      avatarLoading: true,
       avatarFile: {},
       detailsFetchError: false,
       errorText: "",
@@ -63,7 +64,8 @@ export class Page extends Component {
     image.onload = function() {
         // image exists and is loaded
         that.setState({
-          avatarLink: avatarLink
+          avatarLink: avatarLink,
+          avatarLoading: false,
         })
         return
     }
@@ -71,7 +73,8 @@ export class Page extends Component {
     image.onerror = function() {
         // image did not load
         that.setState({
-          avatarLink: defaultAvatar
+          avatarLink: defaultAvatar,
+          avatarLoading: false,
         })
 
         return
@@ -205,14 +208,24 @@ export class Page extends Component {
   render() {
 
     const { handleSubmit, initialValues }  = this.props
-    const { avatarLink } = this.state
+    const { avatarLink, avatarLoading } = this.state
 
     return(
-      <div className="tab-pane active" id="home">
+      <div className="tab-pane active" id="profile-tab-container">
         <div className="row">
           <div className="col-md-12 col-lg-3">
             <div className="text-center">
-              <img src={avatarLink} className="avatar img-circle img-thumbnail" alt="avatar" />
+              <div className='avatar-container'>
+                <img src={avatarLink} className="avatar img-circle img-thumbnail" alt="avatar" />
+                {
+                  avatarLoading ?
+                  <React.Fragment>
+                    <div className='avatar-greyer' />
+                    <Spinner className='avatar-spinner' size='75'intent={Intent.PRIMARY} />
+                  </React.Fragment>
+                  : null
+                }
+              </div>
               <h6>{strings.MEMBER_UPLOAD_DIFFERENT_AVATAR}</h6>
 
               <FileInput

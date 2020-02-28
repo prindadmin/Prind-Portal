@@ -1,12 +1,12 @@
 {
-  "status": 200,
+  "statusCode": 200,
   "body": [
     {
-      "id": 1,
+      "id": "1",
       "title": "Please upload your project brief",
       "description": "The project brief is required for the project to start.  Everyone will use this document.",
       "type": "file",
-      "editable": true,
+      "editable": false,
       "fileDetails": [
         {
           "ver": 0,
@@ -31,7 +31,7 @@
           ]
         },
         {
-          "ver": 1,
+          "ver": "1",
           "uploadName": "file-v001.txt",
           "uploadedDateTime": "2020-01-29T12:04:59",
           "uploadedBy": "Jim Moriaty",
@@ -47,7 +47,7 @@
           ]
         },
         {
-          "ver": 2,
+          "ver": "2",
           "uploadName": "file-v002.txt",
           "uploadedDateTime": "2020-01-30T12:04:59",
           "uploadedBy": "Jim Moriaty",
@@ -71,7 +71,7 @@
       ]
     },
     {
-      "id": 2,
+      "id": "2",
       "title": "Will any parts of the building / site be occupied during the works?",
       "description": "This is asked to ensure that any plans will take into account any members of the public who might be moving around the building / site.",
       "type": "dropdown",
@@ -93,7 +93,7 @@
       }
     },
     {
-      "id": 3,
+      "id": "3",
       "title": "Planned Start Date",
       "description": "This is asked to ensure that the project starts on schedule.",
       "type": "calendar",
@@ -103,24 +103,24 @@
       }
     },
     {
-      "id": 4,
+      "id": "4",
       "title": "Planned End Date",
       "description": "This is asked to ensure that the project ends on schedule.",
       "type": "calendar",
-      "editable": true,
+      "editable": false,
       "fieldDetails": {
         "dateValue": "2020-11-01"
       }
     },
     {
-      "id": 5,
+      "id": "5",
       "title": "Will the project have any phasing requirements?",
       "description": "This is asked to ensure that any plans will take into account any phasing requirements.",
       "type": "dropdown",
-      "editable": true,
+      "editable": false,
       "fieldDetails": {
-        "dropdownValue": "No",
-        "textboxValue": "",
+        "dropdownValue": "Yes",
+        "textboxValue": "Hello, World",
         "dropdownOptions": [
           {
             "id": 1,
@@ -135,11 +135,11 @@
       }
     },
     {
-      "id": 6,
+      "id": "6",
       "title": "Other Key Information",
       "description": "This can be key dates, key stakeholders, or any additional information about the project that the project team could find helpful.",
       "type": "longText",
-      "editable": true,
+      "editable": false,
       "fieldDetails": {
         "textValue": null
       }

@@ -14,8 +14,6 @@ import PopOverHandler from '../popOverHandler'
 
 import * as strings from '../../../data/Strings'
 
-// TODO: Implement 'editable' prop.  i.e. make field locked when editable = false
-
 export class Element extends Component {
   static propTypes = {
     teamMembers: PropTypes.arrayOf(

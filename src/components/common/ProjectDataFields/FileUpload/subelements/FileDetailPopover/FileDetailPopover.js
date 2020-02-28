@@ -12,8 +12,6 @@ import SignatureHistory from '../SignatureHistory'
 
 import * as strings from '../../../../../../data/Strings'
 
-// TODO: Fix file downloading
-
 export class Element extends Component {
   static propTypes = {
     //latestFileDetails:  PropTypes.object.isRequired,

@@ -12,8 +12,7 @@ import * as FormInputs from '../../../shared/formInputs'
 
 import * as strings from '../../../../data/Strings'
 
-// TODO: Implement 'editable' prop.  i.e. make field locked when editable = false
-// TODO: Implement max and min dates to the date picker
+// TODO: FUTURE: Implement max and min dates to the date picker (e.g. project can't end before it starts)
 
 export class Element extends Component {
   static propTypes = {

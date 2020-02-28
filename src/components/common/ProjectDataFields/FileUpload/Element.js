@@ -28,8 +28,6 @@ export class Element extends Component {
     pageName: PropTypes.string.isRequired,
   }
 
-  // TODO: Implement 'editable' prop.  i.e. make field locked when editable = false
-
   constructor() {
     super()
     this.state = {

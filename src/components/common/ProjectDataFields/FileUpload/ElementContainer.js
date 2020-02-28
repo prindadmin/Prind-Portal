@@ -14,9 +14,6 @@ const mapStatetoProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    createField: (jwtToken, pageName, fieldDetails) => {
-      dispatch(projectsReducer.createField(jwtToken, pageName, fieldDetails))
-    },
     updateField: (jwtToken, pageName, fieldDetails) => {
       dispatch(projectsReducer.updateField(jwtToken, pageName, fieldDetails))
     }
