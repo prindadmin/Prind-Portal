@@ -24,8 +24,8 @@ export class Page extends Component {
   static propTypes = {
   }
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       selectedRoleID: "0",
       selectedRoleName: strings.NO_ROLE_SELECTED,
@@ -33,25 +33,19 @@ export class Page extends Component {
       addMemberError: false,
       errorText: ""
     }
-  }
 
-  componentDidMount() {
 
-    const { auth, projects, getCurrentMembers, getRoles } = this.props
+    props.getCurrentMembers(
+      props.auth.info.idToken.jwtToken,
+      props.projects.chosenProject.projectId
+    )
 
-    if (projects.chosenProject.projectId !== "" && projects.chosenProject.projectId !== undefined && projects.memberList.length === 0) {
+    // Get the available roles for this project
+    props.getRoles(
+      props.auth.info.idToken.jwtToken,
+      props.projects.chosenProject.projectId
+    )
 
-      getCurrentMembers(
-        auth.info.idToken.jwtToken,
-        projects.chosenProject.projectId
-      )
-
-      // Get the available roles for this project
-      getRoles(
-        auth.info.idToken.jwtToken,
-        projects.chosenProject.projectId
-      )
-    }
   }
 
   componentDidUpdate(prevProps) {
@@ -152,8 +146,6 @@ export class Page extends Component {
       };
     });
 
-    // TODO: Improve formatting so that invalid messages aren't on top of the next box
-
     return (
       <form onSubmit={handleSubmit(this.addMember)} className='add-member-form'>
         {
@@ -183,10 +175,9 @@ export class Page extends Component {
             name="roleId"
             values={formattedRoles}
             component={FormInputs.SelectInput}
-            placeholder={strings.MEMBER_PROJECT_ROLE}
+            placeholder={strings.MEMBER_PROJECT_ROLE_SELECT_ROLE}
             onItemSelect={this.onItemSelected}
-            value={this.state.selectedRoleName}
-            selectedItem={this.state.selectedRoleName}
+            disabled={false}
           />
         </FormGroup>
 
@@ -216,6 +207,8 @@ export class Page extends Component {
 
   memberList = () => {
 
+    const { projects } = this.props
+
     return (
       <div className="member-list-container">
         <div className="row">
@@ -230,7 +223,8 @@ export class Page extends Component {
 
         <div className="member-list row">
           {
-            this.props.projects.memberList.map((memberDetails, index) => {
+            projects.memberList !== undefined ?
+            projects.memberList.map((memberDetails, index) => {
               return (
                 <div key={index} className="col-md-12 col-lg-12 col-xl-6">
                   <ContactTile
@@ -239,7 +233,7 @@ export class Page extends Component {
                   />
                 </div>
               )
-            })
+            }) : null
           }
         </div>
 

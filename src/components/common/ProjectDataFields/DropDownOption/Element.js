@@ -69,13 +69,8 @@ export class Element extends Component {
 
   onItemSelected = (item) => {
     this.setState({
-      dropdownValue: item.name,
+      dropdownValue: item,
     })
-
-    // TODO: Move this functionality into the FormInputs
-    this.props.change(
-      'dropdownValue', item.name
-    )
   }
 
   // When the user wants to save the changes, update the server
@@ -160,7 +155,6 @@ export class Element extends Component {
                     values={dropdownOptions}
                     component={FormInputs.SelectInput}
                     onItemSelect={this.onItemSelected}
-                    selectedItem={dropdownValue}
                     disabled={!editable}
                   />
                 </div>

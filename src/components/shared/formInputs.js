@@ -89,7 +89,9 @@ export class SelectInput extends React.Component {
 
   render () {
 
-    const { input, values, onItemSelect, selectedItem, disabled } = this.props
+    console.log(this.props)
+
+    const { input, values, onItemSelect, disabled, placeholder } = this.props
     const { touched, invalid, error, active } = this.props.meta
 
     return (
@@ -100,12 +102,15 @@ export class SelectInput extends React.Component {
           items={values}
           itemRenderer={this.itemRenderer}
           filterable={false}
-          onItemSelect={onItemSelect}
+          onItemSelect={(e) => {
+            input.onChange(e.name)
+            onItemSelect(e.name)
+          }}
           noResults={<MenuItem disabled={true} text="No results." />}
           disabled={disabled === true}
         >
           <Button
-            text={selectedItem}
+            text={input.value !== "" ? input.value : placeholder}
             rightIcon="double-caret-vertical"
             alignText="left"
             disabled={disabled === true}

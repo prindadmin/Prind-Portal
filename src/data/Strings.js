@@ -74,6 +74,7 @@ export const MEMBER_MOBILE_PHONE_NUMBER_WORK = "Mobile"
 export const MEMBER_EMAIL_ADDRESS = "Email"
 export const MEMBER_POSTAL_ADDRESS_WORK = "Address"
 export const MEMBER_PROJECT_ROLE = "Role"
+export const MEMBER_PROJECT_ROLE_SELECT_ROLE = "Please select a role"
 export const MEMBER_STATUS = "Status"
 export const MEMBER_NAME = "Name"
 export const MEMBER_UPLOAD_DIFFERENT_AVATAR = 'Upload a different photo...'
