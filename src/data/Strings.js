@@ -9,9 +9,13 @@ export const PLEASE_PROVIDE_DETAILS_HERE = "Please provide extra details here...
 export const PROJECT_LOADING = "Project loading, please wait..."
 export const UNABLE_TO_FETCH_CONTENT = "Unable to load the content for this page.  Please try again.  If this problem persists, please contact technical support."
 export const NO_PROJECT_SELECTED = "Please select a project"
+export const NO_PROJECTS = "You do not have any projects, please create a project or ask to be invited to one."
+export const PROJECTS_LOADING = "Loading projects, please wait..."
 export const NO_ITEM_CHOSEN = "Please select an option"
 export const CREATE_NEW_PROJECT = "Create a new project"
 export const ERROR_CREATING_NEW_PROJECT = "There was an error creating a new project, please try again.  If the problem persists, please contact technical support."
+export const ERROR_FETCHING_PROJECT_LIST = "There was an error fetching the project list, please try again.  If the problem persists, please contact technical support."
+export const ERROR_UNABLE_TO_SELECT_PROJECT = "There was an error selecting the project, please try again.  If the problem persists, please contact technical support."
 
 export const PROJECT_NAME = "Project Name"
 export const PROJECT_REFERENCE = "Project Reference"

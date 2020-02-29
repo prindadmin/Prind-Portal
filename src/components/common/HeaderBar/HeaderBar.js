@@ -9,16 +9,6 @@ export class HeaderBar extends Component {
     menuItems: PropTypes.array,
   }
 
-
-  constructor(props) {
-    super(props);
-
-    const { auth } = this.props
-
-    this.props.getAccessibleProjects(auth.info.idToken.jwtToken)
-    this.state = {}
-  }
-
   componentDidMount() {
   }
 
@@ -40,7 +30,7 @@ export class HeaderBar extends Component {
       <div id='header-bar' className='col-12'>
         <div className='header-content row'>
           {
-            projects !== undefined ? <ProjectSelector projects={projects.accessibleProjects} />  : null
+            projects !== undefined ? <ProjectSelector />  : null
           }
           <div className='nav-links'>
             {

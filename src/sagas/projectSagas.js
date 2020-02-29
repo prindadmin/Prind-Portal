@@ -6,7 +6,7 @@ import * as Dispatchers from '../dispatchers/projects'
 import * as actions from '../actions'
 import * as strings from '../data/Strings'
 
-let defaultState = {
+const defaultState = {
   accessibleProjects: {
     projectOwner: [],
     projectRole: []
@@ -17,6 +17,7 @@ let defaultState = {
   },
   memberList: [],
   downloadURL: "",
+  fileDetails: {},
   fetching: false,
   error: null,
 }
@@ -33,10 +34,22 @@ function * getAccessibleProjects (action) {
   const { identityToken } = action.payload
 
   try {
+
+    // pre-fetch update
+    yield put({
+      type: actions.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUEST_SENT,
+      payload: {
+        fetching: true,
+      }
+    })
+
     const { data: result } = yield call(Dispatchers.getAccessibleProjectsDispatcher, identityToken)
+
+    // post-fetch update
     yield put({
       type: actions.PROJECT_SET_STATE,
       payload: {
+        fetching: false,
         accessibleProjects: result.body
       }
     })
@@ -58,11 +71,21 @@ function * createNewProject (action) {
   const { identityToken, projectValues } = action.payload
 
   try {
+
+    // pre-fetch update
+    yield put({
+      type: actions.PROJECT_CREATE_PROJECT_REQUEST_SENT,
+      payload: {
+        fetching: true,
+      }
+    })
+
     const { data: result } = yield call(Dispatchers.createNewProjectDispatcher, identityToken, projectValues)
 
     yield put({
       type: actions.PROJECT_UPDATE_PROJECT_CHOSEN_REQUESTED,
       payload: {
+        fetching: false,
         identityToken,
         project: result.body,
       }
@@ -76,6 +99,7 @@ function * createNewProject (action) {
       yield put({
         type: actions.PROJECT_CREATE_PROJECT_REQUEST_FAILED,
           payload: {
+            fetching: false,
             error
           }
       })
@@ -109,6 +133,10 @@ function * updateChosenProject (action) {
         chosenProject: result.body,
       }
     })
+
+    if (action.payload.resolve !== undefined) {
+      action.payload.resolve()
+    }
   }
   catch (error) {
     console.error(error)
@@ -119,6 +147,10 @@ function * updateChosenProject (action) {
           error,
         }
     })
+
+    if (action.payload.reject !== undefined) {
+      action.payload.reject()
+    }
   }
 }
 

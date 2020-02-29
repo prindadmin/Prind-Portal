@@ -93,6 +93,10 @@ hr {
   width: 100%;
 }
 
+.no-padding {
+  padding: 0;
+}
+
 /* ================================ */
 /* ======== sign-in section ======= */
 /* ================================ */
@@ -1260,7 +1264,9 @@ hr {
 }
 
 .no-project-selected p,
-.no-requests p {
+.no-requests p,
+.no-projects p,
+.loading-spinner p {
   margin-top: 1.5em;
   font-size: 18px;
   font-weight: bold;
@@ -1339,6 +1345,10 @@ hr {
   justify-content: center;
 }
 
+#popup-box .flex-dir-row {
+  flex-direction: row;
+}
+
 #popup-box .projects-pop-up-header h2 {
   color: var(--heading-text-color);
   font-weight: 600;
@@ -1348,28 +1358,49 @@ hr {
   margin: 0;
 }
 
-#popup-box .column {
-  float: left;
-  width: 50%;
-}
-
-#popup-box .column .bp3-button-text {
+#popup-box .bp3-button-text {
   width: 100%
 }
 
-#popup-box .column Button {
-  width: calc(100% - var(--pop-up-project-tile-margin) * 2);
-  margin: var(--pop-up-project-tile-margin);
+#popup-box .site-select-tile {
+  width: 100%;
+  height: auto;
 }
-
 
 #popup-box .project-scroll-box {
   padding-top: 0.5em;
   padding-bottom: 0.5em;
-  display: flex;
   height: 80%;
-  overflow-x: scroll;
   overflow-y: scroll;
+}
+
+#popup-box .project-scroll-box button {
+  height: auto;
+  margin-bottom: 5px;
+}
+
+#popup-box .project-scroll-box .col-xs-12,
+#popup-box .project-scroll-box .col-sm-12,
+#popup-box .project-scroll-box .col-md-12,
+#popup-box .project-scroll-box .col-lg-4,
+#popup-box .project-scroll-box .col-xl-4 {
+  height: auto;
+}
+
+#popup-box .project-scroll-box .loading-spinner {
+}
+
+
+#popup-box .project-scroll-box .no-projects {
+  width: auto;
+  justify-content: center;
+  text-align: center;
+}
+
+#popup-box .project-scroll-box .projects-loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #popup-box .bp3-callout {
@@ -1413,7 +1444,6 @@ hr {
 .project-select-tile:hover {
   background-color: rgba(138, 155, 168, 0.15)
 }
-
 
 
 

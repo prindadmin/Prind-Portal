@@ -13,6 +13,7 @@ const defaultState = {
   memberList: [],
   downloadURL: "",
   fileDetails: {},
+  fetching: false,
   error: null,
 }
 
@@ -47,7 +48,7 @@ export const resetDownloadURL = () => {
   }
 }
 
-export const getAccessibleProjects = ( identityToken ) => {
+export const getAccessibleProjects = ( identityToken,  ) => {
   return {
     type: action.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUESTED,
     payload: {
@@ -56,12 +57,14 @@ export const getAccessibleProjects = ( identityToken ) => {
   }
 }
 
-export const updateChosenProject = ( identityToken, project ) => {
+export const updateChosenProject = ( identityToken, project, resolve, reject ) => {
   return {
     type: action.PROJECT_UPDATE_PROJECT_CHOSEN_REQUESTED,
     payload: {
       identityToken,
       project,
+      resolve,
+      reject,
     }
   }
 }

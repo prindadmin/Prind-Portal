@@ -5,20 +5,14 @@ import { Icon, Button } from '@blueprintjs/core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThLarge } from '@fortawesome/free-solid-svg-icons'
 
-import ProjectSelectorPopUp from './ProjectSelectorPopUp'
+import ProjectSelectorPopUp from './elements/ProjectSelectorPopUp'
 import PopOverHandler from '../popOverHandler'
 
 import * as strings from '../../../data/Strings'
 
-import * as Endpoints from '../../../endpoints'
-
 class ProjectSelector extends React.Component {
   static propTypes = {
-    projects: PropTypes.shape({
-      projectOwner: PropTypes.array.isRequired,
-      projectRole: PropTypes.array.isRequired,
-    }).isRequired,
-    chosenProject: PropTypes.object.isRequired,
+    projects: PropTypes.object.isRequired,
   }
 
   constructor(props){
@@ -32,29 +26,8 @@ class ProjectSelector extends React.Component {
 
   }
 
-  // TODO: Add resolver and rejector to updateChosenProject
-  // TODO: Add loading spinner when fetching project list
-  // TODO: Add error handling if projects cannot be fetched
 
-  // Fired when the user clicks on a project on the project selector popup
-  projectChosen = (project) => {
-
-    const { auth } = this.props
-    const { pathname } = this.props.location
-
-    this.setState({ showPopup: false })
-    this.props.updateChosenProject(
-      auth.info.idToken.jwtToken,
-      project
-    )
-
-    if (pathname === '/NewProject') {
-      this.props.history.push(Endpoints.DEFAULTLOGGEDINPAGE)
-    }
-
-  }
-
-  changeProject = () => {
+  openProjectSelectorPopover = () => {
     this.setState({ showPopup: true })
   }
 
@@ -62,16 +35,8 @@ class ProjectSelector extends React.Component {
     this.setState({ showPopup: false })
   }
 
-  createNewProject = () => {
-    this.projectChosen({
-      projectName: "Creating new project..."
-    })
-
-    this.props.history.push('/NewProject')
-  }
-
   render() {
-    const { chosenProject } = this.props
+    const { chosenProject } = this.props.projects
 
     var buttonText = strings.NO_PROJECT_SELECTED
 
@@ -89,7 +54,7 @@ class ProjectSelector extends React.Component {
           large
           alignText='left'
           icon={<Icon icon={ico} />}
-          onClick={this.changeProject}
+          onClick={this.openProjectSelectorPopover}
         >
           {buttonText}
         </Button>
@@ -97,10 +62,7 @@ class ProjectSelector extends React.Component {
         {this.state.showPopup ?
           <PopOverHandler>
             <ProjectSelectorPopUp
-              projects={ this.props.projects }
               onCancelPopup={ this.cancelPopup }
-              onProjectChosen={ this.projectChosen }
-              onCreateNewProject={ this.createNewProject }
             />
           </PopOverHandler>
           :
