@@ -18,7 +18,7 @@ import AWS from 'aws-sdk';
 import * as strings from '../../../../../../data/Strings'
 import * as validators from '../../../../../../validators'
 
-import * as FormInputs from '../../../../../shared/formInputs'
+import * as FormInputs from '../../../../../common/formInputs'
 
 const defaultAvatar = `images/default-avatar.png`
 

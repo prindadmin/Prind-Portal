@@ -6,6 +6,7 @@ import {
 } from '@blueprintjs/core'
 
 import ItemIcon from '../../../../ItemIcon'
+import DownloadBox from '../DownloadBox'
 import PopOverHandler from '../../../../popOverHandler'
 
 import SignatureHistory from '../SignatureHistory'
@@ -38,21 +39,13 @@ export class Element extends Component {
     }
   }
 
-
-  componentWillUnmount() {
-    this.props.resetDownloadURL()
-  }
-
-
-  // Trigger the closing of the popover
-  closePopover = () => {
-    this.props.onClosePopover()
-  }
-
   downloadResolve = () => {
-    const { projects } = this.props
-    window.open(projects.downloadURL, "_blank")
+    this.setState({
+      fetchError: false,
+      errorText: ""
+    })
   }
+
 
   downloadReject = () => {
     this.setState({
@@ -62,24 +55,9 @@ export class Element extends Component {
   }
 
 
-  downloadFile = (e) => {
-
-    const { auth, projectID, pageName, fieldID, chosenFileDetails } = this.props
-
-    this.setState({
-      fetchError: false,
-    })
-
-    this.props.downloadFile(
-      auth.info.idToken.jwtToken,
-      projectID,
-      pageName,
-      fieldID,
-      chosenFileDetails.ver,
-      this.downloadResolve,
-      this.downloadReject,
-    )
-
+  // Trigger the closing of the popover
+  closePopover = () => {
+    this.props.onClosePopover()
   }
 
   getFileDetailsArea = () => {
@@ -114,18 +92,6 @@ export class Element extends Component {
   }
 
 
-  getDownloadBox = () => {
-    return (
-      <div className="download-box" onClick={(e) => this.downloadFile(e)}>
-        <div>
-          <ItemIcon size='4x' type='download' />
-          {strings.DOWNLOAD}
-        </div>
-      </div>
-    )
-  }
-
-
   getSignaturesArea = () => {
 
     const { chosenFileDetails } = this.props
@@ -143,6 +109,9 @@ export class Element extends Component {
 
   getContent = () => {
 
+    const { projectID, pageName, fieldID, chosenFileDetails } = this.props
+    const { fetchError, errorText } = this.state
+
     return (
       <React.Fragment>
         <div className="row">
@@ -152,15 +121,22 @@ export class Element extends Component {
           </div>
 
           <div className="col download-box-cell">
-            {this.getDownloadBox()}
+            <DownloadBox
+              projectID={projectID}
+              pageName={pageName}
+              fieldID={fieldID}
+              fileVersionDetails={chosenFileDetails}
+              onDownloadSuccess={this.downloadResolve}
+              onDownloadFailure={this.downloadReject}
+            />
           </div>
 
         </div>
         {
-          this.state.fetchError ?
+          fetchError ?
           <div className="row">
             <Callout style={{marginBottom: '15px'}} intent='danger'>
-              <div>{this.state.errorText}</div>
+              <div>{errorText}</div>
             </Callout>
           </div> :
           null

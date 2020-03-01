@@ -12,7 +12,7 @@ import PageChooserSection from '../layouts/PageChooserSection'
 import NoProjectSelected from '../common/NoProjectSelected'
 import Footer from '../common/footer'
 
-import * as FormInputs from '../shared/formInputs'
+import * as FormInputs from '../common/formInputs'
 
 import * as strings from '../../data/Strings'
 import * as validators from '../../validators'

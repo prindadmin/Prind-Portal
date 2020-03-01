@@ -13,7 +13,7 @@ import PageChooserSection from '../layouts/PageChooserSection'
 import NoProjectSelected from '../common/NoProjectSelected'
 import Footer from '../common/footer'
 
-import * as FormInputs from '../shared/formInputs'
+import * as FormInputs from '../common/formInputs'
 
 import ContactTile from './elements/ContactTile'
 
@@ -132,6 +132,12 @@ export class Page extends Component {
     })
   }
 
+  cancelNewMember = () => {
+    this.setState({
+      addingMember: false,
+    })
+  }
+
   addNewMember = () => {
 
     const { handleSubmit } = this.props
@@ -191,6 +197,16 @@ export class Page extends Component {
             text={strings.BUTTON_SAVE_CHANGES}
           />
         </ButtonGroup>
+
+        <ButtonGroup fill>
+          <Button
+            type='cancel'
+            intent='none'
+            text={strings.BUTTON_CANCEL}
+            onClick={this.cancelNewMember}
+          />
+        </ButtonGroup>
+
       </form>
     )
   }

@@ -14,7 +14,7 @@ import PopOverHandler from '../popOverHandler'
 
 import * as strings from '../../../data/Strings'
 import * as validators from '../../../validators'
-import * as FormInputs from '../../shared/formInputs'
+import * as FormInputs from '../formInputs'
 
 const fieldTypes = [
   {

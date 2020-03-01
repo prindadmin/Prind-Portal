@@ -332,7 +332,7 @@ function * downloadFile (action) {
       }
     })
 
-    action.payload.resolve()
+    action.payload.resolve(result.body)
   }
   catch (error) {
     console.error(error)

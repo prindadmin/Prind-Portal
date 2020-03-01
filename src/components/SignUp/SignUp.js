@@ -13,7 +13,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
-import * as FormInputs from '../shared/formInputs'
+import * as FormInputs from '../common/formInputs'
 import * as validators from '../../validators'
 import * as state from '../../states'
 

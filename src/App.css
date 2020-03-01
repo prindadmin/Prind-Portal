@@ -586,7 +586,7 @@ hr {
 #file-upload-element .file-status {
 }
 
-#file-upload-element .current-version-container,
+#current-version-container,
 #file-upload-element .upload-history-container {
   background-color: #EEE;
   width: 100%;
@@ -855,7 +855,8 @@ hr {
   padding: 0;
 }
 
-#file-details-popover .download-box {
+#file-details-popover .download-box,
+#current-version-container .download-box {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -871,7 +872,17 @@ hr {
   position: relative;
 }
 
-#file-details-popover .download-box:hover {
+#current-version-container .download-box {
+  bottom: 0;
+}
+
+#current-version-container .col-10,
+#current-version-container .col-2 {
+  padding: 0px 5px;
+}
+
+#file-details-popover .download-box:hover,
+#current-version-container .download-box:hover {
   transition: background-color 0.3s ease-in;
   background-color: var(--field-element-green);
 }

@@ -9,7 +9,7 @@ import {
   Callout,
 } from '@blueprintjs/core'
 
-import * as FormInputs from '../../../shared/formInputs'
+import * as FormInputs from '../../formInputs'
 
 import * as strings from '../../../../data/Strings'
 

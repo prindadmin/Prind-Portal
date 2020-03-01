@@ -12,7 +12,7 @@ import {
 import * as strings from '../../../../../../data/Strings'
 import * as validators from '../../../../../../validators'
 
-import * as FormInputs from '../../../../../shared/formInputs'
+import * as FormInputs from '../../../../../common/formInputs'
 
 export class Page extends Component {
   static propTypes = {
