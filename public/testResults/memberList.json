@@ -1,0 +1,29 @@
+[
+  {
+    "username": "778bd486-4684-482b-9565-1c2a51367baa",
+    "foundationsID": "did:fnds:12gnpaodbgojntnrsnpojnnn434n3dank233",
+    "emailAddress": "a@b.com",
+    "firstName": "Tom",
+    "lastName": "Smith",
+    "roleID": 3,
+    "roleName": "Client"
+  },
+  {
+    "username": "778bd486-4684-482b-9565-1c2a51367bbb",
+    "foundationsID": "did:fnds:12gnpaodbgojntnrsnpojnnn434n3dank232",
+    "emailAddress": "c@d.com",
+    "firstName": "Ryan",
+    "lastName": "Jones",
+    "roleID": 2,
+    "roleName": "Principal Contractor"
+  },
+  {
+    "username": "778bd486-4684-482b-9565-1c2a51367bcc",
+    "foundationsID": "did:fnds:12gnpaodbgojntnrsnpojnnn434n3dank231",
+    "emailAddress": "e@f.com",
+    "firstName": "Stephanie",
+    "lastName": "Challis",
+    "roleID": 1,
+    "roleName": "Principal Designer"
+  }
+]

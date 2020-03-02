@@ -16,7 +16,7 @@ export class ProviderDetails extends Component {
     return (
       <div className='provider-details-section'>
         <h2>{details.name}</h2>
-        <div className='provider-course-section'>
+        <div className='provider-course-section row'>
           <div className='course-name course-table-heading col-8'>
             Course Name:
           </div>

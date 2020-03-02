@@ -1,0 +1,197 @@
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+
+import {
+  FileInput,
+  Button,
+  Intent,
+} from '@blueprintjs/core'
+
+import {
+  CurrentVersion,
+  UploadHistory,
+  UploaderPopOver,
+} from './subelements'
+
+
+import * as strings from '../../../../data/Strings'
+
+export class Element extends Component {
+  static propTypes = {
+    elementContent: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      description: PropTypes.string,
+      editable: PropTypes.bool.isRequired,
+      fileDetails: PropTypes.array.isRequired,
+    }),
+    pageName: PropTypes.string.isRequired,
+  }
+
+  constructor() {
+    super()
+    this.state = {
+      detailedView: false,
+      filePrompt: strings.FILE_PROMPT,
+      fileDetails: {},
+      hasChosenFile: false,
+      uploadFileRequested: false,
+      fileState: '',
+      hash: null,
+    }
+  }
+
+  componentDidMount() {
+
+    const { fileDetails } = this.props.elementContent
+
+    if (fileDetails.length !== 0) {
+      if (fileDetails[0].proofLink !== undefined) {
+        this.setState({
+          fileState: ' has-anchor'
+        })
+      }
+      else {
+        this.setState({
+          fileState: ' has-upload'
+        })
+      }
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+  }
+
+  // Toggle between the detailed and minimized views of the element
+  onElementClick = () => {
+    this.setState({
+      detailedView: !this.state.detailedView,
+    })
+  }
+
+  // ---------------------- DEFAULT FUNCTIONALITY ABOVE THIS LINE -----------------------
+
+  // Update the text inside the file picker
+  fileChosen = (e) => {
+
+    e.persist()
+
+    this.setState({
+      filePrompt: e.target.value.replace("C:\\fakepath\\", ""),
+      fileDetails: e.target,
+      hasChosenFile: true,
+    })
+  }
+
+  // Updates state which triggers pop-over
+  uploadFile = (e) => {
+    console.log("file submit clicked")
+
+    this.setState({
+      hasChosenFile: false,
+      uploadFileRequested: true,
+      fileState: '',
+    })
+
+    e.stopPropagation();
+
+  }
+
+  cancelPopup = () => {
+    this.setState({
+      uploadFileRequested: false,
+    })
+  }
+
+
+  // ------------------------------ RENDER BELOW THIS LINE ------------------------------
+
+  render() {
+
+    const { detailedView, filePrompt, fileState, fileDetails } = this.state
+    const { elementContent, pageName, projects } = this.props
+
+    // TODO: Add expand transition to make it smooth
+    // TODO: Indicate that there is more data if you click the box
+
+    return (
+      <div id='file-upload-element'>
+        <div className={'file-upload-element-container' + fileState} onClick={(e) => this.onElementClick()}>
+          <div className='element-title'>
+            {elementContent.title}
+          </div>
+          <div className='element-description'>
+            {elementContent.description}
+          </div>
+          <div className='element-file-uploader container'>
+
+            <div className='row'>
+              {
+                elementContent.fileDetails.length > 0 ?
+                <CurrentVersion
+                  details={elementContent.fileDetails[0]}
+                  projectID={projects.chosenProject.projectId}
+                  pageName={pageName}
+                  fieldID={elementContent.id}
+                  editable={elementContent.editable}
+                /> :
+                <CurrentVersion
+                  details={null}
+                />
+              }
+            </div>
+
+
+            <div className='row'>
+              <FileInput
+                className="field bp3-fill"
+                ref='fileInput'
+                onInputChange={(e) => this.fileChosen(e)}
+                text={filePrompt}
+                disabled={!elementContent.editable}
+              />
+
+
+              <div className='row'>
+                <div className='col-5 col-lg-4 col-xl-3'>
+                  <Button
+                    intent={Intent.PRIMARY}
+                    onClick={(e) => this.uploadFile(e)}
+                    disabled={!this.state.hasChosenFile}
+                    text={strings.BUTTON_UPLOAD_FILE}
+                  />
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+          {
+            detailedView ? <UploadHistory
+              details={ elementContent.fileDetails }
+              projectID={projects.chosenProject.projectId}
+              pageName={pageName}
+              fieldID={elementContent.id}
+              /> :
+            null
+          }
+        </div>
+
+        {
+          this.state.uploadFileRequested ?
+            <UploaderPopOver
+              fileDetails={ fileDetails }
+              projectID={projects.chosenProject.projectId}
+              pageName={pageName}
+              fieldID={elementContent.id}
+              onCancelPopup={ this.cancelPopup }
+              /> :
+            null
+        }
+
+      </div>
+    )
+  }
+}
+
+export default Element
