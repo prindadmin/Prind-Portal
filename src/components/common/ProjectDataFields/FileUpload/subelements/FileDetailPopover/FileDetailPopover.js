@@ -5,7 +5,6 @@ import {
   Callout,
 } from '@blueprintjs/core'
 
-import ItemIcon from '../../../../ItemIcon'
 import DownloadBox from '../DownloadBox'
 import PopOverHandler from '../../../../popOverHandler'
 

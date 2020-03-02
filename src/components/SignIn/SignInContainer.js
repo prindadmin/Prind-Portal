@@ -7,7 +7,8 @@ import SignInComponent from './SignIn'
 
 const mapStatetoProps = state => {
   return {
-    auth: state.auth
+    auth: state.auth,
+    user: state.user,
   }
 }
 

@@ -5,7 +5,7 @@ import { config } from 'aws-cognito-promises'
 
 class Auth extends React.Component {
   static propTypes = {
-    getUser: PropTypes.func
+    getUser: PropTypes.func,
   }
 
   componentDidMount() {
@@ -18,6 +18,7 @@ class Auth extends React.Component {
 
     this.props.getUser()
   }
+
 
   render() {
     return null

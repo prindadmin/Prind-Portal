@@ -48,6 +48,14 @@ import TestPage from './components/TestPage'
 
 class App extends Component{
 
+  constructor() {
+    super()
+    this.state = {
+      isLoggedIn: false
+    }
+
+  }
+
   render() {
 
     const { auth } = this.props // the props exposed are defined in the container
@@ -83,7 +91,7 @@ class App extends Component{
             <Route path='/'
               render={() =>
                 auth.isSignedIn === AUTH_SUCCESS ? (
-                  <Redirect to={Endpoints.DEFAULTLOGGEDINPAGE} />
+                  <Redirect to={this.props.user.route} />
                 ) : (
                   <Redirect to={Endpoints.SIGNINPAGE} />
                 )

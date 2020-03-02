@@ -1,5 +1,7 @@
 import * as action from '../actions'
 
+import * as Endpoints from '../endpoints'
+
 let defaultState = {
   fetching: false,
   details: {},
@@ -7,6 +9,7 @@ let defaultState = {
   signatureRequests: [],
   projectS3Token: "",
   userS3Token: "",
+  route: Endpoints.DEFAULTLOGGEDINPAGE,
 }
 
 
@@ -17,6 +20,14 @@ export const init = () => {
   }
 }
 
+export const storeRoute = ( route ) => {
+  return {
+    type: action.USER_SET_STATE,
+    payload: {
+      route
+    }
+  }
+}
 
 export const requestS3ProjectFileUploadToken = ( identityToken, project_id, pageName ) => {
   return {
@@ -124,6 +135,7 @@ const ACTION_HANDLERS = {
 
   [action.USER_INIT]: (state, action) => { return { ...state, ...action.payload }},
   [action.USER_SET_STATE]: (state, action) => { return { ...state, ...action.payload }},
+
 
   [action.USER_S3_UPLOAD_PROJECT_FILE_TOKEN_REQUESTED]: state => ({ ...state }),
   [action.USER_GET_DETAILS_REQUESTED]: state => ({ ...state }),

@@ -12,6 +12,8 @@ import {
   Callout,
 } from '@blueprintjs/core'
 
+// TODO: Use strings file here
+
 import * as FormInputs from '../common/formInputs'
 import * as validators from '../../validators'
 import * as state from '../../states'
@@ -95,7 +97,7 @@ class SignIn extends Component {
     const { auth } = this.props
     return (
       <div id='signin' className='row align-items-center justify-content-center'>
-        {auth.isSignedIn === state.AUTH_SUCCESS ? <Redirect to={Endpoints.DEFAULTLOGGEDINPAGE} /> : this.renderSignIn()}
+        {auth.isSignedIn === state.AUTH_SUCCESS ? <Redirect to={this.props.user.route} /> : this.renderSignIn()}
       </div>
     )
   }

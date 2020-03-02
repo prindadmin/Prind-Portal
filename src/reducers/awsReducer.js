@@ -10,7 +10,8 @@ export const init = () => {
 
 export const getUser = () => {
   return {
-    type: action.AUTH_GET_USER
+    type: action.AUTH_GET_USER,
+    payload: {}
   }
 }
 

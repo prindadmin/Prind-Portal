@@ -28,7 +28,7 @@ function * init (action) {
   })
 }
 
-function * getUser () {
+function * getUser (action) {
   try {
     let user = auth.config.getUser()
     let session = yield call(auth.getSession)
@@ -42,6 +42,8 @@ function * getUser () {
         finished: true,
       }
     })
+
+    //action.payload.resolve()
   } catch (e) {
     yield put({
       type: actions.AUTH_SET_STATE,
@@ -52,6 +54,7 @@ function * getUser () {
         finished: true
       }
     })
+    //action.payload.reject()
   }
 }
 
