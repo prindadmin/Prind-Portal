@@ -119,12 +119,24 @@ export class ProjectSelectorPopUp extends Component {
     )
   }
 
+
+  concatProjects = () => {
+
+    const { accessibleProjects } = this.props.projects
+    let projectsWhereCreator = accessibleProjects.projectOwner.map(project => project.projectId);
+    const roleNotCreator = accessibleProjects.projectRole.filter(item => !projectsWhereCreator.includes(item.projectId))
+
+    var allProjects = accessibleProjects.projectOwner
+    allProjects = allProjects.concat(roleNotCreator)
+
+    return allProjects
+  }
+
   siteSelectorPopupContent = () => {
 
     const { projects } = this.props
     const { fetchError, updateError, errorText } = this.state
-    const { accessibleProjects } = this.props.projects
-    const allProjects = accessibleProjects.projectOwner.concat(accessibleProjects.projectRole)
+    const allProjects = this.concatProjects()
 
     return (
       <div
