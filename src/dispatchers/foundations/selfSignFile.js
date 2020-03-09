@@ -1,11 +1,9 @@
 import axios from 'axios'
 import https from 'https'
 
-// TODO: Check if required
+// TODO: Test this
 
-// TODO: Implement API endpoint
-
-export default function(identityToken, fieldDetails) {
+export default function(identityToken, projectID, pageName, fieldID) {
 
   return new Promise((resolve, reject) => {
 
@@ -19,7 +17,7 @@ export default function(identityToken, fieldDetails) {
       }
     });
 
-    instance.get(`${process.env.REACT_APP_API_LOCAL_ENDPOINT}/foundations/self-sign.json`, fieldDetails)
+    instance.post(`${process.env.REACT_APP_API_ENDPOINT}/document/${projectID}/${pageName}/${fieldID}/sign-on-foundations`)
     .then(res => {
       resolve(res)
     })

@@ -18,7 +18,7 @@ export default function(identityToken, projectID, pageName, fieldID, members) {
     });
 
     const value = {
-      members,
+      signingUsernames: members,
     }
 
     instance.post(`${process.env.REACT_APP_API_ENDPOINT}/project/${projectID}/${pageName}/${fieldID}/request-signature`, value)

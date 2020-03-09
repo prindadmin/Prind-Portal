@@ -1,9 +1,9 @@
 import axios from 'axios'
 import https from 'https'
 
-// TODO: Implement API endpoint
+// TODO: Test once API Endpoint is built
 
-export default function(identityToken, projectID, fieldDetails) {
+export default function(identityToken, projectID, pageName, fieldDetails) {
 
   return new Promise((resolve, reject) => {
 
@@ -17,7 +17,7 @@ export default function(identityToken, projectID, fieldDetails) {
       }
     });
 
-    instance.post(`${process.env.REACT_APP_API_LOCAL_ENDPOINT}/project/${projectID}/create-field.json`, fieldDetails)
+    instance.post(`${process.env.REACT_APP_API_ENDPOINT}/project/${projectID}/${pageName}/create-field`, fieldDetails)
     .then(res => {
       console.log(res)
 

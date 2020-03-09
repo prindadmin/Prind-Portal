@@ -55,7 +55,6 @@ function * addMemberToProject (action) {
     yield put({
       type: actions.MEMBER_ADD_MEMBER_REQUEST_FAILED,
         payload: {
-          ...defaultState,
           error
         }
     })

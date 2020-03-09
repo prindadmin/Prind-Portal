@@ -62,26 +62,17 @@ export class Element extends Component {
   sendSelfSignRequest = (e) => {
     console.log("Self sign file clicked")
 
-    console.log(e)
-    console.log(this.props)
-
     const { projectID, pageName, fieldID, auth } = this.props
-
-    // Create the arguments for the request
-    const fileDetails = {
-      projectID,
-      pageName,
-      fieldID,
-      signer: auth.username,
-    }
 
     // Send the request
     this.props.selfSignFile(
       auth.info.idToken.jwtToken,
-      fileDetails,
+      projectID,
+      pageName,
+      fieldID,
     )
 
-    // Stop the click proporgating up and opening the upload history section
+    // Stop the click propagating up and opening the upload history section
     e.stopPropagation();
   }
 

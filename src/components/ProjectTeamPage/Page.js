@@ -69,6 +69,9 @@ export class Page extends Component {
   }
 
   addMemberResolve = () => {
+
+    this.props.reset()
+
     this.setState({
       addingMember: false,
     })
@@ -83,7 +86,6 @@ export class Page extends Component {
 
   addMemberReject = () => {
     this.setState({
-      addingMember: false,
       addMemberError: true,
       errorText: strings.ERROR_ADDING_MEMBER_TO_PROJECT
     })
@@ -133,6 +135,9 @@ export class Page extends Component {
   }
 
   cancelNewMember = () => {
+
+    this.props.reset()
+
     this.setState({
       addingMember: false,
     })

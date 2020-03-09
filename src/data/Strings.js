@@ -2,6 +2,14 @@
 export const YES = "Yes"
 export const NO = "No"
 
+export const PASSWORD_DOESNT_MATCH_CRITERIA = "Password must be at least 8 characters in length and contain at least one lowercase, one uppercase, and one digit"
+export const LONGER_THAN_32_CHARACTERS = "Not more then 32 characters allowed"
+export const LONGER_THAN_64_CHARACTERS = "Not more then 64 characters allowed"
+export const NOT_A_VALID_EMAIL_ADDRESS = "Not a valid email address"
+export const REQUIRED = "Required"
+export const MIN_LENGTH_EIGHT = "Min Length 8 characters"
+
+
 export const IF_YES_PROVIDE_DETAILS_BELOW = "If yes, please provide extra details below"
 export const IF_XXX_PROVIDE_DETAILS_BELOW = "If XXX, please provide extra details below"
 export const PLEASE_PROVIDE_DETAILS_HERE = "Please provide extra details here..."
@@ -84,7 +92,7 @@ export const MEMBER_PROJECT_ROLE = "Role"
 export const MEMBER_PROJECT_ROLE_SELECT_ROLE = "Please select a role"
 export const MEMBER_STATUS = "Status"
 export const MEMBER_NAME = "Name"
-export const MEMBER_UPLOAD_DIFFERENT_AVATAR = 'Upload a different photo...'
+export const MEMBER_UPLOAD_DIFFERENT_AVATAR = "Upload a different photo..."
 export const MEMBER_FOUNDATIONS_ID = "Foundations ID"
 export const MEMBER_FOUNDATIONS_ID_NOT_FOUND = "No Foundations ID for this Email"
 export const BUTTON_REMOVE_MEMBER = "Remove From Project"
@@ -108,12 +116,12 @@ export const FILE_SUCCESSFULLY_UPLOADED = "Successfully uploaded"
 export const NO_HASH_YET = "File not uploaded yet"
 
 export const CURRENT_VERSION_ELEMENT = "Current Version"
-export const FILE_NAME = 'File Name: '
-export const UPLOAD_DATE_TIME = 'Uploaded At: '
-export const UPLOADED_BY = 'Uploaded By: '
+export const FILE_NAME = "File Name: "
+export const UPLOAD_DATE_TIME = "Uploaded At: "
+export const UPLOADED_BY = "Uploaded By: "
 export const UPLOAD_VERSION = "Version: "
-export const NO_CURRENT_VERSION = 'There is no current version of this file.'
-export const NO_SIGNATURES = 'There are no signatures for this file'
+export const NO_CURRENT_VERSION = "There is no current version of this file."
+export const NO_SIGNATURES = "There are no signatures for this file"
 export const NO_PROOF_AVAILABLE = "Proof still processing"
 
 
@@ -164,7 +172,7 @@ export const CURRENT_PASSWORD = "Current Password"
 export const NEW_PASSWORD = "New Password"
 export const REPEAT_NEW_PASSWORD = "Repeat New Password"
 export const CHANGE_PASSWORD_UNSUCCESSFUL = "Change unsuccessful, please try again"
-export const PASSWORDS_DO_NOT_MATCH = "New passwords do not match"
+export const PASSWORDS_DO_NOT_MATCH = "Passwords do not match"
 
 export const USER_UNABLE_TO_FETCH_DETAILS = "Unable to fetch profile details, please try again!"
 
