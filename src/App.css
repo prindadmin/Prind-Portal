@@ -810,6 +810,39 @@ hr {
   margin-bottom: 0.8em;
 }
 
+/* =========================================== */
+/* === delete project popover element === */
+/* =========================================== */
+
+#delete-project-popover {
+  height: 100%;
+  width: 100%;
+}
+
+#delete-project-popover #popup-box {
+  width: 50%;
+}
+
+#delete-project-popover .delete-project-popover-container {
+  height: calc(100% - 2 * var(--pop-up-padding));
+  margin: var(--pop-up-padding);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#delete-project-popover #popup-box {
+  height: auto;
+  bottom: auto;
+  background-color: var(--field-element-grey)
+}
+
+#delete-project-popover button {
+  max-width: 450px;
+  margin: 0.8em auto 0 auto;
+  text-align: center;
+}
+
 
 /* ==================================== */
 /* === file-details popover element === */

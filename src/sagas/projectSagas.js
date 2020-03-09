@@ -499,6 +499,53 @@ function * requestFileSignature (action) {
 }
 
 
+function * deleteProject (action) {
+
+  const { identityToken, projectID } = action.payload
+
+  try {
+
+    // Pre-fetch update to store
+    yield put({
+      type: actions.PROJECT_DELETE_PROJECT_REQUEST_SENT,
+      payload: {
+        fetching: true,
+      }
+    })
+
+    yield call(Dispatchers.deleteProjectDispatcher, identityToken, projectID,)
+
+    // Post-fetch update to store
+    yield put({
+      type: action,
+      payload: {
+        fetching: false,
+      }
+    })
+
+    // Callback if provided
+    if (action.payload.resolve !== undefined) {
+      action.payload.resolve()
+    }
+  }
+  catch (error) {
+    console.error(error)
+    yield put({
+      type: actions.PROJECT_DELETE_PROJECT_REQUEST_FAILED,
+        payload: {
+          fetching: false,
+          error,
+        }
+    })
+
+    // Callback if provided
+    if (action.payload.reject !== undefined) {
+      action.payload.reject()
+    }
+  }
+}
+
+
 export default function * sagas () {
   yield takeLatest(actions.PROJECT_INIT, init)
   yield takeLatest(actions.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUESTED, getAccessibleProjects)
@@ -511,4 +558,5 @@ export default function * sagas () {
   yield takeLatest(actions.PROJECT_CREATE_FIELD_REQUESTED, createField)
   yield takeLatest(actions.PROJECT_UPDATE_FIELD_REQUESTED, updateField)
   yield takeLatest(actions.PROJECT_FILE_SIGNATURE_REQUEST_REQUESTED, requestFileSignature)
+  yield takeLatest(actions.PROJECT_DELETE_PROJECT_REQUESTED, deleteProject)
 }
