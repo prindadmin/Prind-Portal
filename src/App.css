@@ -101,6 +101,11 @@ hr {
   text-align: center;
 }
 
+.horizontal-flex {
+  display: flex;
+  flex-direction: row;
+}
+
 /* ================================ */
 /* ======== sign-in section ======= */
 /* ================================ */
@@ -1142,7 +1147,8 @@ hr {
 /* ====== project-invitation-request element ====== */
 /* ================================================ */
 
-#project-invitation-request {
+#project-invitation-request,
+#signature-request {
   text-align: left;
   display: flex;
   flex-direction: column;
@@ -1156,23 +1162,27 @@ hr {
 }
 
 
-#project-invitation-request h4 {
+#project-invitation-request h4,
+#signature-request h4 {
   margin-bottom: 0.5em;
 }
 
-#project-invitation-request .button-row {
+#project-invitation-request .button-row,
+#signature-request .button-row {
   display: flex;
   flex-direction: row;
   margin-top: 1em;
   width: 100%;
 }
 
-#project-invitation-request button {
+#project-invitation-request button,
+#signature-request button {
   margin: 0 !important;
   width: calc((100% - 15px) / 2) !important;
 }
 
-#project-invitation-request button:last-of-type {
+#project-invitation-request button:last-of-type,
+#signature-request button:last-of-type {
   margin-left: 15px !important;
 }
 

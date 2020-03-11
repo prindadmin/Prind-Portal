@@ -17,7 +17,7 @@ export default function(identityToken, projectID, pageName, fieldDetails) {
       }
     });
 
-    instance.post(`${process.env.REACT_APP_API_ENDPOINT}/project/${projectID}/${pageName}/create-field`, fieldDetails)
+    instance.post(`${process.env.REACT_APP_API_ENDPOINT}/project/${projectID}/page/${pageName}/create-field`, fieldDetails)
     .then(res => {
       console.log(res)
 

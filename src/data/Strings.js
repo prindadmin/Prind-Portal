@@ -205,3 +205,9 @@ export const THREE_YEARS_AGO = "3 Years Ago"
 
 export const CONFIRM_PROJECT_DELETE = "By clicking the confirm button you are deleting the project from the system.  No access will be possible to the project for any member of the project and all requests (join project, sign document) will be cancelled.  Are you sure you want to delete the project?"
 export const DELETE_PROJECT = "Delete Project?"
+
+export const PROJECT_STAGE = "Project Stage"
+export const PROJECT_FILE_NAME = "File Name"
+export const REQUESTED_BY = "Requested By"
+
+export const BUTTON_GO_TO_DOCUMENT = "Go To Document"
