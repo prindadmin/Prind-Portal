@@ -114,7 +114,8 @@ export class Page extends Component {
 
     // Store the avatarFile event
     this.setState({
-      avatarFile: e.target
+      avatarFile: e.target,
+      avatarLoading: true,
     })
 
   }

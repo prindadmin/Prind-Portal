@@ -211,3 +211,6 @@ export const PROJECT_FILE_NAME = "File Name"
 export const REQUESTED_BY = "Requested By"
 
 export const BUTTON_GO_TO_DOCUMENT = "Go To Document"
+
+export const NO_FOUNDATIONS_ID_BANNER_TEXT = "You do not have a Foundations ID and therefore cannot sign any documents.  Click here to find out more..."
+export const FOUNDATIONS_DESCRIPTION = "Foundations allows users to enter their data into a single system and control the access to it. By using Foundations as the single source of data, you keep complete control of your personally identifiable information while allowing those granted access to it to receive the most up-to-date information automatically while protecting against GDPR violations."

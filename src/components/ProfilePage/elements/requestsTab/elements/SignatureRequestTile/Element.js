@@ -33,7 +33,7 @@ export class Element extends Component {
 
   // TODO: Implement the history push state in all the project stage pages
   goToDocument = () => {
-    const { auth, history, requestDetails, updateChosenProject } = this.props
+    const { auth, requestDetails, updateChosenProject } = this.props
 
     // Build an object for the requested project
     const project = {
