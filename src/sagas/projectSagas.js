@@ -8,7 +8,7 @@ import * as strings from '../data/Strings'
 
 const defaultState = {
   accessibleProjects: {
-    projectOwner: [],
+    projectCreator: [],
     projectRole: []
   },
   chosenProject: {

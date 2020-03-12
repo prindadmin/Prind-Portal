@@ -123,10 +123,10 @@ export class ProjectSelectorPopUp extends Component {
   concatProjects = () => {
 
     const { accessibleProjects } = this.props.projects
-    let projectsWhereCreator = accessibleProjects.projectOwner.map(project => project.projectId);
+    let projectsWhereCreator = accessibleProjects.projectCreator.map(project => project.projectId);
     const roleNotCreator = accessibleProjects.projectRole.filter(item => !projectsWhereCreator.includes(item.projectId))
 
-    var allProjects = accessibleProjects.projectOwner
+    var allProjects = accessibleProjects.projectCreator
     allProjects = allProjects.concat(roleNotCreator)
 
     return allProjects
