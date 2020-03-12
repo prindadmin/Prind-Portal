@@ -38,13 +38,13 @@ import ProjectTeamPage from './components/ProjectTeamPage';
 
 /* Other pages */
 import ProfilePage from './components/ProfilePage'
+import Foundations from './components/FoundationsPage'
 import Error404 from './components/Error404'
 import TestPage from './components/TestPage'
 
 // TODO: Add functionality below 800px width to not show the site
 // TODO: make mobile friendly in future
 // TODO: Remove aws-cognito-promises dependency from the system as it uses a very old AWS-SDK version
-// TODO: Fix delay between selecting a project change and the spinner starting on any page
 
 class App extends Component{
 
@@ -58,7 +58,7 @@ class App extends Component{
 
   render() {
 
-    const { auth } = this.props // the props exposed are defined in the container
+    const { auth } = this.props
 
     return (
       <div className="App full-height">
@@ -87,6 +87,8 @@ class App extends Component{
             <PrivateRoute path='/Profile' component={ProfilePage} />
 
             <PrivateRoute path='/TestPage' component={TestPage} />
+
+            <PrivateRoute path='/Foundations' component={Foundations} />
 
             <Route path='/'
               render={() =>

@@ -14,8 +14,8 @@ const mapStatetoProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    selfSignFile: (jwtToken, fieldDetails) => {
-      dispatch(foundationsReducer.selfSignFile(jwtToken, fieldDetails))
+    selfSignFile: (jwtToken, projectID, pageName, fieldID) => {
+      dispatch(foundationsReducer.selfSignFile(jwtToken, projectID, pageName, fieldID))
     }
   }
 }

@@ -97,6 +97,15 @@ hr {
   padding: 0;
 }
 
+.bp3-button {
+  text-align: center;
+}
+
+.horizontal-flex {
+  display: flex;
+  flex-direction: row;
+}
+
 /* ================================ */
 /* ======== sign-in section ======= */
 /* ================================ */
@@ -173,6 +182,11 @@ hr {
   align-items: center;
   height: var(--header-height);
   background-color: #000;
+  margin: 0;
+  padding: 15px;
+}
+
+.App-header .row {
   margin: 0;
 }
 
@@ -810,6 +824,39 @@ hr {
   margin-bottom: 0.8em;
 }
 
+/* =========================================== */
+/* === delete project popover element === */
+/* =========================================== */
+
+#delete-project-popover {
+  height: 100%;
+  width: 100%;
+}
+
+#delete-project-popover #popup-box {
+  width: 50%;
+}
+
+#delete-project-popover .delete-project-popover-container {
+  height: calc(100% - 2 * var(--pop-up-padding));
+  margin: var(--pop-up-padding);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#delete-project-popover #popup-box {
+  height: auto;
+  bottom: auto;
+  background-color: var(--field-element-grey)
+}
+
+#delete-project-popover button {
+  max-width: 450px;
+  margin: 0.8em auto 0 auto;
+  text-align: center;
+}
+
 
 /* ==================================== */
 /* === file-details popover element === */
@@ -1105,7 +1152,8 @@ hr {
 /* ====== project-invitation-request element ====== */
 /* ================================================ */
 
-#project-invitation-request {
+#project-invitation-request,
+#signature-request {
   text-align: left;
   display: flex;
   flex-direction: column;
@@ -1119,23 +1167,27 @@ hr {
 }
 
 
-#project-invitation-request h4 {
+#project-invitation-request h4,
+#signature-request h4 {
   margin-bottom: 0.5em;
 }
 
-#project-invitation-request .button-row {
+#project-invitation-request .button-row,
+#signature-request .button-row {
   display: flex;
   flex-direction: row;
   margin-top: 1em;
   width: 100%;
 }
 
-#project-invitation-request button {
+#project-invitation-request button,
+#signature-request button {
   margin: 0 !important;
   width: calc((100% - 15px) / 2) !important;
 }
 
-#project-invitation-request button:last-of-type {
+#project-invitation-request button:last-of-type,
+#signature-request button:last-of-type {
   margin-left: 15px !important;
 }
 
@@ -1388,6 +1440,7 @@ hr {
 #popup-box .project-scroll-box button {
   height: auto;
   margin-bottom: 5px;
+  text-align: left;
 }
 
 #popup-box .project-scroll-box .col-xs-12,
@@ -1484,4 +1537,62 @@ hr {
   align-items: center;
   justify-content: center;
   display: flex;
+}
+
+/* ============================================ */
+/* ===== no-foundations-id-banner element ===== */
+/* ============================================ */
+
+#no-foundations-id-banner {
+  background-color: red;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0.67em 0;
+}
+
+#no-foundations-id-banner p {
+  margin: auto;
+  color: white;
+}
+
+#no-foundations-id-banner p:hover {
+  text-decoration: underline;
+}
+
+/* ==================================== */
+/* ===== foundations-page element ===== */
+/* ==================================== */
+
+#foundations-page {
+
+}
+
+#foundations-page .foundations-page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 800px;
+}
+
+#foundations-page .foundations-icon {
+  text-align: center;
+}
+
+#foundations-page .foundations-icon-text {
+  text-align: center;
+}
+
+#foundations-page .foundations-download-icons {
+  text-align: center;
+  width: 100%;
+  margin-top: 4em;
+}
+
+#foundations-page .foundations-download-text {
+  text-align: center;
+  width: 100%;
 }

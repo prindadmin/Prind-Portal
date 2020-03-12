@@ -8,6 +8,7 @@ import downloadFileDispatcher from './downloadFile'
 import createFieldDispatcher from './createField'
 import updateFieldDispatcher from './updateField'
 import requestSignatureDispatcher from './requestSignature'
+import deleteProjectDispatcher from './deleteProject'
 
 export {
   getAccessibleProjectsDispatcher,
@@ -20,4 +21,5 @@ export {
   createFieldDispatcher,
   updateFieldDispatcher,
   requestSignatureDispatcher,
+  deleteProjectDispatcher,
 }

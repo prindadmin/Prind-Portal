@@ -11,12 +11,14 @@ export const init = () => {
   }
 }
 
-export const selfSignFile = ( identityToken, fieldDetails ) => {
+export const selfSignFile = ( identityToken, projectID, pageName, fieldID ) => {
   return {
     type: action.FOUNDATIONS_SELF_SIGN_FILE_REQUESTED,
     payload: {
       identityToken,
-      fieldDetails,
+      projectID,
+      pageName,
+      fieldID,
     }
   }
 }

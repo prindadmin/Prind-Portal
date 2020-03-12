@@ -17,7 +17,13 @@ const mapDispatchToProps = dispatch => {
   return {
     updateProjectDetails: (jwtToken, projectID, values) => {
       dispatch(reducer.updateProjectDetails(jwtToken, projectID, values))
-    }
+    },
+    deleteProject: (jwtToken, projectID, resolve, reject) => {
+      dispatch(reducer.deleteProject(jwtToken, projectID, resolve, reject))
+    },
+    resetChosenProject: () => {
+      dispatch(reducer.resetChosenProject())
+    },
   }
 }
 

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import ProjectSelector from '../ProjectSelector';
 import UserMenu from '../UserMenu'
+import NoFoundationsIDBanner from '../NoFoundationsIDBanner'
 
 export class HeaderBar extends Component {
   static propTypes = {
@@ -24,21 +25,33 @@ export class HeaderBar extends Component {
 
   render() {
 
-    const { projects } = this.props
+    const { projects, user } = this.props
 
     return (
-      <div id='header-bar' className='col-12'>
-        <div className='header-content row'>
-          {
-            projects !== undefined ? <ProjectSelector />  : null
-          }
-          <div className='nav-links'>
+      <React.Fragment>
+        <div id='header-bar' className='full-width'>
+          <div className='header-content row'>
             {
-              this.getMenu()
+              projects !== undefined ? <ProjectSelector />  : null
             }
+            <div className='nav-links'>
+              {
+                this.getMenu()
+              }
+            </div>
           </div>
         </div>
-      </div>
+
+        {
+          user !== undefined ?
+            user.details.foundationsID === null ?
+            <div className="row">
+              <NoFoundationsIDBanner />
+            </div> :
+            null :
+          null
+        }
+      </React.Fragment>
     )
   }
 }

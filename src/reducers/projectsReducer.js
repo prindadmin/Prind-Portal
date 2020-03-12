@@ -3,7 +3,7 @@ import * as strings from '../data/Strings'
 
 const defaultState = {
   accessibleProjects: {
-    projectOwner: [],
+    projectCreator: [],
     projectRole: []
   },
   chosenProject: {
@@ -165,7 +165,6 @@ export const updateField = ( identityToken, projectID, pageName, fieldID, fieldD
 }
 
 export const requestSignature = ( identityToken, projectID, pageName, fieldID, members, resolve, reject ) => {
-
   return {
     type: action.PROJECT_FILE_SIGNATURE_REQUEST_REQUESTED,
     payload: {
@@ -174,6 +173,19 @@ export const requestSignature = ( identityToken, projectID, pageName, fieldID, m
       pageName,
       fieldID,
       members,
+      resolve,
+      reject,
+    }
+  }
+}
+
+
+export const deleteProject = ( identityToken, projectID, resolve, reject ) => {
+  return {
+    type: action.PROJECT_DELETE_PROJECT_REQUESTED,
+    payload: {
+      identityToken,
+      projectID,
       resolve,
       reject,
     }
@@ -196,6 +208,7 @@ const ACTION_HANDLERS = {
   [action.PROJECT_CREATE_FIELD_REQUESTED]: state => ({ ...state }),
   [action.PROJECT_UPDATE_FIELD_REQUESTED]: state => ({ ...state }),
   [action.PROJECT_FILE_SIGNATURE_REQUEST_REQUESTED]: state => ({ ...state }),
+  [action.PROJECT_DELETE_PROJECT_REQUESTED]: state => ({ ...state }),
 
   [action.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUEST_SENT]: (state, action) => { return { ...state, ...action.payload }},
   [action.PROJECT_UPDATE_PROJECT_CHOSEN_REQUEST_SENT]: (state, action) => { return { ...state, ...action.payload }},
@@ -207,6 +220,7 @@ const ACTION_HANDLERS = {
   [action.PROJECT_UPDATE_FIELD_REQUEST_SENT]: (state, action) => { return { ...state, ...action.payload }},
   [action.PROJECT_DOWNLOAD_FILE_REQUEST_SENT]: (state, action) => { return { ...state, ...action.payload }},
   [action.PROJECT_FILE_SIGNATURE_REQUEST_REQUEST_SENT]: (state, action) => { return { ...state, ...action.payload }},
+  [action.PROJECT_DELETE_PROJECT_REQUEST_SENT]: (state, action) => { return { ...state, ...action.payload }},
 
   [action.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
   [action.PROJECT_CREATE_PROJECT_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
@@ -217,6 +231,7 @@ const ACTION_HANDLERS = {
   [action.PROJECT_CREATE_FIELD_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
   [action.PROJECT_UPDATE_FIELD_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
   [action.PROJECT_FILE_SIGNATURE_REQUEST_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
+  [action.PROJECT_DELETE_PROJECT_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
 
   [action.PROJECT_RESET_CHOSEN_PROJECT]: (state, action) => ({ ...state, ...action.payload }),
   [action.PROJECT_RESET_DOWNLOAD_URL]: (state, action) => ({ ...state, ...action.payload }),

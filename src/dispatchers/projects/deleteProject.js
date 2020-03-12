@@ -1,9 +1,7 @@
 import axios from 'axios'
 import https from 'https'
 
-// TODO: Test once API Endpoint is built
-
-export default function(identityToken, projectID, pageName, fieldDetails) {
+export default function(identityToken, projectId) {
 
   return new Promise((resolve, reject) => {
 
@@ -17,7 +15,7 @@ export default function(identityToken, projectID, pageName, fieldDetails) {
       }
     });
 
-    instance.post(`${process.env.REACT_APP_API_ENDPOINT}/project/${projectID}/page/${pageName}/create-field`, fieldDetails)
+    instance.post(`${process.env.REACT_APP_API_ENDPOINT}/project/${projectId}/delete`)
     .then(res => {
       console.log(res)
 

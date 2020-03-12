@@ -2,6 +2,14 @@
 export const YES = "Yes"
 export const NO = "No"
 
+export const PASSWORD_DOESNT_MATCH_CRITERIA = "Password must be at least 8 characters in length and contain at least one lowercase, one uppercase, and one digit"
+export const LONGER_THAN_32_CHARACTERS = "Not more then 32 characters allowed"
+export const LONGER_THAN_64_CHARACTERS = "Not more then 64 characters allowed"
+export const NOT_A_VALID_EMAIL_ADDRESS = "Not a valid email address"
+export const REQUIRED = "Required"
+export const MIN_LENGTH_EIGHT = "Min Length 8 characters"
+
+
 export const IF_YES_PROVIDE_DETAILS_BELOW = "If yes, please provide extra details below"
 export const IF_XXX_PROVIDE_DETAILS_BELOW = "If XXX, please provide extra details below"
 export const PLEASE_PROVIDE_DETAILS_HERE = "Please provide extra details here..."
@@ -36,6 +44,7 @@ export const NO_PROJECT_DESCRIPTION = "No project description provided"
 export const BUTTON_CREATE_PROJECT = "Create Project"
 export const BUTTON_CANCEL = "Cancel"
 export const BUTTON_SAVE_CHANGES = "Save Changes"
+export const BUTTON_DELETE_PROJECT = "Delete Project"
 
 export const INCEPTION_PAGE_TITLE = "Project Inception"
 export const INCEPTION_PAGE_DESCRIPTION = "Inception of a project begins with the idea. This idea is captured in a project brief."
@@ -70,6 +79,7 @@ export const PROJECT_DIRECTORY_ADD_NEW_TITLE = "Add New Project Member"
 export const BUTTON_ADD_MEMBER_TO_PROJECT = "Add New Member"
 export const ERROR_ADDING_MEMBER_TO_PROJECT = "There was an error adding member to the project, please try again.  If the problem persists, please contact technical support."
 export const ERROR_REMOVING_MEMBER_FROM_PROJECT = "There was an error removing a member from the project, please try again.  If the problem persists, please contact technical support."
+export const ERROR_DELETING_PROJECT = "There was an error deleting the project, please try again.  If the problem persists, please contact technical support."
 
 export const MEMBER_DETAILS = "Member Details"
 export const MEMBER_FIRST_NAME = "First Name"
@@ -82,7 +92,7 @@ export const MEMBER_PROJECT_ROLE = "Role"
 export const MEMBER_PROJECT_ROLE_SELECT_ROLE = "Please select a role"
 export const MEMBER_STATUS = "Status"
 export const MEMBER_NAME = "Name"
-export const MEMBER_UPLOAD_DIFFERENT_AVATAR = 'Upload a different photo...'
+export const MEMBER_UPLOAD_DIFFERENT_AVATAR = "Upload a different photo..."
 export const MEMBER_FOUNDATIONS_ID = "Foundations ID"
 export const MEMBER_FOUNDATIONS_ID_NOT_FOUND = "No Foundations ID for this Email"
 export const BUTTON_REMOVE_MEMBER = "Remove From Project"
@@ -106,12 +116,12 @@ export const FILE_SUCCESSFULLY_UPLOADED = "Successfully uploaded"
 export const NO_HASH_YET = "File not uploaded yet"
 
 export const CURRENT_VERSION_ELEMENT = "Current Version"
-export const FILE_NAME = 'File Name: '
-export const UPLOAD_DATE_TIME = 'Uploaded At: '
-export const UPLOADED_BY = 'Uploaded By: '
+export const FILE_NAME = "File Name: "
+export const UPLOAD_DATE_TIME = "Uploaded At: "
+export const UPLOADED_BY = "Uploaded By: "
 export const UPLOAD_VERSION = "Version: "
-export const NO_CURRENT_VERSION = 'There is no current version of this file.'
-export const NO_SIGNATURES = 'There are no signatures for this file'
+export const NO_CURRENT_VERSION = "There is no current version of this file."
+export const NO_SIGNATURES = "There are no signatures for this file"
 export const NO_PROOF_AVAILABLE = "Proof still processing"
 
 
@@ -162,7 +172,7 @@ export const CURRENT_PASSWORD = "Current Password"
 export const NEW_PASSWORD = "New Password"
 export const REPEAT_NEW_PASSWORD = "Repeat New Password"
 export const CHANGE_PASSWORD_UNSUCCESSFUL = "Change unsuccessful, please try again"
-export const PASSWORDS_DO_NOT_MATCH = "New passwords do not match"
+export const PASSWORDS_DO_NOT_MATCH = "Passwords do not match"
 
 export const USER_UNABLE_TO_FETCH_DETAILS = "Unable to fetch profile details, please try again!"
 
@@ -192,3 +202,15 @@ export const THREE_MONTHS_AGO = "3 Months Ago"
 export const SIX_MONTHS_AGO = "6 Months Ago"
 export const ONE_YEAR_AGO = "1 Year Ago"
 export const THREE_YEARS_AGO = "3 Years Ago"
+
+export const CONFIRM_PROJECT_DELETE = "By clicking the confirm button you are deleting the project from the system.  No access will be possible to the project for any member of the project and all requests (join project, sign document) will be cancelled.  Are you sure you want to delete the project?"
+export const DELETE_PROJECT = "Delete Project?"
+
+export const PROJECT_STAGE = "Project Stage"
+export const PROJECT_FILE_NAME = "File Name"
+export const REQUESTED_BY = "Requested By"
+
+export const BUTTON_GO_TO_DOCUMENT = "Go To Document"
+
+export const NO_FOUNDATIONS_ID_BANNER_TEXT = "You do not have a Foundations ID and therefore cannot sign any documents.  Click here to find out more..."
+export const FOUNDATIONS_DESCRIPTION = "Foundations allows users to enter their data into a single system and control the access to it. By using Foundations as the single source of data, you keep complete control of your personally identifiable information while allowing those granted access to it to receive the most up-to-date information automatically while protecting against GDPR violations."

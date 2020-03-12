@@ -1,6 +1,8 @@
 
 import { call, put, takeLatest } from 'redux-saga/effects'
 
+// TODO: Implement resolver and rejector callbacks
+
 import {
   selfSignFileDispatcher,
 } from '../dispatchers/foundations'
@@ -21,7 +23,7 @@ function * init (action) {
 
 function * selfSignFile (action) {
 
-  const { identityToken, fieldDetails } = action.payload
+  const { identityToken, projectID, pageName, fieldID } = action.payload
 
   try {
 
@@ -34,7 +36,7 @@ function * selfSignFile (action) {
       }
     })
 
-    yield call(selfSignFileDispatcher, identityToken, fieldDetails)
+    yield call(selfSignFileDispatcher, identityToken, projectID, pageName, fieldID)
 
     // Post-fetch update to store
     yield put({

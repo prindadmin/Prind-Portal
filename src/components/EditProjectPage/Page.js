@@ -5,12 +5,15 @@ import {
   FormGroup,
   Button,
   ButtonGroup,
+  Callout,
 } from '@blueprintjs/core'
 
 import HeaderBar from '../common/HeaderBar';
 import PageChooserSection from '../layouts/PageChooserSection'
 import NoProjectSelected from '../common/NoProjectSelected'
 import Footer from '../common/footer'
+
+import PopOverHandler from '../common/popOverHandler'
 
 import * as FormInputs from '../common/formInputs'
 
@@ -22,6 +25,14 @@ export class Page extends Component {
   static propTypes = {
   }
 
+  constructor() {
+    super()
+    this.state = {
+      showDeleteProjectConfirmation: false,
+      deleteError: false,
+      errorText: "",
+    }
+  }
 
   componentDidUpdate(prevProps) {
     if (this.props.projects.chosenProject.projectId !== prevProps.projects.chosenProject.projectId) {
@@ -48,6 +59,13 @@ export class Page extends Component {
         <h2>{strings.EDIT_PROJECT_DETAILS}</h2>
       </div>
     )
+  }
+
+  confirmProjectDelete = () => {
+    console.log("confirm project delete")
+    this.setState({
+      showDeleteProjectConfirmation: true,
+    })
   }
 
   projectForm = () => {
@@ -147,9 +165,109 @@ export class Page extends Component {
             text={strings.BUTTON_SAVE_CHANGES}
           />
         </ButtonGroup>
+
+
+
+        <ButtonGroup fill>
+          <Button
+            loading={this.props.submitting}
+            intent='danger'
+            text={strings.BUTTON_DELETE_PROJECT}
+            onClick={(e) => this.setState({
+              showDeleteProjectConfirmation: true,
+              deleteError: false,
+            })}
+          />
+        </ButtonGroup>
+
+
+
       </form>
     )
   }
+
+
+  confirmDeleteProject = () => {
+
+    const { jwtToken } = this.props.auth.info.idToken
+    const { projectId } = this.props.projects.chosenProject
+
+    this.props.deleteProject(
+      jwtToken,
+      projectId,
+      this.resolveDelete,
+      this.rejectDelete,
+    )
+
+  }
+
+  resolveDelete = () => {
+    this.props.resetChosenProject()
+    this.props.history.push('/profile')
+  }
+
+  rejectDelete = () => {
+
+    console.log("reject delete")
+
+    this.setState({
+      deleteError: true,
+      errorText: strings.ERROR_DELETING_PROJECT
+    })
+  }
+
+  showDeleteConfirmationOverlay = () => {
+
+    const { deleteError, errorText } = this.state
+
+    return(
+      <PopOverHandler>
+        <div id='popup-greyer' onClick={(e) => {
+          this.setState({showDeleteProjectConfirmation: false})
+          e.stopPropagation()
+          }}>
+          <div id='delete-project-popover'>
+            <div id='popup-box'>
+              <div className='delete-project-popover-container' onClick={(e) => e.stopPropagation()}>
+                <div className='element-title'>
+                  {strings.DELETE_PROJECT}
+                </div>
+                {
+                  deleteError ?
+                  <Callout style={{marginBottom: '15px'}} intent='danger'>
+                    <div>{errorText}</div>
+                  </Callout> :
+                  null
+                }
+
+                <div className='element-description'>
+                  {strings.CONFIRM_PROJECT_DELETE}
+                  <ButtonGroup fill>
+                    <Button
+                      loading={this.props.submitting}
+                      intent='danger'
+                      text={strings.BUTTON_DELETE_PROJECT}
+                      onClick={this.confirmDeleteProject}
+                    />
+                  </ButtonGroup>
+
+                  <ButtonGroup fill>
+                    <Button
+                      loading={this.props.submitting}
+                      intent='none'
+                      text={strings.BUTTON_CANCEL}
+                      onClick={(e) => this.setState({showDeleteProjectConfirmation: false})}
+                    />
+                  </ButtonGroup>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </PopOverHandler>
+    )
+  }
+
 
   projectPageFooter = () => {
     return (
@@ -160,12 +278,21 @@ export class Page extends Component {
   }
 
   projectDetails = () => {
+
+    const { showDeleteProjectConfirmation } = this.state
+
     return (
-      <div className="form-container">
-        {this.projectPageHeader()}
-        {this.projectForm()}
-        {this.projectPageFooter()}
-      </div>
+      <React.Fragment>
+        {
+          showDeleteProjectConfirmation ?
+          this.showDeleteConfirmationOverlay() : null
+        }
+        <div className="form-container">
+          {this.projectPageHeader()}
+          {this.projectForm()}
+          {this.projectPageFooter()}
+        </div>
+      </React.Fragment>
     )
   }
 
