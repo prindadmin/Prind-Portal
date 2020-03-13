@@ -13,8 +13,6 @@ import {
 
 import AWS from 'aws-sdk';
 
-// TODO: Add spinner to user image when an upload is happening
-
 import * as strings from '../../../../../../data/Strings'
 import * as validators from '../../../../../../validators'
 
@@ -91,6 +89,12 @@ export class Page extends Component {
     // If the user details change
     if (this.props.user.details !== prevProps.user.details) {
       this.getImage(this.props)
+
+      if (this.props.user.details.emailAddress !== undefined) {
+        this.setState({
+          detailsFetchError: false,
+        })
+      }
     }
 
     // If there is a file to upload and there is a token to do it with

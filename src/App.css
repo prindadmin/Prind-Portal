@@ -506,6 +506,29 @@ hr {
   border-radius: 10px;
 }
 
+/* The animation code */
+@keyframes changeMaxHeightExpand {
+  from {max-height: 441px;}
+  to {max-height: 1000px;}
+}
+
+@keyframes changeMaxHeightContract {
+  from {max-height: 1000px;}
+  to {max-height: 441px;}
+}
+
+#file-upload-element {
+  overflow-y: hidden;
+}
+
+#file-upload-element.collapsed {
+  animation: changeMaxHeightContract 1s ease-out;
+}
+
+#file-upload-element.expanded {
+  animation: changeMaxHeightExpand 1s ease-in;
+}
+
 #file-upload-element .file-upload-element-container,
 #drop-down-element .drop-down-element-container,
 #calendar-picker-element .calendar-picker-element-container,

@@ -1,8 +1,6 @@
 import axios from 'axios'
 import https from 'https'
 
-// TODO: Test once API Endpoint is built
-
 export default function(identityToken, projectID, pageName, fieldDetails) {
 
   return new Promise((resolve, reject) => {

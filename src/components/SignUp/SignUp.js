@@ -16,6 +16,7 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import * as FormInputs from '../common/formInputs'
 import * as validators from '../../validators'
 import * as state from '../../states'
+import * as strings from '../../data/Strings'
 
 class SignUp extends Component {
   signUp = async (values) => {
@@ -39,7 +40,7 @@ class SignUp extends Component {
             name="firstName"
             validate={[validators.required, validators.maxLength32]}
             component={FormInputs.TextInput}
-            placeholder='First Name'
+            placeholder={strings.PLACEHOLDER_FIRST_NAME}
           />
         </Label>
         <Label>
@@ -47,7 +48,7 @@ class SignUp extends Component {
             name="lastName"
             validate={[validators.required, validators.maxLength32]}
             component={FormInputs.TextInput}
-            placeholder='Last Name'
+            placeholder={strings.PLACEHOLDER_LAST_NAME}
             type="text"
           />
         </Label>
@@ -69,7 +70,7 @@ class SignUp extends Component {
               validators.isValidPassword
             ]}
             component={FormInputs.PasswordInput}
-            placeholder='Password'
+            placeholder={strings.PLACEHOLDER_PASSWORD}
             type="password"
           />
         </Label>
@@ -79,14 +80,12 @@ class SignUp extends Component {
             disabled={this.props.invalid}
             type='submit'
             intent='primary'
-            className='bim-light-blue'
-            text='Create Account' />
+            text={strings.BUTTON_CREATE_ACCOUNT} />
         </ButtonGroup>
         <ButtonGroup fill>
           <Button
-            text='Cancel Sign Up'
+            text={strings.BUTTON_CANCEL_SIGN_UP}
             intent='primary'
-            className='bim-dark-blue'
             onClick={() => {this.props.history.push(Endpoints.DEFAULTPAGE)}}
           />
         </ButtonGroup>
@@ -104,12 +103,11 @@ class SignUp extends Component {
     return (
       <div className='auth-form' style={style}>
         <Icon icon={ico} />
-        <h3>We've sent you an email to verify your account. Please check your email inbox.</h3>
+        <h3>{strings.PLEASE_VERIFY_ACCOUNT}</h3>
         <Button
-          className='bim-light-blue'
           intent='primary'
           fill
-          text='Back to login page'
+          text={strings.BUTTON_BACK_TO_LOGIN_PAGE}
           onClick={() => {this.props.history.push(Endpoints.SIGNINPAGE)}}
         />
       </div>

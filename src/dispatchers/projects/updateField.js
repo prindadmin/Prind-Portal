@@ -1,8 +1,6 @@
 import axios from 'axios'
 import https from 'https'
 
-// TODO: Remove Type once BE hasn't marked it as required
-
 export default function(identityToken, projectID, pageName, fieldID, fieldDetails) {
 
   return new Promise((resolve, reject) => {
@@ -19,7 +17,6 @@ export default function(identityToken, projectID, pageName, fieldID, fieldDetail
 
     const body = {
       fieldDetails,
-      type: "dropdown"
     }
 
 

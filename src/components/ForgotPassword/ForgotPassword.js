@@ -13,6 +13,7 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons'
 
 import * as FormInputs from '../common/formInputs'
 import * as validators from '../../validators'
+import * as strings from '../../data/Strings'
 
 class ForgotPassword extends Component {
   static propTypes = {
@@ -50,12 +51,11 @@ class ForgotPassword extends Component {
     return (
       <div className='auth-form' style={style}>
         <Icon icon={ico} />
-        <h3>Change password link successfuly sent! Please check your email.</h3>
+        <h3>{strings.CHANGE_PASSWORD_LINK_SENT}</h3>
         <Button
-          className='bim-light-blue'
           intent='primary'
           fill
-          text='Back to login page'
+          text={strings.BUTTON_BACK_TO_LOGIN_PAGE}
           onClick={() => {this.props.history.push('/signin')}}
         />
       </div>
@@ -67,12 +67,12 @@ class ForgotPassword extends Component {
 
     return (
       <form onSubmit={handleSubmit(this.sendCode)} className='auth-form'>
-        <h4>In order to change your password we'll send you a link to the change password page</h4>
+        <h4>{strings.CHANGE_PASSWORD_DESCRIPTION}</h4>
         <Label>
           <Field
             component={FormInputs.TextInput}
             name="email"
-            placeholder='Email'
+            placeholder={strings.PLACEHOLDER_EMAIL}
             validate={[validators.required, validators.email, validators.maxLength32]}
           />
         </Label>
@@ -82,8 +82,7 @@ class ForgotPassword extends Component {
             disabled={this.props.invalid}
             type='submit'
             intent='primary'
-            className='bim-light-blue'
-            text='Send Code' />
+            text={strings.BUTTON_SEND_CODE} />
         </ButtonGroup>
       </form>
     )

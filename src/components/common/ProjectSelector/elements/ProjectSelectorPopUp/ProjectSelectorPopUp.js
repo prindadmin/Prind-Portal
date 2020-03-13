@@ -57,30 +57,21 @@ export class ProjectSelectorPopUp extends Component {
     )
   }
 
-  // TODO: Use these resolvers and rejectors
   resolveProjectFetch = () => {
-    console.log("Resolved Project Fetch")
   }
 
   rejectProjectFetch = () => {
-    console.log("Rejected Project Fetch")
-
     this.setState({
       fetchError: true,
       errorText: strings.ERROR_FETCHING_PROJECT_LIST,
     })
   }
 
-  // TODO: Use these resolvers and rejectors
   resolveProjectUpdate = () => {
-    console.log("Resolved Project Update")
-
     this.cancelPopup()
   }
 
   rejectProjectUpdate = () => {
-    console.log("Rejected Project Update")
-
     this.setState({
       updateError: true,
       errorText: strings.ERROR_UNABLE_TO_SELECT_PROJECT,
@@ -95,8 +86,6 @@ export class ProjectSelectorPopUp extends Component {
     history.push('/NewProject')
   }
 
-
-  // TODO: Improve this
   projectsLoading = () => {
     return (
       <div className='projects-loading-container fill'>
