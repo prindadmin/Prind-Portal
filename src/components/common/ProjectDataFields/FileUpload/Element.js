@@ -32,7 +32,8 @@ export class Element extends Component {
   constructor() {
     super()
     this.state = {
-      detailedView: false,
+      isExpanded: false,
+      showUploadHistory: false,
       filePrompt: strings.FILE_PROMPT,
       fileDetails: {},
       hasChosenFile: false,
@@ -65,9 +66,31 @@ export class Element extends Component {
 
   // Toggle between the detailed and minimized views of the element
   onElementClick = () => {
-    this.setState({
-      detailedView: !this.state.detailedView,
-    })
+
+    const that = this
+
+    // If the window is expanded, then...
+    if (this.state.isExpanded) {
+      // Delay removing the upload history
+      setTimeout(() => {
+        that.setState({
+          showUploadHistory: !this.state.showUploadHistory,
+        })
+      }, 980);
+
+      // Close the expansion straight away so the animation starts
+      this.setState({
+        isExpanded: !this.state.isExpanded,
+      })
+
+    // Else expand everything together
+    } else {
+      this.setState({
+        isExpanded: !this.state.isExpanded,
+        showUploadHistory: !this.state.showUploadHistory,
+      })
+    }
+
   }
 
   // ---------------------- DEFAULT FUNCTIONALITY ABOVE THIS LINE -----------------------
@@ -109,14 +132,13 @@ export class Element extends Component {
 
   render() {
 
-    const { detailedView, filePrompt, fileState, fileDetails } = this.state
+    const { isExpanded, showUploadHistory, filePrompt, fileState, fileDetails } = this.state
     const { elementContent, pageName, projects } = this.props
 
     // TODO: Add expand transition to make it smooth
-    // TODO: Indicate that there is more data if you click the box
 
     return (
-      <div id='file-upload-element'>
+      <div id='file-upload-element' className={isExpanded ? "expanded" : "collapsed"}>
         <div className={'file-upload-element-container' + fileState}>
           <div className='element-title'>
             {elementContent.title}
@@ -164,7 +186,7 @@ export class Element extends Component {
                 </div>
                 <div className='detail-view-open-button' onClick={(e) => this.onElementClick()}>
                   {
-                    detailedView ?
+                    isExpanded ?
                     <ItemIcon size='2x' type='caretUp' /> :
                     <ItemIcon size='2x' type='caretDown' />
                   }
@@ -175,7 +197,7 @@ export class Element extends Component {
             </div>
           </div>
           {
-            detailedView ? <UploadHistory
+            showUploadHistory ? <UploadHistory
               details={ elementContent.fileDetails }
               projectID={projects.chosenProject.projectId}
               pageName={pageName}

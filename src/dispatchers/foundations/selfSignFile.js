@@ -1,8 +1,6 @@
 import axios from 'axios'
 import https from 'https'
 
-// TODO: Test this
-
 export default function(identityToken, projectID, pageName, fieldID) {
 
   return new Promise((resolve, reject) => {

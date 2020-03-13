@@ -1,4 +1,6 @@
 
+export const ERROR_404_MESSAGE = "Error 404: This resource was not found"
+
 export const YES = "Yes"
 export const NO = "No"
 
@@ -9,6 +11,22 @@ export const NOT_A_VALID_EMAIL_ADDRESS = "Not a valid email address"
 export const REQUIRED = "Required"
 export const MIN_LENGTH_EIGHT = "Min Length 8 characters"
 
+export const BUTTON_LOGIN = "Login"
+export const BUTTON_NEW_USER = "New User? Create Account"
+export const BUTTON_FORGOT_PASSWORD = "Forgot Password"
+export const BUTTON_CREATE_ACCOUNT = "Create Account"
+export const BUTTON_CANCEL_SIGN_UP = "Cancel Sign Up"
+export const BUTTON_BACK_TO_LOGIN_PAGE = "Back to login page"
+export const PLACEHOLDER_EMAIL = "Email"
+export const PLACEHOLDER_PASSWORD = "Password"
+export const PLACEHOLDER_FIRST_NAME = "FirstName"
+export const PLACEHOLDER_LAST_NAME = "Surname"
+export const LOGIN_UNSUCCESSFUL = "Login unsuccessful, please check your email address and password"
+export const PLEASE_VERIFY_ACCOUNT = "We've sent you an email to verify your account. Please check your email inbox."
+
+export const BUTTON_SEND_CODE = "Send Code"
+export const CHANGE_PASSWORD_DESCRIPTION = "In order to change your password we'll send you a link to the change password page"
+export const CHANGE_PASSWORD_LINK_SENT = "Change password link successfuly sent! Please check your email."
 
 export const IF_YES_PROVIDE_DETAILS_BELOW = "If yes, please provide extra details below"
 export const IF_XXX_PROVIDE_DETAILS_BELOW = "If XXX, please provide extra details below"

@@ -43,7 +43,6 @@ function * addMemberToProject (action) {
     yield put({
       type: actions.MEMBER_SET_STATE,
       payload: {
-        ...defaultState,
         currentMember: result
       }
     })
