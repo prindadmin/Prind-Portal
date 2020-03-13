@@ -8,6 +8,8 @@ import {
   faIndustry,
   faCity,
   faDownload,
+  faCaretDown,
+  faCaretUp,
 } from '@fortawesome/free-solid-svg-icons'
 
 import {
@@ -23,6 +25,8 @@ let icons = {
   unticked: faCircle,
   ticked: faCheckCircle,
   download: faDownload,
+  caretDown: faCaretDown,
+  caretUp: faCaretUp,
 }
 
 const ItemIcon = props => {

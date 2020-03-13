@@ -62,7 +62,7 @@ export class Element extends Component {
                 details.map((signature, index) => {
                   return (
                     <div key={index + "proof"}>
-                      <a href={signature.proofLink}>{strings.LINK_TO_PROOF}</a>
+                      <a href={signature.proofLink} target="_blank" rel="noopener noreferrer">{strings.LINK_TO_PROOF}</a>
                     </div>
                   )
                 })

@@ -5,6 +5,7 @@ import * as Endpoints from '../endpoints'
 let defaultState = {
   fetching: false,
   details: {},
+  history: {},
   projectInvitations: [],
   signatureRequests: [],
   projectS3Token: "",

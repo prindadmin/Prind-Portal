@@ -313,11 +313,11 @@ export class Page extends Component {
 
                 <FormGroup
                   label={strings.MEMBER_LANDLINE_PHONE_NUMBER_WORK}
-                  labelFor="landlineWorkPhone"
+                  labelFor="homePhoneNumber"
                   className="col-6"
                 >
                   <Field
-                    name="landlineWorkPhone"
+                    name="homePhoneNumber"
                     validate={[validators.maxLength32]}
                     component={FormInputs.TextInput}
                     placeholder={strings.MEMBER_LANDLINE_PHONE_NUMBER_WORK}
@@ -327,11 +327,11 @@ export class Page extends Component {
 
                 <FormGroup
                   label={strings.MEMBER_MOBILE_PHONE_NUMBER_WORK}
-                  labelFor="mobileWorkPhone"
+                  labelFor="mobilePhoneNumber"
                   className="col-6"
                 >
                   <Field
-                    name="mobileWorkPhone"
+                    name="mobilePhoneNumber"
                     validate={[validators.maxLength32]}
                     component={FormInputs.TextInput}
                     placeholder={strings.MEMBER_MOBILE_PHONE_NUMBER_WORK}
