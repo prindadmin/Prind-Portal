@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-// TODO: Implement the signature request rather than project join request
-
 import * as strings from '../../../../../../data/Strings'
 
 import {

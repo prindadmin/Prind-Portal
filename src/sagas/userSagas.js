@@ -8,6 +8,7 @@ import * as Dispatchers from '../dispatchers/user'
 let defaultState = {
   fetching: false,
   details: {},
+  history: {},
   projectInvitations: [],
   signatureRequests: [],
   projectS3Token: "",

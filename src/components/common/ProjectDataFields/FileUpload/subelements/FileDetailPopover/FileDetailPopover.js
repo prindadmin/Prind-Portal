@@ -81,7 +81,7 @@ export class Element extends Component {
               chosenFileDetails.proofLink === undefined ?
                 strings.NO_PROOF_AVAILABLE :
                 <div onClick={e => e.stopPropagation()}>
-                  <a href={chosenFileDetails.proofLink}>{strings.LINK_TO_PROOF}</a>
+                  <a href={chosenFileDetails.proofLink} target="_blank" rel="noopener noreferrer">{strings.LINK_TO_PROOF}</a>
                 </div>
             }
           </div>

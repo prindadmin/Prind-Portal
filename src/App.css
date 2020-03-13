@@ -229,6 +229,7 @@ hr {
 #header-bar .menu-container {
   display: flex;
   flex-direction: row;
+  position: relative;
 }
 
 #header-bar .menu-item {
@@ -238,6 +239,20 @@ hr {
 
 #header-bar Button {
   min-width: 300px;
+}
+
+#header-bar .request-badge {
+  background-color: red;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  color: white;
+  text-align: center;
+  font-weight:600;
+  position: absolute;
+  bottom: -3px;
+  right: -3px;
+  border: 1px solid #8b0000;
 }
 
 /* ================================== */
@@ -586,6 +601,11 @@ hr {
 }
 
 #file-upload-element .element-file-uploader {
+}
+
+#file-upload-element .element-file-uploader .detail-view-open-button {
+  margin-left: auto;
+  padding-right: 0.67em;
 }
 
 #file-upload-element .bp3-button {
@@ -1136,6 +1156,16 @@ hr {
   top: calc(75px / 2);
 }
 
+
+/* ============================================ */
+/* ====== history-tab-container element ======= */
+/* ============================================ */
+
+#history-tab-container .bp3-callout {
+  text-align: left;
+}
+
+
 /* ============================================ */
 /* ====== requests-tab-container element ====== */
 /* ============================================ */
@@ -1343,20 +1373,6 @@ hr {
 
 .project-loading-container .section-spinner {
   margin-bottom: 2em;
-}
-
-.request-badge {
-  background-color: red;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  color: white;
-  text-align: center;
-  font-weight:600;
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  border: 1px solid #8b0000;
 }
 
 

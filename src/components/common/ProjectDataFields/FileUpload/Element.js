@@ -13,6 +13,7 @@ import {
   UploaderPopOver,
 } from './subelements'
 
+import ItemIcon from '../../ItemIcon'
 
 import * as strings from '../../../../data/Strings'
 
@@ -116,7 +117,7 @@ export class Element extends Component {
 
     return (
       <div id='file-upload-element'>
-        <div className={'file-upload-element-container' + fileState} onClick={(e) => this.onElementClick()}>
+        <div className={'file-upload-element-container' + fileState}>
           <div className='element-title'>
             {elementContent.title}
           </div>
@@ -160,6 +161,13 @@ export class Element extends Component {
                     disabled={!this.state.hasChosenFile}
                     text={strings.BUTTON_UPLOAD_FILE}
                   />
+                </div>
+                <div className='detail-view-open-button' onClick={(e) => this.onElementClick()}>
+                  {
+                    detailedView ?
+                    <ItemIcon size='2x' type='caretUp' /> :
+                    <ItemIcon size='2x' type='caretDown' />
+                  }
                 </div>
               </div>
 

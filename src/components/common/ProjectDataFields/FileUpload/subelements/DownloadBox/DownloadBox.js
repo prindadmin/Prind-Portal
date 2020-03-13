@@ -21,6 +21,7 @@ export class Element extends Component {
   }
 
 
+  // TODO: Make this download with the correct name
   downloadResolve = (url) => {
     const { onDownloadSuccess } = this.props
     window.open(url, "_blank")
