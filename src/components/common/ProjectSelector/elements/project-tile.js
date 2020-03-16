@@ -5,8 +5,6 @@ import ItemIcon from '../../ItemIcon'
 
 import * as strings from '../../../../data/Strings'
 
-// TODO: FUTURE: Tidy site tiles
-
 const ProjectTile = props => {
   const { project, selected } = props
   let className = 'site-select-tile'

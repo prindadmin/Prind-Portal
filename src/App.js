@@ -41,6 +41,7 @@ import ProfilePage from './components/ProfilePage'
 import Foundations from './components/FoundationsPage'
 import Error404 from './components/Error404'
 import TestPage from './components/TestPage'
+import ConfirmEmailPage from './components/ConfirmEmailPage'
 
 // TODO: Add functionality below 800px width to not show the site
 // TODO: make mobile friendly in future
@@ -71,6 +72,7 @@ class App extends Component{
             <Route path='/SignUp' component={SignUp} />
             <Route path='/forgot-password' component={ForgotPassword} />
             <Route path='/change-password' component={ChangePassword} />
+            <Route path='/confirm-email' component={ConfirmEmailPage} />
 
             <PrivateRoute path='/Project' component={EditProjectPage} />
             <PrivateRoute path='/Team' component={ProjectTeamPage} />
@@ -84,11 +86,8 @@ class App extends Component{
             <PrivateRoute path='/Refurbishment' component={RefurbishmentPage} />
 
             <PrivateRoute path='/NewProject' component={NewProjectPage} />
-
             <PrivateRoute path='/Profile' component={ProfilePage} />
-
             <PrivateRoute path='/TestPage' component={TestPage} />
-
             <PrivateRoute path='/Foundations' component={Foundations} />
 
             <Route path='/'

@@ -135,8 +135,6 @@ export class Element extends Component {
     const { isExpanded, showUploadHistory, filePrompt, fileState, fileDetails } = this.state
     const { elementContent, pageName, projects } = this.props
 
-    // TODO: Add expand transition to make it smooth
-
     return (
       <div id='file-upload-element' className={isExpanded ? "expanded" : "collapsed"}>
         <div className={'file-upload-element-container' + fileState}>

@@ -20,6 +20,8 @@ import * as FormInputs from '../../../../../common/formInputs'
 
 const defaultAvatar = `images/default-avatar.png`
 
+// TODO: Implement profile save buttons
+
 export class Page extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
@@ -343,27 +345,28 @@ export class Page extends Component {
                   />
                 </FormGroup>
               </div>
-
-              <div className="row button-row">
-                <div className="form-group">
-                  <div className="col-12">
-                    <Button
-                      intent={Intent.PRIMARY}
-                      type="submit"
-                      text={strings.BUTTON_SAVE_CHANGES}
-                      icon="floppy-disk"
-                      loading={this.props.submitting}
-                      disabled={this.props.pristine}
-                    />
-                    <Button
-                      intent={Intent.NONE}
-                      type="reset"
-                      text={strings.BUTTON_CANCEL}
-                      icon="reset"
-                    />
+              {/*
+                <div className="row button-row">
+                  <div className="form-group">
+                    <div className="col-12">
+                      <Button
+                        intent={Intent.PRIMARY}
+                        type="submit"
+                        text={strings.BUTTON_SAVE_CHANGES}
+                        icon="floppy-disk"
+                        loading={this.props.submitting}
+                        disabled={this.props.pristine}
+                      />
+                      <Button
+                        intent={Intent.NONE}
+                        type="reset"
+                        text={strings.BUTTON_CANCEL}
+                        icon="reset"
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
+              */}
             </form>
           </div>
         </div>
