@@ -245,17 +245,36 @@ export class Page extends Component {
         <div className="member-list row">
           {
             projects.memberList !== undefined ?
-            projects.memberList.map((memberDetails, index) => {
-              return (
-                <div key={index} className="col-md-12 col-lg-12 col-xl-6">
-                  <ContactTile
-                    memberDetails={memberDetails}
-                    onMemberRemove={this.onMemberRemove}
-                  />
-                </div>
-              )
-            }) : null
-          }
+              projects.memberList.confirmed !== undefined ?
+                projects.memberList.confirmed.map((memberDetails, index) => {
+                  return (
+                    <div key={index} className="col-md-12 col-lg-12 col-xl-6">
+                      <ContactTile
+                        memberDetails={memberDetails}
+                        onMemberRemove={this.onMemberRemove}
+                        confirmed={true}
+                      />
+                    </div>
+                  )
+                }) : null
+              : null
+            }
+            {
+              projects.memberList !== undefined ?
+                projects.memberList.invited !== undefined ?
+                  projects.memberList.invited.map((memberDetails, index) => {
+                    return (
+                      <div key={index} className="col-md-12 col-lg-12 col-xl-6">
+                        <ContactTile
+                          memberDetails={memberDetails}
+                          onMemberRemove={this.onMemberRemove}
+                          confirmed={false}
+                        />
+                      </div>
+                    )
+                  }) : null
+                : null
+            }
         </div>
 
       </div>

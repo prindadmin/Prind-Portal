@@ -15,6 +15,7 @@ export class ContactTile extends Component {
     memberDetails: PropTypes.object.isRequired,
     onMemberRemove: PropTypes.func.isRequired,
     removeMember: PropTypes.func.isRequired,
+    confirmed: PropTypes.bool.isRequired
   }
 
   constructor(props) {
@@ -96,18 +97,20 @@ export class ContactTile extends Component {
 
   render() {
 
-    const { auth, projects, memberDetails } = this.props
+    const { auth, projects, memberDetails, confirmed } = this.props
     const { avatarLink, removeMemberError, errorText } = this.state
 
     // See if the current User is the client, and can therefore remove people
-    const editableMemberList = projects.memberList.filter(member => {
+    const editableMemberList = projects.memberList.confirmed.filter(member => {
       return (
         member.username === auth.info.username && (member.roleID === 'client' || member.roleID === 'clientTeamRepresentative')
       )
     })
 
+    const isConfirmed = confirmed ? "member-confirmed" : "member-not-confirmed"
+
     return (
-        <div id='contact-tile'>
+        <div id='contact-tile' className={isConfirmed}>
           <div className='col-3'>
             <div className="text-center">
               <img src={avatarLink} className="avatar img-circle img-thumbnail" alt="avatar" />
@@ -136,6 +139,16 @@ export class ContactTile extends Component {
                 {memberDetails.roleName}
               </div>
             </div>
+
+            <div className="row">
+              <div className="col-2">
+                <b>{strings.MEMBER_STATUS + ": "}</b>
+              </div>
+              <div className="col-10">
+                { confirmed ? strings.MEMBER_IS_CONFIRMED : strings.MEMBER_ISNT_YET_CONFIRMED }
+              </div>
+            </div>
+
             {
               removeMemberError ?
               <div className="row">

@@ -21,6 +21,7 @@
   --field-element-blue: rgba(19,124,189,.15);
   --field-element-dark-blue: #106ba3;
   --field-element-dark-grey: #bcbcbc;
+  --field-element-light-green: rgba(200, 247, 197, 0.75);
   --tile-selected-green: #d2e9af;
   --profile-avatar-height: 150px;
   --avatar-padding: 4px;
@@ -454,7 +455,6 @@ hr {
 #contact-tile {
   text-align: left;
   display: flex;
-  background-color: var(--field-element-blue);
   padding: 10px;
   margin-top: 1em;
   margin-bottom: 1.5em;
@@ -489,6 +489,14 @@ hr {
 
 #contact-tile button {
   margin-top: 1em;
+}
+
+#contact-tile.member-confirmed {
+  background-color: var(--field-element-light-green);
+}
+
+#contact-tile.member-not-confirmed {
+background-color: var(--field-element-grey);
 }
 
 /* ================================== */

@@ -209,12 +209,14 @@ function * getCurrentMembers (action) {
 
     const { data: result } = yield call(Dispatchers.getCurrentMembersDispatcher, identityToken, projectID)
 
+    const memberList = result.body.members
+
     // Post-fetch update to store
     yield put({
       type: actions.PROJECT_SET_STATE,
       payload: {
         fetching: false,
-        memberList: result.body,
+        memberList,
       }
     })
   }

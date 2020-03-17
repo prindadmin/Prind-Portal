@@ -246,3 +246,6 @@ export const CREATED_PROJECT_TEXT = "You created a project called XXX on the YYY
 export const JOINED_PROJECT_TEXT = "You joined a project called XXX on the YYY"
 export const UPLOADED_DOCUMENT_TEXT = "You uploaded a document called XXX to project YYY on the ZZZ"
 export const SIGNED_DOCUMENT_TEXT = "You signed a document called XXX for project YYY on the ZZZ"
+
+export const MEMBER_IS_CONFIRMED = "Joined"
+export const MEMBER_ISNT_YET_CONFIRMED = "Invited"
