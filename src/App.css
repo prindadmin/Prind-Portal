@@ -112,10 +112,14 @@ hr {
 /* ================================ */
 
 #signup,
-#signin {
+#signin,
+#forgot-password,
+#change-password {
   margin: auto;
 }
 
+#forgot-password .auth-form,
+#change-password .auth-form,
 #signup .auth-form,
 #signin .auth-form,
 #new-project-page .auth-form {

@@ -71,7 +71,7 @@ class App extends Component{
             <Route path='/SignIn' component={SignIn} />
             <Route path='/SignUp' component={SignUp} />
             <Route path='/forgot-password' component={ForgotPassword} />
-            <Route path='/change-password' component={ChangePassword} />
+            <Route path='/reset-password' component={ChangePassword} />
             <Route path='/confirm-email' component={ConfirmEmailPage} />
 
             <PrivateRoute path='/Project' component={EditProjectPage} />

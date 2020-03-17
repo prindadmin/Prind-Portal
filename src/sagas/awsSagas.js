@@ -189,9 +189,11 @@ function * forgotPassword (action) {
 
 function * changePassword (action) {
   try {
-    const { email: username, code, password } = action.payload.values
-    //console.log(username, code, password)
-    yield call(auth.changePassword, username, code, password)
+    const { user_name, confirmation_code, password } = action.payload.values
+
+    console.log(user_name, confirmation_code, password)
+
+    yield call(auth.changePassword, user_name, confirmation_code, password)
 
     yield put({
       type: actions.AUTH_SET_STATE,
@@ -202,6 +204,7 @@ function * changePassword (action) {
     })
 
     action.payload.resolve()
+
   } catch (e) {
     yield put({
       type: actions.AUTH_SET_STATE,

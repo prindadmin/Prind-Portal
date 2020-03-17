@@ -27,6 +27,7 @@ export const LOGIN_UNSUCCESSFUL = "Login unsuccessful, please check your email a
 export const PLEASE_VERIFY_ACCOUNT = "We've sent you an email to verify your account. Please check your email inbox."
 
 export const BUTTON_SEND_CODE = "Send Code"
+export const BUTTON_RESET_LINK = "Send Reset Link"
 export const CHANGE_PASSWORD_DESCRIPTION = "In order to change your password we'll send you a link to the change password page"
 export const CHANGE_PASSWORD_LINK_SENT = "Change password link successfuly sent! Please check your email."
 

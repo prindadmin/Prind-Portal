@@ -82,7 +82,7 @@ class ForgotPassword extends Component {
             disabled={this.props.invalid}
             type='submit'
             intent='primary'
-            text={strings.BUTTON_SEND_CODE} />
+            text={strings.BUTTON_RESET_LINK} />
         </ButtonGroup>
       </form>
     )
@@ -92,7 +92,7 @@ class ForgotPassword extends Component {
     const { showSuccess } = this.state
 
     return (
-      <div className='row align-items-center justify-content-center full-height'>
+      <div id="forgot-password" className='row align-items-center justify-content-center full-height'>
         {showSuccess ? this.showSuccess() : this.renderForgotPassword()}
       </div>
     )

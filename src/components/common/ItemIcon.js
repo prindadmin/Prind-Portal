@@ -10,6 +10,7 @@ import {
   faDownload,
   faCaretDown,
   faCaretUp,
+  faLock
 } from '@fortawesome/free-solid-svg-icons'
 
 import {
@@ -27,6 +28,7 @@ let icons = {
   download: faDownload,
   caretDown: faCaretDown,
   caretUp: faCaretUp,
+  lock: faLock,
 }
 
 const ItemIcon = props => {
