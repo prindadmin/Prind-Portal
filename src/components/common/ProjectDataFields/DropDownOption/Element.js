@@ -18,16 +18,16 @@ export class Element extends Component {
     elementContent: PropTypes.shape({
       id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
-      description: PropTypes.string,
+      description: PropTypes.string.isRequired,
       editable: PropTypes.bool.isRequired,
       fieldDetails: PropTypes.shape({
         dropdownValue: PropTypes.string,
         textboxValue: PropTypes.string,
-        dropdownOptions: PropTypes.array,
+        dropDownOptions: PropTypes.array.isRequired,
         optionOpensTextBox: PropTypes.oneOfType([
           PropTypes.array,
           PropTypes.string,
-        ]),
+        ]).isRequired,
       }).isRequired,
     }),
     pageName: PropTypes.string.isRequired,
@@ -69,7 +69,7 @@ export class Element extends Component {
 
   onItemSelected = (item) => {
     this.setState({
-      dropdownValue: item,
+      dropdownValue: item.id,
     })
   }
 
@@ -123,7 +123,18 @@ export class Element extends Component {
     const { dropdownValue, textboxValue } = this.state
 
     // Check if drop down options has been provided or not
-    const dropdownOptions = fieldDetails.dropdownOptions !== undefined ? fieldDetails.dropdownOptions : []
+    const dropDownOptions = fieldDetails.dropDownOptions !== undefined ? fieldDetails.dropDownOptions : []
+
+    // re-key the roles array so the keys match those required by the drop down
+    var formattedDropDownOptions = dropDownOptions.map(element => {
+      return {
+        id: element,
+        name: element
+      };
+    });
+
+    console.log(dropDownOptions)
+    console.log(formattedDropDownOptions)
 
     return (
       <div id='drop-down-element'>
@@ -152,7 +163,7 @@ export class Element extends Component {
                 <div className='col'>
                   <Field
                     name="dropdownValue"
-                    values={dropdownOptions}
+                    values={formattedDropDownOptions}
                     component={FormInputs.SelectInput}
                     onItemSelect={this.onItemSelected}
                     placeholder={strings.NO_ITEM_CHOSEN}
