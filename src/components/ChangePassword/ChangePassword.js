@@ -18,7 +18,6 @@ import * as validators from '../../validators'
 import * as state from '../../states'
 
 // TODO: Implement strings file here
-// FIXME: This doesn't work!!!
 
 class ResetPassword extends Component {
   static propTypes = {
@@ -61,7 +60,7 @@ class ResetPassword extends Component {
     )
   }
 
-  renderresetPassword() {
+  renderResetPassword() {
     const { handleSubmit, auth } = this.props
 
     return (
@@ -121,7 +120,7 @@ class ResetPassword extends Component {
       <div id="change-password" className='row align-items-center justify-content-center full-height'>
         {auth.hasChangedPassword === state.AUTH_SUCCESS
           ? this.renderSuccess()
-          : this.renderresetPassword()}
+          : this.renderResetPassword()}
       </div>
     )
   }
