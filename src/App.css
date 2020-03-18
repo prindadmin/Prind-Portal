@@ -978,6 +978,13 @@ background-color: var(--field-element-grey);
   bottom: 0;
 }
 
+
+#current-version-container .no-foundations-id {
+  width: auto;
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+}
+
 #current-version-container .col-10,
 #current-version-container .col-2 {
   padding: 0px 5px;
@@ -1191,6 +1198,10 @@ background-color: var(--field-element-grey);
   top: calc(75px / 2);
 }
 
+#profile-tab-container .foundations-info {
+  margin: 0 auto 2em auto;
+  width: calc(100% - (2 * 15px));
+}
 
 /* ============================================ */
 /* ====== history-tab-container element ======= */

@@ -259,6 +259,16 @@ export class Page extends Component {
                 null
               }
 
+              <Callout className='foundations-info' intent='primary'>
+                <div>
+                  {
+                    initialValues.foundationsID !== null ?
+                    strings.PROFILE_DATA_IS_MANAGED_IN_FOUNDATIONS_WITH_APP :
+                    strings.PROFILE_DATA_IS_MANAGED_IN_FOUNDATIONS_NO_APP
+                  }
+                </div>
+              </Callout>
+
               <div className="row">
                 <FormGroup
                   label={strings.MEMBER_FIRST_NAME}
@@ -271,7 +281,8 @@ export class Page extends Component {
                     validate={[validators.required, validators.maxLength64]}
                     component={FormInputs.TextInput}
                     placeholder={strings.MEMBER_FIRST_NAME}
-                    disabled={initialValues.foundationsID !== null}
+                    disabled={true}
+                    //disabled={initialValues.foundationsID !== null}
                   />
                 </FormGroup>
 
@@ -286,7 +297,8 @@ export class Page extends Component {
                     validate={[validators.required, validators.maxLength64]}
                     component={FormInputs.TextInput}
                     placeholder={strings.MEMBER_LAST_NAME}
-                    disabled={initialValues.foundationsID !== null}
+                    disabled={true}
+                    //disabled={initialValues.foundationsID !== null}
                   />
                 </FormGroup>
 
@@ -327,7 +339,8 @@ export class Page extends Component {
                     validate={[validators.maxLength32]}
                     component={FormInputs.TextInput}
                     placeholder={strings.MEMBER_LANDLINE_PHONE_NUMBER_WORK}
-                    disabled={initialValues.foundationsID !== null}
+                    disabled={true}
+                    //disabled={initialValues.foundationsID !== null}
                   />
                 </FormGroup>
 
@@ -341,7 +354,8 @@ export class Page extends Component {
                     validate={[validators.maxLength32]}
                     component={FormInputs.TextInput}
                     placeholder={strings.MEMBER_MOBILE_PHONE_NUMBER_WORK}
-                    disabled={initialValues.foundationsID !== null}
+                    disabled={true}
+                    //disabled={initialValues.foundationsID !== null}
                   />
                 </FormGroup>
               </div>

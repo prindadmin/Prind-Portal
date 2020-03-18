@@ -30,15 +30,15 @@ export class Element extends Component {
       ).isRequired,
       invited: PropTypes.arrayOf(
         PropTypes.shape({
-          username: PropTypes.string.isRequired,
+          username: PropTypes.string,
           foundationsID: PropTypes.string,
           emailAddress: PropTypes.string.isRequired,
-          firstName: PropTypes.string.isRequired,
-          lastName: PropTypes.string.isRequired,
+          firstName: PropTypes.string,
+          lastName: PropTypes.string,
           roleID: PropTypes.string.isRequired,
           roleName: PropTypes.string.isRequired,
         })
-      ).isRequired,
+      ),
     }).isRequired,
     fileDetails: PropTypes.shape({
       uploadedDateTime: PropTypes.string.isRequired,
@@ -160,16 +160,22 @@ export class Element extends Component {
     const { teamMembers } = this.props
     const { searchTerm } = this.state
 
+    const filteredInvitees = teamMembers.invited.filter((item) => {
+      return (
+        item.username !== null
+      )
+    })
+
     // If the search term is blank, return all users
     if (searchTerm === "") {
-      return teamMembers.confirmed.concat(teamMembers.invited)
+      return teamMembers.confirmed.concat(filteredInvitees)
     }
 
     // If not blank, filter the members
-    return (teamMembers.confirmed.concat(teamMembers.invited)).filter((item) => {
+    return (teamMembers.confirmed.concat(filteredInvitees)).filter((item) => {
       return (
-        item.firstName.toLowerCase().startsWith(searchTerm.toLowerCase()) ||
-        item.lastName.toLowerCase().startsWith(searchTerm.toLowerCase())
+        (item.firstName.toLowerCase().startsWith(searchTerm.toLowerCase()) ||
+        item.lastName.toLowerCase().startsWith(searchTerm.toLowerCase()))
       )
     })
   }

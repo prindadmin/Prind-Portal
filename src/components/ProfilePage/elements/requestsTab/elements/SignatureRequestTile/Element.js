@@ -25,7 +25,8 @@ export class Element extends Component {
         lastName: PropTypes.string.isRequired,
       }).isRequired,
     }).isRequired,
-    respondToSignatureInvitation: PropTypes.func.isRequired,
+    rejectSignatureRequest: PropTypes.func.isRequired,
+    updateChosenProject: PropTypes.func.isRequired,
   }
 
 
@@ -69,15 +70,23 @@ export class Element extends Component {
 
   rejectSignatureRequest = () => {
 
-    const { auth, requestDetails, respondToSignatureInvitation } = this.props
+    const { auth, requestDetails, rejectSignatureRequest } = this.props
 
-    respondToSignatureInvitation(
+    rejectSignatureRequest(
       auth.info.idToken.jwtToken,
       requestDetails,
-      false,
+      this.resolveRejectRequest,
+      this.rejectRejectRequest
     )
   }
 
+  resolveRejectRequest = () => {
+    console.log("request was rejected successfully")
+  }
+
+  rejectRejectRequest = () => {
+    console.log("request was NOT rejected successfully")
+  }
 
   render() {
 

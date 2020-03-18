@@ -107,6 +107,10 @@ export class ContactTile extends Component {
       )
     })
 
+    const userName = memberDetails.firstName !== null && memberDetails.lastName !== null ?
+        memberDetails.firstName + " " + memberDetails.lastName :
+        strings.MEMBER_NOT_YET_SIGNED_UP_TO_PRIND
+
     const isConfirmed = confirmed ? "member-confirmed" : "member-not-confirmed"
 
     return (
@@ -119,7 +123,7 @@ export class ContactTile extends Component {
 
           <div className='col-9'>
             <div className='row'>
-              <h4 className='bp3-heading'>{memberDetails.firstName + " " + memberDetails.lastName}</h4>
+              <h4 className='bp3-heading'>{userName}</h4>
             </div>
 
             <div className="row">

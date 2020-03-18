@@ -8,7 +8,8 @@ import Element from './CurrentVersion'
 const mapStatetoProps = state => {
   return {
     auth: state.auth,
-    projects: state.projects
+    projects: state.projects,
+    user: state.user,
   }
 }
 
