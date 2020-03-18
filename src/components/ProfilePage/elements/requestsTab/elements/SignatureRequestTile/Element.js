@@ -31,6 +31,7 @@ export class Element extends Component {
 
 
   // TODO: Implement the history push state in all the project stage pages
+  // https://www.npmjs.com/package/react-scrollable-anchor
   goToDocument = () => {
     const { auth, requestDetails, updateChosenProject } = this.props
 

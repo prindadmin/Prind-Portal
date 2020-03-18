@@ -63,16 +63,6 @@ export const getUserDetails = ( identityToken ) => {
 }
 
 
-export const updateUserDetails = ( identityToken, userDetails ) => {
-  return {
-    type: action.USER_UPDATE_DETAILS_REQUESTED,
-    payload: {
-      identityToken,
-      userDetails,
-    }
-  }
-}
-
 
 export const getProjectInvitations = ( identityToken, resolve, reject  ) => {
   return {
@@ -140,7 +130,6 @@ const ACTION_HANDLERS = {
 
   [action.USER_S3_UPLOAD_PROJECT_FILE_TOKEN_REQUESTED]: state => ({ ...state }),
   [action.USER_GET_DETAILS_REQUESTED]: state => ({ ...state }),
-  [action.USER_UPDATE_DETAILS_REQUESTED]: state => ({ ...state }),
   [action.USER_GET_PROJECT_INVITATIONS_REQUESTED]: state => ({ ...state }),
   [action.USER_PROJECT_INVITATION_SEND_RESPONSE_REQUESTED]: state => ({ ...state }),
   [action.USER_GET_PROJECT_SIGNATURES_REQUESTED]: state => ({ ...state }),
@@ -150,7 +139,6 @@ const ACTION_HANDLERS = {
   [action.USER_S3_UPLOAD_PROJECT_FILE_TOKEN_REQUEST_SENT]: (state, action) => ({ ...state, ...action.payload }),
   [action.USER_S3_UPLOAD_USER_FILE_TOKEN_REQUEST_SENT]: (state, action) => ({ ...state, ...action.payload }),
   [action.USER_GET_DETAILS_REQUEST_SENT]: (state, action) => { return { ...state, ...action.payload }},
-  [action.USER_UPDATE_DETAILS_REQUEST_SENT]: (state, action) => ({ ...state, ...action.payload }),
   [action.USER_GET_PROJECT_INVITATIONS_REQUEST_SENT]: (state, action) => ({ ...state, ...action.payload }),
   [action.USER_PROJECT_INVITATION_SEND_RESPONSE_REQUEST_SENT]: (state, action) => ({ ...state, ...action.payload }),
   [action.USER_GET_PROJECT_SIGNATURES_REQUEST_SENT]: (state, action) => ({ ...state, ...action.payload }),
@@ -160,7 +148,6 @@ const ACTION_HANDLERS = {
   [action.USER_S3_UPLOAD_PROJECT_FILE_TOKEN_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
   [action.USER_S3_UPLOAD_USER_FILE_TOKEN_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
   [action.USER_GET_DETAILS_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
-  [action.USER_UPDATE_DETAILS_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
   [action.USER_GET_PROJECT_INVITATIONS_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
   [action.USER_PROJECT_INVITATION_SEND_RESPONSE_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
   [action.USER_GET_PROJECT_SIGNATURES_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
