@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import ReactGA from 'react-ga';
+
 import HeaderBar from '../common/HeaderBar';
 import PageChooserSection from '../layouts/PageChooserSection'
 import ProjectLoading from '../common/ProjectLoading'
@@ -34,7 +36,10 @@ export class Page extends Component {
 
   componentDidMount() {
 
-    const { projects, auth, getContent, requestS3ProjectFileUploadToken, getProjectMembers } = this.props
+    const { projects, auth, getContent, requestS3ProjectFileUploadToken, getProjectMembers, location } = this.props
+
+    // Register pageview with GA
+    ReactGA.pageview(location.pathname + location.search);
 
     if (projects.chosenProject.projectName !== strings.NO_PROJECT_SELECTED) {
       requestS3ProjectFileUploadToken(auth.info.idToken.jwtToken, projects.chosenProject.projectId, pageName)

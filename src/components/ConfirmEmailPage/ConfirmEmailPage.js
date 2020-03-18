@@ -1,5 +1,7 @@
 import { Component } from 'react'
 
+import ReactGA from 'react-ga';
+
 import * as Endpoints from '../../endpoints'
 
 import * as strings from '../../data/Strings'
@@ -34,6 +36,9 @@ class ConfirmEmailPage extends Component {
 
   componentDidMount() {
     const { location, confirmUser } = this.props
+
+    // Register pageview with GA
+    ReactGA.pageview(location.pathname + location.search);
 
     confirmUser(
       location.search,

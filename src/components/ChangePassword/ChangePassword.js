@@ -3,6 +3,8 @@ import { Field, reduxForm } from 'redux-form'
 import qs from 'stringquery'
 import PropTypes from 'prop-types'
 
+import ReactGA from 'react-ga';
+
 import {
   Label,
   Button,
@@ -27,6 +29,12 @@ class ResetPassword extends Component {
     init: PropTypes.func,
     history: PropTypes.object
   }
+
+  componentDidMount () {
+    // Register pageview with GA
+    ReactGA.pageview(this.props.location.pathname + this.props.location.search);
+  }
+
 
   resetPassword = async values => {
     const query = qs(this.props.location.search)

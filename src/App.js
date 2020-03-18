@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 
+import ReactGA from 'react-ga';
+
 import {
   HashRouter as Router,
   Route,
@@ -11,7 +13,6 @@ import {
 import { AUTH_SUCCESS } from './states'
 
 import * as Endpoints from './endpoints'
-
 import PrivateRoute from './components/PrivateRoute';
 
 /* Before sign in pages */
@@ -55,6 +56,12 @@ class App extends Component{
     this.state = {
       isLoggedIn: false
     }
+
+    ReactGA.initialize('UA-161107547-1', {
+      gaOptions: {
+        siteSpeedSampleRate: 100
+      }
+    });
 
   }
 

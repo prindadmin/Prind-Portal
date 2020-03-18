@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import ReactGA from 'react-ga';
+
 import HeaderBar from '../common/HeaderBar';
 import PageChooserSection from '../layouts/PageChooserSection'
 import ProjectLoading from '../common/ProjectLoading'
@@ -77,6 +79,12 @@ export class Page extends Component {
       signatureRequestsErrorText: "",
     }
 
+  }
+
+  componentDidMount() {
+    const { location } = this.props
+    // Register pageview with GA
+    ReactGA.pageview(location.pathname + location.search);
   }
 
   historyResolve = () => {

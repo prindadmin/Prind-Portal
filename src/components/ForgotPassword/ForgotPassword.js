@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import PropTypes from 'prop-types'
 
+import ReactGA from 'react-ga';
+
 import {
   Label,
   Button,
@@ -29,6 +31,12 @@ class ForgotPassword extends Component {
     this.state = {
       showSuccess: false
     }
+  }
+
+  componentDidMount() {
+    const { location } = this.props
+    // Register pageview with GA
+    ReactGA.pageview(location.pathname + location.search);
   }
 
   sendCode = async values => {

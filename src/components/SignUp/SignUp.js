@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 
+import ReactGA from 'react-ga';
+
 import * as Endpoints from '../../endpoints'
 
 import {
@@ -22,6 +24,13 @@ class SignUp extends Component {
   signUp = async (values) => {
     values.email = values.email.toLowerCase()
     await this.props.signUp(values)
+  }
+
+
+  componentDidMount() {
+    const { location } = this.props
+    // Register pageview with GA
+    ReactGA.pageview(location.pathname + location.search);
   }
 
   signUpForm = () => {

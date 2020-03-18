@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 
+import ReactGA from 'react-ga';
+
 import {
   FormGroup,
   Button,
@@ -46,6 +48,12 @@ export class Page extends Component {
       props.projects.chosenProject.projectId
     )
 
+  }
+
+  componentDidMount() {
+    const { location } = this.props
+    // Register pageview with GA
+    ReactGA.pageview(location.pathname + location.search);
   }
 
   componentDidUpdate(prevProps) {

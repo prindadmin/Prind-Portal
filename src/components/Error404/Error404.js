@@ -1,10 +1,16 @@
 import React, { Component } from 'react'
 
+import ReactGA from 'react-ga';
+
 import * as strings from '../../data/Strings'
 
 export class Error404 extends Component {
 
-  componentDidMount () {
+
+  componentDidMount() {
+    const { location } = this.props
+    // Register pageview with GA
+    ReactGA.pageview(location.pathname + location.search);
   }
 
 
