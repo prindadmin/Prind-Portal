@@ -54,16 +54,38 @@ class App extends Component{
   constructor() {
     super()
     this.state = {
-      isLoggedIn: false
+      isLoggedIn: false,
+      oldConsoleLog: null,
     }
 
+    // Initialise Google Analytics to log all page views
     ReactGA.initialize('UA-161107547-1', {
       gaOptions: {
         siteSpeedSampleRate: 100
       }
     });
-
   }
+
+  componentDidMount() {
+    // Turn off the logger if this is a production environment
+    process.env.REACT_APP_STAGE === "PRODUCTION" ? this.disableLogger() : this.enableLogger()
+  }
+
+  enableLogger = () => {
+      if(this.state.oldConsoleLog == null) {
+          return
+      }
+      window['console']['log'] = this.state.oldConsoleLog;
+  };
+
+  disableLogger = () => {
+      this.setState({
+        oldConsoleLog: console.log
+      })
+      window['console']['log'] = function() {};
+  }
+
+
 
   render() {
 
