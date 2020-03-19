@@ -448,8 +448,8 @@ hr {
   align-items: center;
 }
 
-#project-team-page .member-list-container .row {
-  margin-bottom: 1em;
+#project-team-page .member-list {
+  margin-top: 1em;
 }
 
 #project-team-page .member-list-container .col-md-12,
