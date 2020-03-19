@@ -22,9 +22,9 @@ export class Page extends Component {
     window.open("https://play.google.com/store/apps/details?id=com.buildingim.foundations", "_blank")
   }
 
-  // TODO: Add in the iOS application once it is launched
   iosClicked = () => {
     console.log("iosClicked")
+    window.open("https://apps.apple.com/us/app/foundations/id1499177355", "_blank")
   }
 
   getPageContent = () => {
@@ -49,7 +49,7 @@ export class Page extends Component {
             <img src={"images/Download_Android.svg"} alt="Android Logo" height="75" onClick={this.androidClicked}/>
           </div>
           <div className="col-6">
-            <img src={"images/Download_iOS_soon.png"} alt="iOS Logo" height="75" onClick={this.iosClicked} />
+            <img src={"images/Download_iOS.svg"} alt="iOS Logo" height="75" onClick={this.iosClicked} />
           </div>
         </div>
 
