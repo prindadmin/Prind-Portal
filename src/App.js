@@ -59,7 +59,7 @@ class App extends Component{
     }
 
     // Initialise Google Analytics to log all page views
-    ReactGA.initialize('UA-161107547-1', {
+    ReactGA.initialize(process.env.REACT_APP_GA_ID, {
       gaOptions: {
         siteSpeedSampleRate: 100
       }
