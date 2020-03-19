@@ -87,6 +87,10 @@ function * getUserDetails (action) {
         details: result.body,
       }
     })
+
+    if (action.payload.resolve !== undefined) {
+      action.payload.resolve()
+    }
   }
   catch (error) {
     console.error(error)
@@ -97,6 +101,10 @@ function * getUserDetails (action) {
           error,
         }
     })
+
+    if (action.payload.reject !== undefined) {
+      action.payload.reject()
+    }
   }
 }
 
@@ -221,7 +229,10 @@ function * getSignatureRequests (action) {
       }
     })
 
-    action.payload.resolve()
+    if (action.payload.resolve !== undefined) {
+      action.payload.resolve()
+    }
+
   }
   catch (error) {
     console.error(error)
@@ -233,7 +244,9 @@ function * getSignatureRequests (action) {
         }
     })
 
-    action.payload.reject()
+    if (action.payload.reject !== undefined) {
+      action.payload.reject()
+    }
   }
 }
 

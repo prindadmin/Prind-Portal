@@ -53,11 +53,13 @@ export const requestS3UserFileUploadToken = ( identityToken, fileType ) => {
 }
 
 
-export const getUserDetails = ( identityToken ) => {
+export const getUserDetails = ( identityToken, resolve, reject ) => {
   return {
     type: action.USER_GET_DETAILS_REQUESTED,
     payload: {
       identityToken,
+      resolve,
+      reject,
     }
   }
 }

@@ -14,8 +14,8 @@ const mapStatetoProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getUserDetails: (jwtToken) => {
-      dispatch(userReducer.getUserDetails(jwtToken))
+    getUserDetails: (jwtToken, resolve, reject) => {
+      dispatch(userReducer.getUserDetails(jwtToken, resolve, reject))
     },
     getProjectInvitations: (identityToken) => {
       dispatch(userReducer.getProjectInvitations(identityToken))
