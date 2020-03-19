@@ -78,6 +78,17 @@ export const changeSuccess = () => {
   }
 }
 
+export const confirmUser = ( userParameters, resolve, reject ) => {
+  return {
+    type: action.AUTH_CONFIRM_USER_REQUESTED,
+    payload: {
+      userParameters,
+      resolve,
+      reject
+    }
+  }
+}
+
 const ACTION_HANDLERS = {
   [action.AUTH_INIT]: (state, action) => { return { ...state, ...action.payload }},
   [action.AUTH_SET_STATE]: (state, action) => { return { ...state, ...action.payload }},

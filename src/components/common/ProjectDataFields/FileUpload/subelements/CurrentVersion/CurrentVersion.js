@@ -16,6 +16,7 @@ import * as strings from '../../../../../../data/Strings'
 
 export class Element extends Component {
   static propTypes = {
+    user: PropTypes.object.isRequired,
     details: PropTypes.object,
     projectID: PropTypes.string,
     pageName: PropTypes.string,
@@ -92,8 +93,10 @@ export class Element extends Component {
 
   currentVersionProvided = () => {
 
-    const { projectID, pageName, fieldID, details } = this.props
+    const { projectID, pageName, fieldID, details, user } = this.props
     const { fetchError, errorText } = this.state
+
+    const noFoundationsID = user.details.foundationsID === undefined || user.details.foundationsID === null
 
     return (
       <React.Fragment>
@@ -150,10 +153,22 @@ export class Element extends Component {
               <Button
                 intent={Intent.PRIMARY}
                 onClick={(e) => this.sendSelfSignRequest(e)}
-                disabled={this.state.fileIsSelfSigned || !this.props.editable}
+                disabled={this.state.fileIsSelfSigned || !this.props.editable || noFoundationsID}
                 text={strings.BUTTON_SELF_SIGN_FILE}
               />
             </div>
+
+            {
+              noFoundationsID ?
+                <div className='row button-row'>
+                  <Callout className='no-foundations-id' intent='danger'>
+                    <div>
+                      { strings.CANNOT_SIGN_WITHOUT_FOUNDATIONS_ID }
+                    </div>
+                  </Callout>
+                </div> :
+                null
+            }
 
             <div className='row section-margin'>
               <SignatureHistory

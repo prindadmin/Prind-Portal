@@ -1,6 +1,8 @@
 
 export const ERROR_404_MESSAGE = "Error 404: This resource was not found"
 
+export const ERROR_CONFIRMING_USER = "There was an error confirming your email address.  Please check that the link has not expired and try again."
+
 export const YES = "Yes"
 export const NO = "No"
 
@@ -25,6 +27,7 @@ export const LOGIN_UNSUCCESSFUL = "Login unsuccessful, please check your email a
 export const PLEASE_VERIFY_ACCOUNT = "We've sent you an email to verify your account. Please check your email inbox."
 
 export const BUTTON_SEND_CODE = "Send Code"
+export const BUTTON_RESET_LINK = "Send Reset Link"
 export const CHANGE_PASSWORD_DESCRIPTION = "In order to change your password we'll send you a link to the change password page"
 export const CHANGE_PASSWORD_LINK_SENT = "Change password link successfuly sent! Please check your email."
 
@@ -244,3 +247,11 @@ export const CREATED_PROJECT_TEXT = "You created a project called XXX on the YYY
 export const JOINED_PROJECT_TEXT = "You joined a project called XXX on the YYY"
 export const UPLOADED_DOCUMENT_TEXT = "You uploaded a document called XXX to project YYY on the ZZZ"
 export const SIGNED_DOCUMENT_TEXT = "You signed a document called XXX for project YYY on the ZZZ"
+
+export const MEMBER_IS_CONFIRMED = "Joined"
+export const MEMBER_ISNT_YET_CONFIRMED = "Invited"
+export const MEMBER_NOT_YET_SIGNED_UP_TO_PRIND = "Awaiting Sign Up"
+
+export const PROFILE_DATA_IS_MANAGED_IN_FOUNDATIONS_NO_APP = "Profile data is managed in the Foundations app. Please download the Foundations app by clicking the red bar at the top of the screen."
+export const PROFILE_DATA_IS_MANAGED_IN_FOUNDATIONS_WITH_APP = "Profile data is managed in the Foundations app. Please open the Foundations app to change your profile details."
+export const CANNOT_SIGN_WITHOUT_FOUNDATIONS_ID = "You cannot sign documents without a Foundations ID"

@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import PropTypes from 'prop-types'
 
+import ReactGA from 'react-ga';
+
 import {
   Label,
   Button,
@@ -29,6 +31,12 @@ class ForgotPassword extends Component {
     this.state = {
       showSuccess: false
     }
+  }
+
+  componentDidMount() {
+    const { location } = this.props
+    // Register pageview with GA
+    ReactGA.pageview(location.pathname + location.search);
   }
 
   sendCode = async values => {
@@ -82,7 +90,7 @@ class ForgotPassword extends Component {
             disabled={this.props.invalid}
             type='submit'
             intent='primary'
-            text={strings.BUTTON_SEND_CODE} />
+            text={strings.BUTTON_RESET_LINK} />
         </ButtonGroup>
       </form>
     )
@@ -92,7 +100,7 @@ class ForgotPassword extends Component {
     const { showSuccess } = this.state
 
     return (
-      <div className='row align-items-center justify-content-center full-height'>
+      <div id="forgot-password" className='row align-items-center justify-content-center full-height'>
         {showSuccess ? this.showSuccess() : this.renderForgotPassword()}
       </div>
     )

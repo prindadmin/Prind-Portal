@@ -2,7 +2,7 @@ import * as auth from 'aws-cognito-promises'
 
 import { call, put, takeLatest } from 'redux-saga/effects'
 
-import { register, changePasswordAccount } from '../dispatchers/aws'
+import { register, changePasswordAccount, confirmUserDispatcher } from '../dispatchers/aws'
 import * as actions from '../actions'
 import * as states from '../states'
 
@@ -189,9 +189,11 @@ function * forgotPassword (action) {
 
 function * changePassword (action) {
   try {
-    const { email: username, code, password } = action.payload.values
-    console.log(username, code, password)
-    yield call(auth.changePassword, username, code, password)
+    const { user_name, confirmation_code, password } = action.payload.values
+
+    console.log(user_name, confirmation_code, password)
+
+    yield call(auth.changePassword, user_name, confirmation_code, password)
 
     yield put({
       type: actions.AUTH_SET_STATE,
@@ -202,6 +204,7 @@ function * changePassword (action) {
     })
 
     action.payload.resolve()
+
   } catch (e) {
     yield put({
       type: actions.AUTH_SET_STATE,
@@ -239,6 +242,50 @@ function * completeNewPassword (action) {
   }
 }
 
+function * confirmUser (action) {
+
+  const { userParameters } = action.payload
+
+  try {
+
+    // pre-fetch update
+    yield put({
+      type: actions.AUTH_CONFIRM_USER_REQUEST_SENT,
+      payload: {
+        fetching: true,
+      }
+    })
+
+    const { data: result } = yield call(confirmUserDispatcher, userParameters)
+
+    // post-fetch update
+    yield put({
+      type: actions.AUTH_SET_STATE,
+      payload: {
+        fetching: false,
+      }
+    })
+
+    if (action.payload.resolve !== undefined) {
+      action.payload.resolve()
+    }
+
+  } catch (error) {
+    console.error(error)
+    yield put({
+      type: actions.AUTH_CONFIRM_USER_REQUEST_FAILED,
+        payload: {
+          ...defaultState,
+          error
+        }
+    })
+
+    if (action.payload.reject !== undefined) {
+      action.payload.reject()
+    }
+  }
+}
+
 export default function * sagas () {
   yield takeLatest(actions.AUTH_INIT, init)
   yield takeLatest(actions.AUTH_GET_USER, getUser)
@@ -248,4 +295,5 @@ export default function * sagas () {
   yield takeLatest(actions.AUTH_FORGOT_PASSWORD, forgotPassword)
   yield takeLatest(actions.AUTH_CHANGE_PASSWORD, changePassword)
   yield takeLatest(actions.AUTH_COMPLETE_NEW_PASSWORD, completeNewPassword)
+  yield takeLatest(actions.AUTH_CONFIRM_USER_REQUESTED, confirmUser)
 }

@@ -8,9 +8,17 @@ import NoFoundationsIDBanner from '../NoFoundationsIDBanner'
 export class HeaderBar extends Component {
   static propTypes = {
     menuItems: PropTypes.array,
+    getUserDetails: PropTypes.func.isRequired,
   }
 
   componentDidMount() {
+
+    const { getUserDetails, auth } = this.props
+
+    // When the header bar is loaded, fetch the user details
+    getUserDetails(
+      auth.info.idToken.jwtToken
+    )
   }
 
   getMenu = () => {

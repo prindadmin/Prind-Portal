@@ -3,6 +3,8 @@ import { Field, reduxForm } from 'redux-form'
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types'
 
+import ReactGA from 'react-ga';
+
 import * as Endpoints from '../../endpoints'
 
 import {
@@ -29,6 +31,12 @@ class SignIn extends Component {
   signIn = async values => {
     values.email = values.email.toLowerCase()
     await this.props.signIn(values)
+  }
+
+  componentDidMount() {
+    const { location } = this.props
+    // Register pageview with GA
+    ReactGA.pageview(location.pathname + location.search);
   }
 
   componentDidUpdate() {

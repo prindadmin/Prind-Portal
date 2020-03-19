@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-//import * as userReducer from '../../../../../../reducers/userReducer'
+import * as foundationsReducer from '../../../../../../reducers/foundationsReducer'
 import * as projectsReducer from '../../../../../../reducers/projectsReducer'
 
 import Element from './Element'
@@ -14,9 +14,8 @@ const mapStatetoProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    respondToSignatureInvitation: (identityToken, projectID, response) => {
-      //dispatch(userReducer.respondToSignatureInvitation(identityToken, projectID, response))
-      console.log("respondToSignatureInvitation not yet implemented")
+    rejectSignatureRequest: (identityToken, requestDetails, resolve, reject) => {
+      dispatch(foundationsReducer.rejectSignatureRequest(identityToken, requestDetails, resolve, reject))
     },
     updateChosenProject: (jwtToken, project, resolve, reject) => {
       dispatch(projectsReducer.updateChosenProject(jwtToken, project, resolve, reject))

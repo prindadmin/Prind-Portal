@@ -21,6 +21,7 @@
   --field-element-blue: rgba(19,124,189,.15);
   --field-element-dark-blue: #106ba3;
   --field-element-dark-grey: #bcbcbc;
+  --field-element-light-green: rgba(200, 247, 197, 0.75);
   --tile-selected-green: #d2e9af;
   --profile-avatar-height: 150px;
   --avatar-padding: 4px;
@@ -111,10 +112,14 @@ hr {
 /* ================================ */
 
 #signup,
-#signin {
+#signin,
+#forgot-password,
+#change-password {
   margin: auto;
 }
 
+#forgot-password .auth-form,
+#change-password .auth-form,
 #signup .auth-form,
 #signin .auth-form,
 #new-project-page .auth-form {
@@ -454,7 +459,6 @@ hr {
 #contact-tile {
   text-align: left;
   display: flex;
-  background-color: var(--field-element-blue);
   padding: 10px;
   margin-top: 1em;
   margin-bottom: 1.5em;
@@ -489,6 +493,14 @@ hr {
 
 #contact-tile button {
   margin-top: 1em;
+}
+
+#contact-tile.member-confirmed {
+  background-color: var(--field-element-light-green);
+}
+
+#contact-tile.member-not-confirmed {
+background-color: var(--field-element-grey);
 }
 
 /* ================================== */
@@ -966,6 +978,13 @@ hr {
   bottom: 0;
 }
 
+
+#current-version-container .no-foundations-id {
+  width: auto;
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+}
+
 #current-version-container .col-10,
 #current-version-container .col-2 {
   padding: 0px 5px;
@@ -1179,6 +1198,10 @@ hr {
   top: calc(75px / 2);
 }
 
+#profile-tab-container .foundations-info {
+  margin: 0 auto 2em auto;
+  width: calc(100% - (2 * 15px));
+}
 
 /* ============================================ */
 /* ====== history-tab-container element ======= */
@@ -1186,6 +1209,7 @@ hr {
 
 #history-tab-container .bp3-callout {
   text-align: left;
+  margin-bottom: 1em;
 }
 
 

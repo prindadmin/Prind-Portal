@@ -1,9 +1,11 @@
 import axios from 'axios'
 import https from 'https'
 
-// TODO: Implement API endpoint
+export default function(identityToken, requestDetails) {
 
-export default function(identityToken, userDetails) {
+  const body = {
+    accepted: false,
+  }
 
   return new Promise((resolve, reject) => {
 
@@ -17,17 +19,9 @@ export default function(identityToken, userDetails) {
       }
     });
 
-    instance.post(`${process.env.REACT_APP_API_LOCAL_ENDPOINT}/user/profile`, userDetails)
+    instance.post(`${process.env.REACT_APP_API_ENDPOINT}/document/${requestDetails.projectID}/${requestDetails.pageName}/${requestDetails.fieldID}/sign-on-foundations`, body)
     .then(res => {
-      console.log(res)
-
-      if (res.data.statusCode === 200 || res.data.statusCode === 201) {
-        resolve(res)
-        return
-      }
-
-      console.error(res)
-      reject(res)
+      resolve(res)
     })
     .catch((error) => {
       console.error(error)

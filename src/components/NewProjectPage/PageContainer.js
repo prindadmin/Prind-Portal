@@ -1,8 +1,6 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-// TODO: Add resolver and rejector to updateChosenProject
-
 import * as reducer from '../../reducers/projectsReducer'
 
 import PageComponent from './Page'
@@ -19,9 +17,6 @@ const mapDispatchToProps = dispatch => {
   return {
     createProject: (jwtToken, values, resolve, reject) => {
       dispatch(reducer.createProject(jwtToken, values, resolve, reject))
-    },
-    setCurrentProject: (jwtToken, values) => {
-      dispatch(reducer.updateChosenProject(jwtToken, values))
     },
     resetChosenProject: () => {
       dispatch(reducer.resetChosenProject())

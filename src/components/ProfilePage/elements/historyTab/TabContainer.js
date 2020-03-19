@@ -18,9 +18,6 @@ const mapDispatchToProps = dispatch => {
     getUserDetails: (jwtToken) => {
       dispatch(userReducer.getUserDetails(jwtToken))
     },
-    updateUserDetails: (jwtToken, userDetails) => {
-      dispatch(userReducer.updateUserDetails(jwtToken, userDetails))
-    },
     requestS3UserFileUploadToken: (jwtToken, fileType) => {
       dispatch(userReducer.requestS3UserFileUploadToken(jwtToken, fileType))
     }

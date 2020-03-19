@@ -23,14 +23,31 @@ export const selfSignFile = ( identityToken, projectID, pageName, fieldID ) => {
   }
 }
 
+export const rejectSignatureRequest = ( identityToken, requestDetails, resolve, reject ) => {
+  return {
+    type: action.FOUNDATIONS_REJECT_SIGNATURE_REQUEST_REQUESTED,
+    payload: {
+      identityToken,
+      requestDetails,
+      resolve,
+      reject,
+    }
+  }
+}
+
 const ACTION_HANDLERS = {
 
   [action.FOUNDATIONS_INIT]: (state, action) => { return { ...state, ...action.payload }},
   [action.FOUNDATIONS_SET_STATE]: (state, action) => { return { ...state, ...action.payload }},
 
   [action.FOUNDATIONS_SELF_SIGN_FILE_REQUESTED]: state => ({ ...state }),
+  [action.FOUNDATIONS_REJECT_SIGNATURE_REQUEST_REQUESTED]: state => ({ ...state }),
+
+  [action.FOUNDATIONS_SELF_SIGN_FILE_REQUEST_SENT]: (state, action) => ({ ...state, ...action.payload }),
+  [action.FOUNDATIONS_REJECT_SIGNATURE_REQUEST_REQUEST_SENT]: (state, action) => ({ ...state, ...action.payload }),
 
   [action.FOUNDATIONS_SELF_SIGN_FILE_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
+  [action.FOUNDATIONS_REJECT_SIGNATURE_REQUEST_REQUEST_FAILED]: (state, action) => ({ ...state, ...action.payload }),
 }
 
 

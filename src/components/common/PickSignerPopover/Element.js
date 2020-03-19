@@ -16,17 +16,30 @@ import * as strings from '../../../data/Strings'
 
 export class Element extends Component {
   static propTypes = {
-    teamMembers: PropTypes.arrayOf(
-      PropTypes.shape({
-        username: PropTypes.string.isRequired,
-        foundationsID: PropTypes.string,
-        emailAddress: PropTypes.string.isRequired,
-        firstName: PropTypes.string.isRequired,
-        lastName: PropTypes.string.isRequired,
-        roleID: PropTypes.string.isRequired,
-        roleName: PropTypes.string.isRequired,
-      })
-    ).isRequired,
+    teamMembers: PropTypes.shape({
+      confirmed: PropTypes.arrayOf(
+        PropTypes.shape({
+          username: PropTypes.string.isRequired,
+          foundationsID: PropTypes.string,
+          emailAddress: PropTypes.string.isRequired,
+          firstName: PropTypes.string.isRequired,
+          lastName: PropTypes.string.isRequired,
+          roleID: PropTypes.string.isRequired,
+          roleName: PropTypes.string.isRequired,
+        })
+      ).isRequired,
+      invited: PropTypes.arrayOf(
+        PropTypes.shape({
+          username: PropTypes.string,
+          foundationsID: PropTypes.string,
+          emailAddress: PropTypes.string.isRequired,
+          firstName: PropTypes.string,
+          lastName: PropTypes.string,
+          roleID: PropTypes.string.isRequired,
+          roleName: PropTypes.string.isRequired,
+        })
+      ),
+    }).isRequired,
     fileDetails: PropTypes.shape({
       uploadedDateTime: PropTypes.string.isRequired,
       hash: PropTypes.string.isRequired,
@@ -142,19 +155,36 @@ export class Element extends Component {
     )
   }
 
-
-  getTiles = () => {
+  getFilteredMembers = () => {
 
     const { teamMembers } = this.props
     const { searchTerm } = this.state
 
-    const filteredMembers = searchTerm !== "" ?
-      teamMembers.filter((item) => {
-        return (
-          item.firstName.toLowerCase().startsWith(searchTerm.toLowerCase()) ||
-          item.lastName.toLowerCase().startsWith(searchTerm.toLowerCase())
-        )
-      }) : teamMembers
+    const filteredInvitees = teamMembers.invited.filter((item) => {
+      return (
+        item.username !== null
+      )
+    })
+
+    // If the search term is blank, return all users
+    if (searchTerm === "") {
+      return teamMembers.confirmed.concat(filteredInvitees)
+    }
+
+    // If not blank, filter the members
+    return (teamMembers.confirmed.concat(filteredInvitees)).filter((item) => {
+      return (
+        (item.firstName.toLowerCase().startsWith(searchTerm.toLowerCase()) ||
+        item.lastName.toLowerCase().startsWith(searchTerm.toLowerCase()))
+      )
+    })
+  }
+
+
+
+  getTiles = () => {
+
+    const filteredMembers = this.getFilteredMembers()
 
     return(
       <div className="member-tile-container">

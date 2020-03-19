@@ -16,11 +16,11 @@ const DocumentUploadTile = props => {
   const displayText = strings.UPLOADED_DOCUMENT_TEXT
     .replace("XXX", details.filename)
     .replace("YYY", details.projectName)
-    .replace("ZZZ", new Date(parseInt(details.dateTime) * 1000).toLocaleDateString('en-GB', options))
+    .replace("ZZZ", new Date(details.dateTime).toLocaleDateString('en-GB', options))
 
 
   return (
-    <Callout intent={Intent.NONE} icon='folder-new' title={strings.TILE_DOCUMENT_UPLOADED}>
+    <Callout intent={Intent.DANGER} icon='folder-new' title={strings.TILE_DOCUMENT_UPLOADED}>
       { displayText }
     </Callout>
   )

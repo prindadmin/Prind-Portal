@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import ReactGA from 'react-ga';
+
 import HeaderBar from '../common/HeaderBar';
 import PageChooserSection from '../layouts/PageChooserSection'
 import Footer from '../common/footer'
@@ -7,6 +9,13 @@ import Footer from '../common/footer'
 import * as strings from '../../data/Strings'
 
 export class Page extends Component {
+
+
+  componentDidMount() {
+    const { location } = this.props
+    // Register pageview with GA
+    ReactGA.pageview(location.pathname + location.search);
+  }
 
   androidClicked = () => {
     console.log("androidClicked")
