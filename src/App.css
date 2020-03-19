@@ -448,6 +448,22 @@ hr {
   align-items: center;
 }
 
+#project-team-page .member-list-container .row {
+  margin-bottom: 1em;
+}
+
+#project-team-page .member-list-container .col-md-12,
+#project-team-page .member-list-container .col-lg-12,
+#project-team-page .member-list-container .col-xl-6 {
+  margin-bottom: 2em;
+}
+
+#project-team-page .member-list-container .bp3-callout {
+  text-align: left;
+  height: 100%;
+}
+
+
 #project-team-page .member-list {
   width: 100%;
 }
@@ -460,10 +476,9 @@ hr {
   text-align: left;
   display: flex;
   padding: 10px;
-  margin-top: 1em;
-  margin-bottom: 1.5em;
   border-radius: 0.5em;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+  height: 100%;
 }
 
 
@@ -1207,9 +1222,15 @@ background-color: var(--field-element-grey);
 /* ====== history-tab-container element ======= */
 /* ============================================ */
 
+#history-tab-container .col-md-12,
+#history-tab-container .col-lg-6,
+#history-tab-container .col-xl-4 {
+  margin-bottom: 1em;
+}
+
 #history-tab-container .bp3-callout {
   text-align: left;
-  margin-bottom: 1em;
+  height: 100%;
 }
 
 

@@ -55,7 +55,7 @@ export class Element extends Component {
       )
     } else {
       return(
-        <a onClick={e => this.openProof(e)} href={proofLink}>{strings.LINK_TO_PROOF}</a>
+        <a target="_blank" rel="noopener noreferrer" onClick={e => this.openProof(e)} href={proofLink}>{strings.LINK_TO_PROOF}</a>
       )
     }
   }

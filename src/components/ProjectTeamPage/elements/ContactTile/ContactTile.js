@@ -103,7 +103,9 @@ export class ContactTile extends Component {
     // See if the current User is the client, and can therefore remove people
     const editableMemberList = projects.memberList.confirmed.filter(member => {
       return (
-        member.username === auth.info.username && (member.roleID === 'client' || member.roleID === 'clientTeamRepresentative')
+        member.username === auth.info.username &&
+        (member.roleID === 'client' || member.roleID === 'clientTeamRepresentative' || member.roleID === 'creator') &&
+        memberDetails.username !== member.username
       )
     })
 

@@ -18,7 +18,17 @@ export class HeaderBar extends Component {
     // When the header bar is loaded, fetch the user details
     getUserDetails(
       auth.info.idToken.jwtToken
+      this.resolveUserDetails,
+      this.rejectUserDetails,
     )
+  }
+
+  resolveUserDetails = () => {
+    console.log("User Details fetched successfully")
+  }
+
+  rejectUserDetails = () => {
+    console.log("User Details NOT fetched successfully")
   }
 
   getMenu = () => {

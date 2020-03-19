@@ -16,8 +16,8 @@ const mapStatetoProps = state => {
 // This defines all the actions that can be fetched from the reducer
 const mapDispatchToProps = dispatch => {
   return {
-    getUserDetails: (jwtToken) => {
-      dispatch(userReducer.getUserDetails(jwtToken))
+    getUserDetails: (jwtToken, resolve, reject) => {
+      dispatch(userReducer.getUserDetails(jwtToken, resolve, reject))
     }
   }
 }
