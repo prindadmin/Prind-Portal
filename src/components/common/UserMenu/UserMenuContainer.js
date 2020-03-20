@@ -15,9 +15,6 @@ const mapStatetoProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    init: () => {
-      dispatch(awsReducer.init())
-    },
     signOut: () => {
       dispatch(awsReducer.signOut())
     },

@@ -17,24 +17,29 @@ class UserMenu extends Component {
     user: PropTypes.object.isRequired,
     getUserProjectInvitations: PropTypes.func.isRequired,
     getUserSignatureRequests: PropTypes.func.isRequired,
+    signOut: PropTypes.func.isRequired,
   }
 
-  constructor(props) {
-    super()
-    const { auth, getUserProjectInvitations, getUserSignatureRequests } = props
+  componentDidMount() {
 
+    // This next part fetches all the invitations and requests so they can be
+    // counted and a badge displayed on the user menu if more than 0
+
+    const { auth, getUserProjectInvitations, getUserSignatureRequests } = this.props
+
+    // Get the user project invitations
     getUserProjectInvitations(
       auth.info.idToken.jwtToken,
       this.projectRequestsResolve,
       this.projectRequestsReject,
     )
 
+    // Get the user signature requests
     getUserSignatureRequests(
       auth.info.idToken.jwtToken,
       this.signatureRequestsResolve,
       this.signatureRequestsReject,
     )
-
   }
 
   projectRequestsResolve = () => {

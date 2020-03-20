@@ -4,8 +4,6 @@ import ReactGA from 'react-ga';
 
 import * as Endpoints from '../../endpoints'
 
-import * as strings from '../../data/Strings'
-
 class ConfirmEmailPage extends Component {
 
   constructor(props) {
