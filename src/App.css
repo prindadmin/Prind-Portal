@@ -1,11 +1,30 @@
 /* Grid system */
 @import "~bootstrap/dist/css/bootstrap-grid.min.css";
 /* UI library */
+@import "~normalize.css";
 @import "~@blueprintjs/core/lib/css/blueprint.css";
+@import "~@blueprintjs/icons/lib/css/blueprint-icons.css";
+@import "~@blueprintjs/select/lib/css/blueprint-select.css";
+@import "~@blueprintjs/datetime/lib/css/blueprint-datetime.css";
 
 :root {
   --footer-height: 50px;
   --header-height: 75px;
+  --pop-up-padding: 20px;
+  --heading-text-color: #000;
+  --sidebar-text-color: #106ba3;
+  --pop-up-project-tile-margin: 5px;
+  --field-element-red: #ffcccb;
+  --field-element-yellow: #fffcbb;
+  --field-element-green: #d2e9af;
+  --field-element-grey: #ededed;
+  --field-element-blue: rgba(19,124,189,.15);
+  --field-element-dark-blue: #106ba3;
+  --field-element-dark-grey: #bcbcbc;
+  --field-element-light-green: rgba(200, 247, 197, 0.75);
+  --tile-selected-green: #d2e9af;
+  --profile-avatar-height: 150px;
+  --avatar-padding: 4px;
 }
 
 
@@ -43,11 +62,88 @@ hr {
     margin-top: 20px;
     margin-bottom: 40px;
     overflow: hidden;
-    border-style: inset;
+    border-style: solid;
     border-width: 1px;
-    border-color: #BBB;
-    width: 80%;
+    border-color: #ccc;
+    width: 90%;
 }
+
+
+.content-with-sidebar {
+  display: flex;
+  flex-direction: row;
+  margin: auto 0px;
+}
+
+
+.create-custom-field-button-container {
+  margin-bottom: 2em;
+}
+
+.create-custom-field-button-container button {
+  width: 400px;
+}
+
+.horizontal-line {
+  border-top: 1px solid #999;
+  width: 80%;
+  margin: 1em auto;
+}
+
+.bp3-tabs {
+  width: 100%;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.bp3-button {
+  text-align: center;
+}
+
+.horizontal-flex {
+  display: flex;
+  flex-direction: row;
+}
+
+/* ================================ */
+/* ======== sign-in section ======= */
+/* ================================ */
+
+#signup,
+#signin,
+#forgot-password,
+#change-password {
+  margin: auto;
+}
+
+#forgot-password .auth-form,
+#change-password .auth-form,
+#signup .auth-form,
+#signin .auth-form,
+#new-project-page .auth-form {
+    width: 400px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+#signup .auth-form label.bp3-label,
+#signin .auth-form label.bp3-label {
+    margin-bottom: 20px;
+}
+
+#signup .auth-form label.bp3-label:last-of-type,
+#signin .auth-form label.bp3-label:last-of-type {
+    margin-bottom: 50px;
+}
+
+#signup small,
+#signin small,
+#new-project-page small {
+  position: static !important;
+}
+
 
 /* ================================ */
 /* ======== sidebar section ======= */
@@ -60,9 +156,20 @@ hr {
   padding: 0 0 10px 0;
 }
 
-.content-section {
+.page-content-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   overflow-x: hidden;
   overflow-y: scroll;
+  height: calc(100vh - var(--header-height) - var(--footer-height));
+}
+
+.page-content {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 90%;
 }
 
 .sidebar h2 {
@@ -81,13 +188,17 @@ hr {
   height: var(--header-height);
   background-color: #000;
   margin: 0;
+  padding: 15px;
+}
+
+.App-header .row {
+  margin: 0;
 }
 
 #header-bar .header-content {
   display: flex;
   align-items: center;
   width: 100%;
-  max-width: 1140px;
   margin: auto;
 }
 
@@ -95,6 +206,7 @@ hr {
   color: white;
   float: left;
   margin-left: 20px;
+  margin-right: 30px;
   text-align: left;
 }
 
@@ -110,20 +222,42 @@ hr {
 }
 
 #header-bar .nav-links {
-  color: red;
   float: right;
   margin-left: auto;
   text-align: right;
 }
 
+#header-bar .nav-links svg {
+  color: white;
+}
+
 #header-bar .menu-container {
   display: flex;
   flex-direction: row;
+  position: relative;
 }
 
 #header-bar .menu-item {
   color: white;
   margin-left: 20px;
+}
+
+#header-bar Button {
+  min-width: 300px;
+}
+
+#header-bar .request-badge {
+  background-color: red;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  color: white;
+  text-align: center;
+  font-weight:600;
+  position: absolute;
+  bottom: -3px;
+  right: -3px;
+  border: 1px solid #8b0000;
 }
 
 /* ================================== */
@@ -136,61 +270,819 @@ hr {
 }
 
 /* ================================== */
-/* ========= inception page ========= */
+/* ========== welcome page ========== */
 /* ================================== */
 
-#generic-page {
+#welcome-page {
+
 }
 
-#generic-page .page-title h1 {
-  font-size: calc(20px + ((50 - 20) * (100vw - 300px) / (1600 - 300)));
-  margin-bottom: 0.3em;
+#welcome-page .page-content Button {
+  margin-top: 2em;
 }
 
-#generic-page .page-title {
-  margin-bottom: 40px;
+/* ================================ */
+/* ======= New Project Page ======= */
+/* ================================ */
+
+#new-project-page {
 }
 
-
-#generic-page .form h2 {
-  margin-bottom: 0;
+#new-project-page .header-section {
+  margin: 2em 0 0 0;
 }
 
-#generic-page .field-container {
+#new-project-page label.bp3-label {
+    margin-bottom: 0.5em;
+    text-align: left;
+    font-weight: bold;
+}
+
+#new-project-page .bp3-input-group {
+    margin-bottom: 0.33em;
+}
+
+#new-project-page .bp3-form-group {
+    margin-bottom: 2em;
+}
+
+#new-project-page textarea {
+    width: 100%;
+    min-height: 150px;
+}
+
+#new-project-page .last {
+    margin-bottom: 3em;
+}
+
+#new-project-page .bp3-form-content {
+  text-align: left;
+}
+
+#new-project-page .bp3-button-group {
+  margin-bottom: 10px;
+}
+
+#new-project-page .form-container {
   width: 80%;
-  min-width: 300px;
+  max-width: 430px;
 }
 
-#generic-page .field {
+#new-project-page .project-form {
+    width: 100%;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+/* ======================================== */
+/* === project-creation popover element === */
+/* ======================================== */
+
+#project-creation-popover {
+  height: 100%;
   width: 100%;
 }
 
-#generic-page .button {
-  min-width: 130px;
+#project-creation-popover .project-creation-popover-container {
+  height: calc(100% - 2 * var(--pop-up-padding));
+  min-height: 450px;
+  margin: var(--pop-up-padding);
 }
 
-#generic-page .col-margin {
-  margin-top: 20px;
+#project-creation-popover #popup-box {
+  height: auto;
+  bottom: auto;
+  background-color: var(--field-element-grey)
 }
 
-#generic-page .spinner-section {
-  margin-top: 40px;
+#project-creation-popover .project-creation-popover-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
-#generic-page .result-section {
-  margin-top: 40px;
+#project-creation-popover .bp3-spinner {
+  margin-top: 3em;
 }
 
-#generic-page .error-section {
-  margin-top: 40px;
+#project-creation-popover .element-description {
+  max-width: 600px;
+  text-align: center;
 }
 
-#generic-page .hash-section span {
-  word-wrap:break-word;
+/* ================================== */
+/* ======= project team page ======== */
+/* ================================== */
+
+#project-team-page {
+
 }
 
-#generic-page .result-details span {
-  word-wrap:break-word;
+#project-team-page .add-member-form {
+  max-width: 430px;
+  margin: auto;
+}
+
+#project-team-page .header-section {
+  margin: 2em 0 2em 0;
+}
+
+#project-team-page label.bp3-label {
+    margin-bottom: 0.5em;
+    text-align: left;
+    font-weight: bold;
+}
+
+#project-team-page .bp3-input-group {
+    margin-bottom: 0.33em;
+}
+
+#project-team-page .bp3-form-group:last-of-type {
+    margin-bottom: 2em;
+}
+
+#project-team-page textarea {
+    width: 100%;
+    min-height: 150px;
+}
+
+#project-team-page .last {
+    margin-bottom: 3em;
+}
+
+#project-team-page .bp3-form-content {
+  text-align: left;
+}
+
+#project-team-page .bp3-button-group {
+  margin-bottom: 10px;
+}
+
+#project-team-page .form-container {
+  width: 80%;
+  max-width: 1180px;
+}
+
+#project-team-page .project-form {
+  width: 100%;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+#project-team-page .bp3-popover-target {
+  width: 100%;
+}
+
+.bp3-popover-content a {
+  min-height: 30px;
+}
+
+#project-team-page .page-content-section .bp3-button {
+  width: 430px;
+}
+
+#project-team-page .member-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#project-team-page .member-list {
+  margin-top: 1em;
+}
+
+#project-team-page .member-list-container .col-md-12,
+#project-team-page .member-list-container .col-lg-12,
+#project-team-page .member-list-container .col-xl-6 {
+  margin-bottom: 2em;
+}
+
+#project-team-page .member-list-container .bp3-callout {
+  text-align: left;
+  height: 100%;
+}
+
+
+#project-team-page .member-list {
+  width: 100%;
+}
+
+/* ================================== */
+/* ====== contact tile element ====== */
+/* ================================== */
+
+#contact-tile {
+  text-align: left;
+  display: flex;
+  padding: 10px;
+  border-radius: 0.5em;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+  height: 100%;
+}
+
+
+#contact-tile .bp3-heading {
+  margin-left: 15px;
+}
+
+#contact-tile .col-3 {
+  padding: 0;
+}
+
+#contact-tile h4 {
+  margin-bottom: 0.5em;
+}
+
+#contact-tile .img-thumbnail {
+  padding: var(--avatar-padding);
+  background-color: #aaa;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+}
+
+#contact-tile .avatar {
+  height: 97px;
+  width: 97px;
+}
+
+#contact-tile button {
+  margin-top: 1em;
+}
+
+#contact-tile.member-confirmed {
+  background-color: var(--field-element-light-green);
+}
+
+#contact-tile.member-not-confirmed {
+background-color: var(--field-element-grey);
+}
+
+/* ================================== */
+/* ====== field element common ====== */
+/* ================================== */
+
+#file-upload-element,
+#drop-down-element,
+#calendar-picker-element,
+#long-text-element {
+  width: 100%;
+  max-width: 1140px;
+  margin-bottom: 40px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 10px;
+}
+
+/* The animation code */
+@keyframes changeMaxHeightExpand {
+  from {max-height: 441px;}
+  to {max-height: 1000px;}
+}
+
+@keyframes changeMaxHeightContract {
+  from {max-height: 1000px;}
+  to {max-height: 441px;}
+}
+
+#file-upload-element {
+  overflow-y: hidden;
+}
+
+#file-upload-element.collapsed {
+  animation: changeMaxHeightContract 1s ease-out;
+}
+
+#file-upload-element.expanded {
+  animation: changeMaxHeightExpand 1s ease-in;
+}
+
+#file-upload-element .file-upload-element-container,
+#drop-down-element .drop-down-element-container,
+#calendar-picker-element .calendar-picker-element-container,
+#long-text-element .long-text-element-container {
+  margin: auto;
+  width: 100%;
+  background-color: var(--field-element-red);
+  border-radius: 10px;
+  padding: 10px;
+  position: relative;
+  text-align: left;
+}
+
+#file-upload-element .element-title,
+#drop-down-element .element-title,
+#calendar-picker-element .element-title,
+#long-text-element .element-title,
+#popup-box .element-title,
+#requests-tab-container .element-title {
+  font-size: 20px;
+  font-weight: bold;
+  padding-bottom: 0.33em;
+}
+
+#file-upload-element .element-description,
+#drop-down-element .element-description,
+#calendar-picker-element .element-description,
+#long-text-element .element-description,
+#popup-box .element-description {
+  margin-bottom: 1em;
+}
+
+#file-upload-element .row,
+#drop-down-element .row,
+#calendar-picker-element .row,
+#long-text-element .row {
+  margin: 0;
+}
+
+#file-upload-element .container,
+#drop-down-element .container,
+#calendar-picker-element .container,
+#long-text-element .container {
+  padding: 0;
+}
+
+
+#file-upload-element .row,
+#drop-down-element .row,
+#calendar-picker-element .row,
+#long-text-element .row {
+  width: 100%;
+  align-items: center;
+  display:flex;
+  margin-bottom: 0.3em;
+}
+
+
+#file-upload-element .col,
+#file-upload-element .col-3,
+#file-upload-element .col-4,
+#file-upload-element .col-5,
+#drop-down-element .col,
+#drop-down-element .col-3,
+#drop-down-element .col-4,
+#drop-down-element .col-5,
+#calendar-picker-element .col,
+#calendar-picker-element .col-3,
+#calendar-picker-element .col-4,
+#calendar-picker-element .col-5,
+#long-text-element .col,
+#long-text-element .col-3,
+#long-text-element .col-4,
+#long-text-element .col-5 {
+  padding: 0;
+}
+
+
+/* ================================== */
+/* ======= file upload element ====== */
+/* ================================== */
+
+#file-upload-element .has-upload {
+  background-color: var(--field-element-yellow);
+}
+
+#file-upload-element .has-anchor {
+  background-color: var(--field-element-green);
+}
+
+#file-upload-element .bp3-file-input {
+  margin-bottom: 0.5em;
+}
+
+#file-upload-element .element-file-uploader {
+}
+
+#file-upload-element .element-file-uploader .detail-view-open-button {
+  margin-left: auto;
+  padding-right: 0.67em;
+}
+
+#file-upload-element .bp3-button {
+  width: 150px;
+  margin-right: 1em;
+}
+
+#file-upload-element .row.signatures {
+  padding-left: 0;
+}
+
+#file-upload-element .file-status {
+}
+
+#current-version-container,
+#file-upload-element .upload-history-container {
+  background-color: #EEE;
+  width: 100%;
+  border-radius: 5px;
+  padding: 10px;
+  position: relative;
+  text-align: left;
+  margin-bottom: 1em;
+}
+
+#file-upload-element .upload-history-container {
+  max-height: 300px;
+  overflow-y: scroll;
+}
+
+#file-upload-element .field-names {
+  font-weight: bold;
+}
+
+#file-upload-element .signature-container {
+  padding: 0;
+  width: 100%;
+  max-height: 300px;
+  overflow-y: scroll;
+}
+
+#file-upload-element .section-margin {
+  margin-top: 1em;
+}
+
+#file-upload-element .bp3-label {
+  margin-bottom: 0;
+}
+
+#file-upload-element .button-row {
+  margin-top: 0.5em;
+}
+
+#file-upload-element .upload-history-container .row.signatures {
+  border-radius: 5px;
+}
+
+#file-upload-element .upload-history-container .col {
+  padding: 0.3em;
+}
+
+#file-upload-element .upload-history-container .row.signatures:hover {
+  background-color: var(--field-element-dark-grey);
+  transition: background-color 1s ease;
+}
+
+/* ================================== */
+/* ======= drop down element ======== */
+/* ================================== */
+
+#drop-down-element .drop-down-element-container {
+  background-color: var(--field-element-grey);
+}
+
+#drop-down-element .bp3-button  {
+  width: 250px;
+  margin-bottom: 0.5em;
+}
+
+#drop-down-element select  {
+  width: 250px;
+  margin-bottom: 0.5em;
+}
+
+#drop-down-element label {
+  padding-left: 0.3em;
+}
+
+#drop-down-element textarea {
+  width: 100%;
+}
+
+/* ================================== */
+/* ==== uploader popover element ==== */
+/* ================================== */
+
+#uploader-popover {
+  height: 100%;
+  width: 100%;
+}
+
+#uploader-popover .uploader-popover-container,
+#uploader-popover .file-details-popover-container {
+  height: calc(100% - 2 * var(--pop-up-padding));
+  margin: var(--pop-up-padding);
+}
+
+#uploader-popover .bp3-progress-bar {
+  margin-bottom: 1em;
+}
+
+#uploader-popover #popup-box {
+  height: auto;
+  bottom: auto;
+  background-color: var(--field-element-grey)
+}
+
+#uploader-popover #popup-box.error {
+}
+
+#uploader-popover button {
+  margin-top: 1em;
+  width: 250px;
+}
+
+/* ===================================== */
+/* === signer select popover element === */
+/* ===================================== */
+
+#pick-signer-popover {
+  height: 100%;
+  width: 100%;
+}
+
+#pick-signer-popover .pick-signer-popover-container {
+  height: calc(100% - 2 * var(--pop-up-padding));
+  margin: var(--pop-up-padding);
+}
+
+#pick-signer-popover .bp3-progress-bar {
+  margin-bottom: 1em;
+}
+
+#pick-signer-popover #popup-box {
+  height: auto;
+  bottom: auto;
+  background-color: var(--field-element-grey)
+}
+
+#pick-signer-popover #popup-box.error {
+}
+
+#pick-signer-popover button {
+  margin-top: 1em;
+  width: 250px;
+}
+
+#pick-signer-popover .search-bar-container {
+  margin-top: 0.3em;
+  margin-bottom: 1em;
+}
+
+#pick-signer-popover .member-tile {
+  margin-bottom: 0.5em;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 0.5em 1.0em;
+  position: relative;
+}
+
+#pick-signer-popover .member-tile p:first-of-type {
+  margin-top: 10px;
+}
+
+#pick-signer-popover .selected {
+  background-color: var(--tile-selected-green);
+}
+
+#pick-signer-popover .col-xs-12,
+#pick-signer-popover .col-sm-12,
+#pick-signer-popover .col-md-6,
+#pick-signer-popover .col-lg-4,
+#pick-signer-popover .col-xl-3 {
+
+}
+
+
+#pick-signer-popover .member-tile-tickbox {
+  position: absolute;
+  right: 1em;
+  bottom: calc(50% - 14px);
+}
+
+#pick-signer-popover .negative-margins {
+  margin-left: -15px !important;
+  margin-right: -15px !important;
+}
+
+#pick-signer-popover button {
+  margin-right: 1em;
+}
+
+/* =========================================== */
+/* === create custom field popover element === */
+/* =========================================== */
+
+#create-custom-field-popover {
+  height: 100%;
+  width: 100%;
+}
+
+#create-custom-field-popover .create-custom-field-popover-container {
+  height: calc(100% - 2 * var(--pop-up-padding));
+  margin: var(--pop-up-padding);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#create-custom-field-popover .form-container {
+  width: 400px;
+}
+
+#create-custom-field-popover #popup-box {
+  height: auto;
+  bottom: auto;
+  background-color: var(--field-element-grey)
+}
+
+#create-custom-field-popover .no-options {
+  color: red;
+  font-style: italic;
+}
+
+#create-custom-field-popover button {
+  margin-bottom: 0.8em;
+}
+
+/* =========================================== */
+/* === delete project popover element === */
+/* =========================================== */
+
+#delete-project-popover {
+  height: 100%;
+  width: 100%;
+}
+
+#delete-project-popover #popup-box {
+  width: 50%;
+}
+
+#delete-project-popover .delete-project-popover-container {
+  height: calc(100% - 2 * var(--pop-up-padding));
+  margin: var(--pop-up-padding);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#delete-project-popover #popup-box {
+  height: auto;
+  bottom: auto;
+  background-color: var(--field-element-grey)
+}
+
+#delete-project-popover button {
+  max-width: 450px;
+  margin: 0.8em auto 0 auto;
+  text-align: center;
+}
+
+
+/* ==================================== */
+/* === file-details popover element === */
+/* ==================================== */
+
+#file-details-popover {
+  height: 100%;
+  width: 100%;
+}
+
+#file-details-popover .file-details-popover-container {
+  height: calc(100% - 2 * var(--pop-up-padding));
+  margin: var(--pop-up-padding);
+}
+
+#file-details-popover #popup-box {
+  height: auto;
+  bottom: auto;
+  background-color: var(--field-element-grey)
+}
+
+#file-details-popover button {
+  margin-bottom: 0.8em;
+}
+
+#file-details-popover .col {
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+#file-details-popover .file-details {
+  width: 100%;
+}
+
+#file-details-popover .signature-details {
+  margin-top: 2em;
+  width: 100%;
+}
+
+#file-details-popover .field-names,
+#file-details-popover .field-values  {
+  padding: 0;
+}
+
+#file-details-popover .download-box,
+#current-version-container .download-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-weight: bold;
+  width: 100px;
+  height: 100px;
+  margin-left: auto;
+  border: 1px solid grey;
+  border-radius: 10px;
+  bottom: 2em;
+  position: relative;
+}
+
+#current-version-container .download-box {
+  bottom: 0;
+}
+
+
+#current-version-container .no-foundations-id {
+  width: auto;
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+}
+
+#current-version-container .col-10,
+#current-version-container .col-2 {
+  padding: 0px 5px;
+}
+
+#file-details-popover .download-box:hover,
+#current-version-container .download-box:hover {
+  transition: background-color 0.3s ease-in;
+  background-color: var(--field-element-green);
+}
+
+#file-details-popover svg {
+  margin-bottom: 10px;
+}
+
+/* ================================== */
+/* ====== date picker element ======= */
+/* ================================== */
+
+#calendar-picker-element .col {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+#calendar-picker-element .calendar-picker-element-container {
+  background-color: var(--field-element-grey);
+}
+
+#calendar-picker-element .bp3-datepicker {
+  padding: 0.5em 1em;
+  border-radius: 10px;
+  margin-bottom: 1em;
+}
+
+#calendar-picker-element .entry-button {
+  width: 250px;
+}
+
+/* ================================== */
+/* ======= long text element ======== */
+/* ================================== */
+
+
+#long-text-element .col {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+#long-text-element .long-text-element-container {
+  background-color: var(--field-element-grey);
+}
+
+#long-text-element textarea {
+  width: 100%;
+  min-height: 8em;
+}
+
+
+
+/* ================================== */
+/* ========= inception page ========= */
+/* ================================== */
+
+#inception-page {
+
+}
+
+#inception-page .page-title,
+#feasibility-page .page-title,
+#design-page .page-title,
+#tender-page .page-title,
+#construction-page .page-title,
+#handover-page .page-title,
+#occupation-page .page-title,
+#refurbishment-page .page-title,
+#profile-page .page-title {
+  margin-bottom: 2em;
+}
+
+.required-field {
+  width: 100%;
 }
 
 /* adds border between projects in sidebar */
@@ -219,41 +1111,237 @@ hr {
     background-color: rgba(138, 155, 168, 0.15)
 }
 
+
 /* ================================== */
-/* ========= status section ========= */
+/* ========== profile page ========== */
 /* ================================== */
 
-#generic-page .status-section {
+#profile-page {
 
 }
 
-#generic-page .status-section .status-circle {
-  padding: 10px;
-  margin: 20px;
-  display: inline-block;
+#profile-page label {
+  text-align: left;
+}
+
+#profile-page .page-content,
+#profile-page .row {
+  width: 100%;
+}
+
+#profile-page .img-thumbnail {
+  padding: var(--avatar-padding);
+  background-color: #fff;
+  border: 1px solid #ddd;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
 }
 
-#generic-page .missing-active {
-  background-color: red;
+#profile-page .avatar {
+  height: var(--profile-avatar-height);
+  width: var(--profile-avatar-height);
 }
 
-#generic-page .signature-active {
-  background-color: orange;
+#profile-page h6 {
+  margin: 10px 0;
+  font-size: 12px;
 }
 
-#generic-page .completed-active {
-  background-color: green;
+#profile-page .button-row button {
+  margin-right: 1em;
+  margin-top: 1.5em;
+  width: 200px;
 }
 
-#generic-page .not-active {
-  background-color: grey;
+#profile-page .page-content {
+  max-width: 1200px;
+}
+
+#profile-page .row {
+  margin: 0;
+}
+
+#profile-page .col-md-12,
+#profile-page .col-lg-3,
+#profile-page .col-lg-9,  {
+  margin-bottom: 15px !important;
+}
+
+#profile-page .tab-pane {
+  margin-top: 30px;
+}
+
+
+#password-change-section {
+  width: 100%;
+  max-width: 430px;
+  margin: 2em auto;
+}
+
+#password-change-section button {
+  width: 100%;
+  max-width: 430px;
+}
+
+
+/* ============================================ */
+/* ====== profile-tab-container element ======= */
+/* ============================================ */
+
+#profile-tab-container {
+}
+
+#profile-tab-container .avatar-container {
+  height: 100%;
+  width: 100%;
+}
+
+
+#profile-tab-container .avatar-greyer {
+  position: absolute;
+  height: calc(var(--profile-avatar-height) - (var(--avatar-padding) * 2 + 2));
+  width: calc(var(--profile-avatar-height) - (var(--avatar-padding) * 2 + 2));
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.6);
+  top: calc(var(--avatar-padding) + 1);
+  left: calc((100% - var(--profile-avatar-height) + (var(--avatar-padding) * 2 + 2)) / 2);
+  margin: auto;
+}
+
+#profile-tab-container .avatar-spinner {
+  position: absolute;
+  left: calc((100% - 75px) / 2);
+  top: calc(75px / 2);
+}
+
+#profile-tab-container .foundations-info {
+  margin: 0 auto 2em auto;
+  width: calc(100% - (2 * 15px));
+}
+
+/* ============================================ */
+/* ====== history-tab-container element ======= */
+/* ============================================ */
+
+#history-tab-container .col-md-12,
+#history-tab-container .col-lg-6,
+#history-tab-container .col-xl-4 {
+  margin-bottom: 1em;
+}
+
+#history-tab-container .bp3-callout {
+  text-align: left;
+  height: 100%;
+}
+
+
+/* ============================================ */
+/* ====== requests-tab-container element ====== */
+/* ============================================ */
+
+#requests-tab-container {
+  width: 100%;
+}
+
+#requests-tab-container .requests-section {
+  text-align: left;
+}
+
+/* ================================================ */
+/* ====== project-invitation-request element ====== */
+/* ================================================ */
+
+#project-invitation-request,
+#signature-request {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--field-element-blue);
+  padding: 10px;
+  margin-top: 1em;
+  margin-bottom: 1.5em;
+  border-radius: 0.5em;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+  width: 100%;
+}
+
+
+#project-invitation-request h4,
+#signature-request h4 {
+  margin-bottom: 0.5em;
+}
+
+#project-invitation-request .button-row,
+#signature-request .button-row {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1em;
+  width: 100%;
+}
+
+#project-invitation-request button,
+#signature-request button {
+  margin: 0 !important;
+  width: calc((100% - 15px) / 2) !important;
+}
+
+#project-invitation-request button:last-of-type,
+#signature-request button:last-of-type {
+  margin-left: 15px !important;
 }
 
 /* ================================== */
 /* ========= training page ========== */
+/* ================================== */
+
+#training-page {
+
+}
+
+#training-page .form {
+  min-width: 400px;
+  width: 80%;
+}
+
+#training-page .provider-details-section h2 {
+  margin-bottom: 20px;
+}
+
+#training-page .course-details {
+    margin: 20px 0 10px 0;
+    display: flex;
+    align-items: center;
+    text-align: left;
+}
+
+#training-page .course-name {
+  padding-left: 10%;
+}
+
+#training-page .course-tick-box {
+  padding-left: 35px;
+}
+
+#training-page .course-table-heading {
+  font-weight: bold;
+}
+
+#training-page .provider-course-section {
+  flex-direction: row;
+  display: flex;
+  text-align: left;
+}
+
+/* ================================== */
+/* ======== project selector ======== */
+/* ================================== */
+
+.project-selector {
+  color: white;
+}
+
+
+/* ================================== */
+/* ========= generic page ========== */
 /* ================================== */
 
 #generic-page .training-page {
@@ -314,4 +1402,281 @@ hr {
   color: #888;
   height: 1.3em;
   margin: auto;
+}
+
+
+/* ================================== */
+/* ======== general styling ========= */
+/* ================================== */
+
+.no-project-selected-container {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.no-project-selected {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.no-project-selected svg {
+}
+
+.no-project-selected p,
+.no-requests p,
+.no-projects p,
+.loading-spinner p {
+  margin-top: 1.5em;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.project-loading-container {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.project-loading-container .section-spinner {
+  margin-bottom: 2em;
+}
+
+
+/* ================================== */
+/* ======== selector popover ======== */
+/* ================================== */
+
+.project-selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#popup-greyer {
+  background-color: rgba(0,0,0, 0.5);
+  z-index: 1000;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+#popup-box {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: 15%;
+  bottom: 15%;
+  margin: auto;
+  border-radius: 20px;
+  background: white;
+}
+
+#popOver {
+}
+
+#popup-box .projects-pop-up-header {
+  display: flex;
+  text-align: center;
+  width: 100%;
+  height: 80px;
+  background-color: #ccc;
+  border-radius: 20px 20px 0 0;
+  align-items: center;
+  justify-content: center;
+}
+
+#popup-box .flex-dir-row {
+  flex-direction: row;
+}
+
+#popup-box .projects-pop-up-header h2 {
+  color: var(--heading-text-color);
+  font-weight: 600;
+}
+
+#popup-box .row {
+  margin: 0;
+}
+
+#popup-box .bp3-button-text {
+  width: 100%
+}
+
+#popup-box .site-select-tile {
+  width: 100%;
+  height: auto;
+}
+
+#popup-box .project-scroll-box {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  height: 80%;
+  overflow-y: scroll;
+}
+
+#popup-box .project-scroll-box button {
+  height: auto;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+#popup-box .project-scroll-box .col-xs-12,
+#popup-box .project-scroll-box .col-sm-12,
+#popup-box .project-scroll-box .col-md-12,
+#popup-box .project-scroll-box .col-lg-4,
+#popup-box .project-scroll-box .col-xl-4 {
+  height: auto;
+}
+
+#popup-box .project-scroll-box .loading-spinner {
+}
+
+
+#popup-box .project-scroll-box .no-projects {
+  width: auto;
+  justify-content: center;
+  text-align: center;
+}
+
+#popup-box .project-scroll-box .projects-loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#popup-box .bp3-callout {
+}
+
+#popup-box .bp3-callout h4 {
+  margin-block-end: 0;
+  font-size: 16px;
+}
+
+#popup-box .projects-pop-up-footer {
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: #ccc;
+  border-radius: 0 0 20px 20px;
+}
+
+#popup-box .projects-pop-up-footer Button {
+  margin: var(--pop-up-padding) 0;
+}
+
+.project-select-tile {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  width: 100%;
+  height: 150px;
+  border: 2px solid rgba(138, 155, 168, 0.5);
+}
+
+.project-select-tile .bp3-callout svg {
+  width: 50px;
+  margin-right: 20px;
+}
+
+.project-select-tile.selected,
+.project-select-tile:hover {
+  background-color: rgba(138, 155, 168, 0.15)
+}
+
+
+
+/* ================================== */
+/* =========== test page ============ */
+/* ================================== */
+
+#test-page {
+  background: repeating-linear-gradient(
+    45deg,
+    #606dbc,
+    #606dbc 25px,
+    #465298 25px,
+    #465298 50px
+  );
+  width: 100%;
+  height: 100%;
+}
+
+#test-page .center-container {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: 10%;
+  bottom: 10%;
+  background-color: white;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+/* ============================================ */
+/* ===== no-foundations-id-banner element ===== */
+/* ============================================ */
+
+#no-foundations-id-banner {
+  background-color: red;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0.67em 0;
+}
+
+#no-foundations-id-banner p {
+  margin: auto;
+  color: white;
+}
+
+#no-foundations-id-banner p:hover {
+  text-decoration: underline;
+}
+
+/* ==================================== */
+/* ===== foundations-page element ===== */
+/* ==================================== */
+
+#foundations-page {
+
+}
+
+#foundations-page .foundations-page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 800px;
+}
+
+#foundations-page .foundations-icon {
+  text-align: center;
+}
+
+#foundations-page .foundations-icon-text {
+  text-align: center;
+}
+
+#foundations-page .foundations-download-icons {
+  text-align: center;
+  width: 100%;
+  margin-top: 4em;
+}
+
+#foundations-page .foundations-download-text {
+  text-align: center;
+  width: 100%;
 }
