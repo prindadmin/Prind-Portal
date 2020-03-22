@@ -22,6 +22,8 @@ import ContactTile from './elements/ContactTile'
 import * as strings from '../../data/Strings'
 import * as validators from '../../validators'
 
+// TODO: Stop this requesting the team if there is no project selected
+
 export class Page extends Component {
   static propTypes = {
   }

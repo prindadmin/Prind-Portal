@@ -1,8 +1,11 @@
-import { Component } from 'react'
+import React, { Component } from 'react'
 
 import ReactGA from 'react-ga';
 
 import * as Endpoints from '../../endpoints'
+import EmailConfirming from '../common/ProjectLoading'
+
+import * as strings from '../../data/Strings'
 
 class ConfirmEmailPage extends Component {
 
@@ -36,7 +39,7 @@ class ConfirmEmailPage extends Component {
     const { location, confirmUser } = this.props
 
     // Register pageview with GA
-    ReactGA.pageview(location.pathname + location.search);
+    ReactGA.pageview(location.pathname);
 
     confirmUser(
       location.search,
@@ -64,7 +67,11 @@ class ConfirmEmailPage extends Component {
 
 
   render() {
-    return null
+    return (
+      <div id="confirming-email-address">
+        <EmailConfirming text={strings.CONFIRMING_EMAIL_PLEASE_WAIT} />
+      </div>
+    )
   }
 
 }

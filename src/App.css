@@ -114,7 +114,8 @@ hr {
 #signup,
 #signin,
 #forgot-password,
-#change-password {
+#change-password,
+#confirming-email-address {
   margin: auto;
 }
 
