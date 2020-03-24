@@ -61,7 +61,7 @@ class SignIn extends Component {
             component={FormInputs.TextInput}
             name="email"
             placeholder={strings.PLACEHOLDER_EMAIL}
-            validate={[validators.required, validators.email, validators.maxLength32]}
+            validate={[validators.required, validators.maxLength64, validators.email]}
           />
         </Label>
         <Label>
