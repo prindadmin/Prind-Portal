@@ -107,6 +107,11 @@ hr {
   flex-direction: row;
 }
 
+.custom_fc_frame {
+  right: 10px !important;
+  bottom: 60px !important;
+}
+
 /* ================================ */
 /* ======== sign-in section ======= */
 /* ================================ */
