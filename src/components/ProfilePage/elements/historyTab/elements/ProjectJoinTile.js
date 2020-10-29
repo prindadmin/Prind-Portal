@@ -19,7 +19,7 @@ const ProjectJoinTile = props => {
 
 
   return (
-    <Callout intent={Intent.WARNING} icon='new-person' title={strings.TILE_PROJECT_CREATED}>
+    <Callout intent={Intent.WARNING} icon='new-person' title={strings.TILE_PROJECT_JOINED}>
       { displayText }
     </Callout>
   )

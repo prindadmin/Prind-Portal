@@ -22,6 +22,8 @@ import ContactTile from './elements/ContactTile'
 import * as strings from '../../data/Strings'
 import * as validators from '../../validators'
 
+// TODO: Stop this requesting the team if there is no project selected
+
 export class Page extends Component {
   static propTypes = {
   }
@@ -36,17 +38,19 @@ export class Page extends Component {
       errorText: ""
     }
 
+    if (props.projects.chosenProject.projectId !== "") {
+      // Get the members for the selected project
+      props.getCurrentMembers(
+        props.auth.info.idToken.jwtToken,
+        props.projects.chosenProject.projectId
+      )
 
-    props.getCurrentMembers(
-      props.auth.info.idToken.jwtToken,
-      props.projects.chosenProject.projectId
-    )
-
-    // Get the available roles for this project
-    props.getRoles(
-      props.auth.info.idToken.jwtToken,
-      props.projects.chosenProject.projectId
-    )
+      // Get the available roles for this project
+      props.getRoles(
+        props.auth.info.idToken.jwtToken,
+        props.projects.chosenProject.projectId
+      )
+    }
 
   }
 
@@ -60,7 +64,8 @@ export class Page extends Component {
 
     const { auth, projects, getCurrentMembers, getRoles } = this.props
 
-    if (projects.chosenProject.projectId !== prevProps.projects.chosenProject.projectId && projects.chosenProject.projectId !== undefined) {
+    if (projects.chosenProject.projectId !== prevProps.projects.chosenProject.projectId &&
+      projects.chosenProject.projectId !== "") {
 
       // Get the current members of the project
       getCurrentMembers(
