@@ -8,19 +8,47 @@ import * as Endpoints from '../../endpoints'
 
 class PrivateRoute extends React.Component {
   static propTypes = {
-    auth: PropTypes.object
+    auth: PropTypes.object.isRequired,
+    path: PropTypes.string.isRequired,
+    user: PropTypes.object.isRequired,
+  }
+
+  componentDidMount() {
+    console.log("private path mounted")
+    this.storeRoute()
+  }
+
+  componentDidUpdate(prevProps) {
+
+    console.log("componentDidUpdate")
+
+    if (this.props.path !== prevProps.path) {
+      // Store the route so that the correct page can be loaded if a login is required
+      console.log("componentDidUpdate paths do not match")
+      this.storeRoute()
+    }
   }
 
   storeRoute = () => {
 
-    if (this.props.path === this.props.user.route) {
+    const { pathname } = this.props.location
+    const { currentRoute } = this.props.user
+
+    console.log(this.props.location)
+    console.log(`pathname: ${pathname}`)
+    console.log(`currentRoute: ${currentRoute}`)
+
+    // If the user is on the same page as the store already has, do nothing
+    if (pathname === currentRoute) {
+      console.log("paths match")
       return
     }
 
-    if (this.props.path !== Endpoints.DEFAULTLOGGEDINPAGE && this.props.path !== "/signin") {
-      this.props.storeRoute(this.props.path)
+    // If the users path is not equal the default logged in page, store the path
+    if (this.props.path !== Endpoints.DEFAULTLOGGEDINPAGE) {
+      console.log("paths is not the default")
+      this.props.storeRoute(pathname)
     }
-
   }
 
 

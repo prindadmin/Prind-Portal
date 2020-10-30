@@ -4,7 +4,7 @@ import './App.css';
 import ReactGA from 'react-ga';
 
 import {
-  HashRouter as Router,
+  BrowserRouter as Router,
   Route,
   Redirect,
   Switch
@@ -106,15 +106,34 @@ class App extends Component{
               <Route path='/confirm-email' component={ConfirmEmailPage} />
 
               <PrivateRoute path='/Project' component={EditProjectPage} />
+              <PrivateRoute path='/Project/:id?' component={EditProjectPage} />
+
               <PrivateRoute path='/Team' component={ProjectTeamPage} />
+              <PrivateRoute path='/Team/:id?' component={ProjectTeamPage} />
+
               <PrivateRoute path='/Inception' component={InceptionPage} />
+              <PrivateRoute path='/Inception/:id?' component={InceptionPage} />
+
               <PrivateRoute path='/Feasibility' component={FeasibilityPage} />
+              <PrivateRoute path='/Feasibility/:id?' component={FeasibilityPage} />
+
               <PrivateRoute path='/Design' component={DesignPage} />
+              <PrivateRoute path='/Design/:id?' component={DesignPage} />
+
               <PrivateRoute path='/Tender' component={TenderPage} />
+              <PrivateRoute path='/Tender/:id?' component={TenderPage} />
+
               <PrivateRoute path='/Construction' component={ConstructionPage} />
+              <PrivateRoute path='/Construction/:id?' component={ConstructionPage} />
+
               <PrivateRoute path='/Handover' component={HandoverPage} />
+              <PrivateRoute path='/Handover/:id?' component={HandoverPage} />
+
               <PrivateRoute path='/Occupation' component={OccupationPage} />
+              <PrivateRoute path='/Occupation/:id?' component={OccupationPage} />
+
               <PrivateRoute path='/Refurbishment' component={RefurbishmentPage} />
+              <PrivateRoute path='/Refurbishment/:id?' component={RefurbishmentPage} />
 
               <PrivateRoute path='/NewProject' component={NewProjectPage} />
               <PrivateRoute path='/Profile' component={ProfilePage} />
@@ -124,7 +143,7 @@ class App extends Component{
               <Route path='/'
                 render={() =>
                   auth.isSignedIn === AUTH_SUCCESS ? (
-                    <Redirect to={this.props.user.route} />
+                    <Redirect to={this.props.user.currentRoute} />
                   ) : (
                     <Redirect to={Endpoints.SIGNINPAGE} />
                   )

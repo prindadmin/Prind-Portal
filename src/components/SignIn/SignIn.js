@@ -101,7 +101,7 @@ class SignIn extends Component {
     const { auth } = this.props
     return (
       <div id='signin' className='row align-items-center justify-content-center'>
-        {auth.isSignedIn === state.AUTH_SUCCESS ? <Redirect to={this.props.user.route} /> : this.renderSignIn()}
+        {auth.isSignedIn === state.AUTH_SUCCESS ? <Redirect to={this.props.user.currentRoute} /> : this.renderSignIn()}
       </div>
     )
   }

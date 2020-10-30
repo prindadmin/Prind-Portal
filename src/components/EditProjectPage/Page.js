@@ -34,6 +34,7 @@ export class Page extends Component {
       deleteError: false,
       errorText: "",
     }
+    console.log("loading edit project page")
   }
 
   componentDidMount() {
