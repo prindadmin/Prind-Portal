@@ -123,6 +123,8 @@ function * updateChosenProject (action) {
       }
     })
 
+    console.log(action.payload)
+
     const { data: result } = yield call(Dispatchers.fetchProjectDetailsDispatcher, identityToken, project.projectId)
 
     // Post-fetch update to store

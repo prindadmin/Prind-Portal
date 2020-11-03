@@ -11,7 +11,7 @@ export class PageChooserSection extends Component {
           <div className='sidebar'>
             {
               Object.keys(pageNames).map(key => (
-                <a key={key} href={`/#/${key}`}>
+                <a key={key} href={`${key}`}>
 
                   <ListItem
                     key={pageNames[key].name + "item"}
