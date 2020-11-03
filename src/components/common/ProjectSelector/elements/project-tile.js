@@ -3,7 +3,7 @@ import React from 'react'
 import { Callout } from '@blueprintjs/core'
 import ItemIcon from '../../ItemIcon'
 
-import * as strings from '../../../../data/Strings'
+import * as strings from '../../../../Data/Strings'
 
 const ProjectTile = props => {
   const { project, selected } = props

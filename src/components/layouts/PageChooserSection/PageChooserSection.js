@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import ListItem from '../../../components/common/page-tile'
+import ListItem from '../../../Components/common/page-tile'
 
-import pageNames from '../../../data/pageNames'
+import pageNames from '../../../Data/pageNames'
 
 export class PageChooserSection extends Component {
 

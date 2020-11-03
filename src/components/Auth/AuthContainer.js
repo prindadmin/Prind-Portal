@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 
-import * as reducer from '../../reducers/awsReducer'
+import * as reducer from '../../Reducers/awsReducer'
 
 import AuthComponent from './Auth'
 

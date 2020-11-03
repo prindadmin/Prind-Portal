@@ -2,8 +2,8 @@ import { connect } from 'react-redux'
 
 import PrivateRouteComponent from './PrivateRoute'
 
-import * as userReducer from '../../reducers/userReducer'
-import * as projectsReducer from '../../reducers/projectsReducer'
+import * as userReducer from '../../Reducers/userReducer'
+import * as projectsReducer from '../../Reducers/projectsReducer'
 
 const mapStatetoProps = state => {
   return {

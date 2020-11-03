@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import * as memberReducer from '../../../../reducers/memberReducer'
+import * as memberReducer from '../../../../Reducers/memberReducer'
 
 import ContactTile from './ContactTile'
 

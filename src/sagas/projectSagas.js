@@ -1,10 +1,10 @@
 
 import { call, put, takeLatest } from 'redux-saga/effects'
 
-import * as Dispatchers from '../dispatchers/projects'
+import * as Dispatchers from '../Dispatchers/projects'
 
-import * as actions from '../actions'
-import * as strings from '../data/Strings'
+import * as Actions from '../Actions'
+import * as strings from '../Data/Strings'
 
 const defaultState = {
   accessibleProjects: {
@@ -24,7 +24,7 @@ const defaultState = {
 
 function * init (action) {
   yield put({
-    type: actions.PROJECT_SET_STATE,
+    type: Actions.PROJECT_SET_STATE,
     payload: defaultState
   })
 }
@@ -37,7 +37,7 @@ function * getAccessibleProjects (action) {
 
     // pre-fetch update
     yield put({
-      type: actions.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUEST_SENT,
+      type: Actions.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUEST_SENT,
       payload: {
         fetching: true,
       }
@@ -47,7 +47,7 @@ function * getAccessibleProjects (action) {
 
     // post-fetch update
     yield put({
-      type: actions.PROJECT_SET_STATE,
+      type: Actions.PROJECT_SET_STATE,
       payload: {
         fetching: false,
         accessibleProjects: result.body
@@ -57,7 +57,7 @@ function * getAccessibleProjects (action) {
     catch (error) {
       console.error(error)
       yield put({
-        type: actions.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUEST_FAILED,
+        type: Actions.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUEST_FAILED,
           payload: {
             ...defaultState,
             error
@@ -74,7 +74,7 @@ function * createNewProject (action) {
 
     // pre-fetch update
     yield put({
-      type: actions.PROJECT_CREATE_PROJECT_REQUEST_SENT,
+      type: Actions.PROJECT_CREATE_PROJECT_REQUEST_SENT,
       payload: {
         fetching: true,
       }
@@ -83,7 +83,7 @@ function * createNewProject (action) {
     const { data: result } = yield call(Dispatchers.createNewProjectDispatcher, identityToken, projectValues)
 
     yield put({
-      type: actions.PROJECT_UPDATE_PROJECT_CHOSEN_REQUESTED,
+      type: Actions.PROJECT_UPDATE_PROJECT_CHOSEN_REQUESTED,
       payload: {
         fetching: false,
         identityToken,
@@ -97,7 +97,7 @@ function * createNewProject (action) {
     catch (error) {
       console.error(error)
       yield put({
-        type: actions.PROJECT_CREATE_PROJECT_REQUEST_FAILED,
+        type: Actions.PROJECT_CREATE_PROJECT_REQUEST_FAILED,
           payload: {
             fetching: false,
             error
@@ -117,7 +117,7 @@ function * updateChosenProject (action) {
 
     // Pre-fetch update to store
     yield put({
-      type: actions.PROJECT_UPDATE_PROJECT_CHOSEN_REQUEST_SENT,
+      type: Actions.PROJECT_UPDATE_PROJECT_CHOSEN_REQUEST_SENT,
       payload: {
         fetching: true,
       }
@@ -129,7 +129,7 @@ function * updateChosenProject (action) {
 
     // Post-fetch update to store
     yield put({
-      type: actions.PROJECT_SET_STATE,
+      type: Actions.PROJECT_SET_STATE,
       payload: {
         fetching: false,
         chosenProject: result.body,
@@ -143,7 +143,7 @@ function * updateChosenProject (action) {
   catch (error) {
     console.error(error)
     yield put({
-      type: actions.PROJECT_UPDATE_PROJECT_CHOSEN_REQUEST_FAILED,
+      type: Actions.PROJECT_UPDATE_PROJECT_CHOSEN_REQUEST_FAILED,
         payload: {
           fetching: false,
           error,
@@ -165,7 +165,7 @@ function * updateProjectDetails (action) {
 
     // Pre-fetch update to store
     yield put({
-      type: actions.PROJECT_UPDATE_PROJECT_DETAILS_REQUEST_SENT,
+      type: Actions.PROJECT_UPDATE_PROJECT_DETAILS_REQUEST_SENT,
       payload: {
         fetching: true,
       }
@@ -175,7 +175,7 @@ function * updateProjectDetails (action) {
 
     // Post-fetch update to store
     yield put({
-      type: actions.PROJECT_SET_STATE,
+      type: Actions.PROJECT_SET_STATE,
       payload: {
         fetching: false,
         chosenProject: projectValues,
@@ -185,7 +185,7 @@ function * updateProjectDetails (action) {
   catch (error) {
     console.error(error)
     yield put({
-      type: actions.PROJECT_GET_CURRENT_MEMBERS_REQUEST_FAILED,
+      type: Actions.PROJECT_GET_CURRENT_MEMBERS_REQUEST_FAILED,
         payload: {
           fetching: false,
           error,
@@ -203,7 +203,7 @@ function * getCurrentMembers (action) {
 
     // Pre-fetch update to store
     yield put({
-      type: actions.PROJECT_GET_CURRENT_MEMBERS_REQUEST_SENT,
+      type: Actions.PROJECT_GET_CURRENT_MEMBERS_REQUEST_SENT,
       payload: {
         fetching: true,
       }
@@ -215,7 +215,7 @@ function * getCurrentMembers (action) {
 
     // Post-fetch update to store
     yield put({
-      type: actions.PROJECT_SET_STATE,
+      type: Actions.PROJECT_SET_STATE,
       payload: {
         fetching: false,
         memberList,
@@ -225,7 +225,7 @@ function * getCurrentMembers (action) {
   catch (error) {
     console.error(error)
     yield put({
-      type: actions.PROJECT_GET_CURRENT_MEMBERS_REQUEST_FAILED,
+      type: Actions.PROJECT_GET_CURRENT_MEMBERS_REQUEST_FAILED,
         payload: {
           fetching: false,
           error,
@@ -235,26 +235,26 @@ function * getCurrentMembers (action) {
 }
 
 
-function actionSwitcher(pageName) {
+function Actionswitcher(pageName) {
   switch(pageName) {
     case 'inception':
-      return actions.PROJECT_UPLOAD_FILE_REQUEST_SUCCESSFUL_INCEPTION;
+      return Actions.PROJECT_UPLOAD_FILE_REQUEST_SUCCESSFUL_INCEPTION;
     case 'feasibility':
-      return actions.PROJECT_UPLOAD_FILE_REQUEST_SUCCESSFUL_FEASIBILITY;
+      return Actions.PROJECT_UPLOAD_FILE_REQUEST_SUCCESSFUL_FEASIBILITY;
     case 'design':
-      return actions.PROJECT_UPLOAD_FILE_REQUEST_SUCCESSFUL_DESIGN;
+      return Actions.PROJECT_UPLOAD_FILE_REQUEST_SUCCESSFUL_DESIGN;
     case 'tender':
-      return actions.PROJECT_UPLOAD_FILE_REQUEST_SUCCESSFUL_TENDER;
+      return Actions.PROJECT_UPLOAD_FILE_REQUEST_SUCCESSFUL_TENDER;
     case 'construction':
-      return actions.PROJECT_UPLOAD_FILE_REQUEST_SUCCESSFUL_CONSTRUCTION;
+      return Actions.PROJECT_UPLOAD_FILE_REQUEST_SUCCESSFUL_CONSTRUCTION;
     case 'handover':
-      return actions.PROJECT_UPLOAD_FILE_REQUEST_SUCCESSFUL_HANDOVER;
+      return Actions.PROJECT_UPLOAD_FILE_REQUEST_SUCCESSFUL_HANDOVER;
     case 'occupation':
-      return actions.PROJECT_UPLOAD_FILE_REQUEST_SUCCESSFUL_OCCUPATION;
+      return Actions.PROJECT_UPLOAD_FILE_REQUEST_SUCCESSFUL_OCCUPATION;
     case 'refurbishment':
-      return actions.PROJECT_UPLOAD_FILE_REQUEST_SUCCESSFUL_REFURBISHMENT;
+      return Actions.PROJECT_UPLOAD_FILE_REQUEST_SUCCESSFUL_REFURBISHMENT;
     default:
-      return actions.PROJECT_SET_STATE;
+      return Actions.PROJECT_SET_STATE;
   }
 }
 
@@ -267,7 +267,7 @@ function * uploadFile (action) {
 
     // Pre-fetch update to store
     yield put({
-      type: actions.PROJECT_UPLOAD_FILE_REQUEST_SENT,
+      type: Actions.PROJECT_UPLOAD_FILE_REQUEST_SENT,
       payload: {
         fetching: true,
       }
@@ -278,7 +278,7 @@ function * uploadFile (action) {
     console.log(result)
 
     // Decide which action to dispatch to update the correct page's content
-    const nextAction = actionSwitcher(pageName)
+    const nextAction = Actionswitcher(pageName)
 
     // Post-fetch update to store
     yield put({
@@ -291,7 +291,7 @@ function * uploadFile (action) {
 
     // Post-fetch update to store
     yield put({
-      type: actions.PROJECT_SET_STATE,
+      type: Actions.PROJECT_SET_STATE,
       payload: {
         fetching: false,
       }
@@ -301,7 +301,7 @@ function * uploadFile (action) {
   catch (error) {
     console.error(error)
     yield put({
-      type: actions.PROJECT_UPLOAD_FILE_REQUEST_FAILED,
+      type: Actions.PROJECT_UPLOAD_FILE_REQUEST_FAILED,
         payload: {
           fetching: false,
           error,
@@ -319,7 +319,7 @@ function * downloadFile (action) {
 
     // Pre-fetch update to store
     yield put({
-      type: actions.PROJECT_DOWNLOAD_FILE_REQUEST_SENT,
+      type: Actions.PROJECT_DOWNLOAD_FILE_REQUEST_SENT,
       payload: {
         fetching: true,
       }
@@ -329,7 +329,7 @@ function * downloadFile (action) {
 
     // Post-fetch update to store
     yield put({
-      type: actions.PROJECT_SET_STATE,
+      type: Actions.PROJECT_SET_STATE,
       payload: {
         fetching: false,
         downloadURL: result.body
@@ -341,7 +341,7 @@ function * downloadFile (action) {
   catch (error) {
     console.error(error)
     yield put({
-      type: actions.PROJECT_DOWNLOAD_FILE_REQUEST_FAILED,
+      type: Actions.PROJECT_DOWNLOAD_FILE_REQUEST_FAILED,
         payload: {
           fetching: false,
           error,
@@ -363,7 +363,7 @@ function * createField (action) {
 
     // Pre-fetch update to store
     yield put({
-      type: actions.PROJECT_CREATE_FIELD_REQUEST_SENT,
+      type: Actions.PROJECT_CREATE_FIELD_REQUEST_SENT,
       payload: {
         fetching: true,
       }
@@ -372,7 +372,7 @@ function * createField (action) {
     yield call(Dispatchers.createFieldDispatcher, identityToken, projectID, pageName, fieldDetails)
 
     // Decide which action to dispatch to update the correct page's content
-    const nextAction = actionSwitcher(pageName)
+    const nextAction = Actionswitcher(pageName)
 
     // Post-fetch update to store
     yield put({
@@ -385,7 +385,7 @@ function * createField (action) {
 
     // Post-fetch update to store
     yield put({
-      type: actions.PROJECT_SET_STATE,
+      type: Actions.PROJECT_SET_STATE,
       payload: {
         fetching: false,
       }
@@ -396,7 +396,7 @@ function * createField (action) {
   catch (error) {
     console.error(error)
     yield put({
-      type: actions.PROJECT_CREATE_FIELD_REQUEST_FAILED,
+      type: Actions.PROJECT_CREATE_FIELD_REQUEST_FAILED,
         payload: {
           fetching: false,
           error,
@@ -416,7 +416,7 @@ function * updateField (action) {
 
     // Pre-fetch update to store
     yield put({
-      type: actions.PROJECT_UPDATE_FIELD_REQUEST_SENT,
+      type: Actions.PROJECT_UPDATE_FIELD_REQUEST_SENT,
       payload: {
         fetching: true,
       }
@@ -425,7 +425,7 @@ function * updateField (action) {
     yield call(Dispatchers.updateFieldDispatcher, identityToken, projectID, pageName, fieldID, fieldDetails)
 
     // Decide which action to dispatch to update the correct page's content
-    const nextAction = actionSwitcher(pageName)
+    const nextAction = Actionswitcher(pageName)
 
     action.payload.resolve()
 
@@ -449,7 +449,7 @@ function * updateField (action) {
   catch (error) {
     console.error(error)
     yield put({
-      type: actions.PROJECT_UPDATE_FIELD_REQUEST_FAILED,
+      type: Actions.PROJECT_UPDATE_FIELD_REQUEST_FAILED,
         payload: {
           fetching: false,
           error,
@@ -469,7 +469,7 @@ function * requestFileSignature (action) {
 
     // Pre-fetch update to store
     yield put({
-      type: actions.PROJECT_FILE_SIGNATURE_REQUEST_REQUEST_SENT,
+      type: Actions.PROJECT_FILE_SIGNATURE_REQUEST_REQUEST_SENT,
       payload: {
         fetching: true
       }
@@ -479,7 +479,7 @@ function * requestFileSignature (action) {
 
     // Post-fetch update to store
     yield put({
-      type: actions.PROJECT_SET_STATE,
+      type: Actions.PROJECT_SET_STATE,
       payload: {
         fetching: false,
         error: null,
@@ -491,7 +491,7 @@ function * requestFileSignature (action) {
   catch (error) {
     console.error(error)
     yield put({
-      type: actions.PROJECT_FILE_SIGNATURE_REQUEST_REQUEST_FAILED,
+      type: Actions.PROJECT_FILE_SIGNATURE_REQUEST_REQUEST_FAILED,
         payload: {
           fetching: false,
           error
@@ -511,7 +511,7 @@ function * deleteProject (action) {
 
     // Pre-fetch update to store
     yield put({
-      type: actions.PROJECT_DELETE_PROJECT_REQUEST_SENT,
+      type: Actions.PROJECT_DELETE_PROJECT_REQUEST_SENT,
       payload: {
         fetching: true,
       }
@@ -535,7 +535,7 @@ function * deleteProject (action) {
   catch (error) {
     console.error(error)
     yield put({
-      type: actions.PROJECT_DELETE_PROJECT_REQUEST_FAILED,
+      type: Actions.PROJECT_DELETE_PROJECT_REQUEST_FAILED,
         payload: {
           fetching: false,
           error,
@@ -550,17 +550,17 @@ function * deleteProject (action) {
 }
 
 
-export default function * sagas () {
-  yield takeLatest(actions.PROJECT_INIT, init)
-  yield takeLatest(actions.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUESTED, getAccessibleProjects)
-  yield takeLatest(actions.PROJECT_CREATE_PROJECT_REQUESTED, createNewProject)
-  yield takeLatest(actions.PROJECT_UPDATE_PROJECT_CHOSEN_REQUESTED, updateChosenProject)
-  yield takeLatest(actions.PROJECT_UPDATE_PROJECT_DETAILS_REQUESTED, updateProjectDetails)
-  yield takeLatest(actions.PROJECT_GET_CURRENT_MEMBERS_REQUESTED, getCurrentMembers)
-  yield takeLatest(actions.PROJECT_UPLOAD_FILE_REQUESTED, uploadFile)
-  yield takeLatest(actions.PROJECT_DOWNLOAD_FILE_REQUESTED, downloadFile)
-  yield takeLatest(actions.PROJECT_CREATE_FIELD_REQUESTED, createField)
-  yield takeLatest(actions.PROJECT_UPDATE_FIELD_REQUESTED, updateField)
-  yield takeLatest(actions.PROJECT_FILE_SIGNATURE_REQUEST_REQUESTED, requestFileSignature)
-  yield takeLatest(actions.PROJECT_DELETE_PROJECT_REQUESTED, deleteProject)
+export default function * Sagas () {
+  yield takeLatest(Actions.PROJECT_INIT, init)
+  yield takeLatest(Actions.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUESTED, getAccessibleProjects)
+  yield takeLatest(Actions.PROJECT_CREATE_PROJECT_REQUESTED, createNewProject)
+  yield takeLatest(Actions.PROJECT_UPDATE_PROJECT_CHOSEN_REQUESTED, updateChosenProject)
+  yield takeLatest(Actions.PROJECT_UPDATE_PROJECT_DETAILS_REQUESTED, updateProjectDetails)
+  yield takeLatest(Actions.PROJECT_GET_CURRENT_MEMBERS_REQUESTED, getCurrentMembers)
+  yield takeLatest(Actions.PROJECT_UPLOAD_FILE_REQUESTED, uploadFile)
+  yield takeLatest(Actions.PROJECT_DOWNLOAD_FILE_REQUESTED, downloadFile)
+  yield takeLatest(Actions.PROJECT_CREATE_FIELD_REQUESTED, createField)
+  yield takeLatest(Actions.PROJECT_UPDATE_FIELD_REQUESTED, updateField)
+  yield takeLatest(Actions.PROJECT_FILE_SIGNATURE_REQUEST_REQUESTED, requestFileSignature)
+  yield takeLatest(Actions.PROJECT_DELETE_PROJECT_REQUESTED, deleteProject)
 }

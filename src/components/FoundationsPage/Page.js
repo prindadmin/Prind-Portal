@@ -6,7 +6,7 @@ import HeaderBar from '../common/HeaderBar';
 import PageChooserSection from '../layouts/PageChooserSection'
 import Footer from '../common/footer'
 
-import * as strings from '../../data/Strings'
+import * as strings from '../../Data/Strings'
 
 export class Page extends Component {
 

@@ -1,8 +1,8 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import * as memberReducer from '../../reducers/memberReducer'
-import * as projectReducer from '../../reducers/projectsReducer'
+import * as memberReducer from '../../Reducers/memberReducer'
+import * as projectReducer from '../../Reducers/projectsReducer'
 
 import PageComponent from './Page'
 

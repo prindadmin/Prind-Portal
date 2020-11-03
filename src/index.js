@@ -9,8 +9,8 @@ import './index.css';
 import App from './AppContainer';
 import * as serviceWorker from './serviceWorker';
 
-import rootSaga from './sagas'
-import rootReducer from './reducers'
+import rootSaga from './Sagas'
+import rootReducer from './Reducers'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

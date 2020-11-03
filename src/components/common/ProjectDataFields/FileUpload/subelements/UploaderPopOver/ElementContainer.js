@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import * as projectsreducer from '../../../../../../reducers/projectsReducer'
+import * as projectsreducer from '../../../../../../Reducers/projectsReducer'
 
 import Element from './UploaderPopOver'
 

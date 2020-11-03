@@ -12,7 +12,7 @@ import ItemIcon from '../ItemIcon'
 
 import PopOverHandler from '../popOverHandler'
 
-import * as strings from '../../../data/Strings'
+import * as strings from '../../../Data/Strings'
 
 export class Element extends Component {
   static propTypes = {

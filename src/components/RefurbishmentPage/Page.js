@@ -12,7 +12,7 @@ import { FileUpload, DropDown, CalendarPicker, LongText } from '../common/Projec
 import NoProjectSelected from '../common/NoProjectSelected'
 import ErrorFetchingContent from '../common/ErrorFetchingContent'
 
-import * as strings from '../../data/Strings'
+import * as strings from '../../Data/Strings'
 
 const pageName = 'refurbishment'
 

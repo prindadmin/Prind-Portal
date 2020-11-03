@@ -9,8 +9,8 @@ import {
   Callout,
 } from '@blueprintjs/core'
 
-import * as strings from '../../../../../../data/Strings'
-import * as validators from '../../../../../../validators'
+import * as strings from '../../../../../../Data/Strings'
+import * as Validators from '../../../../../../Validators'
 
 import * as FormInputs from '../../../../../common/formInputs'
 
@@ -95,7 +95,7 @@ export class Page extends Component {
           >
             <Field
               name="currentPassword"
-              validate={[validators.required, validators.maxLength64]}
+              validate={[Validators.required, Validators.maxLength64]}
               component={FormInputs.PasswordInput}
               placeholder={strings.CURRENT_PASSWORD}
             />
@@ -108,7 +108,7 @@ export class Page extends Component {
           >
             <Field
               name="newPassword"
-              validate={[validators.required, validators.maxLength64, validators.isValidPassword]}
+              validate={[Validators.required, Validators.maxLength64, Validators.isValidPassword]}
               component={FormInputs.PasswordInput}
               placeholder={strings.NEW_PASSWORD}
             />
@@ -121,7 +121,7 @@ export class Page extends Component {
           >
             <Field
               name="repeatNewPassword"
-              validate={[validators.required, validators.maxLength64, validators.isValidPassword]}
+              validate={[Validators.required, Validators.maxLength64, Validators.isValidPassword]}
               component={FormInputs.PasswordInput}
               placeholder={strings.NEW_PASSWORD}
             />

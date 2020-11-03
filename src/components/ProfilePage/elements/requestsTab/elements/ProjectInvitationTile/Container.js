@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import * as userReducer from '../../../../../../reducers/userReducer'
+import * as userReducer from '../../../../../../Reducers/userReducer'
 
 import Element from './Element'
 

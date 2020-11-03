@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 
 import HeaderBarComponent from './HeaderBar'
 
-import * as userReducer from '../../../reducers/userReducer'
+import * as userReducer from '../../../Reducers/userReducer'
 
 const mapStatetoProps = state => {
   return {
@@ -13,7 +13,7 @@ const mapStatetoProps = state => {
   }
 }
 
-// This defines all the actions that can be fetched from the reducer
+// This defines all the Actions that can be fetched from the reducer
 const mapDispatchToProps = dispatch => {
   return {
     getUserDetails: (jwtToken, resolve, reject) => {

@@ -2,9 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Route } from 'react-router-dom'
 import { Redirect } from 'react-router-dom'
-import * as state from '../../states'
+import * as state from '../../States'
 
-import * as Endpoints from '../../endpoints'
+import * as Endpoints from '../../Endpoints'
 
 class PrivateRoute extends React.Component {
   static propTypes = {

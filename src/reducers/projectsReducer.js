@@ -1,5 +1,5 @@
-import * as action from '../actions'
-import * as strings from '../data/Strings'
+import * as action from '../Actions'
+import * as strings from '../Data/Strings'
 
 const defaultState = {
   accessibleProjects: {

@@ -12,7 +12,7 @@ import SignatureHistory from '../SignatureHistory'
 import PickSignerPopover from '../../../../PickSignerPopover'
 import DownloadBox from '../DownloadBox'
 
-import * as strings from '../../../../../../data/Strings'
+import * as strings from '../../../../../../Data/Strings'
 
 export class Element extends Component {
   static propTypes = {
@@ -57,7 +57,7 @@ export class Element extends Component {
   }
 
 
-  // Perform actions to request your own signature
+  // Perform Actions to request your own signature
   sendSelfSignRequest = (e) => {
     console.log("Self sign file clicked")
 
@@ -77,7 +77,7 @@ export class Element extends Component {
 
 
 
-  // Perform actions to request a signature
+  // Perform Actions to request a signature
   requestSignature = (e) => {
     console.log("Signature requested")
 

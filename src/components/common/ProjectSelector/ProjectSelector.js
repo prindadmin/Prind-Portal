@@ -8,7 +8,7 @@ import { faThLarge } from '@fortawesome/free-solid-svg-icons'
 import ProjectSelectorPopUp from './elements/ProjectSelectorPopUp'
 import PopOverHandler from '../popOverHandler'
 
-import * as strings from '../../../data/Strings'
+import * as strings from '../../../Data/Strings'
 
 class ProjectSelector extends React.Component {
   static propTypes = {

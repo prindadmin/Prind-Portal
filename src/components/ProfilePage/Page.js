@@ -14,7 +14,7 @@ import {
   Callout,
 } from '@blueprintjs/core'
 
-import * as strings from '../../data/Strings'
+import * as strings from '../../Data/Strings'
 
 import {
   UserTab,

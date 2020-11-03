@@ -1,4 +1,4 @@
-import * as action from '../../actions'
+import * as action from '../../Actions'
 
 const defaultState = {
   fetching: false,

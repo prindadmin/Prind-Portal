@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import * as awsReducer from '../../../../../../reducers/awsReducer'
+import * as awsReducer from '../../../../../../Reducers/awsReducer'
 
 import PasswordForm from './passwordForm'
 

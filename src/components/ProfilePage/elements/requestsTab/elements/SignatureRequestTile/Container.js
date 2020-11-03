@@ -1,8 +1,8 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import * as foundationsReducer from '../../../../../../reducers/foundationsReducer'
-import * as projectsReducer from '../../../../../../reducers/projectsReducer'
+import * as foundationsReducer from '../../../../../../Reducers/foundationsReducer'
+import * as projectsReducer from '../../../../../../Reducers/projectsReducer'
 
 import Element from './Element'
 

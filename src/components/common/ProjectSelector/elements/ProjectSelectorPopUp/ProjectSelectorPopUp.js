@@ -11,7 +11,7 @@ import {
 
 import ItemIcon from '../../../../common/ItemIcon'
 
-import * as strings from '../../../../../data/Strings'
+import * as strings from '../../../../../Data/Strings'
 
 export class ProjectSelectorPopUp extends Component {
   static propTypes = {

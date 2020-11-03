@@ -1,5 +1,5 @@
-import * as action from '../actions'
-import * as state from '../states'
+import * as action from '../Actions'
+import * as state from '../States'
 
 export const init = () => {
   return {

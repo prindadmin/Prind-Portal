@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import * as strings from '../../../data/Strings'
+import * as strings from '../../../Data/Strings'
 
 class NoFoundationsIDBanner extends Component {
 

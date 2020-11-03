@@ -8,7 +8,7 @@ import * as foundationsReducer from './foundationsReducer'
 import pageContent from './pageReducers'
 import { reducer as formReducer } from 'redux-form'
 
-const reducers = combineReducers({
+const Reducers = combineReducers({
   auth: authReducer.reducer,
   user: userReducer.reducer,
   projects: projectsReducer.reducer,
@@ -18,4 +18,4 @@ const reducers = combineReducers({
   form: formReducer,
 })
 
-export default reducers
+export default Reducers

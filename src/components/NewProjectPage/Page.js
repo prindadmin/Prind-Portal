@@ -16,9 +16,9 @@ import Footer from '../common/footer'
 
 import * as FormInputs from '../common/formInputs'
 
-import * as strings from '../../data/Strings'
-import * as validators from '../../validators'
-import * as Endpoints from '../../endpoints'
+import * as strings from '../../Data/Strings'
+import * as Validators from '../../Validators'
+import * as Endpoints from '../../Endpoints'
 
 import {
   CreatingProjectPopover
@@ -96,7 +96,7 @@ export class Page extends Component {
         >
           <Field
             name="projectName"
-            validate={[validators.required, validators.maxLength64]}
+            validate={[Validators.required, Validators.maxLength64]}
             component={FormInputs.TextInput}
             placeholder={strings.PROJECT_NAME}
           />

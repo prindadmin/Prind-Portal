@@ -1,12 +1,12 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-//import * as awsReducer from '../../reducers/awsReducer'
-//import * as foundationsReducer from '../../reducers/foundationsReducer'
-//import * as memberReducer from '../../reducers/memberReducer'
-import * as projectsReducer from '../../reducers/projectsReducer'
-//import * as userReducer from '../../reducers/userReducer'
-//import * as inceptionReducer from '../../reducers/pageReducers/inceptionReducer'
+//import * as awsReducer from '../../Reducers/awsReducer'
+//import * as foundationsReducer from '../../Reducers/foundationsReducer'
+//import * as memberReducer from '../../Reducers/memberReducer'
+import * as projectsReducer from '../../Reducers/projectsReducer'
+//import * as userReducer from '../../Reducers/userReducer'
+//import * as inceptionReducer from '../../Reducers/pageReducers/inceptionReducer'
 
 import PageComponent from './Page'
 

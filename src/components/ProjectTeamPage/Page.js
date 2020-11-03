@@ -19,8 +19,8 @@ import * as FormInputs from '../common/formInputs'
 
 import ContactTile from './elements/ContactTile'
 
-import * as strings from '../../data/Strings'
-import * as validators from '../../validators'
+import * as strings from '../../Data/Strings'
+import * as Validators from '../../Validators'
 
 // TODO: Stop this requesting the team if there is no project selected
 
@@ -185,7 +185,7 @@ export class Page extends Component {
         >
           <Field
             name="emailAddress"
-            validate={[validators.required, validators.isEmailAddress]}
+            validate={[Validators.required, Validators.isEmailAddress]}
             component={FormInputs.TextInput}
             placeholder={strings.MEMBER_EMAIL_ADDRESS}
           />

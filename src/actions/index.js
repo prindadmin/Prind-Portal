@@ -1,4 +1,4 @@
-// AUTH actions
+// AUTH Actions
 export const AUTH_INIT = 'AUTH_INIT'
 export const AUTH_GET_USER = 'AUTH_GET_USER'
 export const AUTH_SET_STATE = 'AUTH_SET_STATE'
