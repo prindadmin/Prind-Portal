@@ -18,7 +18,6 @@ export class ProjectSelectorPopUp extends Component {
     auth: PropTypes.object.isRequired,
     onCancelPopup: PropTypes.func.isRequired,
     updateChosenProject: PropTypes.func.isRequired,
-    resetChosenProject: PropTypes.func.isRequired,
   }
 
   constructor(props) {
@@ -102,10 +101,7 @@ export class ProjectSelectorPopUp extends Component {
   }
 
   createNewProject = () => {
-
-    const { resetChosenProject, history } = this.props
-
-    resetChosenProject()
+    const { history } = this.props
     history.push('/NewProject')
   }
 

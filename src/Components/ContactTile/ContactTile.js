@@ -9,6 +9,7 @@ import {
 
 import * as strings from '../../Data/Strings'
 
+// TODO: Remove memory leak when loading images and navigating away from the page
 
 export class ContactTile extends Component {
   static propTypes = {

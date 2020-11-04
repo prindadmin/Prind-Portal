@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import ReactGA from 'react-ga';
 
 import HeaderBar from '../common/HeaderBar';
-import PageChooserSection from '../layouts/PageChooserSection'
+import SideBar from '../SideBar'
 import ProjectLoading from '../common/ProjectLoading'
 import Footer from '../common/footer'
 
@@ -244,7 +244,7 @@ export class Page extends Component {
         </div>
 
         <div className='content-with-sidebar full-height row'>
-          <PageChooserSection />
+          <SideBar />
           <div className='page-content-section col-xl-10 col-lg-9 col-md-9 col-sm-9'>
             {
                 fetching ?

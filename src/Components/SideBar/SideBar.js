@@ -16,19 +16,13 @@ export class SideBar extends Component {
           <div className='sidebar'>
             {
               Object.keys(pageNames).map(key => (
-                <a key={key} href={`${pageNames[key].linkTo}${pathForProject}`}>
-
-                  <ListItem
-                    key={pageNames[key].name + "item"}
-                    pageName={pageNames[key].name}
-                    selected={this.props.location.pathname.startsWith(pageNames[key].linkTo)}
-                    onClick={(e) => {
-                      e.stopProprogation()
-                      console.log("link clicked")
-                      this.props.history.push(`${pageNames[key].linkTo}${pathForProject}`)
-                    }}
-                  />
-                </a>
+                <ListItem
+                  key={pageNames[key].name + "item"}
+                  pageName={pageNames[key].name}
+                  linkTo={`${pageNames[key].linkTo}${pathForProject}`}
+                  selected={this.props.location.pathname.startsWith(pageNames[key].linkTo)}
+                  history={this.props.history}
+                />
               ))
             }
           </div>

@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import ReactGA from 'react-ga';
 
 import HeaderBar from '../common/HeaderBar';
-import PageChooserSection from '../layouts/PageChooserSection'
+import SideBar from '../SideBar'
 import Footer from '../common/footer'
 
 import * as strings from '../../Data/Strings'
@@ -79,7 +79,7 @@ export class Page extends Component {
         {}
 
         <div className='content-with-sidebar full-height row'>
-          <PageChooserSection />
+          <SideBar />
           <div className='page-content-section col-xl-10 col-lg-9 col-md-9 col-sm-9'>
             {
               this.getPageContent()

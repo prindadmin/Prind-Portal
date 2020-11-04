@@ -25,6 +25,11 @@
   --tile-selected-green: #d2e9af;
   --profile-avatar-height: 150px;
   --avatar-padding: 4px;
+  --prind-palette-color-1: #FEFFFE;
+  --prind-palette-color-2: #E9EBF8;
+  --prind-palette-color-3: #178CA4;
+  --prind-palette-color-4: #8D818C;
+  --prind-palette-color-5: #072A40;
 }
 
 
@@ -182,6 +187,7 @@ hr {
 .sidebar h2 {
   margin: 0.3em 0;
   font-size: calc(14px + ((30 - 20) * (100vw - 300px) / (1600 - 300)));
+  color: var(--prind-palette-color-3);
 }
 
 /* ================================ */

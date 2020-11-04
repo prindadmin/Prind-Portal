@@ -32,34 +32,26 @@ export class InceptionPage extends Component {
   }
 
   componentDidMount() {
-
-    const { projects, auth, getContent, requestS3ProjectFileUploadToken, getProjectMembers, location } = this.props
+    const { projects, auth, getContent, location } = this.props
     const { projectId } = projects.chosenProject
     const { jwtToken } = auth.info.idToken
 
     // Register pageview with GA
     ReactGA.pageview(location.pathname + location.search);
 
-    // If a project has been selected
     if (projects.chosenProject.projectId !== "") {
-      requestS3ProjectFileUploadToken(jwtToken, projectId, pageName)
-      getProjectMembers(jwtToken, projectId)
       getContent(jwtToken, projectId)
     }
   }
 
   componentDidUpdate(prevProps) {
-
-    const { projects, auth, getContent, requestS3ProjectFileUploadToken, getProjectMembers } = this.props
+    const { projects, auth, getContent } = this.props
     const { projectId } = projects.chosenProject
     const { jwtToken } = auth.info.idToken
 
     if (projectId !== prevProps.projects.chosenProject.projectId) {
-      requestS3ProjectFileUploadToken(jwtToken, projectId, pageName)
-      getProjectMembers(jwtToken, projectId)
       getContent(jwtToken, projectId)
     }
-
   }
 
   onClosePopup = () => {

@@ -17,14 +17,8 @@ const mapStatetoProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    requestS3ProjectFileUploadToken: (jwtToken, project_id, pageName) => {
-      dispatch(userReducer.requestS3ProjectFileUploadToken(jwtToken, project_id, pageName))
-    },
     getContent: (identityToken, projectID) => {
       dispatch(reducer.getPageContent(identityToken, projectID))
-    },
-    getProjectMembers: (identityToken, projectID) => {
-      dispatch(projectsReducer.getCurrentMembers(identityToken, projectID))
     }
   }
 }

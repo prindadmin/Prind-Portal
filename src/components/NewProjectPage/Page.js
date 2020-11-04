@@ -11,7 +11,7 @@ import {
 } from '@blueprintjs/core'
 
 import HeaderBar from '../common/HeaderBar';
-import PageChooserSection from '../layouts/PageChooserSection'
+import SideBar from '../SideBar'
 import Footer from '../common/footer'
 
 import * as FormInputs from '../common/formInputs'
@@ -214,7 +214,7 @@ export class Page extends Component {
         }
 
         <div className='content-with-sidebar full-height row'>
-          <PageChooserSection />
+          <SideBar />
           <div className='page-content-section col-xl-10 col-lg-9 col-md-9 col-sm-9'>
             {this.newProjectPageHeader()}
             {

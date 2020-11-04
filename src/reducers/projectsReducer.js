@@ -20,7 +20,7 @@ const defaultState = {
 const blankChosenState = {
   chosenProject: {
     projectName: strings.NO_PROJECT_SELECTED,
-    id: "",
+    projectId: "",
   }
 }
 

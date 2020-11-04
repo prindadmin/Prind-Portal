@@ -32,29 +32,26 @@ export class TenderPage extends Component {
   }
 
   componentDidMount() {
-
-    const { projects, auth, getContent, requestS3ProjectFileUploadToken, getProjectMembers, location } = this.props
+    const { projects, auth, getContent, location } = this.props
+    const { projectId } = projects.chosenProject
+    const { jwtToken } = auth.info.idToken
 
     // Register pageview with GA
     ReactGA.pageview(location.pathname + location.search);
 
-    if (projects.chosenProject.projectName !== strings.NO_PROJECT_SELECTED) {
-      requestS3ProjectFileUploadToken(auth.info.idToken.jwtToken, projects.chosenProject.projectId, pageName)
-      getProjectMembers(auth.info.idToken.jwtToken, projects.chosenProject.projectId)
-      getContent(auth.info.idToken.jwtToken, projects.chosenProject.projectId)
+    if (projects.chosenProject.projectId !== "") {
+      getContent(jwtToken, projectId)
     }
   }
 
   componentDidUpdate(prevProps) {
+    const { projects, auth, getContent } = this.props
+    const { projectId } = projects.chosenProject
+    const { jwtToken } = auth.info.idToken
 
-    const { projects, auth, getContent, requestS3ProjectFileUploadToken, getProjectMembers } = this.props
-
-    if (projects.chosenProject.projectId !== prevProps.projects.chosenProject.projectId) {
-      requestS3ProjectFileUploadToken(auth.info.idToken.jwtToken, projects.chosenProject.projectId, pageName)
-      getProjectMembers(auth.info.idToken.jwtToken, projects.chosenProject.projectId)
-      getContent(auth.info.idToken.jwtToken, projects.chosenProject.projectId)
+    if (projectId !== prevProps.projects.chosenProject.projectId) {
+      getContent(jwtToken, projectId)
     }
-
   }
 
   onClosePopup = () => {

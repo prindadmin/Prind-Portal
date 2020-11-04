@@ -33,19 +33,45 @@ export class LoggedInContent extends Component {
     super()
     this.state = {
       fetchingProjectDetails: false,
+      pageName: ""
     }
   }
 
   componentDidMount() {
     //const { username } = this.props.user
     // TODO: this.props.getuserDetails(username)
+
+    const { projects, auth, requestS3ProjectFileUploadToken, getProjectMembers } = this.props
+    const { projectId } = projects.chosenProject
+    const { jwtToken } = auth.info.idToken
+
+    const pageName = this.getPageName()
+
+    this.setState({
+      pageName
+    })
+
+    // If a project has been selected
+    if (projects.chosenProject.projectId !== "") {
+      requestS3ProjectFileUploadToken(jwtToken, projectId, pageName)
+      getProjectMembers(jwtToken, projectId)
+    }
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    // If the user is changed, get their details
+
     if (this.props !== prevProps) {
-      // TODO: this.props.getUserDetails(this.props.user.username)
       this.getProjectID()
+
+      const { projects, auth, requestS3ProjectFileUploadToken, getProjectMembers } = this.props
+      const { pageName } = this.state
+      const { projectId } = projects.chosenProject
+      const { jwtToken } = auth.info.idToken
+
+      if (projectId !== prevProps.projects.chosenProject.projectId) {
+        requestS3ProjectFileUploadToken(jwtToken, projectId, pageName)
+        getProjectMembers(jwtToken, projectId)
+      }
     }
   }
 
@@ -58,6 +84,16 @@ export class LoggedInContent extends Component {
         This page doesn't exist
       </div>
     )
+  }
+
+  getPageName = () => {
+    const { pathname } = this.props.location
+
+    // Remove final character slash if it is present
+    const pathnameToCheck = pathname.endsWith("/") ? pathname.slice(0, -1) : pathname
+
+    // Split and return the page name
+    return pathnameToCheck.split("/")[1]
   }
 
 
