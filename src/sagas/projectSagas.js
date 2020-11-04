@@ -133,6 +133,7 @@ function * updateChosenProject (action) {
       payload: {
         fetching: false,
         chosenProject: result.body,
+        error: null
       }
     })
 

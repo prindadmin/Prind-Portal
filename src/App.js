@@ -12,7 +12,7 @@ import {
 
 import { AUTH_SUCCESS } from './States'
 
-import * as Endpoints from './Endpoints'
+import * as Endpoints from './Data/Endpoints'
 import PrivateRoute from './Components/PrivateRoute';
 
 import Auth from './Components/Auth';
@@ -26,30 +26,16 @@ const ForgotPassword = lazy(() => import('./Components/ForgotPassword'));
 const ChangePassword = lazy(() => import('./Components/ChangePassword'));
 const ConfirmEmailPage = lazy(() => import('./Components/ConfirmEmailPage'));
 
-/* Stage pages */
-const InceptionPage= lazy(() => import('./Components/InceptionPage'));
-const FeasibilityPage= lazy(() => import('./Components/FeasibilityPage'));
-const DesignPage= lazy(() => import('./Components/DesignPage'));
-const TenderPage= lazy(() => import('./Components/TenderPage'));
-const ConstructionPage= lazy(() => import('./Components/ConstructionPage'));
-const HandoverPage= lazy(() => import('./Components/HandoverPage'));
-const OccupationPage= lazy(() => import('./Components/OccupationPage'));
-const RefurbishmentPage= lazy(() => import('./Components/RefurbishmentPage'));
-
 /* Project pages */
 const NewProjectPage= lazy(() => import('./Components/NewProjectPage'));
-const EditProjectPage= lazy(() => import('./Components/EditProjectPage'));
-const ProjectTeamPage= lazy(() => import('./Components/ProjectTeamPage'));
 
 /* Other pages */
 const ProfilePage= lazy(() => import('./Components/ProfilePage'));
 const Foundations= lazy(() => import('./Components/FoundationsPage'));
 const LoggedInContent = lazy(() => import('./Pages/LoggedInContent'));
 
-// TODO: Add functionality below 800px width to not show the site
 // TODO: make mobile friendly in future
 // TODO: Remove aws-cognito-promises dependency from the system as it uses a very old AWS-SDK version
-// TODO: Add project name into address bar so it can be restored
 
 class App extends Component{
 
@@ -94,7 +80,7 @@ class App extends Component{
     const { auth } = this.props
 
     return (
-      <div className="App full-height">
+      <div className="App full-height container-fluid">
         <Router>
           <Auth />
 
@@ -109,32 +95,32 @@ class App extends Component{
               <PrivateRoute path='/project' component={LoggedInContent} />
               <PrivateRoute path='/project/:id?' component={LoggedInContent} />
 
-              <PrivateRoute path='/team' component={ProjectTeamPage} />
-              <PrivateRoute path='/team/:id?' component={ProjectTeamPage} />
+              <PrivateRoute path='/team' component={LoggedInContent} />
+              <PrivateRoute path='/team/:id?' component={LoggedInContent} />
 
-              <PrivateRoute path='/inception' component={InceptionPage} />
-              <PrivateRoute path='/inception/:id?' component={InceptionPage} />
+              <PrivateRoute path='/inception' component={LoggedInContent} />
+              <PrivateRoute path='/inception/:id?' component={LoggedInContent} />
 
-              <PrivateRoute path='/feasibility' component={FeasibilityPage} />
-              <PrivateRoute path='/feasibility/:id?' component={FeasibilityPage} />
+              <PrivateRoute path='/feasibility' component={LoggedInContent} />
+              <PrivateRoute path='/feasibility/:id?' component={LoggedInContent} />
 
-              <PrivateRoute path='/design' component={DesignPage} />
-              <PrivateRoute path='/design/:id?' component={DesignPage} />
+              <PrivateRoute path='/design' component={LoggedInContent} />
+              <PrivateRoute path='/design/:id?' component={LoggedInContent} />
 
-              <PrivateRoute path='/tender' component={TenderPage} />
-              <PrivateRoute path='/tender/:id?' component={TenderPage} />
+              <PrivateRoute path='/tender' component={LoggedInContent} />
+              <PrivateRoute path='/tender/:id?' component={LoggedInContent} />
 
-              <PrivateRoute path='/construction' component={ConstructionPage} />
-              <PrivateRoute path='/construction/:id?' component={ConstructionPage} />
+              <PrivateRoute path='/construction' component={LoggedInContent} />
+              <PrivateRoute path='/construction/:id?' component={LoggedInContent} />
 
-              <PrivateRoute path='/handover' component={HandoverPage} />
-              <PrivateRoute path='/handover/:id?' component={HandoverPage} />
+              <PrivateRoute path='/handover' component={LoggedInContent} />
+              <PrivateRoute path='/handover/:id?' component={LoggedInContent} />
 
-              <PrivateRoute path='/occupation' component={OccupationPage} />
-              <PrivateRoute path='/occupation/:id?' component={OccupationPage} />
+              <PrivateRoute path='/occupation' component={LoggedInContent} />
+              <PrivateRoute path='/occupation/:id?' component={LoggedInContent} />
 
-              <PrivateRoute path='/refurbishment' component={RefurbishmentPage} />
-              <PrivateRoute path='/refurbishment/:id?' component={RefurbishmentPage} />
+              <PrivateRoute path='/refurbishment' component={LoggedInContent} />
+              <PrivateRoute path='/refurbishment/:id?' component={LoggedInContent} />
 
               <PrivateRoute path='/newproject' component={NewProjectPage} />
               <PrivateRoute path='/profile' component={ProfilePage} />

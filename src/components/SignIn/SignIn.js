@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import ReactGA from 'react-ga';
 
-import * as Endpoints from '../../Endpoints'
+import * as Endpoints from '../../Data/Endpoints'
 
 import {
   Label,

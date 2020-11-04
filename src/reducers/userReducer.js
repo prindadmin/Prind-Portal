@@ -1,6 +1,6 @@
 import * as action from '../Actions'
 
-import * as Endpoints from '../Endpoints'
+import * as Endpoints from '../Data/Endpoints'
 
 let defaultState = {
   fetching: false,

@@ -1,43 +1,43 @@
 const pageNames = {
   Project: {
     name: "Project Details",
-    linkTo: "/Project"
+    linkTo: "/project"
   },
   Team: {
     name: "Project Team",
-    linkTo: "/Team"
+    linkTo: "/team"
   },
   Inception: {
     name: "Inception",
-    linkTo: "/Inception"
+    linkTo: "/inception"
   },
   Feasibility: {
     name: "Feasibility",
-    linkTo: "/Feasibility"
+    linkTo: "/feasibility"
   },
   Design: {
     name: "Design",
-    linkTo: "/Design"
+    linkTo: "/design"
   },
   Tender: {
     name: "Tender",
-    linkTo: "/Tender"
+    linkTo: "/tender"
   },
   Construction: {
     name: "Construction",
-    linkTo: "/Construction"
+    linkTo: "/construction"
   },
   Handover: {
     name: "Handover",
-    linkTo: "/Handover"
+    linkTo: "/handover"
   },
   Occupation: {
     name: "Occupation",
-    linkTo: "/Occupation"
+    linkTo: "/occupation"
   },
   Refurbishment: {
     name: "Refurbishment",
-    linkTo: "/Refurbishment"
+    linkTo: "/refurbishment"
   },
 }
 

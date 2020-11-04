@@ -18,7 +18,7 @@ import * as FormInputs from '../common/formInputs'
 
 import * as strings from '../../Data/Strings'
 import * as Validators from '../../Validators'
-import * as Endpoints from '../../Endpoints'
+import * as Endpoints from '../../Data/Endpoints'
 
 import {
   CreatingProjectPopover

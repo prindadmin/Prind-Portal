@@ -11,14 +11,15 @@ export class PageChooserSection extends Component {
           <div className='sidebar'>
             {
               Object.keys(pageNames).map(key => (
-                <a key={key} href={`${key}`}>
+                <a key={key} href={`${pageNames[key].linkTo} here`}>
 
                   <ListItem
                     key={pageNames[key].name + "item"}
                     pageName={pageNames[key].name}
-                    selected={pageNames[key].linkTo.replace("/", "") === this.props.location.pathname.replace("/", "")}
-                    onClick={() => {
-                      this.props.history.push(`/#/${pageNames[key].linkTo}`)
+                    selected={this.props.location.pathname.startsWith(pageNames[key].linkTo)}
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      this.props.history.push(`${pageNames[key].linkTo}`)
                     }}
                   />
                 </a>

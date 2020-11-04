@@ -3,7 +3,7 @@ import { Field, reduxForm } from 'redux-form'
 
 import ReactGA from 'react-ga';
 
-import * as Endpoints from '../../Endpoints'
+import * as Endpoints from '../../Data/Endpoints'
 
 import {
   Label,

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import ReactGA from 'react-ga';
 
-import * as Endpoints from '../../Endpoints'
+import * as Endpoints from '../../Data/Endpoints'
 import EmailConfirming from '../common/ProjectLoading'
 
 import * as strings from '../../Data/Strings'

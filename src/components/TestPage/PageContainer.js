@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom'
 //import * as memberReducer from '../../Reducers/memberReducer'
 import * as projectsReducer from '../../Reducers/projectsReducer'
 //import * as userReducer from '../../Reducers/userReducer'
-//import * as inceptionReducer from '../../Reducers/pageReducers/inceptionReducer'
+//import * as inceptionReducer from '../../Reducers/PageReducers/inceptionReducer'
 
 import PageComponent from './Page'
 

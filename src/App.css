@@ -36,6 +36,7 @@
   font-weight: 400;
   background-color: white;
   min-height: 100vh;
+  padding: 0;
 }
 
 .full-height {
@@ -265,6 +266,28 @@ hr {
   right: -3px;
   border: 1px solid #8b0000;
 }
+
+
+/* ================================== */
+/*    logged-in-content-container     */
+/* ================================== */
+
+#logged-in-content-container {
+  margin: 0;
+  padding: 0;
+}
+
+
+/* ================================== */
+/*      logged-in-body-section        */
+/* ================================== */
+
+#logged-in-body-section {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 
 /* ================================== */
 /* ====== working area section ====== */
@@ -1425,6 +1448,7 @@ background-color: var(--field-element-grey);
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 800px;
 }
 
 .no-project-selected svg {
