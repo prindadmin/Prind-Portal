@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import ReactGA from 'react-ga';
 
-import HeaderBar from '../common/HeaderBar';
+import HeaderBar from '../HeaderBar';
 import SideBar from '../SideBar'
 import Footer from '../common/footer'
 

@@ -63,7 +63,7 @@ export class HeaderBar extends Component {
         {
           user !== undefined ?
             user.details.foundationsID === null ?
-            <div className="row">
+            <div id="no-foundations-id-banner" className="row full-width">
               <NoFoundationsIDBanner />
             </div> :
             null :

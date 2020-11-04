@@ -10,7 +10,7 @@ import {
   Callout,
 } from '@blueprintjs/core'
 
-import HeaderBar from '../common/HeaderBar';
+import HeaderBar from '../HeaderBar';
 import SideBar from '../SideBar'
 import Footer from '../common/footer'
 

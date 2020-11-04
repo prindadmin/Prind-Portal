@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import ReactGA from 'react-ga';
 
-import HeaderBar from '../common/HeaderBar';
+import HeaderBar from '../HeaderBar';
 import SideBar from '../SideBar'
 import ProjectLoading from '../common/ProjectLoading'
 import Footer from '../common/footer'

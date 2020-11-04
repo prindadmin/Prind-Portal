@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import HeaderBar from '../common/HeaderBar';
+import HeaderBar from '../HeaderBar';
 import SideBar from '../SideBar'
 import Footer from '../common/footer'
 

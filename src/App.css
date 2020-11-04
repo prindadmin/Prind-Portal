@@ -182,6 +182,7 @@ hr {
   display: flex;
   flex-direction: column;
   width: 90%;
+  padding-bottom: var(--footer-height);
 }
 
 .sidebar h2 {
@@ -272,7 +273,6 @@ hr {
   right: -3px;
   border: 1px solid #8b0000;
 }
-
 
 /* ================================== */
 /*    logged-in-content-container     */
@@ -1421,6 +1421,8 @@ background-color: var(--field-element-grey);
   height: var(--footer-height);
   display: flex;
   flex-direction: column;
+  position: fixed;
+  bottom: 0;
 }
 
 #footer-bar .footer-content {
@@ -1670,7 +1672,8 @@ background-color: var(--field-element-grey);
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 0.67em 0;
+  padding: 0.5em 0;
+  margin: 0;
 }
 
 #no-foundations-id-banner p {
