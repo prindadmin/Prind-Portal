@@ -4,7 +4,7 @@ import './App.css';
 import ReactGA from 'react-ga';
 
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Route,
   Redirect,
   Switch
