@@ -14,8 +14,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
 
 import * as FormInputs from '../common/formInputs'
-import * as validators from '../../validators'
-import * as strings from '../../data/Strings'
+import * as Validators from '../../Validators'
+import * as strings from '../../Data/Strings'
 
 class ForgotPassword extends Component {
   static propTypes = {
@@ -81,7 +81,7 @@ class ForgotPassword extends Component {
             component={FormInputs.TextInput}
             name="email"
             placeholder={strings.PLACEHOLDER_EMAIL}
-            validate={[validators.required, validators.email, validators.maxLength32]}
+            validate={[Validators.required, Validators.email, Validators.maxLength32]}
           />
         </Label>
         <ButtonGroup fill style={{marginBottom: '15px'}}>

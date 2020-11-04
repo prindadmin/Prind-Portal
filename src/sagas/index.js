@@ -1,6 +1,6 @@
 import { all, fork } from 'redux-saga/effects'
 
-import awssagas from './awsSagas'
+import awsSagas from './awsSagas'
 import userSagas from './userSagas'
 import projectSagas from './projectSagas'
 import memberSagas from './memberSagas'
@@ -9,7 +9,7 @@ import foundationsSagas from './foundationsSagas'
 
 export default function * root () {
   yield all([
-    fork(awssagas),
+    fork(awsSagas),
     fork(userSagas),
     fork(projectSagas),
     fork(memberSagas),

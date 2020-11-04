@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import ReactGA from 'react-ga';
 
-import * as strings from '../../data/Strings'
+import * as strings from '../../Data/Strings'
 
 export class Error404 extends Component {
 

@@ -1,5 +1,5 @@
-import * as action from '../actions'
-import * as strings from '../data/Strings'
+import * as action from '../Actions'
+import * as strings from '../Data/Strings'
 
 const defaultState = {
   accessibleProjects: {
@@ -20,7 +20,7 @@ const defaultState = {
 const blankChosenState = {
   chosenProject: {
     projectName: strings.NO_PROJECT_SELECTED,
-    id: "",
+    projectId: "",
   }
 }
 
@@ -68,6 +68,18 @@ export const updateChosenProject = ( identityToken, project, resolve, reject ) =
     }
   }
 }
+
+export const saveProjectID = ( projectId ) => {
+  return {
+    type: action.PROJECT_SET_STATE,
+    payload: {
+      chosenProject: {
+        projectId
+      },
+    }
+  }
+}
+
 
 export const createProject = ( identityToken, projectValues, resolve, reject ) => {
   return {

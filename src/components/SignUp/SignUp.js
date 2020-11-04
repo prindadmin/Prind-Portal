@@ -3,7 +3,7 @@ import { Field, reduxForm } from 'redux-form'
 
 import ReactGA from 'react-ga';
 
-import * as Endpoints from '../../endpoints'
+import * as Endpoints from '../../Data/Endpoints'
 
 import {
   Label,
@@ -16,9 +16,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
 import * as FormInputs from '../common/formInputs'
-import * as validators from '../../validators'
-import * as state from '../../states'
-import * as strings from '../../data/Strings'
+import * as Validators from '../../Validators'
+import * as state from '../../States'
+import * as strings from '../../Data/Strings'
 
 class SignUp extends Component {
   signUp = async (values) => {
@@ -47,7 +47,7 @@ class SignUp extends Component {
         <Label>
           <Field
             name="firstName"
-            validate={[validators.required, validators.maxLength32]}
+            validate={[Validators.required, Validators.maxLength32]}
             component={FormInputs.TextInput}
             placeholder={strings.PLACEHOLDER_FIRST_NAME}
           />
@@ -55,7 +55,7 @@ class SignUp extends Component {
         <Label>
           <Field
             name="lastName"
-            validate={[validators.required, validators.maxLength32]}
+            validate={[Validators.required, Validators.maxLength32]}
             component={FormInputs.TextInput}
             placeholder={strings.PLACEHOLDER_LAST_NAME}
             type="text"
@@ -64,7 +64,7 @@ class SignUp extends Component {
         <Label>
           <Field
             name="email"
-            validate={[validators.required, validators.maxLength64, validators.email]}
+            validate={[Validators.required, Validators.maxLength64, Validators.email]}
             component={FormInputs.TextInput}
             placeholder='Email Address'
             type="email"
@@ -74,9 +74,9 @@ class SignUp extends Component {
           <Field
             name="password"
             validate={[
-              validators.required,
-              validators.maxLength32,
-              validators.isValidPassword
+              Validators.required,
+              Validators.maxLength32,
+              Validators.isValidPassword
             ]}
             component={FormInputs.PasswordInput}
             placeholder={strings.PLACEHOLDER_PASSWORD}

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import * as projectsReducer from '../../../../../reducers/projectsReducer'
+import * as projectsReducer from '../../../../../Reducers/projectsReducer'
 
 import Element from './ProjectSelectorPopUp'
 
@@ -19,9 +19,6 @@ const mapDispatchToProps = dispatch => {
     },
     updateChosenProject: (jwtToken, project, resolve, reject) => {
       dispatch(projectsReducer.updateChosenProject(jwtToken, project, resolve, reject))
-    },
-    resetChosenProject: () => {
-      dispatch(projectsReducer.resetChosenProject())
     }
   }
 }

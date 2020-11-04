@@ -1,8 +1,8 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import * as awsReducer from '../../../reducers/awsReducer'
-import * as userReducer from '../../../reducers/userReducer'
+import * as awsReducer from '../../../Reducers/awsReducer'
+import * as userReducer from '../../../Reducers/userReducer'
 
 import UserMenuComponent from './UserMenu'
 

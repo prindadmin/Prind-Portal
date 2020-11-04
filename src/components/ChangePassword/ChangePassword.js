@@ -16,8 +16,8 @@ import {
 import ItemIcon from '../common/ItemIcon'
 
 import * as FormInputs from '../common/formInputs'
-import * as validators from '../../validators'
-import * as state from '../../states'
+import * as Validators from '../../Validators'
+import * as state from '../../States'
 
 // TODO: Implement strings file here
 
@@ -92,8 +92,8 @@ class ResetPassword extends Component {
             name="password"
             placeholder='Password'
             validate={[
-              validators.required,
-              validators.maxLength32
+              Validators.required,
+              Validators.maxLength32
             ]}
           />
         </Label>
@@ -103,9 +103,9 @@ class ResetPassword extends Component {
             name="passwordMatch"
             placeholder='Repeat password'
             validate={[
-              validators.required,
-              validators.passwordMatch,
-              validators.isValidPassword
+              Validators.required,
+              Validators.passwordMatch,
+              Validators.isValidPassword
             ]}
           />
         </Label>

@@ -11,14 +11,13 @@ import {
 
 import ItemIcon from '../../../../common/ItemIcon'
 
-import * as strings from '../../../../../data/Strings'
+import * as strings from '../../../../../Data/Strings'
 
 export class ProjectSelectorPopUp extends Component {
   static propTypes = {
     auth: PropTypes.object.isRequired,
     onCancelPopup: PropTypes.func.isRequired,
     updateChosenProject: PropTypes.func.isRequired,
-    resetChosenProject: PropTypes.func.isRequired,
   }
 
   constructor(props) {
@@ -26,6 +25,7 @@ export class ProjectSelectorPopUp extends Component {
     this.state = {
       fetchError: false,
       updateError: false,
+      chosenProjectId: "",
       errorText: "",
     }
 
@@ -43,11 +43,27 @@ export class ProjectSelectorPopUp extends Component {
     this.props.onCancelPopup()
   }
 
+  getCurrentPage = () => {
+    const { pathname } = this.props.location
+
+    // Remove final character slash if it is present
+    const pathnameToCheck = pathname.endsWith("/") ? pathname.slice(0, -1) : pathname
+
+    // Split and return the page name
+    return pathnameToCheck.split("/")[1]
+  }
+
+
+
   siteChosen(project, event) {
 
     console.log(project)
 
     const { auth, updateChosenProject } = this.props
+
+    this.setState({
+      chosenProjectId: project.projectId
+    })
 
     updateChosenProject(
       auth.info.idToken.jwtToken,
@@ -68,6 +84,12 @@ export class ProjectSelectorPopUp extends Component {
   }
 
   resolveProjectUpdate = () => {
+
+    const { history } = this.props
+
+    const newPathname = `/${this.getCurrentPage()}/${this.state.chosenProjectId}`
+    history.push(newPathname)
+
     this.cancelPopup()
   }
 
@@ -79,10 +101,7 @@ export class ProjectSelectorPopUp extends Component {
   }
 
   createNewProject = () => {
-
-    const { resetChosenProject, history } = this.props
-
-    resetChosenProject()
+    const { history } = this.props
     history.push('/NewProject')
   }
 

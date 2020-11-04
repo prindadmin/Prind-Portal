@@ -1,5 +1,5 @@
 import validator from 'validator'
-import * as strings from '../data/Strings'
+import * as strings from '../Data/Strings'
 
 export const required = value => (value ? undefined : strings.REQUIRED)
 

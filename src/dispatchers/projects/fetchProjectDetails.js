@@ -3,6 +3,8 @@ import https from 'https'
 
 export default function(identityToken, projectId) {
 
+  console.log(`fetching project details for ID: ${projectId}`)
+
   return new Promise((resolve, reject) => {
 
     const instance = axios.create({

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import ReactGA from 'react-ga';
 
-import * as Endpoints from '../../endpoints'
+import * as Endpoints from '../../Data/Endpoints'
 
 import {
   Label,
@@ -15,9 +15,9 @@ import {
 } from '@blueprintjs/core'
 
 import * as FormInputs from '../common/formInputs'
-import * as validators from '../../validators'
-import * as state from '../../states'
-import * as strings from '../../data/Strings'
+import * as Validators from '../../Validators'
+import * as state from '../../States'
+import * as strings from '../../Data/Strings'
 
 class SignIn extends Component {
   static propTypes = {
@@ -61,7 +61,7 @@ class SignIn extends Component {
             component={FormInputs.TextInput}
             name="email"
             placeholder={strings.PLACEHOLDER_EMAIL}
-            validate={[validators.required, validators.maxLength64, validators.email]}
+            validate={[Validators.required, Validators.maxLength64, Validators.email]}
           />
         </Label>
         <Label>
@@ -69,7 +69,7 @@ class SignIn extends Component {
             component={FormInputs.PasswordInput}
             name="password"
             placeholder={strings.PLACEHOLDER_PASSWORD}
-            validate={[validators.required, validators.maxLength32]}
+            validate={[Validators.required, Validators.maxLength32]}
           />
         </Label>
         <ButtonGroup fill style={{marginBottom: '15px'}}>
@@ -101,7 +101,7 @@ class SignIn extends Component {
     const { auth } = this.props
     return (
       <div id='signin' className='row align-items-center justify-content-center'>
-        {auth.isSignedIn === state.AUTH_SUCCESS ? <Redirect to={this.props.user.route} /> : this.renderSignIn()}
+        {auth.isSignedIn === state.AUTH_SUCCESS ? <Redirect to={this.props.user.currentRoute} /> : this.renderSignIn()}
       </div>
     )
   }

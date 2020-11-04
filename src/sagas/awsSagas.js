@@ -2,26 +2,26 @@ import * as auth from 'aws-cognito-promises'
 
 import { call, put, takeLatest } from 'redux-saga/effects'
 
-import { register, changePasswordAccount, confirmUserDispatcher } from '../dispatchers/aws'
-import * as actions from '../actions'
-import * as states from '../states'
+import { register, changePasswordAccount, confirmUserDispatcher } from '../Dispatchers/aws'
+import * as Actions from '../Actions'
+import * as States from '../States'
 
 
 // auth is stateless. Each call to a auth action resets all state EXCEPT for completeNewPassword
 let defaultState = {
   info: {},
   error: {},
-  isSignedIn: states.AUTH_UNKNOWN,
-  isConfirmed: states.AUTH_UNKNOWN,
-  hasSignedUp: states.AUTH_UNKNOWN,
-  hasSentCode: states.AUTH_UNKNOWN,
-  hasChangedPassword: states.AUTH_UNKNOWN,
-  passwordResetRequired: states.AUTH_UNKNOWN
+  isSignedIn: States.AUTH_UNKNOWN,
+  isConfirmed: States.AUTH_UNKNOWN,
+  hasSignedUp: States.AUTH_UNKNOWN,
+  hasSentCode: States.AUTH_UNKNOWN,
+  hasChangedPassword: States.AUTH_UNKNOWN,
+  passwordResetRequired: States.AUTH_UNKNOWN
 }
 
 function * init (action) {
   yield put({
-    type: actions.AUTH_SET_STATE,
+    type: Actions.AUTH_SET_STATE,
     payload: {
       ...defaultState
     }
@@ -33,11 +33,11 @@ function * getUser (action) {
     let user = auth.config.getUser()
     let session = yield call(auth.getSession)
     yield put({
-      type: actions.AUTH_SET_STATE,
+      type: Actions.AUTH_SET_STATE,
       payload: {
         ...defaultState,
-        isSignedIn: states.AUTH_SUCCESS,
-        isConfirmed: states.AUTH_SUCCESS,
+        isSignedIn: States.AUTH_SUCCESS,
+        isConfirmed: States.AUTH_SUCCESS,
         info: { username: user.username, ...session },
         finished: true,
       }
@@ -46,10 +46,10 @@ function * getUser (action) {
     //action.payload.resolve()
   } catch (e) {
     yield put({
-      type: actions.AUTH_SET_STATE,
+      type: Actions.AUTH_SET_STATE,
       payload: {
         ...defaultState,
-        isSignedIn: states.AUTH_FAIL,
+        isSignedIn: States.AUTH_FAIL,
         error: e,
         finished: true
       }
@@ -62,16 +62,16 @@ function * signUp (action) {
   try {
     yield call(register, action.payload.values)
     yield put({
-      type: actions.AUTH_SET_STATE,
+      type: Actions.AUTH_SET_STATE,
       payload: {
         ...defaultState,
-        hasSignedUp: states.AUTH_SUCCESS
+        hasSignedUp: States.AUTH_SUCCESS
       }
     })
     action.payload.resolve()
   } catch (e) {
     yield put({
-      type: actions.AUTH_SET_STATE,
+      type: Actions.AUTH_SET_STATE,
       payload: {
         ...defaultState,
         error: e
@@ -86,38 +86,38 @@ function * signOut () {
     yield call(auth.signOut)
 
     yield put({
-      type: actions.AUTH_SET_STATE,
-      payload: { isSignedIn: states.AUTH_FAIL }
+      type: Actions.AUTH_SET_STATE,
+      payload: { isSignedIn: States.AUTH_FAIL }
     })
 
     // Clear the project store
     yield put({
-      type: actions.PROJECT_INIT,
+      type: Actions.PROJECT_INIT,
       payload: {}
     })
 
     // Clear the member store
     yield put({
-      type: actions.MEMBER_INIT,
+      type: Actions.MEMBER_INIT,
       payload: {}
     })
 
     // Clear the foundations store
     yield put({
-      type: actions.FOUNDATIONS_INIT,
+      type: Actions.FOUNDATIONS_INIT,
       payload: {}
     })
 
     // Clear the user store
     yield put({
-      type: actions.USER_INIT,
+      type: Actions.USER_INIT,
       payload: {}
     })
 
   } catch (e) {
     yield put({
-      type: actions.AUTH_SET_STATE,
-      payload: { error: e, isSignedIn: states.AUTH_FAIL }
+      type: Actions.AUTH_SET_STATE,
+      payload: { error: e, isSignedIn: States.AUTH_FAIL }
     })
   }
 }
@@ -135,10 +135,10 @@ function * signIn (action) {
     let user = auth.config.getUser()
     let session = yield call(auth.getSession)
     yield put({
-      type: actions.AUTH_SET_STATE,
+      type: Actions.AUTH_SET_STATE,
       payload: {
-        isSignedIn: states.AUTH_SUCCESS,
-        isConfirmed: states.AUTH_SUCCESS,
+        isSignedIn: States.AUTH_SUCCESS,
+        isConfirmed: States.AUTH_SUCCESS,
         info: { username: user.username, ...session }
       }
     })
@@ -146,18 +146,18 @@ function * signIn (action) {
   } catch (e) {
     if (e.code === 'UserNotConfirmedException') {
       yield put({
-        type: actions.AUTH_SET_STATE,
-        payload: { isConfirmed: states.AUTH_FAIL, error: e }
+        type: Actions.AUTH_SET_STATE,
+        payload: { isConfirmed: States.AUTH_FAIL, error: e }
       })
     } else if (e.code === 'PasswordResetRequiredException') {
       yield put({
-        type: actions.AUTH_SET_STATE,
-        payload: { passwordResetRequired: states.AUTH_SUCCESS, error: e }
+        type: Actions.AUTH_SET_STATE,
+        payload: { passwordResetRequired: States.AUTH_SUCCESS, error: e }
       })
     } else {
       yield put({
-        type: actions.AUTH_SET_STATE,
-        payload: { ...defaultState, isConfirmed: states.AUTH_SUCCESS, error: e }
+        type: Actions.AUTH_SET_STATE,
+        payload: { ...defaultState, isConfirmed: States.AUTH_SUCCESS, error: e }
       })
     }
     action.payload.reject()
@@ -169,16 +169,16 @@ function * forgotPassword (action) {
     const { username } = action.payload
     yield call(auth.forgotPassword, username)
     yield put({
-      type: actions.AUTH_SET_STATE,
+      type: Actions.AUTH_SET_STATE,
       payload: {
         ...defaultState,
-        hasSentCode: states.AUTH_SUCCESS
+        hasSentCode: States.AUTH_SUCCESS
       }
     })
     action.payload.resolve()
   } catch (e) {
     yield put({
-      type: actions.AUTH_SET_STATE,
+      type: Actions.AUTH_SET_STATE,
       payload: {
         error: e
       }
@@ -196,10 +196,10 @@ function * changePassword (action) {
     yield call(auth.changePassword, user_name, confirmation_code, password)
 
     yield put({
-      type: actions.AUTH_SET_STATE,
+      type: Actions.AUTH_SET_STATE,
       payload: {
         ...defaultState,
-        hasChangedPassword: states.AUTH_SUCCESS
+        hasChangedPassword: States.AUTH_SUCCESS
       }
     })
 
@@ -207,11 +207,11 @@ function * changePassword (action) {
 
   } catch (e) {
     yield put({
-      type: actions.AUTH_SET_STATE,
+      type: Actions.AUTH_SET_STATE,
       payload: {
         ...defaultState,
         error: e,
-        isSignedIn: states.AUTH_FAIL
+        isSignedIn: States.AUTH_FAIL
       }
     })
 
@@ -225,15 +225,15 @@ function * completeNewPassword (action) {
     console.log(action)
     yield call(changePasswordAccount, oldPassword, newPassword)
     yield put({
-      type: actions.AUTH_SET_STATE,
+      type: Actions.AUTH_SET_STATE,
       payload: {
-        hasChangedPassword: states.AUTH_SUCCESS
+        hasChangedPassword: States.AUTH_SUCCESS
       }
     })
     action.payload.resolve()
   } catch (e) {
     yield put({
-      type: actions.AUTH_SET_STATE,
+      type: Actions.AUTH_SET_STATE,
       payload: {
         error: e
       }
@@ -250,7 +250,7 @@ function * confirmUser (action) {
 
     // pre-fetch update
     yield put({
-      type: actions.AUTH_CONFIRM_USER_REQUEST_SENT,
+      type: Actions.AUTH_CONFIRM_USER_REQUEST_SENT,
       payload: {
         fetching: true,
       }
@@ -261,7 +261,7 @@ function * confirmUser (action) {
 
     // post-fetch update
     yield put({
-      type: actions.AUTH_SET_STATE,
+      type: Actions.AUTH_SET_STATE,
       payload: {
         fetching: false,
       }
@@ -274,7 +274,7 @@ function * confirmUser (action) {
   } catch (error) {
     console.error(error)
     yield put({
-      type: actions.AUTH_CONFIRM_USER_REQUEST_FAILED,
+      type: Actions.AUTH_CONFIRM_USER_REQUEST_FAILED,
         payload: {
           ...defaultState,
           error
@@ -287,14 +287,14 @@ function * confirmUser (action) {
   }
 }
 
-export default function * sagas () {
-  yield takeLatest(actions.AUTH_INIT, init)
-  yield takeLatest(actions.AUTH_GET_USER, getUser)
-  yield takeLatest(actions.AUTH_SIGN_UP, signUp)
-  yield takeLatest(actions.AUTH_SIGN_IN, signIn)
-  yield takeLatest(actions.AUTH_SIGN_OUT, signOut)
-  yield takeLatest(actions.AUTH_FORGOT_PASSWORD, forgotPassword)
-  yield takeLatest(actions.AUTH_CHANGE_PASSWORD, changePassword)
-  yield takeLatest(actions.AUTH_COMPLETE_NEW_PASSWORD, completeNewPassword)
-  yield takeLatest(actions.AUTH_CONFIRM_USER_REQUESTED, confirmUser)
+export default function * Sagas () {
+  yield takeLatest(Actions.AUTH_INIT, init)
+  yield takeLatest(Actions.AUTH_GET_USER, getUser)
+  yield takeLatest(Actions.AUTH_SIGN_UP, signUp)
+  yield takeLatest(Actions.AUTH_SIGN_IN, signIn)
+  yield takeLatest(Actions.AUTH_SIGN_OUT, signOut)
+  yield takeLatest(Actions.AUTH_FORGOT_PASSWORD, forgotPassword)
+  yield takeLatest(Actions.AUTH_CHANGE_PASSWORD, changePassword)
+  yield takeLatest(Actions.AUTH_COMPLETE_NEW_PASSWORD, completeNewPassword)
+  yield takeLatest(Actions.AUTH_CONFIRM_USER_REQUESTED, confirmUser)
 }

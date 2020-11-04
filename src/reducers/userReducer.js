@@ -1,6 +1,6 @@
-import * as action from '../actions'
+import * as action from '../Actions'
 
-import * as Endpoints from '../endpoints'
+import * as Endpoints from '../Data/Endpoints'
 
 let defaultState = {
   fetching: false,
@@ -10,7 +10,7 @@ let defaultState = {
   signatureRequests: [],
   projectS3Token: "",
   userS3Token: "",
-  route: Endpoints.DEFAULTLOGGEDINPAGE,
+  currentRoute: Endpoints.DEFAULTLOGGEDINPAGE,
 }
 
 
@@ -21,11 +21,11 @@ export const init = () => {
   }
 }
 
-export const storeRoute = ( route ) => {
+export const storeRoute = ( currentRoute ) => {
   return {
     type: action.USER_SET_STATE,
     payload: {
-      route
+      currentRoute
     }
   }
 }

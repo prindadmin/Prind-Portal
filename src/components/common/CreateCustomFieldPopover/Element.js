@@ -12,8 +12,8 @@ import {
 
 import PopOverHandler from '../popOverHandler'
 
-import * as strings from '../../../data/Strings'
-import * as validators from '../../../validators'
+import * as strings from '../../../Data/Strings'
+import * as Validators from '../../../Validators'
 import * as FormInputs from '../formInputs'
 
 const fieldTypes = [
@@ -194,7 +194,7 @@ export class Element extends Component {
           >
             <Field
               name="title"
-              validate={[validators.required, validators.maxLength64]}
+              validate={[Validators.required, Validators.maxLength64]}
               component={FormInputs.TextInput}
               placeholder={strings.FIELD_TITLE}
             />
@@ -207,7 +207,7 @@ export class Element extends Component {
           >
             <Field
               name="description"
-              validate={[validators.required]}
+              validate={[Validators.required]}
               component={FormInputs.TextInput}
               placeholder={strings.FIELD_DESCRIPTION}
             />
@@ -239,7 +239,7 @@ export class Element extends Component {
               >
                 <Field
                   name="fieldDropDownOptions"
-                  validate={[validators.required]}
+                  validate={[Validators.required]}
                   component={FormInputs.TextInput}
                   placeholder={strings.DROP_DOWN_OPTIONS}
                 />

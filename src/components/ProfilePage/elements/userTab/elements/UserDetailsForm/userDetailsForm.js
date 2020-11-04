@@ -12,8 +12,8 @@ import {
 
 import AWS from 'aws-sdk';
 
-import * as strings from '../../../../../../data/Strings'
-import * as validators from '../../../../../../validators'
+import * as strings from '../../../../../../Data/Strings'
+import * as Validators from '../../../../../../Validators'
 
 import * as FormInputs from '../../../../../common/formInputs'
 
@@ -267,7 +267,7 @@ export class Page extends Component {
                 >
                   <Field
                     name="firstName"
-                    validate={[validators.required, validators.maxLength64]}
+                    validate={[Validators.required, Validators.maxLength64]}
                     component={FormInputs.TextInput}
                     placeholder={strings.MEMBER_FIRST_NAME}
                     disabled={true}
@@ -283,7 +283,7 @@ export class Page extends Component {
                 >
                   <Field
                     name="lastName"
-                    validate={[validators.required, validators.maxLength64]}
+                    validate={[Validators.required, Validators.maxLength64]}
                     component={FormInputs.TextInput}
                     placeholder={strings.MEMBER_LAST_NAME}
                     disabled={true}
@@ -311,7 +311,7 @@ export class Page extends Component {
                 >
                   <Field
                     name="emailAddress"
-                    validate={[validators.required, validators.isEmailAddress]}
+                    validate={[Validators.required, Validators.isEmailAddress]}
                     component={FormInputs.TextInput}
                     placeholder={strings.MEMBER_EMAIL_ADDRESS}
                     disabled={true}
@@ -325,7 +325,7 @@ export class Page extends Component {
                 >
                   <Field
                     name="homePhoneNumber"
-                    validate={[validators.maxLength32]}
+                    validate={[Validators.maxLength32]}
                     component={FormInputs.TextInput}
                     placeholder={strings.MEMBER_LANDLINE_PHONE_NUMBER_WORK}
                     disabled={true}
@@ -340,7 +340,7 @@ export class Page extends Component {
                 >
                   <Field
                     name="mobilePhoneNumber"
-                    validate={[validators.maxLength32]}
+                    validate={[Validators.maxLength32]}
                     component={FormInputs.TextInput}
                     placeholder={strings.MEMBER_MOBILE_PHONE_NUMBER_WORK}
                     disabled={true}

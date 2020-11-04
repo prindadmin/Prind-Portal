@@ -25,6 +25,11 @@
   --tile-selected-green: #d2e9af;
   --profile-avatar-height: 150px;
   --avatar-padding: 4px;
+  --prind-palette-color-1: #FEFFFE;
+  --prind-palette-color-2: #E9EBF8;
+  --prind-palette-color-3: #178CA4;
+  --prind-palette-color-4: #8D818C;
+  --prind-palette-color-5: #072A40;
 }
 
 
@@ -36,6 +41,7 @@
   font-weight: 400;
   background-color: white;
   min-height: 100vh;
+  padding: 0;
 }
 
 .full-height {
@@ -176,11 +182,13 @@ hr {
   display: flex;
   flex-direction: column;
   width: 90%;
+  padding-bottom: var(--footer-height);
 }
 
 .sidebar h2 {
   margin: 0.3em 0;
   font-size: calc(14px + ((30 - 20) * (100vw - 300px) / (1600 - 300)));
+  color: var(--prind-palette-color-3);
 }
 
 /* ================================ */
@@ -265,6 +273,27 @@ hr {
   right: -3px;
   border: 1px solid #8b0000;
 }
+
+/* ================================== */
+/*    logged-in-content-container     */
+/* ================================== */
+
+#logged-in-content-container {
+  margin: 0;
+  padding: 0;
+}
+
+
+/* ================================== */
+/*      logged-in-body-section        */
+/* ================================== */
+
+#logged-in-body-section {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 
 /* ================================== */
 /* ====== working area section ====== */
@@ -1392,6 +1421,8 @@ background-color: var(--field-element-grey);
   height: var(--footer-height);
   display: flex;
   flex-direction: column;
+  position: fixed;
+  bottom: 0;
 }
 
 #footer-bar .footer-content {
@@ -1425,6 +1456,7 @@ background-color: var(--field-element-grey);
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 800px;
 }
 
 .no-project-selected svg {
@@ -1640,7 +1672,8 @@ background-color: var(--field-element-grey);
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 0.67em 0;
+  padding: 0.5em 0;
+  margin: 0;
 }
 
 #no-foundations-id-banner p {

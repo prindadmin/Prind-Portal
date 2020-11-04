@@ -6,9 +6,9 @@ import { call, put, takeLatest } from 'redux-saga/effects'
 import {
   selfSignFileDispatcher,
   rejectSignatureRequestDispatcher
-} from '../dispatchers/foundations'
+} from '../Dispatchers/foundations'
 
-import * as actions from '../actions'
+import * as Actions from '../Actions'
 
 let defaultState = {
   fetching: false,
@@ -16,7 +16,7 @@ let defaultState = {
 
 function * init (action) {
   yield put({
-    type: actions.FOUNDATIONS_SET_STATE,
+    type: Actions.FOUNDATIONS_SET_STATE,
     payload: defaultState
   })
 }
@@ -30,7 +30,7 @@ function * selfSignFile (action) {
 
     // Pre-fetch update to store
     yield put({
-      type: actions.FOUNDATIONS_SELF_SIGN_FILE_REQUEST_SENT,
+      type: Actions.FOUNDATIONS_SELF_SIGN_FILE_REQUEST_SENT,
       payload: {
         ...defaultState,
         fetching: true
@@ -41,7 +41,7 @@ function * selfSignFile (action) {
 
     // Post-fetch update to store
     yield put({
-      type: actions.FOUNDATIONS_SET_STATE,
+      type: Actions.FOUNDATIONS_SET_STATE,
       payload: {
         ...defaultState,
       }
@@ -50,7 +50,7 @@ function * selfSignFile (action) {
   catch (error) {
     console.error(error)
     yield put({
-      type: actions.FOUNDATIONS_SELF_SIGN_FILE_REQUEST_FAILED,
+      type: Actions.FOUNDATIONS_SELF_SIGN_FILE_REQUEST_FAILED,
         payload: {
           ...defaultState,
           error
@@ -68,7 +68,7 @@ function * rejectSignatureRequest (action) {
 
     // Pre-fetch update to store
     yield put({
-      type: actions.FOUNDATIONS_REJECT_SIGNATURE_REQUEST_REQUEST_SENT,
+      type: Actions.FOUNDATIONS_REJECT_SIGNATURE_REQUEST_REQUEST_SENT,
       payload: {
         ...defaultState,
         fetching: true
@@ -79,7 +79,7 @@ function * rejectSignatureRequest (action) {
 
     // Post-fetch update to store
     yield put({
-      type: actions.FOUNDATIONS_SET_STATE,
+      type: Actions.FOUNDATIONS_SET_STATE,
       payload: {
         ...defaultState,
       }
@@ -87,7 +87,7 @@ function * rejectSignatureRequest (action) {
 
     // Request that the signatures list is updated
     yield put({
-      type: actions.USER_GET_PROJECT_SIGNATURES_REQUESTED,
+      type: Actions.USER_GET_PROJECT_SIGNATURES_REQUESTED,
       payload: {
         identityToken,
       }
@@ -100,7 +100,7 @@ function * rejectSignatureRequest (action) {
   catch (error) {
     console.error(error)
     yield put({
-      type: actions.FOUNDATIONS_REJECT_SIGNATURE_REQUEST_REQUEST_FAILED,
+      type: Actions.FOUNDATIONS_REJECT_SIGNATURE_REQUEST_REQUEST_FAILED,
         payload: {
           ...defaultState,
           error
@@ -113,8 +113,8 @@ function * rejectSignatureRequest (action) {
   }
 }
 
-export default function * sagas () {
-  yield takeLatest(actions.FOUNDATIONS_INIT, init)
-  yield takeLatest(actions.FOUNDATIONS_SELF_SIGN_FILE_REQUESTED, selfSignFile)
-  yield takeLatest(actions.FOUNDATIONS_REJECT_SIGNATURE_REQUEST_REQUESTED, rejectSignatureRequest)
+export default function * Sagas () {
+  yield takeLatest(Actions.FOUNDATIONS_INIT, init)
+  yield takeLatest(Actions.FOUNDATIONS_SELF_SIGN_FILE_REQUESTED, selfSignFile)
+  yield takeLatest(Actions.FOUNDATIONS_REJECT_SIGNATURE_REQUEST_REQUESTED, rejectSignatureRequest)
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import ItemIcon from './ItemIcon'
-import * as strings from '../../data/Strings'
+import * as strings from '../../Data/Strings'
 
 export class NoProjectSelected extends Component {
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import { Spinner, Intent } from '@blueprintjs/core'
 
-import * as strings from '../../data/Strings'
+import * as strings from '../../Data/Strings'
 
 export class ProjectLoading extends Component {
   static propTypes = {

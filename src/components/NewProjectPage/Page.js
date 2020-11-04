@@ -10,15 +10,15 @@ import {
   Callout,
 } from '@blueprintjs/core'
 
-import HeaderBar from '../common/HeaderBar';
-import PageChooserSection from '../layouts/PageChooserSection'
+import HeaderBar from '../HeaderBar';
+import SideBar from '../SideBar'
 import Footer from '../common/footer'
 
 import * as FormInputs from '../common/formInputs'
 
-import * as strings from '../../data/Strings'
-import * as validators from '../../validators'
-import * as Endpoints from '../../endpoints'
+import * as strings from '../../Data/Strings'
+import * as Validators from '../../Validators'
+import * as Endpoints from '../../Data/Endpoints'
 
 import {
   CreatingProjectPopover
@@ -96,7 +96,7 @@ export class Page extends Component {
         >
           <Field
             name="projectName"
-            validate={[validators.required, validators.maxLength64]}
+            validate={[Validators.required, Validators.maxLength64]}
             component={FormInputs.TextInput}
             placeholder={strings.PROJECT_NAME}
           />
@@ -214,7 +214,7 @@ export class Page extends Component {
         }
 
         <div className='content-with-sidebar full-height row'>
-          <PageChooserSection />
+          <SideBar />
           <div className='page-content-section col-xl-10 col-lg-9 col-md-9 col-sm-9'>
             {this.newProjectPageHeader()}
             {

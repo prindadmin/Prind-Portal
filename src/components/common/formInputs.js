@@ -8,7 +8,7 @@ import { Select } from "@blueprintjs/select";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 
-import * as strings from '../../data/Strings'
+import * as strings from '../../Data/Strings'
 
 const validationErrorStyle = {
   color: '#db3737',

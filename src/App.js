@@ -10,45 +10,32 @@ import {
   Switch
 } from "react-router-dom";
 
-import { AUTH_SUCCESS } from './states'
+import { AUTH_SUCCESS } from './States'
 
-import * as Endpoints from './endpoints'
-import PrivateRoute from './components/PrivateRoute';
+import * as Endpoints from './Data/Endpoints'
+import PrivateRoute from './Components/PrivateRoute';
 
-import Auth from './components/Auth';
-import Error404 from './components/Error404'
-import TestPage from './components/TestPage'
+import Auth from './Components/Auth';
+import Error404 from './Components/Error404'
+import TestPage from './Components/TestPage'
 
 /* Before sign in pages */
-const SignIn = lazy(() => import('./components/SignIn'));
-const SignUp = lazy(() => import('./components/SignUp'));
-const ForgotPassword = lazy(() => import('./components/ForgotPassword'));
-const ChangePassword = lazy(() => import('./components/ChangePassword'));
-const ConfirmEmailPage = lazy(() => import('./components/ConfirmEmailPage'));
-
-/* Stage pages */
-const InceptionPage= lazy(() => import('./components/InceptionPage'));
-const FeasibilityPage= lazy(() => import('./components/FeasibilityPage'));
-const DesignPage= lazy(() => import('./components/DesignPage'));
-const TenderPage= lazy(() => import('./components/TenderPage'));
-const ConstructionPage= lazy(() => import('./components/ConstructionPage'));
-const HandoverPage= lazy(() => import('./components/HandoverPage'));
-const OccupationPage= lazy(() => import('./components/OccupationPage'));
-const RefurbishmentPage= lazy(() => import('./components/RefurbishmentPage'));
+const SignIn = lazy(() => import('./Components/SignIn'));
+const SignUp = lazy(() => import('./Components/SignUp'));
+const ForgotPassword = lazy(() => import('./Components/ForgotPassword'));
+const ChangePassword = lazy(() => import('./Components/ChangePassword'));
+const ConfirmEmailPage = lazy(() => import('./Components/ConfirmEmailPage'));
 
 /* Project pages */
-const NewProjectPage= lazy(() => import('./components/NewProjectPage'));
-const EditProjectPage= lazy(() => import('./components/EditProjectPage'));
-const ProjectTeamPage= lazy(() => import('./components/ProjectTeamPage'));
+const NewProjectPage= lazy(() => import('./Components/NewProjectPage'));
 
 /* Other pages */
-const ProfilePage= lazy(() => import('./components/ProfilePage'));
-const Foundations= lazy(() => import('./components/FoundationsPage'));
+const ProfilePage= lazy(() => import('./Components/ProfilePage'));
+const Foundations= lazy(() => import('./Components/FoundationsPage'));
+const LoggedInContent = lazy(() => import('./Pages/LoggedInContent'));
 
-// TODO: Add functionality below 800px width to not show the site
 // TODO: make mobile friendly in future
 // TODO: Remove aws-cognito-promises dependency from the system as it uses a very old AWS-SDK version
-// TODO: Add project name into address bar so it can be restored
 
 class App extends Component{
 
@@ -93,38 +80,57 @@ class App extends Component{
     const { auth } = this.props
 
     return (
-      <div className="App full-height">
+      <div className="App full-height container-fluid">
         <Router>
           <Auth />
 
           <Suspense fallback={<div>Loading...</div>}>
             <Switch>
-              <Route path='/SignIn' component={SignIn} />
-              <Route path='/SignUp' component={SignUp} />
+              <Route path='/signin' component={SignIn} />
+              <Route path='/signup' component={SignUp} />
               <Route path='/forgot-password' component={ForgotPassword} />
               <Route path='/reset-password' component={ChangePassword} />
               <Route path='/confirm-email' component={ConfirmEmailPage} />
 
-              <PrivateRoute path='/Project' component={EditProjectPage} />
-              <PrivateRoute path='/Team' component={ProjectTeamPage} />
-              <PrivateRoute path='/Inception' component={InceptionPage} />
-              <PrivateRoute path='/Feasibility' component={FeasibilityPage} />
-              <PrivateRoute path='/Design' component={DesignPage} />
-              <PrivateRoute path='/Tender' component={TenderPage} />
-              <PrivateRoute path='/Construction' component={ConstructionPage} />
-              <PrivateRoute path='/Handover' component={HandoverPage} />
-              <PrivateRoute path='/Occupation' component={OccupationPage} />
-              <PrivateRoute path='/Refurbishment' component={RefurbishmentPage} />
+              <PrivateRoute path='/project' component={LoggedInContent} />
+              <PrivateRoute path='/project/:id?' component={LoggedInContent} />
 
-              <PrivateRoute path='/NewProject' component={NewProjectPage} />
-              <PrivateRoute path='/Profile' component={ProfilePage} />
-              <PrivateRoute path='/TestPage' component={TestPage} />
-              <PrivateRoute path='/Foundations' component={Foundations} />
+              <PrivateRoute path='/team' component={LoggedInContent} />
+              <PrivateRoute path='/team/:id?' component={LoggedInContent} />
+
+              <PrivateRoute path='/inception' component={LoggedInContent} />
+              <PrivateRoute path='/inception/:id?' component={LoggedInContent} />
+
+              <PrivateRoute path='/feasibility' component={LoggedInContent} />
+              <PrivateRoute path='/feasibility/:id?' component={LoggedInContent} />
+
+              <PrivateRoute path='/design' component={LoggedInContent} />
+              <PrivateRoute path='/design/:id?' component={LoggedInContent} />
+
+              <PrivateRoute path='/tender' component={LoggedInContent} />
+              <PrivateRoute path='/tender/:id?' component={LoggedInContent} />
+
+              <PrivateRoute path='/construction' component={LoggedInContent} />
+              <PrivateRoute path='/construction/:id?' component={LoggedInContent} />
+
+              <PrivateRoute path='/handover' component={LoggedInContent} />
+              <PrivateRoute path='/handover/:id?' component={LoggedInContent} />
+
+              <PrivateRoute path='/occupation' component={LoggedInContent} />
+              <PrivateRoute path='/occupation/:id?' component={LoggedInContent} />
+
+              <PrivateRoute path='/refurbishment' component={LoggedInContent} />
+              <PrivateRoute path='/refurbishment/:id?' component={LoggedInContent} />
+
+              <PrivateRoute path='/newproject' component={NewProjectPage} />
+              <PrivateRoute path='/profile' component={ProfilePage} />
+              <PrivateRoute path='/testpage' component={TestPage} />
+              <PrivateRoute path='/foundations' component={Foundations} />
 
               <Route path='/'
                 render={() =>
                   auth.isSignedIn === AUTH_SUCCESS ? (
-                    <Redirect to={this.props.user.route} />
+                    <Redirect to={this.props.user.currentRoute} />
                   ) : (
                     <Redirect to={Endpoints.SIGNINPAGE} />
                   )

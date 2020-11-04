@@ -1,8 +1,8 @@
 
 import { call, put, takeLatest } from 'redux-saga/effects'
-import * as actions from '../../actions'
+import * as Actions from '../../Actions'
 
-import { designPageDispatcher } from '../../dispatchers/pages'
+import { designPageDispatcher } from '../../Dispatchers/pages'
 
 const defaultState = {
   fields: [],
@@ -17,7 +17,7 @@ function * getPageContent (action) {
 
   try {
     yield put({
-      type: actions.PAGE_GET_CONTENT_DESIGN_REQUEST_SENT,
+      type: Actions.PAGE_GET_CONTENT_DESIGN_REQUEST_SENT,
       payload: {
         ...defaultState,
         fetching: true
@@ -25,7 +25,7 @@ function * getPageContent (action) {
     })
     const { data: result } = yield call(designPageDispatcher, identityToken, projectID )
     yield put({
-      type: actions.PAGE_DESIGN_SET_STATE,
+      type: Actions.PAGE_DESIGN_SET_STATE,
       payload: {
         ...defaultState,
         fields: result.body,
@@ -35,7 +35,7 @@ function * getPageContent (action) {
     catch (error) {
       console.error(error)
       yield put({
-        type: actions.PAGE_GET_CONTENT_DESIGN_REQUEST_FAILED,
+        type: Actions.PAGE_GET_CONTENT_DESIGN_REQUEST_FAILED,
           payload: {
             fetching: false,
             error,
@@ -45,7 +45,7 @@ function * getPageContent (action) {
 }
 
 
-export default function * sagas () {
-  yield takeLatest(actions.PAGE_GET_CONTENT_DESIGN_REQUESTED, getPageContent)
-  yield takeLatest(actions.PROJECT_UPLOAD_FILE_REQUEST_SUCCESSFUL_DESIGN, getPageContent)
+export default function * Sagas () {
+  yield takeLatest(Actions.PAGE_GET_CONTENT_DESIGN_REQUESTED, getPageContent)
+  yield takeLatest(Actions.PROJECT_UPLOAD_FILE_REQUEST_SUCCESSFUL_DESIGN, getPageContent)
 }

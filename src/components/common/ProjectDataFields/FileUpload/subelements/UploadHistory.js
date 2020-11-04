@@ -7,7 +7,7 @@ import {
 
 import FileDetailPopover from './FileDetailPopover'
 
-import * as strings from '../../../../../data/Strings'
+import * as strings from '../../../../../Data/Strings'
 
 export class Element extends Component {
   static propTypes = {

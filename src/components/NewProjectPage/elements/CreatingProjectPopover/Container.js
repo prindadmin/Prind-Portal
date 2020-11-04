@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-//import * as reducer from '../../../../reducers/projectsReducer'
+//import * as reducer from '../../../../Reducers/projectsReducer'
 
 import Component from './Component'
 

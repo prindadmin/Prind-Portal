@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import ItemIcon from '../../../../ItemIcon'
-import * as strings from '../../../../../../data/Strings'
+import * as strings from '../../../../../../Data/Strings'
 
 export class Element extends Component {
   static propTypes = {

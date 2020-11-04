@@ -11,7 +11,7 @@ import {
 
 import AWS from 'aws-sdk';
 
-import * as strings from '../../../../../../data/Strings'
+import * as strings from '../../../../../../Data/Strings'
 
 
 const windowCloseDelay = 1500

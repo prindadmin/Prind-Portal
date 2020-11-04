@@ -10,7 +10,7 @@ const mapStatetoProps = state => {
   }
 }
 
-// This defines all the actions that can be fetched from the reducer
+// This defines all the Actions that can be fetched from the reducer
 const mapDispatchToProps = dispatch => {
   return {
   }
