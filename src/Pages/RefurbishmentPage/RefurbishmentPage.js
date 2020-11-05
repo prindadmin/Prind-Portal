@@ -22,7 +22,7 @@ export class RefurbishmentPage extends Component {
   componentDidMount() {
     const { projects, auth, getContent, location } = this.props
     const { projectId } = projects.chosenProject
-    const { jwtToken } = auth.info.idToken
+    const { jwtToken } = auth.signInUserSession.idToken
 
     // Register pageview with GA
     ReactGA.pageview(location.pathname + location.search);
@@ -35,7 +35,7 @@ export class RefurbishmentPage extends Component {
   componentDidUpdate(prevProps) {
     const { projects, auth, getContent } = this.props
     const { projectId } = projects.chosenProject
-    const { jwtToken } = auth.info.idToken
+    const { jwtToken } = auth.signInUserSession.idToken
 
     if (projectId !== prevProps.projects.chosenProject.projectId) {
       getContent(jwtToken, projectId)

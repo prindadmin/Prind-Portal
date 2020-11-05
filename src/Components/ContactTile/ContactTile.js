@@ -93,7 +93,7 @@ export class ContactTile extends Component {
     })
 
     removeMember(
-      auth.info.idToken.jwtToken,
+      auth.signInUserSession.idToken.jwtToken,
       projects.chosenProject.projectId,
       memberDetails.username,
       this.removeMemberResolve,

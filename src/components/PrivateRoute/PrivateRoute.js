@@ -6,6 +6,8 @@ import * as States from '../../States'
 
 import * as Endpoints from '../../Data/Endpoints'
 
+import { Auth } from 'aws-amplify';
+
 // FUTURE: projects/create isn't linkable to...
 
 class PrivateRoute extends React.Component {

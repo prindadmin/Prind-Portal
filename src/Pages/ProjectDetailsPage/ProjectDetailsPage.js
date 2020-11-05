@@ -53,7 +53,7 @@ export class ProjectDetailsPage extends Component {
     const { updateProjectDetails, history, auth, projects } = this.props
 
     await updateProjectDetails(
-      auth.info.idToken.jwtToken,
+      auth.signInUserSession.idToken.jwtToken,
       projects.chosenProject.projectId,
       values
     )
@@ -197,7 +197,7 @@ export class ProjectDetailsPage extends Component {
 
   confirmDeleteProject = () => {
 
-    const { jwtToken } = this.props.auth.info.idToken
+    const { jwtToken } = this.props.auth.signInUserSession.idToken
     const { projectId } = this.props.projects.chosenProject
 
     this.props.deleteProject(

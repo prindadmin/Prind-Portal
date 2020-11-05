@@ -16,17 +16,17 @@ const mapStatetoProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getProjectDetails: (idToken, project, resolve) => {
-      dispatch(projectsReducer.updateChosenProject(idToken, project, resolve))
+    getProjectDetails: (project, resolve) => {
+      dispatch(projectsReducer.updateChosenProject(project, resolve))
     },
     saveProjectID: (projectID) => {
       dispatch(projectsReducer.saveProjectID(projectID))
     },
-    requestS3ProjectFileUploadToken: (jwtToken, project_id, pageName) => {
-      dispatch(userReducer.requestS3ProjectFileUploadToken(jwtToken, project_id, pageName))
+    requestS3ProjectFileUploadToken: (project_id, pageName) => {
+      dispatch(userReducer.requestS3ProjectFileUploadToken(project_id, pageName))
     },
-    getProjectMembers: (identityToken, projectID) => {
-      dispatch(projectsReducer.getCurrentMembers(identityToken, projectID))
+    getProjectMembers: (projectID) => {
+      dispatch(projectsReducer.getCurrentMembers(projectID))
     }
   }
 }

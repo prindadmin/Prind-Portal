@@ -1,6 +1,8 @@
 import React, { Component, lazy, Suspense } from 'react';
 import './App.css';
 
+import Amplify, { Auth } from 'aws-amplify';
+
 import ReactGA from 'react-ga';
 
 import {
@@ -15,7 +17,6 @@ import { AUTH_SUCCESS } from './States'
 import * as Endpoints from './Data/Endpoints'
 import PrivateRoute from './Components/PrivateRoute';
 
-import Auth from './Components/Auth';
 import Error404 from './Components/Error404'
 import TestPage from './Components/TestPage'
 
@@ -37,6 +38,20 @@ const LoggedInContent = lazy(() => import('./Pages/LoggedInContent'));
 // TODO: make mobile friendly in future
 // TODO: Remove aws-cognito-promises dependency from the system as it uses a very old AWS-SDK version
 
+// Use existing Cognito resource for auth
+Amplify.configure({
+    Auth: {
+        // REQUIRED - Amazon Cognito Region
+        region: process.env.REACT_APP_REGION,
+
+        // OPTIONAL - Amazon Cognito User Pool ID
+        userPoolId: process.env.REACT_APP_USER_POOL_ID,
+
+        // OPTIONAL - Amazon Cognito Web Client ID (26-char alphanumeric string)
+        userPoolWebClientId: process.env.REACT_APP_CLIENT_ID,
+    }
+});
+
 class App extends Component{
 
   constructor() {
@@ -57,6 +72,10 @@ class App extends Component{
   componentDidMount() {
     // Turn off the logger if this is a production environment
     process.env.REACT_APP_STAGE === "PRODUCTION" ? this.disableLogger() : this.enableLogger()
+
+    // Show the details of the Auth configuration
+    const currentConfig = Auth.configure();
+    console.log(currentConfig)
   }
 
   enableLogger = () => {
@@ -82,8 +101,6 @@ class App extends Component{
     return (
       <div className="App full-height container-fluid">
         <Router>
-          <Auth />
-
           <Suspense fallback={<div>Loading...</div>}>
             <Switch>
               <Route path='/signin' component={SignIn} />

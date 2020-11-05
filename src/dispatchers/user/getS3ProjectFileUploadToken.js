@@ -1,9 +1,19 @@
 import axios from 'axios'
 import https from 'https'
 
-export default function(identityToken, project_id, pageName) {
+import { Auth } from 'aws-amplify';
+
+export default function(project_id, pageName) {
+
+  console.log("Getting S3 token")
 
   return new Promise((resolve, reject) => {
+
+    // Get the current session and the identity jwtToken
+    const identityToken = Auth.currentSession()
+      .then(credentials => {
+          return credentials.idToken.jwtToken
+        })
 
     const instance = axios.create({
       httpsAgent: new https.Agent({

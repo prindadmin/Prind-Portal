@@ -6,11 +6,19 @@ import { register, changePasswordAccount, confirmUserDispatcher } from '../Dispa
 import * as Actions from '../Actions'
 import * as States from '../States'
 
+import {
+  //registerNewUserDispatcher,
+  signInDispatcher,
+  //signOutDispatcher,
+  //resendConfirmationCodeDispatcher,
+  //refreshSessionDispatcher,
+} from '../Dispatchers/Auth'
 
-// auth is stateless. Each call to a auth action resets all state EXCEPT for completeNewPassword
+
 let defaultState = {
   info: {},
   error: {},
+  username: null,
   isSignedIn: States.AUTH_UNKNOWN,
   isConfirmed: States.AUTH_UNKNOWN,
   hasSignedUp: States.AUTH_UNKNOWN,
@@ -124,43 +132,38 @@ function * signOut () {
 
 function * signIn (action) {
   try {
-    const { email, password, code } = action.payload.values
-    const username = email
-
-    if (code) {
-      yield call(auth.confirmation, username, code)
-    }
-
-    yield call(auth.signIn, username, password)
-    let user = auth.config.getUser()
-    let session = yield call(auth.getSession)
+    const result = yield call(signInDispatcher, action.payload.values)
     yield put({
       type: Actions.AUTH_SET_STATE,
       payload: {
         isSignedIn: States.AUTH_SUCCESS,
         isConfirmed: States.AUTH_SUCCESS,
-        info: { username: user.username, ...session }
       }
     })
-    action.payload.resolve()
-  } catch (e) {
-    if (e.code === 'UserNotConfirmedException') {
-      yield put({
-        type: Actions.AUTH_SET_STATE,
-        payload: { isConfirmed: States.AUTH_FAIL, error: e }
-      })
-    } else if (e.code === 'PasswordResetRequiredException') {
-      yield put({
-        type: Actions.AUTH_SET_STATE,
-        payload: { passwordResetRequired: States.AUTH_SUCCESS, error: e }
-      })
-    } else {
-      yield put({
-        type: Actions.AUTH_SET_STATE,
-        payload: { ...defaultState, isConfirmed: States.AUTH_SUCCESS, error: e }
-      })
+
+    yield put({
+      type: Actions.AUTH_SET_STATE,
+      payload: {
+        ...result
+      }
+    })
+
+    if (action.payload.resolve !== undefined) {
+      action.payload.resolve(result)
     }
-    action.payload.reject()
+
+  } catch (e) {
+    yield put({
+      type: Actions.AUTH_SET_STATE,
+      payload: {
+        ...defaultState,
+        error: e
+      }
+    })
+
+    if (action.payload.reject !== undefined) {
+      action.payload.reject(e)
+    }
   }
 }
 

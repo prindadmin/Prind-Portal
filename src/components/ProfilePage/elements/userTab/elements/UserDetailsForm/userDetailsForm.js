@@ -109,7 +109,7 @@ export class Page extends Component {
     const { requestS3UserFileUploadToken, auth } = this.props
 
     // Get a token to allow the uploading of the file
-    requestS3UserFileUploadToken(auth.info.idToken.jwtToken, "profile-avatar")
+    requestS3UserFileUploadToken(auth.signInUserSession.idToken.jwtToken, "profile-avatar")
 
     e.persist()
 

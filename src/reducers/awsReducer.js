@@ -1,6 +1,10 @@
 import * as action from '../Actions'
 import * as state from '../States'
 
+let defaultState = {
+  isSignedIn: state.AUTH_UNKNOWN
+}
+
 export const init = () => {
   return {
     type: action.AUTH_INIT,
@@ -92,10 +96,6 @@ export const confirmUser = ( userParameters, resolve, reject ) => {
 const ACTION_HANDLERS = {
   [action.AUTH_INIT]: (state, action) => { return { ...state, ...action.payload }},
   [action.AUTH_SET_STATE]: (state, action) => { return { ...state, ...action.payload }},
-}
-
-let defaultState = {
-  isSignedIn: state.AUTH_UNKNOWN
 }
 
 export const reducer = (state = defaultState, action) => {

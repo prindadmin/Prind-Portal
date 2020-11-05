@@ -30,7 +30,7 @@ export class ProjectSelectorPopUp extends Component {
     }
 
     this.props.getAccessibleProjects(
-      props.auth.info.idToken.jwtToken,
+      props.auth.signInUserSession.idToken.jwtToken,
       this.resolveProjectFetch,
       this.rejectProjectFetch,
     )
@@ -66,7 +66,7 @@ export class ProjectSelectorPopUp extends Component {
     })
 
     updateChosenProject(
-      auth.info.idToken.jwtToken,
+      auth.signInUserSession.idToken.jwtToken,
       project,
       this.resolveProjectUpdate,
       this.rejectProjectUpdate,

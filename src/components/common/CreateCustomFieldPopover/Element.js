@@ -121,7 +121,7 @@ export class Element extends Component {
 
     // Send to server
     this.props.createField(
-      auth.info.idToken.jwtToken,
+      auth.signInUserSession.idToken.jwtToken,
       projectID,
       pageName,
       newFieldDetails,

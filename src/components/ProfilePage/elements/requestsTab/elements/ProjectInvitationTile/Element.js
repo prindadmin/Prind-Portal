@@ -27,7 +27,7 @@ export class Element extends Component {
     const { auth, requestDetails, respondToProjectInvitation } = this.props
 
     respondToProjectInvitation(
-      auth.info.idToken.jwtToken,
+      auth.signInUserSession.idToken.jwtToken,
       requestDetails.projectId,
       true,
     )
@@ -38,7 +38,7 @@ export class Element extends Component {
     const { auth, requestDetails, respondToProjectInvitation } = this.props
 
     respondToProjectInvitation(
-      auth.info.idToken.jwtToken,
+      auth.signInUserSession.idToken.jwtToken,
       requestDetails.projectId,
       false,
     )

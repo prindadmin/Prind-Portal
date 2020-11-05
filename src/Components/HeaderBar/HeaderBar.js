@@ -17,7 +17,7 @@ export class HeaderBar extends Component {
 
     // When the header bar is loaded, fetch the user details
     getUserDetails(
-      auth.info.idToken.jwtToken,
+      auth.signInUserSession.idToken.jwtToken,
       this.resolveUserDetails,
       this.rejectUserDetails,
     )

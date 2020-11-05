@@ -85,7 +85,7 @@ export class Element extends Component {
     var members = selectedMembers.map(value => value.username);
 
     this.props.requestSignature(
-      auth.info.idToken.jwtToken,
+      auth.signInUserSession.idToken.jwtToken,
       projectID,
       pageName,
       fieldID,

@@ -125,7 +125,7 @@ export class Element extends Component {
 
     // Send to the reducer
     uploadFile(
-      auth.info.idToken.jwtToken,
+      auth.signInUserSession.idToken.jwtToken,
       projectID,
       pageName,
       fieldID,

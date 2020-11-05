@@ -38,13 +38,13 @@ export class ProjectTeamPage extends Component {
     if (props.projects.chosenProject.projectId !== "") {
       // Get the members for the selected project
       props.getCurrentMembers(
-        props.auth.info.idToken.jwtToken,
+        props.auth.signInUserSession.idToken.jwtToken,
         props.projects.chosenProject.projectId
       )
 
       // Get the available roles for this project
       props.getRoles(
-        props.auth.info.idToken.jwtToken,
+        props.auth.signInUserSession.idToken.jwtToken,
         props.projects.chosenProject.projectId
       )
     }
@@ -66,13 +66,13 @@ export class ProjectTeamPage extends Component {
 
       // Get the current members of the project
       getCurrentMembers(
-        auth.info.idToken.jwtToken,
+        auth.signInUserSession.idToken.jwtToken,
         projects.chosenProject.projectId
       )
 
       // Get the available roles for this project
       getRoles(
-        auth.info.idToken.jwtToken,
+        auth.signInUserSession.idToken.jwtToken,
         projects.chosenProject.projectId
       )
     }
@@ -88,7 +88,7 @@ export class ProjectTeamPage extends Component {
 
     // Get the current members of the project
     this.props.getCurrentMembers(
-      this.props.auth.info.idToken.jwtToken,
+      this.props.auth.signInUserSession.idToken.jwtToken,
       this.props.projects.chosenProject.projectId
     )
   }
@@ -112,7 +112,7 @@ export class ProjectTeamPage extends Component {
     newValues.roleId = this.state.selectedRoleID
 
     this.props.addMember(
-      this.props.auth.info.idToken.jwtToken,
+      this.props.auth.signInUserSession.idToken.jwtToken,
       this.props.projects.chosenProject.projectId,
       newValues,
       this.addMemberResolve,
@@ -231,7 +231,7 @@ export class ProjectTeamPage extends Component {
     const { getCurrentMembers, auth, projects } = this.props
 
     getCurrentMembers(
-      auth.info.idToken.jwtToken,
+      auth.signInUserSession.idToken.jwtToken,
       projects.chosenProject.projectId
     )
   }

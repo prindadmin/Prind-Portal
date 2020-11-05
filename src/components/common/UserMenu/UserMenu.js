@@ -29,14 +29,14 @@ class UserMenu extends Component {
 
     // Get the user project invitations
     getUserProjectInvitations(
-      auth.info.idToken.jwtToken,
+      auth.signInUserSession.idToken.jwtToken,
       this.projectRequestsResolve,
       this.projectRequestsReject,
     )
 
     // Get the user signature requests
     getUserSignatureRequests(
-      auth.info.idToken.jwtToken,
+      auth.signInUserSession.idToken.jwtToken,
       this.signatureRequestsResolve,
       this.signatureRequestsReject,
     )

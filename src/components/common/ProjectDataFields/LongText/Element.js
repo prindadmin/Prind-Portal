@@ -55,7 +55,7 @@ export class Element extends Component {
     })
 
     this.props.updateField(
-      auth.info.idToken.jwtToken,
+      auth.signInUserSession.idToken.jwtToken,
       projects.chosenProject.projectId,
       pageName,
       elementContent.id,

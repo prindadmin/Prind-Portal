@@ -55,7 +55,7 @@ export class Page extends Component {
     const { createProject, auth } = this.props
 
     createProject(
-      auth.info.idToken.jwtToken,
+      auth.signInUserSession.idToken.jwtToken,
       values,
       this.createResolve,
       this.createReject,

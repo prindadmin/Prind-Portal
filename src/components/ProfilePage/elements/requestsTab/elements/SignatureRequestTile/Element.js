@@ -43,7 +43,7 @@ export class Element extends Component {
 
     // Update the project currently chosen by the user to the project referenced in the request
     updateChosenProject(
-      auth.info.idToken.jwtToken,
+      auth.signInUserSession.idToken.jwtToken,
       project,
       this.resolveProjectUpdate,
       this.rejectProjectUpdate,
@@ -74,7 +74,7 @@ export class Element extends Component {
     const { auth, requestDetails, rejectSignatureRequest } = this.props
 
     rejectSignatureRequest(
-      auth.info.idToken.jwtToken,
+      auth.signInUserSession.idToken.jwtToken,
       requestDetails,
       this.resolveRejectRequest,
       this.rejectRejectRequest

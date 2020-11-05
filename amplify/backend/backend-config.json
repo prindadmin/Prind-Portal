@@ -1,0 +1,10 @@
+{
+  "auth": {
+    "prindportalc5d3ae7f": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}

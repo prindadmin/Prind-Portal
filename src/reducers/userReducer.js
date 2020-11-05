@@ -30,11 +30,10 @@ export const storeRoute = ( currentRoute ) => {
   }
 }
 
-export const requestS3ProjectFileUploadToken = ( identityToken, project_id, pageName ) => {
+export const requestS3ProjectFileUploadToken = ( project_id, pageName ) => {
   return {
     type: action.USER_S3_UPLOAD_PROJECT_FILE_TOKEN_REQUESTED,
     payload: {
-      identityToken,
       project_id,
       pageName,
     }

@@ -43,7 +43,6 @@ export class LoggedInContent extends Component {
 
     const { projects, auth, requestS3ProjectFileUploadToken, getProjectMembers } = this.props
     const { projectId } = projects.chosenProject
-    const { jwtToken } = auth.info.idToken
 
     const pageName = this.getPageName()
 
@@ -53,8 +52,8 @@ export class LoggedInContent extends Component {
 
     // If a project has been selected
     if (projects.chosenProject.projectId !== "") {
-      requestS3ProjectFileUploadToken(jwtToken, projectId, pageName)
-      getProjectMembers(jwtToken, projectId)
+      requestS3ProjectFileUploadToken(projectId, pageName)
+      getProjectMembers(projectId)
     }
   }
 
@@ -66,11 +65,10 @@ export class LoggedInContent extends Component {
       const { projects, auth, requestS3ProjectFileUploadToken, getProjectMembers } = this.props
       const { pageName } = this.state
       const { projectId } = projects.chosenProject
-      const { jwtToken } = auth.info.idToken
 
       if (projectId !== prevProps.projects.chosenProject.projectId) {
-        requestS3ProjectFileUploadToken(jwtToken, projectId, pageName)
-        getProjectMembers(jwtToken, projectId)
+        requestS3ProjectFileUploadToken(projectId, pageName)
+        getProjectMembers(projectId)
       }
     }
   }
@@ -100,7 +98,6 @@ export class LoggedInContent extends Component {
   getProjectID = () => {
     const { pathname } = this.props.location
     const currentProjectID = this.props.projects.chosenProject.projectId
-    const { jwtToken } = this.props.auth.info.idToken
 
     // Remove final character slash if it is present
     const pathnameToCheck = pathname.endsWith("/") ? pathname.slice(0, -1) : pathname
@@ -124,7 +121,7 @@ export class LoggedInContent extends Component {
         this.props.saveProjectID(projectIDToSave)
 
         // Fetch the details of the project
-        this.props.getProjectDetails(jwtToken, { projectId: projectIDToSave }, this.returnFromFetchingProjectDetails)
+        this.props.getProjectDetails({ projectId: projectIDToSave }, this.returnFromFetchingProjectDetails)
       }
 
       return projectIDToSave

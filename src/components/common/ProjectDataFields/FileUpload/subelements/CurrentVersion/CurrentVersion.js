@@ -65,7 +65,7 @@ export class Element extends Component {
 
     // Send the request
     this.props.selfSignFile(
-      auth.info.idToken.jwtToken,
+      auth.signInUserSession.idToken.jwtToken,
       projectID,
       pageName,
       fieldID,

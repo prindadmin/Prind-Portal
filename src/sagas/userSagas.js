@@ -26,10 +26,10 @@ function * init (action) {
 
 function * getS3ProjectFileUploadToken (action) {
 
-  const { identityToken, project_id, pageName } = action.payload
+  const { project_id, pageName } = action.payload
 
   try {
-    const { data: result } = yield call(Dispatchers.s3UploadProjectFileTokenDispatcher, identityToken, project_id, pageName)
+    const { data: result } = yield call(Dispatchers.s3UploadProjectFileTokenDispatcher, project_id, pageName)
     yield put({
       type: Actions.USER_SET_STATE,
       payload: {

@@ -57,11 +57,10 @@ export const getAccessibleProjects = ( identityToken,  ) => {
   }
 }
 
-export const updateChosenProject = ( identityToken, project, resolve, reject ) => {
+export const updateChosenProject = ( project, resolve, reject ) => {
   return {
     type: action.PROJECT_UPDATE_PROJECT_CHOSEN_REQUESTED,
     payload: {
-      identityToken,
       project,
       resolve,
       reject,

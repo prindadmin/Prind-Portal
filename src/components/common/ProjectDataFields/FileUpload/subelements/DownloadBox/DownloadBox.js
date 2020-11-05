@@ -43,7 +43,7 @@ export class Element extends Component {
     })
 
     downloadFile(
-      auth.info.idToken.jwtToken,
+      auth.signInUserSession.idToken.jwtToken,
       projectID,
       pageName,
       fieldID,
