@@ -1719,3 +1719,15 @@ background-color: var(--field-element-grey);
   text-align: center;
   width: 100%;
 }
+
+/* ==================================== */
+/* === user details popover element === */
+/* ==================================== */
+
+#user-details-popover {
+
+}
+
+#user-details-popover #popup-box {
+  padding: 20px;
+}

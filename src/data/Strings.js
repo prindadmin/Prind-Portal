@@ -257,3 +257,7 @@ export const MEMBER_NOT_YET_SIGNED_UP_TO_PRIND = "Awaiting Sign Up"
 export const PROFILE_DATA_IS_MANAGED_IN_FOUNDATIONS_NO_APP = "Profile data is managed in the Foundations app. Please download the Foundations app by clicking the red bar at the top of the screen."
 export const PROFILE_DATA_IS_MANAGED_IN_FOUNDATIONS_WITH_APP = "Profile data is managed in the Foundations app. Please open the Foundations app to change your profile details."
 export const CANNOT_SIGN_WITHOUT_FOUNDATIONS_ID = "You cannot sign documents without a Foundations ID"
+
+export const ACCREDITATION_NAME = "Accreditation name"
+export const ACCREDITATION_ISSUE_DATE = "Issue date"
+export const ACCREDITATION_ISSUER = "Issued by"

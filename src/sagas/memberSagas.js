@@ -11,7 +11,10 @@ import * as Actions from '../Actions'
 
 let defaultState = {
   fetching: false,
-  currentMember: null,
+  currentMember: {
+    username: null,
+    accreditations: []
+  },
   roles: [],
 }
 

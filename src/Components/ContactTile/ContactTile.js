@@ -7,6 +7,9 @@ import {
   Intent,
 } from '@blueprintjs/core'
 
+import PopOverHandler from '../common/popOverHandler'
+import UserDetailsPopOver from '../UserDetailsPopOver'
+
 import * as strings from '../../Data/Strings'
 
 // TODO: Remove memory leak when loading images and navigating away from the page
@@ -27,6 +30,7 @@ export class ContactTile extends Component {
     this.state = {
       removingMember: false,
       removeMemberError: false,
+      showUserDetailsPopover: false,
       errorText: "",
       avatarLink: defaultAvatar
     }
@@ -97,12 +101,24 @@ export class ContactTile extends Component {
     )
   }
 
+  showUserDetails = () => {
+    console.log("hello, user")
+    this.setState({
+      showUserDetailsPopover: true,
+    })
+  }
 
+  hideUserDetails = () => {
+    console.log("bye, user")
+    this.setState({
+      showUserDetailsPopover: false,
+    })
+  }
 
   render() {
 
     const { auth, projects, memberDetails, confirmed } = this.props
-    const { avatarLink, removeMemberError, errorText } = this.state
+    const { avatarLink, removeMemberError, errorText, showUserDetailsPopover } = this.state
 
     // See if the current User is the client, and can therefore remove people
     const editableMemberList = projects.memberList.confirmed.filter(member => {
@@ -120,7 +136,10 @@ export class ContactTile extends Component {
     const isConfirmed = confirmed ? "member-confirmed" : "member-not-confirmed"
 
     return (
-        <div id='contact-tile' className={isConfirmed}>
+        <div id='contact-tile' className={isConfirmed} onClick={(e) => {
+          e.stopPropagation()
+          this.showUserDetails()
+        }}>
           <div className='col-3'>
             <div className="text-center">
               <img src={avatarLink} className="avatar img-circle img-thumbnail" alt="avatar" />
@@ -177,6 +196,18 @@ export class ContactTile extends Component {
                   intent={Intent.DANGER}
                 />
               </div> : null
+            }
+
+            {
+              showUserDetailsPopover ?
+              <PopOverHandler>
+                <UserDetailsPopOver
+                  memberDetails={ memberDetails }
+                  onCancelPopup={ this.hideUserDetails }
+                />
+              </PopOverHandler>
+              :
+              null
             }
 
           </div>
