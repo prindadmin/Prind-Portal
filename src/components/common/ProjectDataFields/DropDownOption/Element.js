@@ -76,7 +76,7 @@ export class Element extends Component {
   // When the user wants to save the changes, update the server
   saveChanges = (fieldDetails) => {
 
-    const { auth, pageName, projects, elementContent } = this.props
+    const { pageName, projects, elementContent } = this.props
 
     this.setState({
       updateError: false,
@@ -84,7 +84,6 @@ export class Element extends Component {
     })
 
     this.props.updateField(
-      auth.signInUserSession.idToken.jwtToken,
       projects.chosenProject.projectId,
       pageName,
       elementContent.id,

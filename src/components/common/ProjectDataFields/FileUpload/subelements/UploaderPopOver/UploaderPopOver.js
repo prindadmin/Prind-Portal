@@ -116,7 +116,7 @@ export class Element extends Component {
 
   // Tell the Prin-D server that there has been an upload with the following details
   informServer = (response) => {
-    const { auth, uploadFile, fileDetails, projectID, pageName, fieldID } = this.props
+    const { uploadFile, fileDetails, projectID, pageName, fieldID } = this.props
 
     // Build parameters
     var uploadDetails = {
@@ -125,7 +125,6 @@ export class Element extends Component {
 
     // Send to the reducer
     uploadFile(
-      auth.signInUserSession.idToken.jwtToken,
       projectID,
       pageName,
       fieldID,

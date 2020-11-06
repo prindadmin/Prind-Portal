@@ -1,31 +1,32 @@
-import axios from 'axios'
-import https from 'https'
+import API from '@aws-amplify/api';
+
+// Fixed values for the API request
+const apiName = process.env.REACT_APP_USER_AUTHORISATION_URL
 
 // TODO: Stop this throwing CORS errors
 
-export default function(userParameters) {
+export default async function(userParameters) {
+
+  // Build path for request
+  const path = `/${userParameters}`
 
   return new Promise((resolve, reject) => {
 
-    const instance = axios.create({
-      httpsAgent: new https.Agent({
-        rejectUnauthorized: false
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    });
+    // Create the header for the request
+    const myInit = {
+        headers: {},
+        response: false,
+    }
 
-    console.log(`confirming user: ${process.env.REACT_APP_USER_AUTHORISATION_URL}${userParameters}`)
-
-    instance.get(`${process.env.REACT_APP_USER_AUTHORISATION_URL}${userParameters}`)
-    .then(res => {
-      console.log(res)
-      resolve(res)
-    })
-    .catch((error) => {
-      console.error(error)
-      reject(error)
-    })
-  })
+    // Send the request
+    API.get(apiName, path, myInit)
+      .then(response => {
+        console.log(response)
+        resolve(response)
+      })
+      .catch(error => {
+        console.log(error.response);
+        reject(error)
+     })
+   })
 }

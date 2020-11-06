@@ -8,7 +8,6 @@ import PageComponent from './LoggedInContent'
 
 const mapStatetoProps = state => {
   return {
-    auth: state.auth,
     user: state.user,
     projects: state.projects,
   }
@@ -17,7 +16,7 @@ const mapStatetoProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getProjectDetails: (project, resolve) => {
-      dispatch(projectsReducer.updateChosenProject(project, resolve))
+      dispatch(projectsReducer.updateChosenProject(null, project, resolve))
     },
     saveProjectID: (projectID) => {
       dispatch(projectsReducer.saveProjectID(projectID))

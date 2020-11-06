@@ -25,18 +25,16 @@ class UserMenu extends Component {
     // This next part fetches all the invitations and requests so they can be
     // counted and a badge displayed on the user menu if more than 0
 
-    const { auth, getUserProjectInvitations, getUserSignatureRequests } = this.props
+    const { getUserProjectInvitations, getUserSignatureRequests } = this.props
 
     // Get the user project invitations
     getUserProjectInvitations(
-      auth.signInUserSession.idToken.jwtToken,
       this.projectRequestsResolve,
       this.projectRequestsReject,
     )
 
     // Get the user signature requests
     getUserSignatureRequests(
-      auth.signInUserSession.idToken.jwtToken,
       this.signatureRequestsResolve,
       this.signatureRequestsReject,
     )

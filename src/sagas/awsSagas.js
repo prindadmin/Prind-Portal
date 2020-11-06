@@ -259,7 +259,7 @@ function * confirmUser (action) {
       }
     })
 
-    //const { data: result } = yield call(confirmUserDispatcher, userParameters)
+    //const result = yield call(confirmUserDispatcher, userParameters)
     yield call(confirmUserDispatcher, userParameters)
 
     // post-fetch update

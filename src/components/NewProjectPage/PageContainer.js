@@ -7,7 +7,6 @@ import PageComponent from './Page'
 
 const mapStatetoProps = state => {
   return {
-    auth: state.auth,
     projects: state.projects,
     pageContent: state.pageContent,
   }
@@ -15,8 +14,8 @@ const mapStatetoProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    createProject: (jwtToken, values, resolve, reject) => {
-      dispatch(reducer.createProject(jwtToken, values, resolve, reject))
+    createProject: (values, resolve, reject) => {
+      dispatch(reducer.createProject(values, resolve, reject))
     },
     resetChosenProject: () => {
       dispatch(reducer.resetChosenProject())

@@ -8,7 +8,6 @@ import UserMenuComponent from './UserMenu'
 
 const mapStatetoProps = state => {
   return {
-    auth: state.auth,
     user: state.user,
   }
 }

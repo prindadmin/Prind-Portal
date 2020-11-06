@@ -50,10 +50,9 @@ export class ProjectDetailsPage extends Component {
 
   updateProject = async (values) => {
 
-    const { updateProjectDetails, history, auth, projects } = this.props
+    const { updateProjectDetails, history, projects } = this.props
 
     await updateProjectDetails(
-      auth.signInUserSession.idToken.jwtToken,
       projects.chosenProject.projectId,
       values
     )
@@ -197,11 +196,9 @@ export class ProjectDetailsPage extends Component {
 
   confirmDeleteProject = () => {
 
-    const { jwtToken } = this.props.auth.signInUserSession.idToken
     const { projectId } = this.props.projects.chosenProject
 
     this.props.deleteProject(
-      jwtToken,
       projectId,
       this.resolveDelete,
       this.rejectDelete,

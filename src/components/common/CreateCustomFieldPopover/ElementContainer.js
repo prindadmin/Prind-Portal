@@ -7,7 +7,6 @@ import Element from './Element'
 
 const mapStatetoProps = state => {
   return {
-    auth: state.auth,
     projects: state.projects,
     initialValues: {
       type: "file"
@@ -17,8 +16,8 @@ const mapStatetoProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    createField: (jwtToken, projectID, pageName, fieldDetails, resolve, reject) => {
-      dispatch(projectsReducer.createField(jwtToken, projectID, pageName, fieldDetails, resolve, reject))
+    createField: (projectID, pageName, fieldDetails, resolve, reject) => {
+      dispatch(projectsReducer.createField(projectID, pageName, fieldDetails, resolve, reject))
     }
   }
 }

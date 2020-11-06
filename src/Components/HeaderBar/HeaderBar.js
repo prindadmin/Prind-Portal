@@ -13,11 +13,10 @@ export class HeaderBar extends Component {
 
   componentDidMount() {
 
-    const { getUserDetails, auth } = this.props
+    const { getUserDetails } = this.props
 
     // When the header bar is loaded, fetch the user details
     getUserDetails(
-      auth.signInUserSession.idToken.jwtToken,
       this.resolveUserDetails,
       this.rejectUserDetails,
     )

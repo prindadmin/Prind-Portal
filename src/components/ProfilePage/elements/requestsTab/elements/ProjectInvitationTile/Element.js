@@ -24,10 +24,9 @@ export class Element extends Component {
 
   acceptInvitation = () => {
 
-    const { auth, requestDetails, respondToProjectInvitation } = this.props
+    const { requestDetails, respondToProjectInvitation } = this.props
 
     respondToProjectInvitation(
-      auth.signInUserSession.idToken.jwtToken,
       requestDetails.projectId,
       true,
     )
@@ -35,10 +34,9 @@ export class Element extends Component {
 
   rejectInvitation = () => {
 
-    const { auth, requestDetails, respondToProjectInvitation } = this.props
+    const { requestDetails, respondToProjectInvitation } = this.props
 
     respondToProjectInvitation(
-      auth.signInUserSession.idToken.jwtToken,
       requestDetails.projectId,
       false,
     )

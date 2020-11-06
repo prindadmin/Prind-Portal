@@ -38,13 +38,11 @@ export class ProjectTeamPage extends Component {
     if (props.projects.chosenProject.projectId !== "") {
       // Get the members for the selected project
       props.getCurrentMembers(
-        props.auth.signInUserSession.idToken.jwtToken,
         props.projects.chosenProject.projectId
       )
 
       // Get the available roles for this project
       props.getRoles(
-        props.auth.signInUserSession.idToken.jwtToken,
         props.projects.chosenProject.projectId
       )
     }
@@ -59,20 +57,18 @@ export class ProjectTeamPage extends Component {
 
   componentDidUpdate(prevProps) {
 
-    const { auth, projects, getCurrentMembers, getRoles } = this.props
+    const { projects, getCurrentMembers, getRoles } = this.props
 
     if (projects.chosenProject.projectId !== prevProps.projects.chosenProject.projectId &&
       projects.chosenProject.projectId !== "") {
 
       // Get the current members of the project
       getCurrentMembers(
-        auth.signInUserSession.idToken.jwtToken,
         projects.chosenProject.projectId
       )
 
       // Get the available roles for this project
       getRoles(
-        auth.signInUserSession.idToken.jwtToken,
         projects.chosenProject.projectId
       )
     }
@@ -88,7 +84,6 @@ export class ProjectTeamPage extends Component {
 
     // Get the current members of the project
     this.props.getCurrentMembers(
-      this.props.auth.signInUserSession.idToken.jwtToken,
       this.props.projects.chosenProject.projectId
     )
   }
@@ -112,7 +107,6 @@ export class ProjectTeamPage extends Component {
     newValues.roleId = this.state.selectedRoleID
 
     this.props.addMember(
-      this.props.auth.signInUserSession.idToken.jwtToken,
       this.props.projects.chosenProject.projectId,
       newValues,
       this.addMemberResolve,
@@ -228,10 +222,9 @@ export class ProjectTeamPage extends Component {
 
   onMemberRemove = () => {
 
-    const { getCurrentMembers, auth, projects } = this.props
+    const { getCurrentMembers, projects } = this.props
 
     getCurrentMembers(
-      auth.signInUserSession.idToken.jwtToken,
       projects.chosenProject.projectId
     )
   }

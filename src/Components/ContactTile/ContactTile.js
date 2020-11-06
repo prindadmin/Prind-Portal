@@ -85,7 +85,7 @@ export class ContactTile extends Component {
 
   removeMember = (e) => {
 
-    const { auth, projects, removeMember, memberDetails } = this.props
+    const { projects, removeMember, memberDetails } = this.props
 
     this.setState({
       removingMember: true,
@@ -93,7 +93,6 @@ export class ContactTile extends Component {
     })
 
     removeMember(
-      auth.signInUserSession.idToken.jwtToken,
       projects.chosenProject.projectId,
       memberDetails.username,
       this.removeMemberResolve,
@@ -123,7 +122,7 @@ export class ContactTile extends Component {
     // See if the current User is the client, and can therefore remove people
     const editableMemberList = projects.memberList.confirmed.filter(member => {
       return (
-        member.username === auth.info.username &&
+        member.username === auth.username &&
         (member.roleID === 'client' || member.roleID === 'clientTeamRepresentative' || member.roleID === 'creator') &&
         memberDetails.username !== member.username
       )

@@ -41,7 +41,7 @@ export class LoggedInContent extends Component {
     //const { username } = this.props.user
     // TODO: this.props.getuserDetails(username)
 
-    const { projects, auth, requestS3ProjectFileUploadToken, getProjectMembers } = this.props
+    const { projects, requestS3ProjectFileUploadToken, getProjectMembers } = this.props
     const { projectId } = projects.chosenProject
 
     const pageName = this.getPageName()
@@ -62,7 +62,7 @@ export class LoggedInContent extends Component {
     if (this.props !== prevProps) {
       this.getProjectID()
 
-      const { projects, auth, requestS3ProjectFileUploadToken, getProjectMembers } = this.props
+      const { projects, requestS3ProjectFileUploadToken, getProjectMembers } = this.props
       const { pageName } = this.state
       const { projectId } = projects.chosenProject
 

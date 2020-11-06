@@ -6,7 +6,6 @@ import * as strings from '../../../../../../Data/Strings'
 
 export class Element extends Component {
   static propTypes = {
-    auth: PropTypes.object.isRequired,
     projectID: PropTypes.string.isRequired,
     pageName: PropTypes.string.isRequired,
     fieldID: PropTypes.string.isRequired,
@@ -36,14 +35,13 @@ export class Element extends Component {
 
   downloadFile = (e) => {
 
-    const { auth, projectID, pageName, fieldID, fileVersionDetails, downloadFile } = this.props
+    const { projectID, pageName, fieldID, fileVersionDetails, downloadFile } = this.props
 
     this.setState({
       fetchError: false,
     })
 
     downloadFile(
-      auth.signInUserSession.idToken.jwtToken,
       projectID,
       pageName,
       fieldID,

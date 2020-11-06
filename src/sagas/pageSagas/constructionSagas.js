@@ -13,7 +13,7 @@ const defaultState = {
 
 function * getPageContent (action) {
 
-  const { identityToken, projectID } = action.payload
+  const { projectID } = action.payload
 
   try {
     yield put({
@@ -23,7 +23,7 @@ function * getPageContent (action) {
         fetching: true
       }
     })
-    const { data: result } = yield call(constructionPageDispatcher, identityToken, projectID )
+    const result = yield call(constructionPageDispatcher, projectID )
     yield put({
       type: Actions.PAGE_CONSTRUCTION_SET_STATE,
       payload: {

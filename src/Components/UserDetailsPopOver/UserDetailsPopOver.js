@@ -14,7 +14,6 @@ import UserAccreditations from '../Temp/UserAccreditations'
 
 export class UserDetailsPopOver extends Component {
   static propTypes = {
-    auth: PropTypes.object.isRequired,
     projects: PropTypes.object.isRequired,
     memberDetails: PropTypes.object.isRequired,
     onCancelPopup: PropTypes.func.isRequired,

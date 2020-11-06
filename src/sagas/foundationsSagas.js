@@ -24,7 +24,7 @@ function * init (action) {
 
 function * selfSignFile (action) {
 
-  const { identityToken, projectID, pageName, fieldID } = action.payload
+  const { projectID, pageName, fieldID } = action.payload
 
   try {
 
@@ -37,7 +37,7 @@ function * selfSignFile (action) {
       }
     })
 
-    yield call(selfSignFileDispatcher, identityToken, projectID, pageName, fieldID)
+    yield call(selfSignFileDispatcher, projectID, pageName, fieldID)
 
     // Post-fetch update to store
     yield put({
@@ -62,7 +62,7 @@ function * selfSignFile (action) {
 
 function * rejectSignatureRequest (action) {
 
-  const { identityToken, requestDetails } = action.payload
+  const { requestDetails } = action.payload
 
   try {
 
@@ -75,7 +75,7 @@ function * rejectSignatureRequest (action) {
       }
     })
 
-    yield call(rejectSignatureRequestDispatcher, identityToken, requestDetails)
+    yield call(rejectSignatureRequestDispatcher, requestDetails)
 
     // Post-fetch update to store
     yield put({
@@ -88,9 +88,7 @@ function * rejectSignatureRequest (action) {
     // Request that the signatures list is updated
     yield put({
       type: Actions.USER_GET_PROJECT_SIGNATURES_REQUESTED,
-      payload: {
-        identityToken,
-      }
+      payload: {}
     })
 
     if (action.payload.resolve !== undefined) {

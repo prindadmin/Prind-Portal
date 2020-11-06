@@ -28,7 +28,7 @@ function * init (action) {
 
 function * addMemberToProject (action) {
 
-  const { identityToken, projectID, memberDetails } = action.payload
+  const { projectID, memberDetails } = action.payload
 
   try {
 
@@ -40,7 +40,7 @@ function * addMemberToProject (action) {
       }
     })
 
-    const { data: result } = yield call(addMemberToProjectDispatcher, identityToken, projectID, memberDetails)
+    const result = yield call(addMemberToProjectDispatcher, projectID, memberDetails)
 
     // Post-fetch update to store
     yield put({
@@ -50,7 +50,10 @@ function * addMemberToProject (action) {
       }
     })
 
-    action.payload.resolve()
+    // Callback if provided
+    if (action.payload.resolve !== undefined) {
+      action.payload.resolve()
+    }
   }
   catch (error) {
     console.error(error)
@@ -61,14 +64,17 @@ function * addMemberToProject (action) {
         }
     })
 
-    action.payload.reject()
+    // Callback if provided
+    if (action.payload.reject !== undefined) {
+      action.payload.reject()
+    }
   }
 }
 
 
 function * removeMemberFromProject (action) {
 
-  const { identityToken, projectID, memberUsername } = action.payload
+  const { projectID, memberUsername } = action.payload
 
   try {
 
@@ -80,7 +86,7 @@ function * removeMemberFromProject (action) {
       }
     })
 
-    const { data: result } = yield call(removeMemberFromProjectDispatcher, identityToken, projectID, memberUsername)
+    const result = yield call(removeMemberFromProjectDispatcher, projectID, memberUsername)
 
     // Post-fetch update to store
     yield put({
@@ -91,7 +97,10 @@ function * removeMemberFromProject (action) {
       }
     })
 
-    action.payload.resolve()
+    // Callback if provided
+    if (action.payload.resolve !== undefined) {
+      action.payload.resolve()
+    }
   }
   catch (error) {
     console.error(error)
@@ -103,14 +112,17 @@ function * removeMemberFromProject (action) {
         }
     })
 
-    action.payload.reject()
+    // Callback if provided
+    if (action.payload.reject !== undefined) {
+      action.payload.reject()
+    }
   }
 }
 
 
 function * getRoles (action) {
 
-  const { identityToken, projectID } = action.payload
+  const { projectID } = action.payload
 
   try {
 
@@ -122,15 +134,12 @@ function * getRoles (action) {
       }
     })
 
-    const { data: result } = yield call(getRolesDispatcher, identityToken, projectID)
-
-    console.log(result)
+    const result  = yield call(getRolesDispatcher, projectID)
 
     // Post-fetch update to store
     yield put({
       type: Actions.MEMBER_SET_STATE,
       payload: {
-        ...defaultState,
         roles: result.body
       }
     })

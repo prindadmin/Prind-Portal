@@ -7,7 +7,6 @@ import * as memberReducer from '../../Reducers/memberReducer'
 
 const mapStatetoProps = state => {
   return {
-    auth: state.auth,
     projects: state.projects,
     members: state.members,
   }

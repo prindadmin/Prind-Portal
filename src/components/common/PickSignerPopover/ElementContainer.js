@@ -7,15 +7,14 @@ import Element from './Element'
 
 const mapStatetoProps = state => {
   return {
-    auth: state.auth,
     projects: state.projects,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    requestSignature: (jwtToken, projectID, pageName, fieldID, members, resolve, reject) => {
-      dispatch(projectsReducer.requestSignature(jwtToken, projectID, pageName, fieldID, members, resolve, reject))
+    requestSignature: (projectID, pageName, fieldID, members, resolve, reject) => {
+      dispatch(projectsReducer.requestSignature(projectID, pageName, fieldID, members, resolve, reject))
     }
   }
 }

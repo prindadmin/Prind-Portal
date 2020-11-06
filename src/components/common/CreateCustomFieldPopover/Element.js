@@ -88,7 +88,7 @@ export class Element extends Component {
       errorText: "",
     })
 
-    const { auth, projectID, pageName } = this.props
+    const { projectID, pageName } = this.props
 
     var newFieldDetails = {}
 
@@ -121,7 +121,6 @@ export class Element extends Component {
 
     // Send to server
     this.props.createField(
-      auth.signInUserSession.idToken.jwtToken,
       projectID,
       pageName,
       newFieldDetails,

@@ -7,7 +7,6 @@ import PageComponent from './ProjectDetailsPage'
 
 const mapStatetoProps = state => {
   return {
-    auth: state.auth,
     projects: state.projects,
     initialValues: state.projects.chosenProject,
   }
@@ -15,11 +14,11 @@ const mapStatetoProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateProjectDetails: (jwtToken, projectID, values) => {
-      dispatch(reducer.updateProjectDetails(jwtToken, projectID, values))
+    updateProjectDetails: (projectID, values) => {
+      dispatch(reducer.updateProjectDetails(projectID, values))
     },
-    deleteProject: (jwtToken, projectID, resolve, reject) => {
-      dispatch(reducer.deleteProject(jwtToken, projectID, resolve, reject))
+    deleteProject: (projectID, resolve, reject) => {
+      dispatch(reducer.deleteProject(projectID, resolve, reject))
     },
     resetChosenProject: () => {
       dispatch(reducer.resetChosenProject())

@@ -49,6 +49,14 @@ Amplify.configure({
 
         // OPTIONAL - Amazon Cognito Web Client ID (26-char alphanumeric string)
         userPoolWebClientId: process.env.REACT_APP_CLIENT_ID,
+    },
+    API: {
+        endpoints: [
+            {
+                name: process.env.REACT_APP_API_NAME,
+                endpoint: process.env.REACT_APP_API_ENDPOINT
+            }
+        ]
     }
 });
 

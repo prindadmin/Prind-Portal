@@ -7,15 +7,14 @@ import Element from './Element'
 
 const mapStatetoProps = state => {
   return {
-    auth: state.auth,
     projects: state.projects
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateField: (jwtToken, pageName, fieldDetails) => {
-      dispatch(projectsReducer.updateField(jwtToken, pageName, fieldDetails))
+    updateField: (pageName, fieldDetails) => {
+      dispatch(projectsReducer.updateField(pageName, fieldDetails))
     }
   }
 }

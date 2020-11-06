@@ -15,7 +15,6 @@ import * as strings from '../../../../../Data/Strings'
 
 export class ProjectSelectorPopUp extends Component {
   static propTypes = {
-    auth: PropTypes.object.isRequired,
     onCancelPopup: PropTypes.func.isRequired,
     updateChosenProject: PropTypes.func.isRequired,
   }
@@ -30,7 +29,6 @@ export class ProjectSelectorPopUp extends Component {
     }
 
     this.props.getAccessibleProjects(
-      props.auth.signInUserSession.idToken.jwtToken,
       this.resolveProjectFetch,
       this.rejectProjectFetch,
     )
@@ -59,14 +57,13 @@ export class ProjectSelectorPopUp extends Component {
 
     console.log(project)
 
-    const { auth, updateChosenProject } = this.props
+    const { updateChosenProject } = this.props
 
     this.setState({
       chosenProjectId: project.projectId
     })
 
     updateChosenProject(
-      auth.signInUserSession.idToken.jwtToken,
       project,
       this.resolveProjectUpdate,
       this.rejectProjectUpdate,

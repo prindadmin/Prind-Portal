@@ -31,8 +31,6 @@ function * init (action) {
 
 function * getAccessibleProjects (action) {
 
-  const { identityToken } = action.payload
-
   try {
 
     // pre-fetch update
@@ -43,7 +41,7 @@ function * getAccessibleProjects (action) {
       }
     })
 
-    const { data: result } = yield call(Dispatchers.getAccessibleProjectsDispatcher, identityToken)
+    const result = yield call(Dispatchers.getAccessibleProjectsDispatcher)
 
     // post-fetch update
     yield put({
@@ -68,7 +66,7 @@ function * getAccessibleProjects (action) {
 
 function * createNewProject (action) {
 
-  const { identityToken, projectValues } = action.payload
+  const { projectValues } = action.payload
 
   try {
 
@@ -80,13 +78,12 @@ function * createNewProject (action) {
       }
     })
 
-    const { data: result } = yield call(Dispatchers.createNewProjectDispatcher, identityToken, projectValues)
+    const result = yield call(Dispatchers.createNewProjectDispatcher, projectValues)
 
     yield put({
       type: Actions.PROJECT_UPDATE_PROJECT_CHOSEN_REQUESTED,
       payload: {
         fetching: false,
-        identityToken,
         project: result.body,
       }
     })
@@ -111,7 +108,7 @@ function * createNewProject (action) {
 
 function * updateChosenProject (action) {
 
-  const { identityToken, project } = action.payload
+  const { project } = action.payload
 
   try {
 
@@ -125,7 +122,7 @@ function * updateChosenProject (action) {
 
     console.log(action.payload)
 
-    const { data: result } = yield call(Dispatchers.fetchProjectDetailsDispatcher, identityToken, project.projectId)
+    const result = yield call(Dispatchers.fetchProjectDetailsDispatcher, project.projectId)
 
     // Post-fetch update to store
     yield put({
@@ -160,7 +157,7 @@ function * updateChosenProject (action) {
 
 function * updateProjectDetails (action) {
 
-  const { identityToken, projectID, projectValues } = action.payload
+  const { projectID, projectValues } = action.payload
 
   try {
 
@@ -172,7 +169,7 @@ function * updateProjectDetails (action) {
       }
     })
 
-    yield call(Dispatchers.updateProjectDetailsDispatcher, identityToken, projectID, projectValues)
+    yield call(Dispatchers.updateProjectDetailsDispatcher, projectID, projectValues)
 
     // Post-fetch update to store
     yield put({
@@ -198,7 +195,7 @@ function * updateProjectDetails (action) {
 
 function * getCurrentMembers (action) {
 
-  const { identityToken, projectID } = action.payload
+  const { projectID } = action.payload
 
   try {
 
@@ -210,7 +207,7 @@ function * getCurrentMembers (action) {
       }
     })
 
-    const { data: result } = yield call(Dispatchers.getCurrentMembersDispatcher, identityToken, projectID)
+    const result = yield call(Dispatchers.getCurrentMembersDispatcher, projectID)
 
     const memberList = result.body.members
 
@@ -262,7 +259,7 @@ function Actionswitcher(pageName) {
 
 function * uploadFile (action) {
 
-  const { identityToken, projectID, pageName, fieldID, fileDetails } = action.payload
+  const { projectID, pageName, fieldID, fileDetails } = action.payload
 
   try {
 
@@ -274,7 +271,7 @@ function * uploadFile (action) {
       }
     })
 
-    const { data: result } = yield call(Dispatchers.uploadFileDispatcher, identityToken, projectID, pageName, fieldID, fileDetails)
+    const result = yield call(Dispatchers.uploadFileDispatcher, projectID, pageName, fieldID, fileDetails)
 
     console.log(result)
 
@@ -285,7 +282,6 @@ function * uploadFile (action) {
     yield put({
       type: nextAction,
       payload: {
-        identityToken,
         projectID,
       }
     })
@@ -314,7 +310,7 @@ function * uploadFile (action) {
 
 function * downloadFile (action) {
 
-  const { identityToken, projectID, pageName, fieldID, version } = action.payload
+  const { projectID, pageName, fieldID, version } = action.payload
 
   try {
 
@@ -326,7 +322,7 @@ function * downloadFile (action) {
       }
     })
 
-    const { data: result } = yield call(Dispatchers.downloadFileDispatcher, identityToken, projectID, pageName, fieldID, version)
+    const result = yield call(Dispatchers.downloadFileDispatcher, projectID, pageName, fieldID, version)
 
     // Post-fetch update to store
     yield put({
@@ -358,7 +354,7 @@ function * downloadFile (action) {
 
 function * createField (action) {
 
-  const { identityToken, projectID, pageName, fieldDetails } = action.payload
+  const { projectID, pageName, fieldDetails } = action.payload
 
   try {
 
@@ -370,7 +366,7 @@ function * createField (action) {
       }
     })
 
-    yield call(Dispatchers.createFieldDispatcher, identityToken, projectID, pageName, fieldDetails)
+    yield call(Dispatchers.createFieldDispatcher, projectID, pageName, fieldDetails)
 
     // Decide which action to dispatch to update the correct page's content
     const nextAction = Actionswitcher(pageName)
@@ -379,7 +375,6 @@ function * createField (action) {
     yield put({
       type: nextAction,
       payload: {
-        identityToken,
         projectID,
       }
     })
@@ -411,7 +406,7 @@ function * createField (action) {
 
 function * updateField (action) {
 
-  const { identityToken, projectID, pageName, fieldID, fieldDetails } = action.payload
+  const { projectID, pageName, fieldID, fieldDetails } = action.payload
 
   try {
 
@@ -423,7 +418,7 @@ function * updateField (action) {
       }
     })
 
-    yield call(Dispatchers.updateFieldDispatcher, identityToken, projectID, pageName, fieldID, fieldDetails)
+    yield call(Dispatchers.updateFieldDispatcher, projectID, pageName, fieldID, fieldDetails)
 
     // Decide which action to dispatch to update the correct page's content
     const nextAction = Actionswitcher(pageName)
@@ -434,7 +429,6 @@ function * updateField (action) {
     yield put({
       type: nextAction,
       payload: {
-        identityToken,
         projectID,
       }
     })
@@ -464,7 +458,7 @@ function * updateField (action) {
 
 function * requestFileSignature (action) {
 
-  const { identityToken, projectID, pageName, fieldID, members } = action.payload
+  const { projectID, pageName, fieldID, members } = action.payload
 
   try {
 
@@ -476,7 +470,7 @@ function * requestFileSignature (action) {
       }
     })
 
-    yield call(Dispatchers.requestSignatureDispatcher, identityToken, projectID, pageName, fieldID, members)
+    yield call(Dispatchers.requestSignatureDispatcher, projectID, pageName, fieldID, members)
 
     // Post-fetch update to store
     yield put({
@@ -506,7 +500,7 @@ function * requestFileSignature (action) {
 
 function * deleteProject (action) {
 
-  const { identityToken, projectID } = action.payload
+  const { projectID } = action.payload
 
   try {
 
@@ -518,7 +512,7 @@ function * deleteProject (action) {
       }
     })
 
-    yield call(Dispatchers.deleteProjectDispatcher, identityToken, projectID,)
+    yield call(Dispatchers.deleteProjectDispatcher, projectID,)
 
     // Post-fetch update to store
     yield put({

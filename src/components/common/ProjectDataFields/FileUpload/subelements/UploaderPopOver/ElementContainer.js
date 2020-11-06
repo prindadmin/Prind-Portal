@@ -7,7 +7,6 @@ import Element from './UploaderPopOver'
 
 const mapStatetoProps = state => {
   return {
-    auth: state.auth,
     user: state.user,
     projects: state.projects,
   }
@@ -15,8 +14,8 @@ const mapStatetoProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    uploadFile: (identityToken, projectID, pageName, fieldID, fileDetails) => {
-      dispatch(projectsreducer.uploadFile(identityToken, projectID, pageName, fieldID, fileDetails))
+    uploadFile: (projectID, pageName, fieldID, fileDetails) => {
+      dispatch(projectsreducer.uploadFile(projectID, pageName, fieldID, fileDetails))
     }
   }
 }

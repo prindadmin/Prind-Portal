@@ -13,11 +13,10 @@ export const init = () => {
   }
 }
 
-export const getPageContent = ( identityToken, projectID ) => {
+export const getPageContent = ( projectID ) => {
   return {
     type: action.PAGE_GET_CONTENT_TENDER_REQUESTED,
     payload: {
-      identityToken,
       projectID,
     }
   }

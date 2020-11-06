@@ -13,7 +13,7 @@ const defaultState = {
 
 function * getPageContent (action) {
 
-  const { identityToken, projectID } = action.payload
+  const { projectID } = action.payload
 
   try {
     yield put({
@@ -23,7 +23,7 @@ function * getPageContent (action) {
         fetching: true
       }
     })
-    const { data: result } = yield call(feasibilityPageDispatcher, identityToken, projectID )
+    const result = yield call(feasibilityPageDispatcher, projectID )
 
     yield put({
       type: Actions.PAGE_FEASIBILITY_SET_STATE,

@@ -12,7 +12,6 @@ import PageComponent from './Page'
 
 const mapStatetoProps = state => {
   return {
-    auth: state.auth,
     user: state.user,
     projects: state.projects,
     pageContent: state.pageContent,

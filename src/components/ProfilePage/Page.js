@@ -32,25 +32,21 @@ export class Page extends Component {
     super(props)
 
     props.getUserDetails(
-      props.auth.signInUserSession.idToken.jwtToken,
       this.profileResolve,
       this.profileReject,
     )
 
     props.getProjectInvitations(
-      props.auth.signInUserSession.idToken.jwtToken,
       this.projectRequestsResolve,
       this.projectRequestsReject,
     )
 
     props.getSignatureRequests(
-      props.auth.signInUserSession.idToken.jwtToken,
       this.signatureRequestsResolve,
       this.signatureRequestsReject,
     )
 
     props.getHistory(
-      props.auth.signInUserSession.idToken.jwtToken,
       this.historyResolve,
       this.historyReject,
     )

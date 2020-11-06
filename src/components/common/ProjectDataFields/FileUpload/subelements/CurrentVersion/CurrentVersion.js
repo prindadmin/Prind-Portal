@@ -61,11 +61,10 @@ export class Element extends Component {
   sendSelfSignRequest = (e) => {
     console.log("Self sign file clicked")
 
-    const { projectID, pageName, fieldID, auth } = this.props
+    const { projectID, pageName, fieldID } = this.props
 
     // Send the request
     this.props.selfSignFile(
-      auth.signInUserSession.idToken.jwtToken,
       projectID,
       pageName,
       fieldID,

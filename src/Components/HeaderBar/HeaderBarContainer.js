@@ -7,7 +7,6 @@ import * as userReducer from '../../Reducers/userReducer'
 
 const mapStatetoProps = state => {
   return {
-    auth: state.auth,
     projects: state.projects,
     user: state.user,
   }
@@ -16,8 +15,8 @@ const mapStatetoProps = state => {
 // This defines all the Actions that can be fetched from the reducer
 const mapDispatchToProps = dispatch => {
   return {
-    getUserDetails: (jwtToken, resolve, reject) => {
-      dispatch(userReducer.getUserDetails(jwtToken, resolve, reject))
+    getUserDetails: (resolve, reject) => {
+      dispatch(userReducer.getUserDetails(resolve, reject))
     }
   }
 }

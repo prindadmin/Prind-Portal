@@ -79,13 +79,12 @@ export class Element extends Component {
   sendSigningRequest = (e) => {
     e.stopPropagation()
 
-    const { auth, projectID, pageName, fieldID } = this.props
+    const { projectID, pageName, fieldID } = this.props
     const { selectedMembers } = this.state
 
     var members = selectedMembers.map(value => value.username);
 
     this.props.requestSignature(
-      auth.signInUserSession.idToken.jwtToken,
       projectID,
       pageName,
       fieldID,
