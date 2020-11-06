@@ -9,15 +9,13 @@ import {
   Label,
   Button,
   ButtonGroup,
-  Callout,
-  Icon
+  Callout
 } from '@blueprintjs/core'
 
 import ItemIcon from '../common/ItemIcon'
 
 import * as FormInputs from '../common/formInputs'
 import * as Validators from '../../Validators'
-import * as state from '../../States'
 
 // TODO: Implement strings file here
 import * as Strings from '../../Data/Strings'
@@ -26,7 +24,6 @@ class ResetPassword extends Component {
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
     setNewPassword: PropTypes.func.isRequired,
-    auth: PropTypes.object,
     init: PropTypes.func,
     history: PropTypes.object
   }

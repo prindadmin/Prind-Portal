@@ -1,5 +1,9 @@
-import React, { Component, lazy } from 'react'
+import React, { Component, lazy, Suspense } from 'react'
 import PropTypes from 'prop-types'
+
+import ProjectLoading from '../../Components/common/ProjectLoading'
+
+import * as Strings from '../../Data/Strings'
 
 // Components
 const HeaderBar = lazy(() => import('../../Components/HeaderBar'));
@@ -146,6 +150,12 @@ export class LoggedInContent extends Component {
     )
   }
 
+  loadingPlaceholder = () => {
+    return(
+      <ProjectLoading text={Strings.LOADING_DATA_FOR_PAGE}/>
+    )
+  }
+
 
   render () {
 
@@ -179,7 +189,9 @@ export class LoggedInContent extends Component {
           </LayoutSideBar>
 
           <LayoutContentArea1x1>
-            { error ? this.errorContent() : content }
+            <Suspense fallback={this.loadingPlaceholder()}>
+              { error ? this.errorContent() : content }
+            </Suspense>
           </LayoutContentArea1x1>
         </LayoutBody>
 

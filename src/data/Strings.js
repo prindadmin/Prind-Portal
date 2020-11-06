@@ -263,3 +263,5 @@ export const ACCREDITATION_ISSUE_DATE = "Issue date"
 export const ACCREDITATION_ISSUER = "Issued by"
 
 export const YOUR_PASSWORD_WAS_SUCCESSFULLY_CHAINGED = "Your password has been successfully changed."
+export const LOADING_DATA_FOR_PAGE = "Loading page data"
+export const LOADING = "Loading"

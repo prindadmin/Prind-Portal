@@ -10,7 +10,7 @@ import {
   faDownload,
   faCaretDown,
   faCaretUp,
-  faLock
+  //faLock
 } from '@fortawesome/free-solid-svg-icons'
 
 import {

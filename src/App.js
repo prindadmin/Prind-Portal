@@ -16,8 +16,10 @@ import { AUTH_SUCCESS } from './States'
 
 import * as Endpoints from './Data/Endpoints'
 import PrivateRoute from './Components/PrivateRoute';
+import ProjectLoading from './Components/common/ProjectLoading'
 
 import Error404 from './Components/Error404'
+import * as Strings from './Data/Strings'
 
 /* Before sign in pages */
 const SignIn = lazy(() => import('./Components/SignIn'));
@@ -96,7 +98,13 @@ class App extends Component{
       window['console']['log'] = function() {};
   }
 
-
+  loadingPlaceholder = () => {
+    return(
+      <div id='loading-placeholder'>
+        <ProjectLoading text={Strings.LOADING}/>
+      </div>
+    )
+  }
 
   render() {
 
@@ -105,7 +113,7 @@ class App extends Component{
     return (
       <div className="App full-height container-fluid">
         <Router>
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={this.loadingPlaceholder()}>
             <Switch>
               <Route path='/signin' component={SignIn} />
               <Route path='/signup' component={SignUp} />

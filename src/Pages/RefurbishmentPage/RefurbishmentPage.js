@@ -143,7 +143,7 @@ export class RefurbishmentPage extends Component {
 
     return (
       <div id='refurbishment-page'>
-        <div className='page-content-section col-xl-10 col-lg-9 col-md-9 col-sm-9'>
+        <div className='page-content-section row'>
           {
             projects !== undefined ? this.chooseContent() : this.showErrorPage()
           }
