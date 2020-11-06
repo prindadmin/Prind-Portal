@@ -54,7 +54,7 @@ export class Page extends Component {
 
   getImage = (props) => {
 
-    const { username } = props.auth
+    const { username } = props.user
     const that = this
     const avatarLink = `${process.env.REACT_APP_AWS_S3_USER_AVATAR_ENDPOINT}/${username}`
 

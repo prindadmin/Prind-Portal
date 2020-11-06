@@ -14,6 +14,10 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 
 import {
+  faLockAlt
+} from '@fortawesome/pro-solid-svg-icons'
+
+import {
   faCheckCircle,
   faTimesCircle,
   faCircle,
@@ -28,7 +32,7 @@ let icons = {
   download: faDownload,
   caretDown: faCaretDown,
   caretUp: faCaretUp,
-  lock: faLock,
+  lock: faLockAlt,
 }
 
 const ItemIcon = props => {

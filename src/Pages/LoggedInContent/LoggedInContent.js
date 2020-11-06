@@ -19,6 +19,9 @@ const ConstructionPage = lazy(() => import('../ConstructionPage'));
 const HandoverPage = lazy(() => import('../HandoverPage'));
 const OccupationPage = lazy(() => import('../OccupationPage'));
 const RefurbishmentPage = lazy(() => import('../RefurbishmentPage'));
+const FoundationsPage = lazy(() => import('../FoundationsPage'));
+const NewProjectPage = lazy(() => import('../NewProjectPage'));
+const ProfilePage = lazy(() => import('../ProfilePage'));
 
 /* Other pages */
 const ProjectDetailsPage = lazy(() => import('../ProjectDetailsPage'));
@@ -159,6 +162,9 @@ export class LoggedInContent extends Component {
                     pathname.startsWith('/handover') ? <HandoverPage /> :
                     pathname.startsWith('/occupation') ? <OccupationPage /> :
                     pathname.startsWith('/refurbishment') ? <RefurbishmentPage /> :
+                    pathname.startsWith('/foundations') ? <FoundationsPage /> :
+                    pathname.startsWith('/newproject') ? <NewProjectPage /> :
+                    pathname.startsWith('/profile') ? <ProfilePage /> :
                     this.errorComponent()
 
     return (

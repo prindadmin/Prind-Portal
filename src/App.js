@@ -18,25 +18,18 @@ import * as Endpoints from './Data/Endpoints'
 import PrivateRoute from './Components/PrivateRoute';
 
 import Error404 from './Components/Error404'
-import TestPage from './Components/TestPage'
 
 /* Before sign in pages */
 const SignIn = lazy(() => import('./Components/SignIn'));
 const SignUp = lazy(() => import('./Components/SignUp'));
 const ForgotPassword = lazy(() => import('./Components/ForgotPassword'));
-const ChangePassword = lazy(() => import('./Components/ChangePassword'));
+const ResetPassword = lazy(() => import('./Components/ResetPassword'));
 const ConfirmEmailPage = lazy(() => import('./Components/ConfirmEmailPage'));
 
-/* Project pages */
-const NewProjectPage= lazy(() => import('./Components/NewProjectPage'));
-
 /* Other pages */
-const ProfilePage= lazy(() => import('./Components/ProfilePage'));
-const Foundations= lazy(() => import('./Components/FoundationsPage'));
 const LoggedInContent = lazy(() => import('./Pages/LoggedInContent'));
 
 // TODO: make mobile friendly in future
-// TODO: Remove aws-cognito-promises dependency from the system as it uses a very old AWS-SDK version
 
 // Use existing Cognito resource for auth
 Amplify.configure({
@@ -84,6 +77,9 @@ class App extends Component{
     // Show the details of the Auth configuration
     const currentConfig = Auth.configure();
     console.log(currentConfig)
+
+    // If the refreshToken is present, refresh the login
+    this.props.refreshSession()
   }
 
   enableLogger = () => {
@@ -114,7 +110,7 @@ class App extends Component{
               <Route path='/signin' component={SignIn} />
               <Route path='/signup' component={SignUp} />
               <Route path='/forgot-password' component={ForgotPassword} />
-              <Route path='/reset-password' component={ChangePassword} />
+              <Route path='/reset-password' component={ResetPassword} />
               <Route path='/confirm-email' component={ConfirmEmailPage} />
 
               <PrivateRoute path='/project' component={LoggedInContent} />
@@ -147,10 +143,10 @@ class App extends Component{
               <PrivateRoute path='/refurbishment' component={LoggedInContent} />
               <PrivateRoute path='/refurbishment/:id?' component={LoggedInContent} />
 
-              <PrivateRoute path='/newproject' component={NewProjectPage} />
-              <PrivateRoute path='/profile' component={ProfilePage} />
-              <PrivateRoute path='/testpage' component={TestPage} />
-              <PrivateRoute path='/foundations' component={Foundations} />
+              <PrivateRoute path='/newproject' component={LoggedInContent} />
+
+              <PrivateRoute path='/profile' component={LoggedInContent} />
+              <PrivateRoute path='/foundations' component={LoggedInContent} />
 
               <Route path='/'
                 render={() =>

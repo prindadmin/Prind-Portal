@@ -22,14 +22,14 @@ export const BUTTON_CANCEL_SIGN_UP = "Cancel Sign Up"
 export const BUTTON_BACK_TO_LOGIN_PAGE = "Back to login page"
 export const PLACEHOLDER_EMAIL = "Email"
 export const PLACEHOLDER_PASSWORD = "Password"
-export const PLACEHOLDER_FIRST_NAME = "FirstName"
+export const PLACEHOLDER_FIRST_NAME = "First Name"
 export const PLACEHOLDER_LAST_NAME = "Surname"
 export const LOGIN_UNSUCCESSFUL = "Login unsuccessful, please check your email address and password"
 export const PLEASE_VERIFY_ACCOUNT = "We've sent you an email to verify your account. Please check your email inbox."
 
 export const BUTTON_SEND_CODE = "Send Code"
 export const BUTTON_RESET_LINK = "Send Reset Link"
-export const CHANGE_PASSWORD_DESCRIPTION = "In order to change your password we'll send you a link to the change password page"
+export const CHANGE_PASSWORD_DESCRIPTION = "In order to change your password, we'll need to send you a link to the change password page"
 export const CHANGE_PASSWORD_LINK_SENT = "Change password link successfuly sent! Please check your email."
 
 export const IF_YES_PROVIDE_DETAILS_BELOW = "If yes, please provide extra details below"
@@ -261,3 +261,5 @@ export const CANNOT_SIGN_WITHOUT_FOUNDATIONS_ID = "You cannot sign documents wit
 export const ACCREDITATION_NAME = "Accreditation name"
 export const ACCREDITATION_ISSUE_DATE = "Issue date"
 export const ACCREDITATION_ISSUER = "Issued by"
+
+export const YOUR_PASSWORD_WAS_SUCCESSFULLY_CHAINGED = "Your password has been successfully changed."

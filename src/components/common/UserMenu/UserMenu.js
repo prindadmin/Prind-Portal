@@ -88,14 +88,14 @@ class UserMenu extends Component {
 
     if (user.signatureRequests.length + user.projectInvitations.length > 0) {
       this.props.history.push({
-        pathname: '/Profile',
+        pathname: '/profile',
         state: { tabToOpen: 'requests' },
       })
       return;
     }
 
     this.props.history.push({
-      pathname: '/Profile',
+      pathname: '/profile',
     })
 
   }

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import * as awsReducer from '../../../Reducers/awsReducer'
+import * as authReducer from '../../../Reducers/authReducer'
 import * as userReducer from '../../../Reducers/userReducer'
 
 import UserMenuComponent from './UserMenu'
@@ -15,13 +15,13 @@ const mapStatetoProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     signOut: () => {
-      dispatch(awsReducer.signOut())
+      dispatch(authReducer.signOut())
     },
-    getUserProjectInvitations: (identityToken, resolve, reject) => {
-      dispatch(userReducer.getProjectInvitations(identityToken, resolve, reject))
+    getUserProjectInvitations: (resolve, reject) => {
+      dispatch(userReducer.getProjectInvitations(resolve, reject))
     },
-    getUserSignatureRequests: (identityToken, resolve, reject) => {
-      dispatch(userReducer.getSignatureRequests(identityToken, resolve, reject))
+    getUserSignatureRequests: (resolve, reject) => {
+      dispatch(userReducer.getSignatureRequests(resolve, reject))
     }
   }
 }

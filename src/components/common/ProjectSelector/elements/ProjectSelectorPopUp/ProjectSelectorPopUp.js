@@ -99,7 +99,7 @@ export class ProjectSelectorPopUp extends Component {
 
   createNewProject = () => {
     const { history } = this.props
-    history.push('/NewProject')
+    history.push('/newproject')
   }
 
   projectsLoading = () => {

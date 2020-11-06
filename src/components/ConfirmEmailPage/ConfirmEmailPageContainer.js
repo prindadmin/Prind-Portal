@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import * as awsReducer from '../../Reducers/awsReducer'
+import * as reducer from '../../Reducers/authReducer'
 
 import ConfirmEmailPage from './ConfirmEmailPage'
 
@@ -12,7 +12,7 @@ const mapStatetoProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     confirmUser: (userParameters, resolve, reject) => {
-      dispatch(awsReducer.confirmUser(userParameters, resolve, reject))
+      dispatch(reducer.confirmUser(userParameters, resolve, reject))
     },
   }
 }

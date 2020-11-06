@@ -1,6 +1,6 @@
 
 import { combineReducers } from 'redux'
-import * as authReducer from './awsReducer'
+import * as authReducer from './authReducer'
 import * as userReducer from './userReducer'
 import * as projectsReducer from './projectsReducer'
 import * as memberReducer from './memberReducer'

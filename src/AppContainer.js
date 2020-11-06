@@ -2,6 +2,8 @@ import { connect } from 'react-redux'
 
 import AppComponent from './App'
 
+import * as authReducer from './Reducers/authReducer'
+
 const mapStatetoProps = state => {
   return {
     isSignedIn: state.auth.isSignedIn,
@@ -11,7 +13,11 @@ const mapStatetoProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-  return {}
+  return {
+    refreshSession: () => {
+      dispatch(authReducer.refreshSession())
+    },
+  }
 }
 
 export default connect(mapStatetoProps, mapDispatchToProps)(AppComponent)
