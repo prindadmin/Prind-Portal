@@ -18,6 +18,11 @@ import {
 } from '@fortawesome/pro-solid-svg-icons'
 
 import {
+  faBars
+} from '@fortawesome/pro-regular-svg-icons'
+
+
+import {
   faCheckCircle,
   faTimesCircle,
   faCircle,
@@ -25,6 +30,7 @@ import {
 
 let icons = {
   building: faIndustry,
+  burger: faBars,
   city: faCity,
   timesCircle: faTimesCircle,
   unticked: faCircle,

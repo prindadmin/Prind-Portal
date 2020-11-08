@@ -132,20 +132,20 @@ export class ContactTile extends Component {
         memberDetails.firstName + " " + memberDetails.lastName :
         strings.MEMBER_NOT_YET_SIGNED_UP_TO_PRIND
 
-    const isConfirmed = confirmed ? "member-confirmed" : "member-not-confirmed"
+    const isConfirmed = confirmed ? "row member-confirmed" : "row member-not-confirmed"
 
     return (
         <div id='contact-tile' className={isConfirmed} onClick={(e) => {
           e.stopPropagation()
           // TODO this.showUserDetails()
         }}>
-          <div className='col-3'>
-            <div className="text-center">
+          <div className='col-md-3 col-sm-12'>
+            <div className="text-center avatar-container">
               <img src={avatarLink} className="avatar img-circle img-thumbnail" alt="avatar" />
             </div>
           </div>
 
-          <div className='col-9'>
+          <div className='col-md-9 col-sm-12'>
             <div className='row'>
               <h4 className='bp3-heading'>{userName}</h4>
             </div>

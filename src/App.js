@@ -31,7 +31,7 @@ const ConfirmEmailPage = lazy(() => import('./Components/ConfirmEmailPage'));
 /* Other pages */
 const LoggedInContent = lazy(() => import('./Pages/LoggedInContent'));
 
-// TODO: make mobile friendly in future
+// TODO: make mobile version pages the right height (1x1 content is way longer than it needs to be)
 
 // Use existing Cognito resource for auth
 Amplify.configure({

@@ -70,7 +70,7 @@ export class Page extends Component {
 
   newProjectPageHeader = () => {
     return (
-      <div className='header-section'>
+      <div className='header-section row'>
         <h2>Create a new project</h2>
       </div>
     )
@@ -81,11 +81,12 @@ export class Page extends Component {
     const { handleSubmit } = this.props
 
     return (
-      <form onSubmit={handleSubmit(this.createProject)} className='auth-form'>
+      <form onSubmit={handleSubmit(this.createProject)} className='auth-form row'>
         <FormGroup
           label={Strings.PROJECT_NAME}
           labelFor="projectName"
           labelInfo={Strings.FIELD_IS_REQUIRED}
+          className='col-12'
         >
           <Field
             name="projectName"
@@ -98,6 +99,7 @@ export class Page extends Component {
         <FormGroup
           label={Strings.PROJECT_REFERENCE}
           labelFor="projectReference"
+          className='col-12'
         >
           <Field
             name="projectReference"
@@ -110,6 +112,7 @@ export class Page extends Component {
           label={Strings.PROJECT_ADDRESS}
           labelFor="projectAddressLine1"
           labelInfo=""
+          className='col-12'
         >
           <Field
             name="projectAddressLine1"
@@ -152,7 +155,7 @@ export class Page extends Component {
           label={Strings.PROJECT_DESCRIPTION}
           labelFor="projectDescription"
           labelInfo=""
-          className="last"
+          className="col-12 last"
         >
           <Field
             name="projectDescription"
@@ -174,6 +177,7 @@ export class Page extends Component {
           <Button
             text={Strings.BUTTON_CANCEL}
             intent='none'
+            className="last"
             onClick={() => {
               this.props.resetChosenProject()
               this.props.history.push(Endpoints.DEFAULTLOGGEDINPAGE)
@@ -186,7 +190,7 @@ export class Page extends Component {
 
   newProjectPageFooter = () => {
     return (
-      <div>
+      <div className='content-footer'>
         {/*new project page footer here*/}
       </div>
     )
@@ -199,7 +203,7 @@ export class Page extends Component {
 
     return (
       <div id='new-project-page'>
-        <div className='page-content-section row'>
+        <div className='page-content-section'>
           {this.newProjectPageHeader()}
           {
             createError ?

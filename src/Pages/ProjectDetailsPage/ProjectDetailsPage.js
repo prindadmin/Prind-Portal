@@ -16,9 +16,11 @@ import PopOverHandler from '../../Components/common/popOverHandler'
 
 import * as FormInputs from '../../Components/common/formInputs'
 
-import * as strings from '../../Data/Strings'
+import * as Strings from '../../Data/Strings'
 import * as Validators from '../../Validators'
 import * as Endpoints from '../../Data/Endpoints'
+
+// TODO: Work out why this forms button is over the footer in mobile mode (might also be in desktop mode)
 
 export class ProjectDetailsPage extends Component {
   static propTypes = {
@@ -63,7 +65,7 @@ export class ProjectDetailsPage extends Component {
   projectPageHeader = () => {
     return (
       <div className='header-section'>
-        <h2>{strings.EDIT_PROJECT_DETAILS}</h2>
+        <h2>{Strings.EDIT_PROJECT_DETAILS}</h2>
       </div>
     )
   }
@@ -82,73 +84,73 @@ export class ProjectDetailsPage extends Component {
     return (
       <form onSubmit={handleSubmit(this.updateProject)} className='project-form'>
         <FormGroup
-          label={strings.PROJECT_NAME}
+          label={Strings.PROJECT_NAME}
           labelFor="projectName"
-          labelInfo={strings.FIELD_IS_REQUIRED}
+          labelInfo={Strings.FIELD_IS_REQUIRED}
         >
           <Field
             name="projectName"
             validate={[Validators.required, Validators.maxLength64]}
             component={FormInputs.TextInput}
-            placeholder={strings.PROJECT_NAME}
+            placeholder={Strings.PROJECT_NAME}
           />
         </FormGroup>
 
         <FormGroup
-          label={strings.PROJECT_REFERENCE}
+          label={Strings.PROJECT_REFERENCE}
           labelFor="projectReference"
         >
           <Field
             name="projectReference"
             component={FormInputs.TextInput}
-            placeholder={strings.PROJECT_REFERENCE}
+            placeholder={Strings.PROJECT_REFERENCE}
           />
         </FormGroup>
 
         <FormGroup
-          label={strings.PROJECT_ADDRESS}
+          label={Strings.PROJECT_ADDRESS}
           labelFor="projectAddressLine1"
           labelInfo=""
         >
           <Field
             name="projectAddressLine1"
             component={FormInputs.TextInput}
-            placeholder={strings.ADDRESS_LINE_1}
+            placeholder={Strings.ADDRESS_LINE_1}
           />
           <Field
             name="projectAddressLine2"
             component={FormInputs.TextInput}
-            placeholder={strings.ADDRESS_LINE_2}
+            placeholder={Strings.ADDRESS_LINE_2}
           />
           <Field
             name="projectAddressLine3"
             component={FormInputs.TextInput}
-            placeholder={strings.ADDRESS_LINE_3}
+            placeholder={Strings.ADDRESS_LINE_3}
           />
           <Field
             name="projectAddressTown"
             component={FormInputs.TextInput}
-            placeholder={strings.ADDRESS_LINE_TOWN}
+            placeholder={Strings.ADDRESS_LINE_TOWN}
           />
           <Field
             name="projectAddressRegion"
             component={FormInputs.TextInput}
-            placeholder={strings.ADDRESS_LINE_REGION}
+            placeholder={Strings.ADDRESS_LINE_REGION}
           />
           <Field
             name="projectAddressPostalCode"
             component={FormInputs.TextInput}
-            placeholder={strings.ADDRESS_LINE_POSTAL_CODE}
+            placeholder={Strings.ADDRESS_LINE_POSTAL_CODE}
           />
           <Field
             name="projectAddressCountry"
             component={FormInputs.TextInput}
-            placeholder={strings.ADDRESS_LINE_COUNTRY}
+            placeholder={Strings.ADDRESS_LINE_COUNTRY}
           />
         </FormGroup>
 
         <FormGroup
-          label={strings.PROJECT_DESCRIPTION}
+          label={Strings.PROJECT_DESCRIPTION}
           labelFor="projectDescription"
           labelInfo=""
           className="last"
@@ -157,7 +159,7 @@ export class ProjectDetailsPage extends Component {
             name="projectDescription"
             component="textarea"
             className="bp3-input"
-            placeholder={strings.PROJECT_DESCRIPTION}
+            placeholder={Strings.PROJECT_DESCRIPTION}
           />
         </FormGroup>
 
@@ -169,7 +171,7 @@ export class ProjectDetailsPage extends Component {
             disabled={this.props.invalid}
             type='submit'
             intent='primary'
-            text={strings.BUTTON_SAVE_CHANGES}
+            text={Strings.BUTTON_SAVE_CHANGES}
           />
         </ButtonGroup>
 
@@ -179,7 +181,7 @@ export class ProjectDetailsPage extends Component {
           <Button
             loading={this.props.submitting}
             intent='danger'
-            text={strings.BUTTON_DELETE_PROJECT}
+            text={Strings.BUTTON_DELETE_PROJECT}
             onClick={(e) => this.setState({
               showDeleteProjectConfirmation: true,
               deleteError: false,
@@ -217,7 +219,7 @@ export class ProjectDetailsPage extends Component {
 
     this.setState({
       deleteError: true,
-      errorText: strings.ERROR_DELETING_PROJECT
+      errorText: Strings.ERROR_DELETING_PROJECT
     })
   }
 
@@ -235,7 +237,7 @@ export class ProjectDetailsPage extends Component {
             <div id='popup-box'>
               <div className='delete-project-popover-container' onClick={(e) => e.stopPropagation()}>
                 <div className='element-title'>
-                  {strings.DELETE_PROJECT}
+                  {Strings.DELETE_PROJECT}
                 </div>
                 {
                   deleteError ?
@@ -246,12 +248,12 @@ export class ProjectDetailsPage extends Component {
                 }
 
                 <div className='element-description'>
-                  {strings.CONFIRM_PROJECT_DELETE}
+                  {Strings.CONFIRM_PROJECT_DELETE}
                   <ButtonGroup fill>
                     <Button
                       loading={this.props.submitting}
                       intent='danger'
-                      text={strings.BUTTON_DELETE_PROJECT}
+                      text={Strings.BUTTON_DELETE_PROJECT}
                       onClick={this.confirmDeleteProject}
                     />
                   </ButtonGroup>
@@ -260,7 +262,7 @@ export class ProjectDetailsPage extends Component {
                     <Button
                       loading={this.props.submitting}
                       intent='none'
-                      text={strings.BUTTON_CANCEL}
+                      text={Strings.BUTTON_CANCEL}
                       onClick={(e) => this.setState({showDeleteProjectConfirmation: false})}
                     />
                   </ButtonGroup>
@@ -316,7 +318,7 @@ export class ProjectDetailsPage extends Component {
         <div className='page-content-section row'>
           {
             this.props.projects !== undefined ?
-              this.props.projects.chosenProject.projectName === strings.NO_PROJECT_SELECTED ?
+              this.props.projects.chosenProject.projectName === Strings.NO_PROJECT_SELECTED ?
                 this.showEmptyPage() :
                 this.projectDetails() :
             this.showEmptyPage()

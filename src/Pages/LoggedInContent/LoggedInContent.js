@@ -7,10 +7,11 @@ import * as Strings from '../../Data/Strings'
 
 // Components
 const HeaderBar = lazy(() => import('../../Components/HeaderBar'));
-const LayoutSideBar = lazy(() => import('../../Components/SideBar'));
 const SideBar = lazy(() => import('../../Components/SideBar'));
+const SideBarMobile = lazy(() => import('../../Components/SideBarMobile'));
 const LayoutBody  = lazy(() => import('../../Components/LoggedInLayout/Body'));
 const LayoutContentArea1x1  = lazy(() => import('../../Components/LoggedInLayout/ContentArea1x1'));
+const LayoutContentArea1x1Mobile  = lazy(() => import('../../Components/LoggedInLayout/ContentArea1x1Mobile'));
 const Footer = lazy(() => import('../../Components/common/footer'));
 const ProjectFetchError = lazy(() => import('../../Components/common/ProjectFetchError'));
 
@@ -31,6 +32,8 @@ const ProfilePage = lazy(() => import('../ProfilePage'));
 const ProjectDetailsPage = lazy(() => import('../ProjectDetailsPage'));
 const ProjectTeamPage = lazy(() => import('../ProjectTeamPage'));
 
+const MOBILE_WIDTH_BREAKPOINT = 992;
+
 export class LoggedInContent extends Component {
   static propTypes = {
     location: PropTypes.object.isRequired,
@@ -40,14 +43,14 @@ export class LoggedInContent extends Component {
     super()
     this.state = {
       fetchingProjectDetails: false,
-      pageName: ""
+      pageName: "",
+      width: 0,
+      height: 0,
     }
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
   }
 
   componentDidMount() {
-    //const { username } = this.props.user
-    // TODO: this.props.getuserDetails(username)
-
     const { projects, requestS3ProjectFileUploadToken, getProjectMembers } = this.props
     const { projectId } = projects.chosenProject
 
@@ -62,6 +65,9 @@ export class LoggedInContent extends Component {
       requestS3ProjectFileUploadToken(projectId, pageName)
       getProjectMembers(projectId)
     }
+
+    this.updateWindowDimensions();
+    window.addEventListener('resize', this.updateWindowDimensions);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -78,6 +84,19 @@ export class LoggedInContent extends Component {
         getProjectMembers(projectId)
       }
     }
+  }
+
+  // Removes the screen size listener when component is removed
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWindowDimensions);
+  }
+
+  // Stores the current screen size in the components state
+  updateWindowDimensions() {
+    this.setState({
+      width: window.innerWidth,
+      height: window.innerHeight
+    });
   }
 
   errorComponent = () => {
@@ -161,6 +180,7 @@ export class LoggedInContent extends Component {
 
     const { pathname } = this.props.location
     const { error } = this.props.projects
+    const { width, height } = this.state
 
     const content = pathname.startsWith('/team') ? <ProjectTeamPage /> :
                     pathname.startsWith('/project') ? <ProjectDetailsPage /> :
@@ -184,15 +204,24 @@ export class LoggedInContent extends Component {
 
         <LayoutBody>
 
-          <LayoutSideBar>
-            <SideBar {...this.props} />
-          </LayoutSideBar>
+          {
+            width > MOBILE_WIDTH_BREAKPOINT ? <SideBar {...this.props} /> : <SideBarMobile {...this.props} />
+          }
 
-          <LayoutContentArea1x1>
-            <Suspense fallback={this.loadingPlaceholder()}>
-              { error ? this.errorContent() : content }
-            </Suspense>
-          </LayoutContentArea1x1>
+          {
+              width > MOBILE_WIDTH_BREAKPOINT ?
+                  <LayoutContentArea1x1>
+                      <Suspense fallback={this.loadingPlaceholder()}>
+                          { error ? this.errorContent() : content }
+                      </Suspense>
+                  </LayoutContentArea1x1> :
+                  <LayoutContentArea1x1Mobile>
+                      <Suspense fallback={this.loadingPlaceholder()}>
+                          { error ? this.errorContent() : content }
+                      </Suspense>
+                  </LayoutContentArea1x1Mobile>
+            }
+
         </LayoutBody>
 
         <Footer />

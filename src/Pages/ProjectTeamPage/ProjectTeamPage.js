@@ -234,8 +234,8 @@ export class ProjectTeamPage extends Component {
     const { projects } = this.props
 
     return (
-      <div className="member-list-container">
-        <div className="row">
+      <React.Fragment>
+        <div className="member-list-container row">
           <ButtonGroup fill>
             <Button
               onClick={(e) => this.setState({addingMember: true})}
@@ -279,8 +279,7 @@ export class ProjectTeamPage extends Component {
                 : null
             }
         </div>
-
-      </div>
+      </React.Fragment>
     )
   }
 

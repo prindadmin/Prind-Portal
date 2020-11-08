@@ -84,10 +84,12 @@ hr {
 
 .create-custom-field-button-container {
   margin-bottom: 2em;
+  width: 100%;
 }
 
 .create-custom-field-button-container button {
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
 }
 
 .horizontal-line {
@@ -144,7 +146,8 @@ hr {
 #signup .auth-form,
 #signin .auth-form,
 #new-project-page .auth-form {
-    width: 400px;
+    max-width: 500px;
+    width: 100%;
     padding: 15px;
     margin: 0 auto;
 }
@@ -172,9 +175,27 @@ hr {
 
 .chooser-section {
   border-right: 1px solid black;
-  height: calc(100vh - var(--header-height) - var(--footer-height));
   overflow: scroll;
   padding: 0 0 10px 0;
+}
+
+.sidebar  {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 5px 0 0 5px;
+}
+
+@media only screen and (min-width: 992px) {
+
+  .chooser-section {
+    height: calc(100vh - var(--header-height) - var(--footer-height));
+  }
+
+  .sidebar  {
+    padding: 0;
+  }
+
 }
 
 .page-content-section {
@@ -266,7 +287,7 @@ hr {
 }
 
 #header-bar Button {
-  min-width: 300px;
+  min-width: 250px;
 }
 
 #header-bar .request-badge {
@@ -365,6 +386,8 @@ hr {
 
 #new-project-page .bp3-button-group {
   margin-bottom: 10px;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
 #new-project-page .form-container {
@@ -376,6 +399,10 @@ hr {
     width: 100%;
     padding: 15px;
     margin: 0 auto;
+}
+
+#new-project-page .content-footer {
+  height: var(--footer-height);
 }
 
 /* ======================================== */
@@ -411,6 +438,7 @@ hr {
 }
 
 #project-creation-popover .element-description {
+  width: 100%;
   max-width: 600px;
   text-align: center;
 }
@@ -466,6 +494,7 @@ hr {
 #project-team-page .form-container {
   width: 80%;
   max-width: 1180px;
+
 }
 
 #project-team-page .project-form {
@@ -492,8 +521,16 @@ hr {
   align-items: center;
 }
 
+#project-team-page .member-list-container button {
+  max-width: 400px;
+  margin: auto;
+}
+
 #project-team-page .member-list {
   margin-top: 1em;
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 #project-team-page .member-list-container .col-md-12,
@@ -546,8 +583,28 @@ hr {
 }
 
 #contact-tile .avatar {
-  height: 97px;
-  width: 97px;
+  height: 100%;
+  width: 100%;
+  max-height: 97px;
+  max-width: 97px;
+}
+
+#contact-tile .avatar-container {
+  width: 100%;
+  padding-top: min(100%, 120px);
+  position: relative;
+  max-width: 100px;
+  max-height: 100px;
+  margin: auto;
+}
+
+#contact-tile .avatar-container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
 }
 
 #contact-tile button {
@@ -621,7 +678,7 @@ background-color: var(--field-element-grey);
 #requests-tab-container .element-title {
   font-size: 20px;
   font-weight: bold;
-  padding-bottom: 0.33em;
+  padding-bottom: 1em;
 }
 
 #file-upload-element .element-description,
@@ -629,6 +686,8 @@ background-color: var(--field-element-grey);
 #calendar-picker-element .element-description,
 #long-text-element .element-description,
 #popup-box .element-description {
+  width: 100%;
+  max-width: 600px;
   margin-bottom: 1em;
 }
 
@@ -920,7 +979,8 @@ background-color: var(--field-element-grey);
 }
 
 #create-custom-field-popover .form-container {
-  width: 400px;
+  width: 100%;
+  max-width: 500px;
 }
 
 #create-custom-field-popover #popup-box {
@@ -1258,9 +1318,26 @@ background-color: var(--field-element-grey);
 }
 
 #profile-tab-container .foundations-info {
-  margin: 0 auto 2em auto;
-  width: calc(100% - (2 * 15px));
+  margin: 1em 0 2em 0;
+  width: 100%;
 }
+
+#profile-tab-container .bp3-form-group {
+  padding: 0;
+}
+
+@media only screen and (min-width: 992px) {
+
+  #profile-tab-container .foundations-info {
+    margin: 0 auto 2em auto;
+    width: calc(100% - (2 * 15px));
+  }
+
+  #profile-tab-container .bp3-form-group {
+    padding: 0 15px;
+  }
+}
+
 
 /* ============================================ */
 /* ====== history-tab-container element ======= */

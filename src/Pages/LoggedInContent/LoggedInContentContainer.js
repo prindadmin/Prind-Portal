@@ -16,7 +16,7 @@ const mapStatetoProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getProjectDetails: (project, resolve) => {
-      dispatch(projectsReducer.updateChosenProject(null, project, resolve))
+      dispatch(projectsReducer.updateChosenProject(project, resolve))
     },
     saveProjectID: (projectID) => {
       dispatch(projectsReducer.saveProjectID(projectID))

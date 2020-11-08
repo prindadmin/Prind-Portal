@@ -19,6 +19,8 @@ import * as FormInputs from '../../../common/formInputs'
 
 const defaultAvatar = `images/default-avatar.png`
 
+// TODO: Resize the password change section
+
 export class Page extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
@@ -263,7 +265,7 @@ export class Page extends Component {
                   label={strings.MEMBER_FIRST_NAME}
                   labelFor="firstName"
                   labelInfo={strings.FIELD_IS_REQUIRED}
-                  className="col-6"
+                  className="col-lg-6 col-md-12"
                 >
                   <Field
                     name="firstName"
@@ -279,7 +281,7 @@ export class Page extends Component {
                   label={strings.MEMBER_LAST_NAME}
                   labelFor="lastName"
                   labelInfo={strings.FIELD_IS_REQUIRED}
-                  className="col-6"
+                  className="col-lg-6 col-md-12"
                 >
                   <Field
                     name="lastName"
@@ -294,7 +296,7 @@ export class Page extends Component {
                 <FormGroup
                   label={strings.MEMBER_FOUNDATIONS_ID}
                   labelFor="foundationsID"
-                  className="col-6"
+                  className="col-lg-6 col-md-12"
                 >
                   <Field
                     name="foundationsID"
@@ -307,7 +309,7 @@ export class Page extends Component {
                 <FormGroup
                   label={strings.MEMBER_EMAIL_ADDRESS}
                   labelFor="emailAddress"
-                  className="col-6"
+                  className="col-lg-6 col-md-12"
                 >
                   <Field
                     name="emailAddress"
@@ -321,7 +323,7 @@ export class Page extends Component {
                 <FormGroup
                   label={strings.MEMBER_LANDLINE_PHONE_NUMBER_WORK}
                   labelFor="homePhoneNumber"
-                  className="col-6"
+                  className="col-lg-6 col-md-12"
                 >
                   <Field
                     name="homePhoneNumber"
@@ -336,7 +338,7 @@ export class Page extends Component {
                 <FormGroup
                   label={strings.MEMBER_MOBILE_PHONE_NUMBER_WORK}
                   labelFor="mobilePhoneNumber"
-                  className="col-6"
+                  className="col-lg-6 col-md-12"
                 >
                   <Field
                     name="mobilePhoneNumber"
