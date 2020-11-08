@@ -134,6 +134,11 @@ hr {
 /* ================================ */
 
 #signup,
+#signin {
+  width: 100%;
+}
+
+#signup,
 #signin,
 #forgot-password,
 #change-password,
@@ -166,6 +171,12 @@ hr {
 #signin small,
 #new-project-page small {
   position: static !important;
+}
+#signup .sign-up-container,
+#signin .sign-in-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 15px;
 }
 
 

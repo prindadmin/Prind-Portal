@@ -156,7 +156,7 @@ export class Page extends Component {
 
     // Fetch the parameters
     const bucketName = process.env.REACT_APP_AWS_S3_USER_AVATAR_BUCKET_NAME
-    const key = `profile-avatar/${auth.info.username}`
+    const key = `profile-avatar/${user.username}`
 
     // Create the parameters to upload the file with
     var uploadParams = {
