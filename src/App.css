@@ -185,7 +185,6 @@ hr {
 /* ================================ */
 
 .chooser-section {
-  border-right: 1px solid black;
   overflow: scroll;
   padding: 0 0 10px 0;
 }
@@ -200,6 +199,7 @@ hr {
 @media only screen and (min-width: 992px) {
 
   .chooser-section {
+    border-right: 1px solid black;
     height: calc(100vh - var(--header-height) - var(--footer-height));
   }
 
@@ -464,6 +464,7 @@ hr {
 
 #project-team-page .add-member-form {
   max-width: 430px;
+  width: 100%;
   margin: auto;
 }
 
@@ -496,6 +497,7 @@ hr {
 
 #project-team-page .bp3-form-content {
   text-align: left;
+  width: 100%;
 }
 
 #project-team-page .bp3-button-group {
@@ -523,7 +525,8 @@ hr {
 }
 
 #project-team-page .page-content-section .bp3-button {
-  width: 430px;
+  width: 100%;
+  max-width: 430px;
 }
 
 #project-team-page .member-list-container {
@@ -542,6 +545,7 @@ hr {
   width: 100%;
   margin-left: 0;
   margin-right: 0;
+  margin-bottom: var(--footer-height);
 }
 
 #project-team-page .member-list-container .col-md-12,
@@ -560,6 +564,10 @@ hr {
   width: 100%;
 }
 
+#project-team-page .single-contact-tile-container {
+  margin-bottom: 15px;
+}
+
 /* ================================== */
 /* ====== contact tile element ====== */
 /* ================================== */
@@ -571,6 +579,7 @@ hr {
   border-radius: 0.5em;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
   height: 100%;
+  margin: 0px;
 }
 
 

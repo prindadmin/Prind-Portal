@@ -151,28 +151,28 @@ export class ContactTile extends Component {
             </div>
 
             <div className="row">
-              <div className="col-2">
+              <div className="col-lg-2 col-md-4">
                 <b>{strings.MEMBER_EMAIL_ADDRESS + ": "}</b>
               </div>
-              <div className="col-10">
+              <div className="col-lg-10 col-md-8">
                 {memberDetails.emailAddress}
               </div>
             </div>
 
             <div className="row">
-              <div className="col-2">
+              <div className="col-lg-2 col-md-4">
                 <b>{strings.MEMBER_PROJECT_ROLE + ": "}</b>
               </div>
-              <div className="col-10">
+              <div className="col-lg-10 col-md-8">
                 {memberDetails.roleName}
               </div>
             </div>
 
             <div className="row">
-              <div className="col-2">
+              <div className="col-lg-2 col-md-4">
                 <b>{strings.MEMBER_STATUS + ": "}</b>
               </div>
-              <div className="col-10">
+              <div className="col-lg-10 col-md-8">
                 { confirmed ? strings.MEMBER_IS_CONFIRMED : strings.MEMBER_ISNT_YET_CONFIRMED }
               </div>
             </div>

@@ -32,6 +32,7 @@ const ConfirmEmailPage = lazy(() => import('./Components/ConfirmEmailPage'));
 const LoggedInContent = lazy(() => import('./Pages/LoggedInContent'));
 
 // TODO: make mobile version pages the right height (1x1 content is way longer than it needs to be)
+// TODO: make the page menu float over other elements and not be 100% width in mobile size
 
 // Use existing Cognito resource for auth
 Amplify.configure({

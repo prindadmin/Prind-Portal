@@ -251,7 +251,7 @@ export class ProjectTeamPage extends Component {
               projects.memberList.confirmed !== undefined ?
                 projects.memberList.confirmed.map((memberDetails, index) => {
                   return (
-                    <div key={index} className="col-md-12 col-lg-12 col-xl-6">
+                    <div key={index} className="col-md-12 col-lg-12 col-xl-6 single-contact-tile-container">
                       <ContactTile
                         memberDetails={memberDetails}
                         onMemberRemove={this.onMemberRemove}
