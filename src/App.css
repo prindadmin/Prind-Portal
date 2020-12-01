@@ -698,7 +698,7 @@ background-color: var(--field-element-grey);
 #requests-tab-container .element-title {
   font-size: 20px;
   font-weight: bold;
-  padding-bottom: 1em;
+  padding-bottom: 0.7em;
 }
 
 #file-upload-element .element-description,
@@ -725,7 +725,6 @@ background-color: var(--field-element-grey);
   padding: 0;
 }
 
-
 #file-upload-element .row,
 #drop-down-element .row,
 #calendar-picker-element .row,
@@ -734,6 +733,11 @@ background-color: var(--field-element-grey);
   align-items: center;
   display:flex;
   margin-bottom: 0.3em;
+}
+
+
+#file-upload-element .row {
+  margin-bottom: 0.5em;
 }
 
 
@@ -811,6 +815,13 @@ background-color: var(--field-element-grey);
 
 #file-upload-element .field-names {
   font-weight: bold;
+  padding-left: 0px;
+}
+
+@media only screen and (min-width: 992px) {
+  #file-upload-element .field-names {
+    padding-left: 15px;
+  }
 }
 
 #file-upload-element .signature-container {
@@ -830,6 +841,10 @@ background-color: var(--field-element-grey);
 
 #file-upload-element .button-row {
   margin-top: 0.5em;
+}
+
+#file-upload-element .button-row button {
+  margin-top: 1em;
 }
 
 #file-upload-element .upload-history-container .row.signatures {
@@ -1104,13 +1119,28 @@ background-color: var(--field-element-grey);
   align-items: center;
   text-align: center;
   font-weight: bold;
-  width: 100px;
-  height: 100px;
+  width: 75px;
+  height: 75px;
   margin-left: auto;
   border: 1px solid grey;
   border-radius: 10px;
   bottom: 2em;
   position: relative;
+  font-size: 12px;
+}
+
+@media only screen and (min-width: 992px) {
+  #file-details-popover .download-box,
+  #current-version-container .download-box {
+    width: 100px;
+    height: 100px;
+    font-size: 14px;
+  }
+}
+
+.download-box p {
+  margin-top: 0.3em;
+  margin-bottom: 0;
 }
 
 #current-version-container .download-box {

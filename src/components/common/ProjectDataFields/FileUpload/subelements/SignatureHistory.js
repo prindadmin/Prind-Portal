@@ -7,6 +7,8 @@ import {
 
 import * as strings from '../../../../../Data/Strings'
 
+// TODO: Update the CSS for this box when the width is below xxx px
+
 export class Element extends Component {
   static propTypes = {
     details: PropTypes.array.isRequired,
