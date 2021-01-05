@@ -14,6 +14,11 @@ import * as FormInputs from '../../formInputs'
 
 import * as strings from '../../../../Data/Strings'
 
+// TODO: Style text editor when disabled
+// TODO: Compare old and new text in some way (side by side)?
+// TODO: Update in server as versioned (normally text isn't versioned, right?)
+
+
 export class Element extends Component {
   static propTypes = {
     elementContent: PropTypes.shape({
@@ -108,7 +113,8 @@ export class Element extends Component {
 
           <div className='container'>
             <Editor
-              initialValue="<p>Initial content</p>"
+              initialValue={ fieldDetails.textValue }
+              disabled={!editable}
               init={{
                 height: 500,
                 menubar: false,

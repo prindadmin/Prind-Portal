@@ -93,13 +93,14 @@ export class DesignPage extends Component {
 
     const { fields }  = this.props.pageContent.design
 
+    // TODO: Remove this test stuff
     const fieldTest = {
       id: "field-test",
       title: "test field",
       description: "This field is being tested",
-      editable: true,
+      editable: false,
       fieldDetails: {
-        textValue: "",
+        textValue: "This is the default test text",
       },
     }
 
