@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import * as reducer from '../../Reducers/PageReducers/refurbishmentReducer'
+import * as reducer from '../../Reducers/pageReducers/refurbishmentReducer'
 //import * as userReducer from '../../Reducers/userReducer'
 //import * as projectsReducer from '../../Reducers/projectsReducer'
 

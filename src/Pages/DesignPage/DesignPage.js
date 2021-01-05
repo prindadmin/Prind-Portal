@@ -6,7 +6,7 @@ import ReactGA from 'react-ga';
 import ProjectLoading from '../../Components/common/ProjectLoading'
 
 import CreateCustomFieldPopover from '../../Components/common/CreateCustomFieldPopover'
-import { FileUpload, DropDown, CalendarPicker, LongText } from '../../Components/common/ProjectDataFields'
+import { FileUpload, DropDown, CalendarPicker, LongText, GitText } from '../../Components/common/ProjectDataFields'
 import NoProjectSelected from '../../Components/common/NoProjectSelected'
 import ErrorFetchingContent from '../../Components/common/ErrorFetchingContent'
 
@@ -93,6 +93,15 @@ export class DesignPage extends Component {
 
     const { fields }  = this.props.pageContent.design
 
+    const fieldTest = {
+      id: "field-test",
+      title: "test field",
+      description: "This field is being tested",
+      editable: true,
+      fieldDetails: {
+        textValue: "",
+      },
+    }
 
     return(
       <div className='page-content'>
@@ -143,6 +152,16 @@ export class DesignPage extends Component {
 
           })
         }
+        {
+          <GitText
+            key="test"
+            form="field-test"
+            elementContent={fieldTest}
+            pageName={pageName}
+            />
+        }
+
+
         {this.getCreateFieldButton()}
       </div>
     )
