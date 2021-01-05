@@ -54,7 +54,7 @@ export class Page extends Component {
 
   getImage = (props) => {
 
-    const { username } = props.auth.info
+    const { username } = props.user
     const that = this
     const avatarLink = `${process.env.REACT_APP_AWS_S3_USER_AVATAR_ENDPOINT}/${username}`
 
@@ -106,10 +106,10 @@ export class Page extends Component {
 
   fileChosen = (e) => {
 
-    const { requestS3UserFileUploadToken, auth } = this.props
+    const { requestS3UserFileUploadToken } = this.props
 
     // Get a token to allow the uploading of the file
-    requestS3UserFileUploadToken(auth.info.idToken.jwtToken, "profile-avatar")
+    requestS3UserFileUploadToken("profile-avatar")
 
     e.persist()
 

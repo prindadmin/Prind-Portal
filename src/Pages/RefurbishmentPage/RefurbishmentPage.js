@@ -20,25 +20,23 @@ export class RefurbishmentPage extends Component {
   }
 
   componentDidMount() {
-    const { projects, auth, getContent, location } = this.props
+    const { projects, getContent, location } = this.props
     const { projectId } = projects.chosenProject
-    const { jwtToken } = auth.info.idToken
 
     // Register pageview with GA
     ReactGA.pageview(location.pathname + location.search);
 
     if (projects.chosenProject.projectId !== "") {
-      getContent(jwtToken, projectId)
+      getContent(projectId)
     }
   }
 
   componentDidUpdate(prevProps) {
-    const { projects, auth, getContent } = this.props
+    const { projects, getContent } = this.props
     const { projectId } = projects.chosenProject
-    const { jwtToken } = auth.info.idToken
 
     if (projectId !== prevProps.projects.chosenProject.projectId) {
-      getContent(jwtToken, projectId)
+      getContent(projectId)
     }
   }
 
@@ -145,7 +143,7 @@ export class RefurbishmentPage extends Component {
 
     return (
       <div id='refurbishment-page'>
-        <div className='page-content-section col-xl-10 col-lg-9 col-md-9 col-sm-9'>
+        <div className='page-content-section row'>
           {
             projects !== undefined ? this.chooseContent() : this.showErrorPage()
           }

@@ -5,7 +5,6 @@ import ProjectSelectorComponent from './ProjectSelector'
 
 const mapStatetoProps = state => {
   return {
-    auth: state.auth,
     projects: state.projects
   }
 }

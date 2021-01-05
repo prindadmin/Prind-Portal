@@ -2,11 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Route } from 'react-router-dom'
 import { Redirect } from 'react-router-dom'
+
 import * as States from '../../States'
-
 import * as Endpoints from '../../Data/Endpoints'
-
-// FUTURE: projects/create isn't linkable to...
 
 class PrivateRoute extends React.Component {
   static propTypes = {

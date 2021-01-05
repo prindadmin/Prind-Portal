@@ -1,6 +1,8 @@
 import React, { Component, lazy, Suspense } from 'react';
 import './App.css';
 
+import Amplify, { Auth } from 'aws-amplify';
+
 import ReactGA from 'react-ga';
 
 import {
@@ -14,28 +16,46 @@ import { AUTH_SUCCESS } from './States'
 
 import * as Endpoints from './Data/Endpoints'
 import PrivateRoute from './Components/PrivateRoute';
+import ProjectLoading from './Components/common/ProjectLoading'
 
-import Auth from './Components/Auth';
 import Error404 from './Components/Error404'
-import TestPage from './Components/TestPage'
+import * as Strings from './Data/Strings'
 
 /* Before sign in pages */
 const SignIn = lazy(() => import('./Components/SignIn'));
 const SignUp = lazy(() => import('./Components/SignUp'));
 const ForgotPassword = lazy(() => import('./Components/ForgotPassword'));
-const ChangePassword = lazy(() => import('./Components/ChangePassword'));
+const ResetPassword = lazy(() => import('./Components/ResetPassword'));
 const ConfirmEmailPage = lazy(() => import('./Components/ConfirmEmailPage'));
 
-/* Project pages */
-const NewProjectPage= lazy(() => import('./Components/NewProjectPage'));
-
 /* Other pages */
-const ProfilePage= lazy(() => import('./Components/ProfilePage'));
-const Foundations= lazy(() => import('./Components/FoundationsPage'));
 const LoggedInContent = lazy(() => import('./Pages/LoggedInContent'));
 
-// TODO: make mobile friendly in future
-// TODO: Remove aws-cognito-promises dependency from the system as it uses a very old AWS-SDK version
+// TODO: make mobile version pages the right height (1x1 content is way longer than it needs to be)
+// TODO: make the page menu float over other elements and not be 100% width in mobile size
+// TODO: Add error handling when a page cannot load
+
+// Use existing Cognito resource for auth
+Amplify.configure({
+    Auth: {
+        // REQUIRED - Amazon Cognito Region
+        region: process.env.REACT_APP_REGION,
+
+        // OPTIONAL - Amazon Cognito User Pool ID
+        userPoolId: process.env.REACT_APP_USER_POOL_ID,
+
+        // OPTIONAL - Amazon Cognito Web Client ID (26-char alphanumeric string)
+        userPoolWebClientId: process.env.REACT_APP_CLIENT_ID,
+    },
+    API: {
+        endpoints: [
+            {
+                name: process.env.REACT_APP_API_NAME,
+                endpoint: process.env.REACT_APP_API_ENDPOINT
+            }
+        ]
+    }
+});
 
 class App extends Component{
 
@@ -57,6 +77,13 @@ class App extends Component{
   componentDidMount() {
     // Turn off the logger if this is a production environment
     process.env.REACT_APP_STAGE === "PRODUCTION" ? this.disableLogger() : this.enableLogger()
+
+    // Show the details of the Auth configuration
+    const currentConfig = Auth.configure();
+    console.log(currentConfig)
+
+    // If the refreshToken is present, refresh the login
+    this.props.refreshSession()
   }
 
   enableLogger = () => {
@@ -73,7 +100,13 @@ class App extends Component{
       window['console']['log'] = function() {};
   }
 
-
+  loadingPlaceholder = () => {
+    return(
+      <div id='loading-placeholder'>
+        <ProjectLoading text={Strings.LOADING}/>
+      </div>
+    )
+  }
 
   render() {
 
@@ -82,14 +115,12 @@ class App extends Component{
     return (
       <div className="App full-height container-fluid">
         <Router>
-          <Auth />
-
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={this.loadingPlaceholder()}>
             <Switch>
               <Route path='/signin' component={SignIn} />
               <Route path='/signup' component={SignUp} />
               <Route path='/forgot-password' component={ForgotPassword} />
-              <Route path='/reset-password' component={ChangePassword} />
+              <Route path='/reset-password' component={ResetPassword} />
               <Route path='/confirm-email' component={ConfirmEmailPage} />
 
               <PrivateRoute path='/project' component={LoggedInContent} />
@@ -122,10 +153,10 @@ class App extends Component{
               <PrivateRoute path='/refurbishment' component={LoggedInContent} />
               <PrivateRoute path='/refurbishment/:id?' component={LoggedInContent} />
 
-              <PrivateRoute path='/newproject' component={NewProjectPage} />
-              <PrivateRoute path='/profile' component={ProfilePage} />
-              <PrivateRoute path='/testpage' component={TestPage} />
-              <PrivateRoute path='/foundations' component={Foundations} />
+              <PrivateRoute path='/newproject' component={LoggedInContent} />
+
+              <PrivateRoute path='/profile' component={LoggedInContent} />
+              <PrivateRoute path='/foundations' component={LoggedInContent} />
 
               <Route path='/'
                 render={() =>

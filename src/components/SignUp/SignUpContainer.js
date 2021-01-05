@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import * as reducer from '../../Reducers/awsReducer'
+import * as reducer from '../../Reducers/authReducer'
 
 import SignUpComponent from './SignUp'
 

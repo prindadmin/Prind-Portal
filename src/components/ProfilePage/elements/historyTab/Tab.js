@@ -12,7 +12,6 @@ import {
 
 export class Page extends Component {
   static propTypes = {
-    auth: PropTypes.object.isRequired,
     user: PropTypes.object.isRequired,
   }
 

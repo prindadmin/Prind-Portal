@@ -8,7 +8,7 @@ import { faThLarge } from '@fortawesome/free-solid-svg-icons'
 import ProjectSelectorPopUp from './elements/ProjectSelectorPopUp'
 import PopOverHandler from '../popOverHandler'
 
-import * as strings from '../../../Data/Strings'
+import * as Strings from '../../../Data/Strings'
 
 class ProjectSelector extends React.Component {
   static propTypes = {
@@ -38,7 +38,7 @@ class ProjectSelector extends React.Component {
   render() {
     const { chosenProject } = this.props.projects
 
-    var buttonText = strings.NO_PROJECT_SELECTED
+    var buttonText = Strings.NO_PROJECT_SELECTED
 
     if (chosenProject !== undefined) {
       buttonText = chosenProject.projectName

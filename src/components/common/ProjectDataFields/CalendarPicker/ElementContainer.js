@@ -7,7 +7,6 @@ import Element from './Element'
 
 const mapStatetoProps = state => {
   return {
-    auth: state.auth,
     projects: state.projects,
   }
 }

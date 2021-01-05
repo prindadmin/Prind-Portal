@@ -61,11 +61,10 @@ export class Element extends Component {
   sendSelfSignRequest = (e) => {
     console.log("Self sign file clicked")
 
-    const { projectID, pageName, fieldID, auth } = this.props
+    const { projectID, pageName, fieldID } = this.props
 
     // Send the request
     this.props.selfSignFile(
-      auth.info.idToken.jwtToken,
       projectID,
       pageName,
       fieldID,
@@ -102,7 +101,7 @@ export class Element extends Component {
       <React.Fragment>
 
         <div className='row align-items-start'>
-          <div className='col-10'>
+          <div className='col-8 col-lg-10 '>
 
 
             <div className='row'>
@@ -122,17 +121,41 @@ export class Element extends Component {
             }
 
             <div className='row'>
-              <div className='field-names col-4 col-lg-3 col-xl-2'>
+              <div className='field-names col-12 col-lg-3 col-xl-2'>
                 <div>{strings.FILE_NAME}</div>
-                <div>{strings.UPLOAD_DATE_TIME}</div>
-                <div>{strings.UPLOADED_BY}</div>
-                <div>{strings.PROOF}</div>
               </div>
 
               <div className='field-values col-auto'>
                 <div>{details.uploadName !== undefined ? details.uploadName : <br />}</div>
+              </div>
+            </div>
+
+            <div className='row'>
+              <div className='field-names col-12 col-lg-3 col-xl-2'>
+                <div>{strings.UPLOAD_DATE_TIME}</div>
+              </div>
+
+              <div className='field-values col-auto'>
                 <div>{details.uploadedDateTime !== undefined ? details.uploadedDateTime : <br />}</div>
+              </div>
+            </div>
+
+            <div className='row'>
+              <div className='field-names col-12 col-lg-3 col-xl-2'>
+                <div>{strings.UPLOADED_BY}</div>
+              </div>
+
+              <div className='field-values col-auto'>
                 <div>{details.uploadedBy !== undefined ? details.uploadedBy : <br />}</div>
+              </div>
+            </div>
+
+            <div className='row'>
+              <div className='field-names col-12 col-lg-3 col-xl-2'>
+                <div>{strings.PROOF}</div>
+              </div>
+
+              <div className='field-values col-auto'>
                 {
                   details.proofLink === null  || details.proofLink === undefined ?
                     strings.NO_PROOF_AVAILABLE :
@@ -178,7 +201,7 @@ export class Element extends Component {
           </div>
 
 
-          <div className='col-2'>
+          <div className='col-4 col-lg-2'>
             <div className="col download-box-cell" onClick={(e) => e.stopPropagation()}>
               <DownloadBox
                 projectID={projectID}

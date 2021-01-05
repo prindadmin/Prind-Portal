@@ -26,10 +26,10 @@ function * init (action) {
 
 function * getS3ProjectFileUploadToken (action) {
 
-  const { identityToken, project_id, pageName } = action.payload
+  const { project_id, pageName } = action.payload
 
   try {
-    const { data: result } = yield call(Dispatchers.s3UploadProjectFileTokenDispatcher, identityToken, project_id, pageName)
+    const result = yield call(Dispatchers.s3UploadProjectFileTokenDispatcher, project_id, pageName)
     yield put({
       type: Actions.USER_SET_STATE,
       payload: {
@@ -45,10 +45,10 @@ function * getS3ProjectFileUploadToken (action) {
 
 function * getS3UserFileUploadToken (action) {
 
-  const { identityToken, fileType } = action.payload
+  const { fileType } = action.payload
 
   try {
-    const { data: result } = yield call(Dispatchers.s3UploadUserFileTokenDispatcher, identityToken, fileType)
+    const result = yield call(Dispatchers.s3UploadUserFileTokenDispatcher, fileType)
     yield put({
       type: Actions.USER_SET_STATE,
       payload: {
@@ -77,7 +77,7 @@ function * getUserDetails (action) {
       }
     })
 
-    const { data: result } = yield call(Dispatchers.getUserDetailsDispatcher, identityToken)
+    const result = yield call(Dispatchers.getUserDetailsDispatcher, identityToken)
 
     // Post-fetch update to store
     yield put({
@@ -124,7 +124,7 @@ function * getProjectInvitations (action) {
       }
     })
 
-    const { data: result } = yield call(Dispatchers.getProjectInvitationsDispatcher, identityToken)
+    const result = yield call(Dispatchers.getProjectInvitationsDispatcher, identityToken)
 
     // Post-fetch update to store
     yield put({
@@ -159,7 +159,7 @@ function * getProjectInvitations (action) {
 
 function * respondToProjectInvitation (action) {
 
-  const { identityToken, projectID, response } = action.payload
+  const { projectID, response } = action.payload
 
   try {
 
@@ -171,7 +171,7 @@ function * respondToProjectInvitation (action) {
       }
     })
 
-    yield call(Dispatchers.respondToProjectInvitationDispatcher, identityToken, projectID, response)
+    yield call(Dispatchers.respondToProjectInvitationDispatcher, projectID, response)
 
     // Post-fetch update to store
     yield put({
@@ -184,9 +184,7 @@ function * respondToProjectInvitation (action) {
     // Trigger a fetch of the requests list again
     yield put({
       type: Actions.USER_GET_PROJECT_INVITATIONS_REQUESTED,
-      payload: {
-        identityToken,
-      }
+      payload: {}
     })
 
   }
@@ -218,7 +216,7 @@ function * getSignatureRequests (action) {
       }
     })
 
-    const { data: result } = yield call(Dispatchers.getSignatureRequestsDispatcher, identityToken)
+    const result = yield call(Dispatchers.getSignatureRequestsDispatcher, identityToken)
 
     // Post-fetch update to store
     yield put({
@@ -254,7 +252,7 @@ function * getSignatureRequests (action) {
 
 function * respondToSignatureRequests (action) {
 
-  const { identityToken, projectID, pageName, fieldID, response } = action.payload
+  const { projectID, pageName, fieldID, response } = action.payload
 
   try {
 
@@ -266,7 +264,7 @@ function * respondToSignatureRequests (action) {
       }
     })
 
-    yield call(Dispatchers.respondToSignatureRequestDispatcher, identityToken, projectID, pageName, fieldID, response)
+    yield call(Dispatchers.respondToSignatureRequestDispatcher, projectID, pageName, fieldID, response)
 
     // Post-fetch update to store
     yield put({
@@ -279,9 +277,7 @@ function * respondToSignatureRequests (action) {
     // Trigger a fetch of the requests list again
     yield put({
       type: Actions.USER_GET_PROJECT_SIGNATURES_REQUESTED,
-      payload: {
-        identityToken,
-      }
+      payload: {}
     })
 
   }
@@ -312,7 +308,7 @@ function * getHistory (action) {
       }
     })
 
-    const { data: result } = yield call(Dispatchers.getHistoryDispatcher, identityToken)
+    const result = yield call(Dispatchers.getHistoryDispatcher, identityToken)
 
     // Post-fetch update to store
     yield put({

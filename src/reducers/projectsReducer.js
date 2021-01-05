@@ -48,20 +48,18 @@ export const resetDownloadURL = () => {
   }
 }
 
-export const getAccessibleProjects = ( identityToken,  ) => {
+export const getAccessibleProjects = ( ) => {
   return {
     type: action.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUESTED,
     payload: {
-      identityToken: identityToken,
     }
   }
 }
 
-export const updateChosenProject = ( identityToken, project, resolve, reject ) => {
+export const updateChosenProject = ( project, resolve, reject ) => {
   return {
     type: action.PROJECT_UPDATE_PROJECT_CHOSEN_REQUESTED,
     payload: {
-      identityToken,
       project,
       resolve,
       reject,
@@ -81,11 +79,10 @@ export const saveProjectID = ( projectId ) => {
 }
 
 
-export const createProject = ( identityToken, projectValues, resolve, reject ) => {
+export const createProject = ( projectValues, resolve, reject ) => {
   return {
     type: action.PROJECT_CREATE_PROJECT_REQUESTED,
     payload: {
-      identityToken,
       projectValues,
       resolve,
       reject,
@@ -93,33 +90,30 @@ export const createProject = ( identityToken, projectValues, resolve, reject ) =
   }
 }
 
-export const updateProjectDetails = ( identityToken, projectID, projectValues ) => {
+export const updateProjectDetails = ( projectID, projectValues ) => {
   return {
     type: action.PROJECT_UPDATE_PROJECT_DETAILS_REQUESTED,
     payload: {
-      identityToken,
       projectID,
       projectValues,
     }
   }
 }
 
-export const getCurrentMembers = ( identityToken, projectID ) => {
+export const getCurrentMembers = ( projectID ) => {
   return {
     type: action.PROJECT_GET_CURRENT_MEMBERS_REQUESTED,
     payload: {
-      identityToken,
       projectID,
     }
   }
 }
 
-export const uploadFile = ( identityToken, projectID, pageName, fieldID, fileDetails ) => {
+export const uploadFile = ( projectID, pageName, fieldID, fileDetails ) => {
 
   return {
     type: action.PROJECT_UPLOAD_FILE_REQUESTED,
     payload: {
-      identityToken,
       projectID,
       pageName,
       fieldID,
@@ -128,12 +122,11 @@ export const uploadFile = ( identityToken, projectID, pageName, fieldID, fileDet
   }
 }
 
-export const downloadFile = ( identityToken, projectID, pageName, fieldID, version, resolve, reject ) => {
+export const downloadFile = ( projectID, pageName, fieldID, version, resolve, reject ) => {
 
   return {
     type: action.PROJECT_DOWNLOAD_FILE_REQUESTED,
     payload: {
-      identityToken,
       projectID,
       pageName,
       fieldID,
@@ -145,12 +138,11 @@ export const downloadFile = ( identityToken, projectID, pageName, fieldID, versi
 }
 
 
-export const createField = ( identityToken, projectID, pageName, fieldDetails, resolve, reject ) => {
+export const createField = ( projectID, pageName, fieldDetails, resolve, reject ) => {
 
   return {
     type: action.PROJECT_CREATE_FIELD_REQUESTED,
     payload: {
-      identityToken,
       projectID,
       pageName,
       fieldDetails,
@@ -160,12 +152,11 @@ export const createField = ( identityToken, projectID, pageName, fieldDetails, r
   }
 }
 
-export const updateField = ( identityToken, projectID, pageName, fieldID, fieldDetails, resolve, reject ) => {
+export const updateField = ( projectID, pageName, fieldID, fieldDetails, resolve, reject ) => {
 
   return {
     type: action.PROJECT_UPDATE_FIELD_REQUESTED,
     payload: {
-      identityToken,
       projectID,
       pageName,
       fieldID,
@@ -176,11 +167,10 @@ export const updateField = ( identityToken, projectID, pageName, fieldID, fieldD
   }
 }
 
-export const requestSignature = ( identityToken, projectID, pageName, fieldID, members, resolve, reject ) => {
+export const requestSignature = ( projectID, pageName, fieldID, members, resolve, reject ) => {
   return {
     type: action.PROJECT_FILE_SIGNATURE_REQUEST_REQUESTED,
     payload: {
-      identityToken,
       projectID,
       pageName,
       fieldID,
@@ -192,11 +182,10 @@ export const requestSignature = ( identityToken, projectID, pageName, fieldID, m
 }
 
 
-export const deleteProject = ( identityToken, projectID, resolve, reject ) => {
+export const deleteProject = ( projectID, resolve, reject ) => {
   return {
     type: action.PROJECT_DELETE_PROJECT_REQUESTED,
     payload: {
-      identityToken,
       projectID,
       resolve,
       reject,

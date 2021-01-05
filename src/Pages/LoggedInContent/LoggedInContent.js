@@ -1,12 +1,17 @@
-import React, { Component, lazy } from 'react'
+import React, { Component, lazy, Suspense } from 'react'
 import PropTypes from 'prop-types'
+
+import ProjectLoading from '../../Components/common/ProjectLoading'
+
+import * as Strings from '../../Data/Strings'
 
 // Components
 const HeaderBar = lazy(() => import('../../Components/HeaderBar'));
-const LayoutSideBar = lazy(() => import('../../Components/SideBar'));
 const SideBar = lazy(() => import('../../Components/SideBar'));
+const SideBarMobile = lazy(() => import('../../Components/SideBarMobile'));
 const LayoutBody  = lazy(() => import('../../Components/LoggedInLayout/Body'));
 const LayoutContentArea1x1  = lazy(() => import('../../Components/LoggedInLayout/ContentArea1x1'));
+const LayoutContentArea1x1Mobile  = lazy(() => import('../../Components/LoggedInLayout/ContentArea1x1Mobile'));
 const Footer = lazy(() => import('../../Components/common/footer'));
 const ProjectFetchError = lazy(() => import('../../Components/common/ProjectFetchError'));
 
@@ -19,10 +24,15 @@ const ConstructionPage = lazy(() => import('../ConstructionPage'));
 const HandoverPage = lazy(() => import('../HandoverPage'));
 const OccupationPage = lazy(() => import('../OccupationPage'));
 const RefurbishmentPage = lazy(() => import('../RefurbishmentPage'));
+const FoundationsPage = lazy(() => import('../FoundationsPage'));
+const NewProjectPage = lazy(() => import('../NewProjectPage'));
+const ProfilePage = lazy(() => import('../ProfilePage'));
 
 /* Other pages */
 const ProjectDetailsPage = lazy(() => import('../ProjectDetailsPage'));
 const ProjectTeamPage = lazy(() => import('../ProjectTeamPage'));
+
+const MOBILE_WIDTH_BREAKPOINT = 992;
 
 export class LoggedInContent extends Component {
   static propTypes = {
@@ -33,17 +43,16 @@ export class LoggedInContent extends Component {
     super()
     this.state = {
       fetchingProjectDetails: false,
-      pageName: ""
+      pageName: "",
+      width: 0,
+      height: 0,
     }
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
   }
 
   componentDidMount() {
-    //const { username } = this.props.user
-    // TODO: this.props.getuserDetails(username)
-
-    const { projects, auth, requestS3ProjectFileUploadToken, getProjectMembers } = this.props
+    const { projects, requestS3ProjectFileUploadToken, getProjectMembers } = this.props
     const { projectId } = projects.chosenProject
-    const { jwtToken } = auth.info.idToken
 
     const pageName = this.getPageName()
 
@@ -53,9 +62,12 @@ export class LoggedInContent extends Component {
 
     // If a project has been selected
     if (projects.chosenProject.projectId !== "") {
-      requestS3ProjectFileUploadToken(jwtToken, projectId, pageName)
-      getProjectMembers(jwtToken, projectId)
+      requestS3ProjectFileUploadToken(projectId, pageName)
+      getProjectMembers(projectId)
     }
+
+    this.updateWindowDimensions();
+    window.addEventListener('resize', this.updateWindowDimensions);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -63,16 +75,28 @@ export class LoggedInContent extends Component {
     if (this.props !== prevProps) {
       this.getProjectID()
 
-      const { projects, auth, requestS3ProjectFileUploadToken, getProjectMembers } = this.props
+      const { projects, requestS3ProjectFileUploadToken, getProjectMembers } = this.props
       const { pageName } = this.state
       const { projectId } = projects.chosenProject
-      const { jwtToken } = auth.info.idToken
 
       if (projectId !== prevProps.projects.chosenProject.projectId) {
-        requestS3ProjectFileUploadToken(jwtToken, projectId, pageName)
-        getProjectMembers(jwtToken, projectId)
+        requestS3ProjectFileUploadToken(projectId, pageName)
+        getProjectMembers(projectId)
       }
     }
+  }
+
+  // Removes the screen size listener when component is removed
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWindowDimensions);
+  }
+
+  // Stores the current screen size in the components state
+  updateWindowDimensions() {
+    this.setState({
+      width: window.innerWidth,
+      height: window.innerHeight
+    });
   }
 
   errorComponent = () => {
@@ -100,7 +124,6 @@ export class LoggedInContent extends Component {
   getProjectID = () => {
     const { pathname } = this.props.location
     const currentProjectID = this.props.projects.chosenProject.projectId
-    const { jwtToken } = this.props.auth.info.idToken
 
     // Remove final character slash if it is present
     const pathnameToCheck = pathname.endsWith("/") ? pathname.slice(0, -1) : pathname
@@ -124,7 +147,7 @@ export class LoggedInContent extends Component {
         this.props.saveProjectID(projectIDToSave)
 
         // Fetch the details of the project
-        this.props.getProjectDetails(jwtToken, { projectId: projectIDToSave }, this.returnFromFetchingProjectDetails)
+        this.props.getProjectDetails({ projectId: projectIDToSave }, this.returnFromFetchingProjectDetails)
       }
 
       return projectIDToSave
@@ -146,11 +169,18 @@ export class LoggedInContent extends Component {
     )
   }
 
+  loadingPlaceholder = () => {
+    return(
+      <ProjectLoading text={Strings.LOADING_DATA_FOR_PAGE}/>
+    )
+  }
+
 
   render () {
 
     const { pathname } = this.props.location
     const { error } = this.props.projects
+    const { width, height } = this.state
 
     const content = pathname.startsWith('/team') ? <ProjectTeamPage /> :
                     pathname.startsWith('/project') ? <ProjectDetailsPage /> :
@@ -162,6 +192,9 @@ export class LoggedInContent extends Component {
                     pathname.startsWith('/handover') ? <HandoverPage /> :
                     pathname.startsWith('/occupation') ? <OccupationPage /> :
                     pathname.startsWith('/refurbishment') ? <RefurbishmentPage /> :
+                    pathname.startsWith('/foundations') ? <FoundationsPage /> :
+                    pathname.startsWith('/newproject') ? <NewProjectPage /> :
+                    pathname.startsWith('/profile') ? <ProfilePage /> :
                     this.errorComponent()
 
     return (
@@ -171,13 +204,24 @@ export class LoggedInContent extends Component {
 
         <LayoutBody>
 
-          <LayoutSideBar>
-            <SideBar {...this.props} />
-          </LayoutSideBar>
+          {
+            width > MOBILE_WIDTH_BREAKPOINT ? <SideBar {...this.props} /> : <SideBarMobile {...this.props} />
+          }
 
-          <LayoutContentArea1x1>
-            { error ? this.errorContent() : content }
-          </LayoutContentArea1x1>
+          {
+              width > MOBILE_WIDTH_BREAKPOINT ?
+                  <LayoutContentArea1x1>
+                      <Suspense fallback={this.loadingPlaceholder()}>
+                          { error ? this.errorContent() : content }
+                      </Suspense>
+                  </LayoutContentArea1x1> :
+                  <LayoutContentArea1x1Mobile>
+                      <Suspense fallback={this.loadingPlaceholder()}>
+                          { error ? this.errorContent() : content }
+                      </Suspense>
+                  </LayoutContentArea1x1Mobile>
+            }
+
         </LayoutBody>
 
         <Footer />

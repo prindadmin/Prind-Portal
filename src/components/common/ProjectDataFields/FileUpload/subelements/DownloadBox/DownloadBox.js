@@ -6,7 +6,6 @@ import * as strings from '../../../../../../Data/Strings'
 
 export class Element extends Component {
   static propTypes = {
-    auth: PropTypes.object.isRequired,
     projectID: PropTypes.string.isRequired,
     pageName: PropTypes.string.isRequired,
     fieldID: PropTypes.string.isRequired,
@@ -15,9 +14,33 @@ export class Element extends Component {
     onDownloadFailure: PropTypes.func.isRequired,
   }
 
+  constructor() {
+    super()
+    this.state = {
+      width: 0,
+      height: 0,
+    }
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+  }
+
+  componentDidMount() {
+    this.updateWindowDimensions();
+    window.addEventListener('resize', this.updateWindowDimensions);
+  }
+
+
+  // Stores the current screen size in the components state
+  updateWindowDimensions() {
+    this.setState({
+      width: window.innerWidth,
+      height: window.innerHeight
+    });
+  }
+
 
   componentWillUnmount() {
     this.props.resetDownloadURL()
+    window.removeEventListener('resize', this.updateWindowDimensions);
   }
 
 
@@ -36,14 +59,13 @@ export class Element extends Component {
 
   downloadFile = (e) => {
 
-    const { auth, projectID, pageName, fieldID, fileVersionDetails, downloadFile } = this.props
+    const { projectID, pageName, fieldID, fileVersionDetails, downloadFile } = this.props
 
     this.setState({
       fetchError: false,
     })
 
     downloadFile(
-      auth.info.idToken.jwtToken,
       projectID,
       pageName,
       fieldID,
@@ -56,11 +78,15 @@ export class Element extends Component {
 
   render () {
 
+    var itemSize = "4x"
+
+    this.state.width < 992 ? itemSize = "3x" : itemSize = "4x"
+
     return (
       <div className="download-box" onClick={(e) => this.downloadFile(e)}>
         <div>
-          <ItemIcon size='4x' type='download' />
-          {strings.DOWNLOAD}
+          <ItemIcon size={itemSize} type='download' />
+          <p>{strings.DOWNLOAD}</p>
         </div>
       </div>
     )

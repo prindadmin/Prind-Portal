@@ -7,7 +7,6 @@ import Element from './CurrentVersion'
 
 const mapStatetoProps = state => {
   return {
-    auth: state.auth,
     projects: state.projects,
     user: state.user,
   }
@@ -15,8 +14,8 @@ const mapStatetoProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    selfSignFile: (jwtToken, projectID, pageName, fieldID) => {
-      dispatch(foundationsReducer.selfSignFile(jwtToken, projectID, pageName, fieldID))
+    selfSignFile: (projectID, pageName, fieldID) => {
+      dispatch(foundationsReducer.selfSignFile(projectID, pageName, fieldID))
     }
   }
 }

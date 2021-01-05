@@ -8,7 +8,6 @@ import PageComponent from './ProjectTeamPage'
 
 const mapStatetoProps = state => {
   return {
-    auth: state.auth,
     members: state.members,
     projects: state.projects,
     pageContent: state.pageContent,
@@ -17,14 +16,14 @@ const mapStatetoProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addMember: (jwtToken, projectID, memberValues, resolve, reject) => {
-      dispatch(memberReducer.addMemberToProject(jwtToken, projectID, memberValues, resolve, reject))
+    addMember: (projectID, memberValues, resolve, reject) => {
+      dispatch(memberReducer.addMemberToProject(projectID, memberValues, resolve, reject))
     },
-    getCurrentMembers: (jwtToken, projectID) => {
-      dispatch(projectReducer.getCurrentMembers(jwtToken, projectID))
+    getCurrentMembers: (projectID) => {
+      dispatch(projectReducer.getCurrentMembers(projectID))
     },
-    getRoles: (jwtToken, projectID) => {
-      dispatch(memberReducer.getRoles(jwtToken, projectID))
+    getRoles: (projectID) => {
+      dispatch(memberReducer.getRoles(projectID))
     },
   }
 }

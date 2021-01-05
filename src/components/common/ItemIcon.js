@@ -10,8 +10,17 @@ import {
   faDownload,
   faCaretDown,
   faCaretUp,
-  faLock
+  //faLock
 } from '@fortawesome/free-solid-svg-icons'
+
+import {
+  faLockAlt
+} from '@fortawesome/pro-solid-svg-icons'
+
+import {
+  faBars
+} from '@fortawesome/pro-regular-svg-icons'
+
 
 import {
   faCheckCircle,
@@ -21,6 +30,7 @@ import {
 
 let icons = {
   building: faIndustry,
+  burger: faBars,
   city: faCity,
   timesCircle: faTimesCircle,
   unticked: faCircle,
@@ -28,7 +38,7 @@ let icons = {
   download: faDownload,
   caretDown: faCaretDown,
   caretUp: faCaretUp,
-  lock: faLock,
+  lock: faLockAlt,
 }
 
 const ItemIcon = props => {

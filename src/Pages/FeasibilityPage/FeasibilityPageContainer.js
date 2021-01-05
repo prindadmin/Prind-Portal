@@ -7,7 +7,6 @@ import PageComponent from './FeasibilityPage'
 
 const mapStatetoProps = state => {
   return {
-    auth: state.auth,
     projects: state.projects,
     pageContent: state.pageContent,
   }

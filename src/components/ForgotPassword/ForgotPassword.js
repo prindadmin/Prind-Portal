@@ -15,7 +15,7 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons'
 
 import * as FormInputs from '../common/formInputs'
 import * as Validators from '../../Validators'
-import * as strings from '../../Data/Strings'
+import * as Strings from '../../Data/Strings'
 
 class ForgotPassword extends Component {
   static propTypes = {
@@ -59,11 +59,11 @@ class ForgotPassword extends Component {
     return (
       <div className='auth-form' style={style}>
         <Icon icon={ico} />
-        <h3>{strings.CHANGE_PASSWORD_LINK_SENT}</h3>
+        <h3>{Strings.CHANGE_PASSWORD_LINK_SENT}</h3>
         <Button
           intent='primary'
           fill
-          text={strings.BUTTON_BACK_TO_LOGIN_PAGE}
+          text={Strings.BUTTON_BACK_TO_LOGIN_PAGE}
           onClick={() => {this.props.history.push('/signin')}}
         />
       </div>
@@ -75,12 +75,12 @@ class ForgotPassword extends Component {
 
     return (
       <form onSubmit={handleSubmit(this.sendCode)} className='auth-form'>
-        <h4>{strings.CHANGE_PASSWORD_DESCRIPTION}</h4>
+        <h4>{Strings.CHANGE_PASSWORD_DESCRIPTION}</h4>
         <Label>
           <Field
             component={FormInputs.TextInput}
             name="email"
-            placeholder={strings.PLACEHOLDER_EMAIL}
+            placeholder={Strings.PLACEHOLDER_EMAIL}
             validate={[Validators.required, Validators.email, Validators.maxLength32]}
           />
         </Label>
@@ -90,7 +90,7 @@ class ForgotPassword extends Component {
             disabled={this.props.invalid}
             type='submit'
             intent='primary'
-            text={strings.BUTTON_RESET_LINK} />
+            text={Strings.BUTTON_RESET_LINK} />
         </ButtonGroup>
       </form>
     )

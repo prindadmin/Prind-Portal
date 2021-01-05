@@ -128,9 +128,13 @@ class SignUp extends Component {
 
     return (
       <div id='signup' className='row align-items-center justify-content-center'>
-        {auth.hasSignedUp === state.AUTH_UNKNOWN
-          ? this.signUpForm()
-          : this.signedUp()}
+        <div className='sign-up-container'>
+          {
+            auth.hasSignedUp === state.AUTH_UNKNOWN
+            ? this.signUpForm()
+            : this.signedUp()
+          }
+        </div>
       </div>
     )
   }

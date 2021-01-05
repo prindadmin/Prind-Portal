@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import * as awsReducer from '../../../../../../Reducers/awsReducer'
+import * as reducer from '../../../../../../Reducers/authReducer'
 
 import PasswordForm from './passwordForm'
 
@@ -14,7 +14,7 @@ const mapStatetoProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     updatePassword: (currentPassword, newPassword, resolve, reject) => {
-      dispatch(awsReducer.completeNewPassword(currentPassword, newPassword, resolve, reject))
+      dispatch(reducer.updatePassword(currentPassword, newPassword, resolve, reject))
     }
   }
 }

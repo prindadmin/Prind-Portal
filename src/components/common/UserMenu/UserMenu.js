@@ -25,18 +25,16 @@ class UserMenu extends Component {
     // This next part fetches all the invitations and requests so they can be
     // counted and a badge displayed on the user menu if more than 0
 
-    const { auth, getUserProjectInvitations, getUserSignatureRequests } = this.props
+    const { getUserProjectInvitations, getUserSignatureRequests } = this.props
 
     // Get the user project invitations
     getUserProjectInvitations(
-      auth.info.idToken.jwtToken,
       this.projectRequestsResolve,
       this.projectRequestsReject,
     )
 
     // Get the user signature requests
     getUserSignatureRequests(
-      auth.info.idToken.jwtToken,
       this.signatureRequestsResolve,
       this.signatureRequestsReject,
     )
@@ -90,14 +88,14 @@ class UserMenu extends Component {
 
     if (user.signatureRequests.length + user.projectInvitations.length > 0) {
       this.props.history.push({
-        pathname: '/Profile',
+        pathname: '/profile',
         state: { tabToOpen: 'requests' },
       })
       return;
     }
 
     this.props.history.push({
-      pathname: '/Profile',
+      pathname: '/profile',
     })
 
   }

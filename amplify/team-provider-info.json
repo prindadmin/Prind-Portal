@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-prindportal-dev-151012-authRole",
+      "UnauthRoleArn": "arn:aws:iam::434494845257:role/amplify-prindportal-dev-151012-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::434494845257:role/amplify-prindportal-dev-151012-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-prindportal-dev-151012-deployment",
+      "UnauthRoleName": "amplify-prindportal-dev-151012-unauthRole",
+      "StackName": "amplify-prindportal-dev-151012",
+      "StackId": "arn:aws:cloudformation:eu-west-1:434494845257:stack/amplify-prindportal-dev-151012/02a2a710-1f79-11eb-ad3c-020129b492b7",
+      "AmplifyAppId": "d1wnpkqnshp2a4"
+    },
+    "categories": {
+      "auth": {
+        "prindportalc5d3ae7f": {}
+      }
+    }
+  }
+}

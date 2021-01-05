@@ -8,17 +8,16 @@ import Element from './Element'
 
 const mapStatetoProps = state => {
   return {
-    auth: state.auth,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    rejectSignatureRequest: (identityToken, requestDetails, resolve, reject) => {
-      dispatch(foundationsReducer.rejectSignatureRequest(identityToken, requestDetails, resolve, reject))
+    rejectSignatureRequest: (requestDetails, resolve, reject) => {
+      dispatch(foundationsReducer.rejectSignatureRequest(requestDetails, resolve, reject))
     },
-    updateChosenProject: (jwtToken, project, resolve, reject) => {
-      dispatch(projectsReducer.updateChosenProject(jwtToken, project, resolve, reject))
+    updateChosenProject: (project, resolve, reject) => {
+      dispatch(projectsReducer.updateChosenProject(project, resolve, reject))
     },
   }
 }

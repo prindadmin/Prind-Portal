@@ -11,11 +11,11 @@ import {
 
 import ItemIcon from '../../../../common/ItemIcon'
 
-import * as strings from '../../../../../Data/Strings'
+import * as Strings from '../../../../../Data/Strings'
+import * as Endpoints from '../../../../../Data/Endpoints'
 
 export class ProjectSelectorPopUp extends Component {
   static propTypes = {
-    auth: PropTypes.object.isRequired,
     onCancelPopup: PropTypes.func.isRequired,
     updateChosenProject: PropTypes.func.isRequired,
   }
@@ -30,7 +30,6 @@ export class ProjectSelectorPopUp extends Component {
     }
 
     this.props.getAccessibleProjects(
-      props.auth.info.idToken.jwtToken,
       this.resolveProjectFetch,
       this.rejectProjectFetch,
     )
@@ -59,14 +58,13 @@ export class ProjectSelectorPopUp extends Component {
 
     console.log(project)
 
-    const { auth, updateChosenProject } = this.props
+    const { updateChosenProject } = this.props
 
     this.setState({
       chosenProjectId: project.projectId
     })
 
     updateChosenProject(
-      auth.info.idToken.jwtToken,
       project,
       this.resolveProjectUpdate,
       this.rejectProjectUpdate,
@@ -79,7 +77,7 @@ export class ProjectSelectorPopUp extends Component {
   rejectProjectFetch = () => {
     this.setState({
       fetchError: true,
-      errorText: strings.ERROR_FETCHING_PROJECT_LIST,
+      errorText: Strings.ERROR_FETCHING_PROJECT_LIST,
     })
   }
 
@@ -87,7 +85,13 @@ export class ProjectSelectorPopUp extends Component {
 
     const { history } = this.props
 
-    const newPathname = `/${this.getCurrentPage()}/${this.state.chosenProjectId}`
+    // If the current page is the new project page, go to the default page
+    var currentPage = this.getCurrentPage()
+    if (currentPage === 'newproject') {
+      currentPage = Endpoints.DEFAULTLOGGEDINPAGE.replace("/", "")
+    }
+
+    const newPathname = `/${currentPage}/${this.state.chosenProjectId}`
     history.push(newPathname)
 
     this.cancelPopup()
@@ -96,13 +100,13 @@ export class ProjectSelectorPopUp extends Component {
   rejectProjectUpdate = () => {
     this.setState({
       updateError: true,
-      errorText: strings.ERROR_UNABLE_TO_SELECT_PROJECT,
+      errorText: Strings.ERROR_UNABLE_TO_SELECT_PROJECT,
     })
   }
 
   createNewProject = () => {
     const { history } = this.props
-    history.push('/NewProject')
+    history.push('/newproject')
   }
 
   projectsLoading = () => {
@@ -110,7 +114,7 @@ export class ProjectSelectorPopUp extends Component {
       <div className='projects-loading-container fill'>
         <div className='loading-spinner'>
           <Spinner size={100} intent={Intent.DANGER} />
-          <p>{strings.PROJECTS_LOADING}</p>
+          <p>{Strings.PROJECTS_LOADING}</p>
         </div>
       </div>
     )
@@ -121,7 +125,7 @@ export class ProjectSelectorPopUp extends Component {
       <div className='projects-loading-container fill'>
         <div className='no-projects'>
           <ItemIcon size='6x' type='building' />
-          <p>{strings.NO_PROJECTS}</p>
+          <p>{Strings.NO_PROJECTS}</p>
         </div>
       </div>
     )
@@ -197,7 +201,7 @@ export class ProjectSelectorPopUp extends Component {
               icon="cube-add"
               intent='success'
               onClick={(e) => this.createNewProject(e)}
-              text={strings.CREATE_NEW_PROJECT}
+              text={Strings.CREATE_NEW_PROJECT}
             />
           </div>
         </div>

@@ -11,11 +11,10 @@ export const init = () => {
   }
 }
 
-export const selfSignFile = ( identityToken, projectID, pageName, fieldID ) => {
+export const selfSignFile = ( projectID, pageName, fieldID ) => {
   return {
     type: action.FOUNDATIONS_SELF_SIGN_FILE_REQUESTED,
     payload: {
-      identityToken,
       projectID,
       pageName,
       fieldID,
@@ -23,11 +22,10 @@ export const selfSignFile = ( identityToken, projectID, pageName, fieldID ) => {
   }
 }
 
-export const rejectSignatureRequest = ( identityToken, requestDetails, resolve, reject ) => {
+export const rejectSignatureRequest = ( requestDetails, resolve, reject ) => {
   return {
     type: action.FOUNDATIONS_REJECT_SIGNATURE_REQUEST_REQUESTED,
     payload: {
-      identityToken,
       requestDetails,
       resolve,
       reject,

@@ -7,6 +7,9 @@ import {
   Intent,
 } from '@blueprintjs/core'
 
+import PopOverHandler from '../common/popOverHandler'
+import UserDetailsPopOver from '../UserDetailsPopOver'
+
 import * as strings from '../../Data/Strings'
 
 // TODO: Remove memory leak when loading images and navigating away from the page
@@ -27,6 +30,7 @@ export class ContactTile extends Component {
     this.state = {
       removingMember: false,
       removeMemberError: false,
+      showUserDetailsPopover: false,
       errorText: "",
       avatarLink: defaultAvatar
     }
@@ -81,7 +85,7 @@ export class ContactTile extends Component {
 
   removeMember = (e) => {
 
-    const { auth, projects, removeMember, memberDetails } = this.props
+    const { projects, removeMember, memberDetails } = this.props
 
     this.setState({
       removingMember: true,
@@ -89,7 +93,6 @@ export class ContactTile extends Component {
     })
 
     removeMember(
-      auth.info.idToken.jwtToken,
       projects.chosenProject.projectId,
       memberDetails.username,
       this.removeMemberResolve,
@@ -97,17 +100,29 @@ export class ContactTile extends Component {
     )
   }
 
+  showUserDetails = () => {
+    console.log("hello, user")
+    this.setState({
+      showUserDetailsPopover: true,
+    })
+  }
 
+  hideUserDetails = () => {
+    console.log("bye, user")
+    this.setState({
+      showUserDetailsPopover: false,
+    })
+  }
 
   render() {
 
     const { auth, projects, memberDetails, confirmed } = this.props
-    const { avatarLink, removeMemberError, errorText } = this.state
+    const { avatarLink, removeMemberError, errorText, showUserDetailsPopover } = this.state
 
     // See if the current User is the client, and can therefore remove people
     const editableMemberList = projects.memberList.confirmed.filter(member => {
       return (
-        member.username === auth.info.username &&
+        member.username === auth.username &&
         (member.roleID === 'client' || member.roleID === 'clientTeamRepresentative' || member.roleID === 'creator') &&
         memberDetails.username !== member.username
       )
@@ -117,44 +132,47 @@ export class ContactTile extends Component {
         memberDetails.firstName + " " + memberDetails.lastName :
         strings.MEMBER_NOT_YET_SIGNED_UP_TO_PRIND
 
-    const isConfirmed = confirmed ? "member-confirmed" : "member-not-confirmed"
+    const isConfirmed = confirmed ? "row member-confirmed" : "row member-not-confirmed"
 
     return (
-        <div id='contact-tile' className={isConfirmed}>
-          <div className='col-3'>
-            <div className="text-center">
+        <div id='contact-tile' className={isConfirmed} onClick={(e) => {
+          e.stopPropagation()
+          // TODO this.showUserDetails()
+        }}>
+          <div className='col-md-3 col-sm-12'>
+            <div className="text-center avatar-container">
               <img src={avatarLink} className="avatar img-circle img-thumbnail" alt="avatar" />
             </div>
           </div>
 
-          <div className='col-9'>
+          <div className='col-md-9 col-sm-12'>
             <div className='row'>
               <h4 className='bp3-heading'>{userName}</h4>
             </div>
 
             <div className="row">
-              <div className="col-2">
+              <div className="col-lg-2 col-md-4">
                 <b>{strings.MEMBER_EMAIL_ADDRESS + ": "}</b>
               </div>
-              <div className="col-10">
+              <div className="col-lg-10 col-md-8">
                 {memberDetails.emailAddress}
               </div>
             </div>
 
             <div className="row">
-              <div className="col-2">
+              <div className="col-lg-2 col-md-4">
                 <b>{strings.MEMBER_PROJECT_ROLE + ": "}</b>
               </div>
-              <div className="col-10">
+              <div className="col-lg-10 col-md-8">
                 {memberDetails.roleName}
               </div>
             </div>
 
             <div className="row">
-              <div className="col-2">
+              <div className="col-lg-2 col-md-4">
                 <b>{strings.MEMBER_STATUS + ": "}</b>
               </div>
-              <div className="col-10">
+              <div className="col-lg-10 col-md-8">
                 { confirmed ? strings.MEMBER_IS_CONFIRMED : strings.MEMBER_ISNT_YET_CONFIRMED }
               </div>
             </div>
@@ -177,6 +195,18 @@ export class ContactTile extends Component {
                   intent={Intent.DANGER}
                 />
               </div> : null
+            }
+
+            {
+              showUserDetailsPopover ?
+              <PopOverHandler>
+                <UserDetailsPopOver
+                  memberDetails={ memberDetails }
+                  onCancelPopup={ this.hideUserDetails }
+                />
+              </PopOverHandler>
+              :
+              null
             }
 
           </div>

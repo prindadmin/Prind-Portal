@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 
-import * as reducer from '../../Reducers/awsReducer'
+import * as reducer from '../../Reducers/authReducer'
 
 import ForgotPasswordComponent from './ForgotPassword'
 
@@ -16,10 +16,10 @@ const mapDispatchToProps = dispatch => {
       dispatch(reducer.init())
     },
     sendCode: (values) => {
-      const email = values.email
+      const username = values.email
 
       return new Promise((resolve, reject) => {
-        dispatch(reducer.forgotPassword(email, resolve, reject))
+        dispatch(reducer.forgotPassword(username, resolve, reject))
       })
     }
   }

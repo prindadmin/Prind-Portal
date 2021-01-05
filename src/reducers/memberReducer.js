@@ -2,7 +2,10 @@ import * as action from '../Actions'
 
 const defaultState = {
   fetching: false,
-  currentMember: null,
+  currentMember: {
+    username: null,
+    accreditations: []
+  },
   roles: [],
 }
 
@@ -13,11 +16,10 @@ export const init = () => {
   }
 }
 
-export const addMemberToProject = ( identityToken, projectID, memberDetails, resolve, reject ) => {
+export const addMemberToProject = ( projectID, memberDetails, resolve, reject ) => {
   return {
     type: action.MEMBER_ADD_MEMBER_REQUESTED,
     payload: {
-      identityToken,
       projectID,
       memberDetails,
       resolve,
@@ -26,11 +28,10 @@ export const addMemberToProject = ( identityToken, projectID, memberDetails, res
   }
 }
 
-export const removeMemberFromProject = ( identityToken, projectID, memberUsername, resolve, reject ) => {
+export const removeMemberFromProject = ( projectID, memberUsername, resolve, reject ) => {
   return {
     type: action.MEMBER_REMOVE_MEMBER_REQUESTED,
     payload: {
-      identityToken,
       projectID,
       memberUsername,
       resolve,
@@ -39,13 +40,24 @@ export const removeMemberFromProject = ( identityToken, projectID, memberUsernam
   }
 }
 
-export const getRoles = ( identityToken, projectID ) => {
-
+export const getRoles = ( projectID ) => {
   return {
     type: action.MEMBER_GET_AVAILABLE_ROLES_REQUESTED,
     payload: {
-      identityToken,
       projectID,
+    }
+  }
+}
+
+
+export const tempGetUserAccreditations = ( username, accreditations ) => {
+  return {
+    type: action.MEMBER_SET_STATE,
+    payload: {
+      currentMember: {
+        username,
+        accreditations,
+      },
     }
   }
 }

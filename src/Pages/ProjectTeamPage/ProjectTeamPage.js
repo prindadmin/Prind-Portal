@@ -38,13 +38,11 @@ export class ProjectTeamPage extends Component {
     if (props.projects.chosenProject.projectId !== "") {
       // Get the members for the selected project
       props.getCurrentMembers(
-        props.auth.info.idToken.jwtToken,
         props.projects.chosenProject.projectId
       )
 
       // Get the available roles for this project
       props.getRoles(
-        props.auth.info.idToken.jwtToken,
         props.projects.chosenProject.projectId
       )
     }
@@ -59,20 +57,18 @@ export class ProjectTeamPage extends Component {
 
   componentDidUpdate(prevProps) {
 
-    const { auth, projects, getCurrentMembers, getRoles } = this.props
+    const { projects, getCurrentMembers, getRoles } = this.props
 
     if (projects.chosenProject.projectId !== prevProps.projects.chosenProject.projectId &&
       projects.chosenProject.projectId !== "") {
 
       // Get the current members of the project
       getCurrentMembers(
-        auth.info.idToken.jwtToken,
         projects.chosenProject.projectId
       )
 
       // Get the available roles for this project
       getRoles(
-        auth.info.idToken.jwtToken,
         projects.chosenProject.projectId
       )
     }
@@ -88,7 +84,6 @@ export class ProjectTeamPage extends Component {
 
     // Get the current members of the project
     this.props.getCurrentMembers(
-      this.props.auth.info.idToken.jwtToken,
       this.props.projects.chosenProject.projectId
     )
   }
@@ -112,7 +107,6 @@ export class ProjectTeamPage extends Component {
     newValues.roleId = this.state.selectedRoleID
 
     this.props.addMember(
-      this.props.auth.info.idToken.jwtToken,
       this.props.projects.chosenProject.projectId,
       newValues,
       this.addMemberResolve,
@@ -228,10 +222,9 @@ export class ProjectTeamPage extends Component {
 
   onMemberRemove = () => {
 
-    const { getCurrentMembers, auth, projects } = this.props
+    const { getCurrentMembers, projects } = this.props
 
     getCurrentMembers(
-      auth.info.idToken.jwtToken,
       projects.chosenProject.projectId
     )
   }
@@ -241,8 +234,8 @@ export class ProjectTeamPage extends Component {
     const { projects } = this.props
 
     return (
-      <div className="member-list-container">
-        <div className="row">
+      <React.Fragment>
+        <div className="member-list-container row">
           <ButtonGroup fill>
             <Button
               onClick={(e) => this.setState({addingMember: true})}
@@ -258,7 +251,7 @@ export class ProjectTeamPage extends Component {
               projects.memberList.confirmed !== undefined ?
                 projects.memberList.confirmed.map((memberDetails, index) => {
                   return (
-                    <div key={index} className="col-md-12 col-lg-12 col-xl-6">
+                    <div key={index} className="col-md-12 col-lg-12 col-xl-6 single-contact-tile-container">
                       <ContactTile
                         memberDetails={memberDetails}
                         onMemberRemove={this.onMemberRemove}
@@ -274,7 +267,7 @@ export class ProjectTeamPage extends Component {
                 projects.memberList.invited !== undefined ?
                   projects.memberList.invited.map((memberDetails, index) => {
                     return (
-                      <div key={index} className="col-md-12 col-lg-12 col-xl-6">
+                      <div key={index} className="col-md-12 col-lg-12 col-xl-6 single-contact-tile-container">
                         <ContactTile
                           memberDetails={memberDetails}
                           onMemberRemove={this.onMemberRemove}
@@ -286,8 +279,7 @@ export class ProjectTeamPage extends Component {
                 : null
             }
         </div>
-
-      </div>
+      </React.Fragment>
     )
   }
 

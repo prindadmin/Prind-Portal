@@ -33,7 +33,7 @@ export class Element extends Component {
   // TODO: Implement the history push state in all the project stage pages
   // https://www.npmjs.com/package/react-scrollable-anchor
   goToDocument = () => {
-    const { auth, requestDetails, updateChosenProject } = this.props
+    const { requestDetails, updateChosenProject } = this.props
 
     // Build an object for the requested project
     const project = {
@@ -43,7 +43,6 @@ export class Element extends Component {
 
     // Update the project currently chosen by the user to the project referenced in the request
     updateChosenProject(
-      auth.info.idToken.jwtToken,
       project,
       this.resolveProjectUpdate,
       this.rejectProjectUpdate,
@@ -71,10 +70,9 @@ export class Element extends Component {
 
   rejectSignatureRequest = () => {
 
-    const { auth, requestDetails, rejectSignatureRequest } = this.props
+    const { requestDetails, rejectSignatureRequest } = this.props
 
     rejectSignatureRequest(
-      auth.info.idToken.jwtToken,
       requestDetails,
       this.resolveRejectRequest,
       this.rejectRejectRequest

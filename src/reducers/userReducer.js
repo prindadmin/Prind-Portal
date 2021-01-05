@@ -30,11 +30,10 @@ export const storeRoute = ( currentRoute ) => {
   }
 }
 
-export const requestS3ProjectFileUploadToken = ( identityToken, project_id, pageName ) => {
+export const requestS3ProjectFileUploadToken = ( project_id, pageName ) => {
   return {
     type: action.USER_S3_UPLOAD_PROJECT_FILE_TOKEN_REQUESTED,
     payload: {
-      identityToken,
       project_id,
       pageName,
     }
@@ -42,22 +41,20 @@ export const requestS3ProjectFileUploadToken = ( identityToken, project_id, page
 }
 
 
-export const requestS3UserFileUploadToken = ( identityToken, fileType ) => {
+export const requestS3UserFileUploadToken = ( fileType ) => {
   return {
     type: action.USER_S3_UPLOAD_USER_FILE_TOKEN_REQUESTED,
     payload: {
-      identityToken,
       fileType,
     }
   }
 }
 
 
-export const getUserDetails = ( identityToken, resolve, reject ) => {
+export const getUserDetails = ( resolve, reject ) => {
   return {
     type: action.USER_GET_DETAILS_REQUESTED,
     payload: {
-      identityToken,
       resolve,
       reject,
     }
@@ -66,22 +63,20 @@ export const getUserDetails = ( identityToken, resolve, reject ) => {
 
 
 
-export const getProjectInvitations = ( identityToken, resolve, reject  ) => {
+export const getProjectInvitations = ( resolve, reject  ) => {
   return {
     type: action.USER_GET_PROJECT_INVITATIONS_REQUESTED,
     payload: {
-      identityToken,
       resolve,
       reject,
     }
   }
 }
 
-export const respondToProjectInvitation = ( identityToken, projectID, response ) => {
+export const respondToProjectInvitation = ( projectID, response ) => {
   return {
     type: action.USER_PROJECT_INVITATION_SEND_RESPONSE_REQUESTED,
     payload: {
-      identityToken,
       projectID,
       response,
     }
@@ -89,22 +84,20 @@ export const respondToProjectInvitation = ( identityToken, projectID, response )
 }
 
 
-export const getSignatureRequests = ( identityToken, resolve, reject  ) => {
+export const getSignatureRequests = ( resolve, reject  ) => {
   return {
     type: action.USER_GET_PROJECT_SIGNATURES_REQUESTED,
     payload: {
-      identityToken,
       resolve,
       reject,
     }
   }
 }
 
-export const respondToSignatureRequest = ( identityToken, projectID, pageName, fieldID, response ) => {
+export const respondToSignatureRequest = ( projectID, pageName, fieldID, response ) => {
   return {
     type: action.USER_PROJECT_SIGNATURE_SEND_RESPONSE_REQUESTED,
     payload: {
-      identityToken,
       projectID,
       pageName,
       fieldID,
@@ -113,11 +106,10 @@ export const respondToSignatureRequest = ( identityToken, projectID, pageName, f
   }
 }
 
-export const getHistory = ( identityToken, resolve, reject ) => {
+export const getHistory = ( resolve, reject ) => {
   return {
     type: action.USER_GET_HISTORY_REQUESTED,
     payload: {
-      identityToken,
       resolve,
       reject,
     }

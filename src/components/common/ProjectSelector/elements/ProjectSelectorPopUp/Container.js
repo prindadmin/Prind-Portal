@@ -14,11 +14,11 @@ const mapStatetoProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getAccessibleProjects: (jwtToken, resolve, reject) => {
-      dispatch(projectsReducer.getAccessibleProjects(jwtToken, resolve, reject))
+    getAccessibleProjects: (resolve, reject) => {
+      dispatch(projectsReducer.getAccessibleProjects(resolve, reject))
     },
-    updateChosenProject: (jwtToken, project, resolve, reject) => {
-      dispatch(projectsReducer.updateChosenProject(jwtToken, project, resolve, reject))
+    updateChosenProject: (project, resolve, reject) => {
+      dispatch(projectsReducer.updateChosenProject(project, resolve, reject))
     }
   }
 }

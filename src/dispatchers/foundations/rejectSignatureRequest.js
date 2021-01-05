@@ -1,31 +1,43 @@
-import axios from 'axios'
-import https from 'https'
+import { Auth } from 'aws-amplify';
+import API from '@aws-amplify/api';
 
-export default function(identityToken, requestDetails) {
+// Fixed values for the API request
+const apiName = process.env.REACT_APP_API_NAME
 
-  const body = {
-    accepted: false,
-  }
+export default async function(requestDetails) {
+
+  // Build path for request
+  const { projectID, pageName, fieldID } = requestDetails
+  const path = `/document/${projectID}/${pageName}/${fieldID}/sign-on-foundations`
+
+  // Get the current session and the identity jwtToken
+  const identityToken = await Auth.currentSession()
+    .then(credentials => {
+        return credentials.idToken.jwtToken
+      })
 
   return new Promise((resolve, reject) => {
 
-    const instance = axios.create({
-      httpsAgent: new https.Agent({
-        rejectUnauthorized: false
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': identityToken,
-      }
-    });
+    // Create the header for the request
+    const myInit = {
+        headers: {
+          Authorization: identityToken
+        },
+        body: {
+          accepted: false,
+        },
+        response: false,
+    }
 
-    instance.post(`${process.env.REACT_APP_API_ENDPOINT}/document/${requestDetails.projectID}/${requestDetails.pageName}/${requestDetails.fieldID}/sign-on-foundations`, body)
-    .then(res => {
-      resolve(res)
-    })
-    .catch((error) => {
-      console.error(error)
-      reject(error)
-    })
-  })
+    // Send the request
+    API.post(apiName, path, myInit)
+      .then(response => {
+        console.log(response)
+        resolve(response)
+      })
+      .catch(error => {
+        console.log(error.response);
+        reject(error)
+     })
+   })
 }

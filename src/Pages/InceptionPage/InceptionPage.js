@@ -32,27 +32,27 @@ export class InceptionPage extends Component {
   }
 
   componentDidMount() {
-    const { projects, auth, getContent, location } = this.props
+    const { projects, getContent, location } = this.props
     const { projectId } = projects.chosenProject
-    const { jwtToken } = auth.info.idToken
 
     // Register pageview with GA
     ReactGA.pageview(location.pathname + location.search);
 
     if (projects.chosenProject.projectId !== "") {
-      getContent(jwtToken, projectId)
+      getContent(projectId)
     }
   }
 
   componentDidUpdate(prevProps) {
-    const { projects, auth, getContent } = this.props
+    const { projects, getContent } = this.props
     const { projectId } = projects.chosenProject
-    const { jwtToken } = auth.info.idToken
 
     if (projectId !== prevProps.projects.chosenProject.projectId) {
-      getContent(jwtToken, projectId)
+      getContent(projectId)
     }
   }
+
+
 
   onClosePopup = () => {
     this.setState({
