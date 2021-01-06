@@ -113,8 +113,8 @@ export class GitText extends Component {
 
           <div className='container'>
             <Editor
-              initialValue={ fieldDetails.textValue }
-              disabled={!editable}
+              initialValue="hello text"
+              apikey={process.env.REACT_APP_TINY_API_KEY}
               init={{
                 height: 500,
                 menubar: false,

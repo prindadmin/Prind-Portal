@@ -261,6 +261,7 @@ export const CANNOT_SIGN_WITHOUT_FOUNDATIONS_ID = "You cannot sign documents wit
 export const ACCREDITATION_NAME = "Accreditation name"
 export const ACCREDITATION_ISSUE_DATE = "Issue date"
 export const ACCREDITATION_ISSUER = "Issued by"
+export const USER_ACCREDITATIONS_LOADING = "Fetching Accreditations"
 
 export const YOUR_PASSWORD_WAS_SUCCESSFULLY_CHAINGED = "Your password has been successfully changed."
 export const LOADING_DATA_FOR_PAGE = "Loading page data"

@@ -1605,6 +1605,7 @@ background-color: var(--field-element-grey);
   margin-top: 1.5em;
   font-size: 18px;
   font-weight: bold;
+  text-align: center;
 }
 
 .project-loading-container {

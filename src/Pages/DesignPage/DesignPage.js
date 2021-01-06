@@ -153,14 +153,14 @@ export class DesignPage extends Component {
 
           })
         }
-        {
+        { /*
           <GitText
             key="test"
             form="field-test"
             elementContent={fieldTest}
             pageName={pageName}
             />
-        }
+        */}
 
 
         {this.getCreateFieldButton()}

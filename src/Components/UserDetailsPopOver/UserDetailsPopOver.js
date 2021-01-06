@@ -11,6 +11,7 @@ import {
 import * as Strings from '../../Data/Strings'
 
 import UserAccreditations from '../Temp/UserAccreditations'
+import UserAccreditationTile from '../UserAccreditationTile'
 
 // TODO: Code this
 
@@ -24,6 +25,7 @@ export class UserDetailsPopOver extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      fetching: false,
       fetchError: false,
       updateError: false,
       chosenProjectId: "",
@@ -32,12 +34,41 @@ export class UserDetailsPopOver extends Component {
   }
 
   componentDidMount() {
-    this.props.tempGetUserAccreditations(this.props.memberDetails.username, UserAccreditations)
+    console.log("successfully mounted component")
+
+    this.setState({
+      fetching: true,
+      fetchError: false,
+      updateError: false,
+    })
+
+    this.props.tempGetUserAccreditations(this.props.memberDetails.username, UserAccreditations, this.onGetAccreditationsSuccess, this.onGetAccreditationsFailed)
   }
 
+  onGetAccreditationsSuccess = (result) => {
+    console.log("success fetching accreditations")
+    this.setState({
+      fetching: false,
+    })
+
+  }
+
+  onGetAccreditationsFailed = (result) => {
+    console.error("failed to fetch accreditations")
+    this.setState({
+      fetching: false,
+      fetchError: true,
+    })
+  }
 
   singleAccreditationPresentation = (accreditation, id) => {
 
+    return (
+      <UserAccreditationTile
+        {...accreditation}
+        key={id} />
+    )
+    /*
     const factomLink = `${process.env.REACT_APP_FACTOM_EXPLORER_SITE}/entries/${accreditation.proof.entryHash}`
 
     return (
@@ -48,6 +79,7 @@ export class UserDetailsPopOver extends Component {
         <p><a target="_blank" rel="noopener noreferrer" href={factomLink}>{Strings.LINK_TO_PROOF}</a></p>
       </div>
     )
+    */
   }
 
   // Get the code to display the user's details
@@ -76,6 +108,19 @@ export class UserDetailsPopOver extends Component {
   }
 
 
+
+  detailsLoading = () => {
+    return (
+      <div className='fill'>
+        <div className='loading-spinner'>
+          <Spinner size={100} intent={Intent.DANGER} />
+          <p>{Strings.USER_ACCREDITATIONS_LOADING}</p>
+        </div>
+      </div>
+    )
+  }
+
+
   render() {
 
     console.log(this.props.projects.chosenProject)
@@ -88,8 +133,11 @@ export class UserDetailsPopOver extends Component {
       }} >
         <div id='user-details-popover'>
           <div id='popup-box' onClick={(e) => e.stopPropagation()}>
+
             <div className='accreditation-list'>
-              {this.getAccreditationsPresentation()}
+              {
+                this.state.fetching ? this.detailsLoading() : this.getAccreditationsPresentation()
+              }
             </div>
           </div>
         </div>

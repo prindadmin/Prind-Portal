@@ -50,7 +50,14 @@ export const getRoles = ( projectID ) => {
 }
 
 
-export const tempGetUserAccreditations = ( username, accreditations ) => {
+export const tempGetUserAccreditations = ( username, accreditations, resolve, reject ) => {
+
+  if (resolve !== null) {
+    setTimeout(function() {
+      resolve()
+    }, 1000);
+  }
+
   return {
     type: action.MEMBER_SET_STATE,
     payload: {
