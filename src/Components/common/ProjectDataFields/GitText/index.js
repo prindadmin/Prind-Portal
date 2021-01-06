@@ -1,3 +1,3 @@
-import Element from './ElementContainer'
+import GitText from './GitTextContainer'
 
-export default Element
+export default GitText

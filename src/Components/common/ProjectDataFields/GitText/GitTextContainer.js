@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 
 import * as projectsReducer from '../../../../Reducers/projectsReducer'
 
-import Element from './Element'
+import GitText from './GitText'
 
 const mapStatetoProps = state => {
   return {
@@ -20,4 +20,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default withRouter(connect(mapStatetoProps, mapDispatchToProps)(Element))
+export default withRouter(connect(mapStatetoProps, mapDispatchToProps)(GitText))

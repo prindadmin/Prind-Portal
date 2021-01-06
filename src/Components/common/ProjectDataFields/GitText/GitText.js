@@ -15,11 +15,11 @@ import * as FormInputs from '../../formInputs'
 import * as strings from '../../../../Data/Strings'
 
 // TODO: Style text editor when disabled
-// TODO: Compare old and new text in some way (side by side)?
+// TODO: Compare old and new text in some way (https://mergely.com/)
 // TODO: Update in server as versioned (normally text isn't versioned, right?)
 
 
-export class Element extends Component {
+export class GitText extends Component {
   static propTypes = {
     elementContent: PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -143,4 +143,4 @@ Element = reduxForm({
   enableReinitialize: true
 })(Element)
 
-export default Element
+export default GitText

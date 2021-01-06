@@ -36,9 +36,12 @@ const LoggedInContent = lazy(() => import('./Pages/LoggedInContent'));
 // TODO: Add error handling when a page cannot load
 // TODO: Strip out axios (not needed as a root dependency anyway)
 // TODO: Strip out bootstrap
+// TODO: Strip out blueprint (if possible; date picker is important)
 // TODO: Strip out node-sass (why is this used?)
 // TODO: Strip out typescript???
 // TODO: Add in CSS Grid
+// TODO: Add in sign in / sign up page from Foundations portal
+// TODO: Simplify CSS using media queries and global variables
 
 // Use existing Cognito resource for auth
 Amplify.configure({
