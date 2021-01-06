@@ -137,7 +137,7 @@ export class ContactTile extends Component {
     return (
         <div id='contact-tile' className={isConfirmed} onClick={(e) => {
           e.stopPropagation()
-          // TODO this.showUserDetails()
+          this.showUserDetails()
         }}>
           <div className='col-md-3 col-sm-12'>
             <div className="text-center avatar-container">

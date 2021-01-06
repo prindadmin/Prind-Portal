@@ -12,6 +12,8 @@ import * as Strings from '../../Data/Strings'
 
 import UserAccreditations from '../Temp/UserAccreditations'
 
+// TODO: Code this
+
 export class UserDetailsPopOver extends Component {
   static propTypes = {
     projects: PropTypes.object.isRequired,
