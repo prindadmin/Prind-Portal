@@ -11,7 +11,7 @@ import {
 
 import AWS from 'aws-sdk';
 
-import * as strings from '../../../../../../Data/Strings'
+import * as Strings from '../../../../../../Data/Strings'
 
 
 const windowCloseDelay = 1500
@@ -151,7 +151,7 @@ export class Element extends Component {
         </div>
         <div>
           <Button
-            text={strings.CLOSE_WINDOW}
+            text={Strings.CLOSE_WINDOW}
             onClick={(e) => this.cancelPopup()}
             intent={Intent.DANGER}
             />
@@ -180,11 +180,11 @@ export class Element extends Component {
             <div id='popup-box' className={uploadStatus}>
               <div className='uploader-popover-container'>
                 <div className='element-title'>
-                  {strings.UPLOAD_IN_PROGESS}
+                  {Strings.UPLOAD_IN_PROGESS}
                 </div>
                 <div className='element-description'>
-                  <p><b>{strings.FILE_NAME}</b> {fileDetails.value.replace("C:\\fakepath\\", "")}</p>
-                  <p><b>{strings.UPLOADED_SIZE}</b> {uploadProgress + " / " + fileSize + " bytes"}</p>
+                  <p><b>{Strings.FILE_NAME}</b> {fileDetails.value.replace("C:\\fakepath\\", "")}</p>
+                  <p><b>{Strings.UPLOADED_SIZE}</b> {uploadProgress + " / " + fileSize + " bytes"}</p>
                 </div>
                 <ProgressBar
                   intent={uploadError? Intent.DANGER : Intent.PRIMARY}

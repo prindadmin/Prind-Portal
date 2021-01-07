@@ -1,5 +1,5 @@
 import * as action from '../Actions'
-import * as strings from '../Data/Strings'
+import * as Strings from '../Data/Strings'
 
 const defaultState = {
   accessibleProjects: {
@@ -7,7 +7,7 @@ const defaultState = {
     projectRole: []
   },
   chosenProject: {
-    projectName: strings.NO_PROJECT_SELECTED,
+    projectName: Strings.NO_PROJECT_SELECTED,
     projectId: "",
   },
   memberList: [],
@@ -19,7 +19,7 @@ const defaultState = {
 
 const blankChosenState = {
   chosenProject: {
-    projectName: strings.NO_PROJECT_SELECTED,
+    projectName: Strings.NO_PROJECT_SELECTED,
     projectId: "",
   }
 }

@@ -30,6 +30,10 @@
   --prind-palette-color-3: #178CA4;
   --prind-palette-color-4: #8D818C;
   --prind-palette-color-5: #072A40;
+  --max-width-popover: 1200px;
+  --standard-border-radius: 15px;
+  --standard-padding: 15px;
+  --standard-margin: 15px;
 }
 
 
@@ -61,6 +65,21 @@
   display: flex;
   flex-direction: row;
   height: calc(100vh - var(--header-height) - var(--footer-height));
+}
+
+h1 {
+
+}
+
+h2 {
+  font-size: 30px;
+  padding: 0;
+  margin: 0;
+}
+
+h3 {
+  margin: 0;
+  padding: 0;
 }
 
 hr {
@@ -119,6 +138,16 @@ hr {
 .custom_fc_frame {
   right: 10px !important;
   bottom: 60px !important;
+}
+
+.close-button {
+  background-color: grey;
+  color: white;
+  border-radius: 15px;
+  border: 2px black solid;
+  padding: 10px 27px;
+  height: 3em;
+  font-size: 16px;
 }
 
 #loading-placeholder {
@@ -1866,5 +1895,46 @@ background-color: var(--field-element-grey);
 }
 
 #user-details-popover #popup-box {
+  display: flex;
+  flex-direction: column;
+  max-width: var(--max-width-popover);
   padding: 20px;
+  overflow-y: hidden;
+}
+
+#popup-box .popup-box-header {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: var(--standard-padding) 0;
+}
+
+#popup-box .close-button {
+  margin-left: auto;
+}
+
+#user-details-popover .accreditation-list-container {
+  display: flex;
+  overflow-y: scroll;
+}
+
+#user-details-popover .accreditation-list {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-row-gap: var(--standard-padding);
+}
+
+/* ======================================= */
+/* === user accreditation tile element === */
+/* ======================================= */
+
+#user-accreditation-tile {
+  border: 1px black solid;
+  border-radius: var(--standard-border-radius);
+  padding: var(--standard-padding);
+}
+
+#user-accreditation-tile h3 {
+  margin-bottom: var(--standard-margin);
 }

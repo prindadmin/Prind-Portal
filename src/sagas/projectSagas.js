@@ -4,7 +4,7 @@ import { call, put, takeLatest } from 'redux-saga/effects'
 import * as Dispatchers from '../Dispatchers/projects'
 
 import * as Actions from '../Actions'
-import * as strings from '../Data/Strings'
+import * as Strings from '../Data/Strings'
 
 const defaultState = {
   accessibleProjects: {
@@ -12,7 +12,7 @@ const defaultState = {
     projectRole: []
   },
   chosenProject: {
-    projectName: strings.NO_PROJECT_SELECTED,
+    projectName: Strings.NO_PROJECT_SELECTED,
     projectId: "",
   },
   memberList: [],

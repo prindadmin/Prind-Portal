@@ -11,7 +11,7 @@ import {
 
 import * as FormInputs from '../../formInputs'
 
-import * as strings from '../../../../Data/Strings'
+import * as Strings from '../../../../Data/Strings'
 
 export class Element extends Component {
   static propTypes = {
@@ -39,8 +39,8 @@ export class Element extends Component {
     const { dropdownValue, textboxValue } = props.elementContent.fieldDetails
 
     var stateUpdate = {
-      dropdownValue: strings.NO_VALUE_SELECTED,
-      textboxValue: strings.PLEASE_PROVIDE_DETAILS_HERE,
+      dropdownValue: Strings.NO_VALUE_SELECTED,
+      textboxValue: Strings.PLEASE_PROVIDE_DETAILS_HERE,
       updateInProgress: false,
       updateError: false,
       errorText: "",
@@ -109,7 +109,7 @@ export class Element extends Component {
     this.setState({
       updateError: true,
       updateInProgress: false,
-      errorText: strings.ERROR_SAVING_CHANGES_TO_FIELD
+      errorText: Strings.ERROR_SAVING_CHANGES_TO_FIELD
     })
   }
 
@@ -165,7 +165,7 @@ export class Element extends Component {
                     values={formattedDropDownOptions}
                     component={FormInputs.SelectInput}
                     onItemSelect={this.onItemSelected}
-                    placeholder={strings.NO_ITEM_CHOSEN}
+                    placeholder={Strings.NO_ITEM_CHOSEN}
                     disabled={!editable}
                   />
                 </div>
@@ -177,7 +177,7 @@ export class Element extends Component {
                   {
                     fieldDetails.optionOpensTextBox.includes(dropdownValue) ?
                     <FormGroup
-                      label={strings.IF_XXX_PROVIDE_DETAILS_BELOW.replace("XXX", dropdownValue)}
+                      label={Strings.IF_XXX_PROVIDE_DETAILS_BELOW.replace("XXX", dropdownValue)}
                       labelFor="extraInfo"
                       labelInfo=""
                       className="last"
@@ -200,7 +200,7 @@ export class Element extends Component {
                 <Button
                   loading={this.props.submitting}
                   disabled={this.props.pristine}
-                  text={strings.BUTTON_SAVE_CHANGES}
+                  text={Strings.BUTTON_SAVE_CHANGES}
                   className='entry-button'
                   intent={Intent.PRIMARY}
                   type='submit'

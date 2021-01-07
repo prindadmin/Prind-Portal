@@ -10,7 +10,7 @@ import {
 import PopOverHandler from '../common/popOverHandler'
 import UserDetailsPopOver from '../UserDetailsPopOver'
 
-import * as strings from '../../Data/Strings'
+import * as Strings from '../../Data/Strings'
 
 // TODO: Remove memory leak when loading images and navigating away from the page
 
@@ -79,7 +79,7 @@ export class ContactTile extends Component {
     this.setState({
       removingMember: false,
       removeMemberError: true,
-      errorText: strings.ERROR_REMOVING_MEMBER_FROM_PROJECT
+      errorText: Strings.ERROR_REMOVING_MEMBER_FROM_PROJECT
     })
   }
 
@@ -130,7 +130,7 @@ export class ContactTile extends Component {
 
     const userName = memberDetails.firstName !== null && memberDetails.lastName !== null ?
         memberDetails.firstName + " " + memberDetails.lastName :
-        strings.MEMBER_NOT_YET_SIGNED_UP_TO_PRIND
+        Strings.MEMBER_NOT_YET_SIGNED_UP_TO_PRIND
 
     const isConfirmed = confirmed ? "row member-confirmed" : "row member-not-confirmed"
 
@@ -152,7 +152,7 @@ export class ContactTile extends Component {
 
             <div className="row">
               <div className="col-lg-2 col-md-4">
-                <b>{strings.MEMBER_EMAIL_ADDRESS + ": "}</b>
+                <b>{Strings.MEMBER_EMAIL_ADDRESS + ": "}</b>
               </div>
               <div className="col-lg-10 col-md-8">
                 {memberDetails.emailAddress}
@@ -161,7 +161,7 @@ export class ContactTile extends Component {
 
             <div className="row">
               <div className="col-lg-2 col-md-4">
-                <b>{strings.MEMBER_PROJECT_ROLE + ": "}</b>
+                <b>{Strings.MEMBER_PROJECT_ROLE + ": "}</b>
               </div>
               <div className="col-lg-10 col-md-8">
                 {memberDetails.roleName}
@@ -170,10 +170,10 @@ export class ContactTile extends Component {
 
             <div className="row">
               <div className="col-lg-2 col-md-4">
-                <b>{strings.MEMBER_STATUS + ": "}</b>
+                <b>{Strings.MEMBER_STATUS + ": "}</b>
               </div>
               <div className="col-lg-10 col-md-8">
-                { confirmed ? strings.MEMBER_IS_CONFIRMED : strings.MEMBER_ISNT_YET_CONFIRMED }
+                { confirmed ? Strings.MEMBER_IS_CONFIRMED : Strings.MEMBER_ISNT_YET_CONFIRMED }
               </div>
             </div>
 
@@ -190,7 +190,7 @@ export class ContactTile extends Component {
               editableMemberList.length > 0 ?
               <div className="row">
                 <Button
-                  text={strings.BUTTON_REMOVE_MEMBER}
+                  text={Strings.BUTTON_REMOVE_MEMBER}
                   onClick={(e) => this.removeMember(e)}
                   intent={Intent.DANGER}
                 />

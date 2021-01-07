@@ -16,7 +16,7 @@ import * as FormInputs from '../../Components/common/formInputs'
 
 import ContactTile from '../../Components/ContactTile'
 
-import * as strings from '../../Data/Strings'
+import * as Strings from '../../Data/Strings'
 import * as Validators from '../../Validators'
 
 // TODO: Stop this requesting the team if there is no project selected
@@ -29,7 +29,7 @@ export class ProjectTeamPage extends Component {
     super(props)
     this.state = {
       selectedRoleID: "0",
-      selectedRoleName: strings.NO_ROLE_SELECTED,
+      selectedRoleName: Strings.NO_ROLE_SELECTED,
       addingMember: false,
       addMemberError: false,
       errorText: ""
@@ -92,7 +92,7 @@ export class ProjectTeamPage extends Component {
   addMemberReject = () => {
     this.setState({
       addMemberError: true,
-      errorText: strings.ERROR_ADDING_MEMBER_TO_PROJECT
+      errorText: Strings.ERROR_ADDING_MEMBER_TO_PROJECT
     })
   }
 
@@ -118,7 +118,7 @@ export class ProjectTeamPage extends Component {
   pageHeader = () => {
     return (
       <div className='header-section'>
-        <h2>{strings.PROJECT_DIRECTORY_TITLE}</h2>
+        <h2>{Strings.PROJECT_DIRECTORY_TITLE}</h2>
       </div>
     )
   }
@@ -126,7 +126,7 @@ export class ProjectTeamPage extends Component {
   newMemberPageHeader = () => {
     return (
       <div className='header-section'>
-        <h2>{strings.PROJECT_DIRECTORY_ADD_NEW_TITLE}</h2>
+        <h2>{Strings.PROJECT_DIRECTORY_ADD_NEW_TITLE}</h2>
       </div>
     )
   }
@@ -171,26 +171,26 @@ export class ProjectTeamPage extends Component {
           null
         }
         <FormGroup
-          label={strings.MEMBER_DETAILS}
+          label={Strings.MEMBER_DETAILS}
           labelFor="emailAddress"
         >
           <Field
             name="emailAddress"
             validate={[Validators.required, Validators.isEmailAddress]}
             component={FormInputs.TextInput}
-            placeholder={strings.MEMBER_EMAIL_ADDRESS}
+            placeholder={Strings.MEMBER_EMAIL_ADDRESS}
           />
         </FormGroup>
 
         <FormGroup
-          label={strings.MEMBER_PROJECT_ROLE}
+          label={Strings.MEMBER_PROJECT_ROLE}
           labelFor="roleId"
         >
           <Field
             name="roleId"
             values={formattedRoles}
             component={FormInputs.SelectInput}
-            placeholder={strings.MEMBER_PROJECT_ROLE_SELECT_ROLE}
+            placeholder={Strings.MEMBER_PROJECT_ROLE_SELECT_ROLE}
             onItemSelect={this.onItemSelected}
             disabled={false}
           />
@@ -203,7 +203,7 @@ export class ProjectTeamPage extends Component {
             disabled={this.props.invalid}
             type='submit'
             intent='primary'
-            text={strings.BUTTON_SAVE_CHANGES}
+            text={Strings.BUTTON_SAVE_CHANGES}
           />
         </ButtonGroup>
 
@@ -211,7 +211,7 @@ export class ProjectTeamPage extends Component {
           <Button
             type='cancel'
             intent='none'
-            text={strings.BUTTON_CANCEL}
+            text={Strings.BUTTON_CANCEL}
             onClick={this.cancelNewMember}
           />
         </ButtonGroup>
@@ -240,7 +240,7 @@ export class ProjectTeamPage extends Component {
             <Button
               onClick={(e) => this.setState({addingMember: true})}
               intent='primary'
-              text={strings.BUTTON_ADD_MEMBER_TO_PROJECT}
+              text={Strings.BUTTON_ADD_MEMBER_TO_PROJECT}
             />
           </ButtonGroup>
         </div>
@@ -317,7 +317,7 @@ export class ProjectTeamPage extends Component {
         <div className='page-content-section row'>
           {
             this.props.projects !== undefined ?
-              this.props.projects.chosenProject.projectName === strings.NO_PROJECT_SELECTED ?
+              this.props.projects.chosenProject.projectName === Strings.NO_PROJECT_SELECTED ?
                 this.showEmptyPage() :
                 this.teamDetails() :
             this.showEmptyPage()

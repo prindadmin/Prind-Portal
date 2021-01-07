@@ -10,7 +10,7 @@ import { FileUpload, DropDown, CalendarPicker, LongText } from '../../Components
 import NoProjectSelected from '../../Components/common/NoProjectSelected'
 import ErrorFetchingContent from '../../Components/common/ErrorFetchingContent'
 
-import * as strings from '../../Data/Strings'
+import * as Strings from '../../Data/Strings'
 
 const pageName = 'refurbishment'
 
@@ -66,8 +66,8 @@ export class RefurbishmentPage extends Component {
     return(
       <div className='page-content'>
         <div className='page-title'>
-          <h1>{strings.REFURBISHMENT_PAGE_TITLE}</h1>
-          <span>{strings.REFURBISHMENT_PAGE_DESCRIPTION}</span>
+          <h1>{Strings.REFURBISHMENT_PAGE_TITLE}</h1>
+          <span>{Strings.REFURBISHMENT_PAGE_DESCRIPTION}</span>
         </div>
         {
           fields.map((singleField) => {
@@ -120,7 +120,7 @@ export class RefurbishmentPage extends Component {
 
     const { projects, pageContent } = this.props
 
-    if (projects.chosenProject.projectName === strings.NO_PROJECT_SELECTED) {
+    if (projects.chosenProject.projectName === Strings.NO_PROJECT_SELECTED) {
       return this.showEmptyPage()
     }
 

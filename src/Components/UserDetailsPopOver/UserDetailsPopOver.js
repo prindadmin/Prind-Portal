@@ -120,6 +120,12 @@ export class UserDetailsPopOver extends Component {
     )
   }
 
+  onSubmit = (e) => {
+    e.stopPropagation()
+    e.preventDefault()
+
+    this.cancelPopup()
+  }
 
   render() {
 
@@ -134,10 +140,21 @@ export class UserDetailsPopOver extends Component {
         <div id='user-details-popover'>
           <div id='popup-box' onClick={(e) => e.stopPropagation()}>
 
-            <div className='accreditation-list'>
-              {
-                this.state.fetching ? this.detailsLoading() : this.getAccreditationsPresentation()
-              }
+            <div className='popup-box-header'>
+              <h2>{ Strings.USER_ACCREDITATIONS_POPOVER_HEADING }</h2>
+              <input
+                type="submit"
+                value={ Strings.CLOSE_WINDOW }
+                className="close-button"
+                onClick={(e) => this.onSubmit(e)} />
+            </div>
+
+            <div className='accreditation-list-container'>
+              <div className='accreditation-list'>
+                {
+                  this.state.fetching ? this.detailsLoading() : this.getAccreditationsPresentation()
+                }
+              </div>
             </div>
           </div>
         </div>

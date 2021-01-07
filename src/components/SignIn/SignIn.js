@@ -17,7 +17,7 @@ import {
 import * as FormInputs from '../common/formInputs'
 import * as Validators from '../../Validators'
 import * as state from '../../States'
-import * as strings from '../../Data/Strings'
+import * as Strings from '../../Data/Strings'
 
 class SignIn extends Component {
   static propTypes = {
@@ -52,7 +52,7 @@ class SignIn extends Component {
         {
           this.props.submitFailed ?
           <Callout style={{marginBottom: '15px'}} intent='danger'>
-            <div>{strings.LOGIN_UNSUCCESSFUL}</div>
+            <div>{Strings.LOGIN_UNSUCCESSFUL}</div>
           </Callout> :
           null
         }
@@ -60,7 +60,7 @@ class SignIn extends Component {
           <Field
             component={FormInputs.TextInput}
             name="email"
-            placeholder={strings.PLACEHOLDER_EMAIL}
+            placeholder={Strings.PLACEHOLDER_EMAIL}
             validate={[Validators.required, Validators.maxLength64, Validators.email]}
           />
         </Label>
@@ -68,7 +68,7 @@ class SignIn extends Component {
           <Field
             component={FormInputs.PasswordInput}
             name="password"
-            placeholder={strings.PLACEHOLDER_PASSWORD}
+            placeholder={Strings.PLACEHOLDER_PASSWORD}
             validate={[Validators.required, Validators.maxLength32]}
           />
         </Label>
@@ -78,17 +78,17 @@ class SignIn extends Component {
             disabled={this.props.invalid}
             type='submit'
             intent='primary'
-            text={strings.BUTTON_LOGIN} />
+            text={Strings.BUTTON_LOGIN} />
         </ButtonGroup>
         <ButtonGroup fill style={{marginBottom: '15px'}}>
           <Button
             intent='primary'
-            text={strings.BUTTON_NEW_USER}
+            text={Strings.BUTTON_NEW_USER}
             onClick={() => {this.props.history.push(Endpoints.SIGNUPPAGE)}} />
         </ButtonGroup>
         <ButtonGroup fill>
           <Button
-            text={strings.BUTTON_FORGOT_PASSWORD}
+            text={Strings.BUTTON_FORGOT_PASSWORD}
             intent='primary'
             onClick={() => {this.props.history.push('/forgot-password')}}
           />

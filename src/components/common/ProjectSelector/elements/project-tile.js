@@ -3,7 +3,7 @@ import React from 'react'
 import { Callout } from '@blueprintjs/core'
 import ItemIcon from '../../ItemIcon'
 
-import * as strings from '../../../../Data/Strings'
+import * as Strings from '../../../../Data/Strings'
 
 const ProjectTile = props => {
   const { project, selected } = props
@@ -12,7 +12,7 @@ const ProjectTile = props => {
 
 
   if (bodyText === undefined) {
-    bodyText = strings.NO_PROJECT_DESCRIPTION
+    bodyText = Strings.NO_PROJECT_DESCRIPTION
   }
 
   if (bodyText > 300) {

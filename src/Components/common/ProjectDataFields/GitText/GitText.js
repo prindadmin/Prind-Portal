@@ -12,7 +12,7 @@ import {
 
 import * as FormInputs from '../../formInputs'
 
-import * as strings from '../../../../Data/Strings'
+import * as Strings from '../../../../Data/Strings'
 
 // TODO: Style text editor when disabled
 // TODO: Compare old and new text in some way (https://mergely.com/)
@@ -89,7 +89,7 @@ export class GitText extends Component {
     this.setState({
       updateError: true,
       updateInProgress: false,
-      errorText: strings.ERROR_SAVING_CHANGES_TO_FIELD
+      errorText: Strings.ERROR_SAVING_CHANGES_TO_FIELD
     })
   }
 

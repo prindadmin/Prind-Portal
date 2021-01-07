@@ -12,7 +12,7 @@ import {
 
 import PopOverHandler from '../popOverHandler'
 
-import * as strings from '../../../Data/Strings'
+import * as Strings from '../../../Data/Strings'
 import * as Validators from '../../../Validators'
 import * as FormInputs from '../formInputs'
 
@@ -76,7 +76,7 @@ export class Element extends Component {
   createReject = () => {
     this.setState({
       createError: true,
-      errorText: strings.ERROR_CREATING_CUSTOM_FIELD,
+      errorText: Strings.ERROR_CREATING_CUSTOM_FIELD,
     })
   }
 
@@ -164,7 +164,7 @@ export class Element extends Component {
     } else {
       return (
         <div className="no-options">
-          {strings.PLEASE_ENTER_SOME_OPTIONS}
+          {Strings.PLEASE_ENTER_SOME_OPTIONS}
         </div>
       )
     }
@@ -187,36 +187,36 @@ export class Element extends Component {
         }
         <form onSubmit={handleSubmit(this.createField)} className='create-field-form'>
           <FormGroup
-            label={strings.FIELD_TITLE}
+            label={Strings.FIELD_TITLE}
             labelFor="title"
-            labelInfo={strings.FIELD_IS_REQUIRED}
+            labelInfo={Strings.FIELD_IS_REQUIRED}
           >
             <Field
               name="title"
               validate={[Validators.required, Validators.maxLength64]}
               component={FormInputs.TextInput}
-              placeholder={strings.FIELD_TITLE}
+              placeholder={Strings.FIELD_TITLE}
             />
           </FormGroup>
 
           <FormGroup
-            label={strings.FIELD_DESCRIPTION}
+            label={Strings.FIELD_DESCRIPTION}
             labelFor="description"
-            labelInfo={strings.FIELD_IS_REQUIRED}
+            labelInfo={Strings.FIELD_IS_REQUIRED}
           >
             <Field
               name="description"
               validate={[Validators.required]}
               component={FormInputs.TextInput}
-              placeholder={strings.FIELD_DESCRIPTION}
+              placeholder={Strings.FIELD_DESCRIPTION}
             />
           </FormGroup>
 
 
 
           <FormGroup
-            label={strings.FIELD_TYPE}
-            labelInfo={strings.FIELD_IS_REQUIRED}
+            label={Strings.FIELD_TYPE}
+            labelInfo={Strings.FIELD_IS_REQUIRED}
           >
             <Field
               name="type"
@@ -232,20 +232,20 @@ export class Element extends Component {
             selectedTypeValue === 'dropdown' ?
             <React.Fragment>
               <FormGroup
-                label={strings.DROP_DOWN_OPTIONS}
+                label={Strings.DROP_DOWN_OPTIONS}
                 labelFor="fieldDropDownOptions"
-                labelInfo={strings.FIELD_IS_REQUIRED}
+                labelInfo={Strings.FIELD_IS_REQUIRED}
               >
                 <Field
                   name="fieldDropDownOptions"
                   validate={[Validators.required]}
                   component={FormInputs.TextInput}
-                  placeholder={strings.DROP_DOWN_OPTIONS}
+                  placeholder={Strings.DROP_DOWN_OPTIONS}
                 />
               </FormGroup>
 
               <FormGroup
-                label={strings.DROP_DOWN_OPTIONS_OPENING_TEXT_BOX}
+                label={Strings.DROP_DOWN_OPTIONS_OPENING_TEXT_BOX}
               >
                 {this.getCheckBoxes()}
               </FormGroup>
@@ -260,12 +260,12 @@ export class Element extends Component {
               disabled={this.props.invalid}
               type='submit'
               intent='primary'
-              text={strings.BUTTON_CREATE_FIELD}
+              text={Strings.BUTTON_CREATE_FIELD}
             />
           </ButtonGroup>
           <ButtonGroup fill>
             <Button
-              text={strings.BUTTON_CANCEL}
+              text={Strings.BUTTON_CANCEL}
               intent='none'
               onClick={(e) => {
                 this.closePopover(e)
@@ -293,7 +293,7 @@ export class Element extends Component {
             <div id='popup-box'>
               <div className='create-custom-field-popover-container' onClick={(e) => e.stopPropagation()}>
                 <div className='element-title'>
-                  {strings.CREATE_CUSTOM_FIELD}
+                  {Strings.CREATE_CUSTOM_FIELD}
                 </div>
                 <div className='element-description'>
                   {this.getForm()}

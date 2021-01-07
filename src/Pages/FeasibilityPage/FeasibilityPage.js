@@ -15,7 +15,7 @@ import {
   Intent,
 } from '@blueprintjs/core'
 
-import * as strings from '../../Data/Strings'
+import * as Strings from '../../Data/Strings'
 
 const pageName = 'feasibility'
 
@@ -62,7 +62,7 @@ export class FeasibilityPage extends Component {
     return (
       <div className="create-custom-field-button-container">
         <Button
-          text={strings.CREATE_CUSTOM_FIELD}
+          text={Strings.CREATE_CUSTOM_FIELD}
           intent={Intent.PRIMARY}
           onClick={(e) => this.setState({createFieldIsOpen: true})}
           />
@@ -97,8 +97,8 @@ export class FeasibilityPage extends Component {
     return(
       <div className='page-content'>
         <div className='page-title'>
-          <h1>{strings.FEASIBILITY_PAGE_TITLE}</h1>
-          <span>{strings.FEASIBILITY_PAGE_DESCRIPTION}</span>
+          <h1>{Strings.FEASIBILITY_PAGE_TITLE}</h1>
+          <span>{Strings.FEASIBILITY_PAGE_DESCRIPTION}</span>
         </div>
         {
           fields.map((singleField) => {
@@ -152,7 +152,7 @@ export class FeasibilityPage extends Component {
 
     const { projects, pageContent } = this.props
 
-    if (projects.chosenProject.projectName === strings.NO_PROJECT_SELECTED) {
+    if (projects.chosenProject.projectName === Strings.NO_PROJECT_SELECTED) {
       return this.showEmptyPage()
     }
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import ItemIcon from '../../../../ItemIcon'
-import * as strings from '../../../../../../Data/Strings'
+import * as Strings from '../../../../../../Data/Strings'
 
 export class Element extends Component {
   static propTypes = {
@@ -86,7 +86,7 @@ export class Element extends Component {
       <div className="download-box" onClick={(e) => this.downloadFile(e)}>
         <div>
           <ItemIcon size={itemSize} type='download' />
-          <p>{strings.DOWNLOAD}</p>
+          <p>{Strings.DOWNLOAD}</p>
         </div>
       </div>
     )

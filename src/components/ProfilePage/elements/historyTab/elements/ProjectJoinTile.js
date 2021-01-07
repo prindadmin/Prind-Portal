@@ -5,7 +5,7 @@ import {
   Intent,
 } from '@blueprintjs/core'
 
-import * as strings from '../../../../../Data/Strings'
+import * as Strings from '../../../../../Data/Strings'
 
 const ProjectJoinTile = props => {
 
@@ -13,13 +13,13 @@ const ProjectJoinTile = props => {
 
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
 
-  const displayText = strings.JOINED_PROJECT_TEXT
+  const displayText = Strings.JOINED_PROJECT_TEXT
     .replace("XXX", details.projectName)
     .replace("YYY", new Date(parseInt(details.dateTime) * 1000).toLocaleDateString('en-GB', options))
 
 
   return (
-    <Callout intent={Intent.WARNING} icon='new-person' title={strings.TILE_PROJECT_JOINED}>
+    <Callout intent={Intent.WARNING} icon='new-person' title={Strings.TILE_PROJECT_JOINED}>
       { displayText }
     </Callout>
   )

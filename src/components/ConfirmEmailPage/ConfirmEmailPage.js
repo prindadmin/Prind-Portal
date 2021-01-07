@@ -5,7 +5,7 @@ import ReactGA from 'react-ga';
 import * as Endpoints from '../../Data/Endpoints'
 import EmailConfirming from '../common/ProjectLoading'
 
-import * as strings from '../../Data/Strings'
+import * as Strings from '../../Data/Strings'
 
 class ConfirmEmailPage extends Component {
 
@@ -59,7 +59,7 @@ class ConfirmEmailPage extends Component {
     /*
     this.setState({
       confirmationError: true,
-      errorMessage: strings.ERROR_CONFIRMING_USER,
+      errorMessage: Strings.ERROR_CONFIRMING_USER,
     })
     */
     this.props.history.push(Endpoints.SIGNINPAGE)
@@ -69,7 +69,7 @@ class ConfirmEmailPage extends Component {
   render() {
     return (
       <div id="confirming-email-address">
-        <EmailConfirming text={strings.CONFIRMING_EMAIL_PLEASE_WAIT} />
+        <EmailConfirming text={Strings.CONFIRMING_EMAIL_PLEASE_WAIT} />
       </div>
     )
   }

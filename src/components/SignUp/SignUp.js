@@ -18,7 +18,7 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import * as FormInputs from '../common/formInputs'
 import * as Validators from '../../Validators'
 import * as state from '../../States'
-import * as strings from '../../Data/Strings'
+import * as Strings from '../../Data/Strings'
 
 class SignUp extends Component {
   signUp = async (values) => {
@@ -49,7 +49,7 @@ class SignUp extends Component {
             name="firstName"
             validate={[Validators.required, Validators.maxLength32]}
             component={FormInputs.TextInput}
-            placeholder={strings.PLACEHOLDER_FIRST_NAME}
+            placeholder={Strings.PLACEHOLDER_FIRST_NAME}
           />
         </Label>
         <Label>
@@ -57,7 +57,7 @@ class SignUp extends Component {
             name="lastName"
             validate={[Validators.required, Validators.maxLength32]}
             component={FormInputs.TextInput}
-            placeholder={strings.PLACEHOLDER_LAST_NAME}
+            placeholder={Strings.PLACEHOLDER_LAST_NAME}
             type="text"
           />
         </Label>
@@ -79,7 +79,7 @@ class SignUp extends Component {
               Validators.isValidPassword
             ]}
             component={FormInputs.PasswordInput}
-            placeholder={strings.PLACEHOLDER_PASSWORD}
+            placeholder={Strings.PLACEHOLDER_PASSWORD}
             type="password"
           />
         </Label>
@@ -89,11 +89,11 @@ class SignUp extends Component {
             disabled={this.props.invalid}
             type='submit'
             intent='primary'
-            text={strings.BUTTON_CREATE_ACCOUNT} />
+            text={Strings.BUTTON_CREATE_ACCOUNT} />
         </ButtonGroup>
         <ButtonGroup fill>
           <Button
-            text={strings.BUTTON_CANCEL_SIGN_UP}
+            text={Strings.BUTTON_CANCEL_SIGN_UP}
             intent='primary'
             onClick={() => {this.props.history.push(Endpoints.DEFAULTPAGE)}}
           />
@@ -112,11 +112,11 @@ class SignUp extends Component {
     return (
       <div className='auth-form' style={style}>
         <Icon icon={ico} />
-        <h3>{strings.PLEASE_VERIFY_ACCOUNT}</h3>
+        <h3>{Strings.PLEASE_VERIFY_ACCOUNT}</h3>
         <Button
           intent='primary'
           fill
-          text={strings.BUTTON_BACK_TO_LOGIN_PAGE}
+          text={Strings.BUTTON_BACK_TO_LOGIN_PAGE}
           onClick={() => {this.props.history.push(Endpoints.SIGNINPAGE)}}
         />
       </div>

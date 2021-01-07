@@ -15,7 +15,7 @@ import {
 
 import ItemIcon from '../../ItemIcon'
 
-import * as strings from '../../../../Data/Strings'
+import * as Strings from '../../../../Data/Strings'
 
 export class Element extends Component {
   static propTypes = {
@@ -34,7 +34,7 @@ export class Element extends Component {
     this.state = {
       isExpanded: false,
       showUploadHistory: false,
-      filePrompt: strings.FILE_PROMPT,
+      filePrompt: Strings.FILE_PROMPT,
       fileDetails: {},
       hasChosenFile: false,
       uploadFileRequested: false,
@@ -179,7 +179,7 @@ export class Element extends Component {
                     intent={Intent.PRIMARY}
                     onClick={(e) => this.uploadFile(e)}
                     disabled={!this.state.hasChosenFile}
-                    text={strings.BUTTON_UPLOAD_FILE}
+                    text={Strings.BUTTON_UPLOAD_FILE}
                   />
                 </div>
                 <div className='detail-view-open-button' onClick={(e) => this.onElementClick()}>

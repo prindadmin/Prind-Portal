@@ -8,7 +8,7 @@ import { Select } from "@blueprintjs/select";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 
-import * as strings from '../../Data/Strings'
+import * as Strings from '../../Data/Strings'
 
 const validationErrorStyle = {
   color: '#db3737',
@@ -169,40 +169,40 @@ export class CalendarPicker extends React.Component {
     const shortcuts = [
       {
         date: new Date(today.getFullYear() + 3, today.getMonth(), today.getDate()),
-        label: strings.THREE_YEARS_HENCE
+        label: Strings.THREE_YEARS_HENCE
       },
       {
         date: new Date(today.getFullYear() + 1, today.getMonth(), today.getDate()),
-        label: strings.ONE_YEAR_HENCE
+        label: Strings.ONE_YEAR_HENCE
       },
       {
         date: new Date(today.getFullYear(), today.getMonth() + 6, today.getDate()),
-        label: strings.SIX_MONTHS_HENCE
+        label: Strings.SIX_MONTHS_HENCE
       },
       {
         date: new Date(today.getFullYear(), today.getMonth() + 3, today.getDate()),
-        label: strings.THREE_MONTHS_HENCE
+        label: Strings.THREE_MONTHS_HENCE
       },
       {
         date: new Date(today),
-        label: strings.TODAY
+        label: Strings.TODAY
       },
       {
         date: new Date(today.getFullYear(), today.getMonth() - 3, today.getDate()),
-        label: strings.THREE_MONTHS_AGO
+        label: Strings.THREE_MONTHS_AGO
       },
       {
         date: new Date(today.getFullYear(), today.getMonth() - 6, today.getDate()),
-        label: strings.SIX_MONTHS_AGO
+        label: Strings.SIX_MONTHS_AGO
       },
       {
         date: new Date(today.getFullYear() - 1, today.getMonth(), today.getDate()),
-        label: strings.ONE_YEAR_AGO
+        label: Strings.ONE_YEAR_AGO
       },
       /*
       {
         date: new Date(today.getFullYear() - 3, today.getMonth(), today.getDate()),
-        label: strings.THREE_YEARS_AGO
+        label: Strings.THREE_YEARS_AGO
       }
       */
     ]
