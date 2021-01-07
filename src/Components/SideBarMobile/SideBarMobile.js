@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import ListItem from '../common/page-tile'
-import ItemIcon from '../common/ItemIcon'
+import ListItem from '../Common/page-tile'
+import ItemIcon from '../Common/ItemIcon'
 
 import { Button, MenuItem } from "@blueprintjs/core";
 import { Select } from "@blueprintjs/select";

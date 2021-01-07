@@ -8,7 +8,7 @@ import {
   SignatureRequestTile,
 } from './elements'
 
-import ItemIcon from '../../../common/ItemIcon'
+import ItemIcon from '../../../Common/ItemIcon'
 
 export class Page extends Component {
   static propTypes = {

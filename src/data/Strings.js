@@ -264,6 +264,7 @@ export const ACCREDITATION_ISSUER = "Issued by"
 export const ACCREDITATION_STATUS = "Status"
 export const USER_ACCREDITATIONS_LOADING = "Fetching Accreditations"
 export const USER_ACCREDITATIONS_POPOVER_HEADING = "Professional Accreditations"
+export const ACCREDITATIONS_NO_ACCREDITATIONS_AVAILABLE = "No accreditations available"
 
 export const YOUR_PASSWORD_WAS_SUCCESSFULLY_CHAINGED = "Your password has been successfully changed."
 export const LOADING_DATA_FOR_PAGE = "Loading page data"

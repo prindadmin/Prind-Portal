@@ -13,7 +13,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
 
-import * as FormInputs from '../common/formInputs'
+import * as FormInputs from '../Common/formInputs'
 import * as Validators from '../../Validators'
 import * as Strings from '../../Data/Strings'
 

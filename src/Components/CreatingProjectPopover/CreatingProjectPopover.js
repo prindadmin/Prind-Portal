@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 //import PropTypes from 'prop-types'
 
-import PopOverHandler from '../common/popOverHandler'
+import PopOverHandler from '../Common/popOverHandler'
 
 import {
   Spinner,

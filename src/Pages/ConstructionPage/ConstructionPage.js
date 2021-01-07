@@ -3,12 +3,12 @@ import PropTypes from 'prop-types'
 
 import ReactGA from 'react-ga';
 
-import ProjectLoading from '../../Components/common/ProjectLoading'
+import ProjectLoading from '../../Components/Common/ProjectLoading'
 
-import CreateCustomFieldPopover from '../../Components/common/CreateCustomFieldPopover'
-import { FileUpload, DropDown, CalendarPicker, LongText } from '../../Components/common/ProjectDataFields'
-import NoProjectSelected from '../../Components/common/NoProjectSelected'
-import ErrorFetchingContent from '../../Components/common/ErrorFetchingContent'
+import CreateCustomFieldPopover from '../../Components/Common/CreateCustomFieldPopover'
+import { FileUpload, DropDown, CalendarPicker, LongText } from '../../Components/Common/ProjectDataFields'
+import NoProjectSelected from '../../Components/Common/NoProjectSelected'
+import ErrorFetchingContent from '../../Components/Common/ErrorFetchingContent'
 
 import {
   Button,

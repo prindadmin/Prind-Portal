@@ -16,7 +16,7 @@ import { AUTH_SUCCESS } from './States'
 
 import * as Endpoints from './Data/Endpoints'
 import PrivateRoute from './Components/PrivateRoute';
-import ProjectLoading from './Components/common/ProjectLoading'
+import ProjectLoading from './Components/Common/ProjectLoading'
 
 import Error404 from './Components/Error404'
 import * as Strings from './Data/Strings'

@@ -14,7 +14,7 @@ import {
   Callout,
 } from '@blueprintjs/core'
 
-import * as FormInputs from '../common/formInputs'
+import * as FormInputs from '../Common/formInputs'
 import * as Validators from '../../Validators'
 import * as state from '../../States'
 import * as Strings from '../../Data/Strings'

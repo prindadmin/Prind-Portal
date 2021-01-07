@@ -1,7 +1,7 @@
 import React, { Component, lazy, Suspense } from 'react'
 import PropTypes from 'prop-types'
 
-import ProjectLoading from '../../Components/common/ProjectLoading'
+import ProjectLoading from '../../Components/Common/ProjectLoading'
 
 import * as Strings from '../../Data/Strings'
 
@@ -12,8 +12,8 @@ const SideBarMobile = lazy(() => import('../../Components/SideBarMobile'));
 const LayoutBody  = lazy(() => import('../../Components/LoggedInLayout/Body'));
 const LayoutContentArea1x1  = lazy(() => import('../../Components/LoggedInLayout/ContentArea1x1'));
 const LayoutContentArea1x1Mobile  = lazy(() => import('../../Components/LoggedInLayout/ContentArea1x1Mobile'));
-const Footer = lazy(() => import('../../Components/common/footer'));
-const ProjectFetchError = lazy(() => import('../../Components/common/ProjectFetchError'));
+const Footer = lazy(() => import('../../Components/Common/footer'));
+const ProjectFetchError = lazy(() => import('../../Components/Common/ProjectFetchError'));
 
 /* Stage pages */
 const InceptionPage = lazy(() => import('../InceptionPage'));

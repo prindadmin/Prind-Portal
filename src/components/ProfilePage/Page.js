@@ -5,8 +5,8 @@ import ReactGA from 'react-ga';
 
 import HeaderBar from '../HeaderBar';
 import SideBar from '../SideBar'
-import ProjectLoading from '../common/ProjectLoading'
-import Footer from '../common/footer'
+import ProjectLoading from '../Common/ProjectLoading'
+import Footer from '../Common/footer'
 
 import {
   Tab,

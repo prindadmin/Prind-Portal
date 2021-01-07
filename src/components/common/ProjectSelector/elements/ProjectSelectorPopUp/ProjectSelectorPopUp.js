@@ -9,7 +9,7 @@ import {
   Callout,
 } from '@blueprintjs/core'
 
-import ItemIcon from '../../../../common/ItemIcon'
+import ItemIcon from '../../../../Common/ItemIcon'
 
 import * as Strings from '../../../../../Data/Strings'
 import * as Endpoints from '../../../../../Data/Endpoints'

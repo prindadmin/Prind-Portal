@@ -10,9 +10,9 @@ import {
   Callout,
 } from '@blueprintjs/core'
 
-import NoProjectSelected from '../../Components/common/NoProjectSelected'
+import NoProjectSelected from '../../Components/Common/NoProjectSelected'
 
-import * as FormInputs from '../../Components/common/formInputs'
+import * as FormInputs from '../../Components/Common/formInputs'
 
 import ContactTile from '../../Components/ContactTile'
 

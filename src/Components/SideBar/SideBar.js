@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ListItem from '../common/page-tile'
+import ListItem from '../Common/page-tile'
 
 import pageNames from '../../Data/pageNames'
 

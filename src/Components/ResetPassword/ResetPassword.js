@@ -12,9 +12,9 @@ import {
   Callout
 } from '@blueprintjs/core'
 
-import ItemIcon from '../common/ItemIcon'
+import ItemIcon from '../Common/ItemIcon'
 
-import * as FormInputs from '../common/formInputs'
+import * as FormInputs from '../Common/formInputs'
 import * as Validators from '../../Validators'
 
 // TODO: Implement strings file here

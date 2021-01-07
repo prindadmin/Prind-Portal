@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import ProjectSelector from '../common/ProjectSelector';
-import UserMenu from '../common/UserMenu'
-import NoFoundationsIDBanner from '../common/NoFoundationsIDBanner'
+import ProjectSelector from '../Common/ProjectSelector';
+import UserMenu from '../Common/UserMenu'
+import NoFoundationsIDBanner from '../Common/NoFoundationsIDBanner'
 
 export class HeaderBar extends Component {
   static propTypes = {

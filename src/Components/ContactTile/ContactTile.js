@@ -7,7 +7,7 @@ import {
   Intent,
 } from '@blueprintjs/core'
 
-import PopOverHandler from '../common/popOverHandler'
+import PopOverHandler from '../Common/popOverHandler'
 import UserDetailsPopOver from '../UserDetailsPopOver'
 
 import * as Strings from '../../Data/Strings'

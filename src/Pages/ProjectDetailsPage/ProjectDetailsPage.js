@@ -10,11 +10,11 @@ import {
   Callout,
 } from '@blueprintjs/core'
 
-import NoProjectSelected from '../../Components/common/NoProjectSelected'
+import NoProjectSelected from '../../Components/Common/NoProjectSelected'
 
-import PopOverHandler from '../../Components/common/popOverHandler'
+import PopOverHandler from '../../Components/Common/popOverHandler'
 
-import * as FormInputs from '../../Components/common/formInputs'
+import * as FormInputs from '../../Components/Common/formInputs'
 
 import * as Strings from '../../Data/Strings'
 import * as Validators from '../../Validators'

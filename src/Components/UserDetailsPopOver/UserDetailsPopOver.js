@@ -12,6 +12,7 @@ import * as Strings from '../../Data/Strings'
 
 import UserAccreditations from '../Temp/UserAccreditations'
 import UserAccreditationTile from '../UserAccreditationTile'
+import NoAccreditationsAvailable from '../Common/NoAccreditationsAvailable'
 
 // TODO: Code this
 
@@ -62,24 +63,11 @@ export class UserDetailsPopOver extends Component {
   }
 
   singleAccreditationPresentation = (accreditation, id) => {
-
     return (
       <UserAccreditationTile
         {...accreditation}
         key={id} />
     )
-    /*
-    const factomLink = `${process.env.REACT_APP_FACTOM_EXPLORER_SITE}/entries/${accreditation.proof.entryHash}`
-
-    return (
-      <div key={id} className='accreditation'>
-        <p>{`${Strings.ACCREDITATION_NAME}: ${accreditation.accreditation.accreditationName}`}</p>
-        <p>{`${Strings.ACCREDITATION_ISSUE_DATE}: ${accreditation.accreditation.issuedDate}`}</p>
-        <p>{`${Strings.ACCREDITATION_ISSUER}: ${accreditation.accreditation.issuer}`}</p>
-        <p><a target="_blank" rel="noopener noreferrer" href={factomLink}>{Strings.LINK_TO_PROOF}</a></p>
-      </div>
-    )
-    */
   }
 
   // Get the code to display the user's details
@@ -92,6 +80,10 @@ export class UserDetailsPopOver extends Component {
   getAccreditationsPresentation = () => {
 
     const { accreditations } = this.props.members.currentMember
+
+    if (accreditations.length == 0) {
+      return <NoAccreditationsAvailable />
+    }
 
     const accreditationsPresentation = accreditations.map((accreditation, id)=> (
       this.singleAccreditationPresentation(accreditation, id)
