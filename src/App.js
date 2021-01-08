@@ -44,7 +44,7 @@ const LoggedInContent = lazy(() => import('./Pages/LoggedInContent'));
 // TODO: Add in sign in / sign up page from Foundations portal
 // TODO: Simplify CSS using media queries and global variables
 // TODO: Add lazy loading for sub modules
-// TODO: Work out why the build is so big (54MB)
+// TODO: Work out why the build is so big (AWS?)
 
 // Use existing Cognito resource for auth
 Amplify.configure({

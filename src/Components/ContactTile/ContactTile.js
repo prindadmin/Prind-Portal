@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, lazy } from 'react'
 import PropTypes from 'prop-types'
 
 import {
@@ -9,9 +9,8 @@ import {
 
 import * as Strings from '../../Data/Strings'
 
-// TODO: Make lazy load
-import PopOverHandler from '../Common/popOverHandler'
-import UserDetailsPopOver from '../UserDetailsPopOver'
+const PopOverHandler = lazy(() => import('../Common/popOverHandler'));
+const UserDetailsPopOver = lazy(() => import('../UserDetailsPopOver'));
 
 export class ContactTile extends Component {
   static propTypes = {

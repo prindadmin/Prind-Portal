@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, lazy } from 'react'
 import PropTypes from 'prop-types'
 
 import {
@@ -9,10 +9,9 @@ import {
 import * as Strings from '../../Data/Strings'
 
 import UserAccreditations from '../Temp/UserAccreditations'
-import UserAccreditationTile from '../UserAccreditationTile'
-import NoAccreditationsAvailable from '../Common/NoAccreditationsAvailable'
 
-// TODO: Code this
+const UserAccreditationTile = lazy(() => import('../UserAccreditationTile'));
+const NoAccreditationsAvailable = lazy(() => import('../Common/NoAccreditationsAvailable'));
 
 export class UserDetailsPopOver extends Component {
   static propTypes = {
@@ -34,7 +33,6 @@ export class UserDetailsPopOver extends Component {
 
   componentDidMount() {
     console.log("successfully mounted component")
-
     this.setState({
       fetching: true,
       fetchError: false,
@@ -76,7 +74,6 @@ export class UserDetailsPopOver extends Component {
 
   // Get the code to display the user's accreditations
   getAccreditationsPresentation = () => {
-
     const { accreditations } = this.props.members.currentMember
 
     if (accreditations.length === 0) {
@@ -88,7 +85,6 @@ export class UserDetailsPopOver extends Component {
     ))
 
     return <React.Fragment>{accreditationsPresentation}</React.Fragment>
-
   }
 
 
@@ -96,8 +92,6 @@ export class UserDetailsPopOver extends Component {
   cancelPopup = () => {
     this.props.onCancelPopup()
   }
-
-
 
   detailsLoading = () => {
     return (
@@ -118,9 +112,7 @@ export class UserDetailsPopOver extends Component {
   }
 
   render() {
-
     console.log(this.props.projects.chosenProject)
-    //this.fetchUserDetails()
 
     return (
       <div id='popup-greyer' onClick={(e) => {
@@ -151,7 +143,6 @@ export class UserDetailsPopOver extends Component {
       </div>
     )
   }
-
 }
 
 export default UserDetailsPopOver
