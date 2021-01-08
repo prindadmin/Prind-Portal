@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { lazy, Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 
 import ReactGA from 'react-ga';
@@ -10,11 +10,10 @@ import {
   Callout,
 } from '@blueprintjs/core'
 
-import NoProjectSelected from '../../Components/Common/NoProjectSelected'
-
 import * as FormInputs from '../../Components/Common/formInputs'
 
-import ContactTile from '../../Components/ContactTile'
+const NoProjectSelected = lazy(() => import('../../Components/Common/NoProjectSelected')
+const ContactTile = lazy(() => import('../../Components/ContactTile'));
 
 import * as Strings from '../../Data/Strings'
 import * as Validators from '../../Validators'

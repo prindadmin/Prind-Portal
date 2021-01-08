@@ -33,6 +33,7 @@ const LoggedInContent = lazy(() => import('./Pages/LoggedInContent'));
 
 // TODO: make mobile version pages the right height (1x1 content is way longer than it needs to be)
 // TODO: make the page menu float over other elements and not be 100% width in mobile size
+// TODO: Add error boundaries
 // TODO: Add error handling when a page cannot load
 // TODO: Strip out axios (not needed as a root dependency anyway)
 // TODO: Strip out bootstrap
@@ -42,6 +43,8 @@ const LoggedInContent = lazy(() => import('./Pages/LoggedInContent'));
 // TODO: Add in CSS Grid
 // TODO: Add in sign in / sign up page from Foundations portal
 // TODO: Simplify CSS using media queries and global variables
+// TODO: Add lazy loading for sub modules
+// TODO: Work out why the build is so big (54MB)
 
 // Use existing Cognito resource for auth
 Amplify.configure({
