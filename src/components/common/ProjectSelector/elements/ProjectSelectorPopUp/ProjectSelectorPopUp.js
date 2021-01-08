@@ -14,6 +14,8 @@ import ItemIcon from '../../../../Common/ItemIcon'
 import * as Strings from '../../../../../Data/Strings'
 import * as Endpoints from '../../../../../Data/Endpoints'
 
+
+// TODO: when clicking new project button, give the user a choice of project type (complete or DHSF)
 export class ProjectSelectorPopUp extends Component {
   static propTypes = {
     onCancelPopup: PropTypes.func.isRequired,
