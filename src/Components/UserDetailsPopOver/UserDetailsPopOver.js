@@ -8,8 +8,6 @@ import {
 
 import * as Strings from '../../Data/Strings'
 
-import UserAccreditations from '../Temp/UserAccreditations'
-
 const UserAccreditationTile = lazy(() => import('../UserAccreditationTile'));
 const NoAccreditationsAvailable = lazy(() => import('../Common/NoAccreditationsAvailable'));
 
@@ -39,7 +37,10 @@ export class UserDetailsPopOver extends Component {
       updateError: false,
     })
 
-    this.props.tempGetUserAccreditations(this.props.memberDetails.username, UserAccreditations, this.onGetAccreditationsSuccess, this.onGetAccreditationsFailed)
+    this.props.tempGetUserAccreditations(
+      this.props.memberDetails.username,
+      this.onGetAccreditationsSuccess,
+      this.onGetAccreditationsFailed)
   }
 
   onGetAccreditationsSuccess = (result) => {
@@ -74,6 +75,8 @@ export class UserDetailsPopOver extends Component {
 
   // Get the code to display the user's accreditations
   getAccreditationsPresentation = () => {
+    // TODO: Implement fetchError from state
+
     const { accreditations } = this.props.members.currentMember
 
     if (accreditations.length === 0) {

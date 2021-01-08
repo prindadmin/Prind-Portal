@@ -1,5 +1,7 @@
 import * as action from '../Actions'
 
+import UserAccreditations from '../Components/Temp/UserAccreditations'
+
 const defaultState = {
   fetching: false,
   currentMember: {
@@ -49,8 +51,8 @@ export const getRoles = ( projectID ) => {
   }
 }
 
-
-export const tempGetUserAccreditations = ( username, accreditations, resolve, reject ) => {
+// TODO: Replace with real fetch function
+export const tempGetUserAccreditations = ( username, resolve, reject ) => {
 
   if (resolve !== null) {
     setTimeout(function() {
@@ -63,7 +65,7 @@ export const tempGetUserAccreditations = ( username, accreditations, resolve, re
     payload: {
       currentMember: {
         username,
-        accreditations,
+        accreditations: UserAccreditations,
       },
     }
   }

@@ -14,8 +14,8 @@ const mapStatetoProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    tempGetUserAccreditations: (username, accreditations, resolve, reject) => {
-      dispatch(memberReducer.tempGetUserAccreditations(username, accreditations, resolve, reject))
+    tempGetUserAccreditations: (username, resolve, reject) => {
+      dispatch(memberReducer.tempGetUserAccreditations(username, resolve, reject))
     },
   }
 }
