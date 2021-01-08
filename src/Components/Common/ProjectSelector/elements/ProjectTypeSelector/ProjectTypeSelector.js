@@ -5,6 +5,7 @@ import ItemIcon from '../../../../Common/ItemIcon'
 
 import * as Strings from '../../../../../Data/Strings'
 import * as Endpoints from '../../../../../Data/Endpoints'
+import ProjectTypesList from '../../../../../Data/ProjectTypes'
 
 const ProjectTypeTile = lazy(() => import('../../../../ProjectTypeTile'));
 
@@ -14,17 +15,29 @@ export class ProjectTypeSelector extends Component {
     closePopup: PropTypes.func.isRequired,
   }
 
-  // TODO: CONTINUE HERE
-
   createNewProject = ( projectType ) => {
     const { history } = this.props
-    history.push(`/newproject?projectType=${projectType}`)
+    history.push(`/newproject?project_type=${projectType}`)
     this.props.closePopup()
   }
 
+  getProjectTypesList = () => {
+    const projectTypesPresentation = ProjectTypesList.map((projectType, id)=> (
+      <ProjectTypeTile
+        key={id}
+        onSelect={this.createNewProject}
+        {...projectType} />
+    ))
+
+    return <React.Fragment>{projectTypesPresentation}</React.Fragment>
+  }
+
+
   render() {
     return (
-      <p>hello, project type selector</p>
+      <div className='project-selector-container'>
+        { this.getProjectTypesList() }
+      </div>
     )
   }
 

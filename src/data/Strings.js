@@ -267,6 +267,11 @@ export const USER_ACCREDITATIONS_POPOVER_HEADING = "Professional Accreditations"
 export const ACCREDITATIONS_NO_ACCREDITATIONS_AVAILABLE = "No accreditations available"
 export const ACCREDITATION_VIEW_ACCREDITATIONS = "View accreditations"
 
+export const PROJECT_TYPE_CDM2015PROJECT_NAME = 'CDM2015 Project'
+export const PROJECT_TYPE_CDM2015PROJECT_DESCRIPTION = 'A new project that is in the inception stage.  This type of project will guide you from inception to occupation through the construction process.'
+export const PROJECT_TYPE_DHSFPROJECT_NAME = 'DHSF Project'
+export const PROJECT_TYPE_DHSFPROJECT_DESCRIPTION = 'An existing build that you wish to store the Health & Safety File for.  This type of project will allow you to store all required parts of the Health & Safety File digitally.'
+
 export const YOUR_PASSWORD_WAS_SUCCESSFULLY_CHAINGED = "Your password has been successfully changed."
 export const LOADING_DATA_FOR_PAGE = "Loading page data"
 export const LOADING = "Loading"

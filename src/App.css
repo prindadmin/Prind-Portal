@@ -34,6 +34,15 @@
   --standard-border-radius: 15px;
   --standard-padding: 15px;
   --standard-margin: 15px;
+  --standard-border-radius: 15px;
+  --project-selector-grid-columns: 1fr;
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --project-selector-grid-columns: 1fr 1fr;
+  }
+
 }
 
 
@@ -1951,5 +1960,41 @@ background-color: var(--field-element-grey);
 }
 
 #user-accreditation-tile h3 {
+  margin-bottom: var(--standard-margin);
+}
+
+
+/* ================================= */
+/* === project type tile element === */
+/* ================================= */
+
+.project-selector-container {
+  display: grid;
+  margin: var(--standard-margin) auto;
+  width: 80%;
+  grid-template-columns: var(--project-selector-grid-columns);
+  grid-column-gap: calc(var(--standard-margin) * 2);
+  grid-row-gap: calc(var(--standard-margin) * 2);
+  min-height: 400px;
+  text-align: center;
+}
+
+#project-type-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--prind-palette-color-2);
+  border-radius: var(--standard-border-radius);
+  border: var(--prind-palette-color-4) 2px solid;
+  padding: calc(var(--standard-padding) * 2);
+  min-height: 400px;
+}
+
+#project-type-tile .icon {
+  height: 150px;
+  width: 150px;
+}
+
+#project-type-tile h2 {
   margin-bottom: var(--standard-margin);
 }

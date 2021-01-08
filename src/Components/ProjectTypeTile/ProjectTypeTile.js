@@ -1,37 +1,24 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import ItemIcon from '../Common/ItemIcon'
 import * as Strings from '../../Data/Strings'
 
 export class ProjectTypeTile extends Component {
   static propTypes = {
-      accreditation: PropTypes.shape({
-          issuedDate: PropTypes.string.isRequired,
-          revocationDate: PropTypes.string,
-          revocationReason: PropTypes.string,
-          accreditationName: PropTypes.string.isRequired,
-          subject: PropTypes.string.isRequired,
-          issuer: PropTypes.string.isRequired,
-          status: PropTypes.string.isRequired,
-      }).isRequired,
-      proof: PropTypes.shape({
-          keyName: PropTypes.string.isRequired,
-          signature: PropTypes.string.isRequired,
-          signingAlgorithm: PropTypes.string.isRequired,
-          didVersion: PropTypes.number.isRequired,
-          did: PropTypes.string.isRequired,
-          entryHash: PropTypes.string.isRequired,
-      }).isRequired,
-      accreditationDid: PropTypes.string.isRequired,
+      id: PropTypes.string.isRequired,
+      icon: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      onSelect: PropTypes.func.isRequired,
   }
 
   render() {
     return (
-      <div id='user-accreditation-tile'>
-        <h3>{ Strings.ACCREDITATION_NAME }: {this.props.accreditation.accreditationName}</h3>
-        <p>{ Strings.ACCREDITATION_ISSUER }: {this.props.accreditation.issuer}</p>
-        <p>{ Strings.ACCREDITATION_ISSUE_DATE }: {this.props.accreditation.issuedDate}</p>
-        <p>{ Strings.ACCREDITATION_STATUS }: {this.props.accreditation.status}</p>
+      <div id='project-type-tile' onClick={(e) => this.props.onSelect(this.props.id)}>
+        <div className='icon'><ItemIcon size='8x' type={ this.props.icon } /></div>
+        <h2>{ this.props.name }</h2>
+        <p>{ this.props.description }</p>
       </div>
     )
   }

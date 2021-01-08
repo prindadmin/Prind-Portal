@@ -35,8 +35,28 @@ export class Page extends Component {
   componentDidMount() {
     const { location } = this.props
     // Register pageview with GA
-    ReactGA.pageview(location.pathname + location.search);
+    ReactGA.pageview(location.pathname);
+
+    const searchParams = this.getQueryStringParams(location.search)
+
+    // TODO: CONTINUE HERE
+    // TODO: Test this when a project isn't selected.  Seems to fail to work.
+    console.log(searchParams);
+    console.log(searchParams.project_type);
   }
+
+  getQueryStringParams = query => {
+    return query
+      ? (/^[?#]/.test(query) ? query.slice(1) : query)
+          .split('&')
+          .reduce((params, param) => {
+                  let [key, value] = param.split('=');
+                  params[key] = value ? decodeURIComponent(value.replace(/\+/g, ' ')) : '';
+                  return params;
+              }, {}
+          )
+      : {}
+  };
 
 
   createProject = (values) => {

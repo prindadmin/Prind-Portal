@@ -219,7 +219,7 @@ export class ProjectSelectorPopUp extends Component {
           <div className='project-scroll-box'>
             {
               projects.fetching ? this.projectsLoading() :
-              projectTypeSelectorOpen ? <ProjectTypeSelector /> :
+              projectTypeSelectorOpen ? <ProjectTypeSelector closePopup={this.cancelPopup}/> :
               fetchError || updateError ? this.getFetchError() : this.getProjectListPresentation(allProjects)
             }
           </div>
