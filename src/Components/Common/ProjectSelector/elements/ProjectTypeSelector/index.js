@@ -1,0 +1,3 @@
+import ProjectTypeSelectorContainer from './ProjectTypeSelectorContainer'
+
+export default ProjectTypeSelectorContainer

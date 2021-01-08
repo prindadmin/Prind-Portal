@@ -1733,6 +1733,13 @@ background-color: var(--field-element-grey);
   overflow-y: scroll;
 }
 
+#popup-box .project-list-container {
+  display: grid;
+  margin: auto var(--standard-margin);
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-gap: 1rem;
+}
+
 #popup-box .project-scroll-box button {
   height: auto;
   margin-bottom: 5px;

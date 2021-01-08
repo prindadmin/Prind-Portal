@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 
 import * as projectsReducer from '../../../../../Reducers/projectsReducer'
 
-import Element from './ProjectSelectorPopUp'
+import ProjectSelectorPopUp from './ProjectSelectorPopUp'
 
 const mapStatetoProps = state => {
   return {
@@ -23,4 +23,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default withRouter(connect(mapStatetoProps, mapDispatchToProps)(Element))
+export default withRouter(connect(mapStatetoProps, mapDispatchToProps)(ProjectSelectorPopUp))

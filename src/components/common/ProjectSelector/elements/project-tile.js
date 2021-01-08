@@ -6,7 +6,7 @@ import ItemIcon from '../../ItemIcon'
 import * as Strings from '../../../../Data/Strings'
 
 const ProjectTile = props => {
-  const { project, selected } = props
+  const { project, selected, onSelect } = props
   let className = 'site-select-tile'
   let bodyText = project.projectDescription
 
@@ -24,7 +24,7 @@ const ProjectTile = props => {
   }
 
   return (
-    <Callout className={className}>
+    <Callout className={className} onClick={(e) => onSelect(project, e)}>
       <ItemIcon size='4x' type='building' />
       <div className='details' >
         <h4>{project.projectName}</h4>

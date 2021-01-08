@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, lazy } from 'react'
 import PropTypes from 'prop-types'
 
 import ProjectTile from '../project-tile'
@@ -14,6 +14,7 @@ import ItemIcon from '../../../../Common/ItemIcon'
 import * as Strings from '../../../../../Data/Strings'
 import * as Endpoints from '../../../../../Data/Endpoints'
 
+const ProjectTypeSelector = lazy(() => import('../ProjectTypeSelector'));
 
 // TODO: when clicking new project button, give the user a choice of project type (complete or DHSF)
 export class ProjectSelectorPopUp extends Component {
@@ -28,6 +29,7 @@ export class ProjectSelectorPopUp extends Component {
       fetchError: false,
       updateError: false,
       chosenProjectId: "",
+      projectTypeSelectorOpen: false,
       errorText: "",
     }
 
@@ -55,11 +57,8 @@ export class ProjectSelectorPopUp extends Component {
   }
 
 
-
-  siteChosen(project, event) {
-
+  siteChosen = (project, event) => {
     console.log(project)
-
     const { updateChosenProject } = this.props
 
     this.setState({
@@ -84,7 +83,6 @@ export class ProjectSelectorPopUp extends Component {
   }
 
   resolveProjectUpdate = () => {
-
     const { history } = this.props
 
     // If the current page is the new project page, go to the default page
@@ -107,8 +105,14 @@ export class ProjectSelectorPopUp extends Component {
   }
 
   createNewProject = () => {
+    this.setState({
+      projectTypeSelectorOpen: true,
+    })
+    /*
+    // Load the new page project once type of project is picked
     const { history } = this.props
     history.push('/newproject')
+    */
   }
 
   projectsLoading = () => {
@@ -133,79 +137,93 @@ export class ProjectSelectorPopUp extends Component {
     )
   }
 
+  getSingleProjectPresentation = (project, id) => {
+    return (
+      <ProjectTile
+        key={id}
+        project={project}
+        selected={false}
+        onSelect={this.siteChosen} />
+    )
+  }
+
+  getProjectListPresentation = ( projectList ) => {
+    if (projectList.length === 0) {
+      return this.noProjectsAvailable()
+    }
+    const projectsPresentation = projectList.map((project, id)=> (
+      this.getSingleProjectPresentation(project, id)
+    ))
+    return <div className='project-list-container'>{projectsPresentation}</div>
+  }
+
 
   concatProjects = () => {
-
     const { accessibleProjects } = this.props.projects
     let projectsWhereCreator = accessibleProjects.projectCreator.map(project => project.projectId);
     const roleNotCreator = accessibleProjects.projectRole.filter(item => !projectsWhereCreator.includes(item.projectId))
-
     var allProjects = accessibleProjects.projectCreator
     allProjects = allProjects.concat(roleNotCreator)
-
     return allProjects
+  }
+
+
+  getHeaderContent = () => {
+    return (
+      <div className='projects-pop-up-header'>
+        <h2>Select a project</h2>
+      </div>
+    )
+  }
+
+  getFetchError = () => {
+    // TODO: add refresh button
+    const { errorText } = this.state
+    return (
+      <Callout style={{marginBottom: '15px'}} intent='danger'>
+        <div>{errorText}</div>
+      </Callout>
+    )
+  }
+
+  getFooterContent = () => {
+    // If the new project type selector is open, don't show the footer
+    if (this.state.projectTypeSelectorOpen) {
+      return null
+    }
+
+    return (
+      <div className='projects-pop-up-footer'>
+        <Button
+          active={true}
+          large={true}
+          icon="cube-add"
+          intent='success'
+          onClick={(e) => this.createNewProject(e)}
+          text={Strings.CREATE_NEW_PROJECT}
+        />
+      </div>
+    )
   }
 
   siteSelectorPopupContent = () => {
 
     const { projects } = this.props
-    const { fetchError, updateError, errorText } = this.state
+    const { fetchError, updateError, projectTypeSelectorOpen } = this.state
     const allProjects = this.concatProjects()
 
     return (
-      <div
-        id='popup-greyer'
-        onClick={this.cancelPopup}
-      >
+      <div id='popup-greyer' onClick={this.cancelPopup} >
         <div id='popup-box' onClick={(e) => e.stopPropagation()}>
-          <div className='projects-pop-up-header'>
-            <h2>Select a project</h2>
-          </div>
+          { this.getHeaderContent() }
           <div className='project-scroll-box'>
             {
               projects.fetching ? this.projectsLoading() :
-                <React.Fragment>
-                  {
-                    fetchError || updateError ?
-                      <Callout style={{marginBottom: '15px'}} intent='danger'>
-                        <div>{errorText}</div>
-                      </Callout> : null
-                  }
-                  {
-                    allProjects.length !== 0 ?
-                      <div className='row'>
-                        {
-                          allProjects.map((project, index) => (
-                            <div key={index} className='col-md-12 col-lg-6 col-xl-4 flex-dir-row'>
-                              <Button
-                                className={'full-width'}
-                                minimal={true}
-                                onClick={(e) => this.siteChosen(project, e)}
-                              >
-                                <ProjectTile
-                                  project={project}
-                                  selected={false}
-                                />
-                              </Button>
-                            </div>
-                          ))
-                        }
-                      </div>
-                    : this.noProjectsAvailable()
-                  }
-                </React.Fragment>
-              }
+              projectTypeSelectorOpen ? <ProjectTypeSelector /> :
+              fetchError || updateError ? this.getFetchError() : this.getProjectListPresentation(allProjects)
+            }
           </div>
-          <div className='projects-pop-up-footer'>
-            <Button
-              active={true}
-              large={true}
-              icon="cube-add"
-              intent='success'
-              onClick={(e) => this.createNewProject(e)}
-              text={Strings.CREATE_NEW_PROJECT}
-            />
-          </div>
+          { this.getFooterContent() }
         </div>
       </div>
     )
