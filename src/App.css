@@ -570,6 +570,9 @@ hr {
 }
 
 #project-team-page .member-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-gap: 1rem;
   margin-top: 1em;
   width: 100%;
   margin-left: 0;
@@ -666,6 +669,11 @@ hr {
 
 #contact-tile.member-not-confirmed {
 background-color: var(--field-element-grey);
+}
+
+#contact-tile .view-accreditations {
+  margin-left: auto;
+  text-decoration: underline;
 }
 
 /* ================================== */

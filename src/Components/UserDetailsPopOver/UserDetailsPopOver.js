@@ -2,10 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import {
-  Button,
   Spinner,
   Intent,
-  Callout,
 } from '@blueprintjs/core'
 
 import * as Strings from '../../Data/Strings'
@@ -81,7 +79,7 @@ export class UserDetailsPopOver extends Component {
 
     const { accreditations } = this.props.members.currentMember
 
-    if (accreditations.length == 0) {
+    if (accreditations.length === 0) {
       return <NoAccreditationsAvailable />
     }
 

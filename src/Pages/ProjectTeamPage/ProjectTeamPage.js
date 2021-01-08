@@ -12,13 +12,15 @@ import {
 
 import * as FormInputs from '../../Components/Common/formInputs'
 
-const NoProjectSelected = lazy(() => import('../../Components/Common/NoProjectSelected')
-const ContactTile = lazy(() => import('../../Components/ContactTile'));
-
 import * as Strings from '../../Data/Strings'
 import * as Validators from '../../Validators'
 
+const NoProjectSelected = lazy(() => import('../../Components/Common/NoProjectSelected'));
+const ContactTile = lazy(() => import('../../Components/ContactTile'));
+
 // TODO: Stop this requesting the team if there is no project selected
+// TODO: Add :root variables to change number of tiles in a row dynamically to let them be smaller than 400px
+// TODO: Move "Add team member" form to it's own component and import it
 
 export class ProjectTeamPage extends Component {
   static propTypes = {
@@ -55,7 +57,6 @@ export class ProjectTeamPage extends Component {
   }
 
   componentDidUpdate(prevProps) {
-
     const { projects, getCurrentMembers, getRoles } = this.props
 
     if (projects.chosenProject.projectId !== prevProps.projects.chosenProject.projectId &&
@@ -74,9 +75,7 @@ export class ProjectTeamPage extends Component {
   }
 
   addMemberResolve = () => {
-
     this.props.reset()
-
     this.setState({
       addingMember: false,
     })
@@ -96,7 +95,6 @@ export class ProjectTeamPage extends Component {
   }
 
   addMember = (values) => {
-
     this.setState({
       addingMember: true,
       addMemberError: false,
@@ -138,9 +136,7 @@ export class ProjectTeamPage extends Component {
   }
 
   cancelNewMember = () => {
-
     this.props.reset()
-
     this.setState({
       addingMember: false,
     })
@@ -220,63 +216,79 @@ export class ProjectTeamPage extends Component {
   }
 
   onMemberRemove = () => {
-
     const { getCurrentMembers, projects } = this.props
-
     getCurrentMembers(
       projects.chosenProject.projectId
     )
   }
 
-  memberList = () => {
 
+  getAddMemberButton = () => {
+    return (
+      <ButtonGroup fill>
+        <Button
+          onClick={(e) => this.setState({addingMember: true})}
+          intent='primary'
+          text={Strings.BUTTON_ADD_MEMBER_TO_PROJECT}
+        />
+      </ButtonGroup>
+    )
+  }
+
+  mapMembers = ( memberList, confirmed ) => {
+    if (memberList === undefined) {
+      return (
+        <React.Fragment />
+      )
+    }
+
+    // Build a list of contact tiles
+    const listToReturn = memberList.map((memberDetails, index) => {
+      return (
+        <ContactTile
+          key={index}
+          memberDetails={memberDetails}
+          onMemberRemove={this.onMemberRemove}
+          confirmed={confirmed}
+        />
+      )
+    })
+
+    // Once the list is built, return it
+    return (
+      <React.Fragment>
+        { listToReturn }
+      </React.Fragment>
+    )
+
+  }
+
+
+  memberList = () => {
     const { projects } = this.props
+
+    // If the member list is not available
+    if (projects.memberList === undefined) {
+      return (
+        <div className="member-list-container row">
+          { this.getAddMemberButton() }
+        </div>
+      )
+    }
 
     return (
       <React.Fragment>
-        <div className="member-list-container row">
-          <ButtonGroup fill>
-            <Button
-              onClick={(e) => this.setState({addingMember: true})}
-              intent='primary'
-              text={Strings.BUTTON_ADD_MEMBER_TO_PROJECT}
-            />
-          </ButtonGroup>
+        <div className="member-list-container">
+          { this.getAddMemberButton() }
         </div>
 
-        <div className="member-list row">
+        <div className="member-list">
           {
-            projects.memberList !== undefined ?
-              projects.memberList.confirmed !== undefined ?
-                projects.memberList.confirmed.map((memberDetails, index) => {
-                  return (
-                    <div key={index} className="col-md-12 col-lg-12 col-xl-6 single-contact-tile-container">
-                      <ContactTile
-                        memberDetails={memberDetails}
-                        onMemberRemove={this.onMemberRemove}
-                        confirmed={true}
-                      />
-                    </div>
-                  )
-                }) : null
-              : null
-            }
-            {
-              projects.memberList !== undefined ?
-                projects.memberList.invited !== undefined ?
-                  projects.memberList.invited.map((memberDetails, index) => {
-                    return (
-                      <div key={index} className="col-md-12 col-lg-12 col-xl-6 single-contact-tile-container">
-                        <ContactTile
-                          memberDetails={memberDetails}
-                          onMemberRemove={this.onMemberRemove}
-                          confirmed={false}
-                        />
-                      </div>
-                    )
-                  }) : null
-                : null
-            }
+            this.mapMembers(projects.memberList.confirmed, true)
+          }
+          {
+            this.mapMembers(projects.memberList.invited, false)
+          }
         </div>
       </React.Fragment>
     )

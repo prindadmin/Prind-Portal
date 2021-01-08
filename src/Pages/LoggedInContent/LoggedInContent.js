@@ -180,7 +180,7 @@ export class LoggedInContent extends Component {
 
     const { pathname } = this.props.location
     const { error } = this.props.projects
-    const { width, height } = this.state
+    const { width } = this.state
 
     const content = pathname.startsWith('/team') ? <ProjectTeamPage /> :
                     pathname.startsWith('/project') ? <ProjectDetailsPage /> :

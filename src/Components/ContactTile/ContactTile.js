@@ -7,12 +7,11 @@ import {
   Intent,
 } from '@blueprintjs/core'
 
-import PopOverHandler from '../Common/popOverHandler'
-import UserDetailsPopOver from '../UserDetailsPopOver'
-
 import * as Strings from '../../Data/Strings'
 
-// TODO: Remove memory leak when loading images and navigating away from the page
+// TODO: Make lazy load
+import PopOverHandler from '../Common/popOverHandler'
+import UserDetailsPopOver from '../UserDetailsPopOver'
 
 export class ContactTile extends Component {
   static propTypes = {
@@ -32,19 +31,35 @@ export class ContactTile extends Component {
       removeMemberError: false,
       showUserDetailsPopover: false,
       errorText: "",
-      avatarLink: defaultAvatar
+      avatarLink: defaultAvatar,
+      loadingImage: undefined,
     }
-
-    this.getImage(props)
   }
 
-  getImage = (props) => {
+  componentDidMount() {
+    this.getImage()
+  }
 
-    const { memberDetails } = props
+  componentWillUnmount() {
+    // If the image is loaded, unload it (stop memory leak when image is still loading)
+    if (this.state.loadingImage !== undefined) {
+      const image = this.state.loadingImage
+      image.src = ''
+    }
+  }
+
+  getImage = () => {
+
+    const { memberDetails } = this.props
     const that = this
     const avatarLink = `${process.env.REACT_APP_AWS_S3_USER_AVATAR_ENDPOINT}/${memberDetails.username}`
 
     var image = new Image();
+
+    // Save the image object so it can be cancelled if component unloads during fetch
+    this.setState({
+      loadingImage: image
+    })
 
     image.onload = function() {
         // image exists and is loaded
@@ -209,6 +224,9 @@ export class ContactTile extends Component {
               null
             }
 
+          </div>
+          <div className='view-accreditations'>
+            { Strings.ACCREDITATION_VIEW_ACCREDITATIONS }
           </div>
         </div>
     )
