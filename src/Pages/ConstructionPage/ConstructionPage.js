@@ -6,9 +6,9 @@ import ReactGA from 'react-ga';
 import ProjectLoading from '../../Components/Common/ProjectLoading'
 
 import CreateCustomFieldPopover from '../../Components/Common/CreateCustomFieldPopover'
-import { FileUpload, DropDown, CalendarPicker, LongText } from '../../Components/Common/ProjectDataFields'
 import NoProjectSelected from '../../Components/Common/NoProjectSelected'
 import ErrorFetchingContent from '../../Components/Common/ErrorFetchingContent'
+import PageFieldMapper from '../../Components/PageFieldMapper'
 
 import {
   Button,
@@ -101,48 +101,11 @@ export class ConstructionPage extends Component {
           <span>{Strings.CONSTRUCTION_PAGE_DESCRIPTION}</span>
         </div>
         {
-          fields.map((singleField) => {
-
-            if (singleField.type === 'file') {
-              return <FileUpload
-                        key={singleField.id}
-                        elementContent={singleField}
-                        pageName={pageName}
-                        />
-            }
-
-            if (singleField.type === 'dropdown') {
-              return <DropDown
-                        key={singleField.id}
-                        form={"field-" + singleField.id}
-                        elementContent={singleField}
-                        initialValues={singleField.fieldDetails}
-                        pageName={pageName}
-                        />
-            }
-
-            if (singleField.type === 'calendar') {
-              return <CalendarPicker
-                        key={singleField.id}
-                        form={"field-" + singleField.id}
-                        elementContent={singleField}
-                        initialValues={singleField.fieldDetails}
-                        pageName={pageName}
-                        />
-            }
-
-            if (singleField.type === 'longText') {
-              return <LongText
-                        key={singleField.id}
-                        form={"field-" + singleField.id}
-                        elementContent={singleField}
-                        initialValues={singleField.fieldDetails}
-                        pageName={pageName}
-                        />
-            }
-
-            return null
-
+          fields.map((singleField, index) => {
+            return <PageFieldMapper
+              key={index}
+              pageName={pageName}
+              singleField={singleField} />
           })
         }
         {this.getCreateFieldButton()}

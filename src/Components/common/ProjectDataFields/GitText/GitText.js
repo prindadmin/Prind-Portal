@@ -1,16 +1,8 @@
 import React, { Component } from 'react'
-import { Field, reduxForm } from 'redux-form'
+import { reduxForm } from 'redux-form'
 import PropTypes from 'prop-types'
 
 import { Editor } from '@tinymce/tinymce-react';
-
-import {
-  Button,
-  Intent,
-  Callout,
-} from '@blueprintjs/core'
-
-import * as FormInputs from '../../formInputs'
 
 import * as Strings from '../../../../Data/Strings'
 
@@ -39,10 +31,14 @@ export class GitText extends Component {
       updateInProgress: false,
       updateError: false,
       errorText: "",
+      content: '',
     }
   }
 
   componentDidMount() {
+    this.setState({
+      content: this.props.elementContent.fieldDetails.textValue
+    })
   }
 
   componentDidUpdate(prevProps) {
@@ -52,17 +48,21 @@ export class GitText extends Component {
   // ---------------------- DEFAULT FUNCTIONALITY ABOVE THIS LINE -----------------------
 
   handleEditorChange = (e) => {
-    console.log(
-      'Content was updated:',
-      e.target.getContent()
-    );
+    console.log('Content was updated');
+    this.setState({
+      content: e.target.getContent()
+    })
   }
 
 
   // When the user wants to save the changes, update the server
-  saveChanges = (fieldDetails) => {
+  saveChanges = (e) => {
 
     const { pageName, projects, elementContent } = this.props
+
+    const fieldDetails = {
+      textValue: this.state.content
+    }
 
     this.setState({
       updateError: false,
@@ -97,12 +97,11 @@ export class GitText extends Component {
 
   render() {
 
-    const { handleSubmit } = this.props
     const { title, description, fieldDetails, editable } = this.props.elementContent
 
     return (
-      <div id='long-text-element'>
-        <div className='long-text-element-container'>
+      <div id='git-text-element'>
+        <div className='git-text-element-container'>
           <div className='element-title'>
             {title}
           </div>
@@ -113,8 +112,9 @@ export class GitText extends Component {
 
           <div className='container'>
             <Editor
-              initialValue="hello text"
+              initialValue={fieldDetails.textValue}
               apikey={process.env.REACT_APP_TINY_API_KEY}
+              disabled={!editable}
               init={{
                 height: 500,
                 menubar: false,
@@ -133,14 +133,16 @@ export class GitText extends Component {
             />
           </div>
 
+          <input
+            type="submit"
+            value={ Strings.BUTTON_SAVE_CHANGES }
+            className="save-button"
+            onClick={(e) => this.saveChanges(e)} />
+
         </div>
       </div>
     )
   }
 }
-
-Element = reduxForm({
-  enableReinitialize: true
-})(Element)
 
 export default GitText

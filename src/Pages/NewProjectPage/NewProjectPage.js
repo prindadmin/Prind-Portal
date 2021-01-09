@@ -28,7 +28,8 @@ export class Page extends Component {
     this.state = {
       showCreatingPopover: false,
       createError: false,
-      errorText: "",
+      errorText: '',
+      projectType: '',
     }
   }
 
@@ -43,6 +44,11 @@ export class Page extends Component {
     // TODO: Test this when a project isn't selected.  Seems to fail to work.
     console.log(searchParams);
     console.log(searchParams.project_type);
+
+    this.setState({
+      projectType: searchParams.project_type
+    })
+
   }
 
   getQueryStringParams = query => {
@@ -68,8 +74,13 @@ export class Page extends Component {
 
     const { createProject } = this.props
 
+    const projectValues = {
+      ...values,
+      projectType: this.state.projectType,
+    }
+
     createProject(
-      values,
+      projectValues,
       this.createResolve,
       this.createReject,
     )

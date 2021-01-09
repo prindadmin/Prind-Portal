@@ -32,6 +32,10 @@ const fieldTypes = [
   {
     value: "longText",
     label: "Text Box"
+  },
+  {
+    value: "gitText",
+    label: "Change Tracking Text Box"
   }
 ]
 

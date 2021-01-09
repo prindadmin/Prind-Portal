@@ -152,7 +152,7 @@ hr {
 .close-button {
   background-color: grey;
   color: white;
-  border-radius: 15px;
+  border-radius: var(--standard-border-radius);
   border: 2px black solid;
   padding: 10px 27px;
   height: 3em;
@@ -692,12 +692,13 @@ background-color: var(--field-element-grey);
 #file-upload-element,
 #drop-down-element,
 #calendar-picker-element,
-#long-text-element {
+#long-text-element,
+#git-text-element {
   width: 100%;
   max-width: 1140px;
   margin-bottom: 40px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  border-radius: 10px;
+  border-radius: var(--standard-border-radius);
 }
 
 /* The animation code */
@@ -726,12 +727,13 @@ background-color: var(--field-element-grey);
 #file-upload-element .file-upload-element-container,
 #drop-down-element .drop-down-element-container,
 #calendar-picker-element .calendar-picker-element-container,
-#long-text-element .long-text-element-container {
+#long-text-element .long-text-element-container,
+#git-text-element .git-text-element-container {
   margin: auto;
   width: 100%;
   background-color: var(--field-element-red);
-  border-radius: 10px;
-  padding: 10px;
+  border-radius: var(--standard-border-radius);
+  padding: var(--standard-padding);
   position: relative;
   text-align: left;
 }
@@ -740,6 +742,7 @@ background-color: var(--field-element-grey);
 #drop-down-element .element-title,
 #calendar-picker-element .element-title,
 #long-text-element .element-title,
+#git-text-element .element-title,
 #popup-box .element-title,
 #requests-tab-container .element-title {
   font-size: 20px;
@@ -751,6 +754,7 @@ background-color: var(--field-element-grey);
 #drop-down-element .element-description,
 #calendar-picker-element .element-description,
 #long-text-element .element-description,
+#git-text-element .element-description,
 #popup-box .element-description {
   width: 100%;
   max-width: 600px;
@@ -760,21 +764,24 @@ background-color: var(--field-element-grey);
 #file-upload-element .row,
 #drop-down-element .row,
 #calendar-picker-element .row,
-#long-text-element .row {
+#long-text-element .row,
+#git-text-element .row {
   margin: 0;
 }
 
 #file-upload-element .container,
 #drop-down-element .container,
 #calendar-picker-element .container,
-#long-text-element .container {
+#long-text-element .container,
+#git-text-element .container {
   padding: 0;
 }
 
 #file-upload-element .row,
 #drop-down-element .row,
 #calendar-picker-element .row,
-#long-text-element .row {
+#long-text-element .row,
+#git-text-element .row {
   width: 100%;
   align-items: center;
   display:flex;
@@ -847,7 +854,7 @@ background-color: var(--field-element-grey);
 #file-upload-element .upload-history-container {
   background-color: #EEE;
   width: 100%;
-  border-radius: 5px;
+  border-radius: var(--standard-border-radius);
   padding: 10px;
   position: relative;
   text-align: left;
@@ -894,7 +901,7 @@ background-color: var(--field-element-grey);
 }
 
 #file-upload-element .upload-history-container .row.signatures {
-  border-radius: 5px;
+  border-radius: var(--standard-border-radius);
 }
 
 #file-upload-element .upload-history-container .col {
@@ -1005,7 +1012,7 @@ background-color: var(--field-element-grey);
 #pick-signer-popover .member-tile {
   margin-bottom: 0.5em;
   border: 1px solid black;
-  border-radius: 10px;
+  border-radius: var(--standard-border-radius);
   padding: 0.5em 1.0em;
   position: relative;
 }
@@ -1169,7 +1176,7 @@ background-color: var(--field-element-grey);
   height: 75px;
   margin-left: auto;
   border: 1px solid grey;
-  border-radius: 10px;
+  border-radius: var(--standard-border-radius);
   bottom: 2em;
   position: relative;
   font-size: 12px;
@@ -1231,7 +1238,7 @@ background-color: var(--field-element-grey);
 
 #calendar-picker-element .bp3-datepicker {
   padding: 0.5em 1em;
-  border-radius: 10px;
+  border-radius: var(--standard-border-radius);
   margin-bottom: 1em;
 }
 
@@ -1257,6 +1264,28 @@ background-color: var(--field-element-grey);
 #long-text-element textarea {
   width: 100%;
   min-height: 8em;
+}
+
+/* ================================== */
+/* ======= git text element ======== */
+/* ================================== */
+
+
+#git-text-element .git-text-element-container {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--field-element-grey);
+}
+
+#git-text-element .save-button {
+  background-color: var(--prind-palette-color-4);
+  color: white;
+  margin: var(--standard-margin) 0 0 auto;
+  border-radius: var(--standard-border-radius);
+  border: 2px black solid;
+  padding: 10px 27px;
+  height: 3em;
+  font-size: 16px;
 }
 
 
@@ -1695,7 +1724,7 @@ background-color: var(--field-element-grey);
   top: 15%;
   bottom: 15%;
   margin: auto;
-  border-radius: 20px;
+  border-radius: var(--standard-border-radius);
   background: white;
 }
 
@@ -1708,7 +1737,7 @@ background-color: var(--field-element-grey);
   width: 100%;
   height: 80px;
   background-color: #ccc;
-  border-radius: 20px 20px 0 0;
+  border-radius: var(--standard-border-radius) var(--standard-border-radius) 0 0;
   align-items: center;
   justify-content: center;
 }
@@ -1794,7 +1823,7 @@ background-color: var(--field-element-grey);
   bottom: 0;
   left: 0;
   background-color: #ccc;
-  border-radius: 0 0 20px 20px;
+  border-radius: 0 0 var(--standard-border-radius) var(--standard-border-radius);
 }
 
 #popup-box .projects-pop-up-footer Button {

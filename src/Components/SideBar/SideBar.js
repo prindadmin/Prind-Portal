@@ -1,26 +1,30 @@
 import React, { Component } from 'react'
 import ListItem from '../Common/page-tile'
 
-import pageNames from '../../Data/pageNames'
+import PAGENAMES from '../../Data/pageNames'
 
 export class SideBar extends Component {
 
   render() {
 
-    const { projectId } = this.props.projects.chosenProject
+    const { chosenProject } = this.props.projects
+    const { projectId, projectType } = chosenProject
 
     const pathForProject = projectId !== "" ? `/${projectId}` : ""
+
+
+    const sidebarEntries = PAGENAMES[projectType] === undefined ? PAGENAMES["CDM2015Project"] : PAGENAMES[projectType]
 
     return (
         <div className='chooser-section col-xl-2 col-lg-3 col-md-3 col-sm-3'>
           <div className='sidebar'>
             {
-              Object.keys(pageNames).map(key => (
+              Object.keys(sidebarEntries).map(key => (
                 <ListItem
-                  key={pageNames[key].name + "item"}
-                  pageName={pageNames[key].name}
-                  linkTo={`${pageNames[key].linkTo}${pathForProject}`}
-                  selected={this.props.location.pathname.startsWith(pageNames[key].linkTo)}
+                  key={sidebarEntries[key].name + "item"}
+                  pageName={sidebarEntries[key].name}
+                  linkTo={`${sidebarEntries[key].linkTo}${pathForProject}`}
+                  selected={this.props.location.pathname.startsWith(sidebarEntries[key].linkTo)}
                   history={this.props.history}
                 />
               ))

@@ -124,6 +124,11 @@ function * updateChosenProject (action) {
 
     const result = yield call(Dispatchers.fetchProjectDetailsDispatcher, project.projectId)
 
+    // TODO: Remove this awful fiddle to test different project types once Simon has coded the BE
+    if (result.body.projectId === "TestProject32020-03-09") {
+      result.body.projectType = "DHSFProject"
+    }
+
     // Post-fetch update to store
     yield put({
       type: Actions.PROJECT_SET_STATE,

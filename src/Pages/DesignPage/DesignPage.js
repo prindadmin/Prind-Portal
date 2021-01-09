@@ -6,9 +6,9 @@ import ReactGA from 'react-ga';
 import ProjectLoading from '../../Components/Common/ProjectLoading'
 
 import CreateCustomFieldPopover from '../../Components/Common/CreateCustomFieldPopover'
-import { FileUpload, DropDown, CalendarPicker, LongText, GitText } from '../../Components/Common/ProjectDataFields'
 import NoProjectSelected from '../../Components/Common/NoProjectSelected'
 import ErrorFetchingContent from '../../Components/Common/ErrorFetchingContent'
+import PageFieldMapper from '../../Components/PageFieldMapper'
 
 import {
   Button,
@@ -93,17 +93,6 @@ export class DesignPage extends Component {
 
     const { fields }  = this.props.pageContent.design
 
-    // TODO: Remove this test stuff
-    const fieldTest = {
-      id: "field-test",
-      title: "test field",
-      description: "This field is being tested",
-      editable: false,
-      fieldDetails: {
-        textValue: "This is the default test text",
-      },
-    }
-
     return(
       <div className='page-content'>
         <div className='page-title'>
@@ -111,56 +100,13 @@ export class DesignPage extends Component {
           <span>{Strings.DESIGN_PAGE_DESCRIPTION}</span>
         </div>
         {
-          fields.map((singleField) => {
-
-            if (singleField.type === 'file') {
-              return <FileUpload
-                        key={singleField.id}
-                        elementContent={singleField}
-                        pageName={pageName}
-                        />
-            }
-
-            if (singleField.type === 'dropdown') {
-              return <DropDown
-                        key={singleField.id}
-                        form={"field-" + singleField.id}
-                        elementContent={singleField}
-                        initialValues={singleField.fieldDetails}
-                        pageName={pageName}
-                        />
-            }
-
-            if (singleField.type === 'calendar') {
-              return <CalendarPicker
-                        key={singleField.id}
-                        elementContent={singleField}
-                        pageName={pageName}
-                        />
-            }
-
-            if (singleField.type === 'longText') {
-              return <LongText
-                        key={singleField.id}
-                        form={"field-" + singleField.id}
-                        elementContent={singleField}
-                        initialValues={singleField.fieldDetails}
-                        pageName={pageName}
-                        />
-            }
-
-            return null
-
+          fields.map((singleField, index) => {
+            return <PageFieldMapper
+              key={index}
+              pageName={pageName}
+              singleField={singleField} />
           })
         }
-        { /*
-          <GitText
-            key="test"
-            form="field-test"
-            elementContent={fieldTest}
-            pageName={pageName}
-            />
-        */}
 
 
         {this.getCreateFieldButton()}
