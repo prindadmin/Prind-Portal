@@ -45,6 +45,7 @@ const LoggedInContent = lazy(() => import('./Pages/LoggedInContent'));
 // TODO: Simplify CSS using media queries and global variables
 // TODO: Add lazy loading for sub modules
 // TODO: Work out why the build is so big (AWS?)
+// TODO: Remove the Long Text box once the Git Text box is complete
 
 // Use existing Cognito resource for auth
 Amplify.configure({
