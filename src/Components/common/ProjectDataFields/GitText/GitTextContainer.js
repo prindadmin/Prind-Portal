@@ -8,6 +8,7 @@ import GitText from './GitText'
 const mapStatetoProps = state => {
   return {
     auth: state.auth,
+    user: state.user,
     projects: state.projects,
   }
 }
