@@ -59,8 +59,19 @@ export class SideBar extends Component {
 
   render() {
 
-    const { projectId } = this.props.projects.chosenProject
+    const { location, projects, history } = this.props
+    const { projectId, projectType } = projects.chosenProject
     const pathForProject = projectId !== "" ? `/${projectId}` : ""
+
+    const sidebarEntries = PAGENAMES[projectType] === undefined ? PAGENAMES["CDM2015Project"] : PAGENAMES[projectType]
+
+    // If the current page isn't found in the current type (such as when changing projects)
+    // Go to the first entry in the sidebarEntries
+    if (sidebarEntries[location.pathname.split("/")[1]] === undefined ) {
+      const pageToLoad = sidebarEntries[Object.keys(sidebarEntries)[0]].linkTo
+      console.log(pageToLoad)
+      history.push(`${pageToLoad}`)
+    }
 
     return (
         <div className='chooser-section col-12'>

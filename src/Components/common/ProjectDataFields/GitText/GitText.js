@@ -147,14 +147,13 @@ export class GitText extends Component {
   onFileUploadComplete = (response) => {
     const { projectID, pageName, fieldID } = this.props
 
-    // TODO: CONTINUE HERE
     // Build parameters
     var uploadDetails = {
-      userFileName: fileDetails.files[0].name
+      userFileName: `GitText-${projectID}-${pageName}-${fieldID}`
     }
 
     // Send to the reducer
-    uploadFile(
+    this.props.uploadFile (
       projectID,
       pageName,
       fieldID,

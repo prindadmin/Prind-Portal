@@ -11,15 +11,14 @@ import {
 } from '@blueprintjs/core'
 
 import NoProjectSelected from '../../Components/Common/NoProjectSelected'
-
 import PopOverHandler from '../../Components/Common/popOverHandler'
-
 import * as FormInputs from '../../Components/Common/formInputs'
 
 import * as Strings from '../../Data/Strings'
 import * as Validators from '../../Validators'
 import * as Endpoints from '../../Data/Endpoints'
 
+// TODO: Change CSS to fix misaligned buttons with rest of the form
 // TODO: Work out why this forms button is over the footer in mobile mode (might also be in desktop mode)
 
 export class ProjectDetailsPage extends Component {

@@ -1,51 +1,59 @@
 const PAGENAMES = {
   CDM2015Project: {
-    Project: {
+    project: {
       name: "Project Details",
       linkTo: "/project"
     },
-    Team: {
+    team: {
       name: "Project Team",
       linkTo: "/team"
     },
-    Inception: {
+    inception: {
       name: "Inception",
       linkTo: "/inception"
     },
-    Feasibility: {
+    feasibility: {
       name: "Feasibility",
       linkTo: "/feasibility"
     },
-    Design: {
+    design: {
       name: "Design",
       linkTo: "/design"
     },
-    Tender: {
+    tender: {
       name: "Tender",
       linkTo: "/tender"
     },
-    Construction: {
+    construction: {
       name: "Construction",
       linkTo: "/construction"
     },
-    Handover: {
+    handover: {
       name: "Handover",
       linkTo: "/handover"
     },
-    Occupation: {
+    occupation: {
       name: "Occupation",
       linkTo: "/occupation"
     },
-    Refurbishment: {
+    refurbishment: {
       name: "Refurbishment",
       linkTo: "/refurbishment"
     }
   },
   DHSFProject: {
-    Occupation: {
+    project: {
+      name: "Project Details",
+      linkTo: "/project"
+    },
+    team: {
+      name: "Project Team",
+      linkTo: "/team"
+    },
+    occupation: {
       name: "Occupation",
       linkTo: "/occupation"
-    }
+    },
   }
 }
 

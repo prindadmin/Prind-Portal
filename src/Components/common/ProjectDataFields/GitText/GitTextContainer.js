@@ -15,8 +15,8 @@ const mapStatetoProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateField: (identityToken, projectID, pageName, fieldID, fieldDetails, resolve, reject) => {
-      dispatch(projectsReducer.updateField(identityToken, projectID, pageName, fieldID, fieldDetails, resolve, reject))
+    uploadFile: (projectID, pageName, fieldID, fileDetails) => {
+      dispatch(projectsReducer.uploadFile(projectID, pageName, fieldID, fileDetails))
     }
   }
 }
