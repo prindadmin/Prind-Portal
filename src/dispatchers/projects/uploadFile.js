@@ -9,6 +9,8 @@ export default async function(projectId, pageName, fieldId, fileDetails) {
   // Build path for request
   const path = `/project/${projectId}/${pageName}/${fieldId}`
 
+  console.log(`Uploading file to S3 @: ${path}`)
+
   // Get the current session and the identity jwtToken
   const identityToken = await Auth.currentSession()
     .then(credentials => {

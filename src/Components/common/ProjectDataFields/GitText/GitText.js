@@ -34,15 +34,22 @@ export class GitText extends Component {
       uploadFileInProgress: false,
       uploadFileProgress: 0,
       uploadFileError: false,
+      downloadFileInProgress: false,
+      downloadFileProgress: 0,
+      downloadFileError: false,
       errorText: "",
       content: '',
     }
   }
 
   componentDidMount() {
+
+    this.downloadFromS3()
+    /*
     this.setState({
       content: this.props.elementContent.fieldDetails.textValue
     })
+    */
   }
 
   componentDidUpdate(prevProps) {
@@ -61,6 +68,9 @@ export class GitText extends Component {
 
   // When the user wants to save the changes, update the server
   saveChanges = (e) => {
+    /*
+    // This code was used when this was the equivalent of a LongText.  It is now the equivalent
+    // of a file uploader
     const { pageName, projects, elementContent } = this.props
 
     const fieldDetails = {
@@ -72,7 +82,7 @@ export class GitText extends Component {
       updateServerInProgress: true,
     })
 
-    this.props.updateField(
+    this.props.updateField (
       projects.chosenProject.projectId,
       pageName,
       elementContent.id,
@@ -80,20 +90,26 @@ export class GitText extends Component {
       this.saveResolve,
       this.saveReject,
     )
+    */
+
+    this.uploadToS3()
   }
 
-  uploadToS3 = () => {
-    const { user, projectID, pageName, fieldID } = this.props
-
+  getValidS3Token = () => {
+    // TODO: Make this refresh the token if required
+    const { user } = this.props
     if (user.projectS3Token === undefined) {
       this.setState({
         uploadFileError: true
       })
-      return;
+      return undefined;
     }
+    return user.projectS3Token
+  }
 
+  configureAWSAuthorisation = (token) => {
     // Update credentials to allow access to S3
-    const { AccessKeyId, SecretAccessKey, SessionToken } = user.projectS3Token
+    const { AccessKeyId, SecretAccessKey, SessionToken } = token
     AWS.config.update({
       credentials: {
         accessKeyId: AccessKeyId,
@@ -101,13 +117,24 @@ export class GitText extends Component {
         sessionToken: SessionToken
       }
     });
+    return;
+  }
+
+  uploadToS3 = () => {
+    const { projects, pageName, fieldID, elementContent } = this.props
+
+    const token = this.getValidS3Token()
+    if (token === undefined) {
+      return;
+    }
+    this.configureAWSAuthorisation(token)
 
     // Create an S3 service provider
     const s3 = new AWS.S3()
 
     // Create the parameters
     const bucketName = process.env.REACT_APP_AWS_S3_USER_UPLOAD_BUCKET_NAME
-    const key = `${projectID}/${pageName}/${fieldID}`
+    const key = `${projects.chosenProject.projectId}/${pageName}/${elementContent.id}`
 
     // Create the parameters to upload the file with
     var uploadParams = {
@@ -125,6 +152,7 @@ export class GitText extends Component {
     var request = s3.putObject(uploadParams);
 
     request.on('httpUploadProgress', function (progress) {
+        console.log(progress)
         that.setState({
           uploadFileProgress: progress.loaded
         })
@@ -135,6 +163,7 @@ export class GitText extends Component {
       })
 
       .on('error', function(error, response) {
+        console.log("ERROR uploading file to S3")
         console.error(error)
         that.setState({
           uploadFileError: true
@@ -145,22 +174,78 @@ export class GitText extends Component {
   }
 
   onFileUploadComplete = (response) => {
-    const { projectID, pageName, fieldID } = this.props
+    const { projects, pageName, elementContent } = this.props
 
     // Build parameters
     var uploadDetails = {
-      userFileName: `GitText-${projectID}-${pageName}-${fieldID}`
+      userFileName: `GitText-${projects.chosenProject.projectId}-${pageName}-${elementContent.id}`
     }
 
     // Send to the reducer
     this.props.uploadFile (
-      projectID,
+      projects.chosenProject.projectId,
       pageName,
-      fieldID,
+      elementContent.id,
       uploadDetails,
     )
   }
 
+  downloadFromS3 = () => {
+    const { projects, pageName, fieldID, elementContent } = this.props
+
+    const token = this.getValidS3Token()
+    if (token === undefined) {
+      return;
+    }
+    this.configureAWSAuthorisation(token)
+
+    // Create an S3 service provider
+    const s3 = new AWS.S3()
+
+    // Create the download values
+    const bucketName = process.env.REACT_APP_AWS_S3_USER_UPLOAD_BUCKET_NAME
+    const key = `${projects.chosenProject.projectId}/${pageName}/${elementContent.id}`
+
+    // Create the download parameters
+    var downloadParams = {
+      Bucket: bucketName,
+      Key: key
+    };
+
+    // Create a request
+    var request = s3.getObject(downloadParams);
+
+    const that = this;
+
+    request.on('httpDownloadProgress', function (progress) {
+        console.log(progress)
+        that.setState({
+          downloadFileProgress: progress.loaded
+        })
+      })
+      .on('success', function(response) {
+        that.onFileDownloadComplete(response)
+      })
+      .on('error', function(error, response) {
+        console.log("ERROR downloading file to S3")
+        console.error(error)
+        that.setState({
+          downloadFileError: true
+        })
+      })
+
+    request.send();
+  }
+
+  onFileDownloadComplete = (response) => {
+    this.setState({
+      content: response.data.Body.toString()
+    })
+
+    // CONTINUE HERE
+    // TODO: This currently doesn't refresh the TinyMCE content.  Need to do that
+
+  }
 
   saveResolve = () => {
     this.setState({
