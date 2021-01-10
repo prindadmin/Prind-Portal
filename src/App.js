@@ -46,6 +46,7 @@ const LoggedInContent = lazy(() => import('./Pages/LoggedInContent'));
 // TODO: Add lazy loading for sub modules
 // TODO: Work out why the build is so big (AWS?)
 // TODO: Remove the Long Text box once the Git Text box is complete
+// TODO: Make page content in Redux follow the available fields for a projectType
 
 // Use existing Cognito resource for auth
 Amplify.configure({

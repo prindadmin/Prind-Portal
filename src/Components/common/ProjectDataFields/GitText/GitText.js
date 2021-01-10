@@ -2,6 +2,11 @@ import React, { Component } from 'react'
 import { reduxForm } from 'redux-form'
 import PropTypes from 'prop-types'
 
+import {
+  Spinner,
+  Intent,
+} from '@blueprintjs/core'
+
 import AWS from 'aws-sdk';
 import { Editor } from '@tinymce/tinymce-react';
 
@@ -9,7 +14,7 @@ import * as Strings from '../../../../Data/Strings'
 
 // TODO: Style text editor when disabled
 // TODO: Compare old and new text in some way (https://mergely.com/)
-// TODO: Update in server as versioned (normally text isn't versioned, right?)
+// TODO: Update in server as versioned (Not sure how this works on the file upload yet)
 
 
 export class GitText extends Component {
@@ -34,22 +39,19 @@ export class GitText extends Component {
       uploadFileInProgress: false,
       uploadFileProgress: 0,
       uploadFileError: false,
-      downloadFileInProgress: false,
+      downloadFileInProgress: true,
       downloadFileProgress: 0,
       downloadFileError: false,
       errorText: "",
-      content: '',
+      originalContent: '',
+      currentContent: '',
+      editable: false,
     }
   }
 
   componentDidMount() {
-
+    console.log(this.props)
     this.downloadFromS3()
-    /*
-    this.setState({
-      content: this.props.elementContent.fieldDetails.textValue
-    })
-    */
   }
 
   componentDidUpdate(prevProps) {
@@ -61,42 +63,18 @@ export class GitText extends Component {
   handleEditorChange = (e) => {
     console.log('Content was updated');
     this.setState({
-      content: e.target.getContent()
+      currentContent: e.target.getContent()
     })
   }
 
 
   // When the user wants to save the changes, update the server
   saveChanges = (e) => {
-    /*
-    // This code was used when this was the equivalent of a LongText.  It is now the equivalent
-    // of a file uploader
-    const { pageName, projects, elementContent } = this.props
-
-    const fieldDetails = {
-      textValue: this.state.content
-    }
-
-    this.setState({
-      updateServerError: false,
-      updateServerInProgress: true,
-    })
-
-    this.props.updateField (
-      projects.chosenProject.projectId,
-      pageName,
-      elementContent.id,
-      fieldDetails,
-      this.saveResolve,
-      this.saveReject,
-    )
-    */
-
     this.uploadToS3()
   }
 
   getValidS3Token = () => {
-    // TODO: Make this refresh the token if required
+    // TODO: Make this refresh the token if required; stops fetching if not present
     const { user } = this.props
     if (user.projectS3Token === undefined) {
       this.setState({
@@ -139,7 +117,7 @@ export class GitText extends Component {
     // Create the parameters to upload the file with
     var uploadParams = {
       ACL: 'private',
-      Body: this.state.content,
+      Body: this.state.currentContent,
       Bucket: bucketName,
       ContentType: 'text/html',
       Key: key,
@@ -227,10 +205,12 @@ export class GitText extends Component {
         that.onFileDownloadComplete(response)
       })
       .on('error', function(error, response) {
-        console.log("ERROR downloading file to S3")
+        console.log("ERROR downloading file from S3")
         console.error(error)
         that.setState({
-          downloadFileError: true
+          downloadFileError: true,
+          editable: true,
+          downloadFileInProgress: false,
         })
       })
 
@@ -238,13 +218,13 @@ export class GitText extends Component {
   }
 
   onFileDownloadComplete = (response) => {
+    console.log("File download complete")
     this.setState({
-      content: response.data.Body.toString()
+      originalContent: response.data.Body.toString(),
+      currentContent: response.data.Body.toString(),
+      downloadFileInProgress: false,
+      editable: true,
     })
-
-    // CONTINUE HERE
-    // TODO: This currently doesn't refresh the TinyMCE content.  Need to do that
-
   }
 
   saveResolve = () => {
@@ -261,13 +241,32 @@ export class GitText extends Component {
     })
   }
 
+  getLoadingSpinner = () => {
+    return (
+      <div className='projects-loading-container fill'>
+        <div className='loading-spinner'>
+          <Spinner size={100} intent={Intent.DANGER} />
+          <p>{Strings.GIT_TEXT_LOADING}</p>
+        </div>
+      </div>
+    )
+  }
+
+
   // ------------------------------ RENDER BELOW THIS LINE ------------------------------
 
   render() {
 
     // TODO: Add state error variable handling
 
-    const { title, description, fieldDetails, editable } = this.props.elementContent
+    const { elementContent } = this.props
+    const { title, description, fieldDetails } = elementContent
+    const { originalContent, editable, downloadFileInProgress } = this.state
+
+    console.log(this.state)
+    console.log(!editable)
+    console.log(!this.props.elementContent.editable)
+    console.log(!editable || !elementContent.editable)
 
     return (
       <div id='git-text-element'>
@@ -281,28 +280,31 @@ export class GitText extends Component {
           </div>
 
           <div className='container'>
-            <Editor
-              initialValue={fieldDetails.textValue}
-              apikey={process.env.REACT_APP_TINY_API_KEY}
-              disabled={!editable}
-              init={{
-                height: 500,
-                menubar: false,
-                plugins: [
-                  'advlist autolink lists link image',
-                  'charmap print preview anchor help',
-                  'searchreplace visualblocks code',
-                  'insertdatetime media table paste wordcount'
-                ],
-                toolbar:
-                  'undo redo | formatselect | bold italic | \
-                  alignleft aligncenter alignright | \
-                  bullist numlist outdent indent | help'
-              }}
-              onChange={this.handleEditorChange}
-            />
-          </div>
+            {
+              downloadFileInProgress ? this.getLoadingSpinner() :
 
+                <Editor
+                  initialValue={originalContent}
+                  apikey={process.env.REACT_APP_TINY_API_KEY}
+                  disabled={!editable || !elementContent.editable}
+                  init={{
+                    height: 500,
+                    menubar: false,
+                    plugins: [
+                      'advlist autolink lists link image',
+                      'charmap print preview anchor help',
+                      'searchreplace visualblocks code',
+                      'insertdatetime media table paste wordcount'
+                    ],
+                    toolbar:
+                      'undo redo | formatselect | bold italic | \
+                      alignleft aligncenter alignright | \
+                      bullist numlist outdent indent | help'
+                  }}
+                  onChange={this.handleEditorChange}
+                />
+            }
+          </div>
           <input
             type="submit"
             value={ Strings.BUTTON_SAVE_CHANGES }

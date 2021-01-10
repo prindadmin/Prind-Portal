@@ -272,6 +272,8 @@ export const PROJECT_TYPE_CDM2015PROJECT_DESCRIPTION = 'A new project that is in
 export const PROJECT_TYPE_DHSFPROJECT_NAME = 'DHSF Project'
 export const PROJECT_TYPE_DHSFPROJECT_DESCRIPTION = 'An existing build that you wish to store the Health & Safety File for.  This type of project will allow you to store all required parts of the Health & Safety File digitally.'
 
+export const GIT_TEXT_LOADING = "Loading data..."
+
 export const YOUR_PASSWORD_WAS_SUCCESSFULLY_CHAINGED = "Your password has been successfully changed."
 export const LOADING_DATA_FOR_PAGE = "Loading page data"
 export const LOADING = "Loading"

@@ -1288,6 +1288,9 @@ background-color: var(--field-element-grey);
   font-size: 16px;
 }
 
+#git-text-element .container {
+  height: 500px;
+}
 
 
 /* ================================== */
