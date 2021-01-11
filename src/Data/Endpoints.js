@@ -4,3 +4,4 @@ export const PROJECTDETAILSPAGE = "/project"
 export const SIGNINPAGE = "/signin"
 export const SIGNUPPAGE = "/signup"
 export const MEMBERPAGE = "/team"
+export const NEWPROJECTPAGE = '/newproject'

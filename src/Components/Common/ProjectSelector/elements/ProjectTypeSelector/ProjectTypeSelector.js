@@ -16,8 +16,10 @@ export class ProjectTypeSelector extends Component {
   }
 
   createNewProject = ( projectType ) => {
+    console.log(`navigating to: ${Endpoints.NEWPROJECTPAGE}?project_type=${projectType}`)
+
     const { history } = this.props
-    history.push(`/newproject?project_type=${projectType}`)
+    history.push(`${Endpoints.NEWPROJECTPAGE}?project_type=${projectType}`)
     this.props.closePopup()
   }
 

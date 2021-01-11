@@ -6,6 +6,7 @@ import { Button, MenuItem } from "@blueprintjs/core";
 import { Select } from "@blueprintjs/select";
 
 import PAGENAMES from '../../Data/pageNames'
+import * as Endpoints from '../../Data/Endpoints'
 
 // TODO: work out why the popover arrow isn't pointing to the menu button
 
@@ -67,10 +68,19 @@ export class SideBar extends Component {
 
     // If the current page isn't found in the current type (such as when changing projects)
     // Go to the first entry in the sidebarEntries
-    if (sidebarEntries[location.pathname.split("/")[1]] === undefined ) {
-      const pageToLoad = sidebarEntries[Object.keys(sidebarEntries)[0]].linkTo
-      console.log(pageToLoad)
-      history.push(`${pageToLoad}`)
+    const pageName = location.pathname.split("/")[1]
+    console.log("page requested: ", pageName)
+
+    const pageRequested = sidebarEntries[pageName]
+    console.log(`Sidebar page requested`, pageRequested)
+
+    if (pageRequested === undefined ) {
+      // So long as the page isn't the new project page
+      if (pageName !== Endpoints.NEWPROJECTPAGE.substring(1)) {
+        const pageToLoad = sidebarEntries[Object.keys(sidebarEntries)[0]].linkTo
+        console.log(`loading page: ${pageToLoad}`)
+        history.push(`${pageToLoad}`)
+      }
     }
 
     return (

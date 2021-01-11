@@ -13,6 +13,7 @@ import {
   forgotPasswordDispatcher,
   changePasswordDispatcher,
   updatePasswordDispatcher,
+  confirmUserDispatcher,
 } from '../Dispatchers/Auth'
 
 
@@ -260,7 +261,37 @@ function * updatePassword (action) {
   const { username, oldPassword, newPassword } = action.payload
 
   try {
-    const result = yield call(updatePasswordDispatcher, username, oldPassword, newPassword)
+    const result = yield call(confirmUserDispatcher, username, oldPassword, newPassword)
+
+    if (action.payload.resolve !== undefined) {
+      action.payload.resolve(result)
+    }
+
+  } catch (e) {
+    yield put({
+      type: Actions.AUTH_SET_STATE,
+      payload: {
+        ...defaultState,
+        error: e
+      }
+    })
+
+    if (action.payload.reject !== undefined) {
+      action.payload.reject(e)
+    }
+  }
+}
+
+/*
+====================================================================
+== Confirm user email function - confirms the users email and     ==
+== allows them to enter their account                             ==
+====================================================================
+*/
+
+function * confirmUserEmail (action) {
+  try {
+    const result = yield call(confirmUserDispatcher, action.payload)
 
     if (action.payload.resolve !== undefined) {
       action.payload.resolve(result)
@@ -289,5 +320,5 @@ export default function * sagas () {
   yield takeLatest(Actions.AUTH_FORGOT_PASSWORD, forgotPassword)
   yield takeLatest(Actions.AUTH_CHANGE_PASSWORD, changePassword)
   yield takeLatest(Actions.AUTH_COMPLETE_NEW_PASSWORD, updatePassword)
-  //yield takeLatest(Actions.AUTH_CONFIRM_USER_REQUESTED, TBC)
+  yield takeLatest(Actions.AUTH_CONFIRM_USER_REQUESTED, confirmUserEmail)
 }

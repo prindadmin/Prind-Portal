@@ -6,6 +6,7 @@ import refreshSessionDispatcher from './refreshSession'
 import forgotPasswordDispatcher from './forgotPassword'
 import changePasswordDispatcher from './changePassword'
 import updatePasswordDispatcher from './updatePassword'
+import confirmUserDispatcher from './confirmUser'
 
 export {
   registerNewUserDispatcher,
@@ -16,4 +17,5 @@ export {
   forgotPasswordDispatcher,
   changePasswordDispatcher,
   updatePasswordDispatcher,
+  confirmUserDispatcher,
 }

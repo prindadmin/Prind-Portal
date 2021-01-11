@@ -31,6 +31,8 @@ export class Page extends Component {
       errorText: '',
       projectType: '',
     }
+
+    console.log("arrived at new project page")
   }
 
   componentDidMount() {
@@ -49,6 +51,7 @@ export class Page extends Component {
       projectType: searchParams.project_type
     })
 
+    console.log("finished mounting new project page")
   }
 
   getQueryStringParams = query => {
@@ -87,6 +90,7 @@ export class Page extends Component {
   }
 
   createResolve = () => {
+    console.log("create resolved; moving to project details page")
     const { history } = this.props
     history.push(Endpoints.PROJECTDETAILSPAGE)
   }

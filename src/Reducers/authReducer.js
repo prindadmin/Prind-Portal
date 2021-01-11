@@ -92,7 +92,7 @@ export const confirmUser = ( userParameters, resolve, reject ) => {
   return {
     type: Actions.AUTH_CONFIRM_USER_REQUESTED,
     payload: {
-      userParameters,
+      ...userParameters,
       resolve,
       reject
     }

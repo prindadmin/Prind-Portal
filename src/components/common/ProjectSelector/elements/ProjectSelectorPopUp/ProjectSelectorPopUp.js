@@ -108,11 +108,6 @@ export class ProjectSelectorPopUp extends Component {
     this.setState({
       projectTypeSelectorOpen: true,
     })
-    /*
-    // Load the new page project once type of project is picked
-    const { history } = this.props
-    history.push('/newproject')
-    */
   }
 
   projectsLoading = () => {
