@@ -30,6 +30,11 @@ export default async function(projectId) {
     API.get(apiName, path, myInit)
       .then(response => {
         console.log(response)
+
+        if (response.errorMessage !== undefined) {
+          reject(response)
+        }
+
         resolve(response)
       })
       .catch(error => {

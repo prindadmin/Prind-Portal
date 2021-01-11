@@ -29,6 +29,12 @@ export default async function() {
     API.get(apiName, path, myInit)
       .then(response => {
         console.log(response)
+
+        // TODO: Add this error handing to all requests
+        if (response.errorMessage !== undefined) {
+          reject(response)
+        }
+
         resolve(response)
       })
       .catch(error => {
