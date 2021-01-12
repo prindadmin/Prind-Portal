@@ -10,6 +10,7 @@ import {
   faDownload,
   faCaretDown,
   faCaretUp,
+  faHome,
   //faLock
 } from '@fortawesome/free-solid-svg-icons'
 
@@ -30,6 +31,7 @@ import {
 } from '@fortawesome/free-regular-svg-icons'
 
 let icons = {
+  home: faHome,
   building: faIndustry,
   burger: faBars,
   city: faCity,

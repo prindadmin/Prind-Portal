@@ -5,6 +5,7 @@ import ItemIcon from '../../ItemIcon'
 
 import * as Strings from '../../../../Data/Strings'
 
+// TODO: Add ability to display thumbnails or icon for project
 const ProjectTile = props => {
   const { project, selected, onSelect } = props
   let className = 'site-select-tile'
@@ -25,7 +26,7 @@ const ProjectTile = props => {
 
   return (
     <Callout className={className} onClick={(e) => onSelect(project, e)}>
-      <ItemIcon size='4x' type='building' />
+      <ItemIcon size='4x' type='home' />
       <div className='details' >
         <h4>{project.projectName}</h4>
         <span>{bodyText}</span><br />

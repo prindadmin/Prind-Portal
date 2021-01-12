@@ -18,6 +18,8 @@ import * as Strings from '../../Data/Strings'
 import * as Validators from '../../Validators'
 import * as Endpoints from '../../Data/Endpoints'
 
+// TODO: Add ability to upload thumbnails or pick icon for a project
+
 export class ProjectDetailsPage extends Component {
   static propTypes = {
   }
