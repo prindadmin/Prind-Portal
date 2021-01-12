@@ -19,8 +19,6 @@ import * as FormInputs from '../../../Common/formInputs'
 
 const defaultAvatar = `images/default-avatar.png`
 
-// TODO: Resize the password change section
-
 export class Page extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,

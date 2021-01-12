@@ -42,8 +42,6 @@ export class Page extends Component {
 
     const searchParams = this.getQueryStringParams(location.search)
 
-    // TODO: CONTINUE HERE
-    // TODO: Test this when a project isn't selected.  Seems to fail to work.
     console.log(searchParams);
     console.log(searchParams.project_type);
 

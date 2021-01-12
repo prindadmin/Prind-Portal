@@ -16,8 +16,6 @@ import ItemIcon from '../Common/ItemIcon'
 
 import * as FormInputs from '../Common/formInputs'
 import * as Validators from '../../Validators'
-
-// TODO: Implement strings file here
 import * as Strings from '../../Data/Strings'
 
 class ResetPassword extends Component {
@@ -83,7 +81,7 @@ class ResetPassword extends Component {
           className='bim-light-blue'
           intent='primary'
           fill
-          text='Back to login page'
+          text={ Strings.ACCOUNT_BACK_TO_LOGIN_PAGE }
           onClick={() => {this.props.history.push('/signin')}}
         />
       </div>
@@ -101,8 +99,8 @@ class ResetPassword extends Component {
             <div>
               {
                 auth.error.code === 'ExpiredCodeException'
-                  ? 'Your change password link is expired. Please request a new one.'
-                  : 'Error: something went wrong. Please try again.'
+                  ? Strings.ACCOUNT_PASSWORD_LINK_EXPIRED
+                  : Strings.ACCOUNT_GENERIC_ERROR
               }
             </div>
           </Callout> :
@@ -112,7 +110,7 @@ class ResetPassword extends Component {
           <Field
             component={FormInputs.PasswordInput}
             name="password"
-            placeholder='Password'
+            placeholder={Strings.PLACEHOLDER_PASSWORD}
             validate={[
               Validators.required,
               Validators.maxLength32
@@ -123,7 +121,7 @@ class ResetPassword extends Component {
           <Field
             component={FormInputs.PasswordInput}
             name="passwordMatch"
-            placeholder='Repeat password'
+            placeholder={Strings.PLACEHOLDER_REPEAT_PASSWORD}
             validate={[
               Validators.required,
               Validators.passwordMatch,
@@ -137,7 +135,7 @@ class ResetPassword extends Component {
             disabled={this.props.invalid}
             type='submit'
             intent='primary'
-            text='Change Password' />
+            text={ Strings.BUTTON_CHANGE_PASSWORD } />
         </ButtonGroup>
       </form>
     )

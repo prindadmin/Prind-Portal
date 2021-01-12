@@ -61,7 +61,6 @@ class ConfirmEmailPage extends Component {
     this.props.history.push(Endpoints.SIGNINPAGE)
   }
 
-  // TODO: This shouldn't forward on reject, but CORS is throwing an error at the moment
   rejectRegister = () => {
     console.log("confirmation failed")
     this.setState({

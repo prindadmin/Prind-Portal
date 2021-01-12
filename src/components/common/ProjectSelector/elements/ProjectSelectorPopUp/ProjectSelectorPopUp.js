@@ -16,7 +16,6 @@ import * as Endpoints from '../../../../../Data/Endpoints'
 
 const ProjectTypeSelector = lazy(() => import('../ProjectTypeSelector'));
 
-// TODO: when clicking new project button, give the user a choice of project type (complete or DHSF)
 export class ProjectSelectorPopUp extends Component {
   static propTypes = {
     onCancelPopup: PropTypes.func.isRequired,
