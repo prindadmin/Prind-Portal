@@ -23,9 +23,10 @@ export class SideBar extends Component {
     const pageRequested = sidebarEntries[pageName]
     console.log(`Sidebar page requested`, pageRequested)
 
+    // If the page doesn't exist in this project
     if (pageRequested === undefined ) {
-      // So long as the page isn't the new project page
-      if (pageName !== Endpoints.NEWPROJECTPAGE.substring(1)) {
+      // and so long as the page isn't a common page, navigate to the first available page
+      if (!PAGENAMES.CommonPages.includes(pageName)) {
         const pageToLoad = sidebarEntries[Object.keys(sidebarEntries)[0]].linkTo
         console.log(`loading page: ${pageToLoad}`)
         history.push(`${pageToLoad}`)

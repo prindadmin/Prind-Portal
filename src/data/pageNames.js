@@ -54,7 +54,10 @@ const PAGENAMES = {
       name: "Occupation",
       linkTo: "/occupation"
     },
-  }
+  },
+  CommonPages: [
+    'newproject', 'profile', 'foundations'
+  ]
 }
 
 export default PAGENAMES
