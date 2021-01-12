@@ -4,7 +4,7 @@ import API from '@aws-amplify/api';
 // Fixed values for the API request
 const apiName = process.env.REACT_APP_API_NAME
 
-export default async function() {
+async function UserGetDetails() {
 
   // Build path for request
   const path = `/user/profile`
@@ -37,3 +37,5 @@ export default async function() {
      })
    })
 }
+
+export default UserGetDetails

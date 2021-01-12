@@ -6,7 +6,7 @@ details provided.
 
 import { Auth } from 'aws-amplify';
 
-function SignIn(payload) {
+export function SignIn(payload) {
   return Auth.signIn(payload.email.toLowerCase(), payload.password);
 }
 

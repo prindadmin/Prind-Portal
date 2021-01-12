@@ -5,7 +5,7 @@ import API from '@aws-amplify/api';
 // Fixed values for the API request
 const apiName = process.env.REACT_APP_API_NAME
 
-export default async function(projectId, pageName, fieldId, version) {
+async function DownloadFile(projectId, pageName, fieldId, version) {
 
   // Build path for request
   const path = `/project/${projectId}/${pageName}/${fieldId}/${version}/get-file-url`
@@ -38,3 +38,5 @@ export default async function(projectId, pageName, fieldId, version) {
      })
    })
 }
+
+export default DownloadFile

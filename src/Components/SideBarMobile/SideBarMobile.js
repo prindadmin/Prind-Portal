@@ -66,17 +66,17 @@ export class SideBar extends Component {
     // If the current page isn't found in the current type (such as when changing projects)
     // Go to the first entry in the sidebarEntries
     const pageName = location.pathname.split("/")[1]
-    console.log("page requested: ", pageName)
+    //console.log("page requested: ", pageName)
 
     const pageRequested = sidebarEntries[pageName]
-    console.log(`Sidebar page requested`, pageRequested)
+    //console.log(`Sidebar page requested`, pageRequested)
 
     // If the page doesn't exist in this project
     if (pageRequested === undefined ) {
       // and so long as the page isn't a common page, navigate to the first available page
       if (!PAGENAMES.CommonPages.includes(pageName)) {
         const pageToLoad = sidebarEntries[Object.keys(sidebarEntries)[0]].linkTo
-        console.log(`loading page: ${pageToLoad}`)
+        //console.log(`loading page: ${pageToLoad}`)
         history.push(`${pageToLoad}`)
       }
     }

@@ -6,7 +6,7 @@ details provided.
 
 import { Auth } from 'aws-amplify';
 
-function RegisterNewUser(payload) {
+export function RegisterNewUser(payload) {
   return Auth.signUp({
       username: payload.email.toLowerCase(),
       password: payload.password,

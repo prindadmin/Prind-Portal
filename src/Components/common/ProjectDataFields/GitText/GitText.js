@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { reduxForm } from 'redux-form'
+//import { reduxForm } from 'redux-form'
 import PropTypes from 'prop-types'
 
 import {
@@ -99,7 +99,7 @@ export class GitText extends Component {
   }
 
   uploadToS3 = () => {
-    const { projects, pageName, fieldID, elementContent } = this.props
+    const { projects, pageName, elementContent } = this.props
 
     const token = this.getValidS3Token()
     if (token === undefined) {
@@ -169,7 +169,7 @@ export class GitText extends Component {
   }
 
   downloadFromS3 = () => {
-    const { projects, pageName, fieldID, elementContent } = this.props
+    const { projects, pageName, elementContent } = this.props
 
     const token = this.getValidS3Token()
     if (token === undefined) {
@@ -260,7 +260,7 @@ export class GitText extends Component {
     // TODO: Add state error variable handling
 
     const { elementContent } = this.props
-    const { title, description, fieldDetails } = elementContent
+    const { title, description } = elementContent
     const { originalContent, editable, downloadFileInProgress } = this.state
 
     console.log(this.state)
@@ -297,9 +297,7 @@ export class GitText extends Component {
                       'insertdatetime media table paste wordcount'
                     ],
                     toolbar:
-                      'undo redo | formatselect | bold italic | \
-                      alignleft aligncenter alignright | \
-                      bullist numlist outdent indent | help'
+                      'undo redo | formatselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | help'
                   }}
                   onChange={this.handleEditorChange}
                 />
