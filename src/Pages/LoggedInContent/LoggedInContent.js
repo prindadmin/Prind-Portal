@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import ProjectLoading from '../../Components/Common/ProjectLoading'
 
 import * as Strings from '../../Data/Strings'
+import PAGENAMES from '../../Data/pageNames'
 
 // Components
 const HeaderBar = lazy(() => import('../../Components/HeaderBar'));
@@ -51,9 +52,8 @@ export class LoggedInContent extends Component {
   }
 
   componentDidMount() {
-    const { projects, requestS3ProjectFileUploadToken, getProjectMembers } = this.props
+    const { projects } = this.props
     const { projectId } = projects.chosenProject
-
     const pageName = this.getPageName()
 
     this.setState({
@@ -61,9 +61,8 @@ export class LoggedInContent extends Component {
     })
 
     // If a project has been selected
-    if (projects.chosenProject.projectId !== "") {
-      requestS3ProjectFileUploadToken(projectId, pageName)
-      getProjectMembers(projectId)
+    if (projects.chosenProject.projectId !== "" && !PAGENAMES.CommonPages.includes(pageName)) {
+      this.attemptRefreshProjectDetails()
     }
 
     this.updateWindowDimensions();
@@ -71,19 +70,22 @@ export class LoggedInContent extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-
     if (this.props !== prevProps) {
       this.getProjectID()
-
-      const { projects, requestS3ProjectFileUploadToken, getProjectMembers } = this.props
+      const { projectId } = this.props.projects.chosenProject
       const { pageName } = this.state
-      const { projectId } = projects.chosenProject
 
-      if (projectId !== prevProps.projects.chosenProject.projectId) {
-        requestS3ProjectFileUploadToken(projectId, pageName)
-        getProjectMembers(projectId)
+      if (projectId !== prevProps.projects.chosenProject.projectId && !PAGENAMES.CommonPages.includes(pageName)) {
+        this.attemptRefreshProjectDetails()
       }
     }
+  }
+
+  attemptRefreshProjectDetails = () => {
+    const { pageName } = this.state
+    const { projectId } = this.props.projects.chosenProject
+    this.props.requestS3ProjectFileUploadToken(projectId, pageName)
+    this.props.getProjectMembers(projectId)
   }
 
   // Removes the screen size listener when component is removed

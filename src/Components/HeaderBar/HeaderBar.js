@@ -58,17 +58,8 @@ export class HeaderBar extends Component {
             </div>
           </div>
         </div>
-
         {
-          user !== undefined ?
-            user.details === null ?
-              user.details.foundationsID === null ?
-              <div id="no-foundations-id-banner" className="row full-width">
-                <NoFoundationsIDBanner />
-              </div> :
-              null :
-            null :
-          null
+          <NoFoundationsIDBanner />
         }
       </React.Fragment>
     )

@@ -35,7 +35,7 @@ const LoggedInContent = lazy(() => import('./Pages/LoggedInContent'));
 // TODO: make the page menu float over other elements and not be 100% width in mobile size
 // TODO: Add error boundaries
 // TODO: Add error handling when a page cannot load
-// TODO: Strip out axios (not needed as a root dependency anyway)
+// TODO: Strip out axios dependency (not needed as a root dependency)
 // TODO: Strip out bootstrap
 // TODO: Strip out blueprint (if possible; date picker is important)
 // TODO: Strip out node-sass (why is this used?)

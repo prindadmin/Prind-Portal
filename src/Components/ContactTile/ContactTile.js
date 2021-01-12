@@ -41,9 +41,10 @@ export class ContactTile extends Component {
 
   componentWillUnmount() {
     // If the image is loaded, unload it (stop memory leak when image is still loading)
+    console.log("attempting to unload image fetch")
     if (this.state.loadingImage !== undefined) {
       const image = this.state.loadingImage
-      image.src = ''
+      image.onload = function(){};
     }
   }
 

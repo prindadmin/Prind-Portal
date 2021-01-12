@@ -261,7 +261,7 @@ function * updatePassword (action) {
   const { username, oldPassword, newPassword } = action.payload
 
   try {
-    const result = yield call(confirmUserDispatcher, username, oldPassword, newPassword)
+    const result = yield call(updatePasswordDispatcher, username, oldPassword, newPassword)
 
     if (action.payload.resolve !== undefined) {
       action.payload.resolve(result)
