@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import ListItem from '../Common/page-tile'
 
 import PAGENAMES from '../../Data/pageNames'
-import * as Endpoints from '../../Data/Endpoints'
 
 export class SideBar extends Component {
 

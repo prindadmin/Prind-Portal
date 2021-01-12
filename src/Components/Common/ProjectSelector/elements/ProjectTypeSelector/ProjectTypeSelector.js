@@ -1,9 +1,6 @@
 import React, { Component, lazy } from 'react'
 import PropTypes from 'prop-types'
 
-import ItemIcon from '../../../../Common/ItemIcon'
-
-import * as Strings from '../../../../../Data/Strings'
 import * as Endpoints from '../../../../../Data/Endpoints'
 import ProjectTypesList from '../../../../../Data/ProjectTypes'
 

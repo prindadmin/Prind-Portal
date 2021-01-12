@@ -8,6 +8,8 @@ code again if there is an issue receiving it the first time.
 
 import { Auth } from 'aws-amplify';
 
-export default function (payload) {
+function ResendConfirmationCode(payload) {
   return Auth.resendSignUp(payload.inputUsername.toLowerCase())
 }
+
+export default ResendConfirmationCode

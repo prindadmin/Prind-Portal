@@ -144,8 +144,6 @@ class ResetPassword extends Component {
   }
 
   render () {
-    const { auth } = this.props
-
     return (
       <div id="change-password" className='row align-items-center justify-content-center full-height'>
         {this.state.hasChangedPassword

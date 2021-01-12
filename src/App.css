@@ -1899,9 +1899,9 @@ background-color: var(--field-element-grey);
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 0.5em 0;
+  padding: 1em 0;
   margin: 0;
-  height: 3em;
+  min-height: 3em;
 }
 
 #no-foundations-id-banner p {

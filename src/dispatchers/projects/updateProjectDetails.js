@@ -4,7 +4,8 @@ import API from '@aws-amplify/api';
 // Fixed values for the API request
 const apiName = process.env.REACT_APP_API_NAME
 
-export default async function(projectId, newProjectDetails) {
+// TODO: Remove all anonymous functions into this format
+async function UpdateProjectDetails(projectId, newProjectDetails) {
 
   // Build path for request
   const path = `/project/${projectId}/update`
@@ -38,3 +39,5 @@ export default async function(projectId, newProjectDetails) {
      })
    })
 }
+
+export default UpdateProjectDetails

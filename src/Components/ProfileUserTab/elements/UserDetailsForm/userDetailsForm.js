@@ -128,7 +128,7 @@ export class Page extends Component {
 
   uploadToS3 = () => {
 
-    const { auth, user } = this.props
+    const { user } = this.props
     const { avatarFile } = this.state
 
     console.log(avatarFile)

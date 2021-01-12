@@ -42,7 +42,7 @@ export class HeaderBar extends Component {
 
   render() {
 
-    const { projects, user } = this.props
+    const { projects } = this.props
 
     return (
       <React.Fragment>

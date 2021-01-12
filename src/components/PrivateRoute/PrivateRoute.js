@@ -4,7 +4,6 @@ import { Route } from 'react-router-dom'
 import { Redirect } from 'react-router-dom'
 
 import * as States from '../../States'
-import * as Endpoints from '../../Data/Endpoints'
 
 class PrivateRoute extends React.Component {
   static propTypes = {

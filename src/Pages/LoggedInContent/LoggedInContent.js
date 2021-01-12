@@ -53,7 +53,6 @@ export class LoggedInContent extends Component {
 
   componentDidMount() {
     const { projects } = this.props
-    const { projectId } = projects.chosenProject
     const pageName = this.getPageName()
 
     this.setState({

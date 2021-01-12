@@ -5,7 +5,7 @@ This dispatcher uses AWS Amplify's Auth class to send a password reset code
 
 import { Auth } from 'aws-amplify';
 
-export default function (username) {
+function ForgotPassword(username) {
 
   return new Promise((resolve, reject) => {
     try {
@@ -18,3 +18,5 @@ export default function (username) {
     }
   })
 }
+
+export default ForgotPassword

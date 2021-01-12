@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
-import ListItem from '../Common/page-tile'
 import ItemIcon from '../Common/ItemIcon'
 
 import { Button, MenuItem } from "@blueprintjs/core";
 import { Select } from "@blueprintjs/select";
 
 import PAGENAMES from '../../Data/pageNames'
-import * as Endpoints from '../../Data/Endpoints'
 
 // TODO: work out why the popover arrow isn't pointing to the menu button
 
@@ -43,7 +41,7 @@ export class SideBar extends Component {
   pageNamesToList = () => {
 
     const { chosenProject } = this.props.projects
-    const { projectId, projectType } = chosenProject
+    const { projectType } = chosenProject
 
     const menuEntries = PAGENAMES[projectType] === undefined ? PAGENAMES["CDM2015Project"] : PAGENAMES[projectType]
 
@@ -61,8 +59,7 @@ export class SideBar extends Component {
   render() {
 
     const { location, projects, history } = this.props
-    const { projectId, projectType } = projects.chosenProject
-    const pathForProject = projectId !== "" ? `/${projectId}` : ""
+    const { projectType } = projects.chosenProject
 
     const sidebarEntries = PAGENAMES[projectType] === undefined ? PAGENAMES["CDM2015Project"] : PAGENAMES[projectType]
 

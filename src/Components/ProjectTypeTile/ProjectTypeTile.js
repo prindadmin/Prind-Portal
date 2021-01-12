@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import ItemIcon from '../Common/ItemIcon'
-import * as Strings from '../../Data/Strings'
 
 export class ProjectTypeTile extends Component {
   static propTypes = {
