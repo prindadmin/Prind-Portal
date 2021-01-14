@@ -22,8 +22,8 @@ import Error404 from './Components/Error404'
 import * as Strings from './Data/Strings'
 
 /* Before sign in pages */
-const SignIn = lazy(() => import('./Components/SignIn'));
-const SignUp = lazy(() => import('./Components/SignUp'));
+//const SignIn = lazy(() => import('./Components/SignIn'));
+//const SignUp = lazy(() => import('./Components/SignUp'));
 const SignInPage = lazy(() => import('./Pages/SignInPage'))
 const ForgotPassword = lazy(() => import('./Components/ForgotPassword'));
 const ResetPassword = lazy(() => import('./Components/ResetPassword'));

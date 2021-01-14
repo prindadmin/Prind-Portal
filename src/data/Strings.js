@@ -7,7 +7,7 @@ export const DONT_HAVE_AN_ACCOUNT = "Haven't got an account yet?  Click here to 
 export const ALREADY_HAVE_AN_ACCOUNT = "Already have an account?  Click here to sign in"
 export const PLEASE_SIGN_UP_TEXT = "Fill in the form below to sign up to the Foundations portal"
 export const PLEASE_SIGN_IN_TEXT = "Fil in your login details to access the portal"
-export const THANK_YOU_FOR_SIGNING_UP = "Thank you for signing up; someone will be in contact with you soon with the next steps"
+export const THANK_YOU_FOR_SIGNING_UP = "Thank you for signing up; please check your email for a confirmation email."
 export const BUTTON_CONTINUE = "Continue"
 export const BUTTON_SIGN_UP = "Sign up"
 
