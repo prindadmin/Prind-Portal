@@ -1,13 +1,26 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Field, reduxForm } from 'redux-form'
 
 // Data
+import * as Endpoints from '../../Data/Endpoints'
 import * as Strings from '../../Data/Strings'
+import * as FormInputs from '../Common/formInputs'
+import * as Validators from '../../Validators'
+import * as state from '../../States'
 
 // Components
 import { CanUseWebP } from '../Common/CheckIfWebpSupported'
-import { Alert, Form, Row, FormGroup, Button } from 'react-bootstrap'
-import ExtractFormDataToObject from '../Common/ExtractFormDataToObject'
+import {
+  Label,
+  Button,
+  ButtonGroup,
+  Callout,
+  Icon
+} from '@blueprintjs/core'
+
+// TODO: Test the signing up functionality
+// TODO: Add styling to components
 
 export class SignUpBox extends Component {
   static propTypes = {
@@ -32,13 +45,21 @@ export class SignUpBox extends Component {
   onSignUpFormSubmit = (e) => {
     e.preventDefault();
 
+    const userDetails = {
+      email: e.target.elements.email.value,
+      password: e.target.elements.password.value,
+      firstName: e.target.elements.firstName.value,
+      lastName: e.target.elements.lastName.value,
+      company: e.target.elements.company.value,
+    }
+
     this.setState({
       showSignUpCompleted: false,
       showSignUpError: false,
       errorMessage: null,
     })
 
-    const userDetails = ExtractFormDataToObject(e)
+    userDetails.email = userDetails.email.toLowerCase()
     this.props.signUp(userDetails, this.signUpSuccessful, this.signUpFailed)
   }
 
@@ -54,7 +75,7 @@ export class SignUpBox extends Component {
     console.log(result)
 
     this.setState({
-        showErrorSigningUp: true,
+        showSignUpError: true,
         errorMessage: result.message,
     })
   }
@@ -64,12 +85,12 @@ export class SignUpBox extends Component {
 
   getLogo = () => {
 
-    const logoLocation = CanUseWebP ? "/images/logos/buildingim-logo.webp" : "/images/logos/buildingim-logo.png"
+    const logoLocation = CanUseWebP ? "/images/logos/prind-logo.webp" : "/images/logos/prind-logo.png"
 
     return (
       <React.Fragment>
         <div className="logo-container">
-          <a href="https://buildingim.com" target="_blank" rel="noopener noreferrer"><img src={logoLocation} alt="BuildingIM logo"></img></a>
+          <a href="https://prind.tech" target="_blank" rel="noopener noreferrer"><img src={logoLocation} alt="Prin D Tech logo"></img></a>
         </div>
         { !this.state.showSignUpCompleted ?
           <React.Fragment>
@@ -89,36 +110,72 @@ export class SignUpBox extends Component {
 
   getSignUpForm = () => {
     return (
-      <Form className="sign-up-form form" onSubmit={this.onSignUpFormSubmit}>
+      <form className="sign-up-form form" onSubmit={this.onSignUpFormSubmit}>
 
-        <Row className="form-row with-space-below">
-          <FormGroup className="form-group col">
-            <Form.Control type="email" className="form-control one-line" id="inputEmail" placeholder={ Strings.USERNAME } />
-            <Form.Control type="password" className="form-control one-line" id="inputPassword" placeholder={ Strings.PASSWORD } />
-          </FormGroup>
-        </Row>
+        <Field
+          name="email"
+          validate={[Validators.required, Validators.email]}
+          component={FormInputs.TextInput}
+          placeholder={ Strings.PLACEHOLDER_USERNAME }
+          type="email"
+        />
 
-        <Row className="form-row with-space-below">
-          <FormGroup className="form-group col">
-            <Form.Control type="text" className="form-control one-line" id="inputFirstName" placeholder={ Strings.FIRST_NAME } />
-            <Form.Control type="text" className="form-control one-line" id="inputLastName" placeholder={ Strings.LAST_NAME } />
-            <Form.Control type="text" className="form-control one-line" id="inputCompany" placeholder={ Strings.COMPANY } />
-          </FormGroup>
-        </Row>
+        <Field
+          name="password"
+          validate={[
+            Validators.required,
+            Validators.maxLength32,
+            Validators.isValidPassword
+          ]}
+          component={FormInputs.PasswordInput}
+          placeholder={Strings.PLACEHOLDER_PASSWORD}
+          type="password"
+        />
+
+        <Field
+          name="firstName"
+          validate={[Validators.required, Validators.maxLength32]}
+          component={FormInputs.TextInput}
+          placeholder={Strings.PLACEHOLDER_FIRST_NAME}
+        />
+
+        <Field
+          name="lastName"
+          validate={[Validators.required, Validators.maxLength32]}
+          component={FormInputs.TextInput}
+          placeholder={Strings.PLACEHOLDER_LAST_NAME}
+          type="text"
+        />
+
+        <Field
+          name="company"
+          validate={[Validators.required, Validators.maxLength64]}
+          component={FormInputs.TextInput}
+          placeholder={Strings.PLACEHOLDER_COMPANY}
+          type="text"
+        />
+
 
         {
-          this.state.showSignUpError ? <Alert variant="danger">
+          this.state.showSignUpError ?
+          <Callout style={{marginBottom: '15px'}} intent='danger' title='Registration failed'>
             <p>{ this.state.errorMessage }</p>
-          </Alert> : null
+          </Callout> :
+          null
         }
 
-        <Button type="submit" className="btn btn-primary">{ Strings.BUTTON_SIGN_UP }</Button>
+        <ButtonGroup fill style={{marginBottom: '15px'}}>
+          <Button
+            loading={this.props.submitting}
+            disabled={this.props.invalid}
+            type='submit'
+            intent='primary'
+            text={Strings.BUTTON_SIGN_UP} />
+        </ButtonGroup>
 
-        <Row className="form-row">
-          <p className="forgot-your-password-text" onClick={this.props.toggleVisibleForm}>{Strings.ALREADY_HAVE_AN_ACCOUNT}</p>
-        </Row>
+        <p className="forgot-your-password-text" onClick={this.props.toggleVisibleForm}>{Strings.ALREADY_HAVE_AN_ACCOUNT}</p>
 
-      </Form>
+      </form>
     )
   }
 
@@ -143,4 +200,6 @@ export class SignUpBox extends Component {
   }
 }
 
-export default SignUpBox
+export default reduxForm({
+  form: 'signUp'
+})(SignUpBox)

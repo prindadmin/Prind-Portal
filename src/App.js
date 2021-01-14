@@ -48,6 +48,8 @@ const LoggedInContent = lazy(() => import('./Pages/LoggedInContent'));
 // TODO: Work out why the build is so big (AWS?)
 // TODO: Remove the Long Text box once the Git Text box is complete
 // TODO: Make page content in Redux follow the available fields for a projectType
+// TODO: Make signin and sign up pass props for which one they are (https://ui.dev/react-router-v4-pass-props-to-components/)
+
 
 // Use existing Cognito resource for auth
 Amplify.configure({
@@ -132,7 +134,7 @@ class App extends Component{
           <Suspense fallback={this.loadingPlaceholder()}>
             <Switch>
               <Route path='/signin' component={SignInPage} />
-              <Route path='/signup' component={SignUp} />
+              <Route path='/signup' component={SignInPage} />
               <Route path='/forgot-password' component={ForgotPassword} />
               <Route path='/reset-password' component={ResetPassword} />
               <Route path='/confirm-email' component={ConfirmEmailPage} />

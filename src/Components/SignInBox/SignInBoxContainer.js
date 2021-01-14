@@ -8,6 +8,7 @@ import PageComponent from './SignInBox'
 const mapStatetoProps = state => {
   return {
     auth: state.auth,
+    user: state.user,
   }
 }
 
