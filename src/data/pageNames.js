@@ -51,7 +51,7 @@ const PAGENAMES = {
       linkTo: "/team"
     },
     occupation: {
-      name: "Occupation",
+      name: "HSF",
       linkTo: "/occupation"
     },
   },

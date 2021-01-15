@@ -19,6 +19,8 @@ import * as Strings from '../../Data/Strings'
 
 const pageName = 'occupation'
 
+// TODO: Move page title and description strings to PAGEDATA in data folder so it can be customised per project type
+
 export class OccupationPage extends Component {
   static propTypes = {
     pageContent: PropTypes.object,
