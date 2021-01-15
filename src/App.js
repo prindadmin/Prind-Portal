@@ -49,6 +49,7 @@ const LoggedInContent = lazy(() => import('./Pages/LoggedInContent'));
 // TODO: Remove the Long Text box once the Git Text box is complete
 // TODO: Make page content in Redux follow the available fields for a projectType
 // TODO: Make signin and sign up pass props for which one they are (https://ui.dev/react-router-v4-pass-props-to-components/)
+// TODO: Update password reset page to look like sign in page
 
 
 // Use existing Cognito resource for auth

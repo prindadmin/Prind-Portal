@@ -1,22 +1,17 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Field, reduxForm } from 'redux-form'
 
 // Data
-import * as Endpoints from '../../Data/Endpoints'
-import * as Strings from '../../Data/Strings'
-import * as FormInputs from '../Common/formInputs'
-import * as Validators from '../../Validators'
-import * as state from '../../States'
+import * as Endpoints from '../../../Data/Endpoints'
+import * as Strings from '../../../Data/Strings'
+import * as FormInputs from '../../Common/formInputs'
+import * as Validators from '../../../Validators'
+import * as States from '../../../States'
 
 // Components
-import { CanUseWebP } from '../Common/CheckIfWebpSupported'
+import { CanUseWebP } from '../../Common/CheckIfWebpSupported'
 import {
-  Label,
-  Button,
-  ButtonGroup,
   Callout,
-  Icon
 } from '@blueprintjs/core'
 
 // TODO: Test the signing up functionality
@@ -33,12 +28,27 @@ export class SignUpBox extends Component {
       showSignUpCompleted: false,
       showSignUpError: false,
       errorMessage: null,
+      email: '',
+      password: '',
+      firstName: '',
+      lastName: '',
+      company: '',
     }
   }
 
 
   componentDidMount () {
     this.props.init()
+  }
+
+  handleInputChange = (event) => {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
   }
 
 
@@ -112,48 +122,50 @@ export class SignUpBox extends Component {
     return (
       <form className="sign-up-form form" onSubmit={this.onSignUpFormSubmit}>
 
-        <Field
+        <input
+          id="email"
           name="email"
-          validate={[Validators.required, Validators.email]}
-          component={FormInputs.TextInput}
-          placeholder={ Strings.PLACEHOLDER_USERNAME }
-          type="email"
-        />
+          type="text"
+          placeholder={ Strings.PLACEHOLDER_EMAIL }
+          value={this.state.email}
+          onChange={this.handleInputChange}
+          className={ this.state.email === null ? "default" : "filled" }/>
 
-        <Field
+        <input
+          id="password"
           name="password"
-          validate={[
-            Validators.required,
-            Validators.maxLength32,
-            Validators.isValidPassword
-          ]}
-          component={FormInputs.PasswordInput}
-          placeholder={Strings.PLACEHOLDER_PASSWORD}
           type="password"
-        />
+          placeholder={ Strings.PLACEHOLDER_PASSWORD }
+          value={this.state.password}
+          onChange={this.handleInputChange}
+          className={ this.state.password === null ? "default" : "filled" }/>
 
-        <Field
+        <input
+          id="firstName"
           name="firstName"
-          validate={[Validators.required, Validators.maxLength32]}
-          component={FormInputs.TextInput}
-          placeholder={Strings.PLACEHOLDER_FIRST_NAME}
-        />
+          type="text"
+          placeholder={ Strings.PLACEHOLDER_FIRST_NAME }
+          value={this.state.firstName}
+          onChange={this.handleInputChange}
+          className={ this.state.firstName === null ? "default" : "filled" }/>
 
-        <Field
+        <input
+          id="lastName"
           name="lastName"
-          validate={[Validators.required, Validators.maxLength32]}
-          component={FormInputs.TextInput}
-          placeholder={Strings.PLACEHOLDER_LAST_NAME}
           type="text"
-        />
+          placeholder={ Strings.PLACEHOLDER_LAST_NAME }
+          value={this.state.firstName}
+          onChange={this.handleInputChange}
+          className={ this.state.lastName === null ? "default" : "filled" }/>
 
-        <Field
+        <input
+          id="company"
           name="company"
-          validate={[Validators.required, Validators.maxLength64]}
-          component={FormInputs.TextInput}
-          placeholder={Strings.PLACEHOLDER_COMPANY}
           type="text"
-        />
+          placeholder={ Strings.PLACEHOLDER_COMPANY }
+          value={this.state.company}
+          onChange={this.handleInputChange}
+          className={ this.state.company === null ? "default" : "filled" }/>
 
 
         {
@@ -163,17 +175,16 @@ export class SignUpBox extends Component {
           </Callout> :
           null
         }
+        <div className='spacer' />
 
-        <ButtonGroup fill style={{marginBottom: '15px'}}>
-          <Button
-            loading={this.props.submitting}
-            disabled={this.props.invalid}
-            type='submit'
-            intent='primary'
-            text={Strings.BUTTON_SIGN_UP} />
-        </ButtonGroup>
+        <input
+          type="submit"
+          value={ Strings.BUTTON_SIGN_UP }
+          className="submit-button" />
 
-        <p className="forgot-your-password-text" onClick={this.props.toggleVisibleForm}>{Strings.ALREADY_HAVE_AN_ACCOUNT}</p>
+        <div className='spacer' />
+
+        <p className="sign-up-in-text" onClick={(e) => this.props.toggleVisibleForm(States.SIGNINFORM)}>{Strings.ALREADY_HAVE_AN_ACCOUNT}</p>
 
       </form>
     )
@@ -200,6 +211,4 @@ export class SignUpBox extends Component {
   }
 }
 
-export default reduxForm({
-  form: 'signUp'
-})(SignUpBox)
+export default SignUpBox

@@ -1,22 +1,17 @@
 import React, { Component } from 'react'
-import { Field, reduxForm } from 'redux-form'
 import PropTypes from 'prop-types'
-import ReactGA from 'react-ga';
 
 // Data
-import * as Endpoints from '../../Data/Endpoints'
-import * as Strings from '../../Data/Strings'
-import * as FormInputs from '../Common/formInputs'
-import * as Validators from '../../Validators'
-import * as state from '../../States'
+import * as Endpoints from '../../../Data/Endpoints'
+import * as Strings from '../../../Data/Strings'
+import * as FormInputs from '../../Common/formInputs'
+import * as Validators from '../../../Validators'
+import * as States from '../../../States'
 
 // Components
-import { CanUseWebP } from '../Common/CheckIfWebpSupported'
+import { CanUseWebP } from '../../Common/CheckIfWebpSupported'
 
 import {
-  Label,
-  Button,
-  ButtonGroup,
   Callout,
 } from '@blueprintjs/core'
 
@@ -32,24 +27,28 @@ export class SignInBox extends Component {
     super()
     this.state = {
       showSignInError: false,
+      username: '',
+      password: '',
     }
   }
-
 
   componentDidMount () {
     this.props.init()
-    ReactGA.pageview(this.props.location.pathname)
   }
 
-  componentDidUpdate() {
-    if (this.props.auth.isSignedIn === state.AUTH_SUCCESS) {
-      //this.props.reset()
-    }
+  handleInputChange = (event) => {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
   }
 
   forgotPasswordClicked = () => {
     console.log("forgot password was clicked")
-    // TODO: Show forgot password screen
+    this.props.toggleVisibleForm(States.FORGOTPASSWORDFORM)
   }
 
 
@@ -110,27 +109,34 @@ export class SignInBox extends Component {
     return (
       <form className="sign-in-form form" onSubmit={this.signIn}>
 
-        <Label>
-          <Field
-            component={FormInputs.TextInput}
-            name="email"
-            placeholder={Strings.PLACEHOLDER_EMAIL}
-            validate={[Validators.required, Validators.email]}
-          />
-        </Label>
-        <Label>
-          <Field
-            component={FormInputs.PasswordInput}
-            name="password"
-            placeholder={Strings.PLACEHOLDER_PASSWORD}
-            validate={[Validators.required, Validators.maxLength32]}
-          />
-        </Label>
+        {
+          /* <label htmlFor="emailAddress">{ Strings.PLACEHOLDER_EMAIL }</label> */
+        }
 
+        <input
+          id="email"
+          name="email"
+          type="text"
+          placeholder={ Strings.PLACEHOLDER_EMAIL }
+          value={this.state.email}
+          onChange={this.handleInputChange}
+          className={ this.state.email === null ? "default" : "filled" }/>
 
+        {
+          /* <label htmlFor="password">{ Strings.PLACEHOLDER_PASSWORD }</label> */
+        }
+        <input
+          id="password"
+          name="password"
+          type="password"
+          placeholder={ Strings.PLACEHOLDER_PASSWORD }
+          value={this.state.password}
+          onChange={this.handleInputChange}
+          className={ this.state.password === null ? "default" : "filled" }/>
 
         <p className="forgot-your-password-text" onClick={this.forgotPasswordClicked}>{Strings.BUTTON_FORGOT_PASSWORD}</p>
 
+        <div className='spacer' />
         {
           this.state.showErrorSigningIn ?
           <Callout style={{marginBottom: '15px'}} intent='danger'>
@@ -139,16 +145,14 @@ export class SignInBox extends Component {
           null
         }
 
-        <ButtonGroup fill style={{marginBottom: '15px'}}>
-          <Button
-            loading={this.props.submitting}
-            disabled={this.props.invalid}
-            type='submit'
-            intent='primary'
-            text={Strings.BUTTON_LOGIN} />
-        </ButtonGroup>
+        <input
+          type="submit"
+          value={ Strings.BUTTON_LOGIN }
+          className="submit-button" />
 
-        <p className="forgot-your-password-text" onClick={this.props.toggleVisibleForm}>{Strings.DONT_HAVE_AN_ACCOUNT}</p>
+        <div className='spacer' />
+
+        <p className="sign-up-in-text" onClick={(e) => this.props.toggleVisibleForm(States.SIGNUPFORM)}>{Strings.DONT_HAVE_AN_ACCOUNT}</p>
 
       </form>
     )
@@ -164,6 +168,4 @@ export class SignInBox extends Component {
     )
   }
 }
-export default reduxForm({
-  form: 'signIn'
-})(SignInBox)
+export default SignInBox

@@ -167,6 +167,31 @@ hr {
   width: 100vw;
 }
 
+.spacer {
+  height: var(--standard-margin);
+}
+
+input[type=submit]  {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 14px;
+  justify-content: center;
+  padding: 5px 10px;
+  text-align: left;
+  vertical-align: middle;
+  min-height: 30px;
+  min-width: 30px;
+  background-color: #137cbd;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+  box-shadow: inset 0 0 0 1px rgba(16, 22, 26, 0.4), inset 0 -1px 0 rgba(16, 22, 26, 0.2);
+  color: #ffffff;
+  width: 100%;
+}
+
 /* ================================ */
 /* ======== sign-in section ======= */
 /* ================================ */
@@ -2071,6 +2096,26 @@ background-color: var(--field-element-grey);
   overflow: auto;
 }
 
+#component-sign-in-up-box input[type=text],
+#component-sign-in-up-box input[type=password]  {
+  width: 100%;
+  appearance: none;
+  background: #ffffff;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0 0 0 0 rgba(19, 124, 189, 0), 0 0 0 0 rgba(19, 124, 189, 0), inset 0 0 0 1px rgba(16, 22, 26, 0.15), inset 0 1px 1px rgba(16, 22, 26, 0.2);
+  color: #182026;
+  font-size: 14px;
+  font-weight: 400;
+  height: 30px;
+  line-height: 30px;
+  outline: none;
+  padding: 0 10px;
+  transition: box-shadow 100ms cubic-bezier(0.4, 1, 0.75, 0.9);
+  vertical-align: middle;
+  margin-bottom: calc(var(--standard-margin) / 2);
+}
+
 #component-sign-in-up-box .component-sign-in-up-box-content-container {
   display: flex;
   flex-direction: column;
@@ -2127,6 +2172,13 @@ background-color: var(--field-element-grey);
 #component-sign-in-up-box .forgot-your-password-text {
   font-size: 14px;
   font-weight: var(--font-raleway-weight-bold);
+  text-align: left;
+}
+
+#component-sign-in-up-box .sign-up-in-text {
+  font-size: 14px;
+  font-weight: var(--font-raleway-weight-bold);
+  text-align: center;
 }
 
 #component-sign-in-up-box .form .btn-primary {

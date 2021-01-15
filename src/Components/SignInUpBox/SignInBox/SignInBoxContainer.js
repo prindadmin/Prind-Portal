@@ -1,13 +1,14 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import * as authReducer from '../../Reducers/authReducer'
+import * as authReducer from '../../../Reducers/authReducer'
 
-import PageComponent from './SignUpBox'
+import PageComponent from './SignInBox'
 
 const mapStatetoProps = state => {
   return {
     auth: state.auth,
+    user: state.user,
   }
 }
 
@@ -16,8 +17,8 @@ const mapDispatchToProps = dispatch => {
     init: () => {
       dispatch(authReducer.init())
     },
-    signUp: (userDetails, resolve, reject) => {
-      dispatch(authReducer.signUp(userDetails, resolve, reject))
+    signIn: (userDetails, resolve, reject) => {
+      dispatch(authReducer.signIn(userDetails, resolve, reject))
     }
   }
 }
