@@ -21,20 +21,26 @@ export class SignInPage extends Component {
   render () {
     const { location } = this.props
     const pageStyle = CanUseWebP ? {
-      backgroundImage: `url(/images/backgrounds/construction-1.webp)`
+      backgroundImage: `url(/images/backgrounds/building-site-1.webp)`
     } : {
-      backgroundImage: `url(/images/backgrounds/construction-1.png)`
+      backgroundImage: `url(/images/backgrounds/building-site-1.png)`
     }
 
     // Work out if the sign-in page should be shown, or the sign up page
-    var isSignIn = location.pathname === Endpoints.SIGNINPAGE
+    const props = {
+      isSignIn: location.pathname === Endpoints.SIGNINPAGE,
+      isSignUp: location.pathname === Endpoints.SIGNUPPAGE,
+      isForgotPassword: location.pathname === Endpoints.FORGOTPASSWORDPAGE,
+      isPasswordReset: location.pathname === Endpoints.RESETPASSWORDPAGE,
+    }
+
 
     return (
       <div id='sign-in-up-page' className='full-width full-height' style={pageStyle}>
         <SignInUpBox
           reference='sign-in-up-box'
           backgroundColor="#FFFFFF"
-          isSignIn={isSignIn}
+          {...props}
         />
       </div>
     )

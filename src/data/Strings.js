@@ -50,6 +50,7 @@ export const BUTTON_SEND_CODE = "Send Code"
 export const BUTTON_RESET_LINK = "Send Reset Link"
 export const CHANGE_PASSWORD_DESCRIPTION = "In order to change your password, we'll need to send you a link to the change password page"
 export const CHANGE_PASSWORD_LINK_SENT = "Change password link successfuly sent! Please check your email."
+export const ENTER_A_NEW_PASSWORD = "Please enter a new password for your account."
 
 export const IF_YES_PROVIDE_DETAILS_BELOW = "If yes, please provide extra details below"
 export const IF_XXX_PROVIDE_DETAILS_BELOW = "If XXX, please provide extra details below"
@@ -293,6 +294,6 @@ export const PROJECT_TYPE_DHSFPROJECT_DESCRIPTION = 'An existing build that you 
 
 export const GIT_TEXT_LOADING = "Loading data..."
 
-export const YOUR_PASSWORD_WAS_SUCCESSFULLY_CHAINGED = "Your password has been successfully changed."
+export const YOUR_PASSWORD_WAS_SUCCESSFULLY_CHANGED = "Your password has been successfully changed."
 export const LOADING_DATA_FOR_PAGE = "Loading page data"
 export const LOADING = "Loading"

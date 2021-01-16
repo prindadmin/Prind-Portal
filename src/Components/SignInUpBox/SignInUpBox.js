@@ -1,39 +1,36 @@
 import React, { Component, lazy } from 'react'
 import PropTypes from 'prop-types'
-import * as States from '../../States'
 import ReactGA from 'react-ga';
+
+import * as Endpoints from '../../Data/Endpoints'
+import * as States from '../../States'
 
 // Components
 const SignUpBox  = lazy(() => import('./SignUpBox'));
 const SignInBox  = lazy(() => import('./SignInBox'));
 const ForgotPasswordBox = lazy(() => import('./ForgotPasswordBox'));
+const PasswordResetBox = lazy(() => import('./ResetPassword'));
 
 // FUTURE: Make the "Click here" text change the mouse icon like a real link
 
 export class SignInUpBox extends Component {
   static propTypes = {
-    isSignIn: PropTypes.bool
+    isSignIn: PropTypes.bool.isRequired,
+    isSignUp: PropTypes.bool.isRequired,
+    isForgotPassword: PropTypes.bool.isRequired,
+    isPasswordReset: PropTypes.bool.isRequired,
   }
 
 
   constructor(props) {
     super()
 
-    var signInShown = false
-
-    if(props.isSignIn !== undefined) {
-      signInShown = props.isSignIn
-    }
-
     this.state = {
-      showSignInForm: signInShown,
-      showSignUpForm: false,
-      showForgotPasswordForm: false,
+      showSignInForm: props.isSignIn,
+      showSignUpForm: props.isSignUp,
+      showForgotPasswordForm: props.isForgotPassword,
+      showResetPasswordForm: props.isPasswordReset,
     }
-  }
-
-  componentDidMount () {
-    ReactGA.pageview(this.props.location.pathname)
   }
 
   showSignInForm = () => {
@@ -60,6 +57,14 @@ export class SignInUpBox extends Component {
     )
   }
 
+  showPasswordResetForm = () => {
+    return (
+      <PasswordResetBox
+        toggleVisibleForm={this.toggleVisibleForm}
+        />
+    )
+  }
+
   toggleVisibleForm = (formToShow) => {
 
     if (formToShow === States.SIGNINFORM) {
@@ -67,7 +72,10 @@ export class SignInUpBox extends Component {
         showSignInForm: true,
         showSignUpForm: false,
         showForgotPasswordForm: false,
+        showResetPasswordForm: false,
       })
+      this.props.history.push(Endpoints.SIGNINPAGE)
+      ReactGA.pageview(this.props.location.pathname)
       return;
     }
 
@@ -76,7 +84,10 @@ export class SignInUpBox extends Component {
         showSignInForm: false,
         showSignUpForm: true,
         showForgotPasswordForm: false,
+        showResetPasswordForm: false,
       })
+      this.props.history.push(Endpoints.SIGNUPPAGE)
+      ReactGA.pageview(this.props.location.pathname)
       return;
     }
 
@@ -85,7 +96,10 @@ export class SignInUpBox extends Component {
         showSignInForm: false,
         showSignUpForm: false,
         showForgotPasswordForm: true,
+        showResetPasswordForm: false,
       })
+      this.props.history.push(Endpoints.FORGOTPASSWORDPAGE)
+      ReactGA.pageview(this.props.location.pathname)
       return;
     }
 
@@ -94,13 +108,11 @@ export class SignInUpBox extends Component {
       showSignInForm: true,
       showSignUpForm: false,
       showForgotPasswordForm: false,
+      showResetPasswordForm: false,
     })
   }
 
   render () {
-
-    console.log(this.state)
-
     return (
       <div id='component-sign-in-up-box'>
         <div className="component-sign-in-up-box-content-container">
@@ -112,6 +124,9 @@ export class SignInUpBox extends Component {
             }
             {
               this.state.showForgotPasswordForm ? this.showForgotPasswordForm() : null
+            }
+            {
+              this.state.showResetPasswordForm ? this.showPasswordResetForm() : null
             }
         </div>
       </div>

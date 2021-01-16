@@ -3,11 +3,26 @@ import ListItem from '../Common/page-tile'
 
 import PAGENAMES from '../../Data/pageNames'
 
+// TODO: Combine sidebars into one root component folder
+
 export class SideBar extends Component {
+
+  pageAllowedCheck = (pageName, sidebarEntries, pageRequested) => {
+    // If the page doesn't exist in this project
+    if (pageRequested === undefined ) {
+      // and so long as the page isn't a common page, navigate to the first available page
+      if (!PAGENAMES.CommonPages.includes(pageName)) {
+        const pageToLoad = sidebarEntries[Object.keys(sidebarEntries)[0]].linkTo
+        //console.log(`loading page: ${pageToLoad}`)
+        this.props.history.push(`${pageToLoad}`)
+      }
+    }
+  }
+
 
   render() {
 
-    const { location, projects, history } = this.props
+    const { location, projects } = this.props
     const { chosenProject } = projects
     const { projectId, projectType } = chosenProject
 
@@ -22,16 +37,8 @@ export class SideBar extends Component {
     const pageRequested = sidebarEntries[pageName]
     //console.log(`Sidebar page requested`, pageRequested)
 
-    // If the page doesn't exist in this project
-    if (pageRequested === undefined ) {
-      // and so long as the page isn't a common page, navigate to the first available page
-      if (!PAGENAMES.CommonPages.includes(pageName)) {
-        const pageToLoad = sidebarEntries[Object.keys(sidebarEntries)[0]].linkTo
-        //console.log(`loading page: ${pageToLoad}`)
-        history.push(`${pageToLoad}`)
-      }
-    }
-
+    // Check that the requested page can be loaded
+    this.pageAllowedCheck(pageName, sidebarEntries, pageRequested)
 
     return (
       <div className='chooser-section col-xl-2 col-lg-3 col-md-3 col-sm-3'>

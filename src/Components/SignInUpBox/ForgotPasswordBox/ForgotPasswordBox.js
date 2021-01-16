@@ -2,10 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 // Data
-import * as Endpoints from '../../../Data/Endpoints'
 import * as Strings from '../../../Data/Strings'
-import * as FormInputs from '../../Common/formInputs'
-import * as Validators from '../../../Validators'
 import * as States from '../../../States'
 
 // Components
@@ -119,7 +116,7 @@ export class ForgotPasswordBox extends Component {
 
         <div className='spacer' />
 
-        <p className="sign-up-in-text" onClick={(e) => this.props.toggleVisibleForm(States.SIGNINFORM)}>{Strings.DONT_HAVE_AN_ACCOUNT}</p>
+        <p className="sign-up-in-text" onClick={(e) => this.props.toggleVisibleForm(States.SIGNINFORM)}>{Strings.ALREADY_HAVE_AN_ACCOUNT}</p>
 
       </form>
     )

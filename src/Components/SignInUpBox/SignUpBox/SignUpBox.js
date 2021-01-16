@@ -2,10 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 // Data
-import * as Endpoints from '../../../Data/Endpoints'
 import * as Strings from '../../../Data/Strings'
-import * as FormInputs from '../../Common/formInputs'
-import * as Validators from '../../../Validators'
 import * as States from '../../../States'
 
 // Components

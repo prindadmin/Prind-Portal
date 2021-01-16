@@ -2,10 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 // Data
-import * as Endpoints from '../../../Data/Endpoints'
 import * as Strings from '../../../Data/Strings'
-import * as FormInputs from '../../Common/formInputs'
-import * as Validators from '../../../Validators'
 import * as States from '../../../States'
 
 // Components
@@ -27,6 +24,7 @@ export class SignInBox extends Component {
     super()
     this.state = {
       showSignInError: false,
+      isSigningIn: false,
       username: '',
       password: '',
     }
@@ -63,6 +61,7 @@ export class SignInBox extends Component {
     // Remove the error if it is showing
     this.setState({
       showErrorSigningIn: false,
+      isSigningIn: true,
     })
 
     // Lower the case of the email address to ensure it is always lower case
@@ -81,13 +80,14 @@ export class SignInBox extends Component {
 
   signInFailed = (result) => {
     console.log(result)
+    // TODO: Implement sign in message
     this.setState({
         showErrorSigningIn: true,
+        isSigningIn: false,
     })
   }
 
   getLogo = () => {
-
     const logoLocation = CanUseWebP ? "/images/logos/prind-tech-logo.webp" : "/images/logos/prind-tech-logo.png"
 
     return (
@@ -105,13 +105,18 @@ export class SignInBox extends Component {
     )
   }
 
+  // TODO: Add in signing in spinner
+  getLoadingSpinner = () => {
+    return (
+      <React.Fragment>
+        <div className='lds-ring'><div></div><div></div><div></div><div></div></div>
+      </React.Fragment>
+    )
+  }
+
   getSignInForm = () => {
     return (
       <form className="sign-in-form form" onSubmit={this.signIn}>
-
-        {
-          /* <label htmlFor="emailAddress">{ Strings.PLACEHOLDER_EMAIL }</label> */
-        }
 
         <input
           id="email"
@@ -122,9 +127,6 @@ export class SignInBox extends Component {
           onChange={this.handleInputChange}
           className={ this.state.email === null ? "default" : "filled" }/>
 
-        {
-          /* <label htmlFor="password">{ Strings.PLACEHOLDER_PASSWORD }</label> */
-        }
         <input
           id="password"
           name="password"
@@ -163,7 +165,9 @@ export class SignInBox extends Component {
     return (
       <React.Fragment>
         { this.getLogo() }
-        { this.getSignInForm() }
+        {
+          this.state.isSigningIn ? this.getLoadingSpinner() : this.getSignInForm()
+        }
       </React.Fragment>
     )
   }
