@@ -110,6 +110,9 @@ export const HANDOVER_PAGE_DESCRIPTION = "The building is complete.  The PC will
 export const OCCUPATION_PAGE_TITLE = "Project Occupation"
 export const OCCUPATION_PAGE_DESCRIPTION = "The Principal Designer has finalised the Project Health and Safety File (HSF)."
 
+export const DHSF_PAGE_TITLE = "Digital Health and Safety File"
+export const DHSF_PAGE_DESCRIPTION = "This is where the project's Health and Safety File (HSF) is stored digitally."
+
 export const REFURBISHMENT_PAGE_TITLE = "Project Refurbishment"
 export const REFURBISHMENT_PAGE_DESCRIPTION = "Time for refurbishment? If your project will last more that 30 days, start new project.  Demolition? - look forward to helping you.\n\nStart new project"
 
@@ -294,6 +297,7 @@ export const PROJECT_TYPE_DHSFPROJECT_DESCRIPTION = 'An existing build that you 
 
 export const GIT_TEXT_LOADING = "Loading data..."
 
+export const YOUR_CHANGE_PASSWORD_REQUEST_WAS_SUCCESS = "Your change password request was successful, please check your email inbox"
 export const YOUR_PASSWORD_WAS_SUCCESSFULLY_CHANGED = "Your password has been successfully changed."
 export const LOADING_DATA_FOR_PAGE = "Loading page data"
 export const LOADING = "Loading"

@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 
 // Data
 import * as Strings from '../../../Data/Strings'
-import * as States from '../../../States'
+import * as FormOptions from '../../../States'
+import * as ComponentState from '../States'
 
 // Components
 import { CanUseWebP } from '../../Common/CheckIfWebpSupported'
@@ -23,10 +24,10 @@ export class SignInBox extends Component {
   constructor() {
     super()
     this.state = {
-      showSignInError: false,
-      isSigningIn: false,
       username: '',
       password: '',
+      errorMessage: '',
+      state: ComponentState.QUIESCENT,
     }
   }
 
@@ -46,7 +47,7 @@ export class SignInBox extends Component {
 
   forgotPasswordClicked = () => {
     console.log("forgot password was clicked")
-    this.props.toggleVisibleForm(States.FORGOTPASSWORDFORM)
+    this.props.toggleVisibleForm(FormOptions.FORGOTPASSWORDFORM)
   }
 
 
@@ -60,8 +61,8 @@ export class SignInBox extends Component {
 
     // Remove the error if it is showing
     this.setState({
-      showErrorSigningIn: false,
-      isSigningIn: true,
+      state: ComponentState.LOADING,
+      errorMessage: '',
     })
 
     // Lower the case of the email address to ensure it is always lower case
@@ -74,16 +75,18 @@ export class SignInBox extends Component {
 
   signInSuccessful = (result) => {
     console.log("sign in successful")
+    this.setState({
+      state: ComponentState.SIGN_IN_SUCCESS,
+    })
     this.props.history.push(this.props.user.currentRoute)
   }
 
 
   signInFailed = (result) => {
     console.log(result)
-    // TODO: Implement sign in message
     this.setState({
-        showErrorSigningIn: true,
-        isSigningIn: false,
+        state: ComponentState.SIGN_IN_FAILED,
+        errorMessage: result.message,
     })
   }
 
@@ -105,8 +108,7 @@ export class SignInBox extends Component {
     )
   }
 
-  // TODO: Add in signing in spinner
-  getLoadingSpinner = () => {
+  getSpinner = () => {
     return (
       <React.Fragment>
         <div className='lds-ring'><div></div><div></div><div></div><div></div></div>
@@ -140,9 +142,9 @@ export class SignInBox extends Component {
 
         <div className='spacer' />
         {
-          this.state.showErrorSigningIn ?
+          this.state.state === ComponentState.SIGN_IN_FAILED ?
           <Callout style={{marginBottom: '15px'}} intent='danger'>
-            <p>{ this.props.auth.error.message }</p>
+            <p>{ this.states.errorMessage }</p>
           </Callout> :
           null
         }
@@ -154,7 +156,7 @@ export class SignInBox extends Component {
 
         <div className='spacer' />
 
-        <p className="sign-up-in-text" onClick={(e) => this.props.toggleVisibleForm(States.SIGNUPFORM)}>{Strings.DONT_HAVE_AN_ACCOUNT}</p>
+        <p className="sign-up-in-text" onClick={(e) => this.props.toggleVisibleForm(FormOptions.SIGNUPFORM)}>{Strings.DONT_HAVE_AN_ACCOUNT}</p>
 
       </form>
     )
@@ -166,7 +168,13 @@ export class SignInBox extends Component {
       <React.Fragment>
         { this.getLogo() }
         {
-          this.state.isSigningIn ? this.getLoadingSpinner() : this.getSignInForm()
+          this.state.state === ComponentState.QUIESCENT ? this.getSignInForm() : null
+        }
+        {
+          this.state.state === ComponentState.LOADING ? this.getSpinner() : null
+        }
+        {
+          this.state.state === ComponentState.SIGN_IN_FAILED ? this.getSignInForm() : null
         }
       </React.Fragment>
     )

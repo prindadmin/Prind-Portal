@@ -1,3 +1,5 @@
+import * as Strings from './Strings'
+
 const PAGENAMES = {
   CDM2015Project: {
     project: {
@@ -34,6 +36,8 @@ const PAGENAMES = {
     },
     occupation: {
       name: "Occupation",
+      title: Strings.OCCUPATION_PAGE_TITLE,
+      description: Strings.OCCUPATION_PAGE_DESCRIPTION,
       linkTo: "/occupation"
     },
     refurbishment: {
@@ -44,14 +48,20 @@ const PAGENAMES = {
   DHSFProject: {
     project: {
       name: "Project Details",
+      title: Strings.EDIT_PROJECT_DETAILS,
+      description: '',
       linkTo: "/project"
     },
     team: {
       name: "Project Team",
+      title: Strings.PROJECT_DIRECTORY_TITLE,
+      description: '',
       linkTo: "/team"
     },
     occupation: {
       name: "HSF",
+      title: Strings.DHSF_PAGE_TITLE,
+      description: Strings.DHSF_PAGE_DESCRIPTION,
       linkTo: "/occupation"
     },
   },

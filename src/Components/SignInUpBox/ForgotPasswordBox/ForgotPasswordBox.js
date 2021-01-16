@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 // Data
 import * as Strings from '../../../Data/Strings'
 import * as States from '../../../States'
+import * as ComponentState from '../States'
 
 // Components
 import { CanUseWebP } from '../../Common/CheckIfWebpSupported'
@@ -12,7 +13,6 @@ import {
   Callout,
 } from '@blueprintjs/core'
 
-// TODO: make this stay on screen once reset is sent
 
 export class ForgotPasswordBox extends Component {
   static propTypes = {
@@ -22,13 +22,11 @@ export class ForgotPasswordBox extends Component {
   constructor() {
     super()
     this.state = {
-      showSignInError: false,
+      state: ComponentState.QUIESCENT,
       username: '',
       password: '',
+      errorMessage: '',
     }
-  }
-
-  componentDidUpdate() {
   }
 
   handleInputChange = (event) => {
@@ -46,7 +44,8 @@ export class ForgotPasswordBox extends Component {
 
     // Remove the error if it is showing
     this.setState({
-      showErrorSigningIn: false,
+      state: ComponentState.LOADING,
+      errorMessage: '',
     })
 
     // Request sign in
@@ -56,14 +55,17 @@ export class ForgotPasswordBox extends Component {
 
   passwordResetSuccessful = (result) => {
     console.log("password reset successful")
-    this.props.history.push(this.props.user.currentRoute)
+    this.setState({
+      state: ComponentState.FORGOT_PASSWORD_SUCCESS,
+    })
   }
 
 
   passwordResetFailed = (result) => {
     console.log(result)
     this.setState({
-        showErrorSigningIn: true,
+      state: ComponentState.FORGOT_PASSWORD_FAILED,
+      errorMessage: result.message,
     })
   }
 
@@ -86,7 +88,7 @@ export class ForgotPasswordBox extends Component {
     )
   }
 
-  getSignInForm = () => {
+  getForgotPasswordForm = () => {
     return (
       <form className="sign-in-form form" onSubmit={this.resetPassword}>
 
@@ -101,13 +103,6 @@ export class ForgotPasswordBox extends Component {
 
 
         <div className='spacer' />
-        {
-          this.state.showErrorSigningIn ?
-          <Callout style={{marginBottom: '15px'}} intent='danger'>
-            <p>{ this.props.auth.error.message }</p>
-          </Callout> :
-          null
-        }
 
         <input
           type="submit"
@@ -122,12 +117,61 @@ export class ForgotPasswordBox extends Component {
     )
   }
 
+  getForgotPasswordFailed = () => {
+    return(
+      <React.Fragment>
+        <Callout style={{marginBottom: '15px'}} intent='danger'>
+          <p>{ this.state.errorMessage }</p>
+        </Callout>
+        <div className='spacer' />
+        {
+          this.getForgotPasswordForm()
+        }
+      </React.Fragment>
+    )
+  }
+
+  getSpinner = () => {
+    return (
+      <React.Fragment>
+        <div className='lds-ring'><div></div><div></div><div></div><div></div></div>
+      </React.Fragment>
+    )
+  }
+
+  getForgotPasswordSuccess = () => {
+    return (
+      <div className='password-request-success'>
+        <h3>{Strings.YOUR_CHANGE_PASSWORD_REQUEST_WAS_SUCCESS}</h3>
+        <div className='spacer' />
+        <input
+          type="submit"
+          value={ Strings.ACCOUNT_BACK_TO_LOGIN_PAGE }
+          className="submit-button"
+          onClick={() => this.props.toggleVisibleForm(States.SIGNINFORM)}/>
+      </div>
+    )
+  }
 
   render () {
+
+    console.log(this.state.state)
+
     return (
       <React.Fragment>
         { this.getLogo() }
-        { this.getSignInForm() }
+        {
+          this.state.state === ComponentState.QUIESCENT ? this.getForgotPasswordForm() : null
+        }
+        {
+          this.state.state === ComponentState.LOADING ? this.getSpinner() : null
+        }
+        {
+          this.state.state === ComponentState.FORGOT_PASSWORD_FAILED ? this.getForgotPasswordFailed() : null
+        }
+        {
+          this.state.state === ComponentState.FORGOT_PASSWORD_SUCCESS ? this.getForgotPasswordSuccess() : null
+        }
       </React.Fragment>
     )
   }

@@ -42,6 +42,8 @@ const LoggedInContent = lazy(() => import('./Pages/LoggedInContent'));
 // TODO: Remove the Long Text box once the Git Text box is complete
 // TODO: Make page content in Redux follow the available fields for a projectType
 // TODO: Use Endpoints import for all routes
+// TODO: Move page title and description strings to 'pageNames' in data folder so it can be customised per project type
+// TODO: Combine all stage pages into one customisable component
 
 
 // Use existing Cognito resource for auth

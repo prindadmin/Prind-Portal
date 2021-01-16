@@ -6,7 +6,7 @@ import { Select } from "@blueprintjs/select";
 
 import PAGENAMES from '../../Data/pageNames'
 
-// TODO: work out why the popover arrow isn't pointing to the menu button
+// TODO: work out why the popover arrow isn't pointing to the menu button (4 hours)
 
 export class SideBar extends Component {
 

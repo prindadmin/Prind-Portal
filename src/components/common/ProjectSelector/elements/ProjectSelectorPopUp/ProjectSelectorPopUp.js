@@ -13,6 +13,7 @@ import ItemIcon from '../../../../Common/ItemIcon'
 
 import * as Strings from '../../../../../Data/Strings'
 import * as Endpoints from '../../../../../Data/Endpoints'
+import * as ComponentState from '../../States'
 
 const ProjectTypeSelector = lazy(() => import('../ProjectTypeSelector'));
 
@@ -25,20 +26,16 @@ export class ProjectSelectorPopUp extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      fetchError: false,
-      updateError: false,
+      state: ComponentState.QUIESCENT,
       chosenProjectId: "",
       projectTypeSelectorOpen: false,
       errorText: "",
     }
-
-    this.props.getAccessibleProjects(
-      this.resolveProjectFetch,
-      this.rejectProjectFetch,
-    )
-
   }
 
+  componentDidMount() {
+    this.fetchProjectList()
+  }
 
   // perform this if the user clicks close popup
   cancelPopup = () => {
@@ -71,12 +68,28 @@ export class ProjectSelectorPopUp extends Component {
     )
   }
 
+  fetchProjectList = () => {
+    this.setState({
+      state: ComponentState.LOADING
+    })
+
+    this.props.getAccessibleProjects(
+      this.resolveProjectFetch,
+      this.rejectProjectFetch,
+    )
+  }
+
   resolveProjectFetch = () => {
+    console.log('successfully fetched project list')
+    this.setState({
+      state: ComponentState.QUIESCENT
+    })
   }
 
   rejectProjectFetch = () => {
+    console.error('failed to fetch project list')
     this.setState({
-      fetchError: true,
+      state: ComponentState.LOADING_ERROR,
       errorText: Strings.ERROR_FETCHING_PROJECT_LIST,
     })
   }
@@ -98,7 +111,7 @@ export class ProjectSelectorPopUp extends Component {
 
   rejectProjectUpdate = () => {
     this.setState({
-      updateError: true,
+      state: ComponentState.UPDATE_ERROR,
       errorText: Strings.ERROR_UNABLE_TO_SELECT_PROJECT,
     })
   }
@@ -141,11 +154,14 @@ export class ProjectSelectorPopUp extends Component {
     )
   }
 
-  getProjectListPresentation = ( projectList ) => {
-    if (projectList.length === 0) {
+  getProjectListPresentation = ( ) => {
+
+    const allProjects = this.concatProjects()
+
+    if (allProjects.length === 0) {
       return this.noProjectsAvailable()
     }
-    const projectsPresentation = projectList.map((project, id)=> (
+    const projectsPresentation = allProjects.map((project, id)=> (
       this.getSingleProjectPresentation(project, id)
     ))
     return <div className='project-list-container'>{projectsPresentation}</div>
@@ -171,12 +187,18 @@ export class ProjectSelectorPopUp extends Component {
   }
 
   getFetchError = () => {
-    // TODO: add refresh button
     const { errorText } = this.state
     return (
-      <Callout style={{marginBottom: '15px'}} intent='danger'>
-        <div>{errorText}</div>
-      </Callout>
+      <div className='error-box'>
+        <Callout style={{marginBottom: '15px'}} intent='danger'>
+          <div>{errorText}</div>
+        </Callout>
+        <input
+          type="submit"
+          value={ Strings.BUTTON_RETRY }
+          className="close-button"
+          onClick={(e) => this.fetchProjectList()} />
+      </div>
     )
   }
 
@@ -201,10 +223,9 @@ export class ProjectSelectorPopUp extends Component {
   }
 
   siteSelectorPopupContent = () => {
+    const { projectTypeSelectorOpen } = this.state
 
-    const { projects } = this.props
-    const { fetchError, updateError, projectTypeSelectorOpen } = this.state
-    const allProjects = this.concatProjects()
+    console.log(this.state.state)
 
     return (
       <div id='popup-greyer' onClick={this.cancelPopup} >
@@ -212,10 +233,21 @@ export class ProjectSelectorPopUp extends Component {
           { this.getHeaderContent() }
           <div className='project-scroll-box'>
             {
-              projects.fetching ? this.projectsLoading() :
-              projectTypeSelectorOpen ? <ProjectTypeSelector closePopup={this.cancelPopup}/> :
-              fetchError || updateError ? this.getFetchError() : this.getProjectListPresentation(allProjects)
+              projectTypeSelectorOpen ? <ProjectTypeSelector closePopup={this.cancelPopup}/> : null
             }
+            {
+              this.state.state === ComponentState.QUIESCENT ? this.getProjectListPresentation() : null
+            }
+            {
+              this.state.state === ComponentState.LOADING ? this.projectsLoading() : null
+            }
+            {
+              this.state.state === ComponentState.LOADING_ERROR ? this.getFetchError() : null
+            }
+            {
+              this.state.state === ComponentState.UPDATE_ERROR ? this.getFetchError() : null
+            }
+
           </div>
           { this.getFooterContent() }
         </div>

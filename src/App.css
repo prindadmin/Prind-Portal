@@ -35,6 +35,7 @@
   --standard-padding: 15px;
   --standard-margin: 15px;
   --standard-border-radius: 15px;
+  --standard-max-content-width: 1000px;
   --project-selector-grid-columns: 1fr;
 }
 
@@ -1952,7 +1953,9 @@ background-color: var(--field-element-grey);
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 800px;
+  width: 100%;
+  padding: var(--standard-padding);
+  max-width: var(--standard-max-content-width);
 }
 
 #foundations-page .foundations-icon {
@@ -1967,6 +1970,10 @@ background-color: var(--field-element-grey);
   text-align: center;
   width: 100%;
   margin-top: 4em;
+}
+
+#foundations-page .foundations-download-icons img {
+  width: 100%;
 }
 
 #foundations-page .foundations-download-text {
@@ -1997,6 +2004,10 @@ background-color: var(--field-element-grey);
   padding: var(--standard-padding) 0;
 }
 
+#popup-box .popup-box-header input[type=submit]{
+  max-width: 30%;
+}
+
 #popup-box .close-button {
   margin-left: auto;
 }
@@ -2011,6 +2022,11 @@ background-color: var(--field-element-grey);
   display: grid;
   grid-template-columns: 1fr;
   grid-row-gap: var(--standard-padding);
+}
+
+#popup-box .error-box {
+  max-width: 400px;
+  margin: 2em auto;
 }
 
 /* ======================================= */
@@ -2144,6 +2160,11 @@ background-color: var(--field-element-grey);
   font-size: 16px;
   font-weight: var(--font-raleway-weight-regular);
   margin-bottom: 30px;
+}
+
+#component-sign-in-up-box .password-request-success {
+  width: 100%;
+  text-align: center;
 }
 
 #component-sign-in-up-box .form {

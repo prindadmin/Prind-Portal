@@ -133,7 +133,6 @@ class ResetPassword extends Component {
     }
     return (
       <div className='auth-form' style={style}>
-        <ItemIcon size='8x' type='lock' />
         <h3>{Strings.YOUR_PASSWORD_WAS_SUCCESSFULLY_CHANGED}</h3>
         <input
           type="submit"

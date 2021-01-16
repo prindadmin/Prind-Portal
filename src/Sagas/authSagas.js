@@ -194,6 +194,9 @@ function * refreshSession (action) {
 ====================================================================
 */
 function * forgotPassword (action) {
+
+  console.log(action.payload)
+
   try {
     const result = yield call(forgotPasswordDispatcher, action.payload.username)
 
@@ -201,6 +204,9 @@ function * forgotPassword (action) {
       action.payload.resolve(result)
     }
   } catch (e) {
+
+    console.log("error in forgotten password")
+
     yield put({
       type: Actions.AUTH_SET_STATE,
       payload: {

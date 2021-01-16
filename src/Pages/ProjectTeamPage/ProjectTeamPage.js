@@ -1,25 +1,18 @@
 import React, { lazy, Component } from 'react'
-import { Field, reduxForm } from 'redux-form'
+import { reduxForm } from 'redux-form'
 
 import ReactGA from 'react-ga';
 
 import {
-  FormGroup,
   Button,
   ButtonGroup,
-  Callout,
 } from '@blueprintjs/core'
 
-import * as FormInputs from '../../Components/Common/formInputs'
 import * as Strings from '../../Data/Strings'
-import * as Validators from '../../Validators'
 
 const NoProjectSelected = lazy(() => import('../../Components/Common/NoProjectSelected'));
 const ContactTile = lazy(() => import('../../Components/ContactTile'));
-
-// TODO: Stop this requesting the team if there is no project selected
-// TODO: Add :root variables to change number of tiles in a row dynamically to let them be smaller than 400px
-// TODO: Move "Add team member" form to it's own component and import it
+const AddNewMemberForm = lazy(() => import('../../Components/AddNewTeamMember'));
 
 export class ProjectTeamPage extends Component {
   static propTypes = {
@@ -108,7 +101,6 @@ export class ProjectTeamPage extends Component {
       this.addMemberResolve,
       this.addMemberReject,
     )
-
   }
 
   pageHeader = () => {
@@ -139,79 +131,6 @@ export class ProjectTeamPage extends Component {
     this.setState({
       addingMember: false,
     })
-  }
-
-  addNewMember = () => {
-
-    const { handleSubmit } = this.props
-    const { roles } = this.props.members
-    const { addMemberError, errorText } = this.state
-
-    // re-key the roles array so the keys match those required by the drop down
-    var formattedRoles = roles.map(item => {
-      return {
-        id: item.roleId,
-        name: item.roleName
-      };
-    });
-
-    return (
-      <form onSubmit={handleSubmit(this.addMember)} className='add-member-form'>
-        {
-          addMemberError ?
-          <Callout style={{marginBottom: '15px'}} intent='danger'>
-            <div>{errorText}</div>
-          </Callout> :
-          null
-        }
-        <FormGroup
-          label={Strings.MEMBER_DETAILS}
-          labelFor="emailAddress"
-        >
-          <Field
-            name="emailAddress"
-            validate={[Validators.required, Validators.isEmailAddress]}
-            component={FormInputs.TextInput}
-            placeholder={Strings.MEMBER_EMAIL_ADDRESS}
-          />
-        </FormGroup>
-
-        <FormGroup
-          label={Strings.MEMBER_PROJECT_ROLE}
-          labelFor="roleId"
-        >
-          <Field
-            name="roleId"
-            values={formattedRoles}
-            component={FormInputs.SelectInput}
-            placeholder={Strings.MEMBER_PROJECT_ROLE_SELECT_ROLE}
-            onItemSelect={this.onItemSelected}
-            disabled={false}
-          />
-        </FormGroup>
-
-
-        <ButtonGroup fill>
-          <Button
-            loading={this.props.submitting}
-            disabled={this.props.invalid}
-            type='submit'
-            intent='primary'
-            text={Strings.BUTTON_SAVE_CHANGES}
-          />
-        </ButtonGroup>
-
-        <ButtonGroup fill>
-          <Button
-            type='cancel'
-            intent='none'
-            text={Strings.BUTTON_CANCEL}
-            onClick={this.cancelNewMember}
-          />
-        </ButtonGroup>
-
-      </form>
-    )
   }
 
   onMemberRemove = () => {
@@ -306,7 +225,15 @@ export class ProjectTeamPage extends Component {
     return (
       <div className="form-container">
         {this.state.addingMember ? this.newMemberPageHeader() : this.pageHeader()}
-        {this.state.addingMember ? this.addNewMember() : this.memberList()}
+        {
+          this.state.addingMember ?
+          <AddNewMemberForm
+            handleSubmit={this.props.handleSubmit(this.addMember)}
+            onItemSelected={this.onItemSelected}
+            {...this.state}
+            /> :
+          this.memberList()
+        }
         {this.pageFooter()}
       </div>
     )
