@@ -17,6 +17,8 @@ import ItemIcon from '../../ItemIcon'
 
 import * as Strings from '../../../../Data/Strings'
 
+// TODO: Fix Uploaded by displaying "none none" when user has not signed up to Foundations (seems to come from server)
+
 export class Element extends Component {
   static propTypes = {
     elementContent: PropTypes.shape({

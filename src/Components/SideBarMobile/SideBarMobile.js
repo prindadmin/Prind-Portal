@@ -6,7 +6,7 @@ import { Select } from "@blueprintjs/select";
 
 import PAGENAMES from '../../Data/pageNames'
 
-// TODO: work out why the popover arrow isn't pointing to the menu button
+// TODO: work out why the popover arrow isn't pointing to the menu button (4 hours)
 
 export class SideBar extends Component {
 
@@ -55,10 +55,22 @@ export class SideBar extends Component {
     return pageNameList
   }
 
+  pageAllowedCheck = (pageName, sidebarEntries, pageRequested) => {
+    // If the page doesn't exist in this project
+    if (pageRequested === undefined ) {
+      // and so long as the page isn't a common page, navigate to the first available page
+      if (!PAGENAMES.CommonPages.includes(pageName)) {
+        const pageToLoad = sidebarEntries[Object.keys(sidebarEntries)[0]].linkTo
+        //console.log(`loading page: ${pageToLoad}`)
+        this.props.history.push(`${pageToLoad}`)
+      }
+    }
+  }
+
 
   render() {
 
-    const { location, projects, history } = this.props
+    const { location, projects } = this.props
     const { projectType } = projects.chosenProject
 
     const sidebarEntries = PAGENAMES[projectType] === undefined ? PAGENAMES["CDM2015Project"] : PAGENAMES[projectType]
@@ -71,15 +83,8 @@ export class SideBar extends Component {
     const pageRequested = sidebarEntries[pageName]
     //console.log(`Sidebar page requested`, pageRequested)
 
-    // If the page doesn't exist in this project
-    if (pageRequested === undefined ) {
-      // and so long as the page isn't a common page, navigate to the first available page
-      if (!PAGENAMES.CommonPages.includes(pageName)) {
-        const pageToLoad = sidebarEntries[Object.keys(sidebarEntries)[0]].linkTo
-        //console.log(`loading page: ${pageToLoad}`)
-        history.push(`${pageToLoad}`)
-      }
-    }
+    // Check that the requested page can be loaded
+    this.pageAllowedCheck(pageName, sidebarEntries, pageRequested)
 
     return (
         <div className='chooser-section col-12'>

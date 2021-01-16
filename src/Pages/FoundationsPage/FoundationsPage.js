@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
-
 import ReactGA from 'react-ga';
 
 import * as Strings from '../../Data/Strings'
 
 export class FoundationsPage extends Component {
-
 
   componentDidMount() {
     const { location } = this.props

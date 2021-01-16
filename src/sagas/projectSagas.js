@@ -30,9 +30,7 @@ function * init (action) {
 }
 
 function * getAccessibleProjects (action) {
-
   try {
-
     // pre-fetch update
     yield put({
       type: Actions.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUEST_SENT,
@@ -51,17 +49,24 @@ function * getAccessibleProjects (action) {
         accessibleProjects: result.body
       }
     })
+
+    if(action.payload.resolve !== null) {
+      action.payload.resolve()
     }
-    catch (error) {
-      console.error(error)
-      yield put({
-        type: Actions.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUEST_FAILED,
-          payload: {
-            ...defaultState,
-            error
-          }
-      })
+  }
+  catch (error) {
+    console.error(error)
+    yield put({
+      type: Actions.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUEST_FAILED,
+        payload: {
+          ...defaultState,
+          error
+        }
+    })
+    if(action.payload.reject !== null) {
+      action.payload.reject()
     }
+  }
 }
 
 function * createNewProject (action) {

@@ -13,7 +13,7 @@ import { Editor } from '@tinymce/tinymce-react';
 import * as Strings from '../../../../Data/Strings'
 
 // TODO: Style text editor when disabled
-// TODO: Compare old and new text in some way (https://mergely.com/)
+// TODO: Compare old and new text in some way (https://mergely.com/ or https://github.com/kpdecker/jsdiff)
 // TODO: Update in server as versioned (Not sure how this works on the file upload yet)
 
 

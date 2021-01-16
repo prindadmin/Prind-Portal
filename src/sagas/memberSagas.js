@@ -40,14 +40,12 @@ function * addMemberToProject (action) {
       }
     })
 
-    const result = yield call(addMemberToProjectDispatcher, projectID, memberDetails)
+    yield call(addMemberToProjectDispatcher, projectID, memberDetails)
 
     // Post-fetch update to store
     yield put({
       type: Actions.MEMBER_SET_STATE,
-      payload: {
-        currentMember: result
-      }
+      payload: {}
     })
 
     // Callback if provided

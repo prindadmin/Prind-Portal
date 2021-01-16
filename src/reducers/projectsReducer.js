@@ -48,10 +48,12 @@ export const resetDownloadURL = () => {
   }
 }
 
-export const getAccessibleProjects = ( ) => {
+export const getAccessibleProjects = ( resolve, reject ) => {
   return {
     type: action.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUESTED,
     payload: {
+      resolve,
+      reject,
     }
   }
 }

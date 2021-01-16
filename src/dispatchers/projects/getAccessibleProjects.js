@@ -30,7 +30,6 @@ async function GetAccessibleProjects() {
       .then(response => {
         console.log(response)
 
-        // TODO: Add this error handing to all requests
         if (response.errorMessage !== undefined) {
           reject(response)
         }

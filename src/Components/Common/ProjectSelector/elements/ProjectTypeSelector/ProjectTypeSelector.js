@@ -6,7 +6,6 @@ import ProjectTypesList from '../../../../../Data/ProjectTypes'
 
 const ProjectTypeTile = lazy(() => import('../../../../ProjectTypeTile'));
 
-// TODO: give the user a choice of project type (complete or DHSF)
 export class ProjectTypeSelector extends Component {
   static propTypes = {
     closePopup: PropTypes.func.isRequired,

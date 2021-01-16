@@ -1,0 +1,4 @@
+export const QUIESCENT = 'QUIESCENT'
+export const LOADING = 'LOADING'
+export const LOADING_ERROR = 'LOADING_ERROR'
+export const UPDATE_ERROR = 'UPDATE_ERROR'

@@ -16,18 +16,25 @@ import {
 } from '@blueprintjs/core'
 
 import * as Strings from '../../Data/Strings'
+import PAGEDATA from '../../Data/pageNames'
 
 const pageName = 'occupation'
+
 
 export class OccupationPage extends Component {
   static propTypes = {
     pageContent: PropTypes.object,
   }
 
-  constructor() {
+  constructor(props) {
     super()
+
+    const { projectType } = props.projects.chosenProject
+
     this.state = {
-      createFieldIsOpen: false
+      createFieldIsOpen: false,
+      pageTitle: '',
+      pageDescription: '',
     }
   }
 
@@ -45,10 +52,18 @@ export class OccupationPage extends Component {
 
   componentDidUpdate(prevProps) {
     const { projects, getContent } = this.props
-    const { projectId } = projects.chosenProject
+    const { chosenProject } = projects
+    const { projectId, projectType } = chosenProject
 
     if (projectId !== prevProps.projects.chosenProject.projectId) {
       getContent(projectId)
+    }
+
+    if (projectType !== undefined && this.state.pageTitle === '') {
+      this.setState({
+        pageTitle: PAGEDATA[projectType][pageName].title,
+        pageDescription: PAGEDATA[projectType][pageName].description
+      })
     }
   }
 
@@ -96,8 +111,8 @@ export class OccupationPage extends Component {
     return(
       <div className='page-content'>
         <div className='page-title'>
-          <h1>{Strings.OCCUPATION_PAGE_TITLE}</h1>
-          <span>{Strings.OCCUPATION_PAGE_DESCRIPTION}</span>
+          <h1>{this.state.pageTitle}</h1>
+          <span>{this.state.pageDescription}</span>
         </div>
         {
           fields.map((singleField, index) => {

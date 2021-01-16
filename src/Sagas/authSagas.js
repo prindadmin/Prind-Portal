@@ -94,7 +94,9 @@ function * signIn (action) {
       }
     })
 
-    action.payload.resolve(result)
+    if (action.payload.resolve !== undefined) {
+      action.payload.resolve(result)
+    }
   } catch (e) {
     yield put({
       type: Actions.AUTH_SET_STATE,
@@ -103,7 +105,10 @@ function * signIn (action) {
         error: e
       }
     })
-    action.payload.reject(e)
+    if (action.payload.reject !== undefined) {
+      action.payload.reject(e)
+    }
+
   }
 }
 
@@ -189,6 +194,9 @@ function * refreshSession (action) {
 ====================================================================
 */
 function * forgotPassword (action) {
+
+  console.log(action.payload)
+
   try {
     const result = yield call(forgotPasswordDispatcher, action.payload.username)
 
@@ -196,6 +204,9 @@ function * forgotPassword (action) {
       action.payload.resolve(result)
     }
   } catch (e) {
+
+    console.log("error in forgotten password")
+
     yield put({
       type: Actions.AUTH_SET_STATE,
       payload: {

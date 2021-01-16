@@ -22,10 +22,7 @@ import Error404 from './Components/Error404'
 import * as Strings from './Data/Strings'
 
 /* Before sign in pages */
-const SignIn = lazy(() => import('./Components/SignIn'));
-const SignUp = lazy(() => import('./Components/SignUp'));
-const ForgotPassword = lazy(() => import('./Components/ForgotPassword'));
-const ResetPassword = lazy(() => import('./Components/ResetPassword'));
+const SignInPage = lazy(() => import('./Pages/SignInPage'))
 const ConfirmEmailPage = lazy(() => import('./Components/ConfirmEmailPage'));
 
 /* Other pages */
@@ -40,13 +37,14 @@ const LoggedInContent = lazy(() => import('./Pages/LoggedInContent'));
 // TODO: Strip out blueprint (if possible; date picker is important)
 // TODO: Strip out node-sass (why is this used?)
 // TODO: Strip out typescript???
-// TODO: Add in CSS Grid
-// TODO: Add in sign in / sign up page from Foundations portal
+// TODO: Migrate to CSS Grid from bootstrap where possible (no rows and cols in classnames)
 // TODO: Simplify CSS using media queries and global variables
-// TODO: Add lazy loading for sub modules
-// TODO: Work out why the build is so big (AWS?)
 // TODO: Remove the Long Text box once the Git Text box is complete
 // TODO: Make page content in Redux follow the available fields for a projectType
+// TODO: Use Endpoints import for all routes
+// TODO: Move page title and description strings to 'pageNames' in data folder so it can be customised per project type
+// TODO: Combine all stage pages into one customisable component
+
 
 // Use existing Cognito resource for auth
 Amplify.configure({
@@ -130,11 +128,11 @@ class App extends Component{
         <Router>
           <Suspense fallback={this.loadingPlaceholder()}>
             <Switch>
-              <Route path='/signin' component={SignIn} />
-              <Route path='/signup' component={SignUp} />
-              <Route path='/forgot-password' component={ForgotPassword} />
-              <Route path='/reset-password' component={ResetPassword} />
-              <Route path='/confirm-email' component={ConfirmEmailPage} />
+              <Route path={Endpoints.SIGNINPAGE} component={SignInPage} />
+              <Route path={Endpoints.SIGNUPPAGE} component={SignInPage} />
+              <Route path={Endpoints.FORGOTPASSWORDPAGE} component={SignInPage} />
+              <Route path={Endpoints.RESETPASSWORDPAGE} component={SignInPage} />
+              <Route path={Endpoints.CONFIRMEMAILPAGE} component={ConfirmEmailPage} />
 
               <PrivateRoute path='/project' component={LoggedInContent} />
               <PrivateRoute path='/project/:id?' component={LoggedInContent} />
