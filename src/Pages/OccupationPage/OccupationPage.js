@@ -28,9 +28,6 @@ export class OccupationPage extends Component {
 
   constructor(props) {
     super()
-
-    const { projectType } = props.projects.chosenProject
-
     this.state = {
       createFieldIsOpen: false,
       pageTitle: '',
@@ -43,7 +40,7 @@ export class OccupationPage extends Component {
     const { projectId } = projects.chosenProject
 
     // Register pageview with GA
-    ReactGA.pageview(location.pathname + location.search);
+    ReactGA.pageview(location.pathname);
 
     if (projects.chosenProject.projectId !== "") {
       getContent(projectId)
@@ -105,7 +102,7 @@ export class OccupationPage extends Component {
   }
 
   showFilledPage = () => {
-
+    const { projectId } = this.props.projects.chosenProject
     const { fields }  = this.props.pageContent.occupation
 
     return(
@@ -119,6 +116,7 @@ export class OccupationPage extends Component {
             return <PageFieldMapper
               key={index}
               pageName={pageName}
+              projectId={projectId}
               singleField={singleField} />
           })
         }

@@ -296,6 +296,7 @@ export const PROJECT_TYPE_DHSFPROJECT_NAME = 'DHSF Project'
 export const PROJECT_TYPE_DHSFPROJECT_DESCRIPTION = 'An existing build that you wish to store the Health & Safety File for.  This type of project will allow you to store all required parts of the Health & Safety File digitally.'
 
 export const GIT_TEXT_LOADING = "Loading data..."
+export const ERROR_DOWNLOADING_TEXT_FOR_GIT_BOX = "There was an error downloading the existing data.  Try again?"
 
 export const YOUR_CHANGE_PASSWORD_REQUEST_WAS_SUCCESS = "Your change password request was successful, please check your email inbox"
 export const YOUR_PASSWORD_WAS_SUCCESSFULLY_CHANGED = "Your password has been successfully changed."

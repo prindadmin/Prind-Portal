@@ -32,7 +32,6 @@ export class SignInBox extends Component {
   }
 
   componentDidMount () {
-    this.props.init()
   }
 
   handleInputChange = (event) => {

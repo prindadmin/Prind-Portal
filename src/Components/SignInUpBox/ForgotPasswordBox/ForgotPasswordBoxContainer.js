@@ -14,9 +14,6 @@ const mapStatetoProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    init: () => {
-      dispatch(authReducer.init())
-    },
     resetPassword: (userDetails, resolve, reject) => {
       dispatch(authReducer.forgotPassword(userDetails, resolve, reject))
     }

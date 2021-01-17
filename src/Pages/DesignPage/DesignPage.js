@@ -90,7 +90,7 @@ export class DesignPage extends Component {
   }
 
   showFilledPage = () => {
-
+    const { projectId } = this.props.projects.chosenProject
     const { fields }  = this.props.pageContent.design
 
     return(
@@ -104,6 +104,7 @@ export class DesignPage extends Component {
             return <PageFieldMapper
               key={index}
               pageName={pageName}
+              projectId={projectId}
               singleField={singleField} />
           })
         }

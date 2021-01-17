@@ -6,6 +6,7 @@ import PageComponent from './SignInUpBox'
 const mapStatetoProps = state => {
   return {
     auth: state.auth,
+    user: state.user,
   }
 }
 

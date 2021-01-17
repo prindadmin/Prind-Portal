@@ -299,6 +299,11 @@ function * uploadFile (action) {
       }
     })
 
+    // Callback if provided
+    if (action.payload.resolve !== undefined) {
+      action.payload.resolve(result)
+    }
+
   }
   catch (error) {
     console.error(error)
@@ -309,6 +314,11 @@ function * uploadFile (action) {
           error,
         }
     })
+
+    // Callback if provided
+    if (action.payload.reject !== undefined) {
+      action.payload.reject(error)
+    }
   }
 }
 

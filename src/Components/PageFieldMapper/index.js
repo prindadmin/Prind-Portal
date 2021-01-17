@@ -4,14 +4,14 @@ import { FileUpload, DropDown, CalendarPicker, LongText, GitText } from '../Comm
 
 const PageFieldMapper = props => {
 
-  const { singleField } = props
-  const pageName = props.pageName
+  const { singleField, pageName, projectId } = props
 
   if (singleField.type === 'file') {
     return <FileUpload
               key={singleField.id}
               elementContent={singleField}
               pageName={pageName}
+              projectId={projectId}
               />
   }
 
@@ -22,6 +22,7 @@ const PageFieldMapper = props => {
               elementContent={singleField}
               initialValues={singleField.fieldDetails}
               pageName={pageName}
+              projectId={projectId}
               />
   }
 
@@ -30,6 +31,7 @@ const PageFieldMapper = props => {
               key={singleField.id}
               elementContent={singleField}
               pageName={pageName}
+              projectId={projectId}
               />
   }
 
@@ -40,6 +42,7 @@ const PageFieldMapper = props => {
               elementContent={singleField}
               initialValues={singleField.fieldDetails}
               pageName={pageName}
+              projectId={projectId}
               />
   }
 
@@ -49,6 +52,7 @@ const PageFieldMapper = props => {
               form={"field-" + singleField.id}
               elementContent={singleField}
               pageName={pageName}
+              projectId={projectId}
               />
   }
 

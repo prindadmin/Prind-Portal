@@ -26,7 +26,7 @@ function * init (action) {
 
 function * getS3ProjectFileUploadToken (action) {
 
-  const { project_id, pageName } = action.payload
+  const { project_id, pageName, resolve, reject } = action.payload
 
   try {
     const result = yield call(Dispatchers.s3UploadProjectFileTokenDispatcher, project_id, pageName)
@@ -36,9 +36,18 @@ function * getS3ProjectFileUploadToken (action) {
         projectS3Token: result.body,
       }
     })
+
+    if (resolve !== undefined) {
+      resolve()
+    }
+
     }
     catch (e) {
       console.error(e)
+
+      if (reject !== undefined) {
+        reject(e)
+      }
   }
 }
 

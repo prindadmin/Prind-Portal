@@ -1323,6 +1323,18 @@ background-color: var(--field-element-grey);
   height: 500px;
 }
 
+#git-text-element .error-text {
+  padding-top: 3em;
+  max-width: 500px;
+  width: 100%;
+  margin: auto;
+  text-align: center;
+}
+
+#git-text-element .error-text input[type=submit] {
+  max-width: 250px;
+  width: 100%;
+}
 
 /* ================================== */
 /* ========= inception page ========= */

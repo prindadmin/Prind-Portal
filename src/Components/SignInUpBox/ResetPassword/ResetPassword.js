@@ -10,8 +10,7 @@ import {
 
 // Components
 import { CanUseWebP } from '../../Common/CheckIfWebpSupported'
-
-import ItemIcon from '../../Common/ItemIcon'
+ 
 import * as Endpoints from '../../../Data/Endpoints'
 import * as Strings from '../../../Data/Strings'
 import * as ComponentState from '../States'

@@ -15,9 +15,12 @@ const mapStatetoProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    uploadFile: (projectID, pageName, fieldID, fileDetails) => {
-      dispatch(projectsReducer.uploadFile(projectID, pageName, fieldID, fileDetails))
-    }
+    uploadFile: (projectID, pageName, fieldID, fileDetails, resolve, reject) => {
+      dispatch(projectsReducer.uploadFile(projectID, pageName, fieldID, fileDetails, resolve, reject))
+    },
+    requestS3ProjectFileUploadToken: (project_id, pageName, resolve, reject) => {
+      dispatch(userReducer.requestS3ProjectFileUploadToken(project_id, pageName, resolve, reject))
+    },
   }
 }
 

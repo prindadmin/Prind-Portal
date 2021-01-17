@@ -14,9 +14,6 @@ const mapStatetoProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    init: () => {
-      dispatch(authReducer.init())
-    },
     signIn: (userDetails, resolve, reject) => {
       dispatch(authReducer.signIn(userDetails, resolve, reject))
     }

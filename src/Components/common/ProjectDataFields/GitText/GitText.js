@@ -11,11 +11,13 @@ import AWS from 'aws-sdk';
 import { Editor } from '@tinymce/tinymce-react';
 
 import * as Strings from '../../../../Data/Strings'
+import * as ComponentState from '../ComponentStates'
 
 // TODO: Style text editor when disabled
 // TODO: Compare old and new text in some way (https://mergely.com/ or https://github.com/kpdecker/jsdiff)
 // TODO: Update in server as versioned (Not sure how this works on the file upload yet)
 
+// CONTINUE HERE: Lots to do on the state flow (i.e. what fetch/upload to run when based on S3 token status)
 
 export class GitText extends Component {
   static propTypes = {
@@ -28,21 +30,17 @@ export class GitText extends Component {
         textValue: PropTypes.string,
       }).isRequired,
     }),
+    projectId: PropTypes.string.isRequired,
     pageName: PropTypes.string.isRequired,
   }
 
   constructor() {
     super()
     this.state = {
-      updateServerInProgress: false,
-      updateServerError: false,
-      uploadFileInProgress: false,
+      state: ComponentState.QUIESCENT,
       uploadFileProgress: 0,
-      uploadFileError: false,
-      downloadFileInProgress: true,
       downloadFileProgress: 0,
-      downloadFileError: false,
-      errorText: "",
+      errorMessage: "",
       originalContent: '',
       currentContent: '',
       editable: false,
@@ -54,7 +52,12 @@ export class GitText extends Component {
     this.downloadFromS3()
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevState, prevProps) {
+    if (this.state.state !== prevState.state) {
+      if (this.state.state === ComponentState.S3_TOKEN_NOW_AVAILABLE) {
+        // TODO: this
+      }
+    }
   }
 
 
@@ -75,14 +78,26 @@ export class GitText extends Component {
 
   getValidS3Token = () => {
     // TODO: Make this refresh the token if required; stops fetching if not present
-    const { user } = this.props
+    const { user, requestS3ProjectFileUploadToken, projectId, pageName } = this.props
     if (user.projectS3Token === undefined) {
       this.setState({
-        uploadFileError: true
+        state: ComponentState.NO_S3_TOKEN_AVAILABLE
       })
+      requestS3ProjectFileUploadToken(projectId, pageName, this.fetchTokenSuccess, this.fetchTokenFailed)
       return undefined;
     }
     return user.projectS3Token
+  }
+
+  fetchTokenSuccess = () => {
+    console.log("S3 token fetched successfully")
+    this.setState({
+      state: ComponentState.S3_TOKEN_NOW_AVAILABLE,
+    })
+  }
+
+  fetchTokenFailed = (error) => {
+    console.log(error)
   }
 
   configureAWSAuthorisation = (token) => {
@@ -144,7 +159,7 @@ export class GitText extends Component {
         console.log("ERROR uploading file to S3")
         console.error(error)
         that.setState({
-          uploadFileError: true
+          state: ComponentState.UPLOADING_NEW_FILE_TO_SERVER_FAILED,
         })
       })
 
@@ -153,6 +168,10 @@ export class GitText extends Component {
 
   onFileUploadComplete = (response) => {
     const { projects, pageName, elementContent } = this.props
+
+    this.setState({
+      state: ComponentState.UPLOADING_NEW_FILE_TO_SERVER_SUCCESS,
+    })
 
     // Build parameters
     var uploadDetails = {
@@ -165,8 +184,28 @@ export class GitText extends Component {
       pageName,
       elementContent.id,
       uploadDetails,
+      this.saveResolve,
+      this.saveReject,
     )
+
+    this.setState({
+      state: ComponentState.UPDATING_METADATA_ON_SERVER
+    })
   }
+
+  saveResolve = () => {
+    this.setState({
+      state: ComponentState.UPDATING_METADATA_ON_SERVER_SUCCESS,
+    })
+  }
+
+  saveReject = () => {
+    this.setState({
+      state: ComponentState.UPDATING_METADATA_ON_SERVER_FAILED,
+      errorMessage: Strings.ERROR_SAVING_CHANGES_TO_FIELD,
+    })
+  }
+
 
   downloadFromS3 = () => {
     const { projects, pageName, elementContent } = this.props
@@ -195,6 +234,7 @@ export class GitText extends Component {
 
     const that = this;
 
+    // TODO: Make check for file existence before trying to download
     request.on('httpDownloadProgress', function (progress) {
         console.log(progress)
         that.setState({
@@ -208,9 +248,7 @@ export class GitText extends Component {
         console.log("ERROR downloading file from S3")
         console.error(error)
         that.setState({
-          downloadFileError: true,
-          editable: true,
-          downloadFileInProgress: false,
+          state: ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER_FAILED,
         })
       })
 
@@ -222,22 +260,7 @@ export class GitText extends Component {
     this.setState({
       originalContent: response.data.Body.toString(),
       currentContent: response.data.Body.toString(),
-      downloadFileInProgress: false,
-      editable: true,
-    })
-  }
-
-  saveResolve = () => {
-    this.setState({
-      updateServerInProgress: false,
-    })
-  }
-
-  saveReject = () => {
-    this.setState({
-      updateServerError: true,
-      updateServerInProgress: false,
-      errorText: Strings.ERROR_SAVING_CHANGES_TO_FIELD
+      state: ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER_SUCCESS
     })
   }
 
@@ -252,21 +275,56 @@ export class GitText extends Component {
     )
   }
 
+  getEditor = () => {
+    const { elementContent } = this.props
+    const { originalContent, state } = this.state
+    const editable = state === ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER_SUCCESS
+
+    return (
+      <Editor
+        initialValue={originalContent}
+        apikey={process.env.REACT_APP_TINY_API_KEY}
+        disabled={!editable || !elementContent.editable}
+        init={{
+          height: 500,
+          menubar: false,
+          plugins: [
+            'advlist autolink lists link image',
+            'charmap print preview anchor help',
+            'searchreplace visualblocks code',
+            'insertdatetime media table paste wordcount'
+          ],
+          toolbar:
+            'undo redo | formatselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | help'
+        }}
+        onChange={this.handleEditorChange}
+      />
+    )
+  }
+
+  getErrorDownloading = () => {
+    return(
+      <div className='error-text'>
+        { Strings.ERROR_DOWNLOADING_TEXT_FOR_GIT_BOX }
+        <input
+          type="submit"
+          value={ Strings.BUTTON_RETRY }
+          className="save-button"
+          onClick={(e) => this.downloadFromS3()} />
+      </div>
+    )
+  }
+
 
   // ------------------------------ RENDER BELOW THIS LINE ------------------------------
 
   render() {
 
     // TODO: Add state error variable handling
+    const { title, description } = this.props.elementContent
+    const { originalContent, state } = this.state
 
-    const { elementContent } = this.props
-    const { title, description } = elementContent
-    const { originalContent, editable, downloadFileInProgress } = this.state
-
-    console.log(this.state)
-    console.log(!editable)
-    console.log(!this.props.elementContent.editable)
-    console.log(!editable || !elementContent.editable)
+    console.log(state)
 
     return (
       <div id='git-text-element'>
@@ -281,33 +339,33 @@ export class GitText extends Component {
 
           <div className='container'>
             {
-              downloadFileInProgress ? this.getLoadingSpinner() :
-
-                <Editor
-                  initialValue={originalContent}
-                  apikey={process.env.REACT_APP_TINY_API_KEY}
-                  disabled={!editable || !elementContent.editable}
-                  init={{
-                    height: 500,
-                    menubar: false,
-                    plugins: [
-                      'advlist autolink lists link image',
-                      'charmap print preview anchor help',
-                      'searchreplace visualblocks code',
-                      'insertdatetime media table paste wordcount'
-                    ],
-                    toolbar:
-                      'undo redo | formatselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | help'
-                  }}
-                  onChange={this.handleEditorChange}
-                />
+              state === ComponentState.UPLOADING_NEW_FILE_TO_SERVER ||
+              state === ComponentState.UPDATING_METADATA_ON_SERVER ||
+              state === ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER ?
+              this.getLoadingSpinner() :
+              null
             }
+            {
+              state === ComponentState.QUIESCENT ?
+              this.getEditor() :
+              null
+            }
+            {
+              state === ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER_FAILED ?
+              this.getErrorDownloading() :
+              null
+            }
+
           </div>
-          <input
-            type="submit"
-            value={ Strings.BUTTON_SAVE_CHANGES }
-            className="save-button"
-            onClick={(e) => this.saveChanges(e)} />
+          {
+            state === ComponentState.QUIESCENT ?
+            <input
+              type="submit"
+              value={ Strings.BUTTON_SAVE_CHANGES }
+              className="save-button"
+              onClick={(e) => this.saveChanges(e)} /> :
+            null
+          }
 
         </div>
       </div>

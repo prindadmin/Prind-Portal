@@ -24,12 +24,33 @@ export class SignInUpBox extends Component {
 
   constructor(props) {
     super()
-
     this.state = {
       showSignInForm: props.isSignIn,
       showSignUpForm: props.isSignUp,
       showForgotPasswordForm: props.isForgotPassword,
       showResetPasswordForm: props.isPasswordReset,
+    }
+  }
+
+  componentDidMount() {
+    this.checkIfLoggedIn({})
+  }
+
+
+  componentDidUpdate(prevState, prevProps) {
+    console.log("updating component")
+    this.checkIfLoggedIn(prevProps)
+  }
+
+  checkIfLoggedIn = (prevProps) => {
+    const { auth, history, user } = this.props
+
+    if (auth !== prevProps.auth) {
+      if (auth.isSignedIn === States.AUTH_SUCCESS) {
+        console.log("redirecting to logged in page")
+        history.push(user.currentRoute)
+        return;
+      }
     }
   }
 

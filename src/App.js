@@ -73,22 +73,18 @@ class App extends Component{
   constructor() {
     super()
     this.state = {
-      isSignedIn: false,
       oldConsoleLog: null,
     }
+
+    // Initialise Google Analytics to log all page views
+    ReactGA.initialize(process.env.REACT_APP_GA_ID, {
+      gaOptions: {
+        siteSpeedSampleRate: 100
+      }
+    });
   }
 
   componentDidMount() {
-
-    // Initialise Google Analytics to log all page views
-    if (process.env.REACT_APP_GA_ID !== "") {
-      ReactGA.initialize(process.env.REACT_APP_GA_ID, {
-        gaOptions: {
-          siteSpeedSampleRate: 100
-        }
-      });
-    }
-
 
     // Turn off the logger if this is a production environment
     process.env.REACT_APP_STAGE === "PRODUCTION" ? this.disableLogger() : this.enableLogger()
@@ -99,6 +95,10 @@ class App extends Component{
 
     // If the refreshToken is present, refresh the login
     this.props.refreshSession()
+  }
+
+  componentDidUpdate(prevState, prevProps) {
+
   }
 
   enableLogger = () => {
@@ -175,11 +175,9 @@ class App extends Component{
 
               <Route path='/'
                 render={() =>
-                  auth.isSignedIn === AUTH_SUCCESS ? (
-                    <Redirect to={this.props.user.currentRoute} />
-                  ) : (
+                  auth.isSignedIn === AUTH_SUCCESS ?
+                    <Redirect to={this.props.user.currentRoute} /> :
                     <Redirect to={Endpoints.SIGNINPAGE} />
-                  )
                 }
               />
               <Route component={ Error404 } />
