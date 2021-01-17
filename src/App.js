@@ -73,19 +73,23 @@ class App extends Component{
   constructor() {
     super()
     this.state = {
-      isLoggedIn: false,
+      isSignedIn: false,
       oldConsoleLog: null,
     }
-
-    // Initialise Google Analytics to log all page views
-    ReactGA.initialize(process.env.REACT_APP_GA_ID, {
-      gaOptions: {
-        siteSpeedSampleRate: 100
-      }
-    });
   }
 
   componentDidMount() {
+
+    // Initialise Google Analytics to log all page views
+    if (process.env.REACT_APP_GA_ID !== "") {
+      ReactGA.initialize(process.env.REACT_APP_GA_ID, {
+        gaOptions: {
+          siteSpeedSampleRate: 100
+        }
+      });
+    }
+
+
     // Turn off the logger if this is a production environment
     process.env.REACT_APP_STAGE === "PRODUCTION" ? this.disableLogger() : this.enableLogger()
 

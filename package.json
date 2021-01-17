@@ -6,16 +6,16 @@
     "@blueprintjs/core": "^3.36.0",
     "@blueprintjs/datetime": "^3.20.0",
     "@blueprintjs/select": "^3.15.0",
-    "@fortawesome/fontawesome-pro": "^5.15.1",
-    "@fortawesome/fontawesome-svg-core": "^1.2.32",
-    "@fortawesome/free-regular-svg-icons": "^5.15.1",
-    "@fortawesome/free-solid-svg-icons": "^5.15.1",
-    "@fortawesome/pro-regular-svg-icons": "^5.15.1",
-    "@fortawesome/pro-solid-svg-icons": "^5.15.1",
+    "@fortawesome/fontawesome-pro": "^5.15.2",
+    "@fortawesome/fontawesome-svg-core": "^1.2.34",
+    "@fortawesome/free-regular-svg-icons": "^5.15.2",
+    "@fortawesome/free-solid-svg-icons": "^5.15.2",
+    "@fortawesome/pro-regular-svg-icons": "^5.15.2",
+    "@fortawesome/pro-solid-svg-icons": "^5.15.2",
     "@fortawesome/react-fontawesome": "^0.1.13",
-    "@tinymce/tinymce-react": "^3.8.4",
+    "@tinymce/tinymce-react": "^3.9.0",
     "aws-amplify": "^3.3.14",
-    "aws-sdk": "^2.824.0",
+    "aws-sdk": "^2.828.0",
     "axios": "^0.21.1",
     "bootstrap": "^4.5.3",
     "env-cmd": "^10.0.1",
@@ -72,6 +72,14 @@
     ]
   },
   "devDependencies": {
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.5",
+    "enzyme-to-json": "^3.6.1",
     "redux-devtools": "^3.7.0"
+  },
+  "jest": {
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
   }
 }

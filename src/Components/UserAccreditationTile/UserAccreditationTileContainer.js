@@ -1,5 +1,4 @@
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
 
 import UserAccreditationTile from './UserAccreditationTile'
 
@@ -13,4 +12,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default withRouter(connect(mapStatetoProps, mapDispatchToProps)(UserAccreditationTile))
+export default connect(mapStatetoProps, mapDispatchToProps)(UserAccreditationTile)
