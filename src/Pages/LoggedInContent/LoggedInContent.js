@@ -20,8 +20,6 @@ const ProjectFetchError = lazy(() => import('../../Components/Common/ProjectFetc
 const InceptionPage = lazy(() => import('../InceptionPage'));
 const FeasibilityPage = lazy(() => import('../FeasibilityPage'));
 const DesignPage = lazy(() => import('../DesignPage'));
-const TenderPage = lazy(() => import('../TenderPage'));
-const ConstructionPage = lazy(() => import('../ConstructionPage'));
 const HandoverPage = lazy(() => import('../HandoverPage'));
 const OccupationPage = lazy(() => import('../OccupationPage'));
 const RefurbishmentPage = lazy(() => import('../RefurbishmentPage'));
@@ -29,11 +27,15 @@ const FoundationsPage = lazy(() => import('../FoundationsPage'));
 const NewProjectPage = lazy(() => import('../NewProjectPage'));
 const ProfilePage = lazy(() => import('../ProfilePage'));
 
+const ProjectStagePage = lazy(() => import('../ProjectStagePageTemplate'));
+
 /* Other pages */
 const ProjectDetailsPage = lazy(() => import('../ProjectDetailsPage'));
 const ProjectTeamPage = lazy(() => import('../ProjectTeamPage'));
 
 const MOBILE_WIDTH_BREAKPOINT = 992;
+
+// TODO: Implement ProjectStagePage and remove all other project pages
 
 export class LoggedInContent extends Component {
   static propTypes = {
@@ -188,8 +190,8 @@ export class LoggedInContent extends Component {
                     pathname.startsWith('/inception') ? <InceptionPage /> :
                     pathname.startsWith('/feasibility') ? <FeasibilityPage /> :
                     pathname.startsWith('/design') ? <DesignPage /> :
-                    pathname.startsWith('/tender') ? <TenderPage /> :
-                    pathname.startsWith('/construction') ? <ConstructionPage /> :
+                    pathname.startsWith('/tender') ? <ProjectStagePage pageName='tender' /> :
+                    pathname.startsWith('/construction') ? <ProjectStagePage pageName='construction' /> :
                     pathname.startsWith('/handover') ? <HandoverPage /> :
                     pathname.startsWith('/occupation') ? <OccupationPage /> :
                     pathname.startsWith('/refurbishment') ? <RefurbishmentPage /> :

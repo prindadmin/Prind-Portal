@@ -4,10 +4,10 @@ import API from '@aws-amplify/api';
 // Fixed values for the API request
 const apiName = process.env.REACT_APP_API_NAME
 
-async function ConstructionPageFetch(projectId) {
+async function StagePageFetch(projectId, pageName) {
 
   // Build path for request
-  const path = `/project/${projectId}/page/construction`
+  const path = `/project/${projectId}/page/${pageName}`
 
   // Get the current session and the identity jwtToken
   const identityToken = await Auth.currentSession()
@@ -38,4 +38,4 @@ async function ConstructionPageFetch(projectId) {
    })
 }
 
-export default ConstructionPageFetch
+export default StagePageFetch

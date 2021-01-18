@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import ReactGA from 'react-ga';
 
 import ProjectLoading from '../../Components/Common/ProjectLoading'
+import * as ComponentState from './States'
 
 import CreateCustomFieldPopover from '../../Components/Common/CreateCustomFieldPopover'
 import NoProjectSelected from '../../Components/Common/NoProjectSelected'
@@ -17,39 +18,66 @@ import {
 
 import * as Strings from '../../Data/Strings'
 
-const pageName = 'construction'
+// TODO: Fix lack of gap between description and first field
 
 export class StagePage extends Component {
   static propTypes = {
-    pageContent: PropTypes.object,
+    pageName: PropTypes.string.isRequired,
+    pageContent: PropTypes.object.isRequired,
   }
 
   constructor() {
     super()
     this.state = {
+      state: ComponentState.QUIESCENT,
       createFieldIsOpen: false
     }
   }
 
   componentDidMount() {
-    const { projects, getContent, location } = this.props
+    const { location, projects } = this.props
     const { projectId } = projects.chosenProject
 
     // Register pageview with GA
-    ReactGA.pageview(location.pathname + location.search);
+    ReactGA.pageview(location.pathname);
 
-    if (projects.chosenProject.projectId !== "") {
-      getContent(projectId)
+    if (projectId !== "") {
+      this.fetchPageContent()
     }
   }
 
   componentDidUpdate(prevProps) {
-    const { projects, getContent } = this.props
-    const { projectId } = projects.chosenProject
-
+    const { projectId } = this.props.projects.chosenProject
     if (projectId !== prevProps.projects.chosenProject.projectId) {
-      getContent(projectId)
+      this.fetchPageContent()
     }
+
+    if (this.props.pageName !== prevProps.pageName) {
+      this.fetchPageContent()
+    }
+  }
+
+  fetchPageContent = () => {
+    const { pageName } = this.props
+    const { projectId } = this.props.projects.chosenProject
+
+    this.setState({
+      state: ComponentState.CONTENT_FETCH_IN_PROGRESS,
+    })
+    this.props.getContent(projectId, pageName, this.contentFetchSuccessful, this.contentFetchFailed)
+  }
+
+  contentFetchSuccessful = (result) => {
+    this.setState({
+      state: ComponentState.CONTENT_FETCH_SUCCESSFUL,
+    })
+  }
+
+  contentFetchFailed = (error) => {
+    this.setState({
+      state: ComponentState.CONTENT_FETCH_FAILED,
+      errorMessage: error.message,
+    })
   }
 
   onClosePopup = () => {
@@ -66,7 +94,6 @@ export class StagePage extends Component {
           intent={Intent.PRIMARY}
           onClick={(e) => this.setState({createFieldIsOpen: true})}
           />
-
       </div>
     )
   }
@@ -90,15 +117,18 @@ export class StagePage extends Component {
   }
 
   showFilledPage = () => {
-    const { projectId } = this.props.projects.chosenProject
-    const { fields }  = this.props.pageContent.construction
+    const { pageName, projects, pageContent } = this.props
+    const { projectId } = projects.chosenProject
+    const { fields }  = pageContent[pageName]
+
+    const { title, description } = Strings.PAGE_TITLES_AND_DESCRIPTIONS[pageName]
 
 
     return(
       <div className='page-content'>
         <div className='page-title'>
-          <h1>{Strings.CONSTRUCTION_PAGE_TITLE}</h1>
-          <span>{Strings.CONSTRUCTION_PAGE_DESCRIPTION}</span>
+          <h1>{title}</h1>
+          <span>{description}</span>
         </div>
         {
           fields.map((singleField, index) => {
@@ -116,7 +146,7 @@ export class StagePage extends Component {
 
   chooseContent = () => {
 
-    const { projects, pageContent } = this.props
+    const { projects, pageContent, pageName } = this.props
 
     if (projects.chosenProject.projectName === Strings.NO_PROJECT_SELECTED) {
       return this.showEmptyPage()
@@ -136,14 +166,14 @@ export class StagePage extends Component {
 
   render() {
 
-    const { projects } = this.props
+    const { projects, pageName } = this.props
     const { createFieldIsOpen } = this.state
 
     return (
-      <div id='construction-page'>
-        <div className='page-content-section row'>
+      <div id='stage-page'>
+        <div className='page-content-section'>
           {
-            projects !== undefined ? this.chooseContent() : this.showErrorPage()
+            projects !== undefined  || this.state.state === ComponentState.CONTENT_FETCH_FAILED ? this.chooseContent() : this.showErrorPage()
           }
           {
             createFieldIsOpen ?

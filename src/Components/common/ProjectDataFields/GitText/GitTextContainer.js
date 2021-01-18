@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 import * as projectsReducer from '../../../../Reducers/projectsReducer'
+import * as userReducer from '../../../../Reducers/userReducer'
 
 import GitText from './GitText'
 

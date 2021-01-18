@@ -116,6 +116,42 @@ export const DHSF_PAGE_DESCRIPTION = "This is where the project's Health and Saf
 export const REFURBISHMENT_PAGE_TITLE = "Project Refurbishment"
 export const REFURBISHMENT_PAGE_DESCRIPTION = "Time for refurbishment? If your project will last more that 30 days, start new project.  Demolition? - look forward to helping you.\n\nStart new project"
 
+export const PAGE_TITLES_AND_DESCRIPTIONS = {
+  inception: {
+    title: "Project Inception",
+    description: "Inception of a project begins with the idea. This idea is captured in a project brief.",
+  },
+  feasibility: {
+    title: "Project Feasibility",
+    description: "To confirm that the project brief is feasible it will be necessary to perform investigations which can be compiled into a feasibility study.",
+  },
+  design: {
+    title: "Project Design",
+    description: "The Appointed design team will be collectively identifying hazards and considering mitagations for potential risks.  The assessment of risks will be complied into a single Design Risk Register.",
+  },
+  tender: {
+    title: "Project Tender",
+    description: "The design is complete, you are ready to build.  You will require a Principal Contractor.  It is the client's responsibility to provide Pre-Construction information.",
+  },
+  construction: {
+    title: "Project Construction",
+    description: "You have appointed a Principal contractor (PC).  The PC has full responsibility for Health and Safety during this step.  The PC will provide a Construction Phase Plan (CPP).",
+  },
+  handover: {
+    title: "Project Handover",
+    description: "The building is complete.  The PC will have provided a Practical Completion Certificate.",
+  },
+  occupation: {
+    title: "Project Occupation",
+    description: "The Principal Designer has finalised the Project Health and Safety File (HSF).",
+  },
+  refurbishment: {
+    title: "Project Refurbishment",
+    description: "Time for refurbishment? If your project will last more that 30 days, start new project.  Demolition? - look forward to helping you.\n\nStart new project",
+  },
+}
+
+
 export const EDIT_PROJECT_DETAILS = "Edit Project Details"
 
 export const PROJECT_DIRECTORY_TITLE = "Project Directory"
