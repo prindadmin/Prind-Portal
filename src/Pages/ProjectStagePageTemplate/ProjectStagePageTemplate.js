@@ -18,8 +18,6 @@ import {
 
 import * as Strings from '../../Data/Strings'
 
-// TODO: Fix lack of gap between description and first field
-
 export class StagePage extends Component {
   static propTypes = {
     pageName: PropTypes.string.isRequired,

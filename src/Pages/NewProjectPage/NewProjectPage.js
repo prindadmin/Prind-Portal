@@ -186,19 +186,6 @@ export class Page extends Component {
           />
         </FormGroup>
 
-        <FormGroup
-          label={Strings.PROJECT_DESCRIPTION}
-          labelFor="projectDescription"
-          labelInfo=""
-          className="col-12 last"
-        >
-          <Field
-            name="projectDescription"
-            component={FormInputs.TextBoxInput}
-            placeholder={Strings.PROJECT_DESCRIPTION}
-          />
-        </FormGroup>
-
         <ButtonGroup fill>
           <Button
             loading={this.props.submitting}

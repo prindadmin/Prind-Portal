@@ -1344,15 +1344,7 @@ background-color: var(--field-element-grey);
 
 }
 
-#inception-page .page-title,
-#feasibility-page .page-title,
-#design-page .page-title,
-#tender-page .page-title,
-#construction-page .page-title,
-#handover-page .page-title,
-#occupation-page .page-title,
-#refurbishment-page .page-title,
-#profile-page .page-title {
+.page-title {
   margin-bottom: 2em;
 }
 

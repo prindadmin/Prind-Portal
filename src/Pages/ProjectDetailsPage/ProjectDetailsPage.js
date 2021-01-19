@@ -147,22 +147,6 @@ export class ProjectDetailsPage extends Component {
           />
         </FormGroup>
 
-        <FormGroup
-          label={Strings.PROJECT_DESCRIPTION}
-          labelFor="projectDescription"
-          labelInfo=""
-          className="last"
-        >
-          <Field
-            name="projectDescription"
-            component="textarea"
-            className="bp3-input"
-            placeholder={Strings.PROJECT_DESCRIPTION}
-          />
-        </FormGroup>
-
-
-
         <ButtonGroup fill>
           <Button
             loading={this.props.submitting}
