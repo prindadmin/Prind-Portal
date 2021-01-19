@@ -1,68 +1,72 @@
-import * as Strings from './Strings'
 
 const PAGENAMES = {
   CDM2015Project: {
     project: {
       name: "Project Details",
-      linkTo: "/project"
+      linkTo: "/project",
+      isStagePage: false,
     },
     team: {
       name: "Project Team",
-      linkTo: "/team"
+      linkTo: "/team",
+      isStagePage: false,
     },
     inception: {
       name: "Inception",
-      linkTo: "/inception"
+      linkTo: "/inception",
+      isStagePage: true,
     },
     feasibility: {
       name: "Feasibility",
-      linkTo: "/feasibility"
+      linkTo: "/feasibility",
+      isStagePage: true,
     },
     design: {
       name: "Design",
-      linkTo: "/design"
+      linkTo: "/design",
+      isStagePage: true,
     },
     tender: {
       name: "Tender",
-      linkTo: "/tender"
+      linkTo: "/tender",
+      isStagePage: true,
     },
     construction: {
       name: "Construction",
-      linkTo: "/construction"
+      linkTo: "/construction",
+      isStagePage: true,
     },
     handover: {
       name: "Handover",
-      linkTo: "/handover"
+      linkTo: "/handover",
+      isStagePage: true,
     },
     occupation: {
       name: "Occupation",
-      title: Strings.OCCUPATION_PAGE_TITLE,
-      description: Strings.OCCUPATION_PAGE_DESCRIPTION,
-      linkTo: "/occupation"
+      linkTo: "/occupation",
+      isStagePage: true,
     },
     refurbishment: {
       name: "Refurbishment",
-      linkTo: "/refurbishment"
+      linkTo: "/refurbishment",
+      isStagePage: true,
     }
   },
   DHSFProject: {
     project: {
       name: "Project Details",
-      title: Strings.EDIT_PROJECT_DETAILS,
-      description: '',
-      linkTo: "/project"
+      linkTo: "/project",
+      isStagePage: false,
     },
     team: {
       name: "Project Team",
-      title: Strings.PROJECT_DIRECTORY_TITLE,
-      description: '',
-      linkTo: "/team"
+      linkTo: "/team",
+      isStagePage: false,
     },
     occupation: {
       name: "HSF",
-      title: Strings.DHSF_PAGE_TITLE,
-      description: Strings.DHSF_PAGE_DESCRIPTION,
-      linkTo: "/occupation"
+      linkTo: "/occupation",
+      isStagePage: true,
     },
   },
   CommonPages: [

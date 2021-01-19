@@ -16,26 +16,15 @@ const LayoutContentArea1x1Mobile  = lazy(() => import('../../Components/LoggedIn
 const Footer = lazy(() => import('../../Components/Common/footer'));
 const ProjectFetchError = lazy(() => import('../../Components/Common/ProjectFetchError'));
 
-/* Stage pages */
-const InceptionPage = lazy(() => import('../InceptionPage'));
-const FeasibilityPage = lazy(() => import('../FeasibilityPage'));
-const DesignPage = lazy(() => import('../DesignPage'));
-const HandoverPage = lazy(() => import('../HandoverPage'));
-const OccupationPage = lazy(() => import('../OccupationPage'));
-const RefurbishmentPage = lazy(() => import('../RefurbishmentPage'));
+/* Pages that can be loaded */
+const ProjectDetailsPage = lazy(() => import('../ProjectDetailsPage'));
+const ProjectTeamPage = lazy(() => import('../ProjectTeamPage'));
+const ProjectStagePage = lazy(() => import('../ProjectStagePageTemplate'));
 const FoundationsPage = lazy(() => import('../FoundationsPage'));
 const NewProjectPage = lazy(() => import('../NewProjectPage'));
 const ProfilePage = lazy(() => import('../ProfilePage'));
 
-const ProjectStagePage = lazy(() => import('../ProjectStagePageTemplate'));
-
-/* Other pages */
-const ProjectDetailsPage = lazy(() => import('../ProjectDetailsPage'));
-const ProjectTeamPage = lazy(() => import('../ProjectTeamPage'));
-
 const MOBILE_WIDTH_BREAKPOINT = 992;
-
-// TODO: Implement ProjectStagePage and remove all other project pages
 
 export class LoggedInContent extends Component {
   static propTypes = {
@@ -45,6 +34,7 @@ export class LoggedInContent extends Component {
   constructor() {
     super()
     this.state = {
+      projectName: undefined,
       fetchingProjectDetails: false,
       pageName: "",
       width: 0,
@@ -178,55 +168,70 @@ export class LoggedInContent extends Component {
     )
   }
 
+  getContent = () => {
+    const { location, projects } = this.props
+    const { pathname } = location
+    const { projectType } = projects.chosenProject
+    const splitPathname = pathname.split('/')
+    const pageName = splitPathname[1]
+    const projectName = splitPathname.length > 2 ? splitPathname[2] : undefined
 
-  render () {
+    if (this.state.projectName !== projectName) {
+      this.setState({
+        projectName
+      })
+    }
 
-    const { pathname } = this.props.location
-    const { error } = this.props.projects
-    const { width } = this.state
+    const possiblePages = projectType === undefined ? PAGENAMES['CDM2015Project'] : PAGENAMES[projectType]
+
+    const stagePageNames = Object.keys(possiblePages).map((singlePageName, index) => {
+      if (possiblePages[singlePageName].isStagePage) {
+        return singlePageName
+      }
+      return null
+    })
+
+    if (stagePageNames.includes(pageName)) {
+      return <ProjectStagePage pageName={pageName} projectName={projectName}/>
+    }
 
     const content = pathname.startsWith('/team') ? <ProjectTeamPage /> :
                     pathname.startsWith('/project') ? <ProjectDetailsPage /> :
-                    pathname.startsWith('/inception') ? <InceptionPage /> :
-                    pathname.startsWith('/feasibility') ? <FeasibilityPage /> :
-                    pathname.startsWith('/design') ? <DesignPage /> :
-                    pathname.startsWith('/tender') ? <ProjectStagePage pageName='tender' /> :
-                    pathname.startsWith('/construction') ? <ProjectStagePage pageName='construction' /> :
-                    pathname.startsWith('/handover') ? <HandoverPage /> :
-                    pathname.startsWith('/occupation') ? <OccupationPage /> :
-                    pathname.startsWith('/refurbishment') ? <RefurbishmentPage /> :
                     pathname.startsWith('/foundations') ? <FoundationsPage /> :
                     pathname.startsWith('/newproject') ? <NewProjectPage /> :
                     pathname.startsWith('/profile') ? <ProfilePage /> :
                     this.errorComponent()
 
+    return content
+  }
+
+
+  render () {
+    const { error } = this.props.projects
+    const { width } = this.state
+    const content = this.getContent()
+
     return (
       <div id='logged-in-content-container' className='full-width row'>
-
-        <HeaderBar companyName='Prin-D' />
-
+        <HeaderBar companyName='Prin-D' openProjectSelector={this.state.projectName === undefined}/>
         <LayoutBody>
-
           {
             width > MOBILE_WIDTH_BREAKPOINT ? <SideBar {...this.props} /> : <SideBarMobile {...this.props} />
           }
-
           {
-              width > MOBILE_WIDTH_BREAKPOINT ?
-                  <LayoutContentArea1x1>
-                      <Suspense fallback={this.loadingPlaceholder()}>
-                          { error ? this.errorContent() : content }
-                      </Suspense>
-                  </LayoutContentArea1x1> :
-                  <LayoutContentArea1x1Mobile>
-                      <Suspense fallback={this.loadingPlaceholder()}>
-                          { error ? this.errorContent() : content }
-                      </Suspense>
-                  </LayoutContentArea1x1Mobile>
+            width > MOBILE_WIDTH_BREAKPOINT ?
+                <LayoutContentArea1x1>
+                    <Suspense fallback={this.loadingPlaceholder()}>
+                        { error ? this.errorContent() : content }
+                    </Suspense>
+                </LayoutContentArea1x1> :
+                <LayoutContentArea1x1Mobile>
+                    <Suspense fallback={this.loadingPlaceholder()}>
+                        { error ? this.errorContent() : content }
+                    </Suspense>
+                </LayoutContentArea1x1Mobile>
             }
-
         </LayoutBody>
-
         <Footer />
       </div>
     )

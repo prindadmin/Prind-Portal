@@ -21,7 +21,7 @@ import * as Strings from '../../Data/Strings'
 export class StagePage extends Component {
   static propTypes = {
     pageName: PropTypes.string.isRequired,
-    pageContent: PropTypes.object.isRequired,
+    projectId: PropTypes.string,
   }
 
   constructor() {
@@ -116,11 +116,17 @@ export class StagePage extends Component {
 
   showFilledPage = () => {
     const { pageName, projects, pageContent } = this.props
-    const { projectId } = projects.chosenProject
+    const { projectId, projectType } = projects.chosenProject
     const { fields }  = pageContent[pageName]
+    var textObject = `PAGE_TITLES_AND_DESCRIPTIONS_CDM2015Project`
+    try {
+      textObject = `PAGE_TITLES_AND_DESCRIPTIONS_${projectType}`
+    }
+    catch(e) {
+      textObject = `PAGE_TITLES_AND_DESCRIPTIONS_CDM2015Project`
+    }
 
-    const { title, description } = Strings.PAGE_TITLES_AND_DESCRIPTIONS[pageName]
-
+    const { title, description } = Strings[textObject][pageName]
 
     return(
       <div className='page-content'>

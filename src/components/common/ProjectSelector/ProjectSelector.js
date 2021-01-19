@@ -13,6 +13,7 @@ import * as Strings from '../../../Data/Strings'
 class ProjectSelector extends React.Component {
   static propTypes = {
     projects: PropTypes.object.isRequired,
+    openProjectSelector: PropTypes.bool.isRequired,
   }
 
   constructor(props){
@@ -23,7 +24,9 @@ class ProjectSelector extends React.Component {
   }
 
   componentDidMount() {
-
+    if (this.props.openProjectSelector) {
+      this.setState({ showPopup: true })
+    }
   }
 
 

@@ -5,7 +5,6 @@ import * as userReducer from './userReducer'
 import * as projectsReducer from './projectsReducer'
 import * as memberReducer from './memberReducer'
 import * as foundationsReducer from './foundationsReducer'
-import pageContent from './pageReducers'
 import { reducer as formReducer } from 'redux-form'
 import * as stagePageReducer from './stagePageReducer'
 

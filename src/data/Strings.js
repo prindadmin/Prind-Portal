@@ -89,34 +89,8 @@ export const BUTTON_CANCEL = "Cancel"
 export const BUTTON_SAVE_CHANGES = "Save Changes"
 export const BUTTON_DELETE_PROJECT = "Delete Project"
 
-export const INCEPTION_PAGE_TITLE = "Project Inception"
-export const INCEPTION_PAGE_DESCRIPTION = "Inception of a project begins with the idea. This idea is captured in a project brief."
 
-export const FEASIBILITY_PAGE_TITLE = "Project Feasibility"
-export const FEASIBILITY_PAGE_DESCRIPTION = "To confirm that the project brief is feasible it will be necessary to perform investigations which can be compiled into a feasibility study."
-
-export const DESIGN_PAGE_TITLE = "Project Design"
-export const DESIGN_PAGE_DESCRIPTION = "The Appointed design team will be collectively identifying hazards and considering mitagations for potential risks.  The assessment of risks will be complied into a single Design Risk Register."
-
-export const TENDER_PAGE_TITLE = "Project Tender"
-export const TENDER_PAGE_DESCRIPTION = "The design is complete, you are ready to build.  You will require a Principal Contractor.  It is the client's responsibility to provide Pre-Construction information."
-
-export const CONSTRUCTION_PAGE_TITLE = "Project Construction"
-export const CONSTRUCTION_PAGE_DESCRIPTION = "You have appointed a Principal contractor (PC).  The PC has full responsibility for Health and Safety during this step.  The PC will provide a Construction Phase Plan (CPP)."
-
-export const HANDOVER_PAGE_TITLE = "Project Handover"
-export const HANDOVER_PAGE_DESCRIPTION = "The building is complete.  The PC will have provided a Practical Completion Certificate."
-
-export const OCCUPATION_PAGE_TITLE = "Project Occupation"
-export const OCCUPATION_PAGE_DESCRIPTION = "The Principal Designer has finalised the Project Health and Safety File (HSF)."
-
-export const DHSF_PAGE_TITLE = "Digital Health and Safety File"
-export const DHSF_PAGE_DESCRIPTION = "This is where the project's Health and Safety File (HSF) is stored digitally."
-
-export const REFURBISHMENT_PAGE_TITLE = "Project Refurbishment"
-export const REFURBISHMENT_PAGE_DESCRIPTION = "Time for refurbishment? If your project will last more that 30 days, start new project.  Demolition? - look forward to helping you.\n\nStart new project"
-
-export const PAGE_TITLES_AND_DESCRIPTIONS = {
+export const PAGE_TITLES_AND_DESCRIPTIONS_CDM2015Project = {
   inception: {
     title: "Project Inception",
     description: "Inception of a project begins with the idea. This idea is captured in a project brief.",
@@ -148,6 +122,14 @@ export const PAGE_TITLES_AND_DESCRIPTIONS = {
   refurbishment: {
     title: "Project Refurbishment",
     description: "Time for refurbishment? If your project will last more that 30 days, start new project.  Demolition? - look forward to helping you.\n\nStart new project",
+  },
+}
+
+
+export const PAGE_TITLES_AND_DESCRIPTIONS_DHSFProject = {
+  occupation: {
+    title: "Digital Health and Safety File",
+    description: "This is where the project's Health and Safety File (HSF) is stored digitally.",
   },
 }
 

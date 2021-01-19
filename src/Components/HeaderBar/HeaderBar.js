@@ -9,6 +9,7 @@ export class HeaderBar extends Component {
   static propTypes = {
     menuItems: PropTypes.array,
     getUserDetails: PropTypes.func.isRequired,
+    openProjectSelector: PropTypes.bool.isRequired,
   }
 
   componentDidMount() {
@@ -42,14 +43,14 @@ export class HeaderBar extends Component {
 
   render() {
 
-    const { projects } = this.props
+    const { projects, openProjectSelector } = this.props
 
     return (
       <React.Fragment>
         <div id='header-bar' className='full-width row'>
           <div className='header-content row'>
             {
-              projects !== undefined ? <ProjectSelector />  : null
+              projects !== undefined ? <ProjectSelector openProjectSelector={openProjectSelector}/>  : null
             }
             <div className='nav-links'>
               {
