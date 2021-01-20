@@ -18,8 +18,6 @@ import {
 
 import * as Strings from '../../Data/Strings'
 
-// TODO: Fix the "The requested project ID was not found in the system" screen showing when logging in
-
 export class StagePage extends Component {
   static propTypes = {
     pageName: PropTypes.string.isRequired,
@@ -42,41 +40,46 @@ export class StagePage extends Component {
     ReactGA.pageview(location.pathname);
 
     if (projectId !== "") {
+      console.log('fetching from mount')
       this.fetchPageContent()
     }
   }
 
   componentDidUpdate(prevProps) {
-    const { projectId } = this.props.projects.chosenProject
-    if (projectId !== prevProps.projects.chosenProject.projectId) {
+    const { projectId } = this.props
+    if (projectId !== prevProps.projectId) {
       this.fetchPageContent()
     }
 
     if (this.props.pageName !== prevProps.pageName) {
+      console.log('fetching from update')
       this.fetchPageContent()
     }
   }
 
   fetchPageContent = () => {
-    const { pageName } = this.props
-    const { projectId } = this.props.projects.chosenProject
-
+    const { pageName, projectId } = this.props
     this.setState({
       state: ComponentState.CONTENT_FETCH_IN_PROGRESS,
     })
+
+    console.log(this.props)
     this.props.getContent(projectId, pageName, this.contentFetchSuccessful, this.contentFetchFailed)
   }
 
   contentFetchSuccessful = (result) => {
+    console.log('success fetching page content')
+    console.log(result)
     this.setState({
       state: ComponentState.CONTENT_FETCH_SUCCESSFUL,
     })
   }
 
   contentFetchFailed = (error) => {
+    console.log('error fetching page content')
     this.setState({
       state: ComponentState.CONTENT_FETCH_FAILED,
-      errorMessage: error.message,
+      errorMessage: error.Error.ErrorMessage,
     })
   }
 
@@ -120,9 +123,12 @@ export class StagePage extends Component {
     const { pageName, projects, pageContent } = this.props
     const { projectId, projectType } = projects.chosenProject
     const { fields }  = pageContent[pageName]
+
     var textObject = `PAGE_TITLES_AND_DESCRIPTIONS_CDM2015Project`
     try {
-      textObject = `PAGE_TITLES_AND_DESCRIPTIONS_${projectType}`
+      if (projectType !== undefined) {
+        textObject = `PAGE_TITLES_AND_DESCRIPTIONS_${projectType}`
+      }
     }
     catch(e) {
       textObject = `PAGE_TITLES_AND_DESCRIPTIONS_CDM2015Project`
@@ -150,41 +156,32 @@ export class StagePage extends Component {
     )
   }
 
-  chooseContent = () => {
-
-    const { projects, pageContent, pageName } = this.props
-
-    if (projects.chosenProject.projectName === Strings.NO_PROJECT_SELECTED) {
-      return this.showEmptyPage()
-    }
-
-    if (pageContent[pageName].fetching) {
-      return this.showLoadingPage()
-    }
-
-    if (pageContent[pageName].error !== null) {
-      return this.showErrorPage()
-    }
-
-    return this.showFilledPage()
-  }
-
 
   render() {
-
-    const { projects, pageName } = this.props
-    const { createFieldIsOpen } = this.state
+    const { pageName, projectId } = this.props
 
     return (
       <div id='stage-page'>
         <div className='page-content-section'>
           {
-            projects !== undefined  || this.state.state === ComponentState.CONTENT_FETCH_FAILED ? this.chooseContent() : this.showErrorPage()
+            this.state.state === ComponentState.QUIESCENT ? this.showEmptyPage() : null
           }
           {
-            createFieldIsOpen ?
+            this.state.state === ComponentState.CONTENT_FETCH_IN_PROGRESS ? this.showLoadingPage() : null
+          }
+          {
+            this.state.state === ComponentState.CONTENT_FETCH_SUCCESSFUL ? this.showFilledPage() : null
+          }
+          {
+            this.state.state === ComponentState.CONTENT_FETCH_FAILED ? this.showErrorPage() : null
+          }
+          {
+            this.state.state === ComponentState.CONTENT_NO_PROJECT_SELECTED ? this.showEmptyPage() : null
+          }
+          {
+            this.state.createFieldIsOpen ?
             <CreateCustomFieldPopover
-              projectID={projects.chosenProject.projectId}
+              projectID={projectId}
               pageName={pageName}
               onClosePopover={this.onClosePopup}
               />

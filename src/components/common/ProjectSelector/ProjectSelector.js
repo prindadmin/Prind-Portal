@@ -29,6 +29,12 @@ class ProjectSelector extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.openProjectSelector !== prevProps.openProjectSelector) {
+      this.setState({ showPopup: this.props.openProjectSelector })
+    }
+  }
+
 
   openProjectSelectorPopover = () => {
     this.setState({ showPopup: true })

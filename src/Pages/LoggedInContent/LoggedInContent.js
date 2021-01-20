@@ -70,6 +70,16 @@ export class LoggedInContent extends Component {
         this.attemptRefreshProjectDetails()
       }
     }
+
+    const { pathname } = this.props.location
+    const splitPathname = pathname.split('/')
+    const projectName = splitPathname.length > 2 ? splitPathname[2] : undefined
+
+    if (projectName !== prevState.projectName) {
+      this.setState({
+        projectName
+      })
+    }
   }
 
   attemptRefreshProjectDetails = () => {
@@ -176,12 +186,6 @@ export class LoggedInContent extends Component {
     const pageName = splitPathname[1]
     const projectName = splitPathname.length > 2 ? splitPathname[2] : undefined
 
-    if (this.state.projectName !== projectName) {
-      this.setState({
-        projectName
-      })
-    }
-
     const possiblePages = projectType === undefined ? PAGENAMES['CDM2015Project'] : PAGENAMES[projectType]
 
     const stagePageNames = Object.keys(possiblePages).map((singlePageName, index) => {
@@ -192,7 +196,7 @@ export class LoggedInContent extends Component {
     })
 
     if (stagePageNames.includes(pageName)) {
-      return <ProjectStagePage pageName={pageName} projectName={projectName}/>
+      return <ProjectStagePage pageName={pageName} projectId={projectName}/>
     }
 
     const content = pathname.startsWith('/team') ? <ProjectTeamPage /> :
