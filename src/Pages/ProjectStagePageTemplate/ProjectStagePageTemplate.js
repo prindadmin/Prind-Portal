@@ -18,6 +18,8 @@ import {
 
 import * as Strings from '../../Data/Strings'
 
+// TODO: Page updating doesn't show the loading spinner when refreshing from Git Text
+
 export class StagePage extends Component {
   static propTypes = {
     pageName: PropTypes.string.isRequired,
@@ -33,26 +35,24 @@ export class StagePage extends Component {
   }
 
   componentDidMount() {
-    const { location, projects } = this.props
-    const { projectId } = projects.chosenProject
+    const { location, projectId } = this.props
 
     // Register pageview with GA
     ReactGA.pageview(location.pathname);
 
     if (projectId !== "") {
-      console.log('fetching from mount')
       this.fetchPageContent()
     }
   }
 
   componentDidUpdate(prevProps) {
     const { projectId } = this.props
+
     if (projectId !== prevProps.projectId) {
       this.fetchPageContent()
     }
 
     if (this.props.pageName !== prevProps.pageName) {
-      console.log('fetching from update')
       this.fetchPageContent()
     }
   }
@@ -143,13 +143,15 @@ export class StagePage extends Component {
           <span>{description}</span>
         </div>
         {
+          fields !== undefined ?
           fields.map((singleField, index) => {
             return <PageFieldMapper
               key={index}
               pageName={pageName}
               projectId={projectId}
               singleField={singleField} />
-          })
+          }):
+          null
         }
         {this.getCreateFieldButton()}
       </div>

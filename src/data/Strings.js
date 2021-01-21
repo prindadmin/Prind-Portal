@@ -315,6 +315,8 @@ export const PROJECT_TYPE_DHSFPROJECT_DESCRIPTION = 'An existing build that you 
 
 export const GIT_TEXT_LOADING = "Loading data..."
 export const ERROR_DOWNLOADING_TEXT_FOR_GIT_BOX = "There was an error downloading the existing data.  Try again?"
+export const GIT_UPLOAD_FILE_SUCCESSFUL_TOAST = "Save successful"
+export const GIT_UPLOAD_FILE_FAILED_TOAST = "Error when saving"
 
 export const YOUR_CHANGE_PASSWORD_REQUEST_WAS_SUCCESS = "Your change password request was successful, please check your email inbox"
 export const YOUR_PASSWORD_WAS_SUCCESSFULLY_CHANGED = "Your password has been successfully changed."

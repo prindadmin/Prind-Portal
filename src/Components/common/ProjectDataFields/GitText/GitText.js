@@ -17,8 +17,6 @@ import * as ComponentState from '../ComponentStates'
 // TODO: Compare old and new text in some way (https://mergely.com/ or https://github.com/kpdecker/jsdiff)
 // TODO: Update in server as versioned (Not sure how this works on the file upload yet)
 
-// CONTINUE HERE: Lots to do on the state flow (i.e. what fetch/upload to run when based on S3 token status)
-
 export class GitText extends Component {
   static propTypes = {
     elementContent: PropTypes.shape({
@@ -44,6 +42,8 @@ export class GitText extends Component {
       originalContent: '',
       currentContent: '',
       editable: false,
+      toastText: '',
+      showToast: false,
     }
   }
 
@@ -54,8 +54,16 @@ export class GitText extends Component {
 
   componentDidUpdate(prevState, prevProps) {
     if (this.state.state !== prevState.state) {
-      if (this.state.state === ComponentState.S3_TOKEN_NOW_AVAILABLE) {
-        // TODO: this
+      if (this.state.state === ComponentState.UPLOADING_NEW_FILE_TO_SERVER_SUCCESS) {
+        this.uploadMetadataToDatabase()
+      }
+
+      if (this.state.state === ComponentState.UPDATING_METADATA_ON_SERVER_SUCCESS) {
+        this.showToast(Strings.GIT_UPLOAD_FILE_SUCCESSFUL_TOAST)
+      }
+
+      if (this.state.state === ComponentState.UPLOADING_NEW_FILE_TO_SERVER_FAILED) {
+        this.showToast(Strings.GIT_UPLOAD_FILE_FAILED_TOAST)
       }
     }
   }
@@ -114,12 +122,13 @@ export class GitText extends Component {
   }
 
   uploadToS3 = () => {
-    const { projects, pageName, elementContent } = this.props
-
+    const { projectId, pageName, elementContent } = this.props
     const token = this.getValidS3Token()
+
     if (token === undefined) {
       return;
     }
+
     this.configureAWSAuthorisation(token)
 
     // Create an S3 service provider
@@ -127,7 +136,7 @@ export class GitText extends Component {
 
     // Create the parameters
     const bucketName = process.env.REACT_APP_AWS_S3_USER_UPLOAD_BUCKET_NAME
-    const key = `${projects.chosenProject.projectId}/${pageName}/${elementContent.id}`
+    const key = `${projectId}/${pageName}/${elementContent.id}`
 
     // Create the parameters to upload the file with
     var uploadParams = {
@@ -167,27 +176,21 @@ export class GitText extends Component {
   }
 
   onFileUploadComplete = (response) => {
-    const { projects, pageName, elementContent } = this.props
-
     this.setState({
       state: ComponentState.UPLOADING_NEW_FILE_TO_SERVER_SUCCESS,
     })
+  }
+
+  uploadMetadataToDatabase = () => {
+    const { pageName, projectId, elementContent } = this.props
 
     // Build parameters
     var uploadDetails = {
-      userFileName: `GitText-${projects.chosenProject.projectId}-${pageName}-${elementContent.id}`
+      userFileName: `GitText-${projectId}-${pageName}-${elementContent.id}`
     }
 
     // Send to the reducer
-    this.props.uploadFile (
-      projects.chosenProject.projectId,
-      pageName,
-      elementContent.id,
-      uploadDetails,
-      this.saveResolve,
-      this.saveReject,
-    )
-
+    this.props.uploadFile (projectId, pageName, elementContent.id, uploadDetails, this.saveResolve, this.saveReject)
     this.setState({
       state: ComponentState.UPDATING_METADATA_ON_SERVER
     })
@@ -206,9 +209,25 @@ export class GitText extends Component {
     })
   }
 
+  showToast = (textToShow) => {
+    this.setState({
+      state: ComponentState.QUIESCENT,
+      toastText: textToShow,
+      showToast: true,
+    })
+
+    const that = this;
+
+    setTimeout(function() {
+      that.setState({
+        showToast: false,
+      })
+    }, 2000);
+  }
+
 
   downloadFromS3 = () => {
-    const { projects, pageName, elementContent } = this.props
+    const { projectId, pageName, elementContent } = this.props
 
     const token = this.getValidS3Token()
     if (token === undefined) {
@@ -221,7 +240,7 @@ export class GitText extends Component {
 
     // Create the download values
     const bucketName = process.env.REACT_APP_AWS_S3_USER_UPLOAD_BUCKET_NAME
-    const key = `${projects.chosenProject.projectId}/${pageName}/${elementContent.id}`
+    const key = `${projectId}/${pageName}/${elementContent.id}`
 
     // Create the download parameters
     var downloadParams = {
@@ -229,12 +248,36 @@ export class GitText extends Component {
       Key: key
     };
 
-    // Create a request
-    var request = s3.getObject(downloadParams);
+    this.setState({
+      state: ComponentState.CHECKING_EXISTING_FILE_EXISTS_ON_SERVER
+    })
 
     const that = this;
 
-    // TODO: Make check for file existence before trying to download
+    // TODO: Handle credential error that seems to be occuring here
+    // Check that file exists
+    s3.headObject(downloadParams, function (err, metadata) {
+      console.log(err, metadata)
+      if (err) {
+        // File does not exist, so no need to fetch
+        console.log("File does not exist")
+        console.log(err)
+        that.setState({
+          state: ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER_FAILED,
+        })
+      } else {
+        console.log("File exists")
+        that.getFileDataFromS3(s3, downloadParams)
+      }
+    });
+  }
+
+  getFileDataFromS3 = (s3, downloadParams) => {
+    // Create a request
+    var request = s3.getObject(downloadParams);
+    const that = this;
+
+    // Send request
     request.on('httpDownloadProgress', function (progress) {
         console.log(progress)
         that.setState({
@@ -251,18 +294,19 @@ export class GitText extends Component {
           state: ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER_FAILED,
         })
       })
-
     request.send();
   }
+
 
   onFileDownloadComplete = (response) => {
     console.log("File download complete")
     this.setState({
       originalContent: response.data.Body.toString(),
       currentContent: response.data.Body.toString(),
-      state: ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER_SUCCESS
+      state: ComponentState.QUIESCENT
     })
   }
+
 
   getLoadingSpinner = () => {
     return (
@@ -277,14 +321,13 @@ export class GitText extends Component {
 
   getEditor = () => {
     const { elementContent } = this.props
-    const { originalContent, state } = this.state
-    const editable = state === ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER_SUCCESS
+    const { originalContent } = this.state
 
     return (
       <Editor
         initialValue={originalContent}
         apikey={process.env.REACT_APP_TINY_API_KEY}
-        disabled={!editable || !elementContent.editable}
+        disabled={!elementContent.editable}
         init={{
           height: 500,
           menubar: false,
@@ -322,7 +365,7 @@ export class GitText extends Component {
 
     // TODO: Add state error variable handling
     const { title, description } = this.props.elementContent
-    const { originalContent, state } = this.state
+    const { state, showToast } = this.state
 
     console.log(state)
 
@@ -339,23 +382,29 @@ export class GitText extends Component {
 
           <div className='container'>
             {
-              state === ComponentState.UPLOADING_NEW_FILE_TO_SERVER ||
-              state === ComponentState.UPDATING_METADATA_ON_SERVER ||
-              state === ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER ?
-              this.getLoadingSpinner() :
-              null
+              state === ComponentState.UPLOADING_NEW_FILE_TO_SERVER ? this.getLoadingSpinner() : null
             }
             {
-              state === ComponentState.QUIESCENT ?
-              this.getEditor() :
-              null
+              state === ComponentState.UPLOADING_NEW_FILE_TO_SERVER_FAILED ? this.getEditor() : null
             }
             {
-              state === ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER_FAILED ?
-              this.getErrorDownloading() :
-              null
+              state === ComponentState.UPDATING_METADATA_ON_SERVER ? this.getLoadingSpinner() : null
             }
-
+            {
+              state === ComponentState.CHECKING_EXISTING_FILE_EXISTS_ON_SERVER ? this.getLoadingSpinner() : null
+            }
+            {
+              state === ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER ? this.getLoadingSpinner() : null
+            }
+            {
+              state === ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER_SUCCESS ? this.getEditor() : null
+            }
+            {
+              state === ComponentState.QUIESCENT ? this.getEditor() : null
+            }
+            {
+              state === ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER_FAILED ? this.getErrorDownloading() : null
+            }
           </div>
           {
             state === ComponentState.QUIESCENT ?
@@ -364,6 +413,13 @@ export class GitText extends Component {
               value={ Strings.BUTTON_SAVE_CHANGES }
               className="save-button"
               onClick={(e) => this.saveChanges(e)} /> :
+            null
+          }
+          {
+            showToast ?
+            <div className='git-toast'>
+              { Strings.GIT_UPLOAD_FILE_SUCCESSFUL_TOAST }
+            </div> :
             null
           }
 
