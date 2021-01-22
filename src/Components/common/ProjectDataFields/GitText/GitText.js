@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, lazy } from 'react'
 //import { reduxForm } from 'redux-form'
 import PropTypes from 'prop-types'
 
@@ -8,10 +8,12 @@ import {
 } from '@blueprintjs/core'
 
 import AWS from 'aws-sdk';
-import { Editor } from '@tinymce/tinymce-react';
 
 import * as Strings from '../../../../Data/Strings'
 import * as ComponentState from '../ComponentStates'
+
+const Writer = lazy(() => import('./elements/Writer'));
+const Comparer = lazy(() => import('./elements/Comparer'));
 
 // TODO: Style text editor when disabled
 // TODO: Compare old and new text in some way (https://mergely.com/ or https://github.com/kpdecker/jsdiff)
@@ -36,6 +38,7 @@ export class GitText extends Component {
     super()
     this.state = {
       state: ComponentState.QUIESCENT,
+      view: ComponentState.GIT_TEXT_COMPARER_OPEN,
       uploadFileProgress: 0,
       downloadFileProgress: 0,
       errorMessage: "",
@@ -320,28 +323,20 @@ export class GitText extends Component {
   }
 
   getEditor = () => {
-    const { elementContent } = this.props
-    const { originalContent } = this.state
+
+    if (this.state.view === ComponentState.GIT_TEXT_WRITER_OPEN) {
+      return (
+        <Writer
+          originalContent={this.state.originalContent}
+          onHandleContentChange={this.handleEditorChange}
+          disabled={!this.props.elementContent.editable} />
+      )
+    }
 
     return (
-      <Editor
-        initialValue={originalContent}
-        apikey={process.env.REACT_APP_TINY_API_KEY}
-        disabled={!elementContent.editable}
-        init={{
-          height: 500,
-          menubar: false,
-          plugins: [
-            'advlist autolink lists link image',
-            'charmap print preview anchor help',
-            'searchreplace visualblocks code',
-            'insertdatetime media table paste wordcount'
-          ],
-          toolbar:
-            'undo redo | formatselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | help'
-        }}
-        onChange={this.handleEditorChange}
-      />
+      <Comparer
+        oldContent={this.state.originalContent}
+        newContent={`${this.state.originalContent} abc`} />
     )
   }
 

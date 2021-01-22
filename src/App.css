@@ -1320,7 +1320,13 @@ background-color: var(--field-element-grey);
 }
 
 #git-text-element .container {
-  height: 500px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+#git-text-element .comparer {
+  width: 50%;
 }
 
 #git-text-element .error-text {
@@ -1336,13 +1342,6 @@ background-color: var(--field-element-grey);
   width: 100%;
 }
 
-/* ================================== */
-/* ========= inception page ========= */
-/* ================================== */
-
-#inception-page {
-
-}
 
 .page-title {
   margin-bottom: 2em;
