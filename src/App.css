@@ -1368,6 +1368,21 @@ background-color: var(--field-element-grey);
   width: 100%;
 }
 
+mark.red {
+    color: red;
+    background: none;
+}
+
+mark.green {
+    color: lawngreen;
+    background: none;
+}
+
+mark.grey {
+    color: gray;
+    background: none;
+}
+
 
 .page-title {
   margin-bottom: 2em;

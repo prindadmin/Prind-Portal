@@ -17,8 +17,9 @@ import Writer from './elements/Writer'
 import Comparer from './elements/Comparer'
 
 // TODO: Style text editor when disabled
-// TODO: Compare old and new text in some way (https://mergely.com/ or https://github.com/kpdecker/jsdiff)
 // TODO: Update in server as versioned (Not sure how this works on the file upload yet)
+// TODO: Add file version selector and downloader to allow comparison
+
 
 export class GitText extends Component {
   static propTypes = {
@@ -324,7 +325,6 @@ export class GitText extends Component {
   }
 
   getEditor = () => {
-
     if (this.state.view === ComponentState.GIT_TEXT_WRITER_OPEN) {
       return (
         <Writer
@@ -337,7 +337,7 @@ export class GitText extends Component {
     return (
       <Comparer
         oldContent={this.state.originalContent}
-        newContent={`${this.state.originalContent} abc`} />
+        newContent={`${this.state.originalContent.replace("test","abc")}`} />
     )
   }
 
@@ -377,9 +377,11 @@ export class GitText extends Component {
 
   render() {
 
-    // TODO: Add state error variable handling
+    // TODO: Get toasts working
+    // TODO: Fix errors when first loading the page
+    // TODO: Fix occasional errors with the S3 token
     const { title, description } = this.props.elementContent
-    const { state, showToast } = this.state
+    const { state, view, showToast } = this.state
 
     console.log(state)
 
@@ -421,7 +423,8 @@ export class GitText extends Component {
             }
           </div>
           {
-            state === ComponentState.QUIESCENT ?
+            // TODO: Disable rather than remove; it causes a reload
+            state === ComponentState.QUIESCENT && view !== ComponentState.GIT_TEXT_COMPARER_OPEN ?
             <input
               type="submit"
               value={ Strings.BUTTON_SAVE_CHANGES }
