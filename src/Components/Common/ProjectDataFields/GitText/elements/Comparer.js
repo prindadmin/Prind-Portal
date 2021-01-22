@@ -11,6 +11,12 @@ export class Comparer extends Component {
     newContent: PropTypes.string.isRequired,
   }
 
+  // TODO: write the highlighting for the text based on differences
+  addFormatting = () => {
+    return (null)
+  }
+
+
   getEditor = (content) => {
     return (
       <Editor

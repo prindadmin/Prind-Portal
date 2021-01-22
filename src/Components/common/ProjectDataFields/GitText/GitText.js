@@ -1,4 +1,4 @@
-import React, { Component, lazy } from 'react'
+import React, { Component } from 'react'
 //import { reduxForm } from 'redux-form'
 import PropTypes from 'prop-types'
 
@@ -8,12 +8,13 @@ import {
 } from '@blueprintjs/core'
 
 import AWS from 'aws-sdk';
+import ItemIcon from '../../ItemIcon'
 
 import * as Strings from '../../../../Data/Strings'
 import * as ComponentState from '../ComponentStates'
 
-const Writer = lazy(() => import('./elements/Writer'));
-const Comparer = lazy(() => import('./elements/Comparer'));
+import Writer from './elements/Writer'
+import Comparer from './elements/Comparer'
 
 // TODO: Style text editor when disabled
 // TODO: Compare old and new text in some way (https://mergely.com/ or https://github.com/kpdecker/jsdiff)
@@ -38,7 +39,7 @@ export class GitText extends Component {
     super()
     this.state = {
       state: ComponentState.QUIESCENT,
-      view: ComponentState.GIT_TEXT_COMPARER_OPEN,
+      view: ComponentState.GIT_TEXT_WRITER_OPEN,
       uploadFileProgress: 0,
       downloadFileProgress: 0,
       errorMessage: "",
@@ -353,6 +354,24 @@ export class GitText extends Component {
     )
   }
 
+  // TODO: style button
+  getChangeViewButtons = () => {
+    const isWriter = this.state.view === ComponentState.GIT_TEXT_WRITER_OPEN
+    const changeTo = this.state.view === ComponentState.GIT_TEXT_WRITER_OPEN ? ComponentState.GIT_TEXT_COMPARER_OPEN : ComponentState.GIT_TEXT_WRITER_OPEN
+    const title = this.state.view === ComponentState.GIT_TEXT_WRITER_OPEN ? Strings.GIT_TEXT_OPEN_COMPARER : Strings.GIT_TEXT_OPEN_WRITER
+
+    return(
+      <div className='switch-state-buttons'>
+        <button
+          title={title}
+          className="view-change-button btn-primary"
+          onClick={(e) => this.setState({view: changeTo})} >
+          <ItemIcon size='3x' type={isWriter ? 'columns' : 'edit'} />
+        </button>
+      </div>
+    )
+  }
+
 
   // ------------------------------ RENDER BELOW THIS LINE ------------------------------
 
@@ -415,6 +434,13 @@ export class GitText extends Component {
             <div className='git-toast'>
               { Strings.GIT_UPLOAD_FILE_SUCCESSFUL_TOAST }
             </div> :
+            null
+          }
+          {
+            state === ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER_SUCCESS ||
+            state === ComponentState.UPLOADING_NEW_FILE_TO_SERVER_FAILED ||
+            state === ComponentState.QUIESCENT ?
+            this.getChangeViewButtons() :
             null
           }
 

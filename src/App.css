@@ -1308,6 +1308,28 @@ background-color: var(--field-element-grey);
   background-color: var(--field-element-grey);
 }
 
+#git-text-element .switch-state-buttons {
+  position: absolute;
+  right: var(--standard-padding);
+  height: 50px;
+  width: 50px;
+}
+
+#git-text-element .switch-state-buttons button {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+
+#git-text-element .switch-state-buttons svg {
+  max-width: 100%;
+  max-height: 100%;
+}
+
 #git-text-element .save-button {
   background-color: var(--prind-palette-color-4);
   color: white;
@@ -1322,6 +1344,10 @@ background-color: var(--field-element-grey);
 #git-text-element .container {
   display: flex;
   flex-direction: row;
+  width: 100%;
+}
+
+#git-text-element .tox-tinymce {
   width: 100%;
 }
 
