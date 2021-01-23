@@ -240,7 +240,7 @@ function * getCurrentMembers (action) {
 
 function * uploadFile (action) {
 
-  const { projectID, pageName, fieldID, fileDetails, resolve, reject } = action.payload
+  const { projectID, pageName, fieldID, fileDetails, fieldType, resolve, reject } = action.payload
 
   try {
 
@@ -252,7 +252,7 @@ function * uploadFile (action) {
       }
     })
 
-    const result = yield call(Dispatchers.uploadFileDispatcher, projectID, pageName, fieldID, fileDetails)
+    const result = yield call(Dispatchers.uploadFileDispatcher, projectID, pageName, fieldID, fileDetails, fieldType)
 
     console.log(result)
 

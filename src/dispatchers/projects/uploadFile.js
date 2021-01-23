@@ -4,7 +4,7 @@ import API from '@aws-amplify/api';
 // Fixed values for the API request
 const apiName = process.env.REACT_APP_API_NAME
 
-async function UploadFile(projectId, pageName, fieldId, fileDetails) {
+async function UploadFile(projectId, pageName, fieldId, fileDetails, fieldType) {
 
   // Build path for request
   const path = `/project/${projectId}/${pageName}/${fieldId}`
@@ -29,7 +29,7 @@ async function UploadFile(projectId, pageName, fieldId, fileDetails) {
             filename: fileDetails.userFileName,
             tags: []
           },
-          type: "file"
+          type: fieldType
         },
         response: false,
     }

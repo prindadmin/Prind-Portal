@@ -65,18 +65,35 @@ export class Comparer extends Component {
     )
   }
 
+  // TODO: Fill with options by mapping redux store data
+  // TODO: Add on select functionality
+  getVersionSelectSystem = (selectorName) => {
+    return (
+      <div className='version-select'>
+        <select name={selectorName} id={selectorName}>
+          <option value="Version 1">Version 1</option>
+          <option value="Version 2">Version 2</option>
+          <option value="Version 3">Version 3</option>
+          <option value="Version 4">Version 4</option>
+        </select>
+      </div>
+    )
+  }
+
   render() {
     const { oldContent, newContent } = this.props
 
-    this.addFormatting()
-
     return (
       <React.Fragment>
-        <div className='comparer old'>
-          { this.getEditor(oldContent, false) }
-        </div>
-        <div className='comparer new'>
-          { this.getEditor(newContent, true) }
+        <div className='comparators'>
+          <div className='comparer old'>
+            { this.getVersionSelectSystem("oldContent") }
+            { this.getEditor(oldContent, false) }
+          </div>
+          <div className='comparer new'>
+            { this.getVersionSelectSystem("newContent") }
+            { this.getEditor(newContent, true) }
+          </div>
         </div>
       </React.Fragment>
     )

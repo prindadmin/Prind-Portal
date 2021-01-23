@@ -111,7 +111,7 @@ export const getCurrentMembers = ( projectID ) => {
   }
 }
 
-export const uploadFile = ( projectID, pageName, fieldID, fileDetails, resolve, reject ) => {
+export const uploadFile = ( projectID, pageName, fieldID, fileDetails, fieldType, resolve, reject ) => {
 
   return {
     type: action.PROJECT_UPLOAD_FILE_REQUESTED,
@@ -120,6 +120,7 @@ export const uploadFile = ( projectID, pageName, fieldID, fileDetails, resolve, 
       pageName,
       fieldID,
       fileDetails,
+      fieldType,
       resolve,
       reject,
     }

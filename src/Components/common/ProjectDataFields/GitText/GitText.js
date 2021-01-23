@@ -195,7 +195,7 @@ export class GitText extends Component {
     }
 
     // Send to the reducer
-    this.props.uploadFile (projectId, pageName, elementContent.id, uploadDetails, this.saveResolve, this.saveReject)
+    this.props.uploadFile (projectId, pageName, elementContent.id, uploadDetails, "gitText", this.saveResolve, this.saveReject)
     this.setState({
       state: ComponentState.UPDATING_METADATA_ON_SERVER
     })

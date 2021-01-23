@@ -1343,11 +1343,21 @@ background-color: var(--field-element-grey);
 
 #git-text-element .container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   width: 100%;
 }
 
 #git-text-element .tox-tinymce {
+  width: 100%;
+}
+
+#git-text-element .version-select {
+  margin-bottom: var(--standard-margin);
+}
+
+#git-text-element .comparators {
+  display: flex;
+  flex-direction: row;
   width: 100%;
 }
 

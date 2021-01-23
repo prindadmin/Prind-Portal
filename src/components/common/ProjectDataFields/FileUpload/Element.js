@@ -214,6 +214,7 @@ export class Element extends Component {
               projectID={projects.chosenProject.projectId}
               pageName={pageName}
               fieldID={elementContent.id}
+              fieldType="file"
               onCancelPopup={ this.cancelPopup }
               /> :
             null

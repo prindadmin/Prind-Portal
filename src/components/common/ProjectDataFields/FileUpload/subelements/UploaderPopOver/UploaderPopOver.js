@@ -20,6 +20,7 @@ export class UploaderPopOver extends Component {
     projectID: PropTypes.any.isRequired,
     pageName: PropTypes.any.isRequired,
     fieldID: PropTypes.any.isRequired,
+    fieldType: PropTypes.string.isRequired,
     onCancelPopup: PropTypes.func.isRequired,
   }
 
@@ -133,7 +134,7 @@ export class UploaderPopOver extends Component {
 
   // Tell the Prin-D server that there has been an upload with the following details
   informServer = (response) => {
-    const { uploadFile, fileDetails, projectID, pageName, fieldID } = this.props
+    const { uploadFile, fileDetails, projectID, pageName, fieldID, fieldType } = this.props
 
     // Build parameters
     var uploadDetails = {
@@ -146,6 +147,7 @@ export class UploaderPopOver extends Component {
       pageName,
       fieldID,
       uploadDetails,
+      fieldType,
     )
 
     // Close the popup
