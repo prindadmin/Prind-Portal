@@ -4,13 +4,48 @@ import PropTypes from 'prop-types'
 import { Editor } from '@tinymce/tinymce-react';
 
 // TODO: Implement styling depending on state
+// TODO: Add selector drop down to allow selection of different base versions to start edits from
 
 export class TextWriter extends Component {
   static propTypes = {
     originalContent: PropTypes.string.isRequired,
+    fileVersions: PropTypes.arrayOf(PropTypes.shape({
+      ver: PropTypes.string,
+      prevVer: PropTypes.string,
+      s3VersionId: PropTypes.string,
+      commitMessage: PropTypes.string,
+    })),
+    onRequestNewFileVersionData: PropTypes.func.isRequired,
     onHandleContentChange: PropTypes.func.isRequired,
     disabled: PropTypes.bool.isRequired,
   }
+
+  // TODO: Add on select functionality
+  onSelectionChange = (selectorName, e) => {
+    console.log(selectorName)
+    console.log(e.target.value)
+    this.props.onRequestNewFileVersionData(e.target.value, selectorName)
+  }
+
+  // TODO: Load the latest version in componentDidMount for both old and new
+  getVersionSelectSystem = (selectorName) => {
+
+    // Map the fileVersions to options
+    const options = this.props.fileVersions.map((version, index) => {
+      return (
+        <option id={index} value={version.s3VersionId}>{version.commitMessage}</option>
+      )
+    })
+
+    return (
+      <div className='version-select'>
+        <select name={selectorName} id={selectorName} onChange={(e) => this.onSelectionChange(selectorName, e)}>
+          {options}
+        </select>
+      </div>
+    )
+  }
+
 
   getEditor = () => {
     const { originalContent, disabled } = this.props
@@ -39,6 +74,7 @@ export class TextWriter extends Component {
   render() {
     return (
       <React.Fragment>
+        { this.getVersionSelectSystem("oldContent") }
         { this.getEditor() }
       </React.Fragment>
     )

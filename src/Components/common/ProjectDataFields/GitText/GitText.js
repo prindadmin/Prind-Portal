@@ -1,11 +1,6 @@
 import React, { Component } from 'react'
-//import { reduxForm } from 'redux-form'
 import PropTypes from 'prop-types'
 
-import {
-  Spinner,
-  Intent,
-} from '@blueprintjs/core'
 
 import AWS from 'aws-sdk';
 import ItemIcon from '../../ItemIcon'
@@ -15,11 +10,17 @@ import * as ComponentState from '../ComponentStates'
 
 import Writer from './elements/Writer'
 import Comparer from './elements/Comparer'
+import LoadingSpinner from '../../LoadingSpinner'
 
+import getFileFromS3 from './elements/getFileFromS3'
+import uploadFileToS3 from './elements/uploadFileToS3'
 // TODO: Style text editor when disabled
 // TODO: Update in server as versioned (Not sure how this works on the file upload yet)
 // TODO: Add file version selector and downloader to allow comparison
-
+// TODO: Get toasts working
+// TODO: Fix errors when first loading the page
+// TODO: Fix occasional errors with the S3 token
+// TODO: Style save button when disabled
 
 export class GitText extends Component {
   static propTypes = {
@@ -31,6 +32,15 @@ export class GitText extends Component {
       fieldDetails: PropTypes.shape({
         textValue: PropTypes.string,
       }).isRequired,
+      fileDetails: PropTypes.arrayOf(PropTypes.shape({
+        uploadedDateTime: PropTypes.string,
+        uploadedBy: PropTypes.string,
+        ver: PropTypes.string,
+        prevVer: PropTypes.string,
+        s3VersionId: PropTypes.string,
+        uploadName: PropTypes.string,
+        commitMessage: PropTypes.string,
+      })).isRequired,
     }),
     projectId: PropTypes.string.isRequired,
     pageName: PropTypes.string.isRequired,
@@ -49,12 +59,19 @@ export class GitText extends Component {
       editable: false,
       toastText: '',
       showToast: false,
+      requestedFileVersionID: '',
     }
   }
 
   componentDidMount() {
     console.log(this.props)
-    this.downloadFromS3()
+    if (this.props.elementContent.fileDetails !== undefined) {
+      if (this.props.elementContent.fileDetails.length !== 0) {
+        this.setState({
+          requestedFileVersionID: this.props.elementContent.fileDetails[0].s3VersionId,
+        })
+      }
+    }
   }
 
   componentDidUpdate(prevState, prevProps) {
@@ -62,19 +79,22 @@ export class GitText extends Component {
       if (this.state.state === ComponentState.UPLOADING_NEW_FILE_TO_SERVER_SUCCESS) {
         this.uploadMetadataToDatabase()
       }
-
       if (this.state.state === ComponentState.UPDATING_METADATA_ON_SERVER_SUCCESS) {
         this.showToast(Strings.GIT_UPLOAD_FILE_SUCCESSFUL_TOAST)
       }
-
       if (this.state.state === ComponentState.UPLOADING_NEW_FILE_TO_SERVER_FAILED) {
         this.showToast(Strings.GIT_UPLOAD_FILE_FAILED_TOAST)
+      }
+      if (this.state.state === ComponentState.S3_TOKEN_NOW_AVAILABLE) {
+        console.log("new S3 token available")
+      }
+      if (this.state.requestedFileVersionID !== prevProps.requestedFileVersionID) {
+        console.log("file version requested changed")
+        this.downloadFromS3()
       }
     }
   }
 
-
-  // ---------------------- DEFAULT FUNCTIONALITY ABOVE THIS LINE -----------------------
 
   handleEditorChange = (e) => {
     console.log('Content was updated');
@@ -83,11 +103,6 @@ export class GitText extends Component {
     })
   }
 
-
-  // When the user wants to save the changes, update the server
-  saveChanges = (e) => {
-    this.uploadToS3()
-  }
 
   getValidS3Token = () => {
     // TODO: Make this refresh the token if required; stops fetching if not present
@@ -111,6 +126,9 @@ export class GitText extends Component {
 
   fetchTokenFailed = (error) => {
     console.log(error)
+    this.setState({
+      state: ComponentState.NO_S3_TOKEN_AVAILABLE,
+    })
   }
 
   configureAWSAuthorisation = (token) => {
@@ -152,50 +170,18 @@ export class GitText extends Component {
       Key: key,
     };
 
-    // Create a virtual version of the react object so it can be used in the request
-    const that = this;
-
-    // Create a request
-    var request = s3.putObject(uploadParams);
-
-    request.on('httpUploadProgress', function (progress) {
-        console.log(progress)
-        that.setState({
-          uploadFileProgress: progress.loaded
-        })
-      })
-
-      .on('success', function(response) {
-        that.onFileUploadComplete(response)
-      })
-
-      .on('error', function(error, response) {
-        console.log("ERROR uploading file to S3")
-        console.error(error)
-        that.setState({
-          state: ComponentState.UPLOADING_NEW_FILE_TO_SERVER_FAILED,
-        })
-      })
-
-    request.send();
+    uploadFileToS3(s3, uploadParams, this)
   }
 
-  onFileUploadComplete = (response) => {
-    this.setState({
-      state: ComponentState.UPLOADING_NEW_FILE_TO_SERVER_SUCCESS,
-    })
-  }
 
   uploadMetadataToDatabase = () => {
     const { pageName, projectId, elementContent } = this.props
-
     // Build parameters
     var uploadDetails = {
       userFileName: `GitText-${projectId}-${pageName}-${elementContent.id}`
     }
-
     // Send to the reducer
-    this.props.uploadFile (projectId, pageName, elementContent.id, uploadDetails, "gitText", this.saveResolve, this.saveReject)
+    this.props.uploadFile(projectId, pageName, elementContent.id, uploadDetails, "gitText", this.saveResolve, this.saveReject)
     this.setState({
       state: ComponentState.UPDATING_METADATA_ON_SERVER
     })
@@ -253,91 +239,61 @@ export class GitText extends Component {
       Key: key
     };
 
-    this.setState({
-      state: ComponentState.CHECKING_EXISTING_FILE_EXISTS_ON_SERVER
-    })
+    if (this.state.requestedFileVersionID !== undefined) {
+      downloadParams.VersionId = this.state.requestedFileVersionID
+    }
 
-    const that = this;
-
-    // TODO: Handle credential error that seems to be occuring here
-    // Check that file exists
-    s3.headObject(downloadParams, function (err, metadata) {
-      console.log(err, metadata)
-      if (err) {
-        // File does not exist, so no need to fetch
-        console.log("File does not exist")
-        console.log(err)
-        that.setState({
-          state: ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER_FAILED,
-        })
-      } else {
-        console.log("File exists")
-        that.getFileDataFromS3(s3, downloadParams)
-      }
-    });
+    getFileFromS3(s3, downloadParams, this)
   }
 
-  getFileDataFromS3 = (s3, downloadParams) => {
-    // Create a request
-    var request = s3.getObject(downloadParams);
-    const that = this;
-
-    // Send request
-    request.on('httpDownloadProgress', function (progress) {
-        console.log(progress)
-        that.setState({
-          downloadFileProgress: progress.loaded
-        })
-      })
-      .on('success', function(response) {
-        that.onFileDownloadComplete(response)
-      })
-      .on('error', function(error, response) {
-        console.log("ERROR downloading file from S3")
-        console.error(error)
-        that.setState({
-          state: ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER_FAILED,
-        })
-      })
-    request.send();
-  }
-
-
-  onFileDownloadComplete = (response) => {
-    console.log("File download complete")
+  // CONTINUE HERE: This is updating but the file isn't being found
+  updateRequestedFileVersion = (newFileVersion, selectorName) => {
     this.setState({
-      originalContent: response.data.Body.toString(),
-      currentContent: response.data.Body.toString(),
-      state: ComponentState.QUIESCENT
+      requestedFileVersionID: newFileVersion
     })
   }
 
-
-  getLoadingSpinner = () => {
-    return (
-      <div className='projects-loading-container fill'>
-        <div className='loading-spinner'>
-          <Spinner size={100} intent={Intent.DANGER} />
-          <p>{Strings.GIT_TEXT_LOADING}</p>
-        </div>
-      </div>
-    )
-  }
 
   getEditor = () => {
+    const fileVersions = [
+      {
+        ver: "1",
+        prevVer: "0",
+        s3VersionId: "u3.WYA9VlvVba2EY9NywkQHBExdKq9eA",
+        commitMessage: "Oldest Commit"
+      },
+      {
+        ver: "2",
+        prevVer: "1",
+        s3VersionId: "GndxW2exut63gfISgKr._bgLoxEBa1kh",
+        commitMessage: "Intermediate Commit"
+      },
+      {
+        ver: "3",
+        prevVer: "2",
+        s3VersionId: "IhHU28Y.7doCQmf9SijFU3M6C8VDCY5x",
+        commitMessage: "Latest Commit"
+      }
+    ]
+
+
     if (this.state.view === ComponentState.GIT_TEXT_WRITER_OPEN) {
       return (
         <Writer
           originalContent={this.state.originalContent}
+          fileVersions={fileVersions}
+          onRequestNewFileVersionData={this.updateRequestedFileVersion}
           onHandleContentChange={this.handleEditorChange}
           disabled={!this.props.elementContent.editable} />
       )
     }
 
+    // newContent={`${this.state.originalContent.replace("test","abc")}`} />
+
     return (
       <Comparer
         oldContent={this.state.originalContent}
-        newContent={`${this.state.originalContent.replace("test","abc")}`} />
+        newContent="" />
     )
   }
 
@@ -373,18 +329,10 @@ export class GitText extends Component {
   }
 
 
-  // ------------------------------ RENDER BELOW THIS LINE ------------------------------
-
   render() {
-
-    // TODO: Get toasts working
-    // TODO: Fix errors when first loading the page
-    // TODO: Fix occasional errors with the S3 token
     const { title, description } = this.props.elementContent
     const { state, view, showToast } = this.state
-
     console.log(state)
-
     return (
       <div id='git-text-element'>
         <div className='git-text-element-container'>
@@ -398,22 +346,22 @@ export class GitText extends Component {
 
           <div className='container'>
             {
-              state === ComponentState.UPLOADING_NEW_FILE_TO_SERVER ? this.getLoadingSpinner() : null
+              state === ComponentState.UPLOADING_NEW_FILE_TO_SERVER ? <LoadingSpinner />  : null
             }
             {
-              state === ComponentState.UPLOADING_NEW_FILE_TO_SERVER_FAILED ? this.getEditor() : null
+              state === ComponentState.UPDATING_METADATA_ON_SERVER ? <LoadingSpinner />  : null
             }
             {
-              state === ComponentState.UPDATING_METADATA_ON_SERVER ? this.getLoadingSpinner() : null
+              state === ComponentState.CHECKING_EXISTING_FILE_EXISTS_ON_SERVER ? <LoadingSpinner />  : null
             }
             {
-              state === ComponentState.CHECKING_EXISTING_FILE_EXISTS_ON_SERVER ? this.getLoadingSpinner() : null
-            }
-            {
-              state === ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER ? this.getLoadingSpinner() : null
+              state === ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER ? <LoadingSpinner /> : null
             }
             {
               state === ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER_SUCCESS ? this.getEditor() : null
+            }
+            {
+              state === ComponentState.UPLOADING_NEW_FILE_TO_SERVER_FAILED ? this.getEditor() : null
             }
             {
               state === ComponentState.QUIESCENT ? this.getEditor() : null
@@ -421,17 +369,16 @@ export class GitText extends Component {
             {
               state === ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER_FAILED ? this.getErrorDownloading() : null
             }
+            {
+              state === ComponentState.NO_S3_TOKEN_AVAILABLE ? this.getErrorDownloading() : null
+            }
           </div>
-          {
-            // TODO: Disable rather than remove; it causes a reload
-            state === ComponentState.QUIESCENT && view !== ComponentState.GIT_TEXT_COMPARER_OPEN ?
-            <input
-              type="submit"
-              value={ Strings.BUTTON_SAVE_CHANGES }
-              className="save-button"
-              onClick={(e) => this.saveChanges(e)} /> :
-            null
-          }
+          <input
+            type="submit"
+            disabled={!(state === ComponentState.QUIESCENT && view !== ComponentState.GIT_TEXT_COMPARER_OPEN)}
+            value={ Strings.BUTTON_SAVE_CHANGES }
+            className="save-button"
+            onClick={(e) => this.uploadToS3()} />
           {
             showToast ?
             <div className='git-toast'>

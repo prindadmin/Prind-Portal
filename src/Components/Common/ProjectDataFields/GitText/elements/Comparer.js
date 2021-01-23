@@ -4,8 +4,11 @@ import PropTypes from 'prop-types'
 import { Editor } from '@tinymce/tinymce-react';
 import * as Diff from 'diff';
 
+import * as Strings from '../../../../../Data/Strings'
+
 // TODO: Implement styling depending on state
 const editorContentStyle = `mark.red { color: red; background: none; text-decoration: line-through; } mark.green { color: limegreen; background: none; } mark.grey { color: grey; background: none; }`;
+const contentBeforeSelection = `<h2>${Strings.GIT_TEXT_NO_FILE_VERSION_SELECTED}</h2>`
 
 export class Comparer extends Component {
   static propTypes = {
@@ -13,7 +16,7 @@ export class Comparer extends Component {
     newContent: PropTypes.string.isRequired,
   }
 
-  // TODO: write the highlighting for the text based on differences
+  // Add colour formatting to the text
   addFormatting = () => {
     const diff = Diff.diffChars(this.props.oldContent, this.props.newContent);
     var outputDifference = ''
@@ -41,6 +44,9 @@ export class Comparer extends Component {
     if (isNew) {
       displayContent = this.addFormatting()
     }
+    if (content === "") {
+      displayContent = contentBeforeSelection
+    }
 
     return (
       <Editor
@@ -65,12 +71,18 @@ export class Comparer extends Component {
     )
   }
 
-  // TODO: Fill with options by mapping redux store data
   // TODO: Add on select functionality
+  onSelectionChange = (selectorName, e) => {
+    console.log(selectorName)
+    console.log(e.target.value)
+  }
+
+  // TODO: Load the latest version in componentDidMount for both old and new
+  // TODO: Fill with options by mapping redux store data
   getVersionSelectSystem = (selectorName) => {
     return (
       <div className='version-select'>
-        <select name={selectorName} id={selectorName}>
+        <select name={selectorName} id={selectorName} onChange={(e) => this.onSelectionChange(selectorName, e)}>
           <option value="Version 1">Version 1</option>
           <option value="Version 2">Version 2</option>
           <option value="Version 3">Version 3</option>

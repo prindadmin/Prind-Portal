@@ -319,6 +319,7 @@ export const GIT_UPLOAD_FILE_SUCCESSFUL_TOAST = "Save successful"
 export const GIT_UPLOAD_FILE_FAILED_TOAST = "Error when saving"
 export const GIT_TEXT_OPEN_COMPARER = "Compare"
 export const GIT_TEXT_OPEN_WRITER = "Edit"
+export const GIT_TEXT_NO_FILE_VERSION_SELECTED = "Please select a version..."
 
 export const YOUR_CHANGE_PASSWORD_REQUEST_WAS_SUCCESS = "Your change password request was successful, please check your email inbox"
 export const YOUR_PASSWORD_WAS_SUCCESSFULLY_CHANGED = "Your password has been successfully changed."
