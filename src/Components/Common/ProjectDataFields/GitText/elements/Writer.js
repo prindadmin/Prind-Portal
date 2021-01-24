@@ -20,26 +20,34 @@ export class TextWriter extends Component {
     disabled: PropTypes.bool.isRequired,
   }
 
-  // TODO: Add on select functionality
+  // TODO: Load the latest version in componentDidMount
+  componentDidMount() {
+
+  }
+
+
   onSelectionChange = (selectorName, e) => {
     console.log(selectorName)
     console.log(e.target.value)
     this.props.onRequestNewFileVersionData(e.target.value, selectorName)
   }
 
-  // TODO: Load the latest version in componentDidMount for both old and new
+
   getVersionSelectSystem = (selectorName) => {
+    const { fileVersions } = this.props
 
     // Map the fileVersions to options
-    const options = this.props.fileVersions.map((version, index) => {
-      return (
-        <option id={index} value={version.s3VersionId}>{version.commitMessage}</option>
-      )
+    const options = fileVersions.map((version, index) => {
+      return <option key={index} value={version.s3VersionId}>{version.commitMessage}</option>
     })
 
     return (
       <div className='version-select'>
-        <select name={selectorName} id={selectorName} onChange={(e) => this.onSelectionChange(selectorName, e)}>
+        <select
+          name={selectorName}
+          id={selectorName}
+          defaultValue={fileVersions[fileVersions.length -1].s3VersionId}
+          onChange={(e) => this.onSelectionChange(selectorName, e)}>
           {options}
         </select>
       </div>

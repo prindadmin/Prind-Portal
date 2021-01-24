@@ -19,6 +19,9 @@ async function checkFileExists(s3, downloadParams, parent) {
 
 
 function downloadFileContent(s3, downloadParams, parent) {
+
+  console.log(downloadParams)
+
   // Create a request
   var request = s3.getObject(downloadParams);
 
@@ -35,6 +38,7 @@ function downloadFileContent(s3, downloadParams, parent) {
     .on('error', function(error, response) {
       console.log("ERROR downloading file from S3")
       console.error(error)
+      console.log(response)
       parent.setState({
         state: ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER_FAILED,
       })

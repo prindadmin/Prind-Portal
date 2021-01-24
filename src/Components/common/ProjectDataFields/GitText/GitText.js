@@ -72,6 +72,7 @@ export class GitText extends Component {
         })
       }
     }
+    this.downloadFromS3()
   }
 
   componentDidUpdate(prevState, prevProps) {
@@ -219,7 +220,6 @@ export class GitText extends Component {
 
   downloadFromS3 = () => {
     const { projectId, pageName, elementContent } = this.props
-
     const token = this.getValidS3Token()
     if (token === undefined) {
       return;
@@ -239,14 +239,13 @@ export class GitText extends Component {
       Key: key
     };
 
-    if (this.state.requestedFileVersionID !== undefined) {
+    if (this.state.requestedFileVersionID !== "") {
       downloadParams.VersionId = this.state.requestedFileVersionID
     }
-
     getFileFromS3(s3, downloadParams, this)
   }
 
-  // CONTINUE HERE: This is updating but the file isn't being found
+
   updateRequestedFileVersion = (newFileVersion, selectorName) => {
     this.setState({
       requestedFileVersionID: newFileVersion
