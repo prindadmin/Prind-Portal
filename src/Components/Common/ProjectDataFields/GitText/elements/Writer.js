@@ -33,6 +33,7 @@ export class TextWriter extends Component {
   }
 
 
+  // TODO: BUG: When changing chosen file, the menu always reverts to the defaultValue
   getVersionSelectSystem = (selectorName) => {
     const { fileVersions } = this.props
 
