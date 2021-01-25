@@ -1,0 +1,3 @@
+
+export const OLDSELECTOR = "OLDSELECTOR"
+export const NEWSELECTOR = "NEWSELECTOR"

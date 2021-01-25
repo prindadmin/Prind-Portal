@@ -49,8 +49,17 @@ function downloadFileContent(s3, downloadParams, parent) {
 
 function onFileDownloadComplete(response, parent) {
   console.log("File download complete")
+
+  if (parent.state.lastRequestIsOld) {
+    parent.setState({
+      oldContent: response.data.Body.toString(),
+      state: ComponentState.QUIESCENT
+    })
+    return
+  }
+  
   parent.setState({
-    originalContent: response.data.Body.toString(),
+    originalCurrentContent: response.data.Body.toString(),
     currentContent: response.data.Body.toString(),
     state: ComponentState.QUIESCENT
   })

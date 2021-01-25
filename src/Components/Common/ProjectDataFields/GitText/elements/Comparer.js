@@ -5,27 +5,71 @@ import { Editor } from '@tinymce/tinymce-react';
 import * as Diff from 'diff';
 
 import * as Strings from '../../../../../Data/Strings'
+import * as Constants from '../../Constants'
 
 // TODO: Implement styling depending on state
 const editorContentStyle = `mark.red { color: red; background: none; text-decoration: line-through; } mark.green { color: limegreen; background: none; } mark.grey { color: grey; background: none; }`;
 const contentBeforeSelection = `<h2>${Strings.GIT_TEXT_NO_FILE_VERSION_SELECTED}</h2>`
 
+
 export class Comparer extends Component {
   static propTypes = {
     oldContent: PropTypes.string.isRequired,
     newContent: PropTypes.string.isRequired,
+    fileVersions: PropTypes.arrayOf(PropTypes.shape({
+      ver: PropTypes.string,
+      prevVer: PropTypes.string,
+      s3VersionId: PropTypes.string,
+      commitMessage: PropTypes.string,
+    })),
+    onRequestNewFileVersionData: PropTypes.func.isRequired,
+    currentOldVersionSelected: PropTypes.string,
+    currentNewVersionSelected: PropTypes.string,
   }
+
+  constructor(){
+    super()
+    this.state = {
+      currentOldVersionSelected: '',
+      currentNewVersionSelected: ''
+    }
+  }
+
+  componentDidMount() {
+    const { fileVersions, currentOldVersionSelected, currentNewVersionSelected } = this.props
+    // If the parent provides a version, set that as the current version
+    if(this.props.currentOldVersionSelected !== '') {
+      this.setState({
+        currentOldVersionSelected,
+      })
+    }
+
+    // If the parent provides a version, set that as the current version
+    if(this.props.currentNewVersionSelected !== '') {
+      this.setState({
+        currentNewVersionSelected,
+      })
+    }
+    else {
+      // If the parent hasn't provided a version, set it to blank
+      this.setState({
+        currentNewVersionSelected: fileVersions[fileVersions.length -1].s3VersionId,
+      })
+    }
+
+  }
+
 
   // Add colour formatting to the text
   addFormatting = () => {
-    const diff = Diff.diffChars(this.props.oldContent, this.props.newContent);
+    const diff = Diff.diffWords(this.props.oldContent, this.props.newContent);
     var outputDifference = ''
 
     diff.forEach((part) => {
       // green for additions, red for deletions
       // grey for common parts
       const colour = part.added ? 'green' :
-                    part.removed ? 'red' : 'grey';
+                     part.removed ? 'red' : 'grey';
 
       if(colour === 'grey') {
         outputDifference += `${part.value}`
@@ -75,18 +119,49 @@ export class Comparer extends Component {
   onSelectionChange = (selectorName, e) => {
     console.log(selectorName)
     console.log(e.target.value)
+
+    this.props.onRequestNewFileVersionData(e.target.value, selectorName)
   }
+
 
   // TODO: Load the latest version in componentDidMount for both old and new
   // TODO: Fill with options by mapping redux store data
+  // TODO: Add "Please select verison" as hidden option to the drop down
   getVersionSelectSystem = (selectorName) => {
+
+    console.log(selectorName)
+
+    const { fileVersions } = this.props
+    const { currentOldVersionSelected, currentNewVersionSelected } = this.state
+
+    const s3Ids = fileVersions.map((version) => {
+      return version.s3VersionId
+    })
+
+    const oldIndex = s3Ids.indexOf(currentOldVersionSelected)
+    const newIndex = s3Ids.indexOf(currentNewVersionSelected)
+
+    // Map the fileVersions to options
+    const options = fileVersions.map((version, index) => {
+
+      // If this is the old selector and the option is older than the new selector selection
+      // disable the selection
+      if (selectorName === Constants.OLDSELECTOR && index >= newIndex) {
+        return <option key={index} disabled value={version.s3VersionId}>{version.commitMessage}</option>
+      }
+
+      return <option key={index} value={version.s3VersionId}>{version.commitMessage}</option>
+    })
+
+
     return (
       <div className='version-select'>
-        <select name={selectorName} id={selectorName} onChange={(e) => this.onSelectionChange(selectorName, e)}>
-          <option value="Version 1">Version 1</option>
-          <option value="Version 2">Version 2</option>
-          <option value="Version 3">Version 3</option>
-          <option value="Version 4">Version 4</option>
+        <select
+          name={selectorName}
+          id={selectorName}
+          defaultValue={selectorName === Constants.OLDSELECTOR ? currentOldVersionSelected : currentNewVersionSelected}
+          onChange={(e) => this.onSelectionChange(selectorName, e)}>
+          {options}
         </select>
       </div>
     )
@@ -95,15 +170,17 @@ export class Comparer extends Component {
   render() {
     const { oldContent, newContent } = this.props
 
+    console.log(this.state)
+
     return (
       <React.Fragment>
         <div className='comparators'>
           <div className='comparer old'>
-            { this.getVersionSelectSystem("oldContent") }
+            { this.getVersionSelectSystem(Constants.OLDSELECTOR) }
             { this.getEditor(oldContent, false) }
           </div>
           <div className='comparer new'>
-            { this.getVersionSelectSystem("newContent") }
+            { this.getVersionSelectSystem(Constants.NEWSELECTOR) }
             { this.getEditor(newContent, true) }
           </div>
         </div>

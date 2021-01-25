@@ -8,7 +8,7 @@ import { Editor } from '@tinymce/tinymce-react';
 
 export class TextWriter extends Component {
   static propTypes = {
-    originalContent: PropTypes.string.isRequired,
+    currentContent: PropTypes.string.isRequired,
     fileVersions: PropTypes.arrayOf(PropTypes.shape({
       ver: PropTypes.string,
       prevVer: PropTypes.string,
@@ -18,22 +18,43 @@ export class TextWriter extends Component {
     onRequestNewFileVersionData: PropTypes.func.isRequired,
     onHandleContentChange: PropTypes.func.isRequired,
     disabled: PropTypes.bool.isRequired,
+    currentVersionSelected: PropTypes.string,
   }
 
-  // TODO: Load the latest version in componentDidMount
-  componentDidMount() {
+  constructor(){
+    super()
+    this.state = {
+      currentVersionSelected: ''
+    }
+  }
 
+  componentDidMount() {
+    const { fileVersions, currentVersionSelected } = this.props
+    // If the parent provides a version, set that as the current version
+    if(this.props.currentVersionSelected !== '') {
+      this.setState({
+        currentVersionSelected,
+      })
+      return
+    }
+    // If the parent hasn't provided a version, set it to the last version available
+    this.setState({
+      currentVersionSelected: fileVersions[fileVersions.length -1].s3VersionId,
+    })
   }
 
 
   onSelectionChange = (selectorName, e) => {
     console.log(selectorName)
     console.log(e.target.value)
+    this.setState({
+      currentVersionSelected: e.target.value,
+    })
+
     this.props.onRequestNewFileVersionData(e.target.value, selectorName)
   }
 
 
-  // TODO: BUG: When changing chosen file, the menu always reverts to the defaultValue
   getVersionSelectSystem = (selectorName) => {
     const { fileVersions } = this.props
 
@@ -47,7 +68,7 @@ export class TextWriter extends Component {
         <select
           name={selectorName}
           id={selectorName}
-          defaultValue={fileVersions[fileVersions.length -1].s3VersionId}
+          value={this.state.currentVersionSelected}
           onChange={(e) => this.onSelectionChange(selectorName, e)}>
           {options}
         </select>
@@ -57,10 +78,10 @@ export class TextWriter extends Component {
 
 
   getEditor = () => {
-    const { originalContent, disabled } = this.props
+    const { currentContent, disabled } = this.props
     return (
       <Editor
-        initialValue={originalContent}
+        initialValue={currentContent}
         apikey={process.env.REACT_APP_TINY_API_KEY}
         disabled={disabled}
         init={{

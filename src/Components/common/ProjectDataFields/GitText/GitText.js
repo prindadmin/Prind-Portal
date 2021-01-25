@@ -7,6 +7,7 @@ import ItemIcon from '../../ItemIcon'
 
 import * as Strings from '../../../../Data/Strings'
 import * as ComponentState from '../ComponentStates'
+import * as Constants from '../Constants'
 
 import Writer from './elements/Writer'
 import Comparer from './elements/Comparer'
@@ -54,12 +55,15 @@ export class GitText extends Component {
       uploadFileProgress: 0,
       downloadFileProgress: 0,
       errorMessage: "",
-      originalContent: '',
+      originalCurrentContent: '',
       currentContent: '',
+      oldContent: '',
       editable: false,
       toastText: '',
       showToast: false,
-      requestedFileVersionID: '',
+      requestedOldFileVersionID: '',
+      requestedCurrentFileVersionID: '',
+      lastRequestIsOld: false,
     }
   }
 
@@ -68,11 +72,11 @@ export class GitText extends Component {
     if (this.props.elementContent.fileDetails !== undefined) {
       if (this.props.elementContent.fileDetails.length !== 0) {
         this.setState({
-          requestedFileVersionID: this.props.elementContent.fileDetails[0].s3VersionId,
+          requestedCurrentFileVersionID: this.props.elementContent.fileDetails[0].s3VersionId,
         })
       }
     }
-    this.downloadFromS3()
+    this.downloadFromS3(this.state.lastRequestIsOld)
   }
 
   componentDidUpdate(prevState, prevProps) {
@@ -89,9 +93,13 @@ export class GitText extends Component {
       if (this.state.state === ComponentState.S3_TOKEN_NOW_AVAILABLE) {
         console.log("new S3 token available")
       }
-      if (this.state.requestedFileVersionID !== prevProps.requestedFileVersionID) {
+      if (this.state.requestedCurrentFileVersionID !== prevProps.requestedCurrentFileVersionID) {
         console.log("file version requested changed")
-        this.downloadFromS3()
+        this.downloadFromS3(false)
+      }
+      if (this.state.requestedOldFileVersionID !== prevProps.requestedOldFileVersionID) {
+        console.log("file version requested changed")
+        this.downloadFromS3(true)
       }
     }
   }
@@ -218,7 +226,7 @@ export class GitText extends Component {
   }
 
 
-  downloadFromS3 = () => {
+  downloadFromS3 = (isOld) => {
     const { projectId, pageName, elementContent } = this.props
     const token = this.getValidS3Token()
     if (token === undefined) {
@@ -239,16 +247,32 @@ export class GitText extends Component {
       Key: key
     };
 
-    if (this.state.requestedFileVersionID !== "") {
-      downloadParams.VersionId = this.state.requestedFileVersionID
+    if (isOld) {
+      if (this.state.requestedOldFileVersionID !== "") {
+        downloadParams.VersionId = this.state.requestedOldFileVersionID
+      }
+    }
+    else {
+      if (this.state.requestedCurrentFileVersionID !== "") {
+        downloadParams.VersionId = this.state.requestedCurrentFileVersionID
+      }
     }
     getFileFromS3(s3, downloadParams, this)
   }
 
 
   updateRequestedFileVersion = (newFileVersion, selectorName) => {
+    if (selectorName === Constants.OLDSELECTOR) {
+      this.setState({
+        lastRequestIsOld: true,
+        requestedOldFileVersionID: newFileVersion
+      })
+      return
+    }
+
     this.setState({
-      requestedFileVersionID: newFileVersion
+      lastRequestIsOld: false,
+      requestedCurrentFileVersionID: newFileVersion
     })
   }
 
@@ -279,20 +303,25 @@ export class GitText extends Component {
     if (this.state.view === ComponentState.GIT_TEXT_WRITER_OPEN) {
       return (
         <Writer
-          originalContent={this.state.originalContent}
+          currentContent={this.state.currentContent}
           fileVersions={fileVersions}
           onRequestNewFileVersionData={this.updateRequestedFileVersion}
           onHandleContentChange={this.handleEditorChange}
-          disabled={!this.props.elementContent.editable} />
+          disabled={!this.props.elementContent.editable}
+          currentVersionSelected={this.state.requestedCurrentFileVersionID} />
       )
     }
 
-    // newContent={`${this.state.originalContent.replace("test","abc")}`} />
+    // newContent={`${this.state.currentContent.replace("test","abc")}`} />
 
     return (
       <Comparer
-        oldContent={this.state.originalContent}
-        newContent="" />
+        oldContent={this.state.oldContent}
+        newContent={this.state.currentContent}
+        fileVersions={fileVersions}
+        onRequestNewFileVersionData={this.updateRequestedFileVersion}
+        currentOldVersionSelected={this.state.requestedOldFileVersionID}
+        currentNewVersionSelected={this.state.requestedCurrentFileVersionID} />
     )
   }
 
@@ -304,7 +333,7 @@ export class GitText extends Component {
           type="submit"
           value={ Strings.BUTTON_RETRY }
           className="save-button"
-          onClick={(e) => this.downloadFromS3()} />
+          onClick={(e) => this.downloadFromS3(true)} />
       </div>
     )
   }
