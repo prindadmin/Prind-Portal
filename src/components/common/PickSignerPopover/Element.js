@@ -12,7 +12,7 @@ import ItemIcon from '../ItemIcon'
 
 import PopOverHandler from '../popOverHandler'
 
-import * as strings from '../../../Data/Strings'
+import * as Strings from '../../../Data/Strings'
 
 export class Element extends Component {
   static propTypes = {
@@ -101,7 +101,7 @@ export class Element extends Component {
   sendReject = () => {
     this.setState({
       sendError: true,
-      errorText: strings.ERROR_SENDING_SIGNATURE_REQUEST,
+      errorText: Strings.ERROR_SENDING_SIGNATURE_REQUEST,
     })
   }
 
@@ -145,8 +145,8 @@ export class Element extends Component {
 
     return(
       <div className={`member-tile${isSelected ? " selected" : ""}`} key={index} onClick={(e) => this.tileClicked(e, memberDetails)}>
-        <p>{`${strings.MEMBER_NAME}: ${memberDetails.firstName} ${memberDetails.lastName}`}</p>
-        <p>{`${strings.MEMBER_EMAIL_ADDRESS}: ${memberDetails.emailAddress}`}</p>
+        <p>{`${Strings.MEMBER_NAME}: ${memberDetails.firstName} ${memberDetails.lastName}`}</p>
+        <p>{`${Strings.MEMBER_EMAIL_ADDRESS}: ${memberDetails.emailAddress}`}</p>
         <div className="member-tile-tickbox">
           {isSelected ? <ItemIcon size='2x' type='ticked' /> : <ItemIcon size='2x' type='unticked' />}
         </div>
@@ -212,7 +212,7 @@ export class Element extends Component {
           className='search-field'
           id='search-field'
           type='search'
-          placeholder={strings.SEARCH}
+          placeholder={Strings.SEARCH}
           large
           onChange={this.onSearchChange}
         />
@@ -228,13 +228,13 @@ export class Element extends Component {
     return(
       <div className="buttons-container">
         <Button
-          text={strings.BUTTON_SUBMIT}
+          text={Strings.BUTTON_SUBMIT}
           intent={Intent.PRIMARY}
           disabled={selectedMembers.length === 0}
           onClick={(e) => this.sendSigningRequest(e)}
         />
         <Button
-          text={strings.BUTTON_CANCEL}
+          text={Strings.BUTTON_CANCEL}
           onClick={(e) => {
             this.closePopover()
             e.stopPropagation()
@@ -262,7 +262,7 @@ export class Element extends Component {
             <div id='popup-box' onClick={(e) => e.stopPropagation()}>
               <div className='pick-signer-popover-container'>
                 <div className='element-title'>
-                  {strings.PICK_DOCUMENT_SIGNERS}
+                  {Strings.PICK_DOCUMENT_SIGNERS}
                 </div>
                 <div className='element-description'>
                   {

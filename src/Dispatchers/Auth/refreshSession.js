@@ -6,7 +6,7 @@ details provided.
 
 import { Auth } from 'aws-amplify';
 
-export default function () {
+function RefreshSession() {
 
   return new Promise((resolve, reject) => {
     try {
@@ -20,3 +20,5 @@ export default function () {
   })
 
 }
+
+export default RefreshSession

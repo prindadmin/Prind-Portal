@@ -5,7 +5,7 @@ import {
   Intent,
 } from '@blueprintjs/core'
 
-import * as strings from '../../../Data/Strings'
+import * as Strings from '../../../Data/Strings'
 
 const ProjectCreateTile = props => {
 
@@ -13,13 +13,13 @@ const ProjectCreateTile = props => {
 
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
 
-  const displayText = strings.CREATED_PROJECT_TEXT
+  const displayText = Strings.CREATED_PROJECT_TEXT
     .replace("XXX", details.projectName)
     .replace("YYY", new Date(parseInt(details.dateTime) * 1000).toLocaleDateString('en-GB', options))
 
 
   return (
-    <Callout intent={Intent.SUCCESS} icon='build' title={strings.TILE_PROJECT_CREATED}>
+    <Callout intent={Intent.SUCCESS} icon='build' title={Strings.TILE_PROJECT_CREATED}>
       { displayText }
     </Callout>
   )

@@ -4,10 +4,12 @@ import API from '@aws-amplify/api';
 // Fixed values for the API request
 const apiName = process.env.REACT_APP_API_NAME
 
-export default async function(projectId, pageName, fieldId, fileDetails) {
+async function UploadFile(projectId, pageName, fieldId, fileDetails, fieldType) {
 
   // Build path for request
   const path = `/project/${projectId}/${pageName}/${fieldId}`
+
+  console.log(`Uploading file to S3 @: ${path}`)
 
   // Get the current session and the identity jwtToken
   const identityToken = await Auth.currentSession()
@@ -27,7 +29,7 @@ export default async function(projectId, pageName, fieldId, fileDetails) {
             filename: fileDetails.userFileName,
             tags: []
           },
-          type: "file"
+          type: fieldType
         },
         response: false,
     }
@@ -44,3 +46,5 @@ export default async function(projectId, pageName, fieldId, fileDetails) {
      })
    })
 }
+
+export default UploadFile

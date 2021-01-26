@@ -5,8 +5,8 @@ import ReactGA from 'react-ga';
 
 import HeaderBar from '../HeaderBar';
 import SideBar from '../SideBar'
-import ProjectLoading from '../common/ProjectLoading'
-import Footer from '../common/footer'
+import ProjectLoading from '../Common/ProjectLoading'
+import Footer from '../Common/footer'
 
 import {
   Tab,
@@ -14,7 +14,7 @@ import {
   Callout,
 } from '@blueprintjs/core'
 
-import * as strings from '../../Data/Strings'
+import * as Strings from '../../Data/Strings'
 
 import {
   UserTab,
@@ -94,7 +94,7 @@ export class Page extends Component {
     this.setState({
       historyFetching: false,
       historyError: true,
-      historyErrorText: strings.ERROR_FETCHING_USER_HISTORY
+      historyErrorText: Strings.ERROR_FETCHING_USER_HISTORY
     })
   }
 
@@ -109,7 +109,7 @@ export class Page extends Component {
     this.setState({
       profileFetching: false,
       profileError: true,
-      profileErrorText: strings.ERROR_FETCHING_USER_PROFILE
+      profileErrorText: Strings.ERROR_FETCHING_USER_PROFILE
     })
   }
 
@@ -124,7 +124,7 @@ export class Page extends Component {
     this.setState({
       projectRequestsFetching: false,
       projectRequestsError: true,
-      projectRequestsErrorText: strings.ERROR_FETCHING_USER_PROJECT_REQUESTS
+      projectRequestsErrorText: Strings.ERROR_FETCHING_USER_PROJECT_REQUESTS
     })
   }
 
@@ -139,14 +139,14 @@ export class Page extends Component {
     this.setState({
       signatureRequestsFetching: false,
       signatureRequestsError: true,
-      signatureRequestsErrorText: strings.ERROR_FETCHING_USER_SIGNATURE_REQUESTS
+      signatureRequestsErrorText: Strings.ERROR_FETCHING_USER_SIGNATURE_REQUESTS
     })
   }
 
 
   showLoadingPage = () => {
     return (
-      <ProjectLoading text={strings.USER_DETAILS_LOADING}/>
+      <ProjectLoading text={Strings.USER_DETAILS_LOADING}/>
     )
   }
 
@@ -175,8 +175,8 @@ export class Page extends Component {
     return(
       <div className='page-content'>
         <div className='page-title'>
-          <h1>{strings.PROFILE_PAGE_TITLE}</h1>
-          <span>{strings.PROFILE_PAGE_DESCRIPTION}</span>
+          <h1>{Strings.PROFILE_PAGE_TITLE}</h1>
+          <span>{Strings.PROFILE_PAGE_DESCRIPTION}</span>
         </div>
 
         {
@@ -217,9 +217,9 @@ export class Page extends Component {
 
         <div className="row">
           <Tabs id='profileTabs' className="nav nav-tabs" onChange={this.handleTabChange} selectedTabId={activeTab}>
-            <Tab id="user" title={strings.TAB_DETAILS} panel={<UserTab />} />
-            <Tab id="history" title={strings.TAB_HISTORY} panel={<HistoryTab />} />
-            <Tab id="requests" title={strings.TAB_REQUESTS} panel={<RequestsTab />} />
+            <Tab id="user" title={Strings.TAB_DETAILS} panel={<UserTab />} />
+            <Tab id="history" title={Strings.TAB_HISTORY} panel={<HistoryTab />} />
+            <Tab id="requests" title={Strings.TAB_REQUESTS} panel={<RequestsTab />} />
             <Tabs.Expander />
           </Tabs>
         </div>

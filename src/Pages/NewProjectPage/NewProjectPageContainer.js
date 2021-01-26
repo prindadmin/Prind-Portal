@@ -15,6 +15,7 @@ const mapStatetoProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     createProject: (values, resolve, reject) => {
+      console.log("create Project called")
       dispatch(reducer.createProject(values, resolve, reject))
     },
     resetChosenProject: () => {

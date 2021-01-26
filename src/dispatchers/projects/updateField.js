@@ -4,7 +4,7 @@ import API from '@aws-amplify/api';
 // Fixed values for the API request
 const apiName = process.env.REACT_APP_API_NAME
 
-export default async function(projectId, pageName, fieldId, fieldDetails) {
+async function UpdateField(projectId, pageName, fieldId, fieldDetails) {
 
   // Build path for request
   const path = `/project/${projectId}/${pageName}/${fieldId}`
@@ -40,3 +40,5 @@ export default async function(projectId, pageName, fieldId, fieldDetails) {
      })
    })
 }
+
+export default UpdateField

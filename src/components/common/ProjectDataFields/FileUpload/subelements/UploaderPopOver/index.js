@@ -1,3 +1,3 @@
-import Element from './ElementContainer'
+import UploaderPopOverContainer from './UploaderPopOverContainer'
 
-export default Element
+export default UploaderPopOverContainer

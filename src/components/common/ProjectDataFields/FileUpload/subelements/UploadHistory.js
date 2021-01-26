@@ -7,7 +7,7 @@ import {
 
 import FileDetailPopover from './FileDetailPopover'
 
-import * as strings from '../../../../../Data/Strings'
+import * as Strings from '../../../../../Data/Strings'
 
 export class Element extends Component {
   static propTypes = {
@@ -51,11 +51,11 @@ export class Element extends Component {
 
     if (proofLink === undefined) {
       return(
-        strings.NO_PROOF_AVAILABLE
+        Strings.NO_PROOF_AVAILABLE
       )
     } else {
       return(
-        <a target="_blank" rel="noopener noreferrer" onClick={e => this.openProof(e)} href={proofLink}>{strings.LINK_TO_PROOF}</a>
+        <a target="_blank" rel="noopener noreferrer" onClick={e => this.openProof(e)} href={proofLink}>{Strings.LINK_TO_PROOF}</a>
       )
     }
   }
@@ -76,7 +76,7 @@ export class Element extends Component {
 
         <div className='row'>
           <div className='element-title'>
-            {strings.UPLOAD_HISTORY_ELEMENT}
+            {Strings.UPLOAD_HISTORY_ELEMENT}
           </div>
         </div>
 
@@ -85,31 +85,31 @@ export class Element extends Component {
 
           <div className='col'>
             <Label>
-              <b>{strings.FILE_NAME}</b>
+              <b>{Strings.FILE_NAME}</b>
             </Label>
           </div>
 
           <div className='col'>
             <Label>
-              <b>{strings.UPLOADED_BY}</b>
+              <b>{Strings.UPLOADED_BY}</b>
             </Label>
           </div>
 
           <div className='col'>
             <Label>
-              <b>{strings.UPLOAD_VERSION}</b>
+              <b>{Strings.UPLOAD_VERSION}</b>
             </Label>
           </div>
 
           <div className='col'>
             <Label>
-              <b>{strings.UPLOAD_DATE_TIME}</b>
+              <b>{Strings.UPLOAD_DATE_TIME}</b>
             </Label>
           </div>
 
           <div className='col'>
             <Label>
-              <b>{strings.PROOF}</b>
+              <b>{Strings.PROOF}</b>
             </Label>
           </div>
 
@@ -122,7 +122,7 @@ export class Element extends Component {
               <div className='row signatures' key={index} onClick={(e) => this.fileDetailsOpen(e, fileUpload)}>
 
                 <div className='col'>
-                  {fileUpload.uploadName === undefined ? strings.NO_UPLOAD_NAME : fileUpload.uploadName}
+                  {fileUpload.uploadName === undefined ? Strings.NO_UPLOAD_NAME : fileUpload.uploadName}
                 </div>
 
                 <div className='col'>
@@ -156,7 +156,7 @@ export class Element extends Component {
   uploadHistoryNotProvided = () => {
     return (
       <div>
-        {strings.NO_PREVIOUS_VERSIONS}
+        {Strings.NO_PREVIOUS_VERSIONS}
       </div>
     )
   }

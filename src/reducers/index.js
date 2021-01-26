@@ -5,15 +5,15 @@ import * as userReducer from './userReducer'
 import * as projectsReducer from './projectsReducer'
 import * as memberReducer from './memberReducer'
 import * as foundationsReducer from './foundationsReducer'
-import pageContent from './PageReducers'
 import { reducer as formReducer } from 'redux-form'
+import * as stagePageReducer from './stagePageReducer'
 
 const Reducers = combineReducers({
   auth: authReducer.reducer,
   user: userReducer.reducer,
   projects: projectsReducer.reducer,
   foundations: foundationsReducer.reducer,
-  pageContent,
+  pageContent: stagePageReducer.reducer,
   members: memberReducer.reducer,
   form: formReducer,
 })

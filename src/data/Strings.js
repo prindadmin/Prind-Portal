@@ -3,6 +3,13 @@ export const ERROR_404_MESSAGE = "Error 404: This resource was not found"
 
 export const ERROR_CONFIRMING_USER = "There was an error confirming your email address.  Please check that the link has not expired and try again."
 export const CONFIRMING_EMAIL_PLEASE_WAIT = "Confirming your email address, please wait..."
+export const DONT_HAVE_AN_ACCOUNT = "Haven't got an account yet?  Click here to sign up"
+export const ALREADY_HAVE_AN_ACCOUNT = "Already have an account?  Click here to sign in"
+export const PLEASE_SIGN_UP_TEXT = "Fill in the form below to sign up to the Foundations portal"
+export const PLEASE_SIGN_IN_TEXT = "Fil in your login details to access the portal"
+export const THANK_YOU_FOR_SIGNING_UP = "Thank you for signing up; please check your email for a confirmation email."
+export const BUTTON_CONTINUE = "Continue"
+export const BUTTON_SIGN_UP = "Sign up"
 
 export const YES = "Yes"
 export const NO = "No"
@@ -14,23 +21,36 @@ export const NOT_A_VALID_EMAIL_ADDRESS = "Not a valid email address"
 export const REQUIRED = "Required"
 export const MIN_LENGTH_EIGHT = "Min Length 8 characters"
 
+export const WELCOME_TEXT = "Welcome"
 export const BUTTON_LOGIN = "Login"
 export const BUTTON_NEW_USER = "New User? Create Account"
-export const BUTTON_FORGOT_PASSWORD = "Forgot Password"
+export const BUTTON_FORGOT_PASSWORD = "Forgot your password?"
 export const BUTTON_CREATE_ACCOUNT = "Create Account"
 export const BUTTON_CANCEL_SIGN_UP = "Cancel Sign Up"
 export const BUTTON_BACK_TO_LOGIN_PAGE = "Back to login page"
 export const PLACEHOLDER_EMAIL = "Email"
-export const PLACEHOLDER_PASSWORD = "Password"
+export const PLACEHOLDER_REPEAT_PASSWORD = "Repeat Password"
 export const PLACEHOLDER_FIRST_NAME = "First Name"
 export const PLACEHOLDER_LAST_NAME = "Surname"
+export const PLACEHOLDER_COMPANY = "Company"
+export const PLACEHOLDER_USERNAME = "Email"
+export const PLACEHOLDER_PASSWORD = "Password"
 export const LOGIN_UNSUCCESSFUL = "Login unsuccessful, please check your email address and password"
 export const PLEASE_VERIFY_ACCOUNT = "We've sent you an email to verify your account. Please check your email inbox."
 
+export const BUTTON_CHANGE_PASSWORD = "Change Password"
+export const ACCOUNT_PASSWORD_LINK_EXPIRED = "Your change password link is expired. Please request a new one."
+export const ACCOUNT_GENERIC_ERROR = "Error: something went wrong. Please try again."
+export const ACCOUNT_BACK_TO_LOGIN_PAGE = "Back to login page"
+export const BUTTON_SEND_PASSWORD_RESET_CODE = "Reset password"
+export const PLEASE_FILL_IN_EMAIL_TO_RESET_PASSWORD = "Please fill in your email address to request a password reset"
+
+export const BUTTON_RETRY = "Retry"
 export const BUTTON_SEND_CODE = "Send Code"
 export const BUTTON_RESET_LINK = "Send Reset Link"
 export const CHANGE_PASSWORD_DESCRIPTION = "In order to change your password, we'll need to send you a link to the change password page"
 export const CHANGE_PASSWORD_LINK_SENT = "Change password link successfuly sent! Please check your email."
+export const ENTER_A_NEW_PASSWORD = "Please enter a new password for your account."
 
 export const IF_YES_PROVIDE_DETAILS_BELOW = "If yes, please provide extra details below"
 export const IF_XXX_PROVIDE_DETAILS_BELOW = "If XXX, please provide extra details below"
@@ -69,29 +89,50 @@ export const BUTTON_CANCEL = "Cancel"
 export const BUTTON_SAVE_CHANGES = "Save Changes"
 export const BUTTON_DELETE_PROJECT = "Delete Project"
 
-export const INCEPTION_PAGE_TITLE = "Project Inception"
-export const INCEPTION_PAGE_DESCRIPTION = "Inception of a project begins with the idea. This idea is captured in a project brief."
 
-export const FEASIBILITY_PAGE_TITLE = "Project Feasibility"
-export const FEASIBILITY_PAGE_DESCRIPTION = "To confirm that the project brief is feasible it will be necessary to perform investigations which can be compiled into a feasibility study."
+export const PAGE_TITLES_AND_DESCRIPTIONS_CDM2015Project = {
+  inception: {
+    title: "Project Inception",
+    description: "Inception of a project begins with the idea. This idea is captured in a project brief.",
+  },
+  feasibility: {
+    title: "Project Feasibility",
+    description: "To confirm that the project brief is feasible it will be necessary to perform investigations which can be compiled into a feasibility study.",
+  },
+  design: {
+    title: "Project Design",
+    description: "The Appointed design team will be collectively identifying hazards and considering mitagations for potential risks.  The assessment of risks will be complied into a single Design Risk Register.",
+  },
+  tender: {
+    title: "Project Tender",
+    description: "The design is complete, you are ready to build.  You will require a Principal Contractor.  It is the client's responsibility to provide Pre-Construction information.",
+  },
+  construction: {
+    title: "Project Construction",
+    description: "You have appointed a Principal contractor (PC).  The PC has full responsibility for Health and Safety during this step.  The PC will provide a Construction Phase Plan (CPP).",
+  },
+  handover: {
+    title: "Project Handover",
+    description: "The building is complete.  The PC will have provided a Practical Completion Certificate.",
+  },
+  occupation: {
+    title: "Project Occupation",
+    description: "The Principal Designer has finalised the Project Health and Safety File (HSF).",
+  },
+  refurbishment: {
+    title: "Project Refurbishment",
+    description: "Time for refurbishment? If your project will last more that 30 days, start new project.  Demolition? - look forward to helping you.\n\nStart new project",
+  },
+}
 
-export const DESIGN_PAGE_TITLE = "Project Design"
-export const DESIGN_PAGE_DESCRIPTION = "The Appointed design team will be collectively identifying hazards and considering mitagations for potential risks.  The assessment of risks will be complied into a single Design Risk Register."
 
-export const TENDER_PAGE_TITLE = "Project Tender"
-export const TENDER_PAGE_DESCRIPTION = "The design is complete, you are ready to build.  You will require a Principal Contractor.  It is the client's responsibility to provide Pre-Construction information."
+export const PAGE_TITLES_AND_DESCRIPTIONS_DHSFProject = {
+  occupation: {
+    title: "Digital Health and Safety File",
+    description: "This is where the project's Health and Safety File (HSF) is stored digitally.",
+  },
+}
 
-export const CONSTRUCTION_PAGE_TITLE = "Project Construction"
-export const CONSTRUCTION_PAGE_DESCRIPTION = "You have appointed a Principal contractor (PC).  The PC has full responsibility for Health and Safety during this step.  The PC will provide a Construction Phase Plan (CPP)."
-
-export const HANDOVER_PAGE_TITLE = "Project Handover"
-export const HANDOVER_PAGE_DESCRIPTION = "The building is complete.  The PC will have provided a Practical Completion Certificate."
-
-export const OCCUPATION_PAGE_TITLE = "Project Occupation"
-export const OCCUPATION_PAGE_DESCRIPTION = "The Principal Designer has finalised the Project Health and Safety File (HSF)."
-
-export const REFURBISHMENT_PAGE_TITLE = "Project Refurbishment"
-export const REFURBISHMENT_PAGE_DESCRIPTION = "Time for refurbishment? If your project will last more that 30 days, start new project.  Demolition? - look forward to helping you.\n\nStart new project"
 
 export const EDIT_PROJECT_DETAILS = "Edit Project Details"
 
@@ -254,14 +295,33 @@ export const MEMBER_IS_CONFIRMED = "Joined"
 export const MEMBER_ISNT_YET_CONFIRMED = "Invited"
 export const MEMBER_NOT_YET_SIGNED_UP_TO_PRIND = "Awaiting Sign Up"
 
-export const PROFILE_DATA_IS_MANAGED_IN_FOUNDATIONS_NO_APP = "Profile data is managed in the Foundations app. Please download the Foundations app by clicking the red bar at the top of the screen."
-export const PROFILE_DATA_IS_MANAGED_IN_FOUNDATIONS_WITH_APP = "Profile data is managed in the Foundations app. Please open the Foundations app to change your profile details."
+export const PROFILE_DATA_IS_MANAGED_IN_FOUNDATIONS_NO_APP = "For data security, we manage profile data in the secure Foundations app. Please download the Foundations app by clicking the red bar at the top of the screen."
+export const PROFILE_DATA_IS_MANAGED_IN_FOUNDATIONS_WITH_APP = "For data security, your profile data is managed in the secure Foundations app. Please open the Foundations app to change your profile details."
 export const CANNOT_SIGN_WITHOUT_FOUNDATIONS_ID = "You cannot sign documents without a Foundations ID"
 
 export const ACCREDITATION_NAME = "Accreditation name"
 export const ACCREDITATION_ISSUE_DATE = "Issue date"
 export const ACCREDITATION_ISSUER = "Issued by"
+export const ACCREDITATION_STATUS = "Status"
+export const USER_ACCREDITATIONS_LOADING = "Fetching Accreditations"
+export const USER_ACCREDITATIONS_POPOVER_HEADING = "Professional Accreditations"
+export const ACCREDITATIONS_NO_ACCREDITATIONS_AVAILABLE = "No accreditations available"
+export const ACCREDITATION_VIEW_ACCREDITATIONS = "View accreditations"
 
-export const YOUR_PASSWORD_WAS_SUCCESSFULLY_CHAINGED = "Your password has been successfully changed."
+export const PROJECT_TYPE_CDM2015PROJECT_NAME = 'CDM2015 Project'
+export const PROJECT_TYPE_CDM2015PROJECT_DESCRIPTION = 'A new project that is in the inception stage.  This type of project will guide you from inception to occupation through the construction process.'
+export const PROJECT_TYPE_DHSFPROJECT_NAME = 'DHSF Project'
+export const PROJECT_TYPE_DHSFPROJECT_DESCRIPTION = 'An existing build that you wish to store the Health & Safety File for.  This type of project will allow you to store all required parts of the Health & Safety File digitally.'
+
+export const GIT_TEXT_LOADING = "Loading data..."
+export const ERROR_DOWNLOADING_TEXT_FOR_GIT_BOX = "There was an error downloading the existing data.  Try again?"
+export const GIT_UPLOAD_FILE_SUCCESSFUL_TOAST = "Save successful"
+export const GIT_UPLOAD_FILE_FAILED_TOAST = "Error when saving"
+export const GIT_TEXT_OPEN_COMPARER = "Compare"
+export const GIT_TEXT_OPEN_WRITER = "Edit"
+export const GIT_TEXT_NO_FILE_VERSION_SELECTED = "Please select a version..."
+
+export const YOUR_CHANGE_PASSWORD_REQUEST_WAS_SUCCESS = "Your change password request was successful, please check your email inbox"
+export const YOUR_PASSWORD_WAS_SUCCESSFULLY_CHANGED = "Your password has been successfully changed."
 export const LOADING_DATA_FOR_PAGE = "Loading page data"
 export const LOADING = "Loading"

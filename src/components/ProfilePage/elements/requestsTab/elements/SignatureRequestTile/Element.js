@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import * as strings from '../../../../../../Data/Strings'
+import * as Strings from '../../../../../../Data/Strings'
 
 import {
   Button,
@@ -93,30 +93,30 @@ export class Element extends Component {
 
     return(
       <div id="signature-request">
-        <h4 className='bp3-heading'>{strings.SIGNATURE_REQUEST}</h4>
+        <h4 className='bp3-heading'>{Strings.SIGNATURE_REQUEST}</h4>
 
         <span className='horizontal-flex' style={{whiteSpace: 'pre'}}>
-          <div className='bp3-heading'>{`${strings.REQUESTED_BY}:   `}</div>
+          <div className='bp3-heading'>{`${Strings.REQUESTED_BY}:   `}</div>
           <div>{`${requestDetails.requestedBy.firstName} ${requestDetails.requestedBy.lastName}`}</div>
         </span>
 
         <span className='horizontal-flex' style={{whiteSpace: 'pre'}}>
-          <div className='bp3-heading'>{`${strings.PROJECT_NAME}:   `}</div>
+          <div className='bp3-heading'>{`${Strings.PROJECT_NAME}:   `}</div>
           <div>{`${requestDetails.projectName}`}</div>
         </span>
 
         <span className='horizontal-flex' style={{whiteSpace: 'pre'}}>
-          <div className='bp3-heading'>{`${strings.PROJECT_STAGE}:   `}</div>
+          <div className='bp3-heading'>{`${Strings.PROJECT_STAGE}:   `}</div>
           <div>{`${requestDetails.pageName.replace(/^\w/, c => c.toUpperCase())}`}</div>
         </span>
 
         <span className='horizontal-flex' style={{whiteSpace: 'pre'}}>
-          <div className='bp3-heading'>{`${strings.FIELD_TITLE}:   `}</div>
+          <div className='bp3-heading'>{`${Strings.FIELD_TITLE}:   `}</div>
           <div>{`${requestDetails.fieldTitle}`}</div>
         </span>
 
         <span className='horizontal-flex' style={{whiteSpace: 'pre'}}>
-          <div className='bp3-heading'>{`${strings.PROJECT_FILE_NAME}:   `}</div>
+          <div className='bp3-heading'>{`${Strings.PROJECT_FILE_NAME}:   `}</div>
           <div>{`${requestDetails.filename}`}</div>
         </span>
 
@@ -124,13 +124,13 @@ export class Element extends Component {
           <Button
             intent={Intent.PRIMARY}
             onClick={(e) => this.goToDocument()}
-            text={strings.BUTTON_GO_TO_DOCUMENT}
+            text={Strings.BUTTON_GO_TO_DOCUMENT}
             icon="document"
           />
           <Button
             intent={Intent.DANGER}
             onClick={(e) => this.rejectSignatureRequest()}
-            text={strings.BUTTON_REJECT}
+            text={Strings.BUTTON_REJECT}
             icon="cross"
           />
         </div>

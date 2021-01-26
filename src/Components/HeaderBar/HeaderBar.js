@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import ProjectSelector from '../common/ProjectSelector';
-import UserMenu from '../common/UserMenu'
-import NoFoundationsIDBanner from '../common/NoFoundationsIDBanner'
+import ProjectSelector from '../Common/ProjectSelector';
+import UserMenu from '../Common/UserMenu'
+import NoFoundationsIDBanner from '../Common/NoFoundationsIDBanner'
 
 export class HeaderBar extends Component {
   static propTypes = {
     menuItems: PropTypes.array,
     getUserDetails: PropTypes.func.isRequired,
+    openProjectSelector: PropTypes.bool.isRequired,
   }
 
   componentDidMount() {
@@ -42,14 +43,14 @@ export class HeaderBar extends Component {
 
   render() {
 
-    const { projects, user } = this.props
+    const { projects, openProjectSelector } = this.props
 
     return (
       <React.Fragment>
         <div id='header-bar' className='full-width row'>
           <div className='header-content row'>
             {
-              projects !== undefined ? <ProjectSelector />  : null
+              projects !== undefined ? <ProjectSelector openProjectSelector={openProjectSelector}/>  : null
             }
             <div className='nav-links'>
               {
@@ -58,15 +59,8 @@ export class HeaderBar extends Component {
             </div>
           </div>
         </div>
-
         {
-          user !== undefined ?
-            user.details.foundationsID === null ?
-            <div id="no-foundations-id-banner" className="row full-width">
-              <NoFoundationsIDBanner />
-            </div> :
-            null :
-          null
+          <NoFoundationsIDBanner />
         }
       </React.Fragment>
     )

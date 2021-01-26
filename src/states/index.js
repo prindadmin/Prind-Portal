@@ -1,3 +1,7 @@
 export const AUTH_UNKNOWN = 'AUTH_UNKNOWN'
 export const AUTH_SUCCESS = 'AUTH_SUCCESS'
 export const AUTH_FAIL = 'AUTH_FAIL'
+
+export const SIGNINFORM = 'SIGNINFORM'
+export const SIGNUPFORM = 'SIGNUPFORM'
+export const FORGOTPASSWORDFORM = 'FORGOTPASSWORDFORM'

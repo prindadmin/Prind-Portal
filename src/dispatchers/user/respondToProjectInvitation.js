@@ -4,7 +4,7 @@ import API from '@aws-amplify/api';
 // Fixed values for the API request
 const apiName = process.env.REACT_APP_API_NAME
 
-export default async function(projectID, response) {
+async function RespondToProjectInvitation(projectID, response) {
 
   // Build path for request
   const path = `/project/${projectID}/respond-to-invitation`
@@ -40,3 +40,5 @@ export default async function(projectID, response) {
      })
    })
 }
+
+export default RespondToProjectInvitation

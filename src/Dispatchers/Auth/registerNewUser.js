@@ -6,7 +6,7 @@ details provided.
 
 import { Auth } from 'aws-amplify';
 
-export default function (payload) {
+export function RegisterNewUser(payload) {
   return Auth.signUp({
       username: payload.email.toLowerCase(),
       password: payload.password,
@@ -17,3 +17,5 @@ export default function (payload) {
       }
   })
 }
+
+export default RegisterNewUser

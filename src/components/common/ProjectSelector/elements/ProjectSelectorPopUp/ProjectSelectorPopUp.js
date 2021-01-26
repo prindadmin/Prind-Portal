@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, lazy } from 'react'
 import PropTypes from 'prop-types'
 
 import ProjectTile from '../project-tile'
@@ -9,10 +9,13 @@ import {
   Callout,
 } from '@blueprintjs/core'
 
-import ItemIcon from '../../../../common/ItemIcon'
+import ItemIcon from '../../../../Common/ItemIcon'
 
 import * as Strings from '../../../../../Data/Strings'
 import * as Endpoints from '../../../../../Data/Endpoints'
+import * as ComponentState from '../../States'
+
+const ProjectTypeSelector = lazy(() => import('../ProjectTypeSelector'));
 
 export class ProjectSelectorPopUp extends Component {
   static propTypes = {
@@ -23,19 +26,16 @@ export class ProjectSelectorPopUp extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      fetchError: false,
-      updateError: false,
+      state: ComponentState.QUIESCENT,
       chosenProjectId: "",
+      projectTypeSelectorOpen: false,
       errorText: "",
     }
-
-    this.props.getAccessibleProjects(
-      this.resolveProjectFetch,
-      this.rejectProjectFetch,
-    )
-
   }
 
+  componentDidMount() {
+    this.fetchProjectList()
+  }
 
   // perform this if the user clicks close popup
   cancelPopup = () => {
@@ -53,11 +53,8 @@ export class ProjectSelectorPopUp extends Component {
   }
 
 
-
-  siteChosen(project, event) {
-
+  siteChosen = (project, event) => {
     console.log(project)
-
     const { updateChosenProject } = this.props
 
     this.setState({
@@ -71,18 +68,33 @@ export class ProjectSelectorPopUp extends Component {
     )
   }
 
+  fetchProjectList = () => {
+    this.setState({
+      state: ComponentState.LOADING
+    })
+
+    this.props.getAccessibleProjects(
+      this.resolveProjectFetch,
+      this.rejectProjectFetch,
+    )
+  }
+
   resolveProjectFetch = () => {
+    console.log('successfully fetched project list')
+    this.setState({
+      state: ComponentState.QUIESCENT
+    })
   }
 
   rejectProjectFetch = () => {
+    console.error('failed to fetch project list')
     this.setState({
-      fetchError: true,
+      state: ComponentState.LOADING_ERROR,
       errorText: Strings.ERROR_FETCHING_PROJECT_LIST,
     })
   }
 
   resolveProjectUpdate = () => {
-
     const { history } = this.props
 
     // If the current page is the new project page, go to the default page
@@ -99,14 +111,15 @@ export class ProjectSelectorPopUp extends Component {
 
   rejectProjectUpdate = () => {
     this.setState({
-      updateError: true,
+      state: ComponentState.UPDATE_ERROR,
       errorText: Strings.ERROR_UNABLE_TO_SELECT_PROJECT,
     })
   }
 
   createNewProject = () => {
-    const { history } = this.props
-    history.push('/newproject')
+    this.setState({
+      projectTypeSelectorOpen: true,
+    })
   }
 
   projectsLoading = () => {
@@ -131,79 +144,112 @@ export class ProjectSelectorPopUp extends Component {
     )
   }
 
+  getSingleProjectPresentation = (project, id) => {
+    return (
+      <ProjectTile
+        key={id}
+        project={project}
+        selected={false}
+        onSelect={this.siteChosen} />
+    )
+  }
+
+  getProjectListPresentation = ( ) => {
+
+    const allProjects = this.concatProjects()
+
+    if (allProjects.length === 0) {
+      return this.noProjectsAvailable()
+    }
+    const projectsPresentation = allProjects.map((project, id)=> (
+      this.getSingleProjectPresentation(project, id)
+    ))
+    return <div className='project-list-container'>{projectsPresentation}</div>
+  }
+
 
   concatProjects = () => {
-
     const { accessibleProjects } = this.props.projects
     let projectsWhereCreator = accessibleProjects.projectCreator.map(project => project.projectId);
     const roleNotCreator = accessibleProjects.projectRole.filter(item => !projectsWhereCreator.includes(item.projectId))
-
     var allProjects = accessibleProjects.projectCreator
     allProjects = allProjects.concat(roleNotCreator)
-
     return allProjects
   }
 
-  siteSelectorPopupContent = () => {
 
-    const { projects } = this.props
-    const { fetchError, updateError, errorText } = this.state
-    const allProjects = this.concatProjects()
+  getHeaderContent = () => {
+    return (
+      <div className='projects-pop-up-header'>
+        <h2>Select a project</h2>
+      </div>
+    )
+  }
+
+  getFetchError = () => {
+    const { errorText } = this.state
+    return (
+      <div className='error-box'>
+        <Callout style={{marginBottom: '15px'}} intent='danger'>
+          <div>{errorText}</div>
+        </Callout>
+        <input
+          type="submit"
+          value={ Strings.BUTTON_RETRY }
+          className="close-button"
+          onClick={(e) => this.fetchProjectList()} />
+      </div>
+    )
+  }
+
+  getFooterContent = () => {
+    // If the new project type selector is open, don't show the footer
+    if (this.state.projectTypeSelectorOpen) {
+      return null
+    }
 
     return (
-      <div
-        id='popup-greyer'
-        onClick={this.cancelPopup}
-      >
+      <div className='projects-pop-up-footer'>
+        <Button
+          active={true}
+          large={true}
+          icon="cube-add"
+          intent='success'
+          onClick={(e) => this.createNewProject(e)}
+          text={Strings.CREATE_NEW_PROJECT}
+        />
+      </div>
+    )
+  }
+
+  siteSelectorPopupContent = () => {
+    const { projectTypeSelectorOpen } = this.state
+
+    console.log(this.state.state)
+
+    return (
+      <div id='popup-greyer' onClick={this.cancelPopup} >
         <div id='popup-box' onClick={(e) => e.stopPropagation()}>
-          <div className='projects-pop-up-header'>
-            <h2>Select a project</h2>
-          </div>
+          { this.getHeaderContent() }
           <div className='project-scroll-box'>
             {
-              projects.fetching ? this.projectsLoading() :
-                <React.Fragment>
-                  {
-                    fetchError || updateError ?
-                      <Callout style={{marginBottom: '15px'}} intent='danger'>
-                        <div>{errorText}</div>
-                      </Callout> : null
-                  }
-                  {
-                    allProjects.length !== 0 ?
-                      <div className='row'>
-                        {
-                          allProjects.map((project, index) => (
-                            <div key={index} className='col-md-12 col-lg-6 col-xl-4 flex-dir-row'>
-                              <Button
-                                className={'full-width'}
-                                minimal={true}
-                                onClick={(e) => this.siteChosen(project, e)}
-                              >
-                                <ProjectTile
-                                  project={project}
-                                  selected={false}
-                                />
-                              </Button>
-                            </div>
-                          ))
-                        }
-                      </div>
-                    : this.noProjectsAvailable()
-                  }
-                </React.Fragment>
-              }
+              projectTypeSelectorOpen ? <ProjectTypeSelector closePopup={this.cancelPopup}/> : null
+            }
+            {
+              this.state.state === ComponentState.QUIESCENT ? this.getProjectListPresentation() : null
+            }
+            {
+              this.state.state === ComponentState.LOADING ? this.projectsLoading() : null
+            }
+            {
+              this.state.state === ComponentState.LOADING_ERROR ? this.getFetchError() : null
+            }
+            {
+              this.state.state === ComponentState.UPDATE_ERROR ? this.getFetchError() : null
+            }
+
           </div>
-          <div className='projects-pop-up-footer'>
-            <Button
-              active={true}
-              large={true}
-              icon="cube-add"
-              intent='success'
-              onClick={(e) => this.createNewProject(e)}
-              text={Strings.CREATE_NEW_PROJECT}
-            />
-          </div>
+          { this.getFooterContent() }
         </div>
       </div>
     )

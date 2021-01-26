@@ -1,3 +1,3 @@
-import Container from './Container'
+import NoFoundationsIDBannerContainer from './NoFoundationsIDBannerContainer'
 
-export default Container
+export default NoFoundationsIDBannerContainer

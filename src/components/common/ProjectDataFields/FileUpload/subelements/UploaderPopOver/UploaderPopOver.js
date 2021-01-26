@@ -10,18 +10,17 @@ import {
 } from '@blueprintjs/core'
 
 import AWS from 'aws-sdk';
-
-import * as strings from '../../../../../../Data/Strings'
-
+import * as Strings from '../../../../../../Data/Strings'
 
 const windowCloseDelay = 1500
 
-export class Element extends Component {
+export class UploaderPopOver extends Component {
   static propTypes = {
     fileDetails: PropTypes.object.isRequired,
     projectID: PropTypes.any.isRequired,
     pageName: PropTypes.any.isRequired,
     fieldID: PropTypes.any.isRequired,
+    fieldType: PropTypes.string.isRequired,
     onCancelPopup: PropTypes.func.isRequired,
   }
 
@@ -33,29 +32,29 @@ export class Element extends Component {
     }
   }
 
-
   componentDidMount() {
+    const { projectID, pageName } = this.props
+
     // Upload the file to S3
     this.uploadToS3()
-
+    this.props.requestS3ProjectFileUploadToken(projectID, pageName)
   }
 
-
-  uploadToS3 = () => {
-
-    const { fileDetails, user, projectID, pageName, fieldID } = this.props
-    const file = fileDetails.files[0]
-
+  getValidS3Token = () => {
+    // TODO: Make this refresh the token if required; stops fetching if not present
+    const { user } = this.props
     if (user.projectS3Token === undefined) {
       this.setState({
-        uploadError: true
+        uploadFileError: true
       })
-      return;
+      return undefined;
     }
+    return user.projectS3Token
+  }
 
-    const { AccessKeyId, SecretAccessKey, SessionToken } = user.projectS3Token
-
+  configureAWSAuthorisation = (token) => {
     // Update credentials to allow access to S3
+    const { AccessKeyId, SecretAccessKey, SessionToken } = token
     AWS.config.update({
       credentials: {
         accessKeyId: AccessKeyId,
@@ -63,6 +62,25 @@ export class Element extends Component {
         sessionToken: SessionToken
       }
     });
+    return;
+  }
+
+  uploadToS3 = () => {
+    const { fileDetails, projectID, pageName, fieldID } = this.props
+    const file = fileDetails.files[0]
+
+    const token = this.getValidS3Token()
+    if (token === undefined) {
+      console.log("there was an issue getting an S3 token")
+      this.setState({
+        uploadError: true
+      })
+      return;
+    }
+
+    // Update the s3 credentials to allow upload of file to S3
+    this.configureAWSAuthorisation(token)
+
 
     // Create an S3 service provider
     const s3 = new AWS.S3()
@@ -116,7 +134,7 @@ export class Element extends Component {
 
   // Tell the Prin-D server that there has been an upload with the following details
   informServer = (response) => {
-    const { uploadFile, fileDetails, projectID, pageName, fieldID } = this.props
+    const { uploadFile, fileDetails, projectID, pageName, fieldID, fieldType } = this.props
 
     // Build parameters
     var uploadDetails = {
@@ -129,6 +147,7 @@ export class Element extends Component {
       pageName,
       fieldID,
       uploadDetails,
+      fieldType,
     )
 
     // Close the popup
@@ -143,7 +162,6 @@ export class Element extends Component {
 
 
   getErrorBlock = () => {
-
     return(
       <div>
         <div>
@@ -151,14 +169,13 @@ export class Element extends Component {
         </div>
         <div>
           <Button
-            text={strings.CLOSE_WINDOW}
+            text={Strings.CLOSE_WINDOW}
             onClick={(e) => this.cancelPopup()}
             intent={Intent.DANGER}
             />
         </div>
       </div>
     )
-
   }
 
 
@@ -180,11 +197,11 @@ export class Element extends Component {
             <div id='popup-box' className={uploadStatus}>
               <div className='uploader-popover-container'>
                 <div className='element-title'>
-                  {strings.UPLOAD_IN_PROGESS}
+                  {Strings.UPLOAD_IN_PROGESS}
                 </div>
                 <div className='element-description'>
-                  <p><b>{strings.FILE_NAME}</b> {fileDetails.value.replace("C:\\fakepath\\", "")}</p>
-                  <p><b>{strings.UPLOADED_SIZE}</b> {uploadProgress + " / " + fileSize + " bytes"}</p>
+                  <p><b>{Strings.FILE_NAME}</b> {fileDetails.value.replace("C:\\fakepath\\", "")}</p>
+                  <p><b>{Strings.UPLOADED_SIZE}</b> {uploadProgress + " / " + fileSize + " bytes"}</p>
                 </div>
                 <ProgressBar
                   intent={uploadError? Intent.DANGER : Intent.PRIMARY}
@@ -203,4 +220,4 @@ export class Element extends Component {
 
 }
 
-export default Element
+export default UploaderPopOver

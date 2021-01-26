@@ -10,7 +10,7 @@ import PopOverHandler from '../../../../popOverHandler'
 
 import SignatureHistory from '../SignatureHistory'
 
-import * as strings from '../../../../../../Data/Strings'
+import * as Strings from '../../../../../../Data/Strings'
 
 export class Element extends Component {
   static propTypes = {
@@ -49,7 +49,7 @@ export class Element extends Component {
   downloadReject = () => {
     this.setState({
       fetchError: true,
-      errorText: strings.ERROR_FETCHING_DOWNLOAD_LINK
+      errorText: Strings.ERROR_FETCHING_DOWNLOAD_LINK
     })
   }
 
@@ -67,21 +67,21 @@ export class Element extends Component {
       <div className="file-details">
         <div className='row'>
           <div className='field-names col-4'>
-            <div>{strings.FILE_NAME}</div>
-            <div>{strings.UPLOAD_DATE_TIME}</div>
-            <div>{strings.UPLOADED_BY}</div>
-            <div>{strings.PROOF}</div>
+            <div>{Strings.FILE_NAME}</div>
+            <div>{Strings.UPLOAD_DATE_TIME}</div>
+            <div>{Strings.UPLOADED_BY}</div>
+            <div>{Strings.PROOF}</div>
           </div>
 
           <div className='field-values col-auto'>
-            <div>{chosenFileDetails.uploadName !== undefined ? chosenFileDetails.uploadName : strings.NO_UPLOAD_NAME}</div>
+            <div>{chosenFileDetails.uploadName !== undefined ? chosenFileDetails.uploadName : Strings.NO_UPLOAD_NAME}</div>
             <div>{chosenFileDetails.uploadedDateTime !== undefined ? chosenFileDetails.uploadedDateTime : <br />}</div>
             <div>{chosenFileDetails.uploadedBy !== undefined ? chosenFileDetails.uploadedBy : <br />}</div>
             {
               chosenFileDetails.proofLink === undefined ?
-                strings.NO_PROOF_AVAILABLE :
+                Strings.NO_PROOF_AVAILABLE :
                 <div onClick={e => e.stopPropagation()}>
-                  <a href={chosenFileDetails.proofLink} target="_blank" rel="noopener noreferrer">{strings.LINK_TO_PROOF}</a>
+                  <a href={chosenFileDetails.proofLink} target="_blank" rel="noopener noreferrer">{Strings.LINK_TO_PROOF}</a>
                 </div>
             }
           </div>
@@ -163,7 +163,7 @@ export class Element extends Component {
             <div id='popup-box'>
               <div className='file-details-popover-container' onClick={(e) => e.stopPropagation()}>
                 <div className='element-title'>
-                  {strings.FILE_DETAILS}
+                  {Strings.FILE_DETAILS}
                 </div>
                 <div className='element-description'>
                   {this.getContent()}

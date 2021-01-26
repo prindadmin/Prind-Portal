@@ -9,10 +9,10 @@ import {
   Callout,
 } from '@blueprintjs/core'
 
-import * as strings from '../../../../../../Data/Strings'
+import * as Strings from '../../../../../../Data/Strings'
 import * as Validators from '../../../../../../Validators'
 
-import * as FormInputs from '../../../../../common/formInputs'
+import * as FormInputs from '../../../../../Common/formInputs'
 
 export class Page extends Component {
   static propTypes = {
@@ -53,7 +53,7 @@ export class Page extends Component {
     if (values.newPassword !== values.repeatNewPassword) {
       this.setState({
         passwordError: true,
-        errorText: strings.PASSWORDS_DO_NOT_MATCH
+        errorText: Strings.PASSWORDS_DO_NOT_MATCH
       })
       return;
     }
@@ -77,7 +77,7 @@ export class Page extends Component {
           {
             this.props.submitFailed ?
             <Callout style={{marginBottom: '15px'}} intent='danger'>
-              <div>{strings.CHANGE_PASSWORD_UNSUCCESSFUL}</div>
+              <div>{Strings.CHANGE_PASSWORD_UNSUCCESSFUL}</div>
             </Callout> :
             null
           }
@@ -89,48 +89,48 @@ export class Page extends Component {
             null
           }
           <FormGroup
-            label={strings.CURRENT_PASSWORD}
+            label={Strings.CURRENT_PASSWORD}
             labelFor="currentPassword"
-            labelInfo={strings.FIELD_IS_REQUIRED}
+            labelInfo={Strings.FIELD_IS_REQUIRED}
           >
             <Field
               name="currentPassword"
               validate={[Validators.required, Validators.maxLength64]}
               component={FormInputs.PasswordInput}
-              placeholder={strings.CURRENT_PASSWORD}
+              placeholder={Strings.CURRENT_PASSWORD}
             />
           </FormGroup>
 
           <FormGroup
-            label={strings.NEW_PASSWORD}
+            label={Strings.NEW_PASSWORD}
             labelFor="newPassword"
-            labelInfo={strings.FIELD_IS_REQUIRED}
+            labelInfo={Strings.FIELD_IS_REQUIRED}
           >
             <Field
               name="newPassword"
               validate={[Validators.required, Validators.maxLength64, Validators.isValidPassword]}
               component={FormInputs.PasswordInput}
-              placeholder={strings.NEW_PASSWORD}
+              placeholder={Strings.NEW_PASSWORD}
             />
           </FormGroup>
 
           <FormGroup
-            label={strings.REPEAT_NEW_PASSWORD}
+            label={Strings.REPEAT_NEW_PASSWORD}
             labelFor="repeatNewPassword"
-            labelInfo={strings.FIELD_IS_REQUIRED}
+            labelInfo={Strings.FIELD_IS_REQUIRED}
           >
             <Field
               name="repeatNewPassword"
               validate={[Validators.required, Validators.maxLength64, Validators.isValidPassword]}
               component={FormInputs.PasswordInput}
-              placeholder={strings.NEW_PASSWORD}
+              placeholder={Strings.NEW_PASSWORD}
             />
           </FormGroup>
 
           <Button
             intent={Intent.PRIMARY}
             type="submit"
-            text={strings.BUTTON_SAVE_CHANGES}
+            text={Strings.BUTTON_SAVE_CHANGES}
             loading={this.props.submitting}
             disabled={this.props.pristine || this.props.invalid}
           />

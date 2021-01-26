@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import ReactGA from 'react-ga';
 
-import ProjectLoading from '../../Components/common/ProjectLoading'
+import ProjectLoading from '../../Components/Common/ProjectLoading'
 
 import { Tab, Tabs, Callout } from '@blueprintjs/core'
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import ItemIcon from './ItemIcon'
-import * as strings from '../../Data/Strings'
+import * as Strings from '../../Data/Strings'
 
 export class ErrorFetchingContent extends Component {
 
@@ -11,7 +11,7 @@ export class ErrorFetchingContent extends Component {
       <div className='no-project-selected-container fill'>
         <div className='no-project-selected'>
           <ItemIcon size='6x' type='timesCircle' />
-          <p>{strings.UNABLE_TO_FETCH_CONTENT}</p>
+          <p>{Strings.UNABLE_TO_FETCH_CONTENT}</p>
         </div>
       </div>
     )

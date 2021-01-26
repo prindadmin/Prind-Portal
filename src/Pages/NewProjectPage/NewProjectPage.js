@@ -10,13 +10,15 @@ import {
   Callout,
 } from '@blueprintjs/core'
 
-import * as FormInputs from '../../Components/common/formInputs'
+import * as FormInputs from '../../Components/Common/formInputs'
 
 import * as Strings from '../../Data/Strings'
 import * as Validators from '../../Validators'
 import * as Endpoints from '../../Data/Endpoints'
 
 const CreatingProjectPopover = lazy(() => import('../../Components/CreatingProjectPopover'));
+
+// TODO: Add ability to upload thumbnails or pick icon for a project
 
 export class Page extends Component {
   static propTypes = {
@@ -28,15 +30,42 @@ export class Page extends Component {
     this.state = {
       showCreatingPopover: false,
       createError: false,
-      errorText: "",
+      errorText: '',
+      projectType: '',
     }
+
+    console.log("arrived at new project page")
   }
 
   componentDidMount() {
     const { location } = this.props
     // Register pageview with GA
-    ReactGA.pageview(location.pathname + location.search);
+    ReactGA.pageview(location.pathname);
+
+    const searchParams = this.getQueryStringParams(location.search)
+
+    console.log(searchParams);
+    console.log(searchParams.project_type);
+
+    this.setState({
+      projectType: searchParams.project_type
+    })
+
+    console.log("finished mounting new project page")
   }
+
+  getQueryStringParams = query => {
+    return query
+      ? (/^[?#]/.test(query) ? query.slice(1) : query)
+          .split('&')
+          .reduce((params, param) => {
+                  let [key, value] = param.split('=');
+                  params[key] = value ? decodeURIComponent(value.replace(/\+/g, ' ')) : '';
+                  return params;
+              }, {}
+          )
+      : {}
+  };
 
 
   createProject = (values) => {
@@ -48,14 +77,20 @@ export class Page extends Component {
 
     const { createProject } = this.props
 
+    const projectValues = {
+      ...values,
+      projectType: this.state.projectType,
+    }
+
     createProject(
-      values,
+      projectValues,
       this.createResolve,
       this.createReject,
     )
   }
 
   createResolve = () => {
+    console.log("create resolved; moving to project details page")
     const { history } = this.props
     history.push(Endpoints.PROJECTDETAILSPAGE)
   }
@@ -148,19 +183,6 @@ export class Page extends Component {
             name="projectAddressCountry"
             component={FormInputs.TextInput}
             placeholder={Strings.ADDRESS_LINE_COUNTRY}
-          />
-        </FormGroup>
-
-        <FormGroup
-          label={Strings.PROJECT_DESCRIPTION}
-          labelFor="projectDescription"
-          labelInfo=""
-          className="col-12 last"
-        >
-          <Field
-            name="projectDescription"
-            component={FormInputs.TextBoxInput}
-            placeholder={Strings.PROJECT_DESCRIPTION}
           />
         </FormGroup>
 

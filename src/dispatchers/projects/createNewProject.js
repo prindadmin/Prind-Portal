@@ -4,7 +4,7 @@ import API from '@aws-amplify/api';
 // Fixed values for the API request
 const apiName = process.env.REACT_APP_API_NAME
 
-export default async function(newProjectDetails) {
+async function CreateNewProject(newProjectDetails) {
 
   // Build path for request
   const path = `/project/create`
@@ -38,3 +38,5 @@ export default async function(newProjectDetails) {
      })
    })
 }
+
+export default CreateNewProject

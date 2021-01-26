@@ -3,16 +3,17 @@ import React from 'react'
 import { Callout } from '@blueprintjs/core'
 import ItemIcon from '../../ItemIcon'
 
-import * as strings from '../../../../Data/Strings'
+import * as Strings from '../../../../Data/Strings'
 
+// TODO: Add ability to display thumbnails or icon for project
 const ProjectTile = props => {
-  const { project, selected } = props
+  const { project, selected, onSelect } = props
   let className = 'site-select-tile'
   let bodyText = project.projectDescription
 
 
   if (bodyText === undefined) {
-    bodyText = strings.NO_PROJECT_DESCRIPTION
+    bodyText = Strings.NO_PROJECT_DESCRIPTION
   }
 
   if (bodyText > 300) {
@@ -24,8 +25,8 @@ const ProjectTile = props => {
   }
 
   return (
-    <Callout className={className}>
-      <ItemIcon size='4x' type='building' />
+    <Callout className={className} onClick={(e) => onSelect(project, e)}>
+      <ItemIcon size='4x' type='home' />
       <div className='details' >
         <h4>{project.projectName}</h4>
         <span>{bodyText}</span><br />

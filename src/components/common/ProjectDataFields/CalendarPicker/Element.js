@@ -10,7 +10,7 @@ import {
 
 import * as FormInputs from '../../formInputs'
 
-import * as strings from '../../../../Data/Strings'
+import * as Strings from '../../../../Data/Strings'
 
 // TODO: Fix at mobile resolutions (extends past edge of screen)
 
@@ -76,7 +76,7 @@ export class Element extends Component {
     this.setState({
       updateError: true,
       updateInProgress: false,
-      errorText: strings.ERROR_SAVING_CHANGES_TO_FIELD
+      errorText: Strings.ERROR_SAVING_CHANGES_TO_FIELD
     })
   }
 
@@ -135,7 +135,7 @@ export class Element extends Component {
                     disabled={this.props.pristine}
                     className='entry-button'
                     intent={Intent.PRIMARY}
-                    text={strings.BUTTON_SAVE_CHANGES}
+                    text={Strings.BUTTON_SAVE_CHANGES}
                     type='submit'
                     />
                 </div>

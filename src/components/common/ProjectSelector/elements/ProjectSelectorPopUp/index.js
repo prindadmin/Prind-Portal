@@ -1,3 +1,3 @@
-import Container from './Container'
+import ProjectSelectorPopUpContainer from './ProjectSelectorPopUpContainer'
 
-export default Container
+export default ProjectSelectorPopUpContainer

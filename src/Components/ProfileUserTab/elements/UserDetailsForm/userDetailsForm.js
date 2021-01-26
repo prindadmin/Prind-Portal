@@ -12,14 +12,12 @@ import {
 
 import AWS from 'aws-sdk';
 
-import * as strings from '../../../../Data/Strings'
+import * as Strings from '../../../../Data/Strings'
 import * as Validators from '../../../../Validators'
 
-import * as FormInputs from '../../../common/formInputs'
+import * as FormInputs from '../../../Common/formInputs'
 
 const defaultAvatar = `images/default-avatar.png`
-
-// TODO: Resize the password change section
 
 export class Page extends Component {
   static propTypes = {
@@ -38,7 +36,7 @@ export class Page extends Component {
         avatarLoading: false,
         avatarFile: {},
         detailsFetchError: true,
-        errorText: strings.USER_UNABLE_TO_FETCH_DETAILS,
+        errorText: Strings.USER_UNABLE_TO_FETCH_DETAILS,
       }
       return
     }
@@ -128,7 +126,7 @@ export class Page extends Component {
 
   uploadToS3 = () => {
 
-    const { auth, user } = this.props
+    const { user } = this.props
     const { avatarFile } = this.state
 
     console.log(avatarFile)
@@ -226,7 +224,7 @@ export class Page extends Component {
                   : null
                 }
               </div>
-              <h6>{strings.MEMBER_UPLOAD_DIFFERENT_AVATAR}</h6>
+              <h6>{Strings.MEMBER_UPLOAD_DIFFERENT_AVATAR}</h6>
 
               <FileInput
                 className="field bp3-fill"
@@ -254,60 +252,60 @@ export class Page extends Component {
                 <div>
                   {
                     initialValues.foundationsID !== null ?
-                    strings.PROFILE_DATA_IS_MANAGED_IN_FOUNDATIONS_WITH_APP :
-                    strings.PROFILE_DATA_IS_MANAGED_IN_FOUNDATIONS_NO_APP
+                    Strings.PROFILE_DATA_IS_MANAGED_IN_FOUNDATIONS_WITH_APP :
+                    Strings.PROFILE_DATA_IS_MANAGED_IN_FOUNDATIONS_NO_APP
                   }
                 </div>
               </Callout>
 
               <div className="row">
                 <FormGroup
-                  label={strings.MEMBER_FIRST_NAME}
+                  label={Strings.MEMBER_FIRST_NAME}
                   labelFor="firstName"
-                  labelInfo={strings.FIELD_IS_REQUIRED}
+                  labelInfo={Strings.FIELD_IS_REQUIRED}
                   className="col-lg-6 col-md-12"
                 >
                   <Field
                     name="firstName"
                     validate={[Validators.required, Validators.maxLength64]}
                     component={FormInputs.TextInput}
-                    placeholder={strings.MEMBER_FIRST_NAME}
+                    placeholder={Strings.MEMBER_FIRST_NAME}
                     disabled={true}
                     //disabled={initialValues.foundationsID !== null}
                   />
                 </FormGroup>
 
                 <FormGroup
-                  label={strings.MEMBER_LAST_NAME}
+                  label={Strings.MEMBER_LAST_NAME}
                   labelFor="lastName"
-                  labelInfo={strings.FIELD_IS_REQUIRED}
+                  labelInfo={Strings.FIELD_IS_REQUIRED}
                   className="col-lg-6 col-md-12"
                 >
                   <Field
                     name="lastName"
                     validate={[Validators.required, Validators.maxLength64]}
                     component={FormInputs.TextInput}
-                    placeholder={strings.MEMBER_LAST_NAME}
+                    placeholder={Strings.MEMBER_LAST_NAME}
                     disabled={true}
                     //disabled={initialValues.foundationsID !== null}
                   />
                 </FormGroup>
 
                 <FormGroup
-                  label={strings.MEMBER_FOUNDATIONS_ID}
+                  label={Strings.MEMBER_FOUNDATIONS_ID}
                   labelFor="foundationsID"
                   className="col-lg-6 col-md-12"
                 >
                   <Field
                     name="foundationsID"
                     component={FormInputs.TextInput}
-                    placeholder={strings.MEMBER_FOUNDATIONS_ID_NOT_FOUND}
+                    placeholder={Strings.MEMBER_FOUNDATIONS_ID_NOT_FOUND}
                     disabled={true}
                   />
                 </FormGroup>
 
                 <FormGroup
-                  label={strings.MEMBER_EMAIL_ADDRESS}
+                  label={Strings.MEMBER_EMAIL_ADDRESS}
                   labelFor="emailAddress"
                   className="col-lg-6 col-md-12"
                 >
@@ -315,13 +313,13 @@ export class Page extends Component {
                     name="emailAddress"
                     validate={[Validators.required, Validators.isEmailAddress]}
                     component={FormInputs.TextInput}
-                    placeholder={strings.MEMBER_EMAIL_ADDRESS}
+                    placeholder={Strings.MEMBER_EMAIL_ADDRESS}
                     disabled={true}
                   />
                 </FormGroup>
 
                 <FormGroup
-                  label={strings.MEMBER_LANDLINE_PHONE_NUMBER_WORK}
+                  label={Strings.MEMBER_LANDLINE_PHONE_NUMBER_WORK}
                   labelFor="homePhoneNumber"
                   className="col-lg-6 col-md-12"
                 >
@@ -329,14 +327,14 @@ export class Page extends Component {
                     name="homePhoneNumber"
                     validate={[Validators.maxLength32]}
                     component={FormInputs.TextInput}
-                    placeholder={strings.MEMBER_LANDLINE_PHONE_NUMBER_WORK}
+                    placeholder={Strings.MEMBER_LANDLINE_PHONE_NUMBER_WORK}
                     disabled={true}
                     //disabled={initialValues.foundationsID !== null}
                   />
                 </FormGroup>
 
                 <FormGroup
-                  label={strings.MEMBER_MOBILE_PHONE_NUMBER_WORK}
+                  label={Strings.MEMBER_MOBILE_PHONE_NUMBER_WORK}
                   labelFor="mobilePhoneNumber"
                   className="col-lg-6 col-md-12"
                 >
@@ -344,7 +342,7 @@ export class Page extends Component {
                     name="mobilePhoneNumber"
                     validate={[Validators.maxLength32]}
                     component={FormInputs.TextInput}
-                    placeholder={strings.MEMBER_MOBILE_PHONE_NUMBER_WORK}
+                    placeholder={Strings.MEMBER_MOBILE_PHONE_NUMBER_WORK}
                     disabled={true}
                     //disabled={initialValues.foundationsID !== null}
                   />

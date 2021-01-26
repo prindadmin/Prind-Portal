@@ -4,7 +4,7 @@ import API from '@aws-amplify/api';
 // Fixed values for the API request
 const apiName = process.env.REACT_APP_API_NAME
 
-export default async function(projectId, pageName) {
+async function GetS3ProjectFileUploadToken(projectId, pageName) {
 
   // Build path for request
   const path = `/project/${projectId}/page/${pageName}/get-sts`
@@ -37,3 +37,5 @@ export default async function(projectId, pageName) {
      })
    })
 }
+
+export default GetS3ProjectFileUploadToken

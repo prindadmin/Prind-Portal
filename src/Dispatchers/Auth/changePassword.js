@@ -6,7 +6,7 @@ they have forgotten it and requested a reset code
 
 import { Auth } from 'aws-amplify';
 
-export default function (username, code, new_password) {
+function ChangePassword(username, code, new_password) {
 
   return new Promise((resolve, reject) => {
     try {
@@ -19,3 +19,5 @@ export default function (username, code, new_password) {
     }
   })
 }
+
+export default ChangePassword

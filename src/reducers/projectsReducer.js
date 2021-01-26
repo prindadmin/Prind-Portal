@@ -1,5 +1,5 @@
 import * as action from '../Actions'
-import * as strings from '../Data/Strings'
+import * as Strings from '../Data/Strings'
 
 const defaultState = {
   accessibleProjects: {
@@ -7,7 +7,7 @@ const defaultState = {
     projectRole: []
   },
   chosenProject: {
-    projectName: strings.NO_PROJECT_SELECTED,
+    projectName: Strings.NO_PROJECT_SELECTED,
     projectId: "",
   },
   memberList: [],
@@ -19,7 +19,7 @@ const defaultState = {
 
 const blankChosenState = {
   chosenProject: {
-    projectName: strings.NO_PROJECT_SELECTED,
+    projectName: Strings.NO_PROJECT_SELECTED,
     projectId: "",
   }
 }
@@ -48,10 +48,12 @@ export const resetDownloadURL = () => {
   }
 }
 
-export const getAccessibleProjects = ( ) => {
+export const getAccessibleProjects = ( resolve, reject ) => {
   return {
     type: action.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUESTED,
     payload: {
+      resolve,
+      reject,
     }
   }
 }
@@ -109,7 +111,7 @@ export const getCurrentMembers = ( projectID ) => {
   }
 }
 
-export const uploadFile = ( projectID, pageName, fieldID, fileDetails ) => {
+export const uploadFile = ( projectID, pageName, fieldID, fileDetails, fieldType, resolve, reject ) => {
 
   return {
     type: action.PROJECT_UPLOAD_FILE_REQUESTED,
@@ -118,6 +120,9 @@ export const uploadFile = ( projectID, pageName, fieldID, fileDetails ) => {
       pageName,
       fieldID,
       fileDetails,
+      fieldType,
+      resolve,
+      reject,
     }
   }
 }

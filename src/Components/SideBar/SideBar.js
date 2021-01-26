@@ -1,32 +1,61 @@
 import React, { Component } from 'react'
-import ListItem from '../common/page-tile'
+import ListItem from '../Common/page-tile'
 
-import pageNames from '../../Data/pageNames'
+import PAGENAMES from '../../Data/pageNames'
+
+// TODO: Combine sidebars into one root component folder
 
 export class SideBar extends Component {
 
+  pageAllowedCheck = (pageName, sidebarEntries, pageRequested) => {
+    // If the page doesn't exist in this project
+    if (pageRequested === undefined ) {
+      // and so long as the page isn't a common page, navigate to the first available page
+      if (!PAGENAMES.CommonPages.includes(pageName)) {
+        const pageToLoad = sidebarEntries[Object.keys(sidebarEntries)[0]].linkTo
+        //console.log(`loading page: ${pageToLoad}`)
+        this.props.history.push(`${pageToLoad}`)
+      }
+    }
+  }
+
+
   render() {
 
-    const { projectId } = this.props.projects.chosenProject
+    const { location, projects } = this.props
+    const { chosenProject } = projects
+    const { projectId, projectType } = chosenProject
 
     const pathForProject = projectId !== "" ? `/${projectId}` : ""
+    const sidebarEntries = PAGENAMES[projectType] === undefined ? PAGENAMES["CDM2015Project"] : PAGENAMES[projectType]
+
+    // If the current page isn't found in the current type (such as when changing projects)
+    // Go to the first entry in the sidebarEntries
+    const pageName = location.pathname.split("/")[1]
+    //console.log("page requested: ", pageName)
+
+    const pageRequested = sidebarEntries[pageName]
+    //console.log(`Sidebar page requested`, pageRequested)
+
+    // Check that the requested page can be loaded
+    this.pageAllowedCheck(pageName, sidebarEntries, pageRequested)
 
     return (
-        <div className='chooser-section col-xl-2 col-lg-3 col-md-3 col-sm-3'>
-          <div className='sidebar'>
-            {
-              Object.keys(pageNames).map(key => (
-                <ListItem
-                  key={pageNames[key].name + "item"}
-                  pageName={pageNames[key].name}
-                  linkTo={`${pageNames[key].linkTo}${pathForProject}`}
-                  selected={this.props.location.pathname.startsWith(pageNames[key].linkTo)}
-                  history={this.props.history}
-                />
-              ))
-            }
-          </div>
+      <div className='chooser-section col-xl-2 col-lg-3 col-md-3 col-sm-3'>
+        <div className='sidebar'>
+          {
+            Object.keys(sidebarEntries).map(key => (
+              <ListItem
+                key={sidebarEntries[key].name + "item"}
+                pageName={sidebarEntries[key].name}
+                linkTo={`${sidebarEntries[key].linkTo}${pathForProject}`}
+                selected={this.props.location.pathname.startsWith(sidebarEntries[key].linkTo)}
+                history={this.props.history}
+              />
+            ))
+          }
         </div>
+      </div>
     )
   }
 }
