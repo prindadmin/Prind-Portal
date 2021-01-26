@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import { Spinner, Intent } from '@blueprintjs/core'
 
-import * as strings from '../../Data/Strings'
+import * as Strings from '../../Data/Strings'
 
 export class ProjectLoading extends Component {
   static propTypes = {
@@ -12,7 +12,7 @@ export class ProjectLoading extends Component {
 
   constructor(props) {
     super()
-    var text = strings.PROJECT_LOADING
+    var text = Strings.PROJECT_LOADING
 
     if (props.text !== undefined && props.text !== "") {
       text = props.text

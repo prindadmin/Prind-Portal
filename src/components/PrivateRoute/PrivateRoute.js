@@ -4,7 +4,6 @@ import { Route } from 'react-router-dom'
 import { Redirect } from 'react-router-dom'
 
 import * as States from '../../States'
-import * as Endpoints from '../../Data/Endpoints'
 
 class PrivateRoute extends React.Component {
   static propTypes = {
@@ -26,6 +25,9 @@ class PrivateRoute extends React.Component {
 
   // Store route with project number if this is a project (currently ignores the project ID)
   storeRoute = () => {
+    //console.log(`Path: ${this.props.path}`)
+    //console.log(`Pathname: ${this.props.location.pathname}`)
+    //console.log(`Current Route: ${this.props.user.currentRoute}`)
 
     const { pathname } = this.props.location
     const { currentRoute } = this.props.user
@@ -35,11 +37,7 @@ class PrivateRoute extends React.Component {
       return
     }
 
-    // If the users path is not equal the default logged in page, store the path
-    if (pathname !== Endpoints.DEFAULTLOGGEDINPAGE) {
-      this.props.storeRoute(pathname)
-    }
-
+    this.props.storeRoute(pathname)
   }
 
 

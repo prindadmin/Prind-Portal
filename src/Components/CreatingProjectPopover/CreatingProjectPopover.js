@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 //import PropTypes from 'prop-types'
 
-import PopOverHandler from '../common/popOverHandler'
+import PopOverHandler from '../Common/popOverHandler'
 
 import {
   Spinner,
   Intent,
 } from '@blueprintjs/core'
 
-import * as strings from '../../Data/Strings'
+import * as Strings from '../../Data/Strings'
 
 export class Element extends Component {
   static propTypes = {
@@ -17,7 +17,7 @@ export class Element extends Component {
   getContent = () => {
     return (
       <React.Fragment>
-        {strings.PROJECT_CREATION_BILLING_WARNING}
+        {Strings.PROJECT_CREATION_BILLING_WARNING}
         <Spinner size='150' intent={Intent.DANGER}/>
       </React.Fragment>
     )
@@ -31,7 +31,7 @@ export class Element extends Component {
             <div id='popup-box'>
               <div className='project-creation-popover-container' onClick={(e) => e.stopPropagation()}>
                 <div className='element-title'>
-                  {strings.PROJECT_CREATION_IN_PROGRESS}
+                  {Strings.PROJECT_CREATION_IN_PROGRESS}
                 </div>
                 <div className='element-description'>
                   {this.getContent()}

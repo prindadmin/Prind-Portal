@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import ReactGA from 'react-ga';
 
-import * as strings from '../../Data/Strings'
+import * as Strings from '../../Data/Strings'
 
 export class Error404 extends Component {
 
@@ -17,7 +17,7 @@ export class Error404 extends Component {
   render () {
     return (
       <div id='error-page' className='full-height full-width'>
-        <h1>{strings.ERROR_404_MESSAGE}</h1>
+        <h1>{Strings.ERROR_404_MESSAGE}</h1>
       </div>
     )
   }

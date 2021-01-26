@@ -4,7 +4,7 @@ import API from '@aws-amplify/api';
 // Fixed values for the API request
 const apiName = process.env.REACT_APP_API_NAME
 
-export default async function(projectID, memberDetails) {
+async function AddMemberToProject(projectID, memberDetails) {
 
   // Build path for request
   const path = `/project/${projectID}/invite-member`
@@ -38,3 +38,5 @@ export default async function(projectID, memberDetails) {
      })
    })
 }
+
+export default AddMemberToProject

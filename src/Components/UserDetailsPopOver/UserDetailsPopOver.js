@@ -1,16 +1,15 @@
-import React, { Component } from 'react'
+import React, { Component, lazy } from 'react'
 import PropTypes from 'prop-types'
 
 import {
-  Button,
   Spinner,
   Intent,
-  Callout,
 } from '@blueprintjs/core'
 
 import * as Strings from '../../Data/Strings'
 
-import UserAccreditations from '../Temp/UserAccreditations'
+const UserAccreditationTile = lazy(() => import('../UserAccreditationTile'));
+const NoAccreditationsAvailable = lazy(() => import('../Common/NoAccreditationsAvailable'));
 
 export class UserDetailsPopOver extends Component {
   static propTypes = {
@@ -22,6 +21,7 @@ export class UserDetailsPopOver extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      fetching: false,
       fetchError: false,
       updateError: false,
       chosenProjectId: "",
@@ -30,21 +30,40 @@ export class UserDetailsPopOver extends Component {
   }
 
   componentDidMount() {
-    this.props.tempGetUserAccreditations(this.props.memberDetails.username, UserAccreditations)
+    console.log("successfully mounted component")
+    this.setState({
+      fetching: true,
+      fetchError: false,
+      updateError: false,
+    })
+
+    this.props.tempGetUserAccreditations(
+      this.props.memberDetails.username,
+      this.onGetAccreditationsSuccess,
+      this.onGetAccreditationsFailed)
   }
 
+  onGetAccreditationsSuccess = (result) => {
+    console.log("success fetching accreditations")
+    this.setState({
+      fetching: false,
+    })
+
+  }
+
+  onGetAccreditationsFailed = (result) => {
+    console.error("failed to fetch accreditations")
+    this.setState({
+      fetching: false,
+      fetchError: true,
+    })
+  }
 
   singleAccreditationPresentation = (accreditation, id) => {
-
-    const factomLink = `${process.env.REACT_APP_FACTOM_EXPLORER_SITE}/entries/${accreditation.proof.entryHash}`
-
     return (
-      <div key={id} className='accreditation'>
-        <p>{`${Strings.ACCREDITATION_NAME}: ${accreditation.accreditation.accreditationName}`}</p>
-        <p>{`${Strings.ACCREDITATION_ISSUE_DATE}: ${accreditation.accreditation.issuedDate}`}</p>
-        <p>{`${Strings.ACCREDITATION_ISSUER}: ${accreditation.accreditation.issuer}`}</p>
-        <p><a target="_blank" rel="noopener noreferrer" href={factomLink}>{Strings.LINK_TO_PROOF}</a></p>
-      </div>
+      <UserAccreditationTile
+        {...accreditation}
+        key={id} />
     )
   }
 
@@ -56,15 +75,19 @@ export class UserDetailsPopOver extends Component {
 
   // Get the code to display the user's accreditations
   getAccreditationsPresentation = () => {
+    // TODO: Implement fetchError from state
 
     const { accreditations } = this.props.members.currentMember
+
+    if (accreditations.length === 0) {
+      return <NoAccreditationsAvailable />
+    }
 
     const accreditationsPresentation = accreditations.map((accreditation, id)=> (
       this.singleAccreditationPresentation(accreditation, id)
     ))
 
     return <React.Fragment>{accreditationsPresentation}</React.Fragment>
-
   }
 
 
@@ -73,11 +96,26 @@ export class UserDetailsPopOver extends Component {
     this.props.onCancelPopup()
   }
 
+  detailsLoading = () => {
+    return (
+      <div className='fill'>
+        <div className='loading-spinner'>
+          <Spinner size={100} intent={Intent.DANGER} />
+          <p>{Strings.USER_ACCREDITATIONS_LOADING}</p>
+        </div>
+      </div>
+    )
+  }
+
+  onSubmit = (e) => {
+    e.stopPropagation()
+    e.preventDefault()
+
+    this.cancelPopup()
+  }
 
   render() {
-
     console.log(this.props.projects.chosenProject)
-    //this.fetchUserDetails()
 
     return (
       <div id='popup-greyer' onClick={(e) => {
@@ -86,15 +124,28 @@ export class UserDetailsPopOver extends Component {
       }} >
         <div id='user-details-popover'>
           <div id='popup-box' onClick={(e) => e.stopPropagation()}>
-            <div className='accreditation-list'>
-              {this.getAccreditationsPresentation()}
+
+            <div className='popup-box-header'>
+              <h2>{ Strings.USER_ACCREDITATIONS_POPOVER_HEADING }</h2>
+              <input
+                type="submit"
+                value={ Strings.CLOSE_WINDOW }
+                className="close-button"
+                onClick={(e) => this.onSubmit(e)} />
+            </div>
+
+            <div className='accreditation-list-container'>
+              <div className='accreditation-list'>
+                {
+                  this.state.fetching ? this.detailsLoading() : this.getAccreditationsPresentation()
+                }
+              </div>
             </div>
           </div>
         </div>
       </div>
     )
   }
-
 }
 
 export default UserDetailsPopOver

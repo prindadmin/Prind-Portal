@@ -1,9 +1,10 @@
 import React, { Component, lazy, Suspense } from 'react'
 import PropTypes from 'prop-types'
 
-import ProjectLoading from '../../Components/common/ProjectLoading'
+import ProjectLoading from '../../Components/Common/ProjectLoading'
 
 import * as Strings from '../../Data/Strings'
+import PAGENAMES from '../../Data/pageNames'
 
 // Components
 const HeaderBar = lazy(() => import('../../Components/HeaderBar'));
@@ -12,25 +13,16 @@ const SideBarMobile = lazy(() => import('../../Components/SideBarMobile'));
 const LayoutBody  = lazy(() => import('../../Components/LoggedInLayout/Body'));
 const LayoutContentArea1x1  = lazy(() => import('../../Components/LoggedInLayout/ContentArea1x1'));
 const LayoutContentArea1x1Mobile  = lazy(() => import('../../Components/LoggedInLayout/ContentArea1x1Mobile'));
-const Footer = lazy(() => import('../../Components/common/footer'));
-const ProjectFetchError = lazy(() => import('../../Components/common/ProjectFetchError'));
+const Footer = lazy(() => import('../../Components/Common/footer'));
+const ProjectFetchError = lazy(() => import('../../Components/Common/ProjectFetchError'));
 
-/* Stage pages */
-const InceptionPage = lazy(() => import('../InceptionPage'));
-const FeasibilityPage = lazy(() => import('../FeasibilityPage'));
-const DesignPage = lazy(() => import('../DesignPage'));
-const TenderPage = lazy(() => import('../TenderPage'));
-const ConstructionPage = lazy(() => import('../ConstructionPage'));
-const HandoverPage = lazy(() => import('../HandoverPage'));
-const OccupationPage = lazy(() => import('../OccupationPage'));
-const RefurbishmentPage = lazy(() => import('../RefurbishmentPage'));
+/* Pages that can be loaded */
+const ProjectDetailsPage = lazy(() => import('../ProjectDetailsPage'));
+const ProjectTeamPage = lazy(() => import('../ProjectTeamPage'));
+const ProjectStagePage = lazy(() => import('../ProjectStagePageTemplate'));
 const FoundationsPage = lazy(() => import('../FoundationsPage'));
 const NewProjectPage = lazy(() => import('../NewProjectPage'));
 const ProfilePage = lazy(() => import('../ProfilePage'));
-
-/* Other pages */
-const ProjectDetailsPage = lazy(() => import('../ProjectDetailsPage'));
-const ProjectTeamPage = lazy(() => import('../ProjectTeamPage'));
 
 const MOBILE_WIDTH_BREAKPOINT = 992;
 
@@ -42,6 +34,7 @@ export class LoggedInContent extends Component {
   constructor() {
     super()
     this.state = {
+      projectName: undefined,
       fetchingProjectDetails: false,
       pageName: "",
       width: 0,
@@ -51,9 +44,7 @@ export class LoggedInContent extends Component {
   }
 
   componentDidMount() {
-    const { projects, requestS3ProjectFileUploadToken, getProjectMembers } = this.props
-    const { projectId } = projects.chosenProject
-
+    const { projects } = this.props
     const pageName = this.getPageName()
 
     this.setState({
@@ -61,9 +52,8 @@ export class LoggedInContent extends Component {
     })
 
     // If a project has been selected
-    if (projects.chosenProject.projectId !== "") {
-      requestS3ProjectFileUploadToken(projectId, pageName)
-      getProjectMembers(projectId)
+    if (projects.chosenProject.projectId !== "" && !PAGENAMES.CommonPages.includes(pageName)) {
+      this.attemptRefreshProjectDetails()
     }
 
     this.updateWindowDimensions();
@@ -71,19 +61,32 @@ export class LoggedInContent extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-
     if (this.props !== prevProps) {
       this.getProjectID()
-
-      const { projects, requestS3ProjectFileUploadToken, getProjectMembers } = this.props
+      const { projectId } = this.props.projects.chosenProject
       const { pageName } = this.state
-      const { projectId } = projects.chosenProject
 
-      if (projectId !== prevProps.projects.chosenProject.projectId) {
-        requestS3ProjectFileUploadToken(projectId, pageName)
-        getProjectMembers(projectId)
+      if (projectId !== prevProps.projects.chosenProject.projectId && !PAGENAMES.CommonPages.includes(pageName)) {
+        this.attemptRefreshProjectDetails()
       }
     }
+
+    const { pathname } = this.props.location
+    const splitPathname = pathname.split('/')
+    const projectName = splitPathname.length > 2 ? splitPathname[2] : undefined
+
+    if (projectName !== prevState.projectName) {
+      this.setState({
+        projectName
+      })
+    }
+  }
+
+  attemptRefreshProjectDetails = () => {
+    const { pageName } = this.state
+    const { projectId } = this.props.projects.chosenProject
+    this.props.requestS3ProjectFileUploadToken(projectId, pageName)
+    this.props.getProjectMembers(projectId)
   }
 
   // Removes the screen size listener when component is removed
@@ -175,55 +178,64 @@ export class LoggedInContent extends Component {
     )
   }
 
+  getContent = () => {
+    const { location, projects } = this.props
+    const { pathname } = location
+    const { projectType } = projects.chosenProject
+    const splitPathname = pathname.split('/')
+    const pageName = splitPathname[1]
+    const projectName = splitPathname.length > 2 ? splitPathname[2] : undefined
 
-  render () {
+    const possiblePages = projectType === undefined ? PAGENAMES['CDM2015Project'] : PAGENAMES[projectType]
 
-    const { pathname } = this.props.location
-    const { error } = this.props.projects
-    const { width, height } = this.state
+    const stagePageNames = Object.keys(possiblePages).map((singlePageName, index) => {
+      if (possiblePages[singlePageName].isStagePage) {
+        return singlePageName
+      }
+      return null
+    })
+
+    if (stagePageNames.includes(pageName)) {
+      return <ProjectStagePage pageName={pageName} projectId={projectName}/>
+    }
 
     const content = pathname.startsWith('/team') ? <ProjectTeamPage /> :
                     pathname.startsWith('/project') ? <ProjectDetailsPage /> :
-                    pathname.startsWith('/inception') ? <InceptionPage /> :
-                    pathname.startsWith('/feasibility') ? <FeasibilityPage /> :
-                    pathname.startsWith('/design') ? <DesignPage /> :
-                    pathname.startsWith('/tender') ? <TenderPage /> :
-                    pathname.startsWith('/construction') ? <ConstructionPage /> :
-                    pathname.startsWith('/handover') ? <HandoverPage /> :
-                    pathname.startsWith('/occupation') ? <OccupationPage /> :
-                    pathname.startsWith('/refurbishment') ? <RefurbishmentPage /> :
                     pathname.startsWith('/foundations') ? <FoundationsPage /> :
                     pathname.startsWith('/newproject') ? <NewProjectPage /> :
                     pathname.startsWith('/profile') ? <ProfilePage /> :
                     this.errorComponent()
 
+    return content
+  }
+
+
+  render () {
+    const { error } = this.props.projects
+    const { width } = this.state
+    const content = this.getContent()
+
     return (
       <div id='logged-in-content-container' className='full-width row'>
-
-        <HeaderBar companyName='Prin-D' />
-
+        <HeaderBar companyName='Prin-D' openProjectSelector={this.state.projectName === undefined}/>
         <LayoutBody>
-
           {
             width > MOBILE_WIDTH_BREAKPOINT ? <SideBar {...this.props} /> : <SideBarMobile {...this.props} />
           }
-
           {
-              width > MOBILE_WIDTH_BREAKPOINT ?
-                  <LayoutContentArea1x1>
-                      <Suspense fallback={this.loadingPlaceholder()}>
-                          { error ? this.errorContent() : content }
-                      </Suspense>
-                  </LayoutContentArea1x1> :
-                  <LayoutContentArea1x1Mobile>
-                      <Suspense fallback={this.loadingPlaceholder()}>
-                          { error ? this.errorContent() : content }
-                      </Suspense>
-                  </LayoutContentArea1x1Mobile>
+            width > MOBILE_WIDTH_BREAKPOINT ?
+                <LayoutContentArea1x1>
+                    <Suspense fallback={this.loadingPlaceholder()}>
+                        { error ? this.errorContent() : content }
+                    </Suspense>
+                </LayoutContentArea1x1> :
+                <LayoutContentArea1x1Mobile>
+                    <Suspense fallback={this.loadingPlaceholder()}>
+                        { error ? this.errorContent() : content }
+                    </Suspense>
+                </LayoutContentArea1x1Mobile>
             }
-
         </LayoutBody>
-
         <Footer />
       </div>
     )

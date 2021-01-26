@@ -4,7 +4,7 @@ import { call, put, takeLatest } from 'redux-saga/effects'
 import * as Dispatchers from '../Dispatchers/projects'
 
 import * as Actions from '../Actions'
-import * as strings from '../Data/Strings'
+import * as Strings from '../Data/Strings'
 
 const defaultState = {
   accessibleProjects: {
@@ -12,7 +12,7 @@ const defaultState = {
     projectRole: []
   },
   chosenProject: {
-    projectName: strings.NO_PROJECT_SELECTED,
+    projectName: Strings.NO_PROJECT_SELECTED,
     projectId: "",
   },
   memberList: [],
@@ -30,9 +30,7 @@ function * init (action) {
 }
 
 function * getAccessibleProjects (action) {
-
   try {
-
     // pre-fetch update
     yield put({
       type: Actions.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUEST_SENT,
@@ -51,17 +49,24 @@ function * getAccessibleProjects (action) {
         accessibleProjects: result.body
       }
     })
+
+    if(action.payload.resolve !== null) {
+      action.payload.resolve()
     }
-    catch (error) {
-      console.error(error)
-      yield put({
-        type: Actions.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUEST_FAILED,
-          payload: {
-            ...defaultState,
-            error
-          }
-      })
+  }
+  catch (error) {
+    console.error(error)
+    yield put({
+      type: Actions.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUEST_FAILED,
+        payload: {
+          ...defaultState,
+          error
+        }
+    })
+    if(action.payload.reject !== null) {
+      action.payload.reject()
     }
+  }
 }
 
 function * createNewProject (action) {
@@ -233,33 +238,9 @@ function * getCurrentMembers (action) {
 }
 
 
-function Actionswitcher(pageName) {
-  switch(pageName) {
-    case 'inception':
-      return Actions.PROJECT_UPLOAD_FILE_REQUEST_SUCCESSFUL_INCEPTION;
-    case 'feasibility':
-      return Actions.PROJECT_UPLOAD_FILE_REQUEST_SUCCESSFUL_FEASIBILITY;
-    case 'design':
-      return Actions.PROJECT_UPLOAD_FILE_REQUEST_SUCCESSFUL_DESIGN;
-    case 'tender':
-      return Actions.PROJECT_UPLOAD_FILE_REQUEST_SUCCESSFUL_TENDER;
-    case 'construction':
-      return Actions.PROJECT_UPLOAD_FILE_REQUEST_SUCCESSFUL_CONSTRUCTION;
-    case 'handover':
-      return Actions.PROJECT_UPLOAD_FILE_REQUEST_SUCCESSFUL_HANDOVER;
-    case 'occupation':
-      return Actions.PROJECT_UPLOAD_FILE_REQUEST_SUCCESSFUL_OCCUPATION;
-    case 'refurbishment':
-      return Actions.PROJECT_UPLOAD_FILE_REQUEST_SUCCESSFUL_REFURBISHMENT;
-    default:
-      return Actions.PROJECT_SET_STATE;
-  }
-}
-
-
 function * uploadFile (action) {
 
-  const { projectID, pageName, fieldID, fileDetails } = action.payload
+  const { projectID, pageName, fieldID, fileDetails, fieldType, resolve, reject } = action.payload
 
   try {
 
@@ -271,18 +252,18 @@ function * uploadFile (action) {
       }
     })
 
-    const result = yield call(Dispatchers.uploadFileDispatcher, projectID, pageName, fieldID, fileDetails)
+    const result = yield call(Dispatchers.uploadFileDispatcher, projectID, pageName, fieldID, fileDetails, fieldType)
 
     console.log(result)
 
-    // Decide which action to dispatch to update the correct page's content
-    const nextAction = Actionswitcher(pageName)
-
     // Post-fetch update to store
     yield put({
-      type: nextAction,
+      type: Actions.PROJECT_UPLOAD_FILE_REQUEST_SUCCESSFUL,
       payload: {
+        pageName,
         projectID,
+        resolve,
+        reject,
       }
     })
 
@@ -294,6 +275,11 @@ function * uploadFile (action) {
       }
     })
 
+    // Callback if provided
+    if (action.payload.resolve !== undefined) {
+      action.payload.resolve(result)
+    }
+
   }
   catch (error) {
     console.error(error)
@@ -304,6 +290,11 @@ function * uploadFile (action) {
           error,
         }
     })
+
+    // Callback if provided
+    if (action.payload.reject !== undefined) {
+      action.payload.reject(error)
+    }
   }
 }
 
@@ -353,11 +344,9 @@ function * downloadFile (action) {
 
 
 function * createField (action) {
-
-  const { projectID, pageName, fieldDetails } = action.payload
+  const { projectID, pageName, fieldDetails, resolve, reject } = action.payload
 
   try {
-
     // Pre-fetch update to store
     yield put({
       type: Actions.PROJECT_CREATE_FIELD_REQUEST_SENT,
@@ -368,14 +357,14 @@ function * createField (action) {
 
     yield call(Dispatchers.createFieldDispatcher, projectID, pageName, fieldDetails)
 
-    // Decide which action to dispatch to update the correct page's content
-    const nextAction = Actionswitcher(pageName)
-
     // Post-fetch update to store
     yield put({
-      type: nextAction,
+      type: Actions.PROJECT_UPLOAD_FILE_REQUEST_SUCCESSFUL,
       payload: {
+        pageName,
         projectID,
+        resolve,
+        reject,
       }
     })
 
@@ -405,11 +394,8 @@ function * createField (action) {
 
 
 function * updateField (action) {
-
-  const { projectID, pageName, fieldID, fieldDetails } = action.payload
-
+  const { projectID, pageName, fieldID, fieldDetails, resolve, reject } = action.payload
   try {
-
     // Pre-fetch update to store
     yield put({
       type: Actions.PROJECT_UPDATE_FIELD_REQUEST_SENT,
@@ -420,16 +406,14 @@ function * updateField (action) {
 
     yield call(Dispatchers.updateFieldDispatcher, projectID, pageName, fieldID, fieldDetails)
 
-    // Decide which action to dispatch to update the correct page's content
-    const nextAction = Actionswitcher(pageName)
-
-    action.payload.resolve()
-
     // Post-fetch update to store
     yield put({
-      type: nextAction,
+      type: Actions.PROJECT_UPLOAD_FILE_REQUEST_SUCCESSFUL,
       payload: {
+        pageName,
         projectID,
+        resolve,
+        reject,
       }
     })
 

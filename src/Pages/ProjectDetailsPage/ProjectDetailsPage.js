@@ -10,17 +10,15 @@ import {
   Callout,
 } from '@blueprintjs/core'
 
-import NoProjectSelected from '../../Components/common/NoProjectSelected'
-
-import PopOverHandler from '../../Components/common/popOverHandler'
-
-import * as FormInputs from '../../Components/common/formInputs'
+import NoProjectSelected from '../../Components/Common/NoProjectSelected'
+import PopOverHandler from '../../Components/Common/popOverHandler'
+import * as FormInputs from '../../Components/Common/formInputs'
 
 import * as Strings from '../../Data/Strings'
 import * as Validators from '../../Validators'
 import * as Endpoints from '../../Data/Endpoints'
 
-// TODO: Work out why this forms button is over the footer in mobile mode (might also be in desktop mode)
+// TODO: Add ability to upload thumbnails or pick icon for a project
 
 export class ProjectDetailsPage extends Component {
   static propTypes = {
@@ -148,22 +146,6 @@ export class ProjectDetailsPage extends Component {
             placeholder={Strings.ADDRESS_LINE_COUNTRY}
           />
         </FormGroup>
-
-        <FormGroup
-          label={Strings.PROJECT_DESCRIPTION}
-          labelFor="projectDescription"
-          labelInfo=""
-          className="last"
-        >
-          <Field
-            name="projectDescription"
-            component="textarea"
-            className="bp3-input"
-            placeholder={Strings.PROJECT_DESCRIPTION}
-          />
-        </FormGroup>
-
-
 
         <ButtonGroup fill>
           <Button

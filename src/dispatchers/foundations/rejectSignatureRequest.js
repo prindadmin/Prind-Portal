@@ -4,7 +4,7 @@ import API from '@aws-amplify/api';
 // Fixed values for the API request
 const apiName = process.env.REACT_APP_API_NAME
 
-export default async function(requestDetails) {
+async function RejectSignatureRequest(requestDetails) {
 
   // Build path for request
   const { projectID, pageName, fieldID } = requestDetails
@@ -41,3 +41,5 @@ export default async function(requestDetails) {
      })
    })
 }
+
+export default RejectSignatureRequest

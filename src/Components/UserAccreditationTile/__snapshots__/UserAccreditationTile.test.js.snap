@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render with single accreditation prop 1`] = `
+<div
+  id="user-accreditation-tile"
+>
+  <h3>
+    Accreditation name
+    : 
+    Construction Basics 101
+  </h3>
+  <p>
+    Issued by
+    : 
+    did:fctr:d85be1f5baa83fa83850d8b58731a7f7c8ba65c33dec107c2e16e0dd65c7bcc7
+  </p>
+  <p>
+    Issue date
+    : 
+    2019-10-01T12:59:12.142216
+  </p>
+  <p>
+    Status
+    : 
+    revoked
+  </p>
+</div>
+`;

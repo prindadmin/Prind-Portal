@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import * as strings from '../../../../../../Data/Strings'
+import * as Strings from '../../../../../../Data/Strings'
 
 import {
   Button,
@@ -49,19 +49,19 @@ export class Element extends Component {
 
     return(
       <div id="project-invitation-request">
-        <h4 className='bp3-heading'>{strings.PROJECT_INVITATION}</h4>
-        <div className='bp3-heading'>{`${strings.PROJECT_NAME}: ${requestDetails.projectName}`}</div>
+        <h4 className='bp3-heading'>{Strings.PROJECT_INVITATION}</h4>
+        <div className='bp3-heading'>{`${Strings.PROJECT_NAME}: ${requestDetails.projectName}`}</div>
         <div className='row button-row'>
           <Button
             intent={Intent.PRIMARY}
             onClick={(e) => this.acceptInvitation()}
-            text={strings.BUTTON_ACCEPT}
+            text={Strings.BUTTON_ACCEPT}
             icon="tick"
           />
           <Button
             intent={Intent.DANGER}
             onClick={(e) => this.rejectInvitation()}
-            text={strings.BUTTON_REJECT}
+            text={Strings.BUTTON_REJECT}
             icon="cross"
           />
         </div>

@@ -16,6 +16,7 @@ const mapStatetoProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     storeRoute: (route) => {
+      //console.log(`Storing route: ${route}`)
       dispatch(userReducer.storeRoute(route))
     },
     updateChosenProject: (idToken, project, resolve) => {

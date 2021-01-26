@@ -1,44 +1,77 @@
-const pageNames = {
-  Project: {
-    name: "Project Details",
-    linkTo: "/project"
+
+const PAGENAMES = {
+  CDM2015Project: {
+    project: {
+      name: "Project Details",
+      linkTo: "/project",
+      isStagePage: false,
+    },
+    team: {
+      name: "Project Team",
+      linkTo: "/team",
+      isStagePage: false,
+    },
+    inception: {
+      name: "Inception",
+      linkTo: "/inception",
+      isStagePage: true,
+    },
+    feasibility: {
+      name: "Feasibility",
+      linkTo: "/feasibility",
+      isStagePage: true,
+    },
+    design: {
+      name: "Design",
+      linkTo: "/design",
+      isStagePage: true,
+    },
+    tender: {
+      name: "Tender",
+      linkTo: "/tender",
+      isStagePage: true,
+    },
+    construction: {
+      name: "Construction",
+      linkTo: "/construction",
+      isStagePage: true,
+    },
+    handover: {
+      name: "Handover",
+      linkTo: "/handover",
+      isStagePage: true,
+    },
+    occupation: {
+      name: "Occupation",
+      linkTo: "/occupation",
+      isStagePage: true,
+    },
+    refurbishment: {
+      name: "Refurbishment",
+      linkTo: "/refurbishment",
+      isStagePage: true,
+    }
   },
-  Team: {
-    name: "Project Team",
-    linkTo: "/team"
+  DHSFProject: {
+    project: {
+      name: "Project Details",
+      linkTo: "/project",
+      isStagePage: false,
+    },
+    team: {
+      name: "Project Team",
+      linkTo: "/team",
+      isStagePage: false,
+    },
+    occupation: {
+      name: "HSF",
+      linkTo: "/occupation",
+      isStagePage: true,
+    },
   },
-  Inception: {
-    name: "Inception",
-    linkTo: "/inception"
-  },
-  Feasibility: {
-    name: "Feasibility",
-    linkTo: "/feasibility"
-  },
-  Design: {
-    name: "Design",
-    linkTo: "/design"
-  },
-  Tender: {
-    name: "Tender",
-    linkTo: "/tender"
-  },
-  Construction: {
-    name: "Construction",
-    linkTo: "/construction"
-  },
-  Handover: {
-    name: "Handover",
-    linkTo: "/handover"
-  },
-  Occupation: {
-    name: "Occupation",
-    linkTo: "/occupation"
-  },
-  Refurbishment: {
-    name: "Refurbishment",
-    linkTo: "/refurbishment"
-  },
+  CommonPages: [
+    'newproject', 'profile', 'foundations', 'team', 'project'
+  ]
 }
 
-export default pageNames
+export default PAGENAMES

@@ -4,7 +4,7 @@ import API from '@aws-amplify/api';
 // Fixed values for the API request
 const apiName = process.env.REACT_APP_API_NAME
 
-export default async function(projectId, pageName, fieldID) {
+async function SelfSignFile(projectId, pageName, fieldID) {
 
   // Build path for request
   const path = `/document/${projectId}/${pageName}/${fieldID}/sign-on-foundations`
@@ -37,3 +37,5 @@ export default async function(projectId, pageName, fieldID) {
      })
    })
 }
+
+export default SelfSignFile

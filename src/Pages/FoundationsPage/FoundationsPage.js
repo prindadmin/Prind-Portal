@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
-
 import ReactGA from 'react-ga';
 
-import * as strings from '../../Data/Strings'
+import * as Strings from '../../Data/Strings'
 
 export class FoundationsPage extends Component {
-
 
   componentDidMount() {
     const { location } = this.props
@@ -36,7 +34,7 @@ export class FoundationsPage extends Component {
 
         <div className='foundations-icon-text row'>
           <div className="col-12">
-            {strings.FOUNDATIONS_DESCRIPTION}
+            {Strings.FOUNDATIONS_DESCRIPTION}
           </div>
         </div>
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import * as strings from '../../../../Data/Strings'
+import * as Strings from '../../../../Data/Strings'
 
 import {
   ProjectCreate,
@@ -124,7 +124,7 @@ export class Page extends Component {
                     }
                   </div>
                 )
-              }) : strings.NO_HISTORY_YET
+              }) : Strings.NO_HISTORY_YET
             }
           </div>
         </div>

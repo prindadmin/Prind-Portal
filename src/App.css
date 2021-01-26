@@ -30,6 +30,20 @@
   --prind-palette-color-3: #178CA4;
   --prind-palette-color-4: #8D818C;
   --prind-palette-color-5: #072A40;
+  --max-width-popover: 1200px;
+  --standard-border-radius: 15px;
+  --standard-padding: 15px;
+  --standard-margin: 15px;
+  --standard-border-radius: 15px;
+  --standard-max-content-width: 1000px;
+  --project-selector-grid-columns: 1fr;
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --project-selector-grid-columns: 1fr 1fr;
+  }
+
 }
 
 
@@ -61,6 +75,21 @@
   display: flex;
   flex-direction: row;
   height: calc(100vh - var(--header-height) - var(--footer-height));
+}
+
+h1 {
+
+}
+
+h2 {
+  font-size: 30px;
+  padding: 0;
+  margin: 0;
+}
+
+h3 {
+  margin: 0;
+  padding: 0;
 }
 
 hr {
@@ -121,12 +150,47 @@ hr {
   bottom: 60px !important;
 }
 
+.close-button {
+  background-color: grey;
+  color: white;
+  border-radius: var(--standard-border-radius);
+  border: 2px black solid;
+  padding: 10px 27px;
+  height: 3em;
+  font-size: 16px;
+}
+
 #loading-placeholder {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
   width: 100vw;
+}
+
+.spacer {
+  height: var(--standard-margin);
+}
+
+input[type=submit]  {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 14px;
+  justify-content: center;
+  padding: 5px 10px;
+  text-align: left;
+  vertical-align: middle;
+  min-height: 30px;
+  min-width: 30px;
+  background-color: #137cbd;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+  box-shadow: inset 0 0 0 1px rgba(16, 22, 26, 0.4), inset 0 -1px 0 rgba(16, 22, 26, 0.2);
+  color: #ffffff;
+  width: 100%;
 }
 
 /* ================================ */
@@ -177,6 +241,11 @@ hr {
   width: 100%;
   max-width: 500px;
   margin: 15px;
+}
+
+#confirming-email-address .error-container {
+  max-width: 500px;
+  width: 90%;
 }
 
 
@@ -329,9 +398,11 @@ hr {
 /*      logged-in-body-section        */
 /* ================================== */
 
+/* TODO: Fix this height issue when foundations bar is present */
 #logged-in-body-section {
+  height: calc(100% - var(--footer-height));
   width: 100%;
-  margin: 0;
+  margin: 0 0 var(--footer-height) 0;
   padding: 0;
 }
 
@@ -397,8 +468,6 @@ hr {
 
 #new-project-page .bp3-button-group {
   margin-bottom: 10px;
-  margin-left: 15px;
-  margin-right: 15px;
 }
 
 #new-project-page .form-container {
@@ -541,6 +610,9 @@ hr {
 }
 
 #project-team-page .member-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-gap: 1rem;
   margin-top: 1em;
   width: 100%;
   margin-left: 0;
@@ -639,6 +711,11 @@ hr {
 background-color: var(--field-element-grey);
 }
 
+#contact-tile .view-accreditations {
+  margin-left: auto;
+  text-decoration: underline;
+}
+
 /* ================================== */
 /* ====== field element common ====== */
 /* ================================== */
@@ -646,12 +723,13 @@ background-color: var(--field-element-grey);
 #file-upload-element,
 #drop-down-element,
 #calendar-picker-element,
-#long-text-element {
+#long-text-element,
+#git-text-element {
   width: 100%;
   max-width: 1140px;
   margin-bottom: 40px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  border-radius: 10px;
+  border-radius: var(--standard-border-radius);
 }
 
 /* The animation code */
@@ -680,12 +758,13 @@ background-color: var(--field-element-grey);
 #file-upload-element .file-upload-element-container,
 #drop-down-element .drop-down-element-container,
 #calendar-picker-element .calendar-picker-element-container,
-#long-text-element .long-text-element-container {
+#long-text-element .long-text-element-container,
+#git-text-element .git-text-element-container {
   margin: auto;
   width: 100%;
   background-color: var(--field-element-red);
-  border-radius: 10px;
-  padding: 10px;
+  border-radius: var(--standard-border-radius);
+  padding: var(--standard-padding);
   position: relative;
   text-align: left;
 }
@@ -694,6 +773,7 @@ background-color: var(--field-element-grey);
 #drop-down-element .element-title,
 #calendar-picker-element .element-title,
 #long-text-element .element-title,
+#git-text-element .element-title,
 #popup-box .element-title,
 #requests-tab-container .element-title {
   font-size: 20px;
@@ -705,6 +785,7 @@ background-color: var(--field-element-grey);
 #drop-down-element .element-description,
 #calendar-picker-element .element-description,
 #long-text-element .element-description,
+#git-text-element .element-description,
 #popup-box .element-description {
   width: 100%;
   max-width: 600px;
@@ -714,21 +795,24 @@ background-color: var(--field-element-grey);
 #file-upload-element .row,
 #drop-down-element .row,
 #calendar-picker-element .row,
-#long-text-element .row {
+#long-text-element .row,
+#git-text-element .row {
   margin: 0;
 }
 
 #file-upload-element .container,
 #drop-down-element .container,
 #calendar-picker-element .container,
-#long-text-element .container {
+#long-text-element .container,
+#git-text-element .container {
   padding: 0;
 }
 
 #file-upload-element .row,
 #drop-down-element .row,
 #calendar-picker-element .row,
-#long-text-element .row {
+#long-text-element .row,
+#git-text-element .row {
   width: 100%;
   align-items: center;
   display:flex;
@@ -801,7 +885,7 @@ background-color: var(--field-element-grey);
 #file-upload-element .upload-history-container {
   background-color: #EEE;
   width: 100%;
-  border-radius: 5px;
+  border-radius: var(--standard-border-radius);
   padding: 10px;
   position: relative;
   text-align: left;
@@ -848,7 +932,7 @@ background-color: var(--field-element-grey);
 }
 
 #file-upload-element .upload-history-container .row.signatures {
-  border-radius: 5px;
+  border-radius: var(--standard-border-radius);
 }
 
 #file-upload-element .upload-history-container .col {
@@ -959,7 +1043,7 @@ background-color: var(--field-element-grey);
 #pick-signer-popover .member-tile {
   margin-bottom: 0.5em;
   border: 1px solid black;
-  border-radius: 10px;
+  border-radius: var(--standard-border-radius);
   padding: 0.5em 1.0em;
   position: relative;
 }
@@ -1123,7 +1207,7 @@ background-color: var(--field-element-grey);
   height: 75px;
   margin-left: auto;
   border: 1px solid grey;
-  border-radius: 10px;
+  border-radius: var(--standard-border-radius);
   bottom: 2em;
   position: relative;
   font-size: 12px;
@@ -1185,7 +1269,7 @@ background-color: var(--field-element-grey);
 
 #calendar-picker-element .bp3-datepicker {
   padding: 0.5em 1em;
-  border-radius: 10px;
+  border-radius: var(--standard-border-radius);
   margin-bottom: 1em;
 }
 
@@ -1213,25 +1297,104 @@ background-color: var(--field-element-grey);
   min-height: 8em;
 }
 
-
-
 /* ================================== */
-/* ========= inception page ========= */
+/* ======= git text element ======== */
 /* ================================== */
 
-#inception-page {
 
+#git-text-element .git-text-element-container {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--field-element-grey);
 }
 
-#inception-page .page-title,
-#feasibility-page .page-title,
-#design-page .page-title,
-#tender-page .page-title,
-#construction-page .page-title,
-#handover-page .page-title,
-#occupation-page .page-title,
-#refurbishment-page .page-title,
-#profile-page .page-title {
+#git-text-element .switch-state-buttons {
+  position: absolute;
+  right: var(--standard-padding);
+  height: 50px;
+  width: 50px;
+}
+
+#git-text-element .switch-state-buttons button {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+
+#git-text-element .switch-state-buttons svg {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+#git-text-element .save-button {
+  background-color: var(--prind-palette-color-4);
+  color: white;
+  margin: var(--standard-margin) 0 0 auto;
+  border-radius: var(--standard-border-radius);
+  border: 2px black solid;
+  padding: 10px 27px;
+  height: 3em;
+  font-size: 16px;
+}
+
+#git-text-element .container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+#git-text-element .tox-tinymce {
+  width: 100%;
+}
+
+#git-text-element .version-select {
+  margin-bottom: var(--standard-margin);
+}
+
+#git-text-element .comparators {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+#git-text-element .comparer {
+  width: 50%;
+}
+
+#git-text-element .error-text {
+  padding-top: 3em;
+  max-width: 500px;
+  width: 100%;
+  margin: auto;
+  text-align: center;
+}
+
+#git-text-element .error-text input[type=submit] {
+  max-width: 250px;
+  width: 100%;
+}
+
+mark.red {
+    color: red;
+    background: none;
+}
+
+mark.green {
+    color: lawngreen;
+    background: none;
+}
+
+mark.grey {
+    color: gray;
+    background: none;
+}
+
+
+.page-title {
   margin-bottom: 2em;
 }
 
@@ -1559,6 +1722,7 @@ background-color: var(--field-element-grey);
   flex-direction: column;
   position: fixed;
   bottom: 0;
+  z-index: 100;
 }
 
 #footer-bar .footer-content {
@@ -1605,6 +1769,7 @@ background-color: var(--field-element-grey);
   margin-top: 1.5em;
   font-size: 18px;
   font-weight: bold;
+  text-align: center;
 }
 
 .project-loading-container {
@@ -1648,7 +1813,7 @@ background-color: var(--field-element-grey);
   top: 15%;
   bottom: 15%;
   margin: auto;
-  border-radius: 20px;
+  border-radius: var(--standard-border-radius);
   background: white;
 }
 
@@ -1661,7 +1826,7 @@ background-color: var(--field-element-grey);
   width: 100%;
   height: 80px;
   background-color: #ccc;
-  border-radius: 20px 20px 0 0;
+  border-radius: var(--standard-border-radius) var(--standard-border-radius) 0 0;
   align-items: center;
   justify-content: center;
 }
@@ -1693,6 +1858,13 @@ background-color: var(--field-element-grey);
   padding-bottom: 0.5em;
   height: 80%;
   overflow-y: scroll;
+}
+
+#popup-box .project-list-container {
+  display: grid;
+  margin: auto var(--standard-margin);
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-gap: 1rem;
 }
 
 #popup-box .project-scroll-box button {
@@ -1740,7 +1912,7 @@ background-color: var(--field-element-grey);
   bottom: 0;
   left: 0;
   background-color: #ccc;
-  border-radius: 0 0 20px 20px;
+  border-radius: 0 0 var(--standard-border-radius) var(--standard-border-radius);
 }
 
 #popup-box .projects-pop-up-footer Button {
@@ -1808,8 +1980,9 @@ background-color: var(--field-element-grey);
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 0.5em 0;
+  padding: 1em 0;
   margin: 0;
+  min-height: 3em;
 }
 
 #no-foundations-id-banner p {
@@ -1834,7 +2007,9 @@ background-color: var(--field-element-grey);
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 800px;
+  width: 100%;
+  padding: var(--standard-padding);
+  max-width: var(--standard-max-content-width);
 }
 
 #foundations-page .foundations-icon {
@@ -1851,6 +2026,10 @@ background-color: var(--field-element-grey);
   margin-top: 4em;
 }
 
+#foundations-page .foundations-download-icons img {
+  width: 100%;
+}
+
 #foundations-page .foundations-download-text {
   text-align: center;
   width: 100%;
@@ -1865,5 +2044,272 @@ background-color: var(--field-element-grey);
 }
 
 #user-details-popover #popup-box {
+  display: flex;
+  flex-direction: column;
+  max-width: var(--max-width-popover);
   padding: 20px;
+  overflow-y: hidden;
+}
+
+#popup-box .popup-box-header {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: var(--standard-padding) 0;
+}
+
+#popup-box .popup-box-header input[type=submit]{
+  max-width: 30%;
+}
+
+#popup-box .close-button {
+  margin-left: auto;
+}
+
+#user-details-popover .accreditation-list-container {
+  display: flex;
+  overflow-y: scroll;
+}
+
+#user-details-popover .accreditation-list {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-row-gap: var(--standard-padding);
+}
+
+#popup-box .error-box {
+  max-width: 400px;
+  margin: 2em auto;
+}
+
+/* ======================================= */
+/* === user accreditation tile element === */
+/* ======================================= */
+
+#user-accreditation-tile {
+  border: 1px black solid;
+  border-radius: var(--standard-border-radius);
+  padding: var(--standard-padding);
+}
+
+#user-accreditation-tile h3 {
+  margin-bottom: var(--standard-margin);
+}
+
+
+/* ================================= */
+/* === project type tile element === */
+/* ================================= */
+
+.project-selector-container {
+  display: grid;
+  margin: var(--standard-margin) auto;
+  width: 80%;
+  grid-template-columns: var(--project-selector-grid-columns);
+  grid-column-gap: calc(var(--standard-margin) * 2);
+  grid-row-gap: calc(var(--standard-margin) * 2);
+  min-height: 400px;
+  text-align: center;
+}
+
+#project-type-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--prind-palette-color-2);
+  border-radius: var(--standard-border-radius);
+  border: var(--prind-palette-color-4) 2px solid;
+  padding: calc(var(--standard-padding) * 2);
+  min-height: 400px;
+}
+
+#project-type-tile .icon {
+  height: 150px;
+  width: 150px;
+}
+
+#project-type-tile h2 {
+  margin-bottom: var(--standard-margin);
+}
+
+
+/* =================================== */
+/* ======= Sign In and Up Page ======= */
+/* =================================== */
+
+#sign-in-up-page {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+  padding: 0px 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100vh;
+}
+
+/* =================================== */
+/* ======== Sign In and Up Box ======= */
+/* =================================== */
+
+#component-sign-in-up-box {
+  min-width: 300px;
+  max-width: 400px;
+  max-height: 90%;
+  width: 30%;
+  margin-left: 5%;
+  background-color: #F8F8F8;
+  border-radius: 18px;
+  padding: 15px;
+  box-shadow: 0px 3px 6px rgba(0,0,0,0.3);
+  overflow: auto;
+}
+
+#component-sign-in-up-box input[type=text],
+#component-sign-in-up-box input[type=password]  {
+  width: 100%;
+  appearance: none;
+  background: #ffffff;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0 0 0 0 rgba(19, 124, 189, 0), 0 0 0 0 rgba(19, 124, 189, 0), inset 0 0 0 1px rgba(16, 22, 26, 0.15), inset 0 1px 1px rgba(16, 22, 26, 0.2);
+  color: #182026;
+  font-size: 14px;
+  font-weight: 400;
+  height: 30px;
+  line-height: 30px;
+  outline: none;
+  padding: 0 10px;
+  transition: box-shadow 100ms cubic-bezier(0.4, 1, 0.75, 0.9);
+  vertical-align: middle;
+  margin-bottom: calc(var(--standard-margin) / 2);
+}
+
+#component-sign-in-up-box .component-sign-in-up-box-content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 30px;
+}
+
+#component-sign-in-up-box .logo-container {
+  padding: 0 10%;
+  margin-bottom: 20px;
+}
+
+#component-sign-in-up-box .logo-container img {
+  width: 100%;
+}
+
+#component-sign-in-up-box .welcome-text-heading {
+  width: 100%;
+  font-size: 22px;
+  font-weight: var(--font-raleway-weight-semibold);
+  margin-bottom: 10px;
+}
+
+#component-sign-in-up-box .welcome-text-body {
+  width: 100%;
+  font-size: 16px;
+  font-weight: var(--font-raleway-weight-regular);
+  margin-bottom: 30px;
+}
+
+#component-sign-in-up-box .password-request-success {
+  width: 100%;
+  text-align: center;
+}
+
+#component-sign-in-up-box .form {
+  width: 100%;
+  padding: 0 5%;
+}
+
+#component-sign-in-up-box .form-row {
+}
+
+#component-sign-in-up-box .form-row p {
+  padding: 0px 5px;
+}
+
+#component-sign-in-up-box .alert p {
+  padding: 0px;
+  margin: 0px;
+}
+
+#component-sign-in-up-box .sign-in-form {
+}
+
+#component-sign-in-up-box .sign-up-form {
+}
+
+#component-sign-in-up-box .forgot-your-password-text {
+  font-size: 14px;
+  font-weight: var(--font-raleway-weight-bold);
+  text-align: left;
+}
+
+#component-sign-in-up-box .sign-up-in-text {
+  font-size: 14px;
+  font-weight: var(--font-raleway-weight-bold);
+  text-align: center;
+}
+
+#component-sign-in-up-box .form .btn-primary {
+  width: 100%;
+  background-color: #CCCCCC;
+  color: white;
+  font-size: 20px;
+  font-weight: var(--font-raleway-weight-medium);
+  margin-bottom: 20px;
+  background: transparent linear-gradient(90deg, #194174 0%, #6394CC 100%) 0% 0% no-repeat padding-box;
+  border-radius: 10px;
+}
+
+
+/* ==================================== */
+/* ========= Pure CSS Spinner ========= */
+/* ==================================== */
+
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  margin: auto;
+  width: 80px;
+  height: 80px;
+}
+
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid var(--prind-palette-color-3);
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: var(--prind-palette-color-3) transparent transparent transparent;
+}
+
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

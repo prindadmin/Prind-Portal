@@ -1,25 +1,18 @@
-import React, { Component } from 'react'
-import { Field, reduxForm } from 'redux-form'
+import React, { lazy, Component } from 'react'
+import { reduxForm } from 'redux-form'
 
 import ReactGA from 'react-ga';
 
 import {
-  FormGroup,
   Button,
   ButtonGroup,
-  Callout,
 } from '@blueprintjs/core'
 
-import NoProjectSelected from '../../Components/common/NoProjectSelected'
+import * as Strings from '../../Data/Strings'
 
-import * as FormInputs from '../../Components/common/formInputs'
-
-import ContactTile from '../../Components/ContactTile'
-
-import * as strings from '../../Data/Strings'
-import * as Validators from '../../Validators'
-
-// TODO: Stop this requesting the team if there is no project selected
+const NoProjectSelected = lazy(() => import('../../Components/Common/NoProjectSelected'));
+const ContactTile = lazy(() => import('../../Components/ContactTile'));
+const AddNewMemberForm = lazy(() => import('../../Components/AddNewTeamMember'));
 
 export class ProjectTeamPage extends Component {
   static propTypes = {
@@ -29,7 +22,7 @@ export class ProjectTeamPage extends Component {
     super(props)
     this.state = {
       selectedRoleID: "0",
-      selectedRoleName: strings.NO_ROLE_SELECTED,
+      selectedRoleName: Strings.NO_ROLE_SELECTED,
       addingMember: false,
       addMemberError: false,
       errorText: ""
@@ -56,7 +49,6 @@ export class ProjectTeamPage extends Component {
   }
 
   componentDidUpdate(prevProps) {
-
     const { projects, getCurrentMembers, getRoles } = this.props
 
     if (projects.chosenProject.projectId !== prevProps.projects.chosenProject.projectId &&
@@ -75,9 +67,7 @@ export class ProjectTeamPage extends Component {
   }
 
   addMemberResolve = () => {
-
     this.props.reset()
-
     this.setState({
       addingMember: false,
     })
@@ -92,12 +82,11 @@ export class ProjectTeamPage extends Component {
   addMemberReject = () => {
     this.setState({
       addMemberError: true,
-      errorText: strings.ERROR_ADDING_MEMBER_TO_PROJECT
+      errorText: Strings.ERROR_ADDING_MEMBER_TO_PROJECT
     })
   }
 
   addMember = (values) => {
-
     this.setState({
       addingMember: true,
       addMemberError: false,
@@ -112,13 +101,12 @@ export class ProjectTeamPage extends Component {
       this.addMemberResolve,
       this.addMemberReject,
     )
-
   }
 
   pageHeader = () => {
     return (
       <div className='header-section'>
-        <h2>{strings.PROJECT_DIRECTORY_TITLE}</h2>
+        <h2>{Strings.PROJECT_DIRECTORY_TITLE}</h2>
       </div>
     )
   }
@@ -126,7 +114,7 @@ export class ProjectTeamPage extends Component {
   newMemberPageHeader = () => {
     return (
       <div className='header-section'>
-        <h2>{strings.PROJECT_DIRECTORY_ADD_NEW_TITLE}</h2>
+        <h2>{Strings.PROJECT_DIRECTORY_ADD_NEW_TITLE}</h2>
       </div>
     )
   }
@@ -139,145 +127,86 @@ export class ProjectTeamPage extends Component {
   }
 
   cancelNewMember = () => {
-
     this.props.reset()
-
     this.setState({
       addingMember: false,
     })
   }
 
-  addNewMember = () => {
-
-    const { handleSubmit } = this.props
-    const { roles } = this.props.members
-    const { addMemberError, errorText } = this.state
-
-    // re-key the roles array so the keys match those required by the drop down
-    var formattedRoles = roles.map(item => {
-      return {
-        id: item.roleId,
-        name: item.roleName
-      };
-    });
-
-    return (
-      <form onSubmit={handleSubmit(this.addMember)} className='add-member-form'>
-        {
-          addMemberError ?
-          <Callout style={{marginBottom: '15px'}} intent='danger'>
-            <div>{errorText}</div>
-          </Callout> :
-          null
-        }
-        <FormGroup
-          label={strings.MEMBER_DETAILS}
-          labelFor="emailAddress"
-        >
-          <Field
-            name="emailAddress"
-            validate={[Validators.required, Validators.isEmailAddress]}
-            component={FormInputs.TextInput}
-            placeholder={strings.MEMBER_EMAIL_ADDRESS}
-          />
-        </FormGroup>
-
-        <FormGroup
-          label={strings.MEMBER_PROJECT_ROLE}
-          labelFor="roleId"
-        >
-          <Field
-            name="roleId"
-            values={formattedRoles}
-            component={FormInputs.SelectInput}
-            placeholder={strings.MEMBER_PROJECT_ROLE_SELECT_ROLE}
-            onItemSelect={this.onItemSelected}
-            disabled={false}
-          />
-        </FormGroup>
-
-
-        <ButtonGroup fill>
-          <Button
-            loading={this.props.submitting}
-            disabled={this.props.invalid}
-            type='submit'
-            intent='primary'
-            text={strings.BUTTON_SAVE_CHANGES}
-          />
-        </ButtonGroup>
-
-        <ButtonGroup fill>
-          <Button
-            type='cancel'
-            intent='none'
-            text={strings.BUTTON_CANCEL}
-            onClick={this.cancelNewMember}
-          />
-        </ButtonGroup>
-
-      </form>
-    )
-  }
-
   onMemberRemove = () => {
-
     const { getCurrentMembers, projects } = this.props
-
     getCurrentMembers(
       projects.chosenProject.projectId
     )
   }
 
-  memberList = () => {
 
+  getAddMemberButton = () => {
+    return (
+      <ButtonGroup fill>
+        <Button
+          onClick={(e) => this.setState({addingMember: true})}
+          intent='primary'
+          text={Strings.BUTTON_ADD_MEMBER_TO_PROJECT}
+        />
+      </ButtonGroup>
+    )
+  }
+
+  mapMembers = ( memberList, confirmed ) => {
+    if (memberList === undefined) {
+      return (
+        <React.Fragment />
+      )
+    }
+
+    // Build a list of contact tiles
+    const listToReturn = memberList.map((memberDetails, index) => {
+      return (
+        <ContactTile
+          key={index}
+          memberDetails={memberDetails}
+          onMemberRemove={this.onMemberRemove}
+          confirmed={confirmed}
+        />
+      )
+    })
+
+    // Once the list is built, return it
+    return (
+      <React.Fragment>
+        { listToReturn }
+      </React.Fragment>
+    )
+
+  }
+
+
+  memberList = () => {
     const { projects } = this.props
+
+    // If the member list is not available
+    if (projects.memberList === undefined) {
+      return (
+        <div className="member-list-container row">
+          { this.getAddMemberButton() }
+        </div>
+      )
+    }
 
     return (
       <React.Fragment>
-        <div className="member-list-container row">
-          <ButtonGroup fill>
-            <Button
-              onClick={(e) => this.setState({addingMember: true})}
-              intent='primary'
-              text={strings.BUTTON_ADD_MEMBER_TO_PROJECT}
-            />
-          </ButtonGroup>
+        <div className="member-list-container">
+          { this.getAddMemberButton() }
         </div>
 
-        <div className="member-list row">
+        <div className="member-list">
           {
-            projects.memberList !== undefined ?
-              projects.memberList.confirmed !== undefined ?
-                projects.memberList.confirmed.map((memberDetails, index) => {
-                  return (
-                    <div key={index} className="col-md-12 col-lg-12 col-xl-6 single-contact-tile-container">
-                      <ContactTile
-                        memberDetails={memberDetails}
-                        onMemberRemove={this.onMemberRemove}
-                        confirmed={true}
-                      />
-                    </div>
-                  )
-                }) : null
-              : null
-            }
-            {
-              projects.memberList !== undefined ?
-                projects.memberList.invited !== undefined ?
-                  projects.memberList.invited.map((memberDetails, index) => {
-                    return (
-                      <div key={index} className="col-md-12 col-lg-12 col-xl-6 single-contact-tile-container">
-                        <ContactTile
-                          memberDetails={memberDetails}
-                          onMemberRemove={this.onMemberRemove}
-                          confirmed={false}
-                        />
-                      </div>
-                    )
-                  }) : null
-                : null
-            }
+            this.mapMembers(projects.memberList.confirmed, true)
+          }
+          {
+            this.mapMembers(projects.memberList.invited, false)
+          }
         </div>
       </React.Fragment>
     )
@@ -296,7 +225,15 @@ export class ProjectTeamPage extends Component {
     return (
       <div className="form-container">
         {this.state.addingMember ? this.newMemberPageHeader() : this.pageHeader()}
-        {this.state.addingMember ? this.addNewMember() : this.memberList()}
+        {
+          this.state.addingMember ?
+          <AddNewMemberForm
+            handleSubmit={this.props.handleSubmit(this.addMember)}
+            onItemSelected={this.onItemSelected}
+            {...this.state}
+            /> :
+          this.memberList()
+        }
         {this.pageFooter()}
       </div>
     )
@@ -317,7 +254,7 @@ export class ProjectTeamPage extends Component {
         <div className='page-content-section row'>
           {
             this.props.projects !== undefined ?
-              this.props.projects.chosenProject.projectName === strings.NO_PROJECT_SELECTED ?
+              this.props.projects.chosenProject.projectName === Strings.NO_PROJECT_SELECTED ?
                 this.showEmptyPage() :
                 this.teamDetails() :
             this.showEmptyPage()

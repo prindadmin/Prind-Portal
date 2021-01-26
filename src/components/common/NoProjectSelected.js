@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import ItemIcon from './ItemIcon'
-import * as strings from '../../Data/Strings'
+import * as Strings from '../../Data/Strings'
 
 export class NoProjectSelected extends Component {
 
@@ -11,7 +11,7 @@ export class NoProjectSelected extends Component {
       <div className='no-project-selected-container fill'>
         <div className='no-project-selected'>
           <ItemIcon size='6x' type='city' />
-          <p>{strings.NO_PROJECT_SELECTED}</p>
+          <p>{Strings.NO_PROJECT_SELECTED}</p>
         </div>
       </div>
     )

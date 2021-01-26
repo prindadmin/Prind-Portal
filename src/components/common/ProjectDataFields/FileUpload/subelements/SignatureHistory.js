@@ -5,7 +5,7 @@ import {
   Label,
 } from '@blueprintjs/core'
 
-import * as strings from '../../../../../Data/Strings'
+import * as Strings from '../../../../../Data/Strings'
 
 // TODO: Update the CSS for this box when the width is below xxx px
 
@@ -25,13 +25,13 @@ export class Element extends Component {
 
         <div className='row'>
           <div className='element-title'>
-            {strings.SIGNATURE_ELEMENT}
+            {Strings.SIGNATURE_ELEMENT}
           </div>
         </div>
         <div className='row signatures'>
           <div className='col'>
             <Label>
-              <b>{strings.SIGNED_BY}</b>
+              <b>{Strings.SIGNED_BY}</b>
               {
                 details.map((signature, index) => {
                   return (
@@ -45,7 +45,7 @@ export class Element extends Component {
           </div>
           <div className='col'>
             <Label>
-              <b>{strings.SIGNED_DATE_TIME}</b>
+              <b>{Strings.SIGNED_DATE_TIME}</b>
               {
                 details.map((signature, index) => {
                   return (
@@ -59,12 +59,12 @@ export class Element extends Component {
           </div>
           <div className='col'>
             <Label>
-              <b>{strings.PROOF}</b>
+              <b>{Strings.PROOF}</b>
               {
                 details.map((signature, index) => {
                   return (
                     <div key={index + "proof"}>
-                      <a href={signature.proofLink} target="_blank" rel="noopener noreferrer">{strings.LINK_TO_PROOF}</a>
+                      <a href={signature.proofLink} target="_blank" rel="noopener noreferrer">{Strings.LINK_TO_PROOF}</a>
                     </div>
                   )
                 })
@@ -79,7 +79,7 @@ export class Element extends Component {
   signaturesNotProvided = () => {
     return (
       <div>
-        {strings.NO_SIGNATURES}
+        {Strings.NO_SIGNATURES}
       </div>
     )
   }

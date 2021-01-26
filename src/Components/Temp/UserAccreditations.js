@@ -5,7 +5,8 @@ export const UserAccreditations = [
             "issuedDate": "2019-10-01T12:59:12.142216",
             "revocationDate": "2019-11-01T12:59:12.142216",
             "revocationReason": "expired",
-            "accreditationName": "constructionBasics",
+            "accreditationID": "constructionBasics",
+            "accreditationName": "Construction Basics 101",
             "subject": "did:fnds:31a24b270fe86d9c595e715854028c319cc75957718861eb66996929eb5c8025",
             "issuer": "did:fctr:d85be1f5baa83fa83850d8b58731a7f7c8ba65c33dec107c2e16e0dd65c7bcc7",
             "status": "revoked"
@@ -23,7 +24,8 @@ export const UserAccreditations = [
     {
         "accreditation": {
             "issuedDate": "2019-11-01T13:31:00.607495",
-            "accreditationName": "constructionBasics2",
+            "accreditationID": "constructionBasics2",
+            "accreditationName": "Construction Basics 202",
             "subject": "did:fnds:31a24b270fe86d9c595e715854028c319cc75957718861eb66996929eb5c8025",
             "issuer": "did:fctr:d85be1f5baa83fa83850d8b58731a7f7c8ba65c33dec107c2e16e0dd65c7bcc7",
             "status": "issued"
@@ -43,7 +45,8 @@ export const UserAccreditations = [
             "issuedDate": "2019-11-01T13:50:22.737250",
             "additionalInfo2": "Even more information on this accreditation",
             "additionalInfo1": "Some additional information on this accreditatation",
-            "accreditationName": "constructionBasics3",
+            "accreditationID": "constructionBasics3",
+            "accreditationName": "Construction Basics 303",
             "subject": "did:fnds:31a24b270fe86d9c595e715854028c319cc75957718861eb66996929eb5c8025",
             "issuer": "did:fctr:d85be1f5baa83fa83850d8b58731a7f7c8ba65c33dec107c2e16e0dd65c7bcc7",
             "status": "issued"
@@ -63,7 +66,8 @@ export const UserAccreditations = [
             "issuedDate": "2016-09-27T10:41:02.951968",
             "revocationDate": "2019-09-27T10:41:02.951968",
             "revocationReason": "expired",
-            "accreditationName": "plumbingQualification",
+            "accreditationID": "plumbingQualification",
+            "accreditationName": "Domestic Plumbing",
             "subject": "did:fnds:31a24b270fe86d9c595e715854028c319cc75957718861eb66996929eb5c8025",
             "issuer": "did:fctr:d85be1f5baa83fa83850d8b58731a7f7c8ba65c33dec107c2e16e0dd65c7bcc7",
             "status": "revoked"

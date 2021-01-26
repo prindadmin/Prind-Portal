@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import * as strings from '../../Data/Strings'
+import * as Strings from '../../Data/Strings'
 
 import {
   ProjectInvitationTile,
   SignatureRequestTile,
 } from './elements'
 
-import ItemIcon from '../common/ItemIcon'
+import ItemIcon from '../Common/ItemIcon'
 
 export class ProfileRequestsTab extends Component {
   static propTypes = {
@@ -30,7 +30,7 @@ export class ProfileRequestsTab extends Component {
           {
             user.projectInvitations.length > 0 ?
             <div className='element-title'>
-              {strings.PROJECT_INVITATIONS}
+              {Strings.PROJECT_INVITATIONS}
             </div> : null
           }
           {
@@ -50,7 +50,7 @@ export class ProfileRequestsTab extends Component {
           {
             user.signatureRequests.length > 0 ?
             <div className='element-title'>
-              {strings.SIGNATURE_REQUESTS}
+              {Strings.SIGNATURE_REQUESTS}
             </div> : null
           }
           {
@@ -73,7 +73,7 @@ export class ProfileRequestsTab extends Component {
       <div className='no-requests-container fill'>
         <div className='no-requests'>
           <ItemIcon size='6x' type='ticked' />
-          <p>{strings.NO_REQUESTS}</p>
+          <p>{Strings.NO_REQUESTS}</p>
         </div>
       </div>
     )

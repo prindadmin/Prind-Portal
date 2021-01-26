@@ -16,16 +16,13 @@ import { AUTH_SUCCESS } from './States'
 
 import * as Endpoints from './Data/Endpoints'
 import PrivateRoute from './Components/PrivateRoute';
-import ProjectLoading from './Components/common/ProjectLoading'
+import ProjectLoading from './Components/Common/ProjectLoading'
 
 import Error404 from './Components/Error404'
 import * as Strings from './Data/Strings'
 
 /* Before sign in pages */
-const SignIn = lazy(() => import('./Components/SignIn'));
-const SignUp = lazy(() => import('./Components/SignUp'));
-const ForgotPassword = lazy(() => import('./Components/ForgotPassword'));
-const ResetPassword = lazy(() => import('./Components/ResetPassword'));
+const SignInPage = lazy(() => import('./Pages/SignInPage'))
 const ConfirmEmailPage = lazy(() => import('./Components/ConfirmEmailPage'));
 
 /* Other pages */
@@ -33,7 +30,21 @@ const LoggedInContent = lazy(() => import('./Pages/LoggedInContent'));
 
 // TODO: make mobile version pages the right height (1x1 content is way longer than it needs to be)
 // TODO: make the page menu float over other elements and not be 100% width in mobile size
+// TODO: Add error boundaries
 // TODO: Add error handling when a page cannot load
+// TODO: Strip out axios dependency (not needed as a root dependency)
+// TODO: Strip out bootstrap
+// TODO: Strip out blueprint (if possible; date picker is important)
+// TODO: Strip out node-sass (why is this used?)
+// TODO: Strip out typescript???
+// TODO: Migrate to CSS Grid from bootstrap where possible (no rows and cols in classnames)
+// TODO: Simplify CSS using media queries and global variables
+// TODO: Remove the Long Text box once the Git Text box is complete
+// TODO: Make page content in Redux follow the available fields for a projectType
+// TODO: Use Endpoints import for all routes
+// TODO: Move page title and description strings to 'pageNames' in data folder so it can be customised per project type
+// TODO: Combine all stage pages into one customisable component
+
 
 // Use existing Cognito resource for auth
 Amplify.configure({
@@ -62,7 +73,6 @@ class App extends Component{
   constructor() {
     super()
     this.state = {
-      isLoggedIn: false,
       oldConsoleLog: null,
     }
 
@@ -75,6 +85,7 @@ class App extends Component{
   }
 
   componentDidMount() {
+
     // Turn off the logger if this is a production environment
     process.env.REACT_APP_STAGE === "PRODUCTION" ? this.disableLogger() : this.enableLogger()
 
@@ -84,6 +95,10 @@ class App extends Component{
 
     // If the refreshToken is present, refresh the login
     this.props.refreshSession()
+  }
+
+  componentDidUpdate(prevState, prevProps) {
+
   }
 
   enableLogger = () => {
@@ -117,11 +132,11 @@ class App extends Component{
         <Router>
           <Suspense fallback={this.loadingPlaceholder()}>
             <Switch>
-              <Route path='/signin' component={SignIn} />
-              <Route path='/signup' component={SignUp} />
-              <Route path='/forgot-password' component={ForgotPassword} />
-              <Route path='/reset-password' component={ResetPassword} />
-              <Route path='/confirm-email' component={ConfirmEmailPage} />
+              <Route path={Endpoints.SIGNINPAGE} component={SignInPage} />
+              <Route path={Endpoints.SIGNUPPAGE} component={SignInPage} />
+              <Route path={Endpoints.FORGOTPASSWORDPAGE} component={SignInPage} />
+              <Route path={Endpoints.RESETPASSWORDPAGE} component={SignInPage} />
+              <Route path={Endpoints.CONFIRMEMAILPAGE} component={ConfirmEmailPage} />
 
               <PrivateRoute path='/project' component={LoggedInContent} />
               <PrivateRoute path='/project/:id?' component={LoggedInContent} />
@@ -160,11 +175,9 @@ class App extends Component{
 
               <Route path='/'
                 render={() =>
-                  auth.isSignedIn === AUTH_SUCCESS ? (
-                    <Redirect to={this.props.user.currentRoute} />
-                  ) : (
+                  auth.isSignedIn === AUTH_SUCCESS ?
+                    <Redirect to={this.props.user.currentRoute} /> :
                     <Redirect to={Endpoints.SIGNINPAGE} />
-                  )
                 }
               />
               <Route component={ Error404 } />

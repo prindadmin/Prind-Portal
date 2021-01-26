@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-
 import ReactGA from 'react-ga';
 
-import * as Endpoints from '../../Data/Endpoints'
-import EmailConfirming from '../common/ProjectLoading'
+import { ButtonGroup, Button, Callout } from '@blueprintjs/core'
 
-import * as strings from '../../Data/Strings'
+import * as Endpoints from '../../Data/Endpoints'
+import EmailConfirming from '../Common/ProjectLoading'
+
+import * as Strings from '../../Data/Strings'
 
 class ConfirmEmailPage extends Component {
 
@@ -29,20 +30,27 @@ class ConfirmEmailPage extends Component {
     this.state = {
       confirmationError: false,
       errorMessage: "",
+      parameters: parametersObject
     }
 
-    console.log(parametersObject)
+    //console.log(parametersObject)
   }
 
 
   componentDidMount() {
-    const { location, confirmUser } = this.props
-
     // Register pageview with GA
-    ReactGA.pageview(location.pathname);
+    ReactGA.pageview(this.props.location.pathname);
 
-    confirmUser(
-      location.search,
+    this.sendConfirmUser()
+  }
+
+  sendConfirmUser = () => {
+    this.setState({
+      confirmationError: false,
+      errorMessage: "",
+    })
+    this.props.confirmUser(
+      this.state.parameters,
       this.resolveRegister,
       this.rejectRegister
     )
@@ -53,23 +61,40 @@ class ConfirmEmailPage extends Component {
     this.props.history.push(Endpoints.SIGNINPAGE)
   }
 
-  // TODO: This shouldn't forward on reject, but CORS is throwing an error at the moment
   rejectRegister = () => {
     console.log("confirmation failed")
-    /*
     this.setState({
       confirmationError: true,
-      errorMessage: strings.ERROR_CONFIRMING_USER,
+      errorMessage: Strings.ERROR_CONFIRMING_USER,
     })
-    */
-    this.props.history.push(Endpoints.SIGNINPAGE)
+  }
+
+  getErrorPresentation = () => {
+    return (
+      <div className='error-container'>
+        <Callout style={{marginBottom: '15px'}} intent='danger'>
+          <div>{ this.state.errorMessage }</div>
+        </Callout>
+        <ButtonGroup fill style={{marginBottom: '15px'}}>
+          <Button
+            intent='primary'
+            text={ Strings.BUTTON_RETRY }
+            onClick={() => {this.sendConfirmUser()}} />
+          </ButtonGroup>
+      </div>
+    )
   }
 
 
   render() {
     return (
       <div id="confirming-email-address">
-        <EmailConfirming text={strings.CONFIRMING_EMAIL_PLEASE_WAIT} />
+        {
+          this.state.confirmationError ?
+          this.getErrorPresentation() :
+          <EmailConfirming text={Strings.CONFIRMING_EMAIL_PLEASE_WAIT} />
+        }
+
       </div>
     )
   }
