@@ -17,6 +17,8 @@ import * as ComponentState from '../../States'
 
 const ProjectTypeSelector = lazy(() => import('../ProjectTypeSelector'));
 
+// TODO: Test this
+
 export class ProjectSelectorPopUp extends Component {
   static propTypes = {
     onCancelPopup: PropTypes.func.isRequired,
@@ -28,7 +30,6 @@ export class ProjectSelectorPopUp extends Component {
     this.state = {
       state: ComponentState.QUIESCENT,
       chosenProjectId: "",
-      projectTypeSelectorOpen: false,
       errorText: "",
     }
   }
@@ -118,7 +119,7 @@ export class ProjectSelectorPopUp extends Component {
 
   createNewProject = () => {
     this.setState({
-      projectTypeSelectorOpen: true,
+      state: ComponentState.PROJECT_TYPE_SELECTOR_OPEN,
     })
   }
 
@@ -204,7 +205,7 @@ export class ProjectSelectorPopUp extends Component {
 
   getFooterContent = () => {
     // If the new project type selector is open, don't show the footer
-    if (this.state.projectTypeSelectorOpen) {
+    if (this.state.state === ComponentState.PROJECT_TYPE_SELECTOR_OPEN) {
       return null
     }
 
@@ -223,8 +224,6 @@ export class ProjectSelectorPopUp extends Component {
   }
 
   siteSelectorPopupContent = () => {
-    const { projectTypeSelectorOpen } = this.state
-
     console.log(this.state.state)
 
     return (
@@ -233,7 +232,7 @@ export class ProjectSelectorPopUp extends Component {
           { this.getHeaderContent() }
           <div className='project-scroll-box'>
             {
-              projectTypeSelectorOpen ? <ProjectTypeSelector closePopup={this.cancelPopup}/> : null
+              this.state.state === ComponentState.PROJECT_TYPE_SELECTOR_OPEN ? <ProjectTypeSelector closePopup={this.cancelPopup}/> : null
             }
             {
               this.state.state === ComponentState.QUIESCENT ? this.getProjectListPresentation() : null
