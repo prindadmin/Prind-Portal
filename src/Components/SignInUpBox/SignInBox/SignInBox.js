@@ -143,7 +143,7 @@ export class SignInBox extends Component {
         {
           this.state.state === ComponentState.SIGN_IN_FAILED ?
           <Callout style={{marginBottom: '15px'}} intent='danger'>
-            <p>{ this.states.errorMessage }</p>
+            <p>{ this.state.errorMessage }</p>
           </Callout> :
           null
         }
