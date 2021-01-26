@@ -17,7 +17,6 @@ import getFileFromS3 from './elements/getFileFromS3'
 import uploadFileToS3 from './elements/uploadFileToS3'
 // TODO: Style text editor when disabled
 // TODO: Update in server as versioned (Not sure how this works on the file upload yet)
-// TODO: Add file version selector and downloader to allow comparison
 // TODO: Get toasts working
 // TODO: Fix errors when first loading the page
 // TODO: Fix occasional errors with the S3 token
@@ -88,7 +87,6 @@ export class GitText extends Component {
       if(this.props.elementContent !== prevProps.elementContent) {
         if(this.props.elementContent.fileDetails.length !== 0){
           this.setState({
-            requestedOldFileVersionID: this.props.elementContent.fileDetails[0].s3VersionId,
             requestedCurrentFileVersionID: this.props.elementContent.fileDetails[0].s3VersionId,
           })
         }
@@ -293,6 +291,7 @@ export class GitText extends Component {
 
 
   getEditor = () => {
+    // TODO: Remove this
     const fileVersions = [
       {
         ver: "1",
@@ -310,6 +309,12 @@ export class GitText extends Component {
         ver: "3",
         prevVer: "2",
         s3VersionId: "IhHU28Y.7doCQmf9SijFU3M6C8VDCY5x",
+        commitMessage: "Another intermediate Commit"
+      },
+      {
+        ver: "4",
+        prevVer: "3",
+        s3VersionId: "BvjG3l1kV4Wmqd4PpT5PlhMEEc42V4_g",
         commitMessage: "Latest Commit"
       }
     ]
@@ -326,8 +331,6 @@ export class GitText extends Component {
           currentVersionSelected={this.state.requestedCurrentFileVersionID} />
       )
     }
-
-    // newContent={`${this.state.currentContent.replace("test","abc")}`} />
 
     return (
       <Comparer
