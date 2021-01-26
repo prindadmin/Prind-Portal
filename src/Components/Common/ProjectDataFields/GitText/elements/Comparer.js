@@ -36,11 +36,36 @@ export class Comparer extends Component {
   }
 
   componentDidMount() {
+    this.checkVersionsForState()
+  }
+
+  componentDidUpdate(prevProps) {
+    if(this.props !== prevProps) {
+      this.checkVersionsForState()
+    }
+  }
+
+  // This sends two onRequestNewFileVersionData requests on mount and causes overwriting of the state of the
+  // gitText component.  I need to think of a better way to do this.
+  checkVersionsForState = () => {
     const { fileVersions, currentOldVersionSelected, currentNewVersionSelected } = this.props
+
+    // Protects from new fields with no file versions crashing the component
+    if(fileVersions.length === 0) {
+      return;
+    }
+
     // If the parent provides a version, set that as the current version
     if(this.props.currentOldVersionSelected !== '') {
       this.setState({
         currentOldVersionSelected,
+      })
+    }
+    else {
+      // If the parent hasn't provided a version, set it to the last version
+      this.props.onRequestNewFileVersionData(fileVersions[fileVersions.length -1].s3VersionId, Constants.OLDSELECTOR)
+      this.setState({
+        currentOldVersionSelected: fileVersions[fileVersions.length -1].s3VersionId,
       })
     }
 
@@ -51,12 +76,12 @@ export class Comparer extends Component {
       })
     }
     else {
-      // If the parent hasn't provided a version, set it to blank
+      // If the parent hasn't provided a version, set it to the last version
+      this.props.onRequestNewFileVersionData(fileVersions[fileVersions.length -1].s3VersionId, Constants.NEWSELECTOR)
       this.setState({
         currentNewVersionSelected: fileVersions[fileVersions.length -1].s3VersionId,
       })
     }
-
   }
 
 
@@ -125,15 +150,13 @@ export class Comparer extends Component {
 
 
   // TODO: Load the latest version in componentDidMount for both old and new
-  // TODO: Fill with options by mapping redux store data
-  // TODO: Add "Please select verison" as hidden option to the drop down
+  // TODO: Add "Please select version" as hidden option to the drop down
   getVersionSelectSystem = (selectorName) => {
 
     console.log(selectorName)
 
     const { fileVersions } = this.props
     const { currentOldVersionSelected, currentNewVersionSelected } = this.state
-
     const s3Ids = fileVersions.map((version) => {
       return version.s3VersionId
     })
@@ -141,25 +164,26 @@ export class Comparer extends Component {
     const oldIndex = s3Ids.indexOf(currentOldVersionSelected)
     const newIndex = s3Ids.indexOf(currentNewVersionSelected)
 
+    console.log(`oldIndex: ${oldIndex}, newIndex: ${newIndex}`)
+
     // Map the fileVersions to options
     const options = fileVersions.map((version, index) => {
-
       // If this is the old selector and the option is older than the new selector selection
       // disable the selection
       if (selectorName === Constants.OLDSELECTOR && index >= newIndex) {
         return <option key={index} disabled value={version.s3VersionId}>{version.commitMessage}</option>
       }
-
       return <option key={index} value={version.s3VersionId}>{version.commitMessage}</option>
     })
 
+    const value = selectorName === Constants.OLDSELECTOR ? currentOldVersionSelected : currentNewVersionSelected
 
     return (
       <div className='version-select'>
         <select
-          name={selectorName}
           id={selectorName}
-          defaultValue={selectorName === Constants.OLDSELECTOR ? currentOldVersionSelected : currentNewVersionSelected}
+          name={selectorName}
+          value={value}
           onChange={(e) => this.onSelectionChange(selectorName, e)}>
           {options}
         </select>

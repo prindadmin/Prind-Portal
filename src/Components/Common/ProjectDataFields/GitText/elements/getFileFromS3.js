@@ -18,7 +18,7 @@ async function checkFileExists(s3, downloadParams, parent) {
 }
 
 
-function downloadFileContent(s3, downloadParams, parent) {
+function downloadFileContent(s3, downloadParams, parent, lastRequestIsOld) {
 
   console.log(downloadParams)
 
@@ -33,7 +33,7 @@ function downloadFileContent(s3, downloadParams, parent) {
       })
     })
     .on('success', function(response) {
-      onFileDownloadComplete(response, parent)
+      onFileDownloadComplete(response, parent, lastRequestIsOld)
     })
     .on('error', function(error, response) {
       console.log("ERROR downloading file from S3")
@@ -47,17 +47,19 @@ function downloadFileContent(s3, downloadParams, parent) {
 }
 
 
-function onFileDownloadComplete(response, parent) {
+function onFileDownloadComplete(response, parent, lastRequestIsOld) {
   console.log("File download complete")
+  console.log(lastRequestIsOld)
 
-  if (parent.state.lastRequestIsOld) {
+
+  if (lastRequestIsOld) {
     parent.setState({
       oldContent: response.data.Body.toString(),
       state: ComponentState.QUIESCENT
     })
     return
   }
-  
+
   parent.setState({
     originalCurrentContent: response.data.Body.toString(),
     currentContent: response.data.Body.toString(),
@@ -66,7 +68,7 @@ function onFileDownloadComplete(response, parent) {
 }
 
 
-async function getFileDataFromS3(s3, downloadParams, parent) {
+async function getFileDataFromS3(s3, downloadParams, parent, lastRequestIsOld) {
   parent.setState({
     state: ComponentState.CHECKING_EXISTING_FILE_EXISTS_ON_SERVER
   })
@@ -75,7 +77,7 @@ async function getFileDataFromS3(s3, downloadParams, parent) {
     .then(exists => {
       console.log(exists)
       if (exists) {
-        downloadFileContent(s3, downloadParams, parent)
+        downloadFileContent(s3, downloadParams, parent, lastRequestIsOld)
       }
       else {
         parent.setState({

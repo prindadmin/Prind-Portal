@@ -71,15 +71,34 @@ export class GitText extends Component {
     console.log(this.props)
     if (this.props.elementContent.fileDetails !== undefined) {
       if (this.props.elementContent.fileDetails.length !== 0) {
+        // The 0th entry in the fileDetails array is always the current version
         this.setState({
           requestedCurrentFileVersionID: this.props.elementContent.fileDetails[0].s3VersionId,
         })
       }
     }
-    this.downloadFromS3(this.state.lastRequestIsOld)
+    this.downloadFromS3("", this.state.lastRequestIsOld)
   }
 
   componentDidUpdate(prevState, prevProps) {
+
+    console.log(this.state)
+
+    try {
+      if(this.props.elementContent !== prevProps.elementContent) {
+        if(this.props.elementContent.fileDetails.length !== 0){
+          this.setState({
+            requestedOldFileVersionID: this.props.elementContent.fileDetails[0].s3VersionId,
+            requestedCurrentFileVersionID: this.props.elementContent.fileDetails[0].s3VersionId,
+          })
+        }
+      }
+    }
+    catch (e) {
+      console.log("fileDetails does not exist yet")
+    }
+
+
     if (this.state.state !== prevState.state) {
       if (this.state.state === ComponentState.UPLOADING_NEW_FILE_TO_SERVER_SUCCESS) {
         this.uploadMetadataToDatabase()
@@ -95,11 +114,11 @@ export class GitText extends Component {
       }
       if (this.state.requestedCurrentFileVersionID !== prevProps.requestedCurrentFileVersionID) {
         console.log("file version requested changed")
-        this.downloadFromS3(false)
+        this.downloadFromS3(this.state.requestedCurrentFileVersionID, false)
       }
       if (this.state.requestedOldFileVersionID !== prevProps.requestedOldFileVersionID) {
         console.log("file version requested changed")
-        this.downloadFromS3(true)
+        this.downloadFromS3(this.state.requestedOldFileVersionID, true)
       }
     }
   }
@@ -226,7 +245,7 @@ export class GitText extends Component {
   }
 
 
-  downloadFromS3 = (isOld) => {
+  downloadFromS3 = (s3VersionId, isOld) => {
     const { projectId, pageName, elementContent } = this.props
     const token = this.getValidS3Token()
     if (token === undefined) {
@@ -247,21 +266,17 @@ export class GitText extends Component {
       Key: key
     };
 
-    if (isOld) {
-      if (this.state.requestedOldFileVersionID !== "") {
-        downloadParams.VersionId = this.state.requestedOldFileVersionID
-      }
+    if (s3VersionId !== "") {
+      downloadParams.VersionId = s3VersionId
     }
-    else {
-      if (this.state.requestedCurrentFileVersionID !== "") {
-        downloadParams.VersionId = this.state.requestedCurrentFileVersionID
-      }
-    }
-    getFileFromS3(s3, downloadParams, this)
+
+    getFileFromS3(s3, downloadParams, this, isOld)
   }
 
 
   updateRequestedFileVersion = (newFileVersion, selectorName) => {
+    console.log(selectorName, newFileVersion)
+
     if (selectorName === Constants.OLDSELECTOR) {
       this.setState({
         lastRequestIsOld: true,
@@ -333,7 +348,7 @@ export class GitText extends Component {
           type="submit"
           value={ Strings.BUTTON_RETRY }
           className="save-button"
-          onClick={(e) => this.downloadFromS3(true)} />
+          onClick={(e) => this.downloadFromS3(this.state.requestedCurrentFileVersionID, true)} />
       </div>
     )
   }
