@@ -16,6 +16,15 @@ import * as Strings from '../../../Data/Strings'
 import * as Validators from '../../../Validators'
 import * as FormInputs from '../formInputs'
 
+/* TODO: Add this in to create gitText option
+
+{
+  value: "gitText",
+  label: "Change Tracking Text Box"
+}
+
+*/
+
 const fieldTypes = [
   {
     value: "file",
@@ -33,10 +42,6 @@ const fieldTypes = [
     value: "longText",
     label: "Text Box"
   },
-  {
-    value: "gitText",
-    label: "Change Tracking Text Box"
-  }
 ]
 
 export class Element extends Component {
