@@ -40,6 +40,7 @@ export class ProjectSelectorPopUp extends Component {
 
   // perform this if the user clicks close popup
   cancelPopup = () => {
+    console.log("closing popup")
     this.props.onCancelPopup()
   }
 
@@ -59,7 +60,8 @@ export class ProjectSelectorPopUp extends Component {
     const { updateChosenProject } = this.props
 
     this.setState({
-      chosenProjectId: project.projectId
+      chosenProjectId: project.projectId,
+      state: ComponentState.LOADING,
     })
 
     updateChosenProject(

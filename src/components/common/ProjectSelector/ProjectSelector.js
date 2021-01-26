@@ -40,7 +40,9 @@ class ProjectSelector extends React.Component {
     this.setState({ showPopup: true })
   }
 
+  // TODO: FIX ME
   cancelPopup = () => {
+    console.log("closing popup")
     this.setState({ showPopup: false })
   }
 
