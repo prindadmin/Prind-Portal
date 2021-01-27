@@ -2,8 +2,6 @@
 import * as ComponentState from '../../ComponentStates'
 
 function uploadFileToS3(s3, uploadParams, parent) {
-  const { projectId, pageName, elementContent } = parent.props
-
   // Create a request
   var request = s3.putObject(uploadParams);
 

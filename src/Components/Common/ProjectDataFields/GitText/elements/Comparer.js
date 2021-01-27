@@ -8,14 +8,21 @@ import * as Strings from '../../../../../Data/Strings'
 import * as Constants from '../../Constants'
 
 // TODO: Implement styling depending on state
-const editorContentStyle = `mark.red { color: red; background: none; text-decoration: line-through; } mark.green { color: limegreen; background: none; } mark.grey { color: grey; background: none; }`;
-const contentBeforeSelection = `<h2>${Strings.GIT_TEXT_NO_FILE_VERSION_SELECTED}</h2>`
+const EDITORCONTENTSTYLE = `mark.red { color: red; background: none; text-decoration: line-through; } mark.green { color: limegreen; background: none; } mark.grey { color: grey; background: none; }`;
+const CONTENTBEFORESELECTION = `<h2>${Strings.GIT_TEXT_NO_FILE_VERSION_SELECTED}</h2>`
 
 
 export class Comparer extends Component {
   static propTypes = {
-    oldContent: PropTypes.string.isRequired,
-    newContent: PropTypes.string.isRequired,
+    oldVersion: PropTypes.shape({
+      content: PropTypes.string.isRequired,
+      versionId: PropTypes.string.isRequired,
+    }).isRequired,
+    newVersion: PropTypes.shape({
+      originalContent: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+      versionId: PropTypes.string.isRequired,
+    }).isRequired,
     fileVersions: PropTypes.arrayOf(PropTypes.shape({
       ver: PropTypes.string,
       prevVer: PropTypes.string,
@@ -23,70 +30,11 @@ export class Comparer extends Component {
       commitMessage: PropTypes.string,
     })),
     onRequestNewFileVersionData: PropTypes.func.isRequired,
-    currentOldVersionSelected: PropTypes.string,
-    currentNewVersionSelected: PropTypes.string,
   }
-
-  constructor(){
-    super()
-    this.state = {
-      currentOldVersionSelected: '',
-      currentNewVersionSelected: ''
-    }
-  }
-
-  componentDidMount() {
-    this.checkVersionsForState()
-  }
-
-  componentDidUpdate(prevProps) {
-    if(this.props !== prevProps) {
-      this.checkVersionsForState()
-    }
-  }
-
-  // This sends two onRequestNewFileVersionData requests on mount and causes overwriting of the state of the
-  // gitText component.  I need to think of a better way to do this.
-  checkVersionsForState = () => {
-    const { fileVersions, currentOldVersionSelected, currentNewVersionSelected } = this.props
-
-    // Protects from new fields with no file versions crashing the component
-    if(fileVersions.length === 0) {
-      return;
-    }
-
-    // If the parent provides a version, set that as the current version
-    if(this.props.currentOldVersionSelected !== '') {
-      this.setState({
-        currentOldVersionSelected,
-      })
-    }
-    else {
-      // If the parent hasn't provided a version, set it to the last version
-      this.props.onRequestNewFileVersionData(fileVersions[fileVersions.length -1].s3VersionId, Constants.OLDSELECTOR)
-      this.setState({
-        currentOldVersionSelected: fileVersions[fileVersions.length -1].s3VersionId,
-      })
-    }
-
-    // If the parent provides a version, set that as the current version
-    if(this.props.currentNewVersionSelected !== '') {
-      this.setState({
-        currentNewVersionSelected,
-      })
-    }
-    else {
-      // If the parent hasn't provided a version, set it to the last version
-      this.props.onRequestNewFileVersionData(fileVersions[fileVersions.length -1].s3VersionId, Constants.NEWSELECTOR)
-      this.setState({
-        currentNewVersionSelected: fileVersions[fileVersions.length -1].s3VersionId,
-      })
-    }
-  }
-
 
   // Add colour formatting to the text
   addFormatting = () => {
+    console.log(this.props)
     const diff = Diff.diffWords(this.props.oldContent, this.props.newContent);
     var outputDifference = ''
 
@@ -109,12 +57,12 @@ export class Comparer extends Component {
 
 
   getEditor = (content, isNew) => {
-    var displayContent = content
+    var displayContent = content.content
     if (isNew) {
       displayContent = this.addFormatting()
     }
     if (content === "") {
-      displayContent = contentBeforeSelection
+      displayContent = CONTENTBEFORESELECTION
     }
 
     return (
@@ -125,7 +73,7 @@ export class Comparer extends Component {
         init={{
           height: 500,
           menubar: false,
-          content_style: editorContentStyle,
+          content_style: EDITORCONTENTSTYLE,
           plugins: [
             'advlist autolink lists link image',
             'charmap print preview anchor help',
@@ -155,14 +103,13 @@ export class Comparer extends Component {
 
     console.log(selectorName)
 
-    const { fileVersions } = this.props
-    const { currentOldVersionSelected, currentNewVersionSelected } = this.state
+    const { fileVersions, oldVersion, newVersion } = this.props
     const s3Ids = fileVersions.map((version) => {
       return version.s3VersionId
     })
 
-    const oldIndex = s3Ids.indexOf(currentOldVersionSelected)
-    const newIndex = s3Ids.indexOf(currentNewVersionSelected)
+    const oldIndex = s3Ids.indexOf(oldVersion.versionId)
+    const newIndex = s3Ids.indexOf(newVersion.versionId)
 
     console.log(`oldIndex: ${oldIndex}, newIndex: ${newIndex}`)
 
@@ -176,7 +123,7 @@ export class Comparer extends Component {
       return <option key={index} value={version.s3VersionId}>{version.commitMessage}</option>
     })
 
-    const value = selectorName === Constants.OLDSELECTOR ? currentOldVersionSelected : currentNewVersionSelected
+    const value = selectorName === Constants.OLDSELECTOR ? oldVersion.versionId : newVersion.versionId
 
     return (
       <div className='version-select'>
@@ -192,20 +139,20 @@ export class Comparer extends Component {
   }
 
   render() {
-    const { oldContent, newContent } = this.props
+    const { oldVersion, newVersion } = this.props
 
-    console.log(this.state)
+    console.log(this.props)
 
     return (
       <React.Fragment>
         <div className='comparators'>
           <div className='comparer old'>
             { this.getVersionSelectSystem(Constants.OLDSELECTOR) }
-            { this.getEditor(oldContent, false) }
+            { this.getEditor(oldVersion, false) }
           </div>
           <div className='comparer new'>
             { this.getVersionSelectSystem(Constants.NEWSELECTOR) }
-            { this.getEditor(newContent, true) }
+            { this.getEditor(newVersion, true) }
           </div>
         </div>
       </React.Fragment>

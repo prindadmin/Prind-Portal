@@ -8,7 +8,11 @@ import { Editor } from '@tinymce/tinymce-react';
 
 export class TextWriter extends Component {
   static propTypes = {
-    currentContent: PropTypes.string.isRequired,
+    currentContent: PropTypes.shape({
+      originalContent: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+      versionId: PropTypes.string.isRequired,
+    }).isRequired,
     fileVersions: PropTypes.arrayOf(PropTypes.shape({
       ver: PropTypes.string,
       prevVer: PropTypes.string,
@@ -18,39 +22,12 @@ export class TextWriter extends Component {
     onRequestNewFileVersionData: PropTypes.func.isRequired,
     onHandleContentChange: PropTypes.func.isRequired,
     disabled: PropTypes.bool.isRequired,
-    currentVersionSelected: PropTypes.string,
-  }
-
-  constructor(){
-    super()
-    this.state = {
-      currentVersionSelected: ''
-    }
-  }
-
-  componentDidMount() {
-    const { fileVersions, currentVersionSelected } = this.props
-    // If the parent provides a version, set that as the current version
-    if(this.props.currentVersionSelected !== '') {
-      this.setState({
-        currentVersionSelected,
-      })
-      return
-    }
-    // If the parent hasn't provided a version, set it to the last version available
-    this.setState({
-      currentVersionSelected: fileVersions[fileVersions.length -1].s3VersionId,
-    })
   }
 
 
   onSelectionChange = (selectorName, e) => {
     console.log(selectorName)
     console.log(e.target.value)
-    this.setState({
-      currentVersionSelected: e.target.value,
-    })
-
     this.props.onRequestNewFileVersionData(e.target.value, selectorName)
   }
 
@@ -68,7 +45,7 @@ export class TextWriter extends Component {
         <select
           name={selectorName}
           id={selectorName}
-          value={this.state.currentVersionSelected}
+          value={this.props.currentContent.versionId}
           onChange={(e) => this.onSelectionChange(selectorName, e)}>
           {options}
         </select>
@@ -81,7 +58,7 @@ export class TextWriter extends Component {
     const { currentContent, disabled } = this.props
     return (
       <Editor
-        initialValue={currentContent}
+        initialValue={currentContent.originalContent}
         apikey={process.env.REACT_APP_TINY_API_KEY}
         disabled={disabled}
         init={{
@@ -102,6 +79,9 @@ export class TextWriter extends Component {
   }
 
   render() {
+
+    console.log(this.props)
+
     return (
       <React.Fragment>
         { this.getVersionSelectSystem("oldContent") }

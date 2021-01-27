@@ -19,7 +19,6 @@ async function checkFileExists(s3, downloadParams, parent) {
 
 
 function downloadFileContent(s3, downloadParams, parent, lastRequestIsOld) {
-
   console.log(downloadParams)
 
   // Create a request
@@ -33,7 +32,7 @@ function downloadFileContent(s3, downloadParams, parent, lastRequestIsOld) {
       })
     })
     .on('success', function(response) {
-      onFileDownloadComplete(response, parent, lastRequestIsOld)
+      onFileDownloadComplete(response, parent, downloadParams, lastRequestIsOld)
     })
     .on('error', function(error, response) {
       console.log("ERROR downloading file from S3")
@@ -47,22 +46,30 @@ function downloadFileContent(s3, downloadParams, parent, lastRequestIsOld) {
 }
 
 
-function onFileDownloadComplete(response, parent, lastRequestIsOld) {
+function onFileDownloadComplete(response, parent, downloadParams, lastRequestIsOld) {
   console.log("File download complete")
   console.log(lastRequestIsOld)
 
 
   if (lastRequestIsOld) {
     parent.setState({
-      oldContent: response.data.Body.toString(),
+      oldVersion: {
+        ...parent.state.oldVersion,
+        content: response.data.Body.toString(),
+        versionId: downloadParams.VersionId === undefined ? '' : downloadParams.VersionId
+      },
       state: ComponentState.QUIESCENT
     })
     return
   }
 
   parent.setState({
-    originalCurrentContent: response.data.Body.toString(),
-    currentContent: response.data.Body.toString(),
+    currentVersion: {
+      ...parent.state.currentVersion,
+      originalContent: response.data.Body.toString(),
+      content: response.data.Body.toString(),
+      versionId: downloadParams.VersionId === undefined ? '' : downloadParams.VersionId
+    },
     state: ComponentState.QUIESCENT
   })
 }

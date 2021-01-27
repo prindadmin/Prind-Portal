@@ -50,7 +50,7 @@ export class HeaderBar extends Component {
         <div id='header-bar' className='full-width row'>
           <div className='header-content row'>
             {
-              projects !== undefined ? <ProjectSelector openProjectSelector={openProjectSelector}/>  : null
+              projects !== undefined ? <ProjectSelector openProjectSelector={openProjectSelector}/> : null
             }
             <div className='nav-links'>
               {

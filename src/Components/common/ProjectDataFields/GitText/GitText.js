@@ -18,7 +18,6 @@ import uploadFileToS3 from './elements/uploadFileToS3'
 // TODO: Style text editor when disabled
 // TODO: Update in server as versioned (Not sure how this works on the file upload yet)
 // TODO: Get toasts working
-// TODO: Fix errors when first loading the page
 // TODO: Fix occasional errors with the S3 token
 // TODO: Style save button when disabled
 
@@ -54,15 +53,18 @@ export class GitText extends Component {
       uploadFileProgress: 0,
       downloadFileProgress: 0,
       errorMessage: "",
-      originalCurrentContent: '',
-      currentContent: '',
-      oldContent: '',
       editable: false,
       toastText: '',
       showToast: false,
-      requestedOldFileVersionID: '',
-      requestedCurrentFileVersionID: '',
-      lastRequestIsOld: false,
+      currentVersion: {
+        originalContent: '',
+        content: '',
+        versionId: ''
+      },
+      oldVersion: {
+        content: '',
+        versionId: ''
+      }
     }
   }
 
@@ -71,8 +73,20 @@ export class GitText extends Component {
     if (this.props.elementContent.fileDetails !== undefined) {
       if (this.props.elementContent.fileDetails.length !== 0) {
         // The 0th entry in the fileDetails array is always the current version
+
+        const currentVersion = {
+          ...this.state.currentVersion,
+          versionId: this.props.elementContent.fileDetails[0].s3VersionId,
+        }
+
+        const oldVersion = {
+          ...this.state.oldVersion,
+          versionId: this.props.elementContent.fileDetails[0].s3VersionId,
+        }
+
         this.setState({
-          requestedCurrentFileVersionID: this.props.elementContent.fileDetails[0].s3VersionId,
+          currentVersion,
+          oldVersion,
         })
       }
     }
@@ -84,10 +98,27 @@ export class GitText extends Component {
     console.log(this.state)
 
     try {
-      if(this.props.elementContent !== prevProps.elementContent) {
-        if(this.props.elementContent.fileDetails.length !== 0){
+
+      const { elementContent } = this.props
+
+      if(elementContent !== prevProps.elementContent) {
+
+        const { fileDetails } = elementContent
+
+        if(fileDetails.length !== 0 && fileDetails !== prevProps.elementContent.fileDetails){
+          const currentVersion = {
+            ...this.state.currentVersion,
+            versionId: fileDetails[0].s3VersionId,
+          }
+
+          const oldVersion = {
+            ...this.state.oldVersion,
+            versionId: fileDetails[0].s3VersionId,
+          }
+
           this.setState({
-            requestedCurrentFileVersionID: this.props.elementContent.fileDetails[0].s3VersionId,
+            currentVersion,
+            oldVersion,
           })
         }
       }
@@ -110,13 +141,13 @@ export class GitText extends Component {
       if (this.state.state === ComponentState.S3_TOKEN_NOW_AVAILABLE) {
         console.log("new S3 token available")
       }
-      if (this.state.requestedCurrentFileVersionID !== prevProps.requestedCurrentFileVersionID) {
-        console.log("file version requested changed")
-        this.downloadFromS3(this.state.requestedCurrentFileVersionID, false)
+      if (this.state.currentVersion.versionId !== prevProps.currentVersion.versionId) {
+        console.log("file version requested changed (current)")
+        this.downloadFromS3(this.state.currentVersion.versionId, false)
       }
-      if (this.state.requestedOldFileVersionID !== prevProps.requestedOldFileVersionID) {
-        console.log("file version requested changed")
-        this.downloadFromS3(this.state.requestedOldFileVersionID, true)
+      if (this.state.oldVersion.content !== prevProps.oldVersion.content) {
+        console.log("file version requested changed (old)")
+        this.downloadFromS3(this.state.oldVersion.content, true)
       }
     }
   }
@@ -124,8 +155,16 @@ export class GitText extends Component {
 
   handleEditorChange = (e) => {
     console.log('Content was updated');
+
+    const content = {
+      ...this.state.currentVersion,
+      content: e.target.getContent()
+    }
+
     this.setState({
-      currentContent: e.target.getContent()
+      currentVersion: {
+        content
+      }
     })
   }
 
@@ -190,7 +229,7 @@ export class GitText extends Component {
     // Create the parameters to upload the file with
     var uploadParams = {
       ACL: 'private',
-      Body: this.state.currentContent,
+      Body: this.state.currentVersion.content,
       Bucket: bucketName,
       ContentType: 'text/html',
       Key: key,
@@ -276,70 +315,51 @@ export class GitText extends Component {
     console.log(selectorName, newFileVersion)
 
     if (selectorName === Constants.OLDSELECTOR) {
+
+      const versionData = {
+        ...this.state.oldVersion,
+        versionId: newFileVersion
+      }
+
       this.setState({
         lastRequestIsOld: true,
-        requestedOldFileVersionID: newFileVersion
+        oldVersion: versionData
       })
       return
     }
 
+    const versionData = {
+      ...this.state.oldVersion,
+      versionId: newFileVersion
+    }
+
     this.setState({
       lastRequestIsOld: false,
-      requestedCurrentFileVersionID: newFileVersion
+      currentVersion: versionData
     })
   }
 
 
   getEditor = () => {
-    // TODO: Remove this
-    const fileVersions = [
-      {
-        ver: "1",
-        prevVer: "0",
-        s3VersionId: "u3.WYA9VlvVba2EY9NywkQHBExdKq9eA",
-        commitMessage: "Oldest Commit"
-      },
-      {
-        ver: "2",
-        prevVer: "1",
-        s3VersionId: "GndxW2exut63gfISgKr._bgLoxEBa1kh",
-        commitMessage: "Intermediate Commit"
-      },
-      {
-        ver: "3",
-        prevVer: "2",
-        s3VersionId: "IhHU28Y.7doCQmf9SijFU3M6C8VDCY5x",
-        commitMessage: "Another intermediate Commit"
-      },
-      {
-        ver: "4",
-        prevVer: "3",
-        s3VersionId: "BvjG3l1kV4Wmqd4PpT5PlhMEEc42V4_g",
-        commitMessage: "Latest Commit"
-      }
-    ]
 
 
     if (this.state.view === ComponentState.GIT_TEXT_WRITER_OPEN) {
       return (
         <Writer
-          currentContent={this.state.currentContent}
-          fileVersions={fileVersions}
+          currentContent={this.state.currentVersion}
+          fileVersions={this.props.elementContent.fileDetails}
           onRequestNewFileVersionData={this.updateRequestedFileVersion}
           onHandleContentChange={this.handleEditorChange}
-          disabled={!this.props.elementContent.editable}
-          currentVersionSelected={this.state.requestedCurrentFileVersionID} />
+          disabled={!this.props.elementContent.editable} />
       )
     }
 
     return (
       <Comparer
-        oldContent={this.state.oldContent}
-        newContent={this.state.currentContent}
-        fileVersions={fileVersions}
-        onRequestNewFileVersionData={this.updateRequestedFileVersion}
-        currentOldVersionSelected={this.state.requestedOldFileVersionID}
-        currentNewVersionSelected={this.state.requestedCurrentFileVersionID} />
+        oldVersion={this.state.oldVersion}
+        newVersion={this.state.currentVersion}
+        fileVersions={this.props.elementContent.fileDetails}
+        onRequestNewFileVersionData={this.updateRequestedFileVersion} />
     )
   }
 
@@ -351,7 +371,7 @@ export class GitText extends Component {
           type="submit"
           value={ Strings.BUTTON_RETRY }
           className="save-button"
-          onClick={(e) => this.downloadFromS3(this.state.requestedCurrentFileVersionID, true)} />
+          onClick={(e) => this.downloadFromS3(this.state.currentVersion.versionId, true)} />
       </div>
     )
   }
@@ -379,6 +399,8 @@ export class GitText extends Component {
     const { title, description } = this.props.elementContent
     const { state, view, showToast } = this.state
     console.log(state)
+    console.log(this.props)
+    console.log(this.state)
     return (
       <div id='git-text-element'>
         <div className='git-text-element-container'>
