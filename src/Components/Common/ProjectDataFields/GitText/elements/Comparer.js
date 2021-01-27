@@ -7,7 +7,6 @@ import * as Diff from 'diff';
 import * as Strings from '../../../../../Data/Strings'
 import * as Constants from '../../Constants'
 
-// TODO: Implement styling depending on state
 const EDITORCONTENTSTYLE = `mark.red { color: red; background: none; text-decoration: line-through; } mark.green { color: limegreen; background: none; } mark.grey { color: grey; background: none; }`;
 const CONTENTBEFORESELECTION = `<h2>${Strings.GIT_TEXT_NO_FILE_VERSION_SELECTED}</h2>`
 
@@ -56,9 +55,9 @@ export class Comparer extends Component {
   }
 
 
-  getEditor = (content, isNew) => {
+  getEditor = (content, shouldCompare, isNew) => {
     var displayContent = content.content
-    if (isNew) {
+    if (isNew && shouldCompare) {
       displayContent = this.addFormatting()
     }
     if (content === "") {
@@ -88,6 +87,7 @@ export class Comparer extends Component {
     )
   }
 
+  // FIXME: This code isn't working for the old content editor
   // TODO: Add on select functionality
   onSelectionChange = (selectorName, e) => {
     console.log(selectorName)
@@ -139,20 +139,23 @@ export class Comparer extends Component {
   }
 
   render() {
-    const { oldVersion, newVersion } = this.props
-
     console.log(this.props)
+    const { oldVersion, newVersion } = this.props
+    var shouldCompare = true
+    if (oldVersion.content === '' || newVersion.content === '') {
+      shouldCompare = false
+    }
 
     return (
       <React.Fragment>
         <div className='comparators'>
           <div className='comparer old'>
             { this.getVersionSelectSystem(Constants.OLDSELECTOR) }
-            { this.getEditor(oldVersion, false) }
+            { this.getEditor(oldVersion, shouldCompare, false) }
           </div>
           <div className='comparer new'>
             { this.getVersionSelectSystem(Constants.NEWSELECTOR) }
-            { this.getEditor(newVersion, true) }
+            { this.getEditor(newVersion, shouldCompare, true) }
           </div>
         </div>
       </React.Fragment>

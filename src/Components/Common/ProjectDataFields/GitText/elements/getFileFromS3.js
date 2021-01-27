@@ -48,9 +48,6 @@ function downloadFileContent(s3, downloadParams, parent, lastRequestIsOld) {
 
 function onFileDownloadComplete(response, parent, downloadParams, lastRequestIsOld) {
   console.log("File download complete")
-  console.log(lastRequestIsOld)
-
-
   if (lastRequestIsOld) {
     parent.setState({
       oldVersion: {

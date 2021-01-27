@@ -21,6 +21,42 @@ import uploadFileToS3 from './elements/uploadFileToS3'
 // TODO: Fix occasional errors with the S3 token
 // TODO: Style save button when disabled
 
+
+// TODO: Remove this once server sends this data
+const FILEDETAILS = [
+  {
+    ver: "4",
+    prevVer: "3",
+    s3VersionId: "BvjG3l1kV4Wmqd4PpT5PlhMEEc42V4_g",
+    commitMessage: "Latest Commit"
+  },
+  {
+    ver: "1",
+    prevVer: "0",
+    s3VersionId: "u3.WYA9VlvVba2EY9NywkQHBExdKq9eA",
+    commitMessage: "Oldest Commit"
+  },
+  {
+    ver: "2",
+    prevVer: "1",
+    s3VersionId: "GndxW2exut63gfISgKr._bgLoxEBa1kh",
+    commitMessage: "Intermediate Commit"
+  },
+  {
+    ver: "3",
+    prevVer: "2",
+    s3VersionId: "IhHU28Y.7doCQmf9SijFU3M6C8VDCY5x",
+    commitMessage: "Another intermediate Commit"
+  },
+  {
+    ver: "4",
+    prevVer: "3",
+    s3VersionId: "BvjG3l1kV4Wmqd4PpT5PlhMEEc42V4_g",
+    commitMessage: "Latest Commit"
+  }
+]
+
+
 export class GitText extends Component {
   static propTypes = {
     elementContent: PropTypes.shape({
@@ -45,7 +81,7 @@ export class GitText extends Component {
     pageName: PropTypes.string.isRequired,
   }
 
-  constructor() {
+  constructor(props) {
     super()
     this.state = {
       state: ComponentState.QUIESCENT,
@@ -66,6 +102,10 @@ export class GitText extends Component {
         versionId: ''
       }
     }
+
+    // TODO: Remove this once server sends this data
+    props.elementContent.fileDetails = FILEDETAILS
+
   }
 
   componentDidMount() {
@@ -90,7 +130,7 @@ export class GitText extends Component {
         })
       }
     }
-    this.downloadFromS3("", this.state.lastRequestIsOld)
+    this.downloadFromS3(this.props.elementContent.fileDetails[0].s3VersionId, this.state.lastRequestIsOld)
   }
 
   componentDidUpdate(prevState, prevProps) {
@@ -98,9 +138,7 @@ export class GitText extends Component {
     console.log(this.state)
 
     try {
-
       const { elementContent } = this.props
-
       if(elementContent !== prevProps.elementContent) {
 
         const { fileDetails } = elementContent
@@ -347,7 +385,7 @@ export class GitText extends Component {
       return (
         <Writer
           currentContent={this.state.currentVersion}
-          fileVersions={this.props.elementContent.fileDetails}
+          fileVersions={this.props.elementContent.fileDetails.slice(1)}
           onRequestNewFileVersionData={this.updateRequestedFileVersion}
           onHandleContentChange={this.handleEditorChange}
           disabled={!this.props.elementContent.editable} />
@@ -358,7 +396,7 @@ export class GitText extends Component {
       <Comparer
         oldVersion={this.state.oldVersion}
         newVersion={this.state.currentVersion}
-        fileVersions={this.props.elementContent.fileDetails}
+        fileVersions={this.props.elementContent.fileDetails.slice(1)}
         onRequestNewFileVersionData={this.updateRequestedFileVersion} />
     )
   }
