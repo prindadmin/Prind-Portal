@@ -8,8 +8,8 @@ let defaultState = {
   history: {},
   projectInvitations: [],
   signatureRequests: [],
-  projectS3Token: "",
-  userS3Token: "",
+  projectS3Token: {},
+  userS3Token: {},
   currentRoute: Endpoints.DEFAULTLOGGEDINPAGE,
 }
 

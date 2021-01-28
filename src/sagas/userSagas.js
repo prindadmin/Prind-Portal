@@ -11,8 +11,8 @@ let defaultState = {
   history: {},
   projectInvitations: [],
   signatureRequests: [],
-  projectS3Token: "",
-  userS3Token: "",
+  projectS3Token: {},
+  userS3Token: {},
 }
 
 function * init (action) {
@@ -30,6 +30,7 @@ function * getS3ProjectFileUploadToken (action) {
 
   try {
     const result = yield call(Dispatchers.s3UploadProjectFileTokenDispatcher, project_id, pageName)
+    console.log(result)
     yield put({
       type: Actions.USER_SET_STATE,
       payload: {

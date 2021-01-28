@@ -59,6 +59,14 @@ export class StagePage extends Component {
 
   fetchPageContent = () => {
     const { pageName, projectId } = this.props
+
+    if(projectId === undefined) {
+      this.setState({
+        state: ComponentState.CONTENT_NO_PROJECT_SELECTED,
+      })
+      return;
+    }
+
     this.setState({
       state: ComponentState.CONTENT_FETCH_IN_PROGRESS,
     })
@@ -161,7 +169,7 @@ export class StagePage extends Component {
 
   render() {
     const { pageName, projectId } = this.props
-
+    console.log(this.state.state)
     return (
       <div id='stage-page'>
         <div className='page-content-section'>

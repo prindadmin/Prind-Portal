@@ -15,6 +15,7 @@ const LayoutContentArea1x1  = lazy(() => import('../../Components/LoggedInLayout
 const LayoutContentArea1x1Mobile  = lazy(() => import('../../Components/LoggedInLayout/ContentArea1x1Mobile'));
 const Footer = lazy(() => import('../../Components/Common/footer'));
 const ProjectFetchError = lazy(() => import('../../Components/Common/ProjectFetchError'));
+const Error404 = lazy(() => import('../../Components/Error404'))
 
 /* Pages that can be loaded */
 const ProjectDetailsPage = lazy(() => import('../ProjectDetailsPage'));
@@ -25,6 +26,7 @@ const NewProjectPage = lazy(() => import('../NewProjectPage'));
 const ProfilePage = lazy(() => import('../ProfilePage'));
 
 const MOBILE_WIDTH_BREAKPOINT = 992;
+const PAGES_WITHOUT_PROJECT_SELECTOR = ['newproject', 'profile', 'foundations']
 
 export class LoggedInContent extends Component {
   static propTypes = {
@@ -34,7 +36,6 @@ export class LoggedInContent extends Component {
   constructor() {
     super()
     this.state = {
-      projectName: undefined,
       fetchingProjectDetails: false,
       pageName: "",
       width: 0,
@@ -62,7 +63,7 @@ export class LoggedInContent extends Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (this.props !== prevProps) {
-      this.getProjectID()
+      this.getProjectData()
       const { projectId } = this.props.projects.chosenProject
       const { pageName } = this.state
 
@@ -71,9 +72,7 @@ export class LoggedInContent extends Component {
       }
     }
 
-    const { pathname } = this.props.location
-    const splitPathname = pathname.split('/')
-    const projectName = splitPathname.length > 2 ? splitPathname[2] : undefined
+    const projectName = this.getProjectName()
 
     if (projectName !== prevState.projectName) {
       this.setState({
@@ -102,65 +101,56 @@ export class LoggedInContent extends Component {
     });
   }
 
+
   errorComponent = () => {
-
-    // TODO: Make this a 404
-
-    return (
-      <div>
-        This page doesn't exist
-      </div>
-    )
+    return <Error404 />
   }
+
 
   getPageName = () => {
     const { pathname } = this.props.location
-
     // Remove final character slash if it is present
     const pathnameToCheck = pathname.endsWith("/") ? pathname.slice(0, -1) : pathname
-
     // Split and return the page name
     return pathnameToCheck.split("/")[1]
   }
 
 
-  getProjectID = () => {
+  getProjectName = () => {
     const { pathname } = this.props.location
-    const currentProjectID = this.props.projects.chosenProject.projectId
-
     // Remove final character slash if it is present
     const pathnameToCheck = pathname.endsWith("/") ? pathname.slice(0, -1) : pathname
+    // Split the pathname
+    const splitPath = pathnameToCheck.split("/")
+    // eturn the project name or undefined
+    return splitPath.length > 2 ? splitPath[2] : undefined
+  }
 
-    // Count the number of slashes in the path to be checked
-    const numSlashes = pathnameToCheck.split("/").length - 1;
+
+  getProjectData = () => {
+    const currentProjectID = this.props.projects.chosenProject.projectId
+    const projectId = this.getProjectName()
 
     // If the path contains a project number, return that project number
-    if (numSlashes > 1) {
-
-      const projectIDToSave = pathnameToCheck.split("/").pop()
-
-      if (projectIDToSave !== currentProjectID) {
-
-        // Start the fetching cycle
-        this.setState({
-          fetchingProjectDetails: true,
-        })
-
-        // Quick save the ID
-        this.props.saveProjectID(projectIDToSave)
-
-        // Fetch the details of the project
-        this.props.getProjectDetails({ projectId: projectIDToSave }, this.returnFromFetchingProjectDetails)
-      }
-
-      return projectIDToSave
+    if (projectId === undefined) {
+      return ''
     }
-    return ''
+
+    if (projectId !== currentProjectID) {
+      // Start the fetching cycle
+      this.setState({
+        fetchingProjectDetails: true,
+      })
+      // Quick save the ID
+      this.props.saveProjectID(projectId)
+      // Fetch the details of the project
+      this.props.getProjectDetails({ projectId }, this.returnFromFetchingProjectDetails)
+    }
+
+    return projectId
   }
 
   returnFromFetchingProjectDetails = (result) => {
-    //console.log(result)
-
     this.setState({
       fetchingProjectDetails: false,
     })
@@ -178,15 +168,17 @@ export class LoggedInContent extends Component {
     )
   }
 
-  getContent = () => {
-    const { location, projects } = this.props
-    const { pathname } = location
-    const { projectType } = projects.chosenProject
-    const splitPathname = pathname.split('/')
-    const pageName = splitPathname[1]
-    const projectName = splitPathname.length > 2 ? splitPathname[2] : undefined
+  getPossiblePages = () => {
+    const { projectType } = this.props.projects.chosenProject
+    return projectType === undefined ? PAGENAMES['CDM2015Project'] : PAGENAMES[projectType]
+  }
 
-    const possiblePages = projectType === undefined ? PAGENAMES['CDM2015Project'] : PAGENAMES[projectType]
+  getContent = () => {
+    const { location } = this.props
+    const { pathname } = location
+    const pageName = this.getPageName()
+    const projectName = this.getProjectName()
+    const possiblePages = this.getPossiblePages()
 
     const stagePageNames = Object.keys(possiblePages).map((singlePageName, index) => {
       if (possiblePages[singlePageName].isStagePage) {
@@ -209,6 +201,13 @@ export class LoggedInContent extends Component {
     return content
   }
 
+  shouldOpenProjectSelector = () => {
+    const projectNotSelected = this.getProjectName() === undefined
+    const pageCanAutoShowProjectSelector = !PAGES_WITHOUT_PROJECT_SELECTOR.includes(this.getPageName())
+
+    return projectNotSelected && pageCanAutoShowProjectSelector
+  }
+
 
   render () {
     const { error } = this.props.projects
@@ -217,7 +216,7 @@ export class LoggedInContent extends Component {
 
     return (
       <div id='logged-in-content-container' className='full-width row'>
-        <HeaderBar companyName='Prin-D' openProjectSelector={this.state.projectName === undefined}/>
+        <HeaderBar companyName='Prin-D' openProjectSelector={this.shouldOpenProjectSelector()}/>
         <LayoutBody>
           {
             width > MOBILE_WIDTH_BREAKPOINT ? <SideBar {...this.props} /> : <SideBarMobile {...this.props} />

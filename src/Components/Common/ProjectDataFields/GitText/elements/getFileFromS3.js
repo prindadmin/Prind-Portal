@@ -1,16 +1,26 @@
+import AWS from 'aws-sdk';
 
-import * as ComponentState from '../../ComponentStates'
+function configureAWSAuthorisation(token) {
+  // Update credentials to allow access to S3
+  const { AccessKeyId, SecretAccessKey, SessionToken } = token
+  AWS.config.update({
+    credentials: {
+      accessKeyId: AccessKeyId,
+      secretAccessKey: SecretAccessKey,
+      sessionToken: SessionToken
+    }
+  });
+  return;
+}
 
-async function checkFileExists(s3, downloadParams, parent) {
+
+async function checkFileExists(s3, downloadParams) {
   const result = s3.headObject(downloadParams, function (err, metadata) {
     console.log(err, metadata)
     if (err) {
       // File does not exist, so no need to fetch
-      console.log("File does not exist")
-      console.log(err)
       return false
     } else {
-      console.log("File exists")
       return true
     }
   });
@@ -18,8 +28,7 @@ async function checkFileExists(s3, downloadParams, parent) {
 }
 
 
-function downloadFileContent(s3, downloadParams, parent, lastRequestIsOld) {
-
+function downloadFileContent(s3, downloadParams, selectorName, progressFunc, resolve, reject) {
   console.log(downloadParams)
 
   // Create a request
@@ -27,63 +36,48 @@ function downloadFileContent(s3, downloadParams, parent, lastRequestIsOld) {
 
   // Send request
   request.on('httpDownloadProgress', function (progress) {
-      console.log(progress)
-      parent.setState({
-        downloadFileProgress: progress.loaded
-      })
+      if (progressFunc !== undefined) {
+        progressFunc(progress, selectorName)
+      }
     })
     .on('success', function(response) {
-      onFileDownloadComplete(response, parent, lastRequestIsOld)
+      if(resolve !== undefined) {
+        resolve(response, selectorName)
+      }
     })
     .on('error', function(error, response) {
-      console.log("ERROR downloading file from S3")
-      console.error(error)
-      console.log(response)
-      parent.setState({
-        state: ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER_FAILED,
-      })
+      if(resolve !== undefined) {
+        reject(error, selectorName)
+      }
     })
   request.send();
 }
 
 
-function onFileDownloadComplete(response, parent, lastRequestIsOld) {
-  console.log("File download complete")
-  console.log(lastRequestIsOld)
+function getFileDataFromS3(userProps, downloadParams, selectorName, progressFunc, resolve, reject) {
+  // Create an S3 service provider
+  const s3 = new AWS.S3()
 
+  console.log(userProps.projectS3Token)
 
-  if (lastRequestIsOld) {
-    parent.setState({
-      oldContent: response.data.Body.toString(),
-      state: ComponentState.QUIESCENT
-    })
-    return
+  if(userProps.projectS3Token === undefined) {
+    reject({ message: "No S3 token in redux store" })
+    return;
   }
 
-  parent.setState({
-    originalCurrentContent: response.data.Body.toString(),
-    currentContent: response.data.Body.toString(),
-    state: ComponentState.QUIESCENT
-  })
-}
+  configureAWSAuthorisation(userProps.projectS3Token)
 
-
-async function getFileDataFromS3(s3, downloadParams, parent, lastRequestIsOld) {
-  parent.setState({
-    state: ComponentState.CHECKING_EXISTING_FILE_EXISTS_ON_SERVER
-  })
-
-  await checkFileExists(s3, downloadParams, parent)
+  checkFileExists(s3, downloadParams)
     .then(exists => {
       console.log(exists)
+      //console.log(`File exists: ${exists}`)
       if (exists) {
-        downloadFileContent(s3, downloadParams, parent, lastRequestIsOld)
+        downloadFileContent(s3, downloadParams, selectorName, progressFunc, resolve, reject)
       }
       else {
-        parent.setState({
-          state: ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER_FAILED,
-        })
+        reject({ message: "File does not exist" })
       }
     })
 }
+
 export default getFileDataFromS3

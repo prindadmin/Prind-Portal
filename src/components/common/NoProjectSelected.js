@@ -10,7 +10,7 @@ export class NoProjectSelected extends Component {
     return (
       <div className='no-project-selected-container fill'>
         <div className='no-project-selected'>
-          <ItemIcon size='6x' type='city' />
+          <ItemIcon size='6x' type='home' />
           <p>{Strings.NO_PROJECT_SELECTED}</p>
         </div>
       </div>

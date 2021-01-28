@@ -18,6 +18,7 @@ export class ProjectTypeSelector extends Component {
 
     const { history } = this.props
     history.push(`${Endpoints.NEWPROJECTPAGE}?project_type=${projectType}`)
+    console.log("closing popup")
     this.props.closePopup()
   }
 

@@ -2,92 +2,136 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { Editor } from '@tinymce/tinymce-react';
+import LoadingSpinner from '../../../LoadingSpinner'
+import * as ComponentState from '../../ComponentStates'
 import * as Diff from 'diff';
 
 import * as Strings from '../../../../../Data/Strings'
 import * as Constants from '../../Constants'
 
-// TODO: Implement styling depending on state
-const editorContentStyle = `mark.red { color: red; background: none; text-decoration: line-through; } mark.green { color: limegreen; background: none; } mark.grey { color: grey; background: none; }`;
-const contentBeforeSelection = `<h2>${Strings.GIT_TEXT_NO_FILE_VERSION_SELECTED}</h2>`
+import getFileFromS3 from './getFileFromS3'
 
+const EDITORCONTENTSTYLE = `mark.red { color: red; background: none; text-decoration: line-through; } mark.green { color: limegreen; background: none; } mark.grey { color: grey; background: none; }`;
+const CONTENTBEFORESELECTION = `<h2>${Strings.GIT_TEXT_NO_FILE_VERSION_SELECTED}</h2>`
+
+
+// TODO: Fix occasional errors with the S3 token
 
 export class Comparer extends Component {
   static propTypes = {
-    oldContent: PropTypes.string.isRequired,
-    newContent: PropTypes.string.isRequired,
+    projectId: PropTypes.string.isRequired,
+    pageName: PropTypes.string.isRequired,
+    fieldId: PropTypes.string.isRequired,
+    user: PropTypes.shape({
+      projectS3Token: PropTypes.shape({
+        accessKeyId: PropTypes.string.isRequired,
+        secretAccessKey: PropTypes.string.isRequired,
+        sessionToken: PropTypes.string.isRequired,
+      })
+    }).isRequired,
     fileVersions: PropTypes.arrayOf(PropTypes.shape({
       ver: PropTypes.string,
       prevVer: PropTypes.string,
       s3VersionId: PropTypes.string,
       commitMessage: PropTypes.string,
     })),
-    onRequestNewFileVersionData: PropTypes.func.isRequired,
-    currentOldVersionSelected: PropTypes.string,
-    currentNewVersionSelected: PropTypes.string,
+    getNewToken: PropTypes.func.isRequired,
   }
 
-  constructor(){
+  constructor(props) {
     super()
     this.state = {
-      currentOldVersionSelected: '',
-      currentNewVersionSelected: ''
+      oldVersion: {
+        initialContent: '',
+        s3VersionId: props.fileVersions[0].s3VersionId,
+        state: ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER
+      },
+      newVersion: {
+        initialContent: '',
+        s3VersionId: props.fileVersions[0].s3VersionId,
+        state: ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER
+      },
+      state: ComponentState.QUIESCENT
     }
   }
 
   componentDidMount() {
-    this.checkVersionsForState()
+    this.onSelectionChange(Constants.OLDSELECTOR, { target: { value: this.state.oldVersion.s3VersionId }})
+    this.onSelectionChange(Constants.NEWSELECTOR, { target: { value: this.state.newVersion.s3VersionId }})
   }
 
-  componentDidUpdate(prevProps) {
-    if(this.props !== prevProps) {
-      this.checkVersionsForState()
+  onSelectionChange = (selectorName, e) => {
+    const s3VersionId = e.target.value
+    const { projectId, pageName, fieldId, user } = this.props
+    console.log(`SelectorName: ${selectorName}; S3 Version Requested: ${s3VersionId}`)
+
+    // Create the download values
+    const bucketName = process.env.REACT_APP_AWS_S3_USER_UPLOAD_BUCKET_NAME
+    const key = `${projectId}/${pageName}/${fieldId}`
+
+    // Create the download parameters
+    var downloadParams = {
+      Bucket: bucketName,
+      Key: key,
+      VersionId: s3VersionId,
     }
+
+    this.setState({
+      [selectorName]: {
+        ...this.state[selectorName],
+        s3VersionId
+      }
+    })
+
+    getFileFromS3(user, downloadParams, selectorName, this.onProgressUpdate, this.onFileDownloadComplete, this.onFileDownloadFailed)
   }
 
-  // This sends two onRequestNewFileVersionData requests on mount and causes overwriting of the state of the
-  // gitText component.  I need to think of a better way to do this.
-  checkVersionsForState = () => {
-    const { fileVersions, currentOldVersionSelected, currentNewVersionSelected } = this.props
+  onProgressUpdate = (progress, selectorName) => {
+    console.log(`${selectorName} progress: ${progress}`)
+  }
 
-    // Protects from new fields with no file versions crashing the component
-    if(fileVersions.length === 0) {
-      return;
+  onFileDownloadComplete = (result, selectorName) => {
+    console.log("File download successful")
+    console.log(result)
+    console.log(result.data.Body.toString())
+    this.setState({
+      [selectorName]: {
+        ...this.state[selectorName],
+        state: ComponentState.QUIESCENT,
+        initialContent: result.data.Body.toString(),
+      }
+    })
+  }
+
+  onFileDownloadFailed = (error, selectorName) => {
+    console.error("File download failed")
+    console.error(error.message)
+
+    if (error.message === 'The provided token has expired.') {
+      const { projectId, pageName, getNewToken } = this.props
+      getNewToken(projectId, pageName)
     }
 
-    // If the parent provides a version, set that as the current version
-    if(this.props.currentOldVersionSelected !== '') {
-      this.setState({
-        currentOldVersionSelected,
-      })
-    }
-    else {
-      // If the parent hasn't provided a version, set it to the last version
-      this.props.onRequestNewFileVersionData(fileVersions[fileVersions.length -1].s3VersionId, Constants.OLDSELECTOR)
-      this.setState({
-        currentOldVersionSelected: fileVersions[fileVersions.length -1].s3VersionId,
-      })
-    }
-
-    // If the parent provides a version, set that as the current version
-    if(this.props.currentNewVersionSelected !== '') {
-      this.setState({
-        currentNewVersionSelected,
-      })
-    }
-    else {
-      // If the parent hasn't provided a version, set it to the last version
-      this.props.onRequestNewFileVersionData(fileVersions[fileVersions.length -1].s3VersionId, Constants.NEWSELECTOR)
-      this.setState({
-        currentNewVersionSelected: fileVersions[fileVersions.length -1].s3VersionId,
-      })
-    }
+    this.setState({
+      [selectorName]: {
+        state: ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER_FAILED
+      }
+    })
   }
 
 
   // Add colour formatting to the text
+  // TODO: Work out a way to format this text correctly for Version 5 vs 4 in test project
   addFormatting = () => {
-    const diff = Diff.diffWords(this.props.oldContent, this.props.newContent);
+    console.log(this.state)
+
+    if (this.state.oldVersion.initialContent === undefined || this.state.newVersion.initialContent === undefined) {
+      console.warn("One of the contents was empty")
+      console.warn(`old: ${this.state.oldVersion.initialContent}; new: ${this.state.newVersion.initialContent}`)
+      return this.state.newVersion.initialContent
+    }
+
+    const diff = Diff.diffWords(this.state.oldVersion.initialContent, this.state.newVersion.initialContent);
     var outputDifference = ''
 
     diff.forEach((part) => {
@@ -104,28 +148,30 @@ export class Comparer extends Component {
       outputDifference += `<mark class="${colour}">${part.value}</mark>`
     })
 
-    return (outputDifference)
+    console.log(outputDifference)
+
+    return outputDifference
   }
 
 
-  getEditor = (content, isNew) => {
-    var displayContent = content
-    if (isNew) {
+  getEditor = (content, shouldCompare, isNew) => {
+    var displayContent = content.initialContent
+    if (isNew && shouldCompare) {
       displayContent = this.addFormatting()
     }
     if (content === "") {
-      displayContent = contentBeforeSelection
+      displayContent = CONTENTBEFORESELECTION
     }
 
     return (
       <Editor
-        initialValue={displayContent}
+        value={displayContent}
         apikey={process.env.REACT_APP_TINY_API_KEY}
         disabled={true}
         init={{
           height: 500,
           menubar: false,
-          content_style: editorContentStyle,
+          content_style: EDITORCONTENTSTYLE,
           plugins: [
             'advlist autolink lists link image',
             'charmap print preview anchor help',
@@ -140,34 +186,23 @@ export class Comparer extends Component {
     )
   }
 
-  // TODO: Add on select functionality
-  onSelectionChange = (selectorName, e) => {
-    console.log(selectorName)
-    console.log(e.target.value)
-
-    this.props.onRequestNewFileVersionData(e.target.value, selectorName)
-  }
-
 
   // TODO: Load the latest version in componentDidMount for both old and new
   // TODO: Add "Please select version" as hidden option to the drop down
   getVersionSelectSystem = (selectorName) => {
-
-    console.log(selectorName)
-
     const { fileVersions } = this.props
-    const { currentOldVersionSelected, currentNewVersionSelected } = this.state
-    const s3Ids = fileVersions.map((version) => {
+    const { oldVersion, newVersion } = this.state
+    const s3Ids = fileVersions.slice(1).map((version) => {
       return version.s3VersionId
     })
 
-    const oldIndex = s3Ids.indexOf(currentOldVersionSelected)
-    const newIndex = s3Ids.indexOf(currentNewVersionSelected)
+    const oldIndex = s3Ids.indexOf(oldVersion.s3VersionId)
+    const newIndex = s3Ids.indexOf(newVersion.s3VersionId)
 
     console.log(`oldIndex: ${oldIndex}, newIndex: ${newIndex}`)
 
     // Map the fileVersions to options
-    const options = fileVersions.map((version, index) => {
+    const options = fileVersions.slice(1).map((version, index) => {
       // If this is the old selector and the option is older than the new selector selection
       // disable the selection
       if (selectorName === Constants.OLDSELECTOR && index >= newIndex) {
@@ -176,7 +211,7 @@ export class Comparer extends Component {
       return <option key={index} value={version.s3VersionId}>{version.commitMessage}</option>
     })
 
-    const value = selectorName === Constants.OLDSELECTOR ? currentOldVersionSelected : currentNewVersionSelected
+    const value = this.state[selectorName].s3VersionId
 
     return (
       <div className='version-select'>
@@ -191,8 +226,25 @@ export class Comparer extends Component {
     )
   }
 
+  getErrorDownloading = (selectorName) => {
+    return(
+      <div className='error-text'>
+        { Strings.ERROR_DOWNLOADING_TEXT_FOR_GIT_BOX }
+        <input
+          type="submit"
+          value={ Strings.BUTTON_RETRY }
+          className="save-button"
+          onClick={(e) => this.onSelectionChange(selectorName, { target: { value: this.state[selectorName].s3VersionId }})} />
+      </div>
+    )
+  }
+
   render() {
-    const { oldContent, newContent } = this.props
+    const { oldVersion, newVersion } = this.state
+    var shouldCompare = true
+    if (oldVersion.initialContent === '' || newVersion.initialContent === '') {
+      shouldCompare = false
+    }
 
     console.log(this.state)
 
@@ -200,12 +252,44 @@ export class Comparer extends Component {
       <React.Fragment>
         <div className='comparators'>
           <div className='comparer old'>
-            { this.getVersionSelectSystem(Constants.OLDSELECTOR) }
-            { this.getEditor(oldContent, false) }
+            {
+              this.state.oldVersion.state === ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER ?
+              <LoadingSpinner /> :
+              null
+            }
+            {
+              this.state.oldVersion.state === ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER_FAILED ?
+              this.getErrorDownloading(Constants.OLDSELECTOR) :
+              null
+            }
+            {
+              this.state.oldVersion.state  === ComponentState.QUIESCENT ?
+              <React.Fragment>
+                { this.getVersionSelectSystem(Constants.OLDSELECTOR) }
+                { this.getEditor(oldVersion, shouldCompare, false) }
+              </React.Fragment> :
+              null
+            }
           </div>
           <div className='comparer new'>
-            { this.getVersionSelectSystem(Constants.NEWSELECTOR) }
-            { this.getEditor(newContent, true) }
+            {
+              this.state.newVersion.state === ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER ?
+              <LoadingSpinner /> :
+              null
+            }
+            {
+              this.state.newVersion.state === ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER_FAILED ?
+              this.getErrorDownloading(Constants.NEWSELECTOR) :
+              null
+            }
+            {
+              this.state.newVersion.state  === ComponentState.QUIESCENT ?
+              <React.Fragment>
+                { this.getVersionSelectSystem(Constants.NEWSELECTOR) }
+                { this.getEditor(newVersion, shouldCompare, true) }
+              </React.Fragment> :
+              null
+            }
           </div>
         </div>
       </React.Fragment>
