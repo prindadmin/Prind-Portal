@@ -1,3 +1,3 @@
 
-export const OLDSELECTOR = "OLDSELECTOR"
-export const NEWSELECTOR = "NEWSELECTOR"
+export const OLDSELECTOR = "oldVersion"
+export const NEWSELECTOR = "newVersion"

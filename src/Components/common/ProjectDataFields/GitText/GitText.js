@@ -1,34 +1,23 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-
-import AWS from 'aws-sdk';
 import ItemIcon from '../../ItemIcon'
 
 import * as Strings from '../../../../Data/Strings'
 import * as ComponentState from '../ComponentStates'
-import * as Constants from '../Constants'
 
 import Writer from './elements/Writer'
 import Comparer from './elements/Comparer'
 import LoadingSpinner from '../../LoadingSpinner'
 
-import getFileFromS3 from './elements/getFileFromS3'
-import uploadFileToS3 from './elements/uploadFileToS3'
-// TODO: Style text editor when disabled
-// TODO: Update in server as versioned (Not sure how this works on the file upload yet)
-// TODO: Get toasts working
-// TODO: Fix occasional errors with the S3 token
-// TODO: Style save button when disabled
-
 
 // TODO: Remove this once server sends this data
 const FILEDETAILS = [
   {
-    ver: "4",
-    prevVer: "3",
-    s3VersionId: "BvjG3l1kV4Wmqd4PpT5PlhMEEc42V4_g",
-    commitMessage: "Latest Commit"
+    ver: "5",
+    prevVer: "4",
+    s3VersionId: "wq2BhVu69txu8sfN_fav3I1jbzA2tt_P",
+    commitMessage: "Version 5"
   },
   {
     ver: "1",
@@ -53,7 +42,14 @@ const FILEDETAILS = [
     prevVer: "3",
     s3VersionId: "BvjG3l1kV4Wmqd4PpT5PlhMEEc42V4_g",
     commitMessage: "Latest Commit"
+  },
+  {
+    ver: "5",
+    prevVer: "4",
+    s3VersionId: "wq2BhVu69txu8sfN_fav3I1jbzA2tt_P",
+    commitMessage: "Version 5"
   }
+
 ]
 
 
@@ -86,333 +82,42 @@ export class GitText extends Component {
     this.state = {
       state: ComponentState.QUIESCENT,
       view: ComponentState.GIT_TEXT_WRITER_OPEN,
-      uploadFileProgress: 0,
-      downloadFileProgress: 0,
       errorMessage: "",
       editable: false,
-      toastText: '',
-      showToast: false,
-      currentVersion: {
-        originalContent: '',
-        content: '',
-        versionId: ''
-      },
-      oldVersion: {
-        content: '',
-        versionId: ''
-      }
     }
 
     // TODO: Remove this once server sends this data
     props.elementContent.fileDetails = FILEDETAILS
-
-  }
-
-  componentDidMount() {
-    console.log(this.props)
-    if (this.props.elementContent.fileDetails !== undefined) {
-      if (this.props.elementContent.fileDetails.length !== 0) {
-        // The 0th entry in the fileDetails array is always the current version
-
-        const currentVersion = {
-          ...this.state.currentVersion,
-          versionId: this.props.elementContent.fileDetails[0].s3VersionId,
-        }
-
-        const oldVersion = {
-          ...this.state.oldVersion,
-          versionId: this.props.elementContent.fileDetails[0].s3VersionId,
-        }
-
-        this.setState({
-          currentVersion,
-          oldVersion,
-        })
-      }
-    }
-    this.downloadFromS3(this.props.elementContent.fileDetails[0].s3VersionId, this.state.lastRequestIsOld)
-  }
-
-  componentDidUpdate(prevState, prevProps) {
-
-    console.log(this.state)
-
-    try {
-      const { elementContent } = this.props
-      if(elementContent !== prevProps.elementContent) {
-
-        const { fileDetails } = elementContent
-
-        if(fileDetails.length !== 0 && fileDetails !== prevProps.elementContent.fileDetails){
-          const currentVersion = {
-            ...this.state.currentVersion,
-            versionId: fileDetails[0].s3VersionId,
-          }
-
-          const oldVersion = {
-            ...this.state.oldVersion,
-            versionId: fileDetails[0].s3VersionId,
-          }
-
-          this.setState({
-            currentVersion,
-            oldVersion,
-          })
-        }
-      }
-    }
-    catch (e) {
-      console.log("fileDetails does not exist yet")
-    }
-
-
-    if (this.state.state !== prevState.state) {
-      if (this.state.state === ComponentState.UPLOADING_NEW_FILE_TO_SERVER_SUCCESS) {
-        this.uploadMetadataToDatabase()
-      }
-      if (this.state.state === ComponentState.UPDATING_METADATA_ON_SERVER_SUCCESS) {
-        this.showToast(Strings.GIT_UPLOAD_FILE_SUCCESSFUL_TOAST)
-      }
-      if (this.state.state === ComponentState.UPLOADING_NEW_FILE_TO_SERVER_FAILED) {
-        this.showToast(Strings.GIT_UPLOAD_FILE_FAILED_TOAST)
-      }
-      if (this.state.state === ComponentState.S3_TOKEN_NOW_AVAILABLE) {
-        console.log("new S3 token available")
-      }
-      if (this.state.currentVersion.versionId !== prevProps.currentVersion.versionId) {
-        console.log("file version requested changed (current)")
-        this.downloadFromS3(this.state.currentVersion.versionId, false)
-      }
-      if (this.state.oldVersion.content !== prevProps.oldVersion.content) {
-        console.log("file version requested changed (old)")
-        this.downloadFromS3(this.state.oldVersion.content, true)
-      }
-    }
-  }
-
-
-  handleEditorChange = (e) => {
-    console.log('Content was updated');
-
-    const content = {
-      ...this.state.currentVersion,
-      content: e.target.getContent()
-    }
-
-    this.setState({
-      currentVersion: {
-        content
-      }
-    })
-  }
-
-
-  getValidS3Token = () => {
-    // TODO: Make this refresh the token if required; stops fetching if not present
-    const { user, requestS3ProjectFileUploadToken, projectId, pageName } = this.props
-    if (user.projectS3Token === undefined) {
-      this.setState({
-        state: ComponentState.NO_S3_TOKEN_AVAILABLE
-      })
-      requestS3ProjectFileUploadToken(projectId, pageName, this.fetchTokenSuccess, this.fetchTokenFailed)
-      return undefined;
-    }
-    return user.projectS3Token
-  }
-
-  fetchTokenSuccess = () => {
-    console.log("S3 token fetched successfully")
-    this.setState({
-      state: ComponentState.S3_TOKEN_NOW_AVAILABLE,
-    })
-  }
-
-  fetchTokenFailed = (error) => {
-    console.log(error)
-    this.setState({
-      state: ComponentState.NO_S3_TOKEN_AVAILABLE,
-    })
-  }
-
-  configureAWSAuthorisation = (token) => {
-    // Update credentials to allow access to S3
-    const { AccessKeyId, SecretAccessKey, SessionToken } = token
-    AWS.config.update({
-      credentials: {
-        accessKeyId: AccessKeyId,
-        secretAccessKey: SecretAccessKey,
-        sessionToken: SessionToken
-      }
-    });
-    return;
-  }
-
-  uploadToS3 = () => {
-    const { projectId, pageName, elementContent } = this.props
-    const token = this.getValidS3Token()
-
-    if (token === undefined) {
-      return;
-    }
-
-    this.configureAWSAuthorisation(token)
-
-    // Create an S3 service provider
-    const s3 = new AWS.S3()
-
-    // Create the parameters
-    const bucketName = process.env.REACT_APP_AWS_S3_USER_UPLOAD_BUCKET_NAME
-    const key = `${projectId}/${pageName}/${elementContent.id}`
-
-    // Create the parameters to upload the file with
-    var uploadParams = {
-      ACL: 'private',
-      Body: this.state.currentVersion.content,
-      Bucket: bucketName,
-      ContentType: 'text/html',
-      Key: key,
-    };
-
-    uploadFileToS3(s3, uploadParams, this)
-  }
-
-
-  uploadMetadataToDatabase = () => {
-    const { pageName, projectId, elementContent } = this.props
-    // Build parameters
-    var uploadDetails = {
-      userFileName: `GitText-${projectId}-${pageName}-${elementContent.id}`
-    }
-    // Send to the reducer
-    this.props.uploadFile(projectId, pageName, elementContent.id, uploadDetails, "gitText", this.saveResolve, this.saveReject)
-    this.setState({
-      state: ComponentState.UPDATING_METADATA_ON_SERVER
-    })
-  }
-
-  saveResolve = () => {
-    this.setState({
-      state: ComponentState.UPDATING_METADATA_ON_SERVER_SUCCESS,
-    })
-  }
-
-  saveReject = () => {
-    this.setState({
-      state: ComponentState.UPDATING_METADATA_ON_SERVER_FAILED,
-      errorMessage: Strings.ERROR_SAVING_CHANGES_TO_FIELD,
-    })
-  }
-
-  showToast = (textToShow) => {
-    this.setState({
-      state: ComponentState.QUIESCENT,
-      toastText: textToShow,
-      showToast: true,
-    })
-
-    const that = this;
-
-    setTimeout(function() {
-      that.setState({
-        showToast: false,
-      })
-    }, 2000);
-  }
-
-
-  downloadFromS3 = (s3VersionId, isOld) => {
-    const { projectId, pageName, elementContent } = this.props
-    const token = this.getValidS3Token()
-    if (token === undefined) {
-      return;
-    }
-    this.configureAWSAuthorisation(token)
-
-    // Create an S3 service provider
-    const s3 = new AWS.S3()
-
-    // Create the download values
-    const bucketName = process.env.REACT_APP_AWS_S3_USER_UPLOAD_BUCKET_NAME
-    const key = `${projectId}/${pageName}/${elementContent.id}`
-
-    // Create the download parameters
-    var downloadParams = {
-      Bucket: bucketName,
-      Key: key
-    };
-
-    if (s3VersionId !== "") {
-      downloadParams.VersionId = s3VersionId
-    }
-
-    getFileFromS3(s3, downloadParams, this, isOld)
-  }
-
-
-  updateRequestedFileVersion = (newFileVersion, selectorName) => {
-    console.log(selectorName, newFileVersion)
-
-    if (selectorName === Constants.OLDSELECTOR) {
-
-      const versionData = {
-        ...this.state.oldVersion,
-        versionId: newFileVersion
-      }
-
-      this.setState({
-        lastRequestIsOld: true,
-        oldVersion: versionData
-      })
-      return
-    }
-
-    const versionData = {
-      ...this.state.oldVersion,
-      versionId: newFileVersion
-    }
-
-    this.setState({
-      lastRequestIsOld: false,
-      currentVersion: versionData
-    })
   }
 
 
   getEditor = () => {
-
-
     if (this.state.view === ComponentState.GIT_TEXT_WRITER_OPEN) {
       return (
         <Writer
-          currentContent={this.state.currentVersion}
-          fileVersions={this.props.elementContent.fileDetails.slice(1)}
-          onRequestNewFileVersionData={this.updateRequestedFileVersion}
-          onHandleContentChange={this.handleEditorChange}
-          disabled={!this.props.elementContent.editable} />
+          projectId={this.props.projectId}
+          pageName={this.props.pageName}
+          fieldId={this.props.elementContent.id}
+          user={this.props.user}
+          fileVersions={this.props.elementContent.fileDetails}
+          onContentChanged={(e) => console.log(e)}
+          disabled={!this.props.elementContent.editable}
+          uploadFile={this.props.uploadFile}
+          getNewToken={this.props.requestS3ProjectFileUploadToken}/>
       )
     }
 
     return (
       <Comparer
-        oldVersion={this.state.oldVersion}
-        newVersion={this.state.currentVersion}
-        fileVersions={this.props.elementContent.fileDetails.slice(1)}
-        onRequestNewFileVersionData={this.updateRequestedFileVersion} />
+        projectId={this.props.projectId}
+        pageName={this.props.pageName}
+        fieldId={this.props.elementContent.id}
+        user={this.props.user}
+        fileVersions={this.props.elementContent.fileDetails}
+        getNewToken={this.props.requestS3ProjectFileUploadToken} />
     )
   }
 
-  getErrorDownloading = () => {
-    return(
-      <div className='error-text'>
-        { Strings.ERROR_DOWNLOADING_TEXT_FOR_GIT_BOX }
-        <input
-          type="submit"
-          value={ Strings.BUTTON_RETRY }
-          className="save-button"
-          onClick={(e) => this.downloadFromS3(this.state.currentVersion.versionId, true)} />
-      </div>
-    )
-  }
 
   // TODO: style button
   getChangeViewButtons = () => {
@@ -435,10 +140,7 @@ export class GitText extends Component {
 
   render() {
     const { title, description } = this.props.elementContent
-    const { state, view, showToast } = this.state
-    console.log(state)
-    console.log(this.props)
-    console.log(this.state)
+    const { state } = this.state
     return (
       <div id='git-text-element'>
         <div className='git-text-element-container'>
@@ -452,54 +154,17 @@ export class GitText extends Component {
 
           <div className='container'>
             {
-              state === ComponentState.UPLOADING_NEW_FILE_TO_SERVER ? <LoadingSpinner />  : null
-            }
-            {
-              state === ComponentState.UPDATING_METADATA_ON_SERVER ? <LoadingSpinner />  : null
-            }
-            {
-              state === ComponentState.CHECKING_EXISTING_FILE_EXISTS_ON_SERVER ? <LoadingSpinner />  : null
-            }
-            {
-              state === ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER ? <LoadingSpinner /> : null
-            }
-            {
-              state === ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER_SUCCESS ? this.getEditor() : null
-            }
-            {
-              state === ComponentState.UPLOADING_NEW_FILE_TO_SERVER_FAILED ? this.getEditor() : null
-            }
-            {
               state === ComponentState.QUIESCENT ? this.getEditor() : null
             }
             {
-              state === ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER_FAILED ? this.getErrorDownloading() : null
-            }
-            {
-              state === ComponentState.NO_S3_TOKEN_AVAILABLE ? this.getErrorDownloading() : null
+              state === ComponentState.NO_S3_TOKEN_AVAILABLE ? <LoadingSpinner /> : null
             }
           </div>
-          <input
-            type="submit"
-            disabled={!(state === ComponentState.QUIESCENT && view !== ComponentState.GIT_TEXT_COMPARER_OPEN)}
-            value={ Strings.BUTTON_SAVE_CHANGES }
-            className="save-button"
-            onClick={(e) => this.uploadToS3()} />
           {
-            showToast ?
-            <div className='git-toast'>
-              { Strings.GIT_UPLOAD_FILE_SUCCESSFUL_TOAST }
-            </div> :
-            null
-          }
-          {
-            state === ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER_SUCCESS ||
-            state === ComponentState.UPLOADING_NEW_FILE_TO_SERVER_FAILED ||
             state === ComponentState.QUIESCENT ?
             this.getChangeViewButtons() :
             null
           }
-
         </div>
       </div>
     )

@@ -7,9 +7,6 @@ import * as userReducer from '../../../../Reducers/userReducer'
 import GitText from './GitText'
 
 const mapStatetoProps = state => {
-
-  console.log(state.elementContent)
-
   return {
     auth: state.auth,
     user: state.user,

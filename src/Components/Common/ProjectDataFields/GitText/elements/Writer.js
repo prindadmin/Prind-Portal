@@ -2,16 +2,31 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { Editor } from '@tinymce/tinymce-react';
+import LoadingSpinner from '../../../LoadingSpinner'
+import * as ComponentState from '../../ComponentStates'
+
+import * as Strings from '../../../../../Data/Strings'
+
+import getFileFromS3 from './getFileFromS3'
+import uploadFileToS3 from './uploadFileToS3'
 
 // TODO: Implement styling depending on state
-// TODO: Add selector drop down to allow selection of different base versions to start edits from
+// TODO: Implement error message displaying
+// TODO: Style save button when disabled
+// TODO: Style text editor when disabled
+// TODO: Fix occasional errors with the S3 token
 
 export class TextWriter extends Component {
   static propTypes = {
-    currentContent: PropTypes.shape({
-      originalContent: PropTypes.string.isRequired,
-      content: PropTypes.string.isRequired,
-      versionId: PropTypes.string.isRequired,
+    projectId: PropTypes.string.isRequired,
+    pageName: PropTypes.string.isRequired,
+    fieldId: PropTypes.string.isRequired,
+    user: PropTypes.shape({
+      projectS3Token: PropTypes.shape({
+        accessKeyId: PropTypes.string.isRequired,
+        secretAccessKey: PropTypes.string.isRequired,
+        sessionToken: PropTypes.string.isRequired,
+      })
     }).isRequired,
     fileVersions: PropTypes.arrayOf(PropTypes.shape({
       ver: PropTypes.string,
@@ -19,24 +34,84 @@ export class TextWriter extends Component {
       s3VersionId: PropTypes.string,
       commitMessage: PropTypes.string,
     })),
-    onRequestNewFileVersionData: PropTypes.func.isRequired,
-    onHandleContentChange: PropTypes.func.isRequired,
     disabled: PropTypes.bool.isRequired,
+    uploadFile: PropTypes.func.isRequired,
+    getNewToken: PropTypes.func.isRequired,
   }
 
-
-  onSelectionChange = (selectorName, e) => {
-    console.log(selectorName)
-    console.log(e.target.value)
-    this.props.onRequestNewFileVersionData(e.target.value, selectorName)
+  constructor(props) {
+    super()
+    this.state = {
+      initialContent: '',
+      content: '',
+      s3VersionId: props.fileVersions[0].s3VersionId,
+      state: ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER,
+      errorMessage: ''
+    }
   }
 
+  componentDidMount() {
+    this.onSelectionChange({ target: { value: this.state.s3VersionId }})
+  }
+
+  onSelectionChange = (e) => {
+    const s3VersionId = e.target.value
+    const { projectId, pageName, fieldId, user } = this.props
+    console.log(`S3 Version Requested: ${s3VersionId}`)
+
+    // Create the download values
+    const bucketName = process.env.REACT_APP_AWS_S3_USER_UPLOAD_BUCKET_NAME
+    const key = `${projectId}/${pageName}/${fieldId}`
+
+    // Create the download parameters
+    var downloadParams = {
+      Bucket: bucketName,
+      Key: key,
+      VersionId: s3VersionId,
+    }
+
+    this.setState({
+      s3VersionId
+    })
+
+    getFileFromS3(user, downloadParams, undefined, this.onProgressUpdate, this.onFileDownloadComplete, this.onFileDownloadFailed)
+  }
+
+  onProgressUpdate = (progress) => {
+    console.log(progress)
+  }
+
+  onFileDownloadComplete = (result) => {
+    console.log("File download successful")
+    console.log(result)
+    this.setState({
+      ...this.state,
+      state: ComponentState.QUIESCENT,
+      initialContent: result.data.Body.toString(),
+      content: result.data.Body.toString(),
+    })
+  }
+
+  onFileDownloadFailed = (error) => {
+    console.error("File download failed")
+    console.error(error.message)
+    console.log(error.message === 'The provided token has expired.')
+
+    if (error.message === 'The provided token has expired.') {
+      const { projectId, pageName, getNewToken } = this.props
+      getNewToken(projectId, pageName)
+    }
+
+    this.setState({
+      state: ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER_FAILED
+    })
+  }
 
   getVersionSelectSystem = (selectorName) => {
     const { fileVersions } = this.props
 
     // Map the fileVersions to options
-    const options = fileVersions.map((version, index) => {
+    const options = fileVersions.slice(1).map((version, index) => {
       return <option key={index} value={version.s3VersionId}>{version.commitMessage}</option>
     })
 
@@ -45,7 +120,7 @@ export class TextWriter extends Component {
         <select
           name={selectorName}
           id={selectorName}
-          value={this.props.currentContent.versionId}
+          value={this.state.s3VersionId}
           onChange={(e) => this.onSelectionChange(selectorName, e)}>
           {options}
         </select>
@@ -53,12 +128,79 @@ export class TextWriter extends Component {
     )
   }
 
+  onHandleContentChange = (e) => {
+    this.setState({
+      content: e.target.getContent()
+    })
+  }
+
+  onUploadRequest = () => {
+    this.setState({
+      state: ComponentState.UPLOADING_NEW_FILE_TO_SERVER
+    })
+
+
+    const { projectId, pageName, fieldId } = this.props
+
+    // Create the parameters
+    const bucketName = process.env.REACT_APP_AWS_S3_USER_UPLOAD_BUCKET_NAME
+    const key = `${projectId}/${pageName}/${fieldId}`
+
+    // Create the parameters to upload the file with
+    var uploadParams = {
+      ACL: 'private',
+      Body: this.state.content,
+      Bucket: bucketName,
+      ContentType: 'text/html',
+      Key: key,
+    };
+
+    uploadFileToS3(uploadParams, this.onUploadToS3ProgressUpdate, this.onUploadToS3Success, this.onUploadToS3Failed)
+  }
+
+  onUploadToS3ProgressUpdate = (progress) => {
+    console.log(progress)
+  }
+
+  onUploadToS3Success = (result) => {
+    console.log("File upload to S3 successful")
+    const { projectId, pageName, fieldId } = this.props
+    // Build parameters
+    var uploadDetails = {
+      userFileName: `GitText-${projectId}-${pageName}-${fieldId}`
+    }
+    // Send to the reducer
+    this.props.uploadFile(projectId, pageName, fieldId, uploadDetails, "gitText", this.onMetadataSaveSuccess, this.onMetadataSaveFailed)
+  }
+
+  onUploadToS3Failed = (error) => {
+    console.log("ERROR uploading file to S3")
+    console.error(error)
+    this.setState({
+      state: ComponentState.UPLOADING_NEW_FILE_TO_SERVER_FAILED,
+      errorMessage: Strings.ERROR_SAVING_CHANGES_TO_FIELD,
+    })
+  }
+
+  onMetadataSaveSuccess = () => {
+    this.setState({
+      state: ComponentState.QUIESCENT,
+    })
+  }
+
+  onMetadataSaveFailed = () => {
+    this.setState({
+      state: ComponentState.UPLOADING_NEW_FILE_TO_SERVER_FAILED,
+      errorMessage: Strings.ERROR_SAVING_CHANGES_TO_FIELD,
+    })
+  }
+
 
   getEditor = () => {
-    const { currentContent, disabled } = this.props
+    const { disabled } = this.props
     return (
       <Editor
-        initialValue={currentContent.originalContent}
+        initialValue={this.state.initialContent}
         apikey={process.env.REACT_APP_TINY_API_KEY}
         disabled={disabled}
         init={{
@@ -73,19 +215,63 @@ export class TextWriter extends Component {
           toolbar:
             'undo redo | formatselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | help'
         }}
-        onChange={this.props.onHandleContentChange}
+        onChange={this.onHandleContentChange}
       />
     )
   }
 
+  getErrorDownloading = () => {
+    return(
+      <div className='error-text'>
+        { Strings.ERROR_DOWNLOADING_TEXT_FOR_GIT_BOX }
+        <input
+          type="submit"
+          value={ Strings.BUTTON_RETRY }
+          className="save-button"
+          onClick={(e) => this.onSelectionChange({ target: { value: this.state.s3VersionId }})} />
+      </div>
+    )
+  }
+
+
   render() {
-
-    console.log(this.props)
-
+    console.log(this.state.state)
     return (
       <React.Fragment>
-        { this.getVersionSelectSystem("oldContent") }
-        { this.getEditor() }
+        {
+          this.state.state === ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER ?
+          <LoadingSpinner /> :
+          null
+        }
+        {
+          this.state.state === ComponentState.UPLOADING_NEW_FILE_TO_SERVER ?
+          <LoadingSpinner /> :
+          null
+        }
+        {
+          this.state.state === ComponentState.UPLOADING_NEW_FILE_TO_SERVER_FAILED ?
+          this.getErrorDownloading() :
+          null
+        }
+        {
+          this.state.state === ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER_FAILED ?
+          this.getErrorDownloading() :
+          null
+        }
+        {
+          this.state.state === ComponentState.QUIESCENT ?
+          <React.Fragment>
+            { this.getVersionSelectSystem("oldContent") }
+            { this.getEditor() }
+          </React.Fragment> :
+          null
+        }
+        <input
+          type="submit"
+          disabled={this.state.disabled}
+          value={ Strings.BUTTON_SAVE_CHANGES }
+          className="save-button"
+          onClick={(e) => this.onUploadRequest()} />
       </React.Fragment>
     )
   }
