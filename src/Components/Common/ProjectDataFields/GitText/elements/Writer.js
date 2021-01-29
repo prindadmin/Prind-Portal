@@ -95,12 +95,9 @@ export class TextWriter extends Component {
   onFileDownloadFailed = (error) => {
     console.error("File download failed")
     console.error(error.message)
-    console.log(error.message === 'The provided token has expired.')
 
-    if (error.message === 'The provided token has expired.') {
-      const { projectId, pageName, getNewToken } = this.props
-      getNewToken(projectId, pageName)
-    }
+    const { projectId, pageName, getNewToken } = this.props
+    getNewToken(projectId, pageName)
 
     this.setState({
       state: ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER_FAILED

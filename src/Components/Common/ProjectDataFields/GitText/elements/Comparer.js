@@ -15,7 +15,7 @@ const EDITORCONTENTSTYLE = `mark.red { color: red; background: none; text-decora
 const CONTENTBEFORESELECTION = `<h2>${Strings.GIT_TEXT_NO_FILE_VERSION_SELECTED}</h2>`
 
 
-// TODO: Fix occasional errors with the S3 token
+// TODO: Fix occasional errors with the S3 token not being present
 
 export class Comparer extends Component {
   static propTypes = {
@@ -107,10 +107,8 @@ export class Comparer extends Component {
     console.error("File download failed")
     console.error(error.message)
 
-    if (error.message === 'The provided token has expired.') {
-      const { projectId, pageName, getNewToken } = this.props
-      getNewToken(projectId, pageName)
-    }
+    const { projectId, pageName, getNewToken } = this.props
+    getNewToken(projectId, pageName)
 
     this.setState({
       [selectorName]: {

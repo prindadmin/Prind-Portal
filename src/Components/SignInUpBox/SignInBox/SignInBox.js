@@ -24,7 +24,7 @@ export class SignInBox extends Component {
   constructor() {
     super()
     this.state = {
-      username: '',
+      email: '',
       password: '',
       errorMessage: '',
       state: ComponentState.QUIESCENT,
@@ -35,6 +35,7 @@ export class SignInBox extends Component {
   }
 
   handleInputChange = (event) => {
+    //console.log(event)
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
@@ -50,12 +51,12 @@ export class SignInBox extends Component {
   }
 
 
-  signIn = (e) => {
-    e.preventDefault();
+  signIn = () => {
+    //e.preventDefault();
 
     const userDetails = {
-      email: e.target.elements.email.value,
-      password: e.target.elements.password.value
+      email: this.state.email,
+      password: this.state.password
     }
 
     // Remove the error if it is showing
@@ -117,7 +118,7 @@ export class SignInBox extends Component {
 
   getSignInForm = () => {
     return (
-      <form className="sign-in-form form" onSubmit={this.signIn}>
+      <form className="sign-in-form form">
 
         <input
           id="email"
@@ -149,9 +150,12 @@ export class SignInBox extends Component {
         }
 
         <input
+          id="signInButton"
+          name="signInButton"
           type="submit"
           value={ Strings.BUTTON_LOGIN }
-          className="submit-button" />
+          className="submit-button"
+          onClick={(e) => this.signIn(e)}/>
 
         <div className='spacer' />
 
