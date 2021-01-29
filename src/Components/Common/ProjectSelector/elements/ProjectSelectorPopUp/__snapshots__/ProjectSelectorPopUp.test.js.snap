@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render 1`] = `
+<div
+  id="popup-greyer"
+  onClick={[Function]}
+>
+  <div
+    id="popup-box"
+    onClick={[Function]}
+  >
+    <div
+      className="projects-pop-up-header"
+    >
+      <h2>
+        Select a project
+      </h2>
+    </div>
+    <div
+      className="project-scroll-box"
+    >
+      <div
+        className="projects-loading-container fill"
+      >
+        <div
+          className="loading-spinner"
+        >
+          <Blueprint3.Spinner
+            intent="danger"
+            size={100}
+          />
+          <p>
+            Loading projects, please wait...
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      className="projects-pop-up-footer"
+    >
+      <Blueprint3.Button
+        active={true}
+        icon="cube-add"
+        intent="success"
+        large={true}
+        onClick={[Function]}
+        text="Create a new project"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Should render with two projects from creator 1`] = `
+<div
+  id="popup-greyer"
+  onClick={[Function]}
+>
+  <div
+    id="popup-box"
+    onClick={[Function]}
+  >
+    <div
+      className="projects-pop-up-header"
+    >
+      <h2>
+        Select a project
+      </h2>
+    </div>
+    <div
+      className="project-scroll-box"
+    >
+      <div
+        className="projects-loading-container fill"
+      >
+        <div
+          className="loading-spinner"
+        >
+          <Blueprint3.Spinner
+            intent="danger"
+            size={100}
+          />
+          <p>
+            Loading projects, please wait...
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      className="projects-pop-up-footer"
+    >
+      <Blueprint3.Button
+        active={true}
+        icon="cube-add"
+        intent="success"
+        large={true}
+        onClick={[Function]}
+        text="Create a new project"
+      />
+    </div>
+  </div>
+</div>
+`;

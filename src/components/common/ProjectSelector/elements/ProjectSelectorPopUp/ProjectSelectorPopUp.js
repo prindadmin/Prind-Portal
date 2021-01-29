@@ -21,8 +21,39 @@ const ProjectTypeSelector = lazy(() => import('../ProjectTypeSelector'));
 
 export class ProjectSelectorPopUp extends Component {
   static propTypes = {
+    projects: PropTypes.shape({
+      accessibleProjects: PropTypes.shape({
+        projectCreator: PropTypes.arrayOf(PropTypes.shape({
+          data: PropTypes.string.isRequired,
+          projectId: PropTypes.string.isRequired,
+          projectName: PropTypes.string.isRequired,
+          projectDescription: PropTypes.string,
+          dateTime: PropTypes.string.isRequired,
+          projectType: PropTypes.string.isRequired,
+        })),
+        projectRole: PropTypes.arrayOf(PropTypes.shape({
+          data: PropTypes.string.isRequired,
+          projectId: PropTypes.string.isRequired,
+          projectName: PropTypes.string.isRequired,
+          projectDescription: PropTypes.string,
+          dateTime: PropTypes.string.isRequired,
+          projectType: PropTypes.string.isRequired,
+        })),
+      }),
+      chosenProject: PropTypes.shape({
+        projectId: PropTypes.string.isRequired,
+        projectType: PropTypes.string.isRequired,
+      })
+    }),
     onCancelPopup: PropTypes.func.isRequired,
+    getAccessibleProjects: PropTypes.func.isRequired,
     updateChosenProject: PropTypes.func.isRequired,
+    location: PropTypes.shape({
+      pathname: PropTypes.string.isRequired,
+    }).isRequired,
+    history: PropTypes.shape({
+      push: PropTypes.func.isRequired,
+    }).isRequired
   }
 
   constructor(props) {
