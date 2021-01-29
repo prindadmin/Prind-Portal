@@ -41,8 +41,8 @@ it('Should fill in username and password', () => {
 });
 
 
+// TODO: should read value of login
 it('Should attempt to login', () => {
-
   const mockSignIn = jest.fn();
 
   const props = {
@@ -57,7 +57,5 @@ it('Should attempt to login', () => {
   username.simulate('change', { target: { name: "email", value: 'hootsuite@prind.tech' }});
   password.simulate('change', { target: { name: "password", value: 'Password1234!' }});
   submitButton.simulate('click');
-  expect(mockSignIn).toHaveBeenCalled();
+  expect(mockSignIn).toHaveBeenCalledWith({email: 'hootsuite@prind.tech', password: 'Password1234!'},expect.any(Function), expect.any(Function));
 });
-
-// TODO: should read value of login
