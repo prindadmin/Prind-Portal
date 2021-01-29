@@ -41,7 +41,6 @@ it('Should fill in username and password', () => {
 });
 
 
-// TODO: should read value of login
 it('Should attempt to login', () => {
   const mockSignIn = jest.fn();
 
