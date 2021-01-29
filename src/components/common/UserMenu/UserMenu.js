@@ -14,17 +14,21 @@ const ico = <FontAwesomeIcon icon={faUserCircle} size='3x' />
 
 class UserMenu extends Component {
   static propTypes = {
-    user: PropTypes.object.isRequired,
+    user: PropTypes.shape({
+      signatureRequests: PropTypes.array.isRequired,
+      projectInvitations: PropTypes.array.isRequired,
+    }).isRequired,
     getUserProjectInvitations: PropTypes.func.isRequired,
     getUserSignatureRequests: PropTypes.func.isRequired,
     signOut: PropTypes.func.isRequired,
+    history: PropTypes.shape({
+      push: PropTypes.func.isRequired,
+    })
   }
 
   componentDidMount() {
-
     // This next part fetches all the invitations and requests so they can be
     // counted and a badge displayed on the user menu if more than 0
-
     const { getUserProjectInvitations, getUserSignatureRequests } = this.props
 
     // Get the user project invitations
@@ -53,9 +57,7 @@ class UserMenu extends Component {
   }
 
   getRequestBadge = () => {
-
     const { user } = this.props
-
     return (
       <div className='request-badge'>
         { user.signatureRequests.length + user.projectInvitations.length < 10 ? user.signatureRequests.length + user.projectInvitations.length : "+" }
@@ -65,9 +67,7 @@ class UserMenu extends Component {
 
 
   getIcon = () => {
-
     const { user } = this.props
-
     return (
       <React.Fragment>
         <Icon icon={ico} />
@@ -78,14 +78,14 @@ class UserMenu extends Component {
     )
   }
 
+
   signOut = async (values) => {
     await this.props.signOut(values)
   }
 
+
   openProfile = (values) => {
-
     const { user } = this.props
-
     if (user.signatureRequests.length + user.projectInvitations.length > 0) {
       this.props.history.push({
         pathname: '/profile',
@@ -93,21 +93,20 @@ class UserMenu extends Component {
       })
       return;
     }
-
     this.props.history.push({
       pathname: '/profile',
     })
-
   }
+
 
   dropdownContent = <Menu>
     <Menu.Item text='Profile' onClick={this.openProfile}/>
     <Menu.Item text='Sign Out' onClick={this.signOut} />
   </Menu>
 
-  render () {
 
-    return <Popover content={this.dropdownContent} position='bottom'>
+  render () {
+    return <Popover id='popover' content={this.dropdownContent} position='bottom'>
       {this.getIcon()}
     </Popover>
   }

@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { Icon, Button } from '@blueprintjs/core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThLarge } from '@fortawesome/free-solid-svg-icons'
 
@@ -43,11 +42,27 @@ class ProjectSelector extends React.Component {
     this.setState({ showPopup: true })
   }
 
-  // TODO: FIX ME
+
   cancelPopup = () => {
     console.log("closing popup selector")
     this.setState({ showPopup: false })
   }
+
+
+  getButton = ( buttonText ) => {
+    const ico = <FontAwesomeIcon icon={faThLarge} size="1x"/>
+    return (
+      <button
+        id='search-field'
+        className='search-field'
+        onClick={this.openProjectSelectorPopover} >
+        <span>
+          {ico}{buttonText}
+        </span>
+      </button>
+    )
+  }
+
 
   render() {
     const { chosenProject } = this.props.projects
@@ -58,28 +73,18 @@ class ProjectSelector extends React.Component {
       buttonText = chosenProject.projectName
     }
 
-    const ico = <FontAwesomeIcon icon={faThLarge} />
-
     return (
       <div className='project-selector'>
-        <Button
-          className='search-field'
-          id='search-field'
-          large
-          alignText='left'
-          icon={<Icon icon={ico} />}
-          onClick={this.openProjectSelectorPopover}
-        >
-          {buttonText}
-        </Button>
-
-        {this.state.showPopup ?
+        {
+          this.getButton(buttonText)
+        }
+        {
+          this.state.showPopup ?
           <PopOverHandler>
             <ProjectSelectorPopUp
               onCancelPopup={ this.cancelPopup }
             />
-          </PopOverHandler>
-          :
+          </PopOverHandler> :
           null
         }
       </div>

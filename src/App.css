@@ -1673,6 +1673,24 @@ mark.grey {
   color: white;
 }
 
+.project-selector button {
+  height: 42px;
+  border-radius: calc(var(--standard-border-radius) / 2);
+  padding-left: var(--standard-padding);
+}
+
+.project-selector button span {
+  display: flex;
+  text-align: left;
+  align-items: center;
+  font-size: 16px;
+}
+
+.project-selector button span svg {
+  width: 34px;
+  height: 34px;
+  margin-right: var(--standard-margin);
+}
 
 /* ================================== */
 /* ========= generic page ========== */

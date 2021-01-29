@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import SignInBox from './SignInBox'
 
 
-it('should render sign in box', () => {
+it('Should render sign in box', () => {
   const props = {
     toggleVisibleForm: function(e) { console.log(e) }
   };

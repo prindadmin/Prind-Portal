@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import ItemIcon from '../Common/ItemIcon'
+import PropTypes from 'prop-types'
 
+import ItemIcon from '../Common/ItemIcon'
 import { Button, MenuItem } from "@blueprintjs/core";
 import { Select } from "@blueprintjs/select";
 
@@ -9,6 +10,17 @@ import PAGENAMES from '../../Data/pageNames'
 // TODO: work out why the popover arrow isn't pointing to the menu button (4 hours)
 
 export class SideBar extends Component {
+  static propTypes = {
+    projects: PropTypes.shape({
+      chosenProject: PropTypes.shape({
+        projectId: PropTypes.string.isRequired,
+        projectType: PropTypes.string.isRequired,
+      })
+    }).isRequired,
+    location: PropTypes.shape({
+      pathname: PropTypes.string.isRequired,
+    }).isRequired,
+  }
 
   handleElementSelect = (query) => {
     console.log(query)

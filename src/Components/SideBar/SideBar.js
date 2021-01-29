@@ -1,11 +1,24 @@
 import React, { Component } from 'react'
-import ListItem from '../Common/page-tile'
+import PropTypes from 'prop-types'
 
+import ListItem from '../Common/page-tile'
 import PAGENAMES from '../../Data/pageNames'
 
 // TODO: Combine sidebars into one root component folder
 
 export class SideBar extends Component {
+  static propTypes = {
+    projects: PropTypes.shape({
+      chosenProject: PropTypes.shape({
+        projectId: PropTypes.string.isRequired,
+        projectType: PropTypes.string.isRequired,
+      })
+    }).isRequired,
+    location: PropTypes.shape({
+      pathname: PropTypes.string.isRequired,
+    }).isRequired,
+  }
+
 
   pageAllowedCheck = (pageName, sidebarEntries, pageRequested) => {
     // If the page doesn't exist in this project

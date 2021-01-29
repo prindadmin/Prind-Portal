@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should render sign in box 1`] = `
+exports[`Should render sign in box 1`] = `
 <Fragment>
   <div
     className="logo-container"
