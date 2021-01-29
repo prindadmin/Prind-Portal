@@ -257,7 +257,7 @@ export class ProjectSelectorPopUp extends Component {
   }
 
   siteSelectorPopupContent = () => {
-    console.log(this.state.state)
+    //console.log(this.state.state)
 
     return (
       <div id='popup-greyer' onClick={this.cancelPopup} >

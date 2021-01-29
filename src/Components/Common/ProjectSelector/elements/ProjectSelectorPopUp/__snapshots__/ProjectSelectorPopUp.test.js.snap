@@ -71,19 +71,26 @@ exports[`Should render with two projects from creator 1`] = `
       className="project-scroll-box"
     >
       <div
-        className="projects-loading-container fill"
+        className="error-box"
       >
-        <div
-          className="loading-spinner"
+        <Blueprint3.Callout
+          intent="danger"
+          style={
+            Object {
+              "marginBottom": "15px",
+            }
+          }
         >
-          <Blueprint3.Spinner
-            intent="danger"
-            size={100}
-          />
-          <p>
-            Loading projects, please wait...
-          </p>
-        </div>
+          <div>
+            There was an error fetching the project list, please try again.  If the problem persists, please contact technical support.
+          </div>
+        </Blueprint3.Callout>
+        <input
+          className="close-button"
+          onClick={[Function]}
+          type="submit"
+          value="Retry"
+        />
       </div>
     </div>
     <div

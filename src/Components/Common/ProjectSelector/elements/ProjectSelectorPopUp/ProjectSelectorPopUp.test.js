@@ -50,6 +50,19 @@ it('Should render', () => {
 
 // TODO: Currently has spinner; needs to respond to project request (getAccessibleProjects)
 it('Should render with two projects from creator', () => {
+  const fetchProjectListFunc = jest.fn((projectId, resolve, reject) => {
+    console.log(projectId)
+    console.log(resolve)
+    console.log(reject)
+    resolve()
+  });
+
+  /*
+  const fetchProjectListFunc = function(projectId, resolve, reject) {
+    resolve()
+  }
+  */
+
   const props = {
     projects: {
       accessibleProjects: {
@@ -79,7 +92,7 @@ it('Should render with two projects from creator', () => {
       }
     },
     onCancelPopup: function() {},
-    getAccessibleProjects: function() {},
+    getAccessibleProjects: fetchProjectListFunc,
     updateChosenProject: function() {},
     location: {
       pathname: "/occupation/TestFromForm3Dhsf2021-01-11"
