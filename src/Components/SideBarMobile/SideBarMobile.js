@@ -55,7 +55,9 @@ export class SideBar extends Component {
     const { chosenProject } = this.props.projects
     const { projectType } = chosenProject
 
-    const menuEntries = PAGENAMES[projectType] === undefined ? PAGENAMES["CDM2015Project"] : PAGENAMES[projectType]
+    // Removed to allow separate DHSF and CDM2015 project portals
+    //const menuEntries = PAGENAMES[projectType] === undefined ? PAGENAMES["CDM2015Project"] : PAGENAMES[projectType]
+    const menuEntries = PAGENAMES[process.env.REACT_APP_PORTAL]
 
     const pageNameList = Object.keys(menuEntries).map(page => {
       return {
