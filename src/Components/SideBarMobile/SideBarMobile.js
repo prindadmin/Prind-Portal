@@ -14,7 +14,7 @@ export class SideBar extends Component {
     projects: PropTypes.shape({
       chosenProject: PropTypes.shape({
         projectId: PropTypes.string.isRequired,
-        projectType: PropTypes.string.isRequired,
+        projectType: PropTypes.string,
       })
     }).isRequired,
     location: PropTypes.shape({
@@ -51,11 +51,9 @@ export class SideBar extends Component {
   }
 
   pageNamesToList = () => {
-
-    const { chosenProject } = this.props.projects
-    const { projectType } = chosenProject
-
     // Removed to allow separate DHSF and CDM2015 project portals
+    //const { chosenProject } = this.props.projects
+    //const { projectType } = chosenProject
     //const menuEntries = PAGENAMES[projectType] === undefined ? PAGENAMES["CDM2015Project"] : PAGENAMES[projectType]
     const menuEntries = PAGENAMES[process.env.REACT_APP_PORTAL]
 

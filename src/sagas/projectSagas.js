@@ -14,6 +14,7 @@ const defaultState = {
   chosenProject: {
     projectName: Strings.NO_PROJECT_SELECTED,
     projectId: "",
+    projectType: "",
   },
   memberList: [],
   downloadURL: "",
@@ -203,7 +204,6 @@ function * getCurrentMembers (action) {
   const { projectID } = action.payload
 
   try {
-
     // Pre-fetch update to store
     yield put({
       type: Actions.PROJECT_GET_CURRENT_MEMBERS_REQUEST_SENT,
@@ -213,7 +213,7 @@ function * getCurrentMembers (action) {
     })
 
     const result = yield call(Dispatchers.getCurrentMembersDispatcher, projectID)
-
+    console.log(result)
     const memberList = result.body.members
 
     // Post-fetch update to store

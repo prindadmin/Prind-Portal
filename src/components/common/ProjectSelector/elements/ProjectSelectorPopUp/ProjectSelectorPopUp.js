@@ -17,6 +17,8 @@ import * as ComponentState from '../../States'
 
 //const ProjectTypeSelector = lazy(() => import('../ProjectTypeSelector'));
 
+// TODO: Fix bottom padding when in mobile version (doesn't allow the final project to show)
+
 export class ProjectSelectorPopUp extends Component {
   static propTypes = {
     projects: PropTypes.shape({

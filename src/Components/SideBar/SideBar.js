@@ -11,7 +11,7 @@ export class SideBar extends Component {
     projects: PropTypes.shape({
       chosenProject: PropTypes.shape({
         projectId: PropTypes.string.isRequired,
-        projectType: PropTypes.string.isRequired,
+        projectType: PropTypes.string,
       })
     }).isRequired,
     location: PropTypes.shape({
@@ -37,7 +37,7 @@ export class SideBar extends Component {
 
     const { location, projects } = this.props
     const { chosenProject } = projects
-    const { projectId, projectType } = chosenProject
+    const { projectId } = chosenProject
 
     const pathForProject = projectId !== "" ? `/${projectId}` : ""
     // Removed to allow separate DHSF and CDM2015 project portals

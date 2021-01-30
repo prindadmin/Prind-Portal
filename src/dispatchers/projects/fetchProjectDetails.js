@@ -29,6 +29,15 @@ async function FetchProjectDetails(projectId) {
     API.get(apiName, path, myInit)
       .then(response => {
         console.log(response)
+
+        if (response.errorMessage !== undefined) {
+          reject(response)
+        }
+
+        if (response.Error !== undefined) {
+          reject(response)
+        }
+
         resolve(response)
       })
       .catch(error => {
