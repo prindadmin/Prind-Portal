@@ -82,10 +82,12 @@ export class SideBar extends Component {
 
   render() {
 
-    const { location, projects } = this.props
-    const { projectType } = projects.chosenProject
+    const { location } = this.props
 
-    const sidebarEntries = PAGENAMES[projectType] === undefined ? PAGENAMES["CDM2015Project"] : PAGENAMES[projectType]
+    // Removed to allow separate DHSF and CDM2015 project portals
+    //const { projectType } = projects.chosenProject
+    //const sidebarEntries = PAGENAMES[projectType] === undefined ? PAGENAMES["CDM2015Project"] : PAGENAMES[projectType]
+    const sidebarEntries = PAGENAMES[process.env.REACT_APP_PORTAL]
 
     // If the current page isn't found in the current type (such as when changing projects)
     // Go to the first entry in the sidebarEntries
