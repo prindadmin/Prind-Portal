@@ -208,8 +208,12 @@ export class LoggedInContent extends Component {
   }
 
   shouldOpenProjectSelector = () => {
+    const pageName = this.getPageName()
     const projectNotSelected = this.getProjectName() === undefined
-    const pageCanAutoShowProjectSelector = !PAGES_WITHOUT_PROJECT_SELECTOR.includes(this.getPageName())
+    const pageCanAutoShowProjectSelector = !PAGES_WITHOUT_PROJECT_SELECTOR.includes(pageName)
+
+    //console.log(`projectNotSelected: ${projectNotSelected}`)
+    //console.log(`pageCanAutoShowProjectSelector: ${pageCanAutoShowProjectSelector}`)
 
     return projectNotSelected && pageCanAutoShowProjectSelector
   }

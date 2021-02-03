@@ -62,6 +62,8 @@
     "deploy:dev-cdm": "npm run build:dev-cdm && npm run s3Sync:dev-cdm && npm run cfInvalidate:dev-cdm",
     "deploy:staging-cdm": "npm run build:staging-cdm && npm run s3Sync:staging-cdm && npm run cfInvalidate:staging-cdm",
     "deploy:production-cdm": "npm run build:production-cdm && npm run s3Sync:production-cdm && npm run cfInvalidate:production-cdm",
+    "deploy:all-dhsf": "npm run deploy:dev-dhsf && npm run deploy:staging-dhsf && npm run deploy:production-dhsf",
+    "deploy:all-cdm": "npm run deploy:dev-cdm && npm run deploy:staging-cdm && npm run deploy:production-cdm",
     "start": "react-scripts start",
     "start-cdm": "env-cmd -f .env.developmentCDM react-scripts start",
     "start-dhsf": "env-cmd -f .env.developmentDHSF react-scripts start",
