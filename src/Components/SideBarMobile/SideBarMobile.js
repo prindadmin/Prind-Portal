@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import ItemIcon from '../Common/ItemIcon'
+import PropTypes from 'prop-types'
 
+import ItemIcon from '../Common/ItemIcon'
 import { Button, MenuItem } from "@blueprintjs/core";
 import { Select } from "@blueprintjs/select";
 
@@ -9,6 +10,17 @@ import PAGENAMES from '../../Data/pageNames'
 // TODO: work out why the popover arrow isn't pointing to the menu button (4 hours)
 
 export class SideBar extends Component {
+  static propTypes = {
+    projects: PropTypes.shape({
+      chosenProject: PropTypes.shape({
+        projectId: PropTypes.string.isRequired,
+        projectType: PropTypes.string,
+      })
+    }).isRequired,
+    location: PropTypes.shape({
+      pathname: PropTypes.string.isRequired,
+    }).isRequired,
+  }
 
   handleElementSelect = (query) => {
     console.log(query)
@@ -39,11 +51,11 @@ export class SideBar extends Component {
   }
 
   pageNamesToList = () => {
-
-    const { chosenProject } = this.props.projects
-    const { projectType } = chosenProject
-
-    const menuEntries = PAGENAMES[projectType] === undefined ? PAGENAMES["CDM2015Project"] : PAGENAMES[projectType]
+    // Removed to allow separate DHSF and CDM2015 project portals
+    //const { chosenProject } = this.props.projects
+    //const { projectType } = chosenProject
+    //const menuEntries = PAGENAMES[projectType] === undefined ? PAGENAMES["CDM2015Project"] : PAGENAMES[projectType]
+    const menuEntries = PAGENAMES[process.env.REACT_APP_PORTAL]
 
     const pageNameList = Object.keys(menuEntries).map(page => {
       return {
@@ -70,10 +82,12 @@ export class SideBar extends Component {
 
   render() {
 
-    const { location, projects } = this.props
-    const { projectType } = projects.chosenProject
+    const { location } = this.props
 
-    const sidebarEntries = PAGENAMES[projectType] === undefined ? PAGENAMES["CDM2015Project"] : PAGENAMES[projectType]
+    // Removed to allow separate DHSF and CDM2015 project portals
+    //const { projectType } = projects.chosenProject
+    //const sidebarEntries = PAGENAMES[projectType] === undefined ? PAGENAMES["CDM2015Project"] : PAGENAMES[projectType]
+    const sidebarEntries = PAGENAMES[process.env.REACT_APP_PORTAL]
 
     // If the current page isn't found in the current type (such as when changing projects)
     // Go to the first entry in the sidebarEntries

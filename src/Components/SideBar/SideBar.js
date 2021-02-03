@@ -1,11 +1,24 @@
 import React, { Component } from 'react'
-import ListItem from '../Common/page-tile'
+import PropTypes from 'prop-types'
 
+import ListItem from '../Common/page-tile'
 import PAGENAMES from '../../Data/pageNames'
 
 // TODO: Combine sidebars into one root component folder
 
 export class SideBar extends Component {
+  static propTypes = {
+    projects: PropTypes.shape({
+      chosenProject: PropTypes.shape({
+        projectId: PropTypes.string.isRequired,
+        projectType: PropTypes.string,
+      })
+    }).isRequired,
+    location: PropTypes.shape({
+      pathname: PropTypes.string.isRequired,
+    }).isRequired,
+  }
+
 
   pageAllowedCheck = (pageName, sidebarEntries, pageRequested) => {
     // If the page doesn't exist in this project
@@ -24,10 +37,12 @@ export class SideBar extends Component {
 
     const { location, projects } = this.props
     const { chosenProject } = projects
-    const { projectId, projectType } = chosenProject
+    const { projectId } = chosenProject
 
     const pathForProject = projectId !== "" ? `/${projectId}` : ""
-    const sidebarEntries = PAGENAMES[projectType] === undefined ? PAGENAMES["CDM2015Project"] : PAGENAMES[projectType]
+    // Removed to allow separate DHSF and CDM2015 project portals
+    //const sidebarEntries = PAGENAMES[projectType] === undefined ? PAGENAMES["CDM2015Project"] : PAGENAMES[projectType]
+    const sidebarEntries = PAGENAMES[process.env.REACT_APP_PORTAL]
 
     // If the current page isn't found in the current type (such as when changing projects)
     // Go to the first entry in the sidebarEntries

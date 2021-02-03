@@ -6,7 +6,6 @@ import PageComponent from './SideBar'
 const mapStatetoProps = state => {
   return {
     projects: state.projects,
-    pageContent: state.pageContent,
   }
 }
 

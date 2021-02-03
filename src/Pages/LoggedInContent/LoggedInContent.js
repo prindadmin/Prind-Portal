@@ -63,6 +63,10 @@ export class LoggedInContent extends Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (this.props !== prevProps) {
+      if (this.props.projects.error !== null) {
+        console.log("error fetching project")
+        return;
+      }
       this.getProjectData()
       const { projectId } = this.props.projects.chosenProject
       const { pageName } = this.state
@@ -169,8 +173,10 @@ export class LoggedInContent extends Component {
   }
 
   getPossiblePages = () => {
-    const { projectType } = this.props.projects.chosenProject
-    return projectType === undefined ? PAGENAMES['CDM2015Project'] : PAGENAMES[projectType]
+    // Removed to allow separate DHSF and CDM2015 project portals
+    //const { projectType } = this.props.projects.chosenProject
+    //return projectType === undefined ? PAGENAMES['CDM2015Project'] : PAGENAMES[projectType]
+    return PAGENAMES[process.env.REACT_APP_PORTAL]
   }
 
   getContent = () => {
@@ -202,8 +208,12 @@ export class LoggedInContent extends Component {
   }
 
   shouldOpenProjectSelector = () => {
+    const pageName = this.getPageName()
     const projectNotSelected = this.getProjectName() === undefined
-    const pageCanAutoShowProjectSelector = !PAGES_WITHOUT_PROJECT_SELECTOR.includes(this.getPageName())
+    const pageCanAutoShowProjectSelector = !PAGES_WITHOUT_PROJECT_SELECTOR.includes(pageName)
+
+    //console.log(`projectNotSelected: ${projectNotSelected}`)
+    //console.log(`pageCanAutoShowProjectSelector: ${pageCanAutoShowProjectSelector}`)
 
     return projectNotSelected && pageCanAutoShowProjectSelector
   }

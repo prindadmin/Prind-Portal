@@ -35,6 +35,10 @@ async function GetCurrentMembers(projectId) {
           reject(response)
         }
 
+        if (response.Error !== undefined) {
+          reject(response)
+        }
+
         resolve(response)
       })
       .catch(error => {

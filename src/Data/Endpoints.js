@@ -1,5 +1,5 @@
 export const DEFAULTPAGE = ""
-export const DEFAULTLOGGEDINPAGE = "/inception"
+export const DEFAULTLOGGEDINPAGE = process.env.REACT_APP_DEFAULT_PAGE
 export const PROJECTDETAILSPAGE = "/project"
 export const SIGNINPAGE = "/signin"
 export const SIGNUPPAGE = "/signup"

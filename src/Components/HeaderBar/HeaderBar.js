@@ -7,7 +7,12 @@ import NoFoundationsIDBanner from '../Common/NoFoundationsIDBanner'
 
 export class HeaderBar extends Component {
   static propTypes = {
-    menuItems: PropTypes.array,
+    projects: PropTypes.shape({
+      chosenProject: PropTypes.shape({
+        projectId: PropTypes.string,
+        projectType: PropTypes.string,
+      })
+    }),
     getUserDetails: PropTypes.func.isRequired,
     openProjectSelector: PropTypes.bool.isRequired,
   }

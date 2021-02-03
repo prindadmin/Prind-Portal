@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render with project and with project selector 1`] = `
+<Fragment>
+  <div
+    className="full-width row"
+    id="header-bar"
+  >
+    <div
+      className="header-content row"
+    >
+      <withRouter(Connect(ProjectSelector))
+        openProjectSelector={true}
+      />
+      <div
+        className="nav-links"
+      >
+        <div
+          className="menu-container"
+        >
+          <withRouter(Connect(UserMenu)) />
+        </div>
+      </div>
+    </div>
+  </div>
+  <withRouter(Connect(NoFoundationsIDBanner)) />
+</Fragment>
+`;
+
+exports[`Should render with project and without project selector 1`] = `
+<Fragment>
+  <div
+    className="full-width row"
+    id="header-bar"
+  >
+    <div
+      className="header-content row"
+    >
+      <withRouter(Connect(ProjectSelector))
+        openProjectSelector={false}
+      />
+      <div
+        className="nav-links"
+      >
+        <div
+          className="menu-container"
+        >
+          <withRouter(Connect(UserMenu)) />
+        </div>
+      </div>
+    </div>
+  </div>
+  <withRouter(Connect(NoFoundationsIDBanner)) />
+</Fragment>
+`;
+
+exports[`Should render without project and without project selector 1`] = `
+<Fragment>
+  <div
+    className="full-width row"
+    id="header-bar"
+  >
+    <div
+      className="header-content row"
+    >
+      <div
+        className="nav-links"
+      >
+        <div
+          className="menu-container"
+        >
+          <withRouter(Connect(UserMenu)) />
+        </div>
+      </div>
+    </div>
+  </div>
+  <withRouter(Connect(NoFoundationsIDBanner)) />
+</Fragment>
+`;

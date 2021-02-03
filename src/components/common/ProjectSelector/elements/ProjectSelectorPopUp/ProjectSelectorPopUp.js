@@ -1,4 +1,4 @@
-import React, { Component, lazy } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import ProjectTile from '../project-tile'
@@ -15,14 +15,43 @@ import * as Strings from '../../../../../Data/Strings'
 import * as Endpoints from '../../../../../Data/Endpoints'
 import * as ComponentState from '../../States'
 
-const ProjectTypeSelector = lazy(() => import('../ProjectTypeSelector'));
-
-// TODO: Test this
+//const ProjectTypeSelector = lazy(() => import('../ProjectTypeSelector'));
 
 export class ProjectSelectorPopUp extends Component {
   static propTypes = {
+    projects: PropTypes.shape({
+      accessibleProjects: PropTypes.shape({
+        projectCreator: PropTypes.arrayOf(PropTypes.shape({
+          data: PropTypes.string.isRequired,
+          projectId: PropTypes.string.isRequired,
+          projectName: PropTypes.string.isRequired,
+          projectDescription: PropTypes.string,
+          dateTime: PropTypes.string.isRequired,
+          projectType: PropTypes.string.isRequired,
+        })),
+        projectRole: PropTypes.arrayOf(PropTypes.shape({
+          data: PropTypes.string.isRequired,
+          projectId: PropTypes.string.isRequired,
+          projectName: PropTypes.string.isRequired,
+          projectDescription: PropTypes.string,
+          dateTime: PropTypes.string.isRequired,
+          projectType: PropTypes.string.isRequired,
+        })),
+      }),
+      chosenProject: PropTypes.shape({
+        projectId: PropTypes.string.isRequired,
+        projectType: PropTypes.string.isRequired,
+      })
+    }),
     onCancelPopup: PropTypes.func.isRequired,
+    getAccessibleProjects: PropTypes.func.isRequired,
     updateChosenProject: PropTypes.func.isRequired,
+    location: PropTypes.shape({
+      pathname: PropTypes.string.isRequired,
+    }).isRequired,
+    history: PropTypes.shape({
+      push: PropTypes.func.isRequired,
+    }).isRequired
   }
 
   constructor(props) {
@@ -119,10 +148,20 @@ export class ProjectSelectorPopUp extends Component {
     })
   }
 
+  // This is the old function that allowed a choice of project type.  Keeping for later
+  // Removed to allow separate DHSF and CDM2015 project portals
+  /*
   createNewProject = () => {
     this.setState({
       state: ComponentState.PROJECT_TYPE_SELECTOR_OPEN,
     })
+  }
+  */
+
+  // This is the new function that goes straight to the project details entry screen
+  createNewProject = () => {
+    this.props.history.push(`${Endpoints.NEWPROJECTPAGE}?project_type=${process.env.REACT_APP_PORTAL}`)
+    this.cancelPopup()
   }
 
   projectsLoading = () => {
@@ -226,16 +265,17 @@ export class ProjectSelectorPopUp extends Component {
   }
 
   siteSelectorPopupContent = () => {
-    console.log(this.state.state)
+    //console.log(this.state.state)
 
     return (
       <div id='popup-greyer' onClick={this.cancelPopup} >
         <div id='popup-box' onClick={(e) => e.stopPropagation()}>
           { this.getHeaderContent() }
           <div className='project-scroll-box'>
-            {
+            { /*
+              // Removed to allow separate DHSF and CDM2015 project portals
               this.state.state === ComponentState.PROJECT_TYPE_SELECTOR_OPEN ? <ProjectTypeSelector closePopup={this.cancelPopup}/> : null
-            }
+            */}
             {
               this.state.state === ComponentState.QUIESCENT ? this.getProjectListPresentation() : null
             }

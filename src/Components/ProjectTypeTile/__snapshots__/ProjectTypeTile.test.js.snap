@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render 1`] = `
+<div
+  id="project-type-tile"
+  onClick={[Function]}
+>
+  <div
+    className="icon"
+  >
+    <ItemIcon
+      size="8x"
+      type="home"
+    />
+  </div>
+  <h2>
+    Name 1234
+  </h2>
+  <p>
+    description 1234
+  </p>
+</div>
+`;

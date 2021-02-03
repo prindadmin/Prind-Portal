@@ -129,9 +129,11 @@ export class StagePage extends Component {
 
   showFilledPage = () => {
     const { pageName, projects, pageContent } = this.props
-    const { projectId, projectType } = projects.chosenProject
+    const { projectId } = projects.chosenProject
     const { fields }  = pageContent[pageName]
 
+    // Removed to allow separate DHSF and CDM2015 project portals
+    /*
     var textObject = `PAGE_TITLES_AND_DESCRIPTIONS_CDM2015Project`
     try {
       if (projectType !== undefined) {
@@ -141,6 +143,9 @@ export class StagePage extends Component {
     catch(e) {
       textObject = `PAGE_TITLES_AND_DESCRIPTIONS_CDM2015Project`
     }
+    */
+
+    const textObject = `PAGE_TITLES_AND_DESCRIPTIONS_${process.env.REACT_APP_PORTAL}`
 
     const { title, description } = Strings[textObject][pageName]
 

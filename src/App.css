@@ -37,6 +37,8 @@
   --standard-border-radius: 15px;
   --standard-max-content-width: 1000px;
   --project-selector-grid-columns: 1fr;
+  --popup-header-height: 80px;
+  --popup-footer-height: 80px;
 }
 
 @media (min-width: 1024px) {
@@ -1673,6 +1675,24 @@ mark.grey {
   color: white;
 }
 
+.project-selector button {
+  height: 42px;
+  border-radius: calc(var(--standard-border-radius) / 2);
+  padding-left: var(--standard-padding);
+}
+
+.project-selector button span {
+  display: flex;
+  text-align: left;
+  align-items: center;
+  font-size: 16px;
+}
+
+.project-selector button span svg {
+  width: 34px;
+  height: 34px;
+  margin-right: var(--standard-margin);
+}
 
 /* ================================== */
 /* ========= generic page ========== */
@@ -1824,7 +1844,7 @@ mark.grey {
   display: flex;
   text-align: center;
   width: 100%;
-  height: 80px;
+  height: var(--popup-header-height);
   background-color: #ccc;
   border-radius: var(--standard-border-radius) var(--standard-border-radius) 0 0;
   align-items: center;
@@ -1856,7 +1876,7 @@ mark.grey {
 #popup-box .project-scroll-box {
   padding-top: 0.5em;
   padding-bottom: 0.5em;
-  height: 80%;
+  height: calc(100% - var(--popup-header-height) - var(--popup-footer-height));
   overflow-y: scroll;
 }
 
@@ -1908,6 +1928,7 @@ mark.grey {
 #popup-box .projects-pop-up-footer {
   text-align: center;
   width: 100%;
+  height: var(--popup-footer-height);
   position: absolute;
   bottom: 0;
   left: 0;

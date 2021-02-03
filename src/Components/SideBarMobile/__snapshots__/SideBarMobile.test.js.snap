@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render CDM project Sidebar 1`] = `
+<div
+  className="chooser-section col-12"
+>
+  <div
+    className="sidebar"
+  >
+    <Blueprint3.Select
+      filterable={false}
+      itemRenderer={[Function]}
+      items={
+        Array [
+          Object {
+            "linkTo": "/project",
+            "name": "Project Details",
+          },
+          Object {
+            "linkTo": "/team",
+            "name": "Project Team",
+          },
+          Object {
+            "linkTo": "/inception",
+            "name": "Inception",
+          },
+          Object {
+            "linkTo": "/feasibility",
+            "name": "Feasibility",
+          },
+          Object {
+            "linkTo": "/design",
+            "name": "Design",
+          },
+          Object {
+            "linkTo": "/tender",
+            "name": "Tender",
+          },
+          Object {
+            "linkTo": "/construction",
+            "name": "Construction",
+          },
+          Object {
+            "linkTo": "/handover",
+            "name": "Handover",
+          },
+          Object {
+            "linkTo": "/occupation",
+            "name": "Occupation",
+          },
+          Object {
+            "linkTo": "/refurbishment",
+            "name": "Refurbishment",
+          },
+        ]
+      }
+    >
+      <Blueprint3.Button
+        icon={
+          <ItemIcon
+            size="1x"
+            type="burger"
+          />
+        }
+      />
+    </Blueprint3.Select>
+  </div>
+</div>
+`;
+
+exports[`Should render DSHF project Sidebar 1`] = `
+<div
+  className="chooser-section col-12"
+>
+  <div
+    className="sidebar"
+  >
+    <Blueprint3.Select
+      filterable={false}
+      itemRenderer={[Function]}
+      items={
+        Array [
+          Object {
+            "linkTo": "/project",
+            "name": "Project Details",
+          },
+          Object {
+            "linkTo": "/team",
+            "name": "Project Team",
+          },
+          Object {
+            "linkTo": "/occupation",
+            "name": "HSF",
+          },
+        ]
+      }
+    >
+      <Blueprint3.Button
+        icon={
+          <ItemIcon
+            size="1x"
+            type="burger"
+          />
+        }
+      />
+    </Blueprint3.Select>
+  </div>
+</div>
+`;
