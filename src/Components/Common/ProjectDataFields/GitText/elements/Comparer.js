@@ -201,12 +201,20 @@ export class Comparer extends Component {
 
     // Map the fileVersions to options
     const options = fileVersions.slice(1).map((version, index) => {
+      const date = new Date(version.uploadedDateTime)
+      const displayDate = date.toISOString().split('T')[0]
+      var isDisabled = false
       // If this is the old selector and the option is older than the new selector selection
       // disable the selection
       if (selectorName === Constants.OLDSELECTOR && index >= newIndex) {
-        return <option key={index} disabled value={version.s3VersionId}>{version.commitMessage}</option>
+        isDisabled = true
       }
-      return <option key={index} value={version.s3VersionId}>{version.commitMessage}</option>
+
+      if (version.commitMessage === undefined) {
+        return <option key={index} disabled={isDisabled} value={version.s3VersionId}>{`${displayDate} - ${Strings.GIT_TEXT_NO_COMMIT_MESSAGE_PROVIDED}`}</option>
+      }
+
+      return <option key={index} disabled={isDisabled} value={version.s3VersionId}>{`${displayDate} - ${version.commitMessage}`}</option>
     })
 
     const value = this.state[selectorName].s3VersionId

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import AWS from 'aws-sdk';
 
 import ItemIcon from '../../ItemIcon'
 
@@ -12,7 +13,7 @@ import LoadingSpinner from '../../LoadingSpinner'
 
 
 // TODO: Remove this once server sends this data
-const FILEDETAILS = [
+/*const FILEDETAILS = [
   {
     ver: "5",
     prevVer: "4",
@@ -50,7 +51,7 @@ const FILEDETAILS = [
     commitMessage: "Version 5"
   }
 
-]
+]*/
 
 
 export class GitText extends Component {
@@ -87,7 +88,29 @@ export class GitText extends Component {
     }
 
     // TODO: Remove this once server sends this data
-    props.elementContent.fileDetails = FILEDETAILS
+    //props.elementContent.fileDetails = FILEDETAILS
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.user.projectS3Token !== prevProps.user.projectS3Token) {
+      this.configureAWSAuthorisation(this.props.user.projectS3Token)
+    }
+  }
+
+
+  configureAWSAuthorisation = (token) => {
+    console.log("configuring AWS auth")
+
+    // Update credentials to allow access to S3
+    const { AccessKeyId, SecretAccessKey, SessionToken } = token
+    AWS.config.update({
+      credentials: {
+        accessKeyId: AccessKeyId,
+        secretAccessKey: SecretAccessKey,
+        sessionToken: SessionToken
+      }
+    });
+    return;
   }
 
 
@@ -139,7 +162,7 @@ export class GitText extends Component {
 
 
   render() {
-    const { title, description } = this.props.elementContent
+    const { title, description, fileDetails } = this.props.elementContent
     const { state } = this.state
     return (
       <div id='git-text-element'>
@@ -161,7 +184,7 @@ export class GitText extends Component {
             }
           </div>
           {
-            state === ComponentState.QUIESCENT ?
+            state === ComponentState.QUIESCENT && fileDetails.length !== 0 ?
             this.getChangeViewButtons() :
             null
           }

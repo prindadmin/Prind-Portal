@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import { Editor } from '@tinymce/tinymce-react';
 import LoadingSpinner from '../../../LoadingSpinner'
+import PopOverHandler from '../../../popOverHandler'
 import * as ComponentState from '../../ComponentStates'
 
 import * as Strings from '../../../../../Data/Strings'
@@ -29,10 +30,11 @@ export class TextWriter extends Component {
       })
     }).isRequired,
     fileVersions: PropTypes.arrayOf(PropTypes.shape({
-      ver: PropTypes.string,
-      prevVer: PropTypes.string,
-      s3VersionId: PropTypes.string,
+      ver: PropTypes.string.isRequired,
+      prevVer: PropTypes.string.isRequired,
+      s3VersionId: PropTypes.string.isRequired,
       commitMessage: PropTypes.string,
+      uploadedDateTime: PropTypes.string.isRequired,
     })),
     disabled: PropTypes.bool.isRequired,
     uploadFile: PropTypes.func.isRequired,
@@ -41,12 +43,21 @@ export class TextWriter extends Component {
 
   constructor(props) {
     super()
+
+    // Check if the s3version exists
+    var s3VersionId = ""
+    if (props.fileVersions.length !== 0) {
+      s3VersionId = props.fileVersions[0].s3VersionId
+    }
+
     this.state = {
       initialContent: '',
       content: '',
-      s3VersionId: props.fileVersions[0].s3VersionId,
+      s3VersionId,
       state: ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER,
-      errorMessage: ''
+      errorMessage: '',
+      showCommitDialogueBox: false,
+      commitMessage: '',
     }
   }
 
@@ -58,6 +69,12 @@ export class TextWriter extends Component {
     const s3VersionId = e.target.value
     const { projectId, pageName, fieldId, user } = this.props
     console.log(`S3 Version Requested: ${s3VersionId}`)
+
+    // If there is no existing version of the git file, exit
+    if (s3VersionId === "") {
+      this.onNoExistingFile()
+      return;
+    }
 
     // Create the download values
     const bucketName = process.env.REACT_APP_AWS_S3_USER_UPLOAD_BUCKET_NAME
@@ -104,13 +121,34 @@ export class TextWriter extends Component {
     })
   }
 
+  onNoExistingFile = () => {
+    this.setState({
+      state: ComponentState.QUIESCENT
+    })
+  }
+
   getVersionSelectSystem = (selectorName) => {
     const { fileVersions } = this.props
 
-    // Map the fileVersions to options
-    const options = fileVersions.slice(1).map((version, index) => {
-      return <option key={index} value={version.s3VersionId}>{version.commitMessage}</option>
-    })
+    var options = [
+      <option key="0" value="">{Strings.GIT_TEXT_NO_VERSIONS_EXIST_YET}</option>
+    ]
+    var isDisabled = true
+
+    if (fileVersions.length !== 0) {
+      // Map the fileVersions to options
+      options = fileVersions.slice(1).map((version, index) => {
+        const date = new Date(version.uploadedDateTime)
+        const displayDate = date.toISOString().split('T')[0]
+
+        if (version.commitMessage === undefined) {
+          return <option key={index} value={version.s3VersionId}>{`${displayDate} - ${Strings.GIT_TEXT_NO_COMMIT_MESSAGE_PROVIDED}`}</option>
+        }
+
+        return <option key={index} value={version.s3VersionId}>{`${displayDate} - ${version.commitMessage}`}</option>
+      })
+      isDisabled = false
+    }
 
     return (
       <div className='version-select'>
@@ -118,6 +156,7 @@ export class TextWriter extends Component {
           name={selectorName}
           id={selectorName}
           value={this.state.s3VersionId}
+          disabled={isDisabled}
           onChange={(e) => this.onSelectionChange(selectorName, e)}>
           {options}
         </select>
@@ -131,13 +170,25 @@ export class TextWriter extends Component {
     })
   }
 
+  showCommitDialogueBox = () => {
+    this.setState({
+      showCommitDialogueBox: true,
+    })
+  }
+
+  cancelCommit = () => {
+    this.setState({
+      showCommitDialogueBox: false,
+    })
+  }
+
   onUploadRequest = () => {
+    const { projectId, pageName, fieldId, user } = this.props
+    const { commitMessage } = this.state
+
     this.setState({
       state: ComponentState.UPLOADING_NEW_FILE_TO_SERVER
     })
-
-
-    const { projectId, pageName, fieldId } = this.props
 
     // Create the parameters
     const bucketName = process.env.REACT_APP_AWS_S3_USER_UPLOAD_BUCKET_NAME
@@ -152,7 +203,7 @@ export class TextWriter extends Component {
       Key: key,
     };
 
-    uploadFileToS3(uploadParams, this.onUploadToS3ProgressUpdate, this.onUploadToS3Success, this.onUploadToS3Failed)
+    uploadFileToS3(user.projectS3Token, uploadParams, this.onUploadToS3ProgressUpdate, this.onUploadToS3Success, this.onUploadToS3Failed)
   }
 
   onUploadToS3ProgressUpdate = (progress) => {
@@ -192,6 +243,31 @@ export class TextWriter extends Component {
     })
   }
 
+  // TODO: Continue here
+  getCommitDialogueBox = () => {
+    return (
+      <PopOverHandler>
+        <div id='popup-greyer' onClick={(e) => {
+          this.cancelCommit()
+          e.stopPropagation()
+          }}>
+          <div id='popover'>
+            <div id='popup-box' className='fit-content'>
+              <div className='popover-container' onClick={(e) => e.stopPropagation()}>
+                { /* TODO: Add in title here */}
+                { /* TODO: Add in text field here that updates commitMessage state when edited */}
+                <input
+                  type="submit"
+                  value={ Strings.BUTTON_SAVE_CHANGES }
+                  className="save-button"
+                  onClick={(e) => this.onUploadRequest()} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </PopOverHandler>
+    )
+  }
 
   getEditor = () => {
     const { disabled } = this.props
@@ -263,12 +339,17 @@ export class TextWriter extends Component {
           </React.Fragment> :
           null
         }
+        {
+          this.state.showCommitDialogueBox ?
+          this.getCommitDialogueBox() :
+          null
+        }
         <input
           type="submit"
           disabled={this.state.disabled}
           value={ Strings.BUTTON_SAVE_CHANGES }
           className="save-button"
-          onClick={(e) => this.onUploadRequest()} />
+          onClick={(e) => this.showCommitDialogueBox()} />
       </React.Fragment>
     )
   }

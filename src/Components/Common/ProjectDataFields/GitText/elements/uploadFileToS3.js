@@ -1,8 +1,10 @@
 import AWS from 'aws-sdk';
 
-function uploadFileToS3(uploadParams, progressFunc, resolve, reject) {
+function uploadFileToS3(token, uploadParams, progressFunc, resolve, reject) {
   // Create an S3 service provider
   const s3 = new AWS.S3()
+
+  //configureAWSAuthorisation(token)
 
   // Create a request
   var request = s3.putObject(uploadParams);

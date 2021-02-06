@@ -1086,7 +1086,7 @@ background-color: var(--field-element-grey);
 /* === create custom field popover element === */
 /* =========================================== */
 
-#create-custom-field-popover {
+#create-custom-field-popover{
   height: 100%;
   width: 100%;
 }
@@ -1104,7 +1104,8 @@ background-color: var(--field-element-grey);
   max-width: 500px;
 }
 
-#create-custom-field-popover #popup-box {
+#create-custom-field-popover #popup-box,
+#popup-box {
   height: auto;
   bottom: auto;
   background-color: var(--field-element-grey)
@@ -1837,7 +1838,20 @@ mark.grey {
   background: white;
 }
 
-#popOver {
+#popup-box.fit-content {
+  position: relative;
+  left: auto;
+  right: auto;
+  top: auto;
+  bottom: auto;
+  border-radius: var(--standard-border-radius);
+  background: white;
+  margin: auto;
+}
+
+#popOver, #popup-greyer, #popover {
+  width: 100%;
+  display: flex;
 }
 
 #popup-box .projects-pop-up-header {
@@ -2288,6 +2302,14 @@ mark.grey {
   border-radius: 10px;
 }
 
+/* ============================================== */
+/* ========= Git Commit Message Popover ========= */
+/* ============================================== */
+
+#popover .popover-container {
+  width: auto;
+  margin: var(--standard-margin);
+}
 
 /* ==================================== */
 /* ========= Pure CSS Spinner ========= */

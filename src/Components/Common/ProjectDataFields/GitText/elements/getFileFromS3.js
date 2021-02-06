@@ -1,19 +1,5 @@
 import AWS from 'aws-sdk';
 
-function configureAWSAuthorisation(token) {
-  // Update credentials to allow access to S3
-  const { AccessKeyId, SecretAccessKey, SessionToken } = token
-  AWS.config.update({
-    credentials: {
-      accessKeyId: AccessKeyId,
-      secretAccessKey: SecretAccessKey,
-      sessionToken: SessionToken
-    }
-  });
-  return;
-}
-
-
 async function checkFileExists(s3, downloadParams) {
   const result = s3.headObject(downloadParams, function (err, metadata) {
     console.log(err, metadata)
@@ -64,8 +50,6 @@ function getFileDataFromS3(userProps, downloadParams, selectorName, progressFunc
     reject({ message: "No S3 token in redux store" })
     return;
   }
-
-  configureAWSAuthorisation(userProps.projectS3Token)
 
   checkFileExists(s3, downloadParams)
     .then(exists => {
