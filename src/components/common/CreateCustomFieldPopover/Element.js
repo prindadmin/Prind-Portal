@@ -25,7 +25,8 @@ import * as FormInputs from '../formInputs'
 
 */
 
-const fieldTypes = [
+const fieldTypes = process.env.REACT_APP_FUNCTIONALITY_GIT_TEXT_V1 === "True" ?
+[
   {
     value: "file",
     label: "File Upload"
@@ -42,6 +43,28 @@ const fieldTypes = [
     value: "longText",
     label: "Text Box"
   },
+  {
+    value: "gitText",
+    label: "Change Tracking Text Box"
+  }
+] :
+[
+  {
+    value: "file",
+    label: "File Upload"
+  },
+  {
+    value: "calendar",
+    label: "Date Picker"
+  },
+  {
+    value: "dropdown",
+    label: "Drop Down Menu"
+  },
+  {
+    value: "longText",
+    label: "Text Box"
+  }
 ]
 
 export class Element extends Component {

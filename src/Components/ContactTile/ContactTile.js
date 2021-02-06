@@ -99,9 +99,7 @@ export class ContactTile extends Component {
   }
 
   removeMember = (e) => {
-
     const { projects, removeMember, memberDetails } = this.props
-
     this.setState({
       removingMember: true,
       addMemberError: false,
@@ -116,10 +114,12 @@ export class ContactTile extends Component {
   }
 
   showUserDetails = () => {
-    console.log("hello, user")
-    this.setState({
-      showUserDetailsPopover: true,
-    })
+    if (process.env.REACT_APP_FUNCTIONALITY_USER_ACCREDITATIONS_LIST_V1 === "True") {
+      console.log("hello, user")
+      this.setState({
+        showUserDetailsPopover: true,
+      })
+    }
   }
 
   hideUserDetails = () => {
@@ -225,9 +225,13 @@ export class ContactTile extends Component {
             }
 
           </div>
-          <div className='view-accreditations'>
-            { Strings.ACCREDITATION_VIEW_ACCREDITATIONS }
-          </div>
+          {
+            process.env.REACT_APP_FUNCTIONALITY_USER_ACCREDITATIONS_LIST_V1 === "True" ?
+            <div className='view-accreditations'>
+              { Strings.ACCREDITATION_VIEW_ACCREDITATIONS }
+            </div> :
+            null
+          }
         </div>
     )
   }
