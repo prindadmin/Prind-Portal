@@ -16,6 +16,7 @@ import uploadFileToS3 from './uploadFileToS3'
 // TODO: Style save button when disabled
 // TODO: Style text editor when disabled
 // TODO: Fix occasional errors with the S3 token
+// TODO: Store changes so that a failure of upload doesn't lose information
 
 export class TextWriter extends Component {
   static propTypes = {
@@ -46,14 +47,17 @@ export class TextWriter extends Component {
 
     // Check if the s3version exists
     var s3VersionId = ""
+    var ver = ""
     if (props.fileVersions.length !== 0) {
       s3VersionId = props.fileVersions[0].s3VersionId
+      ver = props.fileVersions[0].ver
     }
 
     this.state = {
       initialContent: '',
       content: '',
       s3VersionId,
+      ver,
       state: ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER,
       errorMessage: '',
       showCommitDialogueBox: false,
@@ -62,8 +66,31 @@ export class TextWriter extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props.fileVersions)
     this.onSelectionChange({ target: { value: this.state.s3VersionId }})
   }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.fileVersions !== prevProps.fileVersions) {
+      console.log(this.props.fileVersions)
+    }
+  }
+
+
+  getVerFromS3Id = (s3VersionId) => {
+    const { fileVersions } = this.props
+
+    if (fileVersions.length > 0) {
+      const versionObject = fileVersions.reduce((returnObject, fileVersion) => {
+        returnObject[fileVersion.s3VersionId] = fileVersion.ver
+        return returnObject
+      }, {})
+      return versionObject[s3VersionId]
+    }
+
+    return ""
+  }
+
 
   onSelectionChange = (e) => {
     const s3VersionId = e.target.value
@@ -87,11 +114,22 @@ export class TextWriter extends Component {
       VersionId: s3VersionId,
     }
 
+    // Find the chosen version number and store in state along with s3VersionId
+    const ver = this.getVerFromS3Id(s3VersionId)
+
+
     this.setState({
-      s3VersionId
+      ver,
+      s3VersionId,
     })
 
-    getFileFromS3(user, downloadParams, undefined, this.onProgressUpdate, this.onFileDownloadComplete, this.onFileDownloadFailed)
+    getFileFromS3(
+      user,
+      downloadParams,
+      undefined,
+      this.onProgressUpdate,
+      this.onFileDownloadComplete,
+      this.onFileDownloadFailed)
   }
 
   onProgressUpdate = (progress) => {
@@ -101,6 +139,7 @@ export class TextWriter extends Component {
   onFileDownloadComplete = (result) => {
     console.log("File download successful")
     console.log(result)
+    console.log(result.data.Body.toString())
     this.setState({
       ...this.state,
       state: ComponentState.QUIESCENT,
@@ -142,10 +181,14 @@ export class TextWriter extends Component {
         const displayDate = date.toISOString().split('T')[0]
 
         if (version.commitMessage === undefined) {
-          return <option key={index} value={version.s3VersionId}>{`${displayDate} - ${Strings.GIT_TEXT_NO_COMMIT_MESSAGE_PROVIDED}`}</option>
+          return <option
+            key={index}
+            value={version.s3VersionId}>{`${displayDate} - ${Strings.GIT_TEXT_NO_COMMIT_MESSAGE_PROVIDED}`}</option>
         }
 
-        return <option key={index} value={version.s3VersionId}>{`${displayDate} - ${version.commitMessage}`}</option>
+        return <option
+          key={index}
+          value={version.s3VersionId}>{`${displayDate} - ${version.commitMessage}`}</option>
       })
       isDisabled = false
     }
@@ -157,7 +200,7 @@ export class TextWriter extends Component {
           id={selectorName}
           value={this.state.s3VersionId}
           disabled={isDisabled}
-          onChange={(e) => this.onSelectionChange(selectorName, e)}>
+          onChange={(e) => this.onSelectionChange(e)}>
           {options}
         </select>
       </div>
@@ -184,10 +227,10 @@ export class TextWriter extends Component {
 
   onUploadRequest = () => {
     const { projectId, pageName, fieldId, user } = this.props
-    const { commitMessage } = this.state
 
     this.setState({
-      state: ComponentState.UPLOADING_NEW_FILE_TO_SERVER
+      state: ComponentState.UPLOADING_NEW_FILE_TO_SERVER,
+      showCommitDialogueBox: false,
     })
 
     // Create the parameters
@@ -203,7 +246,12 @@ export class TextWriter extends Component {
       Key: key,
     };
 
-    uploadFileToS3(user.projectS3Token, uploadParams, this.onUploadToS3ProgressUpdate, this.onUploadToS3Success, this.onUploadToS3Failed)
+    uploadFileToS3(
+      user.projectS3Token,
+      uploadParams,
+      this.onUploadToS3ProgressUpdate,
+      this.onUploadToS3Success,
+      this.onUploadToS3Failed)
   }
 
   onUploadToS3ProgressUpdate = (progress) => {
@@ -213,12 +261,26 @@ export class TextWriter extends Component {
   onUploadToS3Success = (result) => {
     console.log("File upload to S3 successful")
     const { projectId, pageName, fieldId } = this.props
+    const { commitMessage, ver } = this.state
+
+    console.log(`commitMessage: ${commitMessage}`)
+
     // Build parameters
     var uploadDetails = {
-      userFileName: `GitText-${projectId}-${pageName}-${fieldId}`
+      filename: `GitText-${projectId}-${pageName}-${fieldId}`,
+      commitMessage,
+      prevVer: ver,
     }
+
     // Send to the reducer
-    this.props.uploadFile(projectId, pageName, fieldId, uploadDetails, "gitText", this.onMetadataSaveSuccess, this.onMetadataSaveFailed)
+    this.props.uploadFile(
+      projectId,
+      pageName,
+      fieldId,
+      uploadDetails,
+      "gitText",
+      this.onMetadataSaveSuccess,
+      this.onMetadataSaveFailed)
   }
 
   onUploadToS3Failed = (error) => {
@@ -243,6 +305,21 @@ export class TextWriter extends Component {
     })
   }
 
+  handleCommitMessageChange = (event) => {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    if (value.length > 50) {
+      return
+    }
+
+    this.setState({
+      [name]: value
+    });
+  }
+
+
   // TODO: Continue here
   getCommitDialogueBox = () => {
     return (
@@ -253,9 +330,25 @@ export class TextWriter extends Component {
           }}>
           <div id='popover'>
             <div id='popup-box' className='fit-content'>
-              <div className='popover-container' onClick={(e) => e.stopPropagation()}>
-                { /* TODO: Add in title here */}
-                { /* TODO: Add in text field here that updates commitMessage state when edited */}
+              <div id="git-commit" className='popover-container' onClick={(e) => e.stopPropagation()}>
+                <h2 style={{marginBottom: '0.2em'}}>{ Strings.GIT_TEXT_COMMIT_TITLE }</h2>
+                <p>{ Strings.GIT_TEXT_COMMIT_DESCRIPTION }</p>
+
+                <input
+                  id="commitMessage"
+                  name="commitMessage"
+                  type="text"
+                  placeholder={ Strings.PLACEHOLDER_COMMIT_MESSAGE }
+                  value={this.state.commitMessage}
+                  onChange={this.handleCommitMessageChange}
+                  className={ this.state.commitMessage === '' ? "default" : "filled" }/>
+
+                {
+                  this.state.commitMessage.length === 50 ?
+                  <p className='error'>{ Strings.GIT_TEXT_COMMIT_MESSAGE_MAX_LENGTH_REACHED }</p> :
+                  <p className='info'>{ `${this.state.commitMessage.length}/50` }</p>
+                }
+
                 <input
                   type="submit"
                   value={ Strings.BUTTON_SAVE_CHANGES }
@@ -274,6 +367,7 @@ export class TextWriter extends Component {
     return (
       <Editor
         initialValue={this.state.initialContent}
+        value={this.state.content}
         apikey={process.env.REACT_APP_TINY_API_KEY}
         disabled={disabled}
         init={{

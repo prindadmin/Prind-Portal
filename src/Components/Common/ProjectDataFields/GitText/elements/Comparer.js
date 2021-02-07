@@ -14,9 +14,6 @@ import getFileFromS3 from './getFileFromS3'
 const EDITORCONTENTSTYLE = `mark.red { color: red; background: none; text-decoration: line-through; } mark.green { color: limegreen; background: none; } mark.grey { color: grey; background: none; }`;
 const CONTENTBEFORESELECTION = `<h2>${Strings.GIT_TEXT_NO_FILE_VERSION_SELECTED}</h2>`
 
-
-// TODO: Fix occasional errors with the S3 token not being present
-
 export class Comparer extends Component {
   static propTypes = {
     projectId: PropTypes.string.isRequired,
@@ -119,7 +116,7 @@ export class Comparer extends Component {
 
 
   // Add colour formatting to the text
-  // TODO: Work out a way to format this text correctly for Version 5 vs 4 in test project
+  // TODO: Add in tidying up of changed tags (see notes app)
   addFormatting = () => {
     console.log(this.state)
 
@@ -130,12 +127,13 @@ export class Comparer extends Component {
     }
 
     const diff = Diff.diffWords(this.state.oldVersion.initialContent, this.state.newVersion.initialContent);
+    console.log(diff)
     var outputDifference = ''
 
     diff.forEach((part) => {
       // green for additions, red for deletions
       // grey for common parts
-      const colour = part.added ? 'green' :
+      const colour = part.added ? 'lawngreen' :
                      part.removed ? 'red' : 'grey';
 
       if(colour === 'grey') {
@@ -143,7 +141,9 @@ export class Comparer extends Component {
         return;
       }
 
-      outputDifference += `<mark class="${colour}">${part.value}</mark>`
+      const markedUpClass = part.value.replaceAll("<p ", `<p style="color: ${colour}" `)
+
+      outputDifference += markedUpClass
     })
 
     console.log(outputDifference)

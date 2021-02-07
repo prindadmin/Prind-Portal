@@ -138,7 +138,7 @@ export class UploaderPopOver extends Component {
 
     // Build parameters
     var uploadDetails = {
-      userFileName: fileDetails.files[0].name
+      filename: fileDetails.files[0].name
     }
 
     // Send to the reducer

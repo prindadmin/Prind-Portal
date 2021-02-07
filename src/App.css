@@ -195,6 +195,17 @@ input[type=submit]  {
   width: 100%;
 }
 
+p.info {
+  color: darkgreen;
+  font-size: 12px;
+}
+
+p.error {
+  color: red;
+  font-size: 12px;
+  font-weight: bold;
+}
+
 /* ================================ */
 /* ======== sign-in section ======= */
 /* ================================ */
@@ -1854,6 +1865,10 @@ mark.grey {
   display: flex;
 }
 
+#popover {
+  padding: var(--standard-padding);
+}
+
 #popup-box .projects-pop-up-header {
   display: flex;
   text-align: center;
@@ -2309,6 +2324,25 @@ mark.grey {
 #popover .popover-container {
   width: auto;
   margin: var(--standard-margin);
+}
+
+#git-commit input[type=text]  {
+  width: 100%;
+  appearance: none;
+  background: #ffffff;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0 0 0 0 rgba(19, 124, 189, 0), 0 0 0 0 rgba(19, 124, 189, 0), inset 0 0 0 1px rgba(16, 22, 26, 0.15), inset 0 1px 1px rgba(16, 22, 26, 0.2);
+  color: #182026;
+  font-size: 14px;
+  font-weight: 400;
+  height: 30px;
+  line-height: 30px;
+  outline: none;
+  padding: 0 10px;
+  transition: box-shadow 100ms cubic-bezier(0.4, 1, 0.75, 0.9);
+  vertical-align: middle;
+  margin-bottom: calc(var(--standard-margin) / 2);
 }
 
 /* ==================================== */
