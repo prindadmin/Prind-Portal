@@ -126,22 +126,27 @@ export class Comparer extends Component {
       return this.state.newVersion.initialContent
     }
 
-    const diff = Diff.diffWords(this.state.oldVersion.initialContent, this.state.newVersion.initialContent);
+    // Remove line breaks because they make things confusing when marking up
+    const oldToCompare = this.state.oldVersion.initialContent//.replace(/\n/g, "")
+    const newToCompare = this.state.newVersion.initialContent//.replace(/\n/g, "")
+
+    const diff = Diff.diffLines(oldToCompare, newToCompare, {newlineIsToken: true});
     console.log(diff)
     var outputDifference = ''
 
     diff.forEach((part) => {
       // green for additions, red for deletions
-      // grey for common parts
-      const colour = part.added ? 'lawngreen' :
-                     part.removed ? 'red' : 'grey';
+      // no formatting for common parts
+      const style = part.added ? "color: lawngreen; background: none;" :
+                    part.removed ? "color: red; background: none; text-decoration: line-through;" :
+                    ""
 
-      if(colour === 'grey') {
+      if(style === '') {
         outputDifference += `${part.value}`
         return;
       }
 
-      const markedUpClass = part.value.replaceAll("<p ", `<p style="color: ${colour}" `)
+      const markedUpClass = part.value.replaceAll(/<p /g, `<p style="${style}" `)
 
       outputDifference += markedUpClass
     })
