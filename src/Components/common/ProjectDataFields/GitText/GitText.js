@@ -124,7 +124,7 @@ export class GitText extends Component {
 
 
   render() {
-    const { title, description, fileDetails, user } = this.props.elementContent
+    const { title, description, fileDetails } = this.props.elementContent
     const { state } = this.state
     return (
       <div id='git-text-element'>

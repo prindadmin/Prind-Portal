@@ -12,7 +12,7 @@ function checkContentIsEmpty(parent) {
   return false
 }
 
-
+/*
 function removeNewLines(text, replaceWith) {
   var replaceString = ""
   if (replaceWith !== undefined) {
@@ -20,7 +20,7 @@ function removeNewLines(text, replaceWith) {
   }
   return text.replace(/\n/g, replaceString)
 }
-
+*/
 
 function splitOnOpeningTags(fileString) {
   return fileString.split(/(?=<[a-zA-Z0-9 "=:;-]+>)/g).slice(0)
