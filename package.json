@@ -1,6 +1,6 @@
 {
-  "name": "prind-demo",
-  "version": "0.1.0",
+  "name": "prind-portal",
+  "version": "1.3.2",
   "private": true,
   "dependencies": {
     "@blueprintjs/core": "^3.38.0",
