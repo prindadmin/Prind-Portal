@@ -1,5 +1,21 @@
 import AWS from 'aws-sdk';
 
+async function configureAWSAuthorisation(token) {
+  console.log("configuring AWS auth")
+  console.log(token)
+
+  // Update credentials to allow access to S3
+  const { AccessKeyId, SecretAccessKey, SessionToken } = token
+  return AWS.config.update({
+    credentials: {
+      accessKeyId: AccessKeyId,
+      secretAccessKey: SecretAccessKey,
+      sessionToken: SessionToken
+    }
+  });
+}
+
+
 async function checkFileExists(s3, downloadParams) {
   const result = s3.headObject(downloadParams, function (err, metadata) {
     console.log(err, metadata)
@@ -51,8 +67,9 @@ function getFileDataFromS3(userProps, downloadParams, selectorName, progressFunc
     return;
   }
 
-  checkFileExists(s3, downloadParams)
-    .then(exists => {
+  configureAWSAuthorisation(userProps.projectS3Token).then(function(e) {
+    console.log("AWS auth set")
+    checkFileExists(s3, downloadParams).then(exists => {
       console.log(exists)
       //console.log(`File exists: ${exists}`)
       if (exists) {
@@ -62,6 +79,7 @@ function getFileDataFromS3(userProps, downloadParams, selectorName, progressFunc
         reject({ message: "File does not exist" })
       }
     })
+  })
 }
 
 export default getFileDataFromS3
