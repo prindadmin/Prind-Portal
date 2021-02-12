@@ -17,6 +17,7 @@ import uploadFileToS3 from './uploadFileToS3'
 // TODO: Style text editor when disabled
 // TODO: Fix occasional errors with the S3 token
 // TODO: Store changes so that a failure of upload doesn't lose information
+// TODO: New line (enter) moves the cursor back to the beginning of the box!!!
 
 export class TextWriter extends Component {
   static propTypes = {

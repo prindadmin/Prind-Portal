@@ -19,6 +19,7 @@ import * as Endpoints from '../../Data/Endpoints'
 const CreatingProjectPopover = lazy(() => import('../../Components/CreatingProjectPopover'));
 
 // TODO: Add ability to upload thumbnails or pick icon for a project
+// TODO: Don't open project selector once project is created
 
 export class Page extends Component {
   static propTypes = {

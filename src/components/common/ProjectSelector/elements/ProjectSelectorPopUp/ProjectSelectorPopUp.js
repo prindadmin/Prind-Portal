@@ -210,6 +210,7 @@ export class ProjectSelectorPopUp extends Component {
   }
 
 
+  // TODO: Edit this so that it only shows projects for the specific portal
   concatProjects = () => {
     const { accessibleProjects } = this.props.projects
     let projectsWhereCreator = accessibleProjects.projectCreator.map(project => project.projectId);

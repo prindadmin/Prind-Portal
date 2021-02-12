@@ -14,6 +14,8 @@ import * as Strings from '../../../../../../Data/Strings'
 
 const windowCloseDelay = 1500
 
+// TODO: After success, this should change the page that called it to the loading spinner, not just sit there
+
 export class UploaderPopOver extends Component {
   static propTypes = {
     fileDetails: PropTypes.object.isRequired,

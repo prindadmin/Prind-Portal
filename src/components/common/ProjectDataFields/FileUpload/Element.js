@@ -18,6 +18,8 @@ import ItemIcon from '../../ItemIcon'
 import * as Strings from '../../../../Data/Strings'
 
 // TODO: Fix Uploaded by displaying "none none" when user has not signed up to Foundations (seems to come from server)
+// TODO: Stop this box expanding, contracting, then expanding again on load.
+// TODO: Completely rethink how this field looks
 
 export class Element extends Component {
   static propTypes = {

@@ -1,6 +1,7 @@
 
 import * as Diff from 'diff';
 
+// TODO: Work out why this isn't highlighting anything (i.e. outputDifference is not having any 'style' applied)
 
 function checkContentIsEmpty(parent) {
   // Check for empty comparison text
