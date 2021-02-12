@@ -6,7 +6,6 @@ import ReactGA from 'react-ga';
 import ProjectLoading from '../../Components/Common/ProjectLoading'
 
 import { Tab, Tabs, Callout } from '@blueprintjs/core'
-
 import * as Strings from '../../Data/Strings'
 
 /* Page elements */

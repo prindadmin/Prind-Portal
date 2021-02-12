@@ -1,8 +1,6 @@
 
 import * as Diff from 'diff';
 
-// TODO: Work out why this isn't highlighting anything (i.e. outputDifference is not having any 'style' applied)
-
 function checkContentIsEmpty(parent) {
   // Check for empty comparison text
   if (parent.state.oldVersion.initialContent === undefined || parent.state.newVersion.initialContent === undefined) {
@@ -29,7 +27,7 @@ function splitOnOpeningTags(fileString) {
 
 
 function AddFormatting(parent) {
-  console.log(parent.state)
+  //console.log(parent.state)
 
   // Check for empty comparison text
   if (checkContentIsEmpty(parent)) {
@@ -76,17 +74,18 @@ function AddFormatting(parent) {
                   ""
 
     if(style === '') {
+      console.log("style was empty")
       outputDifference += `${part.value}`
       return;
     }
 
-    const markedUpClass = part.value.replaceAll(/<p /g, `<p style="${style}" `)
+    const markedUpClass = part.value.split("<p").join(`<p style="${style}"`)
 
     outputDifference += markedUpClass
   })
 
   //console.log(outputDifference)
-  console.log(splitOnOpeningTags(outputDifference))
+  //console.log(splitOnOpeningTags(outputDifference))
 
   return outputDifference
 }

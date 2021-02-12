@@ -187,6 +187,7 @@ export const UPLOAD_VERSION = "Version: "
 export const NO_CURRENT_VERSION = "There is no current version of this file."
 export const NO_SIGNATURES = "There are no signatures for this file"
 export const NO_PROOF_AVAILABLE = "Proof still processing"
+export const FILE_UPLOAD_UPLOADER_HAS_NO_NAME = "User without Foundations"
 
 
 export const BUTTON_SELF_SIGN_FILE = "Self Sign Document"

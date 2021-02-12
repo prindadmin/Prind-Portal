@@ -19,6 +19,7 @@ import * as FormInputs from '../../../Common/formInputs'
 
 const defaultAvatar = `images/default-avatar.png`
 
+// TODO: Fix avatar upload
 export class Page extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,

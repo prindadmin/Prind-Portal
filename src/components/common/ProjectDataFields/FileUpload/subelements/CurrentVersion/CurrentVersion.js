@@ -14,6 +14,8 @@ import DownloadBox from '../DownloadBox'
 
 import * as Strings from '../../../../../../Data/Strings'
 
+// TODO: Get Simon to change "uploadedBy" from "None None" to the users email address
+
 export class Element extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
@@ -146,7 +148,7 @@ export class Element extends Component {
               </div>
 
               <div className='field-values col-auto'>
-                <div>{details.uploadedBy !== undefined ? details.uploadedBy : <br />}</div>
+                <div>{details.uploadedBy !== undefined && details.uploadedBy !== "None None" ? details.uploadedBy : Strings.FILE_UPLOAD_UPLOADER_HAS_NO_NAME}</div>
               </div>
             </div>
 

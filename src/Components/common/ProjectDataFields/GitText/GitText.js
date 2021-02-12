@@ -104,7 +104,6 @@ export class GitText extends Component {
   }
 
 
-  // TODO: style button
   getChangeViewButtons = () => {
     const isWriter = this.state.view === ComponentState.GIT_TEXT_WRITER_OPEN
     const changeTo = this.state.view === ComponentState.GIT_TEXT_WRITER_OPEN ? ComponentState.GIT_TEXT_COMPARER_OPEN : ComponentState.GIT_TEXT_WRITER_OPEN

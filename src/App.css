@@ -34,7 +34,8 @@
   --standard-border-radius: 15px;
   --standard-padding: 15px;
   --standard-margin: 15px;
-  --standard-border-radius: 15px;
+  --standard-border-radius: 10px;
+  --standard-border-radius-button: 5px;
   --standard-max-content-width: 1000px;
   --project-selector-grid-columns: 1fr;
   --popup-header-height: 80px;
@@ -155,7 +156,7 @@ hr {
 .close-button {
   background-color: grey;
   color: white;
-  border-radius: var(--standard-border-radius);
+  border-radius: var(--standard-border-radius-button);
   border: 2px black solid;
   padding: 10px 27px;
   height: 3em;
@@ -179,7 +180,7 @@ input[type=submit]  {
   flex-direction: row;
   align-items: center;
   border: none;
-  border-radius: 3px;
+  border-radius: var(--standard-border-radius-button);
   cursor: pointer;
   font-size: 14px;
   justify-content: center;
@@ -230,7 +231,7 @@ p.error {
 #new-project-page .auth-form {
     max-width: 500px;
     width: 100%;
-    padding: 15px;
+    padding: var(--standard-padding);
     margin: 0 auto;
 }
 
@@ -253,7 +254,7 @@ p.error {
 #signin .sign-in-container {
   width: 100%;
   max-width: 500px;
-  margin: 15px;
+  margin: var(--standard-margin);
 }
 
 #confirming-email-address .error-container {
@@ -325,7 +326,7 @@ p.error {
   height: var(--header-height);
   background-color: #000;
   margin: 0;
-  padding: 15px;
+  padding: var(--standard-padding);
 }
 
 .App-header .row {
@@ -490,7 +491,7 @@ p.error {
 
 #new-project-page .project-form {
     width: 100%;
-    padding: 15px;
+    padding: var(--standard-padding);
     margin: 0 auto;
 }
 
@@ -594,7 +595,7 @@ p.error {
 
 #project-team-page .project-form {
   width: 100%;
-  padding: 15px;
+  padding: var(--standard-padding);
   margin: 0 auto;
 }
 
@@ -650,7 +651,7 @@ p.error {
 }
 
 #project-team-page .single-contact-tile-container {
-  margin-bottom: 15px;
+  margin-bottom: var(--standard-margin);
 }
 
 /* ================================== */
@@ -669,7 +670,7 @@ p.error {
 
 
 #contact-tile .bp3-heading {
-  margin-left: 15px;
+  margin-left: var(--standard-margin);
 }
 
 #contact-tile .col-3 {
@@ -917,7 +918,7 @@ background-color: var(--field-element-grey);
 
 @media only screen and (min-width: 992px) {
   #file-upload-element .field-names {
-    padding-left: 15px;
+    padding-left: var(--standard-padding);
   }
 }
 
@@ -1085,8 +1086,8 @@ background-color: var(--field-element-grey);
 }
 
 #pick-signer-popover .negative-margins {
-  margin-left: -15px !important;
-  margin-right: -15px !important;
+  margin-left: calc(-1 * var(--standard-margin)) !important;
+  margin-right: calc(-1 * var(--standard-margin)) !important;
 }
 
 #pick-signer-popover button {
@@ -1345,14 +1346,8 @@ background-color: var(--field-element-grey);
 }
 
 #git-text-element .save-button {
-  background-color: var(--prind-palette-color-4);
-  color: white;
-  margin: var(--standard-margin) 0 0 auto;
-  border-radius: var(--standard-border-radius);
-  border: 2px black solid;
-  padding: 10px 27px;
-  height: 3em;
-  font-size: 16px;
+  max-width: 400px;
+  margin-top: var(--standard-margin);
 }
 
 #git-text-element .container {
@@ -1494,7 +1489,7 @@ mark.grey {
 #profile-page .col-md-12,
 #profile-page .col-lg-3,
 #profile-page .col-lg-9,  {
-  margin-bottom: 15px !important;
+  margin-bottom: var(--standard-margin) !important;
 }
 
 #profile-page .tab-pane {
@@ -1557,11 +1552,11 @@ mark.grey {
 
   #profile-tab-container .foundations-info {
     margin: 0 auto 2em auto;
-    width: calc(100% - (2 * 15px));
+    width: calc(100% - (2 * var(--standard-margin)));
   }
 
   #profile-tab-container .bp3-form-group {
-    padding: 0 15px;
+    padding: 0 var(--standard-padding);
   }
 }
 
@@ -1629,12 +1624,12 @@ mark.grey {
 #project-invitation-request button,
 #signature-request button {
   margin: 0 !important;
-  width: calc((100% - 15px) / 2) !important;
+  width: calc((100% - var(--standard-margin)) / 2) !important;
 }
 
 #project-invitation-request button:last-of-type,
 #signature-request button:last-of-type {
-  margin-left: 15px !important;
+  margin-left: var(--standard-margin) !important;
 }
 
 /* ================================== */
@@ -2192,7 +2187,7 @@ mark.grey {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 50% 50%;
-  padding: 0px 15px;
+  padding: 0px var(--standard-padding);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -2211,7 +2206,7 @@ mark.grey {
   margin-left: 5%;
   background-color: #F8F8F8;
   border-radius: 18px;
-  padding: 15px;
+  padding: var(--standard-padding);
   box-shadow: 0px 3px 6px rgba(0,0,0,0.3);
   overflow: auto;
 }

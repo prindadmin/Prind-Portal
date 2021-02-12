@@ -6,8 +6,6 @@ import ProjectTypesList from '../../../../../Data/ProjectTypes'
 
 const ProjectTypeTile = lazy(() => import('../../../../ProjectTypeTile'));
 
-// TODO: Test that this closing actually closes the project selector
-
 export class ProjectTypeSelector extends Component {
   static propTypes = {
     closePopup: PropTypes.func.isRequired,

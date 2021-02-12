@@ -229,6 +229,12 @@ export class TextWriter extends Component {
   onUploadRequest = () => {
     const { projectId, pageName, fieldId, user } = this.props
 
+    // If the state is a failed metadata upload, skip straight to metadata upload
+    if (this.state.state === ComponentState.UPDATING_METADATA_ON_SERVER_FAILED) {
+      this.onUploadToS3Success()
+      return;
+    }
+
     this.setState({
       state: ComponentState.UPLOADING_NEW_FILE_TO_SERVER,
       showCommitDialogueBox: false,
@@ -266,11 +272,13 @@ export class TextWriter extends Component {
 
     console.log(`commitMessage: ${commitMessage}`)
 
+    const prevVer = ver === undefined ? "0" : ver
+
     // Build parameters
     var uploadDetails = {
       filename: `GitText-${projectId}-${pageName}-${fieldId}`,
       commitMessage,
-      prevVer: ver,
+      prevVer,
     }
 
     // Send to the reducer
@@ -287,10 +295,12 @@ export class TextWriter extends Component {
   onUploadToS3Failed = (error) => {
     console.log("ERROR uploading file to S3")
     console.error(error)
+    const { getNewToken, projectId, pageName } = this.props
     this.setState({
       state: ComponentState.UPLOADING_NEW_FILE_TO_SERVER_FAILED,
       errorMessage: Strings.ERROR_SAVING_CHANGES_TO_FIELD,
     })
+    getNewToken(projectId, pageName)
   }
 
   onMetadataSaveSuccess = () => {
@@ -300,10 +310,12 @@ export class TextWriter extends Component {
   }
 
   onMetadataSaveFailed = () => {
+    const { getNewToken, projectId, pageName } = this.props
     this.setState({
-      state: ComponentState.UPLOADING_NEW_FILE_TO_SERVER_FAILED,
+      state: ComponentState.UPDATING_METADATA_ON_SERVER_FAILED,
       errorMessage: Strings.ERROR_SAVING_CHANGES_TO_FIELD,
     })
+    getNewToken(projectId, pageName)
   }
 
   handleCommitMessageChange = (event) => {
@@ -321,7 +333,6 @@ export class TextWriter extends Component {
   }
 
 
-  // TODO: Continue here
   getCommitDialogueBox = () => {
     return (
       <PopOverHandler>
@@ -418,6 +429,11 @@ export class TextWriter extends Component {
         }
         {
           this.state.state === ComponentState.UPLOADING_NEW_FILE_TO_SERVER_FAILED ?
+          this.getErrorDownloading() :
+          null
+        }
+        {
+          this.state.state === ComponentState.UPDATING_METADATA_ON_SERVER_FAILED ?
           this.getErrorDownloading() :
           null
         }
