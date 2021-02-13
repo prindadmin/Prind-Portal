@@ -91,52 +91,10 @@ exports[`Should render DSHF project Sidebar 1`] = `
       selected={false}
     />
     <ListItem
-      key="Inceptionitem"
-      linkTo="/inception/1234"
-      pageName="Inception"
-      selected={false}
-    />
-    <ListItem
-      key="Feasibilityitem"
-      linkTo="/feasibility/1234"
-      pageName="Feasibility"
-      selected={false}
-    />
-    <ListItem
-      key="Designitem"
-      linkTo="/design/1234"
-      pageName="Design"
-      selected={false}
-    />
-    <ListItem
-      key="Tenderitem"
-      linkTo="/tender/1234"
-      pageName="Tender"
-      selected={false}
-    />
-    <ListItem
-      key="Constructionitem"
-      linkTo="/construction/1234"
-      pageName="Construction"
-      selected={false}
-    />
-    <ListItem
-      key="Handoveritem"
-      linkTo="/handover/1234"
-      pageName="Handover"
-      selected={false}
-    />
-    <ListItem
-      key="Occupationitem"
+      key="HSFitem"
       linkTo="/occupation/1234"
-      pageName="Occupation"
+      pageName="HSF"
       selected={true}
-    />
-    <ListItem
-      key="Refurbishmentitem"
-      linkTo="/refurbishment/1234"
-      pageName="Refurbishment"
-      selected={false}
     />
   </div>
 </div>
