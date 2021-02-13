@@ -2,20 +2,7 @@ import { call, put, takeLatest } from 'redux-saga/effects'
 
 import * as Actions from '../Actions'
 import * as States from '../States'
-
-// resendConfirmationCodeDispatcher,
-
-import {
-  registerNewUserDispatcher,
-  signInDispatcher,
-  signOutDispatcher,
-  refreshSessionDispatcher,
-  forgotPasswordDispatcher,
-  changePasswordDispatcher,
-  updatePasswordDispatcher,
-  confirmUserDispatcher,
-} from '../Dispatchers/Auth'
-
+import * as Dispatchers from '../Dispatchers/Auth'
 
 // auth is stateless. Each call to a auth action resets all state EXCEPT for updatePassword
 let defaultState = {
@@ -50,7 +37,7 @@ function * init (action) {
 */
 function * signUp (action) {
   try {
-    yield call(registerNewUserDispatcher, action.payload.values)
+    yield call(Dispatchers.registerNewUser, action.payload.values)
     yield put({
       type: Actions.AUTH_SET_STATE,
       payload: {
@@ -58,7 +45,9 @@ function * signUp (action) {
         hasSignedUp: States.AUTH_SUCCESS
       }
     })
-    action.payload.resolve()
+    if (action.payload.resolve !== undefined) {
+      action.payload.resolve()
+    }
   } catch (e) {
     yield put({
       type: Actions.AUTH_SET_STATE,
@@ -67,7 +56,9 @@ function * signUp (action) {
         error: e
       }
     })
-    action.payload.reject(e)
+    if (action.payload.reject !== undefined) {
+      action.payload.reject(e)
+    }
   }
 }
 
@@ -78,7 +69,8 @@ function * signUp (action) {
 */
 function * signIn (action) {
   try {
-    const result = yield call(signInDispatcher, action.payload.values)
+    const result = yield call(Dispatchers.signIn, action.payload.values)
+    console.log(result)
     yield put({
       type: Actions.AUTH_SET_STATE,
       payload: {
@@ -86,14 +78,12 @@ function * signIn (action) {
         isConfirmed: States.AUTH_SUCCESS,
       }
     })
-
     yield put({
       type: Actions.USER_SET_STATE,
       payload: {
         ...result
       }
     })
-
     if (action.payload.resolve !== undefined) {
       action.payload.resolve(result)
     }
@@ -108,7 +98,6 @@ function * signIn (action) {
     if (action.payload.reject !== undefined) {
       action.payload.reject(e)
     }
-
   }
 }
 
@@ -119,14 +108,13 @@ function * signIn (action) {
 */
 function * signOut (action) {
   try {
-    const result = yield call(signOutDispatcher)
+    const result = yield call(Dispatchers.signOut)
     yield put({
       type: Actions.AUTH_SET_STATE,
       payload: {
         ...defaultState,
       }
     })
-
     if (action.payload.resolve !== undefined) {
       action.payload.resolve(result)
     }
@@ -138,7 +126,6 @@ function * signOut (action) {
         error: e
       }
     })
-
     if (action.payload.reject !== undefined) {
       action.payload.reject(e)
     }
@@ -154,7 +141,7 @@ function * signOut (action) {
 
 function * refreshSession (action) {
   try {
-    const result = yield call(refreshSessionDispatcher)
+    const result = yield call(Dispatchers.refreshSession)
     yield put({
       type: Actions.AUTH_SET_STATE,
       payload: {
@@ -162,14 +149,12 @@ function * refreshSession (action) {
         isConfirmed: States.AUTH_SUCCESS,
       }
     })
-
     yield put({
       type: Actions.USER_SET_STATE,
       payload: {
         ...result
       }
     })
-
     if (action.payload.resolve !== undefined) {
       action.payload.resolve(result)
     }
@@ -181,7 +166,6 @@ function * refreshSession (action) {
         error: e
       }
     })
-
     if (action.payload.reject !== undefined) {
       action.payload.reject(e)
     }
@@ -194,19 +178,12 @@ function * refreshSession (action) {
 ====================================================================
 */
 function * forgotPassword (action) {
-
-  console.log(action.payload)
-
   try {
-    const result = yield call(forgotPasswordDispatcher, action.payload.username)
-
+    const result = yield call(Dispatchers.forgotPassword, action.payload.username)
     if (action.payload.resolve !== undefined) {
       action.payload.resolve(result)
     }
   } catch (e) {
-
-    console.log("error in forgotten password")
-
     yield put({
       type: Actions.AUTH_SET_STATE,
       payload: {
@@ -214,7 +191,6 @@ function * forgotPassword (action) {
         error: e
       }
     })
-
     if (action.payload.reject !== undefined) {
       action.payload.reject(e)
     }
@@ -228,21 +204,14 @@ function * forgotPassword (action) {
 ====================================================================
 */
 function * changePassword (action) {
-
-  console.log(action.payload)
-
-  const { user_name, confirmation_code, password } = action.payload
-
   try {
-    const result = yield call(changePasswordDispatcher, user_name, confirmation_code, password)
+    const result = yield call(Dispatchers.changePassword, action.payload)
     yield put({
       type: Actions.AUTH_SET_STATE,
       payload: {
         hasChangedPassword: States.AUTH_SUCCESS
       }
     })
-
-
     if (action.payload.resolve !== undefined) {
       action.payload.resolve(result)
     }
@@ -254,7 +223,6 @@ function * changePassword (action) {
         error: e
       }
     })
-
     if (action.payload.reject !== undefined) {
       action.payload.reject(e)
     }
@@ -268,16 +236,11 @@ function * changePassword (action) {
 ====================================================================
 */
 function * updatePassword (action) {
-
-  const { username, oldPassword, newPassword } = action.payload
-
   try {
-    const result = yield call(updatePasswordDispatcher, username, oldPassword, newPassword)
-
+    const result = yield call(Dispatchers.updatePassword, action.payload)
     if (action.payload.resolve !== undefined) {
       action.payload.resolve(result)
     }
-
   } catch (e) {
     yield put({
       type: Actions.AUTH_SET_STATE,
@@ -286,7 +249,6 @@ function * updatePassword (action) {
         error: e
       }
     })
-
     if (action.payload.reject !== undefined) {
       action.payload.reject(e)
     }
@@ -302,8 +264,7 @@ function * updatePassword (action) {
 
 function * confirmUserEmail (action) {
   try {
-    const result = yield call(confirmUserDispatcher, action.payload)
-
+    const result = yield call(Dispatchers.confirmUser, action.payload)
     if (action.payload.resolve !== undefined) {
       action.payload.resolve(result)
     }
@@ -315,7 +276,6 @@ function * confirmUserEmail (action) {
         error: e
       }
     })
-
     if (action.payload.reject !== undefined) {
       action.payload.reject(e)
     }

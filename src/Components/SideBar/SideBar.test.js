@@ -3,6 +3,11 @@ import { shallow } from 'enzyme';
 
 import SideBar from './SideBar'
 
+beforeEach(() => {
+  process.env = Object.assign(process.env, {
+    REACT_APP_PORTAL: 'CDM2015Project'
+  });
+});
 
 it('Should render CDM project Sidebar', () => {
   const props = {

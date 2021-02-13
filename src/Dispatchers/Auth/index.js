@@ -1,21 +1,10 @@
-import registerNewUserDispatcher from './registerNewUser'
-import signInDispatcher from './signIn'
-import signOutDispatcher from './signOut'
-import resendConfirmationCodeDispatcher from './resendConfirmationCode'
-import refreshSessionDispatcher from './refreshSession'
-import forgotPasswordDispatcher from './forgotPassword'
-import changePasswordDispatcher from './changePassword'
-import updatePasswordDispatcher from './updatePassword'
-import confirmUserDispatcher from './confirmUser'
 
-export {
-  registerNewUserDispatcher,
-  signInDispatcher,
-  signOutDispatcher,
-  resendConfirmationCodeDispatcher,
-  refreshSessionDispatcher,
-  forgotPasswordDispatcher,
-  changePasswordDispatcher,
-  updatePasswordDispatcher,
-  confirmUserDispatcher,
-}
+export { default as registerNewUser } from './registerNewUser';
+export { default as signIn } from './signIn';
+export { default as signOut } from './signOut';
+export { default as resendConfirmationCode } from './resendConfirmationCode';
+export { default as refreshSession } from './refreshSession';
+export { default as forgotPassword } from './forgotPassword';
+export { default as changePassword } from './changePassword';
+export { default as updatePassword } from './updatePassword';
+export { default as confirmUser } from './confirmUser';

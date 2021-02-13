@@ -89,8 +89,36 @@ exports[`Should render DSHF project Sidebar 1`] = `
             "name": "Project Team",
           },
           Object {
+            "linkTo": "/inception",
+            "name": "Inception",
+          },
+          Object {
+            "linkTo": "/feasibility",
+            "name": "Feasibility",
+          },
+          Object {
+            "linkTo": "/design",
+            "name": "Design",
+          },
+          Object {
+            "linkTo": "/tender",
+            "name": "Tender",
+          },
+          Object {
+            "linkTo": "/construction",
+            "name": "Construction",
+          },
+          Object {
+            "linkTo": "/handover",
+            "name": "Handover",
+          },
+          Object {
             "linkTo": "/occupation",
-            "name": "HSF",
+            "name": "Occupation",
+          },
+          Object {
+            "linkTo": "/refurbishment",
+            "name": "Refurbishment",
           },
         ]
       }
