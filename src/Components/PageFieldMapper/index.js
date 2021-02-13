@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { /*FileUpload,*/ DropDown, CalendarPicker, LongText, GitText } from '../Common/ProjectDataFields'
-import * as ProjectDataFields from '../ProjectDataFields'
+import * as PageFields from '../PageFields'
 
 const PageFieldMapper = props => {
 
@@ -9,7 +9,7 @@ const PageFieldMapper = props => {
 
   if (singleField.type === 'file') {
 
-    return <ProjectDataFields.FileUpload
+    return <PageFields.FileUpload
               key={singleField.id}
               elementContent={singleField}
               pageName={pageName}
