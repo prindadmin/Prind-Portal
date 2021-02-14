@@ -14,15 +14,12 @@ import * as Strings from '../../../../../Data/Strings'
 
 export class Element extends Component {
   static propTypes = {
-    //latestFileDetails:  PropTypes.object.isRequired,
     chosenFileDetails: PropTypes.shape({
       uploadName: PropTypes.string.isRequired,
       uploadDateTime: PropTypes.string.isRequired,
       uploadedBy: PropTypes.string.isRequired,
       proofLink: PropTypes.string,
     }).isRequired,
-    //nextFileDetails: PropTypes.object.isRequired,
-    //previousFileDetails: PropTypes.object.isRequired,
     projectID: PropTypes.any.isRequired,
     pageName: PropTypes.any.isRequired,
     fieldID: PropTypes.any.isRequired,

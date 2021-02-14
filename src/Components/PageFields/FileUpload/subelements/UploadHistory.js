@@ -1,15 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import {
-  Label,
-} from '@blueprintjs/core'
-
-import FileDetailPopover from './FileDetailPopover'
+import DownloadBox from './DownloadBox'
+import Spinner from '../../../Common/LoadingSpinnerCSS'
 
 import * as Strings from '../../../../Data/Strings'
 
-export class Element extends Component {
+// TODO: Improve structuring of propTypes to ensure errors are captured
+// TODO: Do something with error text state string
+export class UploadHistory extends Component {
   static propTypes = {
     details: PropTypes.array.isRequired,
     projectID: PropTypes.any.isRequired,
@@ -20,23 +19,27 @@ export class Element extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      showFileDetails: false,
-      fileDetails: {}
+      fileDetails: {},
+      fetchError: false,
+      errorText: "",
+      downloadInProgress: false
     }
   }
 
-  fileDetailsOpen = (e, fileDetails) => {
+
+  downloadResolve = () => {
     this.setState({
-      showFileDetails: true,
-      chosenFileDetails: fileDetails,
+      downloadInProgress: false,
+      fetchError: false,
+      errorText: ""
     })
-    e.stopPropagation()
   }
 
-  closeFileDetails = () => {
+  downloadReject = () => {
     this.setState({
-      showFileDetails: false,
-      fileDetails: {}
+      downloadInProgress: false,
+      fetchError: true,
+      errorText: Strings.ERROR_FETCHING_DOWNLOAD_LINK
     })
   }
 
@@ -46,9 +49,7 @@ export class Element extends Component {
   }
 
 
-
   getProof = (proofLink) => {
-
     if (proofLink === undefined) {
       return(
         Strings.NO_PROOF_AVAILABLE
@@ -60,95 +61,72 @@ export class Element extends Component {
     }
   }
 
+  startDownload = (e) => {
+    this.setState({
+      downloadInProgress: true,
+    })
+  }
 
-  uploadHistoryProvided = () => {
+  getDownloadButton = (fileUpload) => {
+    const { projectID, pageName, fieldID } = this.props
 
-    const  { details } = this.props
+    if (this.state.downloadInProgress) {
+      return (
+        <Spinner size={16} />
+      )
+    }
 
+    return (
+      <div onClick={this.startDownload}>
+        <DownloadBox
+          projectID={projectID}
+          pageName={pageName}
+          fieldID={fieldID}
+          fileVersionDetails={fileUpload}
+          onDownloadSuccess={this.downloadResolve}
+          onDownloadFailure={this.downloadReject}
+        />
+      </div>
+    )
+  }
+
+  getDetailsTable = () => {
+    const { details } = this.props
     var reversedDetails = details.filter(function(fileUpload) {
       return(fileUpload.ver !== "0" && fileUpload.ver !== 0)
     })
-
     reversedDetails.reverse()
-
     return (
-      <React.Fragment>
-
-        <div className='row'>
-          <div className='element-title'>
-            {Strings.UPLOAD_HISTORY_ELEMENT}
-          </div>
-        </div>
-
-
-        <div className='row'>
-
-          <div className='col'>
-            <Label>
-              <b>{Strings.FILE_NAME}</b>
-            </Label>
-          </div>
-
-          <div className='col'>
-            <Label>
-              <b>{Strings.UPLOADED_BY}</b>
-            </Label>
-          </div>
-
-          <div className='col'>
-            <Label>
-              <b>{Strings.UPLOAD_VERSION}</b>
-            </Label>
-          </div>
-
-          <div className='col'>
-            <Label>
-              <b>{Strings.UPLOAD_DATE_TIME}</b>
-            </Label>
-          </div>
-
-          <div className='col'>
-            <Label>
-              <b>{Strings.PROOF}</b>
-            </Label>
-          </div>
-
-        </div>
-
-        <div className='row'>
+      <div className='details-table'>
+        <h4>{Strings.FILE_NAME}</h4>
+        <h4>{Strings.UPLOADED_BY}</h4>
+        <h4>{Strings.UPLOAD_VERSION}</h4>
+        <h4>{Strings.UPLOAD_DATE_TIME}</h4>
+        <h4>{Strings.PROOF}</h4>
+        <h4>{Strings.DOWNLOAD_WITH_COLON}</h4>
         {
           reversedDetails.map((fileUpload, index) => {
             return (
-              <div className='row signatures' key={index} onClick={(e) => this.fileDetailsOpen(e, fileUpload)}>
-
-                <div className='col'>
-                  {fileUpload.uploadName === undefined ? Strings.NO_UPLOAD_NAME : fileUpload.uploadName}
-                </div>
-
-                <div className='col'>
-                  {fileUpload.uploadedBy}
-                </div>
-
-                <div className='col'>
-                  {fileUpload.ver}
-                </div>
-
-                <div className='col'>
-                  {fileUpload.uploadedDateTime}
-                </div>
-
-                <div className='col'>
+              <React.Fragment>
+                <div>{fileUpload.uploadName === undefined ? Strings.NO_UPLOAD_NAME : fileUpload.uploadName}</div>
+                <div>{fileUpload.uploadedBy === "None None" ? Strings.FILE_UPLOAD_UPLOADER_HAS_NO_NAME : fileUpload.uploadedBy}</div>
+                <div>{fileUpload.ver}</div>
+                <div>{fileUpload.uploadedDateTime}</div>
+                <div>
                   {
                     this.getProof(fileUpload.proofLink)
                   }
                 </div>
-
-              </div>
+                <div>
+                  {
+                    this.getDownloadButton(fileUpload)
+                  }
+                </div>
+              </React.Fragment>
             )
           })
         }
-        </div>
-      </React.Fragment>
+      </div>
     )
   }
 
@@ -162,32 +140,19 @@ export class Element extends Component {
   }
 
 
-
   render() {
-
-    const { details, projectID, pageName, fieldID } = this.props
-    const { showFileDetails, chosenFileDetails } = this.state
-
+    const { details } = this.props
     return(
-      <div className='upload-history-container'>
+      <div id='upload-history-container'>
+        <div className='element-title'>
+          {Strings.UPLOAD_HISTORY_ELEMENT}
+        </div>
         {
-          details.length === 0 ? this.uploadHistoryNotProvided() : this.uploadHistoryProvided()
-        }
-        {
-          showFileDetails ?
-          <FileDetailPopover
-            chosenFileDetails={chosenFileDetails}
-            projectID={projectID}
-            pageName={pageName}
-            fieldID={fieldID}
-            onClosePopover={this.closeFileDetails}
-          /> :
-          null
+          details.length === 0 ? this.uploadHistoryNotProvided() : this.getDetailsTable()
         }
       </div>
     )
   }
-
 }
 
-export default Element
+export default UploadHistory

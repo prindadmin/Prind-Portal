@@ -21,9 +21,11 @@ function removeNewLines(text, replaceWith) {
 }
 */
 
+/*
 function splitOnOpeningTags(fileString) {
   return fileString.split(/(?=<[a-zA-Z0-9 "=:;-]+>)/g).slice(0)
 }
+*/
 
 
 function AddFormatting(parent) {

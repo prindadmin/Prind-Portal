@@ -169,6 +169,7 @@ export const TAB_REQUESTS = "Requests"
 export const TAB_CURRENT_FILE = "Current"
 export const TAB_SIGNATURES = "Signatures"
 export const TAB_UPLOAD_FILE = "Upload"
+export const TAB_FILE_VERSIONS = "Versions"
 
 
 export const NO_ROLE_SELECTED = "Please select a role..."
@@ -203,9 +204,12 @@ export const LINK_TO_PROOF = "Link to Proof"
 export const SIGNED_BY = "Signed By: "
 export const SIGNED_DATE_TIME = "Signed At: "
 export const PROOF = "Proof: "
+export const DOWNLOAD_WITH_COLON = "Download:"
 
 export const UPLOAD_HISTORY_ELEMENT = "Upload History"
 export const NO_PREVIOUS_VERSIONS = "There are no previous version of this file"
+
+export const TAB_UPLOAD_FILE_HEADING = "Upload New Version"
 
 export const UPLOAD_IN_PROGESS = "Upload in progress.  Please wait..."
 export const UPLOADED_SIZE = "Uploaded: "

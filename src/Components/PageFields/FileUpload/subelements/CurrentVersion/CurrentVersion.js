@@ -7,8 +7,6 @@ import {
   Callout,
 } from '@blueprintjs/core'
 
-import SignatureHistory from '../SignatureHistory'
-
 import PickSignerPopover from '../../../../Common/PickSignerPopover'
 import DownloadBox from '../DownloadBox'
 
@@ -20,9 +18,9 @@ export class Element extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
     details: PropTypes.object,
-    projectID: PropTypes.string,
-    pageName: PropTypes.string,
-    fieldID: PropTypes.string,
+    projectID: PropTypes.string.isRequired,
+    pageName: PropTypes.string.isRequired,
+    fieldID: PropTypes.string.isRequired,
     editable: PropTypes.bool,
   }
 
@@ -62,165 +60,124 @@ export class Element extends Component {
   // Perform Actions to request your own signature
   sendSelfSignRequest = (e) => {
     console.log("Self sign file clicked")
-
     const { projectID, pageName, fieldID } = this.props
-
     // Send the request
     this.props.selfSignFile(
       projectID,
       pageName,
       fieldID,
     )
-
     // Stop the click propagating up and opening the upload history section
     e.stopPropagation();
   }
 
 
-
   // Perform Actions to request a signature
   requestSignature = (e) => {
     console.log("Signature requested")
-
     // Stop the click proporgating up and opening the upload history section
     e.stopPropagation();
-
     this.setState({
       signerPickerOpen: true,
     })
+  }
 
+
+  getDetailsTable = () => {
+    const { details } = this.props
+    return (
+      <div className='details-table'>
+        <h4>{Strings.FILE_NAME}</h4>
+        <div>{details.uploadName !== undefined ? details.uploadName : ""}</div>
+        <h4>{Strings.UPLOAD_DATE_TIME}</h4>
+        <div>{details.uploadedDateTime !== undefined ? details.uploadedDateTime : ""}</div>
+        <h4>{Strings.UPLOADED_BY}</h4>
+        <div>{details.uploadedBy !== undefined && details.uploadedBy !== "None None" ? details.uploadedBy : Strings.FILE_UPLOAD_UPLOADER_HAS_NO_NAME}</div>
+        <h4>{Strings.PROOF}</h4>
+        <div>
+          {
+            details.proofLink === null  || details.proofLink === undefined ?
+              Strings.NO_PROOF_AVAILABLE :
+              <div onClick={e => e.stopPropagation()}>
+                <a href={details.proofLink} target="_blank" rel="noopener noreferrer">{Strings.LINK_TO_PROOF}</a>
+              </div>
+          }
+        </div>
+      </div>
+    )
+  }
+
+
+  getDownloadButton = () => {
+    const { projectID, pageName, fieldID, details } = this.props
+    return (
+      <div className="download-box-cell" onClick={(e) => e.stopPropagation()}>
+        <DownloadBox
+          projectID={projectID}
+          pageName={pageName}
+          fieldID={fieldID}
+          fileVersionDetails={details}
+          onDownloadSuccess={this.downloadResolve}
+          onDownloadFailure={this.downloadReject}
+        />
+      </div>
+    )
   }
 
 
   currentVersionProvided = () => {
-
-    const { projectID, pageName, fieldID, details, user } = this.props
+    const { user } = this.props
     const { fetchError, errorText } = this.state
-
     const noFoundationsID = user.details.foundationsID === undefined || user.details.foundationsID === null
 
     return (
       <React.Fragment>
-
-        <div className='row align-items-start'>
-          <div className='col-8 col-lg-10 '>
-
-
-            <div className='row'>
-              <div className='element-title'>
-                {Strings.CURRENT_VERSION_ELEMENT}
-              </div>
-            </div>
-
-            {
-              fetchError ?
-              <div className="row">
-                <Callout style={{marginBottom: '15px'}} intent='danger'>
-                  <div>{errorText}</div>
-                </Callout>
-              </div> :
-              null
-            }
-
-            <div className='row'>
-              <div className='field-names col-12 col-lg-3 col-xl-2'>
-                <div>{Strings.FILE_NAME}</div>
-              </div>
-
-              <div className='field-values col-auto'>
-                <div>{details.uploadName !== undefined ? details.uploadName : <br />}</div>
-              </div>
-            </div>
-
-            <div className='row'>
-              <div className='field-names col-12 col-lg-3 col-xl-2'>
-                <div>{Strings.UPLOAD_DATE_TIME}</div>
-              </div>
-
-              <div className='field-values col-auto'>
-                <div>{details.uploadedDateTime !== undefined ? details.uploadedDateTime : <br />}</div>
-              </div>
-            </div>
-
-            <div className='row'>
-              <div className='field-names col-12 col-lg-3 col-xl-2'>
-                <div>{Strings.UPLOADED_BY}</div>
-              </div>
-
-              <div className='field-values col-auto'>
-                <div>{details.uploadedBy !== undefined && details.uploadedBy !== "None None" ? details.uploadedBy : Strings.FILE_UPLOAD_UPLOADER_HAS_NO_NAME}</div>
-              </div>
-            </div>
-
-            <div className='row'>
-              <div className='field-names col-12 col-lg-3 col-xl-2'>
-                <div>{Strings.PROOF}</div>
-              </div>
-
-              <div className='field-values col-auto'>
-                {
-                  details.proofLink === null  || details.proofLink === undefined ?
-                    Strings.NO_PROOF_AVAILABLE :
-                    <div onClick={e => e.stopPropagation()}>
-                      <a href={details.proofLink} target="_blank" rel="noopener noreferrer">{Strings.LINK_TO_PROOF}</a>
-                    </div>
-                }
-              </div>
-            </div>
-
-            <div className='row button-row'>
-              <Button
-                intent={Intent.PRIMARY}
-                onClick={(e) => this.requestSignature(e)}
-                disabled={!this.state.fileCanBeSign || !this.props.editable}
-                text={Strings.BUTTON_REQUEST_SIGNATURES}
-              />
-              <Button
-                intent={Intent.PRIMARY}
-                onClick={(e) => this.sendSelfSignRequest(e)}
-                disabled={this.state.fileIsSelfSigned || !this.props.editable || noFoundationsID}
-                text={Strings.BUTTON_SELF_SIGN_FILE}
-              />
-            </div>
-
-            {
-              noFoundationsID ?
-                <div className='row button-row'>
-                  <Callout className='no-foundations-id' intent='danger'>
-                    <div>
-                      { Strings.CANNOT_SIGN_WITHOUT_FOUNDATIONS_ID }
-                    </div>
-                  </Callout>
-                </div> :
-                null
-            }
-
-            <div className='row section-margin'>
-              <SignatureHistory
-                details={details.signatures}
-              />
-            </div>
-          </div>
-
-
-          <div className='col-4 col-lg-2'>
-            <div className="col download-box-cell" onClick={(e) => e.stopPropagation()}>
-              <DownloadBox
-                projectID={projectID}
-                pageName={pageName}
-                fieldID={fieldID}
-                fileVersionDetails={details}
-                onDownloadSuccess={this.downloadResolve}
-                onDownloadFailure={this.downloadReject}
-              />
-            </div>
-          </div>
-
-
+        <div className='element-title'>
+          {Strings.CURRENT_VERSION_ELEMENT}
         </div>
+
+        {
+          fetchError ?
+            <Callout style={{marginBottom: '15px'}} intent='danger'>
+              <div>{errorText}</div>
+            </Callout> :
+            null
+        }
+        {
+          this.getDetailsTable()
+        }
+        {
+          noFoundationsID ?
+            <div className='row button-row'>
+              <Callout className='no-foundations-id' intent='danger'>
+                <div>
+                  { Strings.CANNOT_SIGN_WITHOUT_FOUNDATIONS_ID }
+                </div>
+              </Callout>
+            </div> :
+            null
+        }
+        <div className='row button-row'>
+          <Button
+            intent={Intent.PRIMARY}
+            onClick={(e) => this.requestSignature(e)}
+            disabled={!this.state.fileCanBeSign || !this.props.editable}
+            text={Strings.BUTTON_REQUEST_SIGNATURES}
+          />
+          <Button
+            intent={Intent.PRIMARY}
+            onClick={(e) => this.sendSelfSignRequest(e)}
+            disabled={this.state.fileIsSelfSigned || !this.props.editable || noFoundationsID}
+            text={Strings.BUTTON_SELF_SIGN_FILE}
+          />
+        </div>
+        {
+          this.getDownloadButton()
+        }
       </React.Fragment>
     )
   }
+
 
   currentVersionNotProvided = () => {
     return (
@@ -230,11 +187,10 @@ export class Element extends Component {
     )
   }
 
-  render() {
 
+  render() {
     const { details, projectID, pageName, fieldID } = this.props
     const { signerPickerOpen } = this.state
-
     return(
       <div id='current-version-container'>
         {
@@ -251,11 +207,8 @@ export class Element extends Component {
           /> : null
         }
       </div>
-
-
     )
   }
-
 }
 
 export default Element

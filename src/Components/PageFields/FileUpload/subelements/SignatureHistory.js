@@ -1,78 +1,53 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import {
-  Label,
-} from '@blueprintjs/core'
-
 import * as Strings from '../../../../Data/Strings'
 
-// TODO: Update the CSS for this box when the width is below xxx px
+// TODO: Test This
+// TODO: Add in version number to the details mapping
 
-export class Element extends Component {
+export class SignatureHistory extends Component {
   static propTypes = {
-    details: PropTypes.array.isRequired,
+    details: PropTypes.arrayOf(
+      PropTypes.shape({
+        signerName: PropTypes.string.isRequired,
+        signatureDateTime: PropTypes.string.isRequired,
+        proofLink: PropTypes.string.isRequired,
+      })
+    ).isRequired,
   }
 
 
+  getDetailsTable = () => {
+    const { details } = this.props
+    return (
+      <div className='details-table'>
+        <h4>{Strings.SIGNED_BY}</h4>
+        <h4>{Strings.SIGNED_DATE_TIME}</h4>
+        <h4>{Strings.PROOF}</h4>
+        {
+          details.map((signature, index) => {
+            return (
+              <React.Fragment>
+                <div>{signature.signerName}</div>
+                <div>{signature.signatureDateTime}</div>
+                <div><a href={signature.proofLink} target="_blank" rel="noopener noreferrer">{Strings.LINK_TO_PROOF}</a></div>
+              </React.Fragment>
+            )
+          })
+        }
+      </div>
+    )
+  }
+
 
   signaturesProvided = () => {
-
-    const { details } = this.props
-
     return (
-      <div>
-
-        <div className='row'>
-          <div className='element-title'>
-            {Strings.SIGNATURE_ELEMENT}
-          </div>
-        </div>
-        <div className='row signatures'>
-          <div className='col'>
-            <Label>
-              <b>{Strings.SIGNED_BY}</b>
-              {
-                details.map((signature, index) => {
-                  return (
-                    <div key={index + "signee"}>
-                      {signature.signerName}
-                    </div>
-                  )
-                })
-              }
-            </Label>
-          </div>
-          <div className='col'>
-            <Label>
-              <b>{Strings.SIGNED_DATE_TIME}</b>
-              {
-                details.map((signature, index) => {
-                  return (
-                    <div key={index + "datetime"}>
-                      {signature.signatureDateTime}
-                    </div>
-                  )
-                })
-              }
-            </Label>
-          </div>
-          <div className='col'>
-            <Label>
-              <b>{Strings.PROOF}</b>
-              {
-                details.map((signature, index) => {
-                  return (
-                    <div key={index + "proof"}>
-                      <a href={signature.proofLink} target="_blank" rel="noopener noreferrer">{Strings.LINK_TO_PROOF}</a>
-                    </div>
-                  )
-                })
-              }
-            </Label>
-          </div>
-        </div>
-      </div>
+      <React.Fragment>
+        {
+          this.getDetailsTable()
+        }
+      </React.Fragment>
     )
   }
 
@@ -89,9 +64,12 @@ export class Element extends Component {
     const { details } = this.props
 
     return(
-      <div className='signature-container'>
+      <div id='signature-container'>
+        <div className='element-title'>
+          {Strings.SIGNATURE_ELEMENT}
+        </div>
         {
-          details === null ? this.signaturesNotProvided() : this.signaturesProvided()
+          details.length === 0 ? this.signaturesNotProvided() : this.signaturesProvided()
         }
       </div>
     )
@@ -99,4 +77,4 @@ export class Element extends Component {
 
 }
 
-export default Element
+export default SignatureHistory

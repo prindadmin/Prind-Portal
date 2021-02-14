@@ -13,15 +13,12 @@ import {
   CurrentVersion,
   UploadHistory,
   UploaderPopOver,
+  SignatureHistory,
 } from './subelements'
-
-import ItemIcon from '../../Common/ItemIcon'
 
 import * as Strings from '../../../Data/Strings'
 
-// TODO: Stop this box expanding, contracting, then expanding again on load.
-// TODO: Completely rethink how this field looks (tabs)?
-
+// TODO: Improve propTypes so that errors are captured more easily
 export class Element extends Component {
   static propTypes = {
     elementContent: PropTypes.shape({
@@ -37,14 +34,11 @@ export class Element extends Component {
   constructor() {
     super()
     this.state = {
-      isExpanded: false,
-      showUploadHistory: false,
       filePrompt: Strings.FILE_PROMPT,
       fileDetails: {},
       hasChosenFile: false,
       uploadFileRequested: false,
       fileState: '',
-      hash: null,
       activeTab: 'current',
     }
   }
@@ -62,33 +56,6 @@ export class Element extends Component {
           fileState: ' has-upload'
         })
       }
-    }
-  }
-
-
-  // Toggle between the detailed and minimized views of the element
-  onElementClick = () => {
-    const that = this
-    // If the window is expanded, then...
-    if (this.state.isExpanded) {
-      // Delay removing the upload history
-      setTimeout(() => {
-        that.setState({
-          showUploadHistory: !this.state.showUploadHistory,
-        })
-      }, 980);
-
-      // Close the expansion straight away so the animation starts
-      this.setState({
-        isExpanded: !this.state.isExpanded,
-      })
-
-    // Else expand everything together
-    } else {
-      this.setState({
-        isExpanded: !this.state.isExpanded,
-        showUploadHistory: !this.state.showUploadHistory,
-      })
     }
   }
 
@@ -125,7 +92,7 @@ export class Element extends Component {
   currentTab = () => {
     const { elementContent, pageName, projects } = this.props
     return (
-      <div className='row'>
+      <React.Fragment>
         {
           elementContent.fileDetails.length > 0 ?
           <CurrentVersion
@@ -139,19 +106,22 @@ export class Element extends Component {
             details={null}
           />
         }
-      </div>
+      </React.Fragment>
     )
   }
 
 
   signatureTab = () => {
-    return (
-      "signature tab"
-    )
+    const { elementContent } = this.props
+    var details = []
+    if (elementContent.fileDetails.length !== 0) {
+      details = elementContent.fileDetails[0].signatures
+    }
+    return <SignatureHistory details={details} />
   }
 
 
-  historyTab = () => {
+  versionsTab = () => {
     const { elementContent, pageName, projects } = this.props
     return (
       <UploadHistory
@@ -168,7 +138,8 @@ export class Element extends Component {
     const { filePrompt, hasChosenFile } = this.state
     const { elementContent } = this.props
     return (
-      <div className='row'>
+      <div id='upload-tab-container'>
+        <div className='element-title'>{Strings.TAB_UPLOAD_FILE_HEADING}</div>
         <FileInput
           className="field bp3-fill"
           ref='fileInput'
@@ -177,16 +148,13 @@ export class Element extends Component {
           disabled={!elementContent.editable}
         />
 
-        <div className='row'>
-          <div className='col-5 col-lg-4 col-xl-3'>
-            <Button
-              intent={Intent.PRIMARY}
-              onClick={(e) => this.uploadFile(e)}
-              disabled={!hasChosenFile}
-              text={Strings.BUTTON_UPLOAD_FILE}
-            />
-          </div>
-        </div>
+        <Button
+          intent={Intent.PRIMARY}
+          onClick={(e) => this.uploadFile(e)}
+          disabled={!hasChosenFile}
+          text={Strings.BUTTON_UPLOAD_FILE}
+        />
+
       </div>
     )
   }
@@ -204,8 +172,8 @@ export class Element extends Component {
     return (
       <Tabs id='fileTabs' className="nav nav-tabs" onChange={this.handleTabChange} selectedTabId={activeTab}>
         <Tab id="current" title={Strings.TAB_CURRENT_FILE} panel={this.currentTab()} />
-        { /* <Tab id="signatures" title={Strings.TAB_SIGNATURES} panel={this.signatureTab()} /> */}
-        <Tab id="history" title={Strings.TAB_HISTORY} panel={this.historyTab()} />
+        <Tab id="signatures" title={Strings.TAB_SIGNATURES} panel={this.signatureTab()} />
+        <Tab id="versions" title={Strings.TAB_FILE_VERSIONS} panel={this.versionsTab()} />
         <Tab id="upload" title={Strings.TAB_UPLOAD_FILE} panel={this.uploadTab()} />
         <Tabs.Expander />
       </Tabs>
@@ -218,7 +186,7 @@ export class Element extends Component {
     const { elementContent, pageName, projects } = this.props
 
     return (
-      <div id='file-upload-element' className="collapsed">
+      <div id='file-upload-element'>
         <div className={'file-upload-element-container' + fileState}>
           <div className='element-title'>
             {elementContent.title}
@@ -227,11 +195,9 @@ export class Element extends Component {
             {elementContent.description}
           </div>
           <div className='element-file-uploader container'>
-            <div className='row'>
-              {
-                this.getTabs()
-              }
-            </div>
+            {
+              this.getTabs()
+            }
           </div>
         </div>
 
