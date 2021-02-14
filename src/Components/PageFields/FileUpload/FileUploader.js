@@ -45,13 +45,12 @@ export class Element extends Component {
       uploadFileRequested: false,
       fileState: '',
       hash: null,
+      activeTab: 'current',
     }
   }
 
   componentDidMount() {
-
     const { fileDetails } = this.props.elementContent
-
     if (fileDetails.length !== 0) {
       if (fileDetails[0].proofLink !== undefined) {
         this.setState({
@@ -66,14 +65,10 @@ export class Element extends Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
-  }
 
   // Toggle between the detailed and minimized views of the element
   onElementClick = () => {
-
     const that = this
-
     // If the window is expanded, then...
     if (this.state.isExpanded) {
       // Delay removing the upload history
@@ -95,16 +90,12 @@ export class Element extends Component {
         showUploadHistory: !this.state.showUploadHistory,
       })
     }
-
   }
 
-  // ---------------------- DEFAULT FUNCTIONALITY ABOVE THIS LINE -----------------------
 
   // Update the text inside the file picker
   fileChosen = (e) => {
-
     e.persist()
-
     this.setState({
       filePrompt: e.target.value.replace("C:\\fakepath\\", ""),
       fileDetails: e.target,
@@ -115,16 +106,14 @@ export class Element extends Component {
   // Updates state which triggers pop-over
   uploadFile = (e) => {
     console.log("file submit clicked")
-
     this.setState({
       hasChosenFile: false,
       uploadFileRequested: true,
       fileState: '',
     })
-
     e.stopPropagation();
-
   }
+
 
   cancelPopup = () => {
     this.setState({
@@ -133,15 +122,103 @@ export class Element extends Component {
   }
 
 
-  // ------------------------------ RENDER BELOW THIS LINE ------------------------------
+  currentTab = () => {
+    const { elementContent, pageName, projects } = this.props
+    return (
+      <div className='row'>
+        {
+          elementContent.fileDetails.length > 0 ?
+          <CurrentVersion
+            details={elementContent.fileDetails[0]}
+            projectID={projects.chosenProject.projectId}
+            pageName={pageName}
+            fieldID={elementContent.id}
+            editable={elementContent.editable}
+          /> :
+          <CurrentVersion
+            details={null}
+          />
+        }
+      </div>
+    )
+  }
+
+
+  signatureTab = () => {
+    return (
+      "signature tab"
+    )
+  }
+
+
+  historyTab = () => {
+    const { elementContent, pageName, projects } = this.props
+    return (
+      <UploadHistory
+        details={ elementContent.fileDetails }
+        projectID={projects.chosenProject.projectId}
+        pageName={pageName}
+        fieldID={elementContent.id}
+        />
+    )
+  }
+
+
+  uploadTab = () => {
+    const { filePrompt, hasChosenFile } = this.state
+    const { elementContent } = this.props
+    return (
+      <div className='row'>
+        <FileInput
+          className="field bp3-fill"
+          ref='fileInput'
+          onInputChange={(e) => this.fileChosen(e)}
+          text={filePrompt}
+          disabled={!elementContent.editable}
+        />
+
+        <div className='row'>
+          <div className='col-5 col-lg-4 col-xl-3'>
+            <Button
+              intent={Intent.PRIMARY}
+              onClick={(e) => this.uploadFile(e)}
+              disabled={!hasChosenFile}
+              text={Strings.BUTTON_UPLOAD_FILE}
+            />
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+
+  handleTabChange = (tabName) => {
+    this.setState({
+      activeTab: tabName,
+    })
+  }
+
+
+  getTabs = () => {
+    const { activeTab } = this.state
+    return (
+      <Tabs id='fileTabs' className="nav nav-tabs" onChange={this.handleTabChange} selectedTabId={activeTab}>
+        <Tab id="current" title={Strings.TAB_CURRENT_FILE} panel={this.currentTab()} />
+        { /* <Tab id="signatures" title={Strings.TAB_SIGNATURES} panel={this.signatureTab()} /> */}
+        <Tab id="history" title={Strings.TAB_HISTORY} panel={this.historyTab()} />
+        <Tab id="upload" title={Strings.TAB_UPLOAD_FILE} panel={this.uploadTab()} />
+        <Tabs.Expander />
+      </Tabs>
+    )
+  }
+
 
   render() {
-
-    const { isExpanded, showUploadHistory, filePrompt, fileState, fileDetails } = this.state
+    const { fileState, fileDetails } = this.state
     const { elementContent, pageName, projects } = this.props
 
     return (
-      <div id='file-upload-element' className={isExpanded ? "expanded" : "collapsed"}>
+      <div id='file-upload-element' className="collapsed">
         <div className={'file-upload-element-container' + fileState}>
           <div className='element-title'>
             {elementContent.title}
@@ -150,64 +227,12 @@ export class Element extends Component {
             {elementContent.description}
           </div>
           <div className='element-file-uploader container'>
-
             <div className='row'>
               {
-                elementContent.fileDetails.length > 0 ?
-                <CurrentVersion
-                  details={elementContent.fileDetails[0]}
-                  projectID={projects.chosenProject.projectId}
-                  pageName={pageName}
-                  fieldID={elementContent.id}
-                  editable={elementContent.editable}
-                /> :
-                <CurrentVersion
-                  details={null}
-                />
+                this.getTabs()
               }
             </div>
-
-
-            <div className='row'>
-              <FileInput
-                className="field bp3-fill"
-                ref='fileInput'
-                onInputChange={(e) => this.fileChosen(e)}
-                text={filePrompt}
-                disabled={!elementContent.editable}
-              />
-
-
-              <div className='row'>
-                <div className='col-5 col-lg-4 col-xl-3'>
-                  <Button
-                    intent={Intent.PRIMARY}
-                    onClick={(e) => this.uploadFile(e)}
-                    disabled={!this.state.hasChosenFile}
-                    text={Strings.BUTTON_UPLOAD_FILE}
-                  />
-                </div>
-                <div className='detail-view-open-button' onClick={(e) => this.onElementClick()}>
-                  {
-                    isExpanded ?
-                    <ItemIcon size='2x' type='caretUp' /> :
-                    <ItemIcon size='2x' type='caretDown' />
-                  }
-                </div>
-              </div>
-
-
-            </div>
           </div>
-          {
-            showUploadHistory ? <UploadHistory
-              details={ elementContent.fileDetails }
-              projectID={projects.chosenProject.projectId}
-              pageName={pageName}
-              fieldID={elementContent.id}
-              /> :
-            null
-          }
         </div>
 
         {
@@ -222,7 +247,6 @@ export class Element extends Component {
               /> :
             null
         }
-
       </div>
     )
   }

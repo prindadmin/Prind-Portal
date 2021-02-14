@@ -166,6 +166,9 @@ export const USER_DETAILS_LOADING = "Fetching details, please wait..."
 export const TAB_DETAILS = "Details"
 export const TAB_HISTORY = "History"
 export const TAB_REQUESTS = "Requests"
+export const TAB_CURRENT_FILE = "Current"
+export const TAB_SIGNATURES = "Signatures"
+export const TAB_UPLOAD_FILE = "Upload"
 
 
 export const NO_ROLE_SELECTED = "Please select a role..."
