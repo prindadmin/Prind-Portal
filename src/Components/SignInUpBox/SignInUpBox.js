@@ -19,6 +19,7 @@ export class SignInUpBox extends Component {
     isSignUp: PropTypes.bool.isRequired,
     isForgotPassword: PropTypes.bool.isRequired,
     isPasswordReset: PropTypes.bool.isRequired,
+    username: PropTypes.string,
   }
 
 
@@ -57,6 +58,7 @@ export class SignInUpBox extends Component {
   showSignInForm = () => {
     return (
       <SignInBox
+        username={this.props.username}
         toggleVisibleForm={this.toggleVisibleForm}
         />
     )

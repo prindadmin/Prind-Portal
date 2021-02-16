@@ -266,7 +266,7 @@ function * confirmUserEmail (action) {
   try {
     const result = yield call(Dispatchers.confirmUser, action.payload)
     if (action.payload.resolve !== undefined) {
-      action.payload.resolve(result)
+      action.payload.resolve(action.payload.user_name)
     }
   } catch (e) {
     yield put({

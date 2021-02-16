@@ -14,9 +14,7 @@ import PopOverHandler from '../popOverHandler'
 
 import * as Strings from '../../../Data/Strings'
 
-// TODO: URGENT: Fix the formatting of this popover
-
-export class Element extends Component {
+export class PickSignerPopover extends Component {
   static propTypes = {
     teamMembers: PropTypes.shape({
       confirmed: PropTypes.arrayOf(
@@ -68,24 +66,13 @@ export class Element extends Component {
     }
   }
 
-  componentDidMount() {
-  }
-
-  componentDidUpdate(prevProps) {
-  }
-
-
-  // ---------------------- DEFAULT FUNCTIONALITY ABOVE THIS LINE -----------------------
 
   // When the user wants to send the signing request, this is called
   sendSigningRequest = (e) => {
     e.stopPropagation()
-
     const { projectID, pageName, fieldID } = this.props
     const { selectedMembers } = this.state
-
     var members = selectedMembers.map(value => value.username);
-
     this.props.requestSignature(
       projectID,
       pageName,
@@ -116,12 +103,15 @@ export class Element extends Component {
     this.setState({
       searchTerm: e.target.value,
     })
-
     e.stopPropagation()
   }
 
   // When a tile it clicked, add or remove it from the selected members list
-  tileClicked = (e, memberDetails) => {
+  tileClicked = (e, memberDetails, canSign) => {
+    e.stopPropagation()
+    if (!canSign) {
+      return;
+    }
 
     var { selectedMembers } = this.state
 
@@ -135,20 +125,33 @@ export class Element extends Component {
     this.setState({
       selectedMembers: selectedMembers
     })
+  }
 
-    e.stopPropagation()
+  getName = (memberDetails) => {
+    if (memberDetails.firstName === null || memberDetails.lastName === null) {
+      return Strings.MEMBER_NEEDS_FOUNDATIONS_TO_SIGN
+    }
+    return `${memberDetails.firstName} ${memberDetails.lastName}`
   }
 
   memberTileRenderer = (memberDetails, index) => {
-
     const { selectedMembers } = this.state
-
     const isSelected = selectedMembers.includes(memberDetails)
+    const canSign = memberDetails.foundationsID !== null
+
+    var className = "member-tile"
+    if(!canSign) {
+      className += " cannot-sign"
+    } else if(isSelected) {
+      className += " selected"
+    }
 
     return(
-      <div className={`member-tile${isSelected ? " selected" : ""}`} key={index} onClick={(e) => this.tileClicked(e, memberDetails)}>
-        <p>{`${Strings.MEMBER_NAME}: ${memberDetails.firstName} ${memberDetails.lastName}`}</p>
-        <p>{`${Strings.MEMBER_EMAIL_ADDRESS}: ${memberDetails.emailAddress}`}</p>
+      <div id='contact-tile' className={className} key={index} onClick={(e) => this.tileClicked(e, memberDetails, canSign)}>
+        <h4>{`${Strings.MEMBER_NAME}:`}</h4>
+        <p>{this.getName(memberDetails)}</p>
+        <h4>{`${Strings.MEMBER_EMAIL_ADDRESS}:`}</h4>
+        <p>{`${memberDetails.emailAddress}`}</p>
         <div className="member-tile-tickbox">
           {isSelected ? <ItemIcon size='2x' type='ticked' /> : <ItemIcon size='2x' type='unticked' />}
         </div>
@@ -157,21 +160,17 @@ export class Element extends Component {
   }
 
   getFilteredMembers = () => {
-
     const { teamMembers } = this.props
     const { searchTerm } = this.state
-
     const filteredInvitees = teamMembers.invited.filter((item) => {
       return (
         item.username !== null
       )
     })
-
     // If the search term is blank, return all users
     if (searchTerm === "") {
       return teamMembers.confirmed.concat(filteredInvitees)
     }
-
     // If not blank, filter the members
     return (teamMembers.confirmed.concat(filteredInvitees)).filter((item) => {
       return (
@@ -182,32 +181,25 @@ export class Element extends Component {
   }
 
 
-
   getTiles = () => {
-
     const filteredMembers = this.getFilteredMembers()
-
-    return(
-      <div className="member-tile-container">
-        <div className="row negative-margins">
-          {
-            filteredMembers.map((memberDetails, index) => {
-              return (
-                <div key={index} className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-4">
-                  {this.memberTileRenderer(memberDetails, index)}
-                </div>
-              )
-            })
-          }
-        </div>
-      </div>
+    return (
+      <React.Fragment>
+        {
+          filteredMembers.map((memberDetails, index) => {
+            return (
+              <div key={index}>
+                {this.memberTileRenderer(memberDetails, index)}
+              </div>
+            )
+          })
+        }
+      </React.Fragment>
     )
   }
 
 
   getSearchBar = () => {
-
-
     return(
       <div className="search-bar-container">
         <InputGroup
@@ -224,9 +216,7 @@ export class Element extends Component {
 
 
   getButtons = () => {
-
     const { selectedMembers } = this.state
-
     return(
       <div className="buttons-container">
         <Button
@@ -246,14 +236,9 @@ export class Element extends Component {
     )
   }
 
-  // ------------------------------ RENDER BELOW THIS LINE ------------------------------
 
   render() {
-
     const { sendError, errorText } = this.state
-
-
-
     return (
       <PopOverHandler>
         <div id='popup-greyer' onClick={(e) => {
@@ -266,18 +251,24 @@ export class Element extends Component {
                 <div className='element-title'>
                   {Strings.PICK_DOCUMENT_SIGNERS}
                 </div>
-                <div className='element-description'>
+                {
+                  sendError ?
+                  <Callout style={{marginBottom: '15px'}} intent='danger'>
+                    <div>{errorText}</div>
+                  </Callout> :
+                  null
+                }
+                {
+                  this.getSearchBar()
+                }
+                <div className='user-tile-container'>
                   {
-                    sendError ?
-                    <Callout style={{marginBottom: '15px'}} intent='danger'>
-                      <div>{errorText}</div>
-                    </Callout> :
-                    null
+                    this.getTiles()
                   }
-                  {this.getSearchBar()}
-                  {this.getTiles()}
-                  {this.getButtons()}
                 </div>
+                {
+                  this.getButtons()
+                }
               </div>
             </div>
           </div>
@@ -287,4 +278,4 @@ export class Element extends Component {
   }
 }
 
-export default Element
+export default PickSignerPopover

@@ -13,18 +13,20 @@ import {
   Callout,
 } from '@blueprintjs/core'
 
-// FUTURE: Make the "Click here" text change the mouse icon like a real link
-// FUTURE: Add icons to username and password boxes
+// TODO: FUTURE: Make the "Click here" text change the mouse icon like a real link
+// TODO: FUTURE: Add icons to username and password boxes
 
 export class SignInBox extends Component {
   static propTypes = {
     toggleVisibleForm: PropTypes.func.isRequired,
+    username: PropTypes.string,
   }
 
-  constructor() {
+  constructor(props) {
     super()
+    const email = props.username !== undefined ? props.username : ''
     this.state = {
-      email: '',
+      email,
       password: '',
       errorMessage: '',
       state: ComponentState.QUIESCENT,

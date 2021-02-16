@@ -10,7 +10,7 @@
 :root {
   --footer-height: 50px;
   --header-height: 75px;
-  --pop-up-padding: 20px;
+  --pop-up-padding: 15px;
   --heading-text-color: #000;
   --sidebar-text-color: #106ba3;
   --pop-up-project-tile-margin: 5px;
@@ -23,6 +23,7 @@
   --field-element-dark-grey: #bcbcbc;
   --field-element-light-green: rgba(200, 247, 197, 0.75);
   --tile-selected-green: #d2e9af;
+  --tile-selected-red: #ffcccb;
   --profile-avatar-height: 150px;
   --avatar-padding: 4px;
   --prind-palette-color-1: #FEFFFE;
@@ -1031,6 +1032,12 @@ background-color: var(--field-element-grey);
   margin: var(--pop-up-padding);
 }
 
+#pick-signer-popover .user-tile-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 1rem 1.5rem;
+}
+
 #pick-signer-popover .bp3-progress-bar {
   margin-bottom: 1em;
 }
@@ -1055,43 +1062,37 @@ background-color: var(--field-element-grey);
 }
 
 #pick-signer-popover .member-tile {
-  margin-bottom: 0.5em;
-  border: 1px solid black;
-  border-radius: var(--standard-border-radius);
-  padding: 0.5em 1.0em;
+  padding: 1rem;
   position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-gap: 0.3rem 1rem;
 }
 
-#pick-signer-popover .member-tile p:first-of-type {
-  margin-top: 10px;
+#pick-signer-popover .member-tile h4 {
+  margin: 0;
 }
 
 #pick-signer-popover .selected {
   background-color: var(--tile-selected-green);
 }
 
-#pick-signer-popover .col-xs-12,
-#pick-signer-popover .col-sm-12,
-#pick-signer-popover .col-md-6,
-#pick-signer-popover .col-lg-4,
-#pick-signer-popover .col-xl-3 {
-
+#pick-signer-popover .cannot-sign {
+  background-color: var(--tile-selected-red);
 }
-
 
 #pick-signer-popover .member-tile-tickbox {
   position: absolute;
   right: 1em;
-  bottom: calc(50% - 14px);
-}
-
-#pick-signer-popover .negative-margins {
-  margin-left: calc(-1 * var(--standard-margin)) !important;
-  margin-right: calc(-1 * var(--standard-margin)) !important;
+  bottom: calc(50% - 1em);
 }
 
 #pick-signer-popover button {
   margin-right: 1em;
+}
+
+#pick-signer-popover .buttons-container {
+  margin-top: var(--standard-margin);
 }
 
 /* =========================================== */

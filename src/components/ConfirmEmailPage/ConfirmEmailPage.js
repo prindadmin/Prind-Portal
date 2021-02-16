@@ -8,7 +8,7 @@ import EmailConfirming from '../Common/ProjectLoading'
 
 import * as Strings from '../../Data/Strings'
 
-// TODO: URGENT: Get the confirmation page to log the user in rather than navigate to the login page
+// TODO: Get the confirmation page to log the user in rather than navigate to the login page
 
 class ConfirmEmailPage extends Component {
 
@@ -58,9 +58,14 @@ class ConfirmEmailPage extends Component {
     )
   }
 
-  resolveRegister = () => {
+  resolveRegister = (username) => {
     console.log("confirmation succeeded")
-    this.props.history.push(Endpoints.SIGNINPAGE)
+    this.props.history.push({
+      pathname: Endpoints.SIGNINPAGE,
+      state: {
+        username
+      }
+    })
   }
 
   rejectRegister = () => {
