@@ -90,6 +90,7 @@ export class UploadHistory extends Component {
     )
   }
 
+  // TODO: Fix the displaying of this details table at mobile widths
   getDetailsTable = () => {
     const { details } = this.props
     var reversedDetails = details.filter(function(fileUpload) {

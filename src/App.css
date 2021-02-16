@@ -1595,6 +1595,22 @@ mark.grey {
   text-align: left;
 }
 
+#requests-tab-container .signature-request-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-gap: 1rem;
+}
+
+#requests-tab-container .signature-tile-content-container {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(50px, auto));
+  grid-gap: 0.5rem;
+}
+
+#requests-tab-container .signature-tile-content-container h4 {
+  margin: 0;
+}
+
 /* ================================================ */
 /* ====== project-invitation-request element ====== */
 /* ================================================ */

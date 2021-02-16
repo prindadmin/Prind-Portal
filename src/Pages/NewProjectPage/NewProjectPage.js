@@ -19,7 +19,6 @@ import * as Endpoints from '../../Data/Endpoints'
 const CreatingProjectPopover = lazy(() => import('../../Components/CreatingProjectPopover'));
 
 // TODO: FUTURE: Add ability to upload thumbnails or pick icon for a project
-// TODO: URGENT: Don't open project selector once project is created
 
 export class Page extends Component {
   static propTypes = {
@@ -32,7 +31,7 @@ export class Page extends Component {
       showCreatingPopover: false,
       createError: false,
       errorText: '',
-      projectType: '',
+      projectType: process.env.REACT_APP_PORTAL,
     }
 
     console.log("arrived at new project page")
@@ -42,7 +41,8 @@ export class Page extends Component {
     const { location } = this.props
     // Register pageview with GA
     ReactGA.pageview(location.pathname);
-
+    /*
+    // Removed due to splitting of the two portals
     const searchParams = this.getQueryStringParams(location.search)
 
     console.log(searchParams);
@@ -51,7 +51,7 @@ export class Page extends Component {
     this.setState({
       projectType: searchParams.project_type
     })
-
+    */
     console.log("finished mounting new project page")
   }
 
@@ -90,11 +90,18 @@ export class Page extends Component {
     )
   }
 
-  createResolve = () => {
+
+  createResolve = (result) => {
     console.log("create resolved; moving to project details page")
     const { history } = this.props
-    history.push(Endpoints.PROJECTDETAILSPAGE)
+    history.push({
+      pathname: `${Endpoints.PROJECTDETAILSPAGE}/${result.projectId}`,
+      state: {
+        openProjectSelector: false,
+      }
+    })
   }
+
 
   createReject = () => {
     this.setState({
@@ -104,6 +111,7 @@ export class Page extends Component {
     })
   }
 
+
   newProjectPageHeader = () => {
     return (
       <div className='header-section row'>
@@ -112,10 +120,9 @@ export class Page extends Component {
     )
   }
 
+
   newProjectForm = () => {
-
     const { handleSubmit } = this.props
-
     return (
       <form onSubmit={handleSubmit(this.createProject)} className='auth-form row'>
         <FormGroup
@@ -221,9 +228,7 @@ export class Page extends Component {
 
 
   render() {
-
     const { showCreatingPopover, createError, errorText } = this.state
-
     return (
       <div id='new-project-page'>
         <div className='page-content-section'>

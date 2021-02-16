@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 import * as foundationsReducer from '../../../../Reducers/foundationsReducer'
 import * as projectsReducer from '../../../../Reducers/projectsReducer'
 
-import Element from './Element'
+import SignatureRequestTile from './SignatureRequestTile'
 
 const mapStatetoProps = state => {
   return {
@@ -22,4 +22,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default withRouter(connect(mapStatetoProps, mapDispatchToProps)(Element))
+export default withRouter(connect(mapStatetoProps, mapDispatchToProps)(SignatureRequestTile))

@@ -10,22 +10,32 @@ import {
 
 import ItemIcon from '../Common/ItemIcon'
 
-// TODO: URGENT: When going to document, don't open project selector
-
 export class ProfileRequestsTab extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
   }
 
-  constructor(props) {
-    super()
+
+  getSignatureRequestContainer = () => {
+    const { user } = this.props
+    return (
+      <div className='requests-section signature-requests'>
+        <div className='element-title'>
+          {Strings.SIGNATURE_REQUESTS}
+        </div>
+        <div className='signature-request-container'>
+          {
+            user.signatureRequests.map((request, index) => {
+              return <SignatureRequestTile requestDetails={request} />
+            })
+          }
+        </div>
+      </div>
+    )
   }
 
-
   hasContent = () => {
-
     const { user } = this.props
-
     return (
       <React.Fragment>
         <div className='requests-section project-invitations'>
@@ -48,23 +58,9 @@ export class ProfileRequestsTab extends Component {
         {
           user.projectInvitations.length > 0 && user.signatureRequests.length > 0 ? <div className='horizontal-line' /> : null
         }
-        <div className='requests-section signature-requests'>
-          {
-            user.signatureRequests.length > 0 ?
-            <div className='element-title'>
-              {Strings.SIGNATURE_REQUESTS}
-            </div> : null
-          }
-          {
-            user.signatureRequests.length > 0 ? user.signatureRequests.map((request, index) => {
-              return (
-                <div key={index} className="col-md-12 col-lg-6 col-xl-4">
-                  <SignatureRequestTile requestDetails={request} />
-                </div>
-              )
-            }) : null
-          }
-        </div>
+        {
+          user.signatureRequests.length > 0 ? this.getSignatureRequestContainer() : null
+        }
       </React.Fragment>
     )
   }

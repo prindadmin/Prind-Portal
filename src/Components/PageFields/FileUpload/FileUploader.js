@@ -184,7 +184,6 @@ export class Element extends Component {
   render() {
     const { fileState, fileDetails } = this.state
     const { elementContent, pageName, projects } = this.props
-
     return (
       <div id='file-upload-element'>
         <div className={'file-upload-element-container' + fileState}>
@@ -194,13 +193,12 @@ export class Element extends Component {
           <div className='element-description'>
             {elementContent.description}
           </div>
-          <div className='element-file-uploader container'>
+          <div className='element-file-uploader'>
             {
               this.getTabs()
             }
           </div>
         </div>
-
         {
           this.state.uploadFileRequested ?
             <UploaderPopOver

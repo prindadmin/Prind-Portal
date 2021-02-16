@@ -94,7 +94,7 @@ function * createNewProject (action) {
       }
     })
 
-    action.payload.resolve()
+    action.payload.resolve(result.body)
 
     }
     catch (error) {

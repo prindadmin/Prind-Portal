@@ -37,6 +37,7 @@ export class LoggedInContent extends Component {
     super()
     this.state = {
       fetchingProjectDetails: false,
+      historyOpenProjectSelectorState: true,
       pageName: "",
       width: 0,
       height: 0,
@@ -76,11 +77,18 @@ export class LoggedInContent extends Component {
       }
     }
 
+    const locationState = this.props.location.state
     const projectName = this.getProjectName()
 
     if (projectName !== prevState.projectName) {
       this.setState({
         projectName
+      })
+    }
+
+    if (locationState !== undefined && locationState !== prevProps.location.state) {
+      this.setState({
+        historyOpenProjectSelectorState: locationState.openProjectSelector
       })
     }
   }
@@ -208,14 +216,18 @@ export class LoggedInContent extends Component {
   }
 
   shouldOpenProjectSelector = () => {
+    const { historyOpenProjectSelectorState } = this.state
     const pageName = this.getPageName()
     const projectNotSelected = this.getProjectName() === undefined
     const pageCanAutoShowProjectSelector = !PAGES_WITHOUT_PROJECT_SELECTOR.includes(pageName)
 
-    //console.log(`projectNotSelected: ${projectNotSelected}`)
-    //console.log(`pageCanAutoShowProjectSelector: ${pageCanAutoShowProjectSelector}`)
+    /*
+    console.log(`projectNotSelected: ${projectNotSelected}`)
+    console.log(`pageCanAutoShowProjectSelector: ${pageCanAutoShowProjectSelector}`)
+    console.log(`historyState: ${historyOpenProjectSelectorState}`)
+    */
 
-    return projectNotSelected && pageCanAutoShowProjectSelector
+    return projectNotSelected && pageCanAutoShowProjectSelector && historyOpenProjectSelectorState
   }
 
 

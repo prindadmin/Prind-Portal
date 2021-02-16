@@ -18,6 +18,7 @@ export class AddNewTeamMember extends Component {
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
     onItemSelected: PropTypes.func.isRequired,
+    onCancelAddMember: PropTypes.func.isRequired,
     addMemberError: PropTypes.bool.isRequired,
     errorText: PropTypes.string.isRequired,
   }
@@ -31,6 +32,10 @@ export class AddNewTeamMember extends Component {
     )
   }
 
+  cancelNewMember = (e) => {
+    e.stopPropagation()
+    this.props.onCancelAddMember()
+  }
 
   addNewMember = () => {
 

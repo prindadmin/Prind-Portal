@@ -8,9 +8,8 @@ import {
   Intent,
 } from '@blueprintjs/core'
 
-export class Element extends Component {
+export class SignatureRequestTile extends Component {
   static propTypes = {
-    auth: PropTypes.object.isRequired,
     requestDetails: PropTypes.shape({
       requestedAt: PropTypes.string.isRequired,
       projectID: PropTypes.string.isRequired,
@@ -30,7 +29,7 @@ export class Element extends Component {
   }
 
 
-  // TODO: Implement the history push state in all the project stage pages
+  // TODO: Implement the history push state in project stage pages
   // https://www.npmjs.com/package/react-scrollable-anchor
   goToDocument = () => {
     const { requestDetails, updateChosenProject } = this.props
@@ -47,18 +46,17 @@ export class Element extends Component {
       this.resolveProjectUpdate,
       this.rejectProjectUpdate,
     )
-
   }
 
 
   resolveProjectUpdate = () => {
     const { requestDetails, history } = this.props
-    const pageToPush = requestDetails.pageName.replace(/^\w/, c => c.toUpperCase())
-
+    const pathToPush = `${requestDetails.pageName}/${requestDetails.projectID}`
     history.push({
-      pathname: pageToPush,
+      pathname: pathToPush,
       state: {
-        fieldID: requestDetails.fieldID
+        fieldID: requestDetails.fieldID,
+        openProjectSelector: false,
       }
     })
   }
@@ -93,32 +91,18 @@ export class Element extends Component {
 
     return(
       <div id="signature-request">
-        <h4 className='bp3-heading'>{Strings.SIGNATURE_REQUEST}</h4>
-
-        <span className='horizontal-flex' style={{whiteSpace: 'pre'}}>
-          <div className='bp3-heading'>{`${Strings.REQUESTED_BY}:   `}</div>
+        <div className='signature-tile-content-container'>
+          <h4>{`${Strings.REQUESTED_BY}:`}</h4>
           <div>{`${requestDetails.requestedBy.firstName} ${requestDetails.requestedBy.lastName}`}</div>
-        </span>
-
-        <span className='horizontal-flex' style={{whiteSpace: 'pre'}}>
-          <div className='bp3-heading'>{`${Strings.PROJECT_NAME}:   `}</div>
+          <h4>{`${Strings.PROJECT_NAME}:`}</h4>
           <div>{`${requestDetails.projectName}`}</div>
-        </span>
-
-        <span className='horizontal-flex' style={{whiteSpace: 'pre'}}>
-          <div className='bp3-heading'>{`${Strings.PROJECT_STAGE}:   `}</div>
+          <h4>{`${Strings.PROJECT_STAGE}:`}</h4>
           <div>{`${requestDetails.pageName.replace(/^\w/, c => c.toUpperCase())}`}</div>
-        </span>
-
-        <span className='horizontal-flex' style={{whiteSpace: 'pre'}}>
-          <div className='bp3-heading'>{`${Strings.FIELD_TITLE}:   `}</div>
+          <h4>{`${Strings.FIELD_TITLE}:`}</h4>
           <div>{`${requestDetails.fieldTitle}`}</div>
-        </span>
-
-        <span className='horizontal-flex' style={{whiteSpace: 'pre'}}>
-          <div className='bp3-heading'>{`${Strings.PROJECT_FILE_NAME}:   `}</div>
+          <h4>{`${Strings.PROJECT_FILE_NAME}:`}</h4>
           <div>{`${requestDetails.filename}`}</div>
-        </span>
+        </div>
 
         <div className='row button-row'>
           <Button
@@ -139,4 +123,4 @@ export class Element extends Component {
   }
 }
 
-export default Element
+export default SignatureRequestTile

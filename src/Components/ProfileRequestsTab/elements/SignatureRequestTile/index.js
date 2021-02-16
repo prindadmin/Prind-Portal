@@ -1,3 +1,3 @@
-import Container from './Container'
+import SignatureRequestTileContainer from './SignatureRequestTileContainer'
 
-export default Container
+export default SignatureRequestTileContainer

@@ -12,8 +12,6 @@ import * as Strings from '../../Data/Strings'
 const PopOverHandler = lazy(() => import('../Common/popOverHandler'));
 const UserDetailsPopOver = lazy(() => import('../UserDetailsPopOver'));
 
-// TODO: URGENT: Fix user tiles of confirmed BUT WITHOUT FOUNDATIONS users from saying "Awaiting Sign Up"
-
 export class ContactTile extends Component {
   static propTypes = {
     memberDetails: PropTypes.object.isRequired,
@@ -51,7 +49,6 @@ export class ContactTile extends Component {
   }
 
   getImage = () => {
-
     const { memberDetails } = this.props
     const that = this
     const avatarLink = `${process.env.REACT_APP_AWS_S3_USER_AVATAR_ENDPOINT}/${memberDetails.username}`
@@ -131,6 +128,29 @@ export class ContactTile extends Component {
     })
   }
 
+  getUsername = () => {
+    const { memberDetails } = this.props
+    if (memberDetails.username === null) {
+      return memberDetails.emailAddress
+    }
+    if (memberDetails.firstName === null && memberDetails.lastName === null) {
+      return memberDetails.emailAddress
+    }
+    return `${memberDetails.firstName} ${memberDetails.lastName}`
+  }
+
+  getStatus = () => {
+    const { memberDetails, confirmed } = this.props
+    if (memberDetails.username === null) {
+      return Strings.MEMBER_NOT_YET_SIGNED_UP_TO_PRIND
+    }
+    if (confirmed) {
+      return Strings.MEMBER_IS_CONFIRMED
+    }
+    return Strings.MEMBER_ISNT_YET_CONFIRMED
+  }
+
+
   render() {
 
     const { auth, projects, memberDetails, confirmed } = this.props
@@ -145,12 +165,7 @@ export class ContactTile extends Component {
       )
     })
 
-    const userName = memberDetails.firstName !== null && memberDetails.lastName !== null ?
-        memberDetails.firstName + " " + memberDetails.lastName :
-        Strings.MEMBER_NOT_YET_SIGNED_UP_TO_PRIND
-
     const isConfirmed = confirmed ? "row member-confirmed" : "row member-not-confirmed"
-
     return (
         <div id='contact-tile' className={isConfirmed} onClick={(e) => {
           e.stopPropagation()
@@ -164,7 +179,7 @@ export class ContactTile extends Component {
 
           <div className='col-md-9 col-sm-12'>
             <div className='row'>
-              <h4 className='bp3-heading'>{userName}</h4>
+              <h4 className='bp3-heading'>{this.getUsername()}</h4>
             </div>
 
             <div className="row">
@@ -190,7 +205,7 @@ export class ContactTile extends Component {
                 <b>{Strings.MEMBER_STATUS + ": "}</b>
               </div>
               <div className="col-lg-10 col-md-8">
-                { confirmed ? Strings.MEMBER_IS_CONFIRMED : Strings.MEMBER_ISNT_YET_CONFIRMED }
+                { this.getStatus() }
               </div>
             </div>
 

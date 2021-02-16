@@ -17,7 +17,7 @@ import * as ComponentState from '../../States'
 
 //const ProjectTypeSelector = lazy(() => import('../ProjectTypeSelector'));
 
-// TODO: Urgent: Show invite projects here as well
+// TODO: SOON: Show invite projects here as well
 
 export class ProjectSelectorPopUp extends Component {
   static propTypes = {
