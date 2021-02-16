@@ -14,6 +14,8 @@ import PopOverHandler from '../popOverHandler'
 
 import * as Strings from '../../../Data/Strings'
 
+// TODO: URGENT: Fix the formatting of this popover
+
 export class Element extends Component {
   static propTypes = {
     teamMembers: PropTypes.shape({

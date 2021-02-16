@@ -12,6 +12,8 @@ import * as Strings from '../../Data/Strings'
 const PopOverHandler = lazy(() => import('../Common/popOverHandler'));
 const UserDetailsPopOver = lazy(() => import('../UserDetailsPopOver'));
 
+// TODO: URGENT: Fix user tiles of confirmed BUT WITHOUT FOUNDATIONS users from saying "Awaiting Sign Up"
+
 export class ContactTile extends Component {
   static propTypes = {
     memberDetails: PropTypes.object.isRequired,
@@ -226,7 +228,7 @@ export class ContactTile extends Component {
 
           </div>
           {
-            process.env.REACT_APP_FUNCTIONALITY_USER_ACCREDITATIONS_LIST_V1 === "True" ?
+            process.env.REACT_APP_FUNCTIONALITY_USER_ACCREDITATIONS_LIST_V1 === "True" && confirmed ?
             <div className='view-accreditations'>
               { Strings.ACCREDITATION_VIEW_ACCREDITATIONS }
             </div> :

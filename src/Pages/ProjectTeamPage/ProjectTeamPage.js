@@ -14,6 +14,9 @@ const NoProjectSelected = lazy(() => import('../../Components/Common/NoProjectSe
 const ContactTile = lazy(() => import('../../Components/ContactTile'));
 const AddNewMemberForm = lazy(() => import('../../Components/AddNewTeamMember'));
 
+// TODO: URGENT: Fix requesting user sign up on cancel button
+// TODO: URGENT: Fix issue that you can't click cancel button if there is no input in the email box
+
 export class ProjectTeamPage extends Component {
   static propTypes = {
   }

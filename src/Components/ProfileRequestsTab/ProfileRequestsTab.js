@@ -10,6 +10,8 @@ import {
 
 import ItemIcon from '../Common/ItemIcon'
 
+// TODO: URGENT: When going to document, don't open project selector
+
 export class ProfileRequestsTab extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,

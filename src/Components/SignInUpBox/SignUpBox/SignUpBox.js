@@ -151,7 +151,7 @@ export class SignUpBox extends Component {
           name="lastName"
           type="text"
           placeholder={ Strings.PLACEHOLDER_LAST_NAME }
-          value={this.state.firstName}
+          value={this.state.lastName}
           onChange={this.handleInputChange}
           className={ this.state.lastName === null ? "default" : "filled" }/>
 

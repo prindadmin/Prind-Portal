@@ -8,6 +8,8 @@ import EmailConfirming from '../Common/ProjectLoading'
 
 import * as Strings from '../../Data/Strings'
 
+// TODO: URGENT: Get the confirmation page to log the user in rather than navigate to the login page
+
 class ConfirmEmailPage extends Component {
 
   constructor(props) {

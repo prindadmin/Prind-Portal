@@ -14,7 +14,7 @@ import * as Strings from '../../../../../Data/Strings'
 
 // TODO: Get Simon to change "uploadedBy" from "None None" to the users email address
 
-export class Element extends Component {
+export class CurrentVersion extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
     details: PropTypes.object,
@@ -132,10 +132,6 @@ export class Element extends Component {
 
     return (
       <React.Fragment>
-        <div className='element-title'>
-          {Strings.CURRENT_VERSION_ELEMENT}
-        </div>
-
         {
           fetchError ?
             <Callout style={{marginBottom: '15px'}} intent='danger'>
@@ -193,6 +189,9 @@ export class Element extends Component {
     const { signerPickerOpen } = this.state
     return(
       <div id='current-version-container'>
+        <div className='element-title'>
+          {Strings.CURRENT_VERSION_ELEMENT}
+        </div>
         {
           details === null ? this.currentVersionNotProvided() : this.currentVersionProvided()
         }
@@ -211,4 +210,4 @@ export class Element extends Component {
   }
 }
 
-export default Element
+export default CurrentVersion

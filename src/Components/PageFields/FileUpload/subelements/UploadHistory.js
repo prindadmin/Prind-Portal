@@ -108,16 +108,16 @@ export class UploadHistory extends Component {
           reversedDetails.map((fileUpload, index) => {
             return (
               <React.Fragment>
-                <div>{fileUpload.uploadName === undefined ? Strings.NO_UPLOAD_NAME : fileUpload.uploadName}</div>
-                <div>{fileUpload.uploadedBy === "None None" ? Strings.FILE_UPLOAD_UPLOADER_HAS_NO_NAME : fileUpload.uploadedBy}</div>
-                <div>{fileUpload.ver}</div>
-                <div>{fileUpload.uploadedDateTime}</div>
-                <div>
+                <div key={`uploadName-${index}`}>{fileUpload.uploadName === undefined ? Strings.NO_UPLOAD_NAME : fileUpload.uploadName}</div>
+                <div key={`uploadedBy-${index}`}>{fileUpload.uploadedBy === "None None" ? Strings.FILE_UPLOAD_UPLOADER_HAS_NO_NAME : fileUpload.uploadedBy}</div>
+                <div key={`ver-${index}`}>{fileUpload.ver}</div>
+                <div key={`uploadDateTime-${index}`}>{fileUpload.uploadedDateTime}</div>
+                <div key={`proof-${index}`}>
                   {
                     this.getProof(fileUpload.proofLink)
                   }
                 </div>
-                <div>
+                <div  key={`downloadButton-${index}`}>
                   {
                     this.getDownloadButton(fileUpload)
                   }
