@@ -12,6 +12,8 @@ import {
 
 const ico = <FontAwesomeIcon icon={faUserCircle} size='3x' />
 
+// TODO: Use Strings rather than hard coded text for menu items
+
 class UserMenu extends Component {
   static propTypes = {
     user: PropTypes.shape({
@@ -66,13 +68,19 @@ class UserMenu extends Component {
   }
 
 
+  hasNotifications = () => {
+    const { user } = this.props
+    return user.signatureRequests.length + user.projectInvitations.length > 0
+  }
+
   getIcon = () => {
     const { user } = this.props
+    const hasNotifications = this.hasNotifications()
     return (
       <React.Fragment>
         <Icon icon={ico} />
         {
-          user.signatureRequests.length + user.projectInvitations.length > 0 ? this.getRequestBadge() : null
+          hasNotifications ? this.getRequestBadge() : null
         }
       </React.Fragment>
     )
@@ -85,22 +93,26 @@ class UserMenu extends Component {
 
 
   openProfile = (values) => {
-    const { user } = this.props
-    if (user.signatureRequests.length + user.projectInvitations.length > 0) {
-      this.props.history.push({
-        pathname: '/profile',
-        state: { tabToOpen: 'requests' },
-      })
-      return;
-    }
     this.props.history.push({
       pathname: '/profile',
     })
   }
 
 
+  openNotifications = (values) => {
+    const { user } = this.props
+    this.props.history.push({
+      pathname: '/profile',
+      state: { tabToOpen: 'requests' },
+    })
+  }
+
+
   dropdownContent = <Menu>
     <Menu.Item text='Profile' onClick={this.openProfile}/>
+    {
+      this.hasNotifications() ? <Menu.Item text='Notifications' onClick={this.openNotifications}/> : null
+    }
     <Menu.Item text='Sign Out' onClick={this.signOut} />
   </Menu>
 
