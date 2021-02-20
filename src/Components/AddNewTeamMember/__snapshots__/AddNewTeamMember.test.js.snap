@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render 1`] = `
+<Fragment>
+  <form
+    className="add-member-form"
+    onSubmit={[Function]}
+  >
+    <Blueprint3.FormGroup
+      label="Member Details"
+      labelFor="emailAddress"
+    >
+      <Field
+        component={[Function]}
+        id="emailAddress"
+        name="emailAddress"
+        placeholder="Email"
+        validate={
+          Array [
+            [Function],
+            [Function],
+          ]
+        }
+      />
+    </Blueprint3.FormGroup>
+    <Blueprint3.FormGroup
+      label="Role"
+      labelFor="roleId"
+    >
+      <Field
+        component={[Function]}
+        disabled={false}
+        name="roleId"
+        onItemSelect={[Function]}
+        placeholder="Please select a role"
+        values={
+          Array [
+            Object {
+              "id": "1",
+              "name": "developer",
+            },
+            Object {
+              "id": "2",
+              "name": "principal contractor",
+            },
+          ]
+        }
+      />
+    </Blueprint3.FormGroup>
+    <Blueprint3.ButtonGroup
+      fill={true}
+    >
+      <Blueprint3.Button
+        id="submit"
+        intent="primary"
+        name="submit"
+        text="Save Changes"
+        type="submit"
+      />
+    </Blueprint3.ButtonGroup>
+    <Blueprint3.ButtonGroup
+      fill={true}
+    >
+      <Blueprint3.Button
+        id="cancel"
+        intent="none"
+        name="cancel"
+        onClick={[Function]}
+        text="Cancel"
+        type="cancel"
+      />
+    </Blueprint3.ButtonGroup>
+  </form>
+</Fragment>
+`;

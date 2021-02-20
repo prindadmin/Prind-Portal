@@ -21,6 +21,14 @@ export class AddNewTeamMember extends Component {
     onCancelAddMember: PropTypes.func.isRequired,
     addMemberError: PropTypes.bool.isRequired,
     errorText: PropTypes.string.isRequired,
+    members: PropTypes.shape({
+      roles: PropTypes.arrayOf(
+        PropTypes.shape({
+          roleId: PropTypes.string.isRequired,
+          roleName: PropTypes.string.isRequired
+        })
+      )
+    })
   }
 
   getErrorBlock = () => {
@@ -43,7 +51,7 @@ export class AddNewTeamMember extends Component {
     const { roles } = this.props.members
 
     // re-key the roles array so the keys match those required by the drop down
-    var formattedRoles = roles.map(item => {
+    const formattedRoles = roles.map(item => {
       return {
         id: item.roleId,
         name: item.roleName
@@ -60,6 +68,7 @@ export class AddNewTeamMember extends Component {
           labelFor="emailAddress"
         >
           <Field
+            id="emailAddress"
             name="emailAddress"
             validate={[Validators.required, Validators.isEmailAddress]}
             component={FormInputs.TextInput}
@@ -84,6 +93,8 @@ export class AddNewTeamMember extends Component {
 
         <ButtonGroup fill>
           <Button
+            id='submit'
+            name='submit'
             loading={this.props.submitting}
             disabled={this.props.invalid}
             type='submit'
@@ -94,6 +105,8 @@ export class AddNewTeamMember extends Component {
 
         <ButtonGroup fill>
           <Button
+            id='cancel'
+            name='cancel'
             type='cancel'
             intent='none'
             text={Strings.BUTTON_CANCEL}

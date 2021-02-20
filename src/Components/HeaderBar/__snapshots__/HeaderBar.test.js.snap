@@ -63,6 +63,9 @@ exports[`Should render without project and without project selector 1`] = `
     <div
       className="header-content row"
     >
+      <withRouter(Connect(ProjectSelector))
+        openProjectSelector={false}
+      />
       <div
         className="nav-links"
       >
