@@ -4,72 +4,64 @@ exports[`Should render 1`] = `
 <Fragment>
   <form
     className="add-member-form"
-    onSubmit={[Function]}
   >
-    <Blueprint3.FormGroup
-      label="Member Details"
-      labelFor="emailAddress"
+    <label
+      htmlFor="emailAddress"
     >
-      <Field
-        component={[Function]}
-        id="emailAddress"
-        name="emailAddress"
-        placeholder="Email"
-        validate={
-          Array [
-            [Function],
-            [Function],
-          ]
-        }
-      />
-    </Blueprint3.FormGroup>
-    <Blueprint3.FormGroup
-      label="Role"
-      labelFor="roleId"
+      Member Details
+    </label>
+    <input
+      className="filled"
+      id="emailAddress"
+      name="emailAddress"
+      onChange={[Function]}
+      placeholder="Email"
+      type="email"
+      value=""
+    />
+    <label
+      htmlFor="roleId"
     >
-      <Field
-        component={[Function]}
-        disabled={false}
-        name="roleId"
-        onItemSelect={[Function]}
-        placeholder="Please select a role"
-        values={
-          Array [
-            Object {
-              "id": "1",
-              "name": "developer",
-            },
-            Object {
-              "id": "2",
-              "name": "principal contractor",
-            },
-          ]
-        }
-      />
-    </Blueprint3.FormGroup>
-    <Blueprint3.ButtonGroup
-      fill={true}
+      Role
+    </label>
+    <select
+      className="role-select"
+      id="roleId"
+      name="roleId"
+      onChange={[Function]}
+      value="1"
     >
-      <Blueprint3.Button
-        id="submit"
-        intent="primary"
-        name="submit"
-        text="Save Changes"
-        type="submit"
-      />
-    </Blueprint3.ButtonGroup>
-    <Blueprint3.ButtonGroup
-      fill={true}
-    >
-      <Blueprint3.Button
-        id="cancel"
-        intent="none"
-        name="cancel"
-        onClick={[Function]}
-        text="Cancel"
-        type="cancel"
-      />
-    </Blueprint3.ButtonGroup>
+      <option
+        key="0"
+        value="1"
+      >
+        developer
+      </option>
+      <option
+        key="1"
+        value="2"
+      >
+        principal contractor
+      </option>
+    </select>
+    <input
+      className="submit-button"
+      id="submit"
+      name="submit"
+      onClick={[Function]}
+      readOnly={true}
+      type="submit"
+      value="Save Changes"
+    />
+    <input
+      className="cancel-button"
+      id="cancel"
+      name="cancel"
+      onClick={[Function]}
+      readOnly={true}
+      type="cancel"
+      value="Cancel"
+    />
   </form>
 </Fragment>
 `;

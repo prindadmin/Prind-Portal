@@ -1,15 +1,18 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 import Component from './AddNewTeamMember'
 
 it('Should render', () => {
   const props = {
-    handleSubmit: function() {},
-    onItemSelected: function() {},
+    onSuccessAddingMember: function() {},
     onCancelAddMember: function() {},
-    addMemberError: false,
-    errorText: "",
+    addMember: function() {},
+    projects: {
+      chosenProject: {
+        projectId: "123"
+      }
+    },
     members: {
       roles: [
         {
@@ -27,16 +30,20 @@ it('Should render', () => {
   expect(component).toMatchSnapshot();
 });
 
-// TODO: Fix this test; it doesn't get a callback when the button is clicked
+
 it('enter email address and click submit', () => {
-  const mockCallBackHandleSubmit = jest.fn();
-  const mockCallBackOnItemSelected = jest.fn();
+  const mockOnSuccessAddingMember = jest.fn();
+  const mockOnCancelAddMember = jest.fn();
+  const mockAddMember = jest.fn();
   const props = {
-    handleSubmit: mockCallBackHandleSubmit,
-    onItemSelected: mockCallBackOnItemSelected,
-    onCancelAddMember: function() {},
-    addMemberError: false,
-    errorText: "",
+    onSuccessAddingMember: mockOnSuccessAddingMember,
+    onCancelAddMember: mockOnCancelAddMember,
+    addMember: mockAddMember,
+    projects: {
+      chosenProject: {
+        projectId: "123"
+      }
+    },
     members: {
       roles: [
         {
@@ -51,9 +58,9 @@ it('enter email address and click submit', () => {
     }
   };
 
-  const component = shallow(<Component {...props} />);
+  const component = mount(<Component {...props} />);
   const username = component.find('#emailAddress')
   username.simulate('change', { target: { name: "emailAddress", value: 'hootsuite@prind.tech' }});
   component.find('#submit').simulate('click')
-  expect(mockCallBackHandleSubmit).toHaveBeenCalled()
+  expect(mockAddMember).toHaveBeenCalledWith("123", {emailAddress: 'hootsuite@prind.tech', roleId: '1'}, expect.any(Function), expect.any(Function))
 });

@@ -1,4 +1,5 @@
 import React, { lazy, Component } from 'react'
+import PropTypes from 'prop-types'
 import { reduxForm } from 'redux-form'
 
 import ReactGA from 'react-ga';
@@ -20,6 +21,7 @@ const AddNewMemberForm = lazy(() => import('../../Components/AddNewTeamMember'))
 
 export class ProjectTeamPage extends Component {
   static propTypes = {
+    handleSubmit: PropTypes.func.isRequired,
   }
 
   constructor(props) {
@@ -36,9 +38,6 @@ export class ProjectTeamPage extends Component {
     }
 
     this.state = {
-      selectedRoleID: "0",
-      selectedRoleName: Strings.NO_ROLE_SELECTED,
-      errorText: "",
       state: initialState
     }
   }
@@ -85,21 +84,6 @@ export class ProjectTeamPage extends Component {
     })
   }
 
-  addMember = (values) => {
-    this.setState({
-      state: PageStates.ADDING_MEMBER_TO_PROJECT
-    })
-
-    var newValues = values
-    newValues.roleId = this.state.selectedRoleID
-
-    this.props.addMember(
-      this.props.projects.chosenProject.projectId,
-      newValues,
-      this.addMemberResolve,
-      this.addMemberReject,
-    )
-  }
 
   pageHeader = () => {
     return (
@@ -117,12 +101,6 @@ export class ProjectTeamPage extends Component {
     )
   }
 
-  onItemSelected = (item) => {
-    this.setState({
-      selectedRoleID: item.id,
-      selectedRoleName: item.name,
-    })
-  }
 
   cancelNewMember = () => {
     this.props.reset()
@@ -210,18 +188,22 @@ export class ProjectTeamPage extends Component {
     )
   }
 
+  successAddingMember = () => {
+    const { projectId } = this.props.projects.chosenProject
+    this.props.getCurrentMembers(projectId)
+    this.closeAddMemberForm()
+  }
+
+  closeAddMemberForm = () => {
+    this.setState({
+      state: PageStates.QUIESCENT
+    })
+  }
+
   getAddNewMemberForm = () => {
-    return (
-      <AddNewMemberForm
-        handleSubmit={this.props.handleSubmit(this.addMember)}
-        onItemSelected={this.onItemSelected}
-        onCancelAddMember={(e) => this.setState({
-          state: PageStates.QUIESCENT
-        })}
-        addMemberError={this.state.state === PageStates.ADDING_MEMBER_TO_PROJECT_FAILED}
-        errorText={this.state.errorText}
-        />
-    )
+    return <AddNewMemberForm
+      onSuccessAddingMember={this.successAddingMember}
+      onCancelAddMember={this.closeAddMemberForm} />
   }
 
   // TODO: code this
