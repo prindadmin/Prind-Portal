@@ -97,7 +97,7 @@ export class Element extends Component {
           elementContent.fileDetails.length > 0 ?
           <CurrentVersion
             details={elementContent.fileDetails[0]}
-            projectID={projects.chosenProject.projectId}
+            projectId={projects.chosenProject.projectId}
             pageName={pageName}
             fieldID={elementContent.id}
             editable={elementContent.editable}

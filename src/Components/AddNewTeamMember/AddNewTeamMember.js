@@ -50,6 +50,7 @@ export class AddNewTeamMember extends Component {
   }
 
   addTeamMember = (e) => {
+    e.preventDefault()
     e.stopPropagation()
     this.setState({
       state: ComponentStates.CREATING_NEW_USER

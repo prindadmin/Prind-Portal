@@ -1,3 +1,3 @@
-import Element from './ElementContainer'
+import LongTextContainer from './LongTextContainer'
 
-export default Element
+export default LongTextContainer

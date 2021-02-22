@@ -174,7 +174,8 @@ export class StagePage extends Component {
 
 
   render() {
-    const { pageName, projectId } = this.props
+    const { pageName, projects } = this.props
+    const { projectId } = projects.chosenProject
     console.log(this.state.state)
     return (
       <div id='stage-page'>
@@ -197,7 +198,7 @@ export class StagePage extends Component {
           {
             this.state.createFieldIsOpen ?
             <CreateCustomFieldPopover
-              projectID={projectId}
+              projectId={projectId}
               pageName={pageName}
               onClosePopover={this.onClosePopup}
               />

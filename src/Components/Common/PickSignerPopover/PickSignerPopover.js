@@ -1,17 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import {
-  InputGroup,
-  Button,
-  Intent,
-  Callout,
-} from '@blueprintjs/core'
+import { InputGroup, Button, Intent, Callout } from '@blueprintjs/core'
 
 import ItemIcon from '../ItemIcon'
-
 import PopOverHandler from '../popOverHandler'
-
 import * as Strings from '../../../Data/Strings'
 
 export class PickSignerPopover extends Component {
@@ -69,7 +62,7 @@ export class PickSignerPopover extends Component {
 
   // When the user wants to send the signing request, this is called
   sendSigningRequest = (e) => {
-    e.stopPropagation()
+    e.preventDefault()
     const { projectID, pageName, fieldID } = this.props
     const { selectedMembers } = this.state
     var members = selectedMembers.map(value => value.username);
@@ -103,7 +96,6 @@ export class PickSignerPopover extends Component {
     this.setState({
       searchTerm: e.target.value,
     })
-    e.stopPropagation()
   }
 
   // When a tile it clicked, add or remove it from the selected members list
@@ -127,12 +119,14 @@ export class PickSignerPopover extends Component {
     })
   }
 
+
   getName = (memberDetails) => {
     if (memberDetails.firstName === null || memberDetails.lastName === null) {
       return Strings.MEMBER_NEEDS_FOUNDATIONS_TO_SIGN
     }
     return `${memberDetails.firstName} ${memberDetails.lastName}`
   }
+
 
   memberTileRenderer = (memberDetails, index) => {
     const { selectedMembers } = this.state
@@ -159,6 +153,21 @@ export class PickSignerPopover extends Component {
     )
   }
 
+
+  filterListBySearchTerm = (firstName, lastName, emailAddress, searchTerm) => {
+    var returnBool = false
+    if (firstName !== null) {
+      returnBool = returnBool || firstName.toLowerCase().startsWith(searchTerm.toLowerCase())
+    }
+    if (lastName !== null) {
+      returnBool = returnBool || lastName.toLowerCase().startsWith(searchTerm.toLowerCase())
+    }
+    if (emailAddress !== null) {
+      returnBool = returnBool || emailAddress.toLowerCase().startsWith(searchTerm.toLowerCase())
+    }
+    return returnBool
+  }
+
   getFilteredMembers = () => {
     const { teamMembers } = this.props
     const { searchTerm } = this.state
@@ -173,10 +182,7 @@ export class PickSignerPopover extends Component {
     }
     // If not blank, filter the members
     return (teamMembers.confirmed.concat(filteredInvitees)).filter((item) => {
-      return (
-        (item.firstName.toLowerCase().startsWith(searchTerm.toLowerCase()) ||
-        item.lastName.toLowerCase().startsWith(searchTerm.toLowerCase()))
-      )
+      return this.filterListBySearchTerm(item.firstName, item.lastName, item.emailAddress, searchTerm)
     })
   }
 
@@ -184,7 +190,7 @@ export class PickSignerPopover extends Component {
   getTiles = () => {
     const filteredMembers = this.getFilteredMembers()
     return (
-      <React.Fragment>
+      <div className='user-tile-container'>
         {
           filteredMembers.map((memberDetails, index) => {
             return (
@@ -194,7 +200,7 @@ export class PickSignerPopover extends Component {
             )
           })
         }
-      </React.Fragment>
+      </div>
     )
   }
 
@@ -236,9 +242,16 @@ export class PickSignerPopover extends Component {
     )
   }
 
+  getSendError = () => {
+    const { errorText } = this.state
+    return(
+      <Callout style={{marginBottom: '15px'}} intent='danger'>
+        <div>{errorText}</div>
+      </Callout>
+    )
+  }
 
   render() {
-    const { sendError, errorText } = this.state
     return (
       <PopOverHandler>
         <div id='popup-greyer' onClick={(e) => {
@@ -252,20 +265,14 @@ export class PickSignerPopover extends Component {
                   {Strings.PICK_DOCUMENT_SIGNERS}
                 </div>
                 {
-                  sendError ?
-                  <Callout style={{marginBottom: '15px'}} intent='danger'>
-                    <div>{errorText}</div>
-                  </Callout> :
-                  null
+                  this.state.sendError ? this.getSendError() : null
                 }
                 {
                   this.getSearchBar()
                 }
-                <div className='user-tile-container'>
-                  {
-                    this.getTiles()
-                  }
-                </div>
+                {
+                  this.getTiles()
+                }
                 {
                   this.getButtons()
                 }

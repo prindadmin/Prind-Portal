@@ -1,3 +1,3 @@
-import Element from './ElementContainer'
+import CreateCustomFieldPopoverContainer from './CreateCustomFieldPopoverContainer'
 
-export default Element
+export default CreateCustomFieldPopoverContainer

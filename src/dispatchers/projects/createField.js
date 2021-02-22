@@ -31,6 +31,10 @@ async function CreateField(projectId, pageName, fieldDetails) {
     API.post(apiName, path, myInit)
       .then(response => {
         console.log(response)
+        if (response.Error !== undefined) {
+          reject(response.Error)
+          return;
+        }
         resolve(response)
       })
       .catch(error => {

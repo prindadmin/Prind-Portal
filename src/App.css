@@ -587,13 +587,17 @@ p.error {
 
 }
 
+#create-custom-field-popover .create-field-form,
 #project-team-page .add-member-form {
-  max-width: 430px;
   width: 100%;
   margin: auto;
   display: flex;
   flex-direction: column;
   text-align: left;
+}
+
+#project-team-page .add-member-form {
+  max-width: 430px;
 }
 
 #project-team-page .add-member-form .role-select {
@@ -1163,7 +1167,7 @@ background-color: var(--field-element-grey);
 
 #create-custom-field-popover .form-container {
   width: 100%;
-  max-width: 500px;
+  margin: auto;
 }
 
 #create-custom-field-popover #popup-box,
@@ -1180,6 +1184,25 @@ background-color: var(--field-element-grey);
 
 #create-custom-field-popover button {
   margin-bottom: 0.8em;
+}
+
+#create-custom-field-popover .drop-down-container,
+#create-custom-field-popover .radio-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--standard-margin);
+}
+
+#create-custom-field-popover .no-options {
+  margin-bottom: var(--standard-margin);
+}
+
+#create-custom-field-popover input[type=radio] {
+  margin: 0 var(--standard-margin);
+}
+
+#create-custom-field-popover input[type=checkbox] {
+  margin-right: var(--standard-margin);
 }
 
 /* =========================================== */
@@ -2283,6 +2306,7 @@ mark.grey {
   overflow: auto;
 }
 
+#create-custom-field-popover input[type=text],
 #component-sign-in-up-box input[type=text],
 #component-sign-in-up-box input[type=password]  {
   width: 100%;

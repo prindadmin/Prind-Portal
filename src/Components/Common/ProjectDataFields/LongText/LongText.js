@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Field, reduxForm } from 'redux-form'
 import PropTypes from 'prop-types'
 
 import {
@@ -9,10 +8,9 @@ import {
 } from '@blueprintjs/core'
 
 import * as FormInputs from '../../formInputs'
-
 import * as Strings from '../../../../Data/Strings'
 
-export class Element extends Component {
+export class LongText extends Component {
   static propTypes = {
     elementContent: PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -26,28 +24,40 @@ export class Element extends Component {
     pageName: PropTypes.string.isRequired,
   }
 
-  constructor() {
+  constructor(props) {
     super()
+
+    var textValue = ''
+
+    if (props.elementContent.fieldDetails !== undefined) {
+      textValue = props.elementContent.fieldDetails.textValue
+    }
+
     this.state = {
       updateInProgress: false,
       updateError: false,
       errorText: "",
+      textValue
     }
   }
 
-  componentDidMount() {
-  }
-
   componentDidUpdate(prevProps) {
+    const { fieldDetails } = this.props.elementContent
+
+    if(fieldDetails !== prevProps.elementContent.fieldDetails) {
+      if (fieldDetails !== undefined) {
+        this.setState({
+          textValue: fieldDetails.textValue
+        })
+      }
+    }
   }
-
-
-  // ---------------------- DEFAULT FUNCTIONALITY ABOVE THIS LINE -----------------------
 
   // When the user wants to save the changes, update the server
-  saveChanges = (fieldDetails) => {
-
+  saveChanges = (e) => {
+    e.preventDefault()
     const { pageName, projects, elementContent } = this.props
+    const { textValue } = this.state
 
     this.setState({
       updateError: false,
@@ -58,7 +68,7 @@ export class Element extends Component {
       projects.chosenProject.projectId,
       pageName,
       elementContent.id,
-      fieldDetails,
+      { textValue },
       this.saveResolve,
       this.saveReject,
     )
@@ -78,13 +88,17 @@ export class Element extends Component {
     })
   }
 
-  // ------------------------------ RENDER BELOW THIS LINE ------------------------------
+
+  handleInputChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
 
   render() {
-
-    const { handleSubmit } = this.props
     const { title, description, fieldDetails, editable } = this.props.elementContent
-
+    const { textValue } = this.state
     return (
       <div id='long-text-element'>
         <div className='long-text-element-container'>
@@ -97,7 +111,7 @@ export class Element extends Component {
           </div>
 
           <div className='container'>
-            <form onSubmit={handleSubmit(this.saveChanges)} className='form'>
+            <form onSubmit={(e) => this.saveChanges(e)} className='form'>
 
               {
                 this.state.updateError ?
@@ -110,12 +124,13 @@ export class Element extends Component {
 
               <div className='row'>
                 <div className='col'>
-                  <Field
+                  <textarea
+                    id="textValue"
                     name="textValue"
-                    component={FormInputs.TextBoxInput}
-                    value={fieldDetails.textValue}
+                    value={textValue}
                     placeholder={Strings.PLEASE_PROVIDE_DETAILS_HERE}
                     disabled={!editable}
+                    onChange={this.handleInputChange}
                     />
                 </div>
               </div>
@@ -123,14 +138,15 @@ export class Element extends Component {
 
               <div className='row'>
                 <div className='col'>
-                  <Button
-                    loading={this.props.submitting}
-                    disabled={this.props.pristine}
-                    className='entry-button'
-                    intent={Intent.PRIMARY}
-                    text={Strings.BUTTON_SAVE_CHANGES}
-                    type='submit'
-                    />
+                  <input
+                    id="submit"
+                    name="submit"
+                    type="submit"
+                    value={ Strings.BUTTON_SAVE_CHANGES }
+                    className="submit-button"
+                    style={{maxWidth: '300px'}}
+                    readOnly
+                    onClick={this.addTeamMember}/>
                 </div>
               </div>
 
@@ -144,8 +160,5 @@ export class Element extends Component {
   }
 }
 
-Element = reduxForm({
-  enableReinitialize: true
-})(Element)
 
-export default Element
+export default LongText

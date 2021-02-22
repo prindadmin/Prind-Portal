@@ -18,7 +18,7 @@ export class CurrentVersion extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
     details: PropTypes.object,
-    projectID: PropTypes.string.isRequired,
+    projectId: PropTypes.string.isRequired,
     pageName: PropTypes.string.isRequired,
     fieldID: PropTypes.string.isRequired,
     editable: PropTypes.bool,
@@ -60,10 +60,10 @@ export class CurrentVersion extends Component {
   // Perform Actions to request your own signature
   sendSelfSignRequest = (e) => {
     console.log("Self sign file clicked")
-    const { projectID, pageName, fieldID } = this.props
+    const { projectId, pageName, fieldID } = this.props
     // Send the request
     this.props.selfSignFile(
-      projectID,
+      projectId,
       pageName,
       fieldID,
     )
@@ -109,11 +109,11 @@ export class CurrentVersion extends Component {
 
 
   getDownloadButton = () => {
-    const { projectID, pageName, fieldID, details } = this.props
+    const { projectId, pageName, fieldID, details } = this.props
     return (
       <div className="download-box-cell" onClick={(e) => e.stopPropagation()}>
         <DownloadBox
-          projectID={projectID}
+          projectId={projectId}
           pageName={pageName}
           fieldID={fieldID}
           fileVersionDetails={details}
@@ -185,7 +185,7 @@ export class CurrentVersion extends Component {
 
 
   render() {
-    const { details, projectID, pageName, fieldID } = this.props
+    const { details, projectId, pageName, fieldID } = this.props
     const { signerPickerOpen } = this.state
     return(
       <div id='current-version-container'>
@@ -199,7 +199,7 @@ export class CurrentVersion extends Component {
           signerPickerOpen ? <PickSignerPopover
             fileDetails={details}
             teamMembers={this.props.projects.memberList}
-            projectID={projectID}
+            projectId={projectId}
             pageName={pageName}
             fieldID={fieldID}
             onClosePopover={this.onClosePopover}

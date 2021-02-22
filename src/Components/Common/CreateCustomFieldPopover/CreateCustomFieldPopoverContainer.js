@@ -3,14 +3,11 @@ import { withRouter } from 'react-router-dom'
 
 import * as projectsReducer from '../../../Reducers/projectsReducer'
 
-import Element from './Element'
+import CreateCustomFieldPopover from './CreateCustomFieldPopover'
 
 const mapStatetoProps = state => {
   return {
     projects: state.projects,
-    initialValues: {
-      type: "file"
-    }
   }
 }
 
@@ -22,4 +19,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default withRouter(connect(mapStatetoProps, mapDispatchToProps)(Element))
+export default withRouter(connect(mapStatetoProps, mapDispatchToProps)(CreateCustomFieldPopover))
