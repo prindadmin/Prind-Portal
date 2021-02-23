@@ -13,12 +13,7 @@ class NoFoundationsIDBanner extends Component {
   }
 
   render () {
-
     const { user } = this.props
-
-    if (user === undefined) {
-      return null;
-    }
 
     if (user.details === undefined) {
       return null;

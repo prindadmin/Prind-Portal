@@ -4,9 +4,7 @@ import ItemIcon from './ItemIcon'
 import * as Strings from '../../Data/Strings'
 
 export class NoAccreditationsAvailable extends Component {
-
   render() {
-
     return (
       <div className='no-project-selected-container fill'>
         <div className='no-project-selected'>
@@ -15,7 +13,6 @@ export class NoAccreditationsAvailable extends Component {
         </div>
       </div>
     )
-
   }
 }
 

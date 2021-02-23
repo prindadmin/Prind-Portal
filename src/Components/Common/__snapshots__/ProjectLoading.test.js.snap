@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render 1`] = `
+<div
+  className="project-loading-container fill"
+>
+  <div
+    className="project-loading"
+  >
+    <div
+      className="section-spinner"
+    >
+      <Blueprint3.Spinner
+        intent="primary"
+        size="100"
+      />
+    </div>
+    <div>
+      Project loading, please wait...
+    </div>
+  </div>
+</div>
+`;

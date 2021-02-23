@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 
-export class HeaderBar extends Component {
-
+export class FooterBar extends Component {
   render() {
-
     return (
       <div id='footer-bar' className='col-12'>
         <div className='footer-content row'>
@@ -16,4 +14,4 @@ export class HeaderBar extends Component {
   }
 }
 
-export default HeaderBar
+export default FooterBar

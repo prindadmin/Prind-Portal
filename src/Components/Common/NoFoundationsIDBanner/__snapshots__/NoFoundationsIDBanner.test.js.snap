@@ -4,7 +4,7 @@ exports[`Should not render if not enough user details provided 1`] = `""`;
 
 exports[`Should not render if user has Foundations ID 1`] = `""`;
 
-exports[`Should render if user has Foundations ID 1`] = `
+exports[`Should render if user has no Foundations ID 1`] = `
 <div
   className="row full-width"
   id="no-foundations-id-banner"

@@ -96,10 +96,6 @@ class App extends Component{
     this.props.refreshSession()
   }
 
-  componentDidUpdate(prevState, prevProps) {
-
-  }
-
   enableLogger = () => {
       if(this.state.oldConsoleLog == null) {
           return

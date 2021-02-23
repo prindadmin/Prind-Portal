@@ -68,6 +68,7 @@ export class Element extends Component {
     projectId: PropTypes.string.isRequired,
     pageName: PropTypes.string.isRequired,
     onClosePopover: PropTypes.func.isRequired,
+    createField: PropTypes.func.isRequired
   }
 
   constructor() {
@@ -78,7 +79,7 @@ export class Element extends Component {
       type: 'file',
       fieldDropDownOptions: '',
       createError: false,
-      errorText: "",
+      errorText: '',
     }
   }
 
@@ -89,7 +90,6 @@ export class Element extends Component {
   }
 
   createResolve = (result) => {
-    console.log(result)
     this.closePopover()
   }
 
@@ -153,7 +153,7 @@ export class Element extends Component {
   getCheckBoxes = () => {
     const { fieldDropDownOptions } = this.state
 
-    if(fieldDropDownOptions !==  undefined) {
+    if(fieldDropDownOptions !==  '') {
       const optionsArray = fieldDropDownOptions.split(",").map(item => item.trim())
 
       return (
@@ -161,7 +161,7 @@ export class Element extends Component {
           {
             optionsArray.map((item, index) => {
               return (
-                <span>
+                <span key={index}>
                   <input
                     id={item}
                     name={item}
@@ -203,7 +203,7 @@ export class Element extends Component {
   getForm = () => {
     return (
       <div className='form-container'>
-        <form onSubmit={(e) => e.stopPropagation()} className='create-field-form'>
+        <form onSubmit={(e) => e.preventDefault()} className='create-field-form'>
 
           <label htmlFor="title">{Strings.FIELD_TITLE}</label>
           <input
@@ -262,7 +262,7 @@ export class Element extends Component {
             value={ Strings.BUTTON_CREATE_FIELD }
             className="submit-button"
             readOnly
-            onClick={this.createField}/>
+            onClick={(e) => this.createField(e)}/>
 
           <input
             id="cancel"
@@ -289,11 +289,14 @@ export class Element extends Component {
           }}>
           <div id='create-custom-field-popover'>
             <div id='popup-box'>
-              <div className='create-custom-field-popover-container' onClick={(e) => e.stopPropagation()}>
+              <div id='create-custom-field-popover-container' className='create-custom-field-popover-container' onClick={(e) => e.stopPropagation()}>
                 <div className='element-title'>
                   {Strings.CREATE_CUSTOM_FIELD}
                 </div>
                 <div className='element-description'>
+                  {
+                    this.state.errorText !== '' ? this.getErrorMessage() : null
+                  }
                   {
                     this.getForm()
                   }

@@ -15,7 +15,7 @@ it('Should not render if user has Foundations ID', () => {
   expect(component).toMatchSnapshot();
 });
 
-it('Should render if user has Foundations ID', () => {
+it('Should render if user has no Foundations ID', () => {
   const props = {
     user: {
       details: {}
@@ -31,4 +31,19 @@ it('Should not render if not enough user details provided', () => {
   };
   const component = shallow(<Component {...props} />);
   expect(component).toMatchSnapshot();
+});
+
+it('Clicking banner should redirect', () => {
+  const mockHistoryPush = jest.fn();
+  const props = {
+    user: {
+      details: {}
+    },
+    history: {
+      push: mockHistoryPush
+    }
+  };
+  const component = shallow(<Component {...props} />);
+  const banner = component.find('#no-foundations-id-banner').simulate('click')
+  expect(mockHistoryPush).toHaveBeenCalledWith("/foundations")
 });

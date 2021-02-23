@@ -114,14 +114,14 @@ export class ProjectSelectorPopUp extends Component {
   }
 
   resolveProjectFetch = () => {
-    console.log('successfully fetched project list')
+    //console.log('successfully fetched project list')
     this.setState({
       state: ComponentState.QUIESCENT
     })
   }
 
   rejectProjectFetch = () => {
-    console.error('failed to fetch project list')
+    //console.error('failed to fetch project list')
     this.setState({
       state: ComponentState.LOADING_ERROR,
       errorText: Strings.ERROR_FETCHING_PROJECT_LIST,

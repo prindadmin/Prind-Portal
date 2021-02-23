@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render 1`] = `
+<div
+  className="no-project-selected-container fill"
+>
+  <div
+    className="no-project-selected"
+  >
+    <ItemIcon
+      size="6x"
+      type="certificate"
+    />
+    <p>
+      No accreditations available
+    </p>
+  </div>
+</div>
+`;
