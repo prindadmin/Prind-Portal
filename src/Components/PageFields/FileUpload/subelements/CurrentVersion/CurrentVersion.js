@@ -18,9 +18,9 @@ export class CurrentVersion extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
     details: PropTypes.object,
-    projectId: PropTypes.string.isRequired,
-    pageName: PropTypes.string.isRequired,
-    fieldID: PropTypes.string.isRequired,
+    projectId: PropTypes.string,
+    pageName: PropTypes.string,
+    fieldID: PropTypes.string,
     editable: PropTypes.bool,
   }
 

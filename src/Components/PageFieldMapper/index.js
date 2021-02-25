@@ -31,6 +31,7 @@ const PageFieldMapper = props => {
   if (singleField.type === 'calendar') {
     return <CalendarPicker
               key={singleField.id}
+              form={"field-" + singleField.id}
               elementContent={singleField}
               pageName={pageName}
               projectId={projectId}

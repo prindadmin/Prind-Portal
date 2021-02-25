@@ -45,7 +45,7 @@ exports[`Should create a dropdown field and create field sucessfully 1`] = `
                   placeholder="Field Title"
                   required={true}
                   type="text"
-                  value=""
+                  value="test title"
                 />
                 <label
                   htmlFor="description"
@@ -60,7 +60,7 @@ exports[`Should create a dropdown field and create field sucessfully 1`] = `
                   placeholder="Field Description"
                   required={true}
                   type="text"
-                  value=""
+                  value="test description"
                 />
                 <p>
                   Field Type
@@ -267,7 +267,7 @@ exports[`Should populate title and description fields and create field fails 1`]
                   placeholder="Field Title"
                   required={true}
                   type="text"
-                  value=""
+                  value="test title"
                 />
                 <label
                   htmlFor="description"
@@ -282,7 +282,7 @@ exports[`Should populate title and description fields and create field fails 1`]
                   placeholder="Field Description"
                   required={true}
                   type="text"
-                  value=""
+                  value="test description"
                 />
                 <p>
                   Field Type
@@ -428,7 +428,7 @@ exports[`Should populate title and description fields and create field sucessful
                   placeholder="Field Title"
                   required={true}
                   type="text"
-                  value=""
+                  value="test title"
                 />
                 <label
                   htmlFor="description"
@@ -443,7 +443,7 @@ exports[`Should populate title and description fields and create field sucessful
                   placeholder="Field Description"
                   required={true}
                   type="text"
-                  value=""
+                  value="test description"
                 />
                 <p>
                   Field Type

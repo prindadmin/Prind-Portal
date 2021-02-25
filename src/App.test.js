@@ -12,7 +12,8 @@ beforeEach(() => {
     REACT_APP_USER_AUTHORISATION_URL: "https://prind-production-user-pool.auth.eu-west-1.amazoncognito.com/confirmUser",
     REACT_APP_API_NAME: "PrinDFrontEndAPI",
     REACT_APP_GA_ID: '123',
-    REACT_APP_STAGE: 'PRODUCTION'
+    REACT_APP_STAGE: 'PRODUCTION',
+    REACT_APP_GA_TEST: 'True'
   });
 });
 

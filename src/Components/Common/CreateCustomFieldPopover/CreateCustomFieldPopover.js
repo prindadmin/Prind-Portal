@@ -121,12 +121,11 @@ export class Element extends Component {
     // If it's not a drop down, send the simple version
     // TODO: Fix this so it doesn't always return false for the tick boxes
     if (type === 'dropdown') {
-      newFieldDetails['optionsArray'] = {
+      newFieldDetails['fieldDetails'] = {
         dropDownOptions: fieldDropDownOptions.split(",").map(item => item.trim()),
-        optionOpensTextBox: fieldDropDownOptions.split(",").map(item => false)
+        optionOpensTextBox: []
       }
     }
-
     // Send to server
     this.props.createField(projectId, pageName, newFieldDetails, this.createResolve, this.createReject)
   }

@@ -13,7 +13,7 @@ import * as FormInputs from '../../formInputs'
 
 import * as Strings from '../../../../Data/Strings'
 
-export class Element extends Component {
+export class DropDownOption extends Component {
   static propTypes = {
     elementContent: PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -113,12 +113,10 @@ export class Element extends Component {
     })
   }
 
-  // ------------------------------ RENDER BELOW THIS LINE ------------------------------
 
-  render() {
-
+  getDropDownPresentation = () => {
     const { handleSubmit } = this.props
-    const { title, description, fieldDetails, editable } = this.props.elementContent
+    const { fieldDetails, editable } = this.props.elementContent
     const { dropdownValue, textboxValue } = this.state
 
     // Check if drop down options has been provided or not
@@ -132,8 +130,87 @@ export class Element extends Component {
       };
     });
 
-    console.log(dropDownOptions)
-    console.log(formattedDropDownOptions)
+    return (
+      <form onSubmit={handleSubmit(this.saveChanges)} className='drop-down-picker-form'>
+
+        {
+          this.state.updateError ?
+          <div className='row'>
+            <Callout style={{marginBottom: '15px'}} intent='danger'>
+              <div>{this.state.errorText}</div>
+            </Callout>
+          </div> : null
+        }
+
+        <div className='row'>
+          <div className='col'>
+            <Field
+              name="dropdownValue"
+              values={formattedDropDownOptions}
+              component={FormInputs.SelectInput}
+              onItemSelect={this.onItemSelected}
+              placeholder={Strings.NO_ITEM_CHOSEN}
+              disabled={!editable}
+            />
+          </div>
+        </div>
+
+
+        <div className='row'>
+          <div className='col'>
+            {
+              fieldDetails.optionOpensTextBox.includes(dropdownValue) ?
+              <FormGroup
+                label={Strings.IF_XXX_PROVIDE_DETAILS_BELOW.replace("XXX", dropdownValue)}
+                labelFor="extraInfo"
+                labelInfo=""
+                className="last"
+              >
+                <Field
+                  name="textboxValue"
+                  component='textarea'
+                  className="bp3-input"
+                  value={textboxValue}
+                  disabled={!editable}
+                />
+              </FormGroup> :
+              null
+            }
+          </div>
+        </div>
+
+        <div className='row'>
+          <div className='col'>
+          <Button
+            loading={this.props.submitting}
+            disabled={this.props.pristine}
+            text={Strings.BUTTON_SAVE_CHANGES}
+            className='entry-button'
+            intent={Intent.PRIMARY}
+            type='submit'
+          />
+          </div>
+        </div>
+      </form>
+    )
+  }
+
+  getNoDropDownOptionsPresent = () => {
+    return (
+      <React.Fragment>
+        { Strings.NO_DROP_DOWN_OPTIONS_PRESENT }
+      </React.Fragment>
+    )
+  }
+
+
+  render() {
+
+    const { handleSubmit } = this.props
+    const { title, description, fieldDetails, editable } = this.props.elementContent
+    const { dropdownValue, textboxValue } = this.state
+
+    console.log(this.props.elementContent.fieldDetails)
 
     return (
       <div id='drop-down-element'>
@@ -147,67 +224,9 @@ export class Element extends Component {
           </div>
 
           <div className='container'>
-            <form onSubmit={handleSubmit(this.saveChanges)} className='drop-down-picker-form'>
-
-              {
-                this.state.updateError ?
-                <div className='row'>
-                  <Callout style={{marginBottom: '15px'}} intent='danger'>
-                    <div>{this.state.errorText}</div>
-                  </Callout>
-                </div> : null
-              }
-
-              <div className='row'>
-                <div className='col'>
-                  <Field
-                    name="dropdownValue"
-                    values={formattedDropDownOptions}
-                    component={FormInputs.SelectInput}
-                    onItemSelect={this.onItemSelected}
-                    placeholder={Strings.NO_ITEM_CHOSEN}
-                    disabled={!editable}
-                  />
-                </div>
-              </div>
-
-
-              <div className='row'>
-                <div className='col'>
-                  {
-                    fieldDetails.optionOpensTextBox.includes(dropdownValue) ?
-                    <FormGroup
-                      label={Strings.IF_XXX_PROVIDE_DETAILS_BELOW.replace("XXX", dropdownValue)}
-                      labelFor="extraInfo"
-                      labelInfo=""
-                      className="last"
-                    >
-                      <Field
-                        name="textboxValue"
-                        component='textarea'
-                        className="bp3-input"
-                        value={textboxValue}
-                        disabled={!editable}
-                      />
-                    </FormGroup> :
-                    null
-                  }
-                </div>
-              </div>
-
-              <div className='row'>
-                <div className='col'>
-                <Button
-                  loading={this.props.submitting}
-                  disabled={this.props.pristine}
-                  text={Strings.BUTTON_SAVE_CHANGES}
-                  className='entry-button'
-                  intent={Intent.PRIMARY}
-                  type='submit'
-                />
-                </div>
-              </div>
-            </form>
+            {
+              fieldDetails.dropDownOptions === undefined ? this.getNoDropDownOptionsPresent() : this.getDropDownPresentation()
+            }
           </div>
 
         </div>
@@ -216,8 +235,8 @@ export class Element extends Component {
   }
 }
 
-Element = reduxForm({
+DropDownOption = reduxForm({
   enableReinitialize: true
-})(Element)
+})(DropDownOption)
 
-export default Element
+export default DropDownOption

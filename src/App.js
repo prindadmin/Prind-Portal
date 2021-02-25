@@ -75,7 +75,11 @@ class App extends Component{
       oldConsoleLog: null,
     }
 
-    // Initialise Google Analytics to log all page views
+    if (process.env.REACT_APP_GA_TEST === 'True') {
+      ReactGA.initialize('dummy', { testMode: true });
+      return;
+    }
+
     ReactGA.initialize(process.env.REACT_APP_GA_ID, {
       gaOptions: {
         siteSpeedSampleRate: 100

@@ -7,6 +7,8 @@ const mapStatetoProps = state => {
   return {}
 }
 
-const mapDispatchToProps = dispatch => {}
+const mapDispatchToProps = dispatch => {
+  return {}
+}
 
 export default withRouter(connect(mapStatetoProps, mapDispatchToProps)(SignInPage))

@@ -13,8 +13,9 @@ import * as FormInputs from '../../formInputs'
 import * as Strings from '../../../../Data/Strings'
 
 // TODO: Fix at mobile resolutions (extends past edge of screen)
+// TODO: URGENT: This doesn't change to the chosen date
 
-export class Element extends Component {
+export class CalendarPicker extends Component {
   static propTypes = {
     elementContent: PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -151,8 +152,8 @@ export class Element extends Component {
   }
 }
 
-Element = reduxForm({
+CalendarPicker = reduxForm({
   enableReinitialize: true
-})(Element)
+})(CalendarPicker)
 
-export default Element
+export default CalendarPicker

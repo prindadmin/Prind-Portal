@@ -29,9 +29,9 @@ it('Should populate title and description fields and create field sucessfully', 
   const component = shallow(<Component {...props} />);
 
   const title = component.find('#title')
-  title.simulate('change', { target: { value: 'test title' }});
+  title.simulate('change', { target: { name: 'title', value: 'test title' }});
   const description = component.find('#description')
-  description.simulate('change', { target: { value: 'test description' }});
+  description.simulate('change', { target: { name: 'description', value: 'test description' }});
   component.find('#submit').simulate('click', { preventDefault: () => {}} )
 
   expect(mockCreateField).toHaveBeenCalled()
@@ -53,16 +53,26 @@ it('Should create a dropdown field and create field sucessfully', () => {
   const component = shallow(<Component {...props} />);
 
   const title = component.find('#title')
-  title.simulate('change', { target: { value: 'test title' }});
+  title.simulate('change', { target: { name: 'title', value: 'test title' }});
   const description = component.find('#description')
-  description.simulate('change', { target: { value: 'test description' }});
+  description.simulate('change', { target: { name: 'description', value: 'test description' }});
   component.find('input[value="dropdown"]').simulate('change', {target: {name: 'type', value: 'dropdown'}})
   component.find('#fieldDropDownOptions').simulate('change', { target: { name: 'fieldDropDownOptions', value: 'Option 1, Option 2' }});
 
 
   component.find('#submit').simulate('click', { preventDefault: () => {}} )
 
-  expect(mockCreateField).toHaveBeenCalled()
+  expect(mockCreateField).toHaveBeenCalledWith("123", "occupation", {
+    title: 'test title',
+    description: 'test description',
+    type: 'dropdown',
+    fieldDetails: {
+        dropDownOptions: ['Option 1', 'Option 2'],
+        optionOpensTextBox: []
+      }
+    },
+    expect.any(Function),
+    expect.any(Function))
   expect(component).toMatchSnapshot();
 });
 
@@ -81,9 +91,9 @@ it('Should populate title and description fields and create field fails', () => 
   const component = shallow(<Component {...props} />);
 
   const title = component.find('#title')
-  title.simulate('change', { target: { value: 'test title' }});
+  title.simulate('change', { target: { name: 'title', value: 'test title' }});
   const description = component.find('#description')
-  description.simulate('change', { target: { value: 'test description' }});
+  description.simulate('change', { target: { name: 'description', value: 'test description' }});
   component.find('#submit').simulate('click', { preventDefault: () => {}} )
 
   expect(mockCreateField).toHaveBeenCalled()
