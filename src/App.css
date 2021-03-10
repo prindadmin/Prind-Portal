@@ -2391,10 +2391,20 @@ mark.grey {
   text-align: left;
 }
 
+#component-sign-in-up-box .forgot-your-password-text:hover {
+  text-decoration: underline;
+  cursor:pointer;
+}
+
 #component-sign-in-up-box .sign-up-in-text {
   font-size: 14px;
   font-weight: var(--font-raleway-weight-bold);
   text-align: center;
+}
+
+#component-sign-in-up-box .sign-up-in-text:hover {
+  text-decoration: underline;
+  cursor:pointer;
 }
 
 #component-sign-in-up-box .form .btn-primary {
