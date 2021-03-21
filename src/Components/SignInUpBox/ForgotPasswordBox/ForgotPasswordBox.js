@@ -7,7 +7,7 @@ import * as States from '../../../States'
 import * as ComponentState from '../States'
 
 // Components
-import { CanUseWebP } from '../../Common/CheckIfWebpSupported'
+import { CanUseWebP } from '../../../Functions/CheckIfWebpSupported'
 
 import {
   Callout,

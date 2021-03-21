@@ -1,6 +1,8 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 
+import { AUTH_UNKNOWN, AUTH_SUCCESS } from './States'
+
 import Component from './App'
 
 beforeEach(() => {
@@ -20,7 +22,10 @@ beforeEach(() => {
 it('Should render production', () => {
   const props = {
     auth: {
-      isSignedIn: false,
+      isSignedIn: AUTH_UNKNOWN,
+    },
+    user: {
+      currentRoute: "/project"
     },
     refreshSession: function () {}
   }
@@ -36,7 +41,10 @@ it('Should render staging', () => {
 
   const props = {
     auth: {
-      isSignedIn: false,
+      isSignedIn: AUTH_UNKNOWN,
+    },
+    user: {
+      currentRoute: "/project"
     },
     refreshSession: function () {}
   }
@@ -48,7 +56,25 @@ it('Should render staging', () => {
 it('Should render logged in', () => {
   const props = {
     auth: {
-      isSignedIn: true,
+      isSignedIn: AUTH_SUCCESS,
+    },
+    user: {
+      currentRoute: "/project"
+    },
+    refreshSession: function () {}
+  }
+  const component = shallow(<Component {...props} />);
+  expect(component).toMatchSnapshot();
+});
+
+
+it('Should render not logged in', () => {
+  const props = {
+    auth: {
+      isSignedIn: AUTH_UNKNOWN,
+    },
+    user: {
+      currentRoute: "/project"
     },
     refreshSession: function () {}
   }

@@ -9,7 +9,7 @@ import {
 } from '@blueprintjs/core'
 
 // Components
-import { CanUseWebP } from '../../Common/CheckIfWebpSupported'
+import { CanUseWebP } from '../../../Functions/CheckIfWebpSupported'
  
 import * as Endpoints from '../../../Data/Endpoints'
 import * as Strings from '../../../Data/Strings'

@@ -25,8 +25,8 @@ export class AddNewTeamMember extends Component {
           roleId: PropTypes.string.isRequired,
           roleName: PropTypes.string.isRequired
         })
-      )
-    })
+      ).isRequired
+    }).isRequired
   }
 
   constructor(props) {
@@ -118,7 +118,7 @@ export class AddNewTeamMember extends Component {
           placeholder={ Strings.PLACEHOLDER_EMAIL }
           value={this.state.emailAddress}
           onChange={this.handleInputChange}
-          className={ this.state.email === null ? "default" : "filled" }/>
+          className={ this.state.emailAddress === '' ? "default" : "filled" }/>
 
         <label htmlFor="roleId">{Strings.MEMBER_PROJECT_ROLE}</label>
         <select

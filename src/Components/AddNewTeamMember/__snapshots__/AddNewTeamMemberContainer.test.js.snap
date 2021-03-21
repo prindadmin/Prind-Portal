@@ -1,7 +1,63 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should render 1`] = `
-<ContextConsumer>
-  <Component />
-</ContextConsumer>
+exports[`should render 1`] = `
+<form
+  className="add-member-form"
+>
+  <label
+    htmlFor="emailAddress"
+  >
+    Member Details
+  </label>
+  <input
+    className="default"
+    id="emailAddress"
+    name="emailAddress"
+    onChange={[Function]}
+    placeholder="Email"
+    type="email"
+    value=""
+  />
+  <label
+    htmlFor="roleId"
+  >
+    Role
+  </label>
+  <select
+    className="role-select"
+    id="roleId"
+    name="roleId"
+    onChange={[Function]}
+    value="1"
+  >
+    <option
+      value="1"
+    >
+      developer
+    </option>
+    <option
+      value="2"
+    >
+      principal contractor
+    </option>
+  </select>
+  <input
+    className="submit-button"
+    id="submit"
+    name="submit"
+    onClick={[Function]}
+    readOnly={true}
+    type="submit"
+    value="Save Changes"
+  />
+  <input
+    className="cancel-button"
+    id="cancel"
+    name="cancel"
+    onClick={[Function]}
+    readOnly={true}
+    type="cancel"
+    value="Cancel"
+  />
+</form>
 `;

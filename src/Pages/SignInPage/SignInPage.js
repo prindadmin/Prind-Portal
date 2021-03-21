@@ -8,7 +8,7 @@ import * as Endpoints from '../../Data/Endpoints'
 
 // Components
 import SignInUpBox from '../../Components/SignInUpBox'
-import { CanUseWebP } from '../../Components/Common/CheckIfWebpSupported'
+import { CanUseWebP } from '../../Components/../Functions/CheckIfWebpSupported'
 
 export class SignInPage extends Component {
 

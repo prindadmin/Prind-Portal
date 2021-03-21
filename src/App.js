@@ -1,4 +1,5 @@
 import React, { Component, lazy, Suspense } from 'react';
+import PropTypes from 'prop-types'
 import './App.css';
 
 import Amplify, { Auth } from 'aws-amplify';
@@ -68,6 +69,16 @@ Amplify.configure({
 });
 
 class App extends Component{
+  static propTypes = {
+    refreshSession: PropTypes.func.isRequired,
+    auth: PropTypes.shape({
+      isSignedIn: PropTypes.string.isRequired
+    }).isRequired,
+    user: PropTypes.shape({
+      currentRoute: PropTypes.string.isRequired
+    }).isRequired
+  }
+
 
   constructor() {
     super()
@@ -123,7 +134,6 @@ class App extends Component{
   }
 
   render() {
-
     const { auth } = this.props
 
     return (
