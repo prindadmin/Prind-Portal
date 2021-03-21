@@ -1,3 +1,3 @@
-import Element from './ElementContainer'
+import CalendarPickerContainer from './CalendarPickerContainer'
 
-export default Element
+export default CalendarPickerContainer

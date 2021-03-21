@@ -1,29 +1,47 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Field } from 'redux-form'
 
-import {
-  FormGroup,
-  ButtonGroup,
-  Button,
-  Callout,
-} from '@blueprintjs/core'
-
-import * as FormInputs from '../Common/formInputs'
+import { Callout } from '@blueprintjs/core'
 import * as Strings from '../../Data/Strings'
-import * as Validators from '../../Validators'
+import Spinner from '../Common/LoadingSpinnerCSS'
 
+import * as ComponentStates from './ComponentStates'
+
+// TODO: Improve look of select box
 
 export class AddNewTeamMember extends Component {
   static propTypes = {
-    handleSubmit: PropTypes.func.isRequired,
-    onItemSelected: PropTypes.func.isRequired,
-    addMemberError: PropTypes.bool.isRequired,
-    errorText: PropTypes.string.isRequired,
+    onSuccessAddingMember: PropTypes.func.isRequired,
+    onCancelAddMember: PropTypes.func.isRequired,
+    addMember: PropTypes.func.isRequired,
+    projects: PropTypes.shape({
+      chosenProject: PropTypes.shape({
+        projectId: PropTypes.string.isRequired
+      }).isRequired,
+    }).isRequired,
+    members: PropTypes.shape({
+      roles: PropTypes.arrayOf(
+        PropTypes.shape({
+          roleId: PropTypes.string.isRequired,
+          roleName: PropTypes.string.isRequired
+        })
+      ).isRequired
+    }).isRequired
+  }
+
+  constructor(props) {
+    super()
+    const { roles } = props.members
+    this.state = {
+      roleId: roles[0].roleId,
+      emailAddress: '',
+      errorText: '',
+      state: ComponentStates.QUIESCENT
+    }
   }
 
   getErrorBlock = () => {
-    const { errorText } = this.props
+    const { errorText } = this.state
     return(
       <Callout style={{marginBottom: '15px'}} intent='danger'>
         <div>{errorText}</div>
@@ -31,70 +49,104 @@ export class AddNewTeamMember extends Component {
     )
   }
 
+  addTeamMember = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    this.setState({
+      state: ComponentStates.CREATING_NEW_USER
+    })
+    const { roleId, emailAddress } = this.state
+    const memberValues = {
+      roleId,
+      emailAddress
+    }
+    const { projectId } = this.props.projects.chosenProject
+    this.props.addMember(projectId, memberValues, this.successfullyAddedUser, this.failedAddingUser)
+  }
 
-  addNewMember = () => {
+  successfullyAddedUser = (result) => {
+    this.props.onSuccessAddingMember()
+  }
 
-    const { handleSubmit, addMemberError } = this.props
+  // TODO: Check that error.message is the right key for the error text
+  failedAddingUser = (error) => {
+    console.error(`failed to add a new user to the system with email: ${this.state.emailAddress}`)
+    this.setState({
+      errorText: error.message,
+      state: ComponentStates.CREATING_NEW_USER_FAILED
+    })
+  }
+
+
+  cancelNewMember = (e) => {
+    e.stopPropagation()
+    this.props.onCancelAddMember()
+  }
+
+  handleInputChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
+  getFailedCreatingUser = () => {
+    return (
+      <React.Fragment>
+        {this.getErrorBlock()}
+        {this.getNewMemberForm()}
+      </React.Fragment>
+    )
+  }
+
+
+  getNewMemberForm = () => {
+    const { addMemberError } = this.props
     const { roles } = this.props.members
-
-    // re-key the roles array so the keys match those required by the drop down
-    var formattedRoles = roles.map(item => {
-      return {
-        id: item.roleId,
-        name: item.roleName
-      };
-    });
+    // Turn the roles array into options for the drop down
+    const roleOptions = roles.map((role, index) => {
+      return <option key={index} value={role.roleId}>{role.roleName}</option>
+    })
 
     return (
-      <form onSubmit={handleSubmit} className='add-member-form'>
-        {
-          addMemberError ? this.getErrorBlock() : null
-        }
-        <FormGroup
-          label={Strings.MEMBER_DETAILS}
-          labelFor="emailAddress"
-        >
-          <Field
-            name="emailAddress"
-            validate={[Validators.required, Validators.isEmailAddress]}
-            component={FormInputs.TextInput}
-            placeholder={Strings.MEMBER_EMAIL_ADDRESS}
-          />
-        </FormGroup>
+      <form className='add-member-form'>
 
-        <FormGroup
-          label={Strings.MEMBER_PROJECT_ROLE}
-          labelFor="roleId"
-        >
-          <Field
-            name="roleId"
-            values={formattedRoles}
-            component={FormInputs.SelectInput}
-            placeholder={Strings.MEMBER_PROJECT_ROLE_SELECT_ROLE}
-            onItemSelect={this.props.onItemSelected}
-            disabled={false}
-          />
-        </FormGroup>
+        <label htmlFor="emailAddress">{Strings.MEMBER_DETAILS}</label>
+        <input
+          id="emailAddress"
+          name="emailAddress"
+          type="email"
+          placeholder={ Strings.PLACEHOLDER_EMAIL }
+          value={this.state.emailAddress}
+          onChange={this.handleInputChange}
+          className={ this.state.emailAddress === '' ? "default" : "filled" }/>
 
+        <label htmlFor="roleId">{Strings.MEMBER_PROJECT_ROLE}</label>
+        <select
+          id="roleId"
+          name="roleId"
+          value={this.state.roleId}
+          onChange={this.handleInputChange}
+          className='role-select'>
+          {roleOptions}
+        </select>
 
-        <ButtonGroup fill>
-          <Button
-            loading={this.props.submitting}
-            disabled={this.props.invalid}
-            type='submit'
-            intent='primary'
-            text={Strings.BUTTON_SAVE_CHANGES}
-          />
-        </ButtonGroup>
+        <input
+          id="submit"
+          name="submit"
+          type="submit"
+          value={ Strings.BUTTON_SAVE_CHANGES }
+          className="submit-button"
+          readOnly
+          onClick={this.addTeamMember}/>
 
-        <ButtonGroup fill>
-          <Button
-            type='cancel'
-            intent='none'
-            text={Strings.BUTTON_CANCEL}
-            onClick={this.cancelNewMember}
-          />
-        </ButtonGroup>
+        <input
+          id="cancel"
+          name="cancel"
+          type="cancel"
+          value={ Strings.BUTTON_CANCEL }
+          className="cancel-button"
+          readOnly
+          onClick={this.cancelNewMember}/>
 
       </form>
     )
@@ -103,7 +155,15 @@ export class AddNewTeamMember extends Component {
   render() {
     return(
       <React.Fragment>
-        {this.addNewMember()}
+        {
+          this.state.state === ComponentStates.CREATING_NEW_USER_FAILED ? this.getFailedCreatingUser() : null
+        }
+        {
+          this.state.state === ComponentStates.QUIESCENT ? this.getNewMemberForm() : null
+        }
+        {
+          this.state.state === ComponentStates.CREATING_NEW_USER ? <Spinner /> : null
+        }
       </React.Fragment>
     )
   }

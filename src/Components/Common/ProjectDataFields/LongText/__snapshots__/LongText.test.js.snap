@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render 1`] = `
+<div
+  id="long-text-element"
+>
+  <div
+    className="long-text-element-container"
+  >
+    <div
+      className="element-title"
+    >
+      Long Text Box
+    </div>
+    <div
+      className="element-description"
+    >
+      Long Text Box Description
+    </div>
+    <div
+      className="container"
+    >
+      <form
+        className="form"
+        onSubmit={[Function]}
+      >
+        <div
+          className="row"
+        >
+          <div
+            className="col"
+          >
+            <textarea
+              disabled={false}
+              id="textValue"
+              name="textValue"
+              onChange={[Function]}
+              placeholder="Please provide extra details here..."
+              value="Test save."
+            />
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="col"
+          >
+            <input
+              className="submit-button"
+              id="submit"
+              name="submit"
+              readOnly={true}
+              style={
+                Object {
+                  "maxWidth": "300px",
+                }
+              }
+              type="submit"
+              value="Save Changes"
+            />
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+`;

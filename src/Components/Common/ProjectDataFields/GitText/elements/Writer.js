@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import { Editor } from '@tinymce/tinymce-react';
 import LoadingSpinner from '../../../LoadingSpinner'
+import PopOverHandler from '../../../popOverHandler'
 import * as ComponentState from '../../ComponentStates'
 
 import * as Strings from '../../../../../Data/Strings'
@@ -15,6 +16,8 @@ import uploadFileToS3 from './uploadFileToS3'
 // TODO: Style save button when disabled
 // TODO: Style text editor when disabled
 // TODO: Fix occasional errors with the S3 token
+// TODO: Store changes so that a failure of upload doesn't lose information
+// TODO: New line (enter) moves the cursor back to the beginning of the box!!!
 
 export class TextWriter extends Component {
   static propTypes = {
@@ -29,10 +32,11 @@ export class TextWriter extends Component {
       })
     }).isRequired,
     fileVersions: PropTypes.arrayOf(PropTypes.shape({
-      ver: PropTypes.string,
-      prevVer: PropTypes.string,
-      s3VersionId: PropTypes.string,
+      ver: PropTypes.string.isRequired,
+      prevVer: PropTypes.string.isRequired,
+      s3VersionId: PropTypes.string.isRequired,
       commitMessage: PropTypes.string,
+      uploadedDateTime: PropTypes.string.isRequired,
     })),
     disabled: PropTypes.bool.isRequired,
     uploadFile: PropTypes.func.isRequired,
@@ -41,23 +45,64 @@ export class TextWriter extends Component {
 
   constructor(props) {
     super()
+
+    // Check if the s3version exists
+    var s3VersionId = ""
+    var ver = ""
+    if (props.fileVersions.length !== 0) {
+      s3VersionId = props.fileVersions[0].s3VersionId
+      ver = props.fileVersions[0].ver
+    }
+
     this.state = {
       initialContent: '',
       content: '',
-      s3VersionId: props.fileVersions[0].s3VersionId,
+      s3VersionId,
+      ver,
       state: ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER,
-      errorMessage: ''
+      errorMessage: '',
+      showCommitDialogueBox: false,
+      commitMessage: '',
     }
   }
 
   componentDidMount() {
+    console.log(this.props.fileVersions)
     this.onSelectionChange({ target: { value: this.state.s3VersionId }})
   }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.fileVersions !== prevProps.fileVersions) {
+      console.log(this.props.fileVersions)
+    }
+  }
+
+
+  getVerFromS3Id = (s3VersionId) => {
+    const { fileVersions } = this.props
+
+    if (fileVersions.length > 0) {
+      const versionObject = fileVersions.reduce((returnObject, fileVersion) => {
+        returnObject[fileVersion.s3VersionId] = fileVersion.ver
+        return returnObject
+      }, {})
+      return versionObject[s3VersionId]
+    }
+
+    return ""
+  }
+
 
   onSelectionChange = (e) => {
     const s3VersionId = e.target.value
     const { projectId, pageName, fieldId, user } = this.props
     console.log(`S3 Version Requested: ${s3VersionId}`)
+
+    // If there is no existing version of the git file, exit
+    if (s3VersionId === "") {
+      this.onNoExistingFile()
+      return;
+    }
 
     // Create the download values
     const bucketName = process.env.REACT_APP_AWS_S3_USER_UPLOAD_BUCKET_NAME
@@ -70,11 +115,22 @@ export class TextWriter extends Component {
       VersionId: s3VersionId,
     }
 
+    // Find the chosen version number and store in state along with s3VersionId
+    const ver = this.getVerFromS3Id(s3VersionId)
+
+
     this.setState({
-      s3VersionId
+      ver,
+      s3VersionId,
     })
 
-    getFileFromS3(user, downloadParams, undefined, this.onProgressUpdate, this.onFileDownloadComplete, this.onFileDownloadFailed)
+    getFileFromS3(
+      user,
+      downloadParams,
+      undefined,
+      this.onProgressUpdate,
+      this.onFileDownloadComplete,
+      this.onFileDownloadFailed)
   }
 
   onProgressUpdate = (progress) => {
@@ -84,6 +140,7 @@ export class TextWriter extends Component {
   onFileDownloadComplete = (result) => {
     console.log("File download successful")
     console.log(result)
+    console.log(result.data.Body.toString())
     this.setState({
       ...this.state,
       state: ComponentState.QUIESCENT,
@@ -104,13 +161,38 @@ export class TextWriter extends Component {
     })
   }
 
+  onNoExistingFile = () => {
+    this.setState({
+      state: ComponentState.QUIESCENT
+    })
+  }
+
   getVersionSelectSystem = (selectorName) => {
     const { fileVersions } = this.props
 
-    // Map the fileVersions to options
-    const options = fileVersions.slice(1).map((version, index) => {
-      return <option key={index} value={version.s3VersionId}>{version.commitMessage}</option>
-    })
+    var options = [
+      <option key="0" value="">{Strings.GIT_TEXT_NO_VERSIONS_EXIST_YET}</option>
+    ]
+    var isDisabled = true
+
+    if (fileVersions.length !== 0) {
+      // Map the fileVersions to options
+      options = fileVersions.slice(1).map((version, index) => {
+        const date = new Date(version.uploadedDateTime)
+        const displayDate = date.toISOString().split('T')[0]
+
+        if (version.commitMessage === undefined) {
+          return <option
+            key={index}
+            value={version.s3VersionId}>{`${displayDate} - ${Strings.GIT_TEXT_NO_COMMIT_MESSAGE_PROVIDED}`}</option>
+        }
+
+        return <option
+          key={index}
+          value={version.s3VersionId}>{`${displayDate} - ${version.commitMessage}`}</option>
+      })
+      isDisabled = false
+    }
 
     return (
       <div className='version-select'>
@@ -118,7 +200,8 @@ export class TextWriter extends Component {
           name={selectorName}
           id={selectorName}
           value={this.state.s3VersionId}
-          onChange={(e) => this.onSelectionChange(selectorName, e)}>
+          disabled={isDisabled}
+          onChange={(e) => this.onSelectionChange(e)}>
           {options}
         </select>
       </div>
@@ -131,13 +214,31 @@ export class TextWriter extends Component {
     })
   }
 
-  onUploadRequest = () => {
+  showCommitDialogueBox = () => {
     this.setState({
-      state: ComponentState.UPLOADING_NEW_FILE_TO_SERVER
+      showCommitDialogueBox: true,
     })
+  }
 
+  cancelCommit = () => {
+    this.setState({
+      showCommitDialogueBox: false,
+    })
+  }
 
-    const { projectId, pageName, fieldId } = this.props
+  onUploadRequest = () => {
+    const { projectId, pageName, fieldId, user } = this.props
+
+    // If the state is a failed metadata upload, skip straight to metadata upload
+    if (this.state.state === ComponentState.UPDATING_METADATA_ON_SERVER_FAILED) {
+      this.onUploadToS3Success()
+      return;
+    }
+
+    this.setState({
+      state: ComponentState.UPLOADING_NEW_FILE_TO_SERVER,
+      showCommitDialogueBox: false,
+    })
 
     // Create the parameters
     const bucketName = process.env.REACT_APP_AWS_S3_USER_UPLOAD_BUCKET_NAME
@@ -152,7 +253,12 @@ export class TextWriter extends Component {
       Key: key,
     };
 
-    uploadFileToS3(uploadParams, this.onUploadToS3ProgressUpdate, this.onUploadToS3Success, this.onUploadToS3Failed)
+    uploadFileToS3(
+      user.projectS3Token,
+      uploadParams,
+      this.onUploadToS3ProgressUpdate,
+      this.onUploadToS3Success,
+      this.onUploadToS3Failed)
   }
 
   onUploadToS3ProgressUpdate = (progress) => {
@@ -162,21 +268,39 @@ export class TextWriter extends Component {
   onUploadToS3Success = (result) => {
     console.log("File upload to S3 successful")
     const { projectId, pageName, fieldId } = this.props
+    const { commitMessage, ver } = this.state
+
+    console.log(`commitMessage: ${commitMessage}`)
+
+    const prevVer = ver === undefined ? "0" : ver
+
     // Build parameters
     var uploadDetails = {
-      userFileName: `GitText-${projectId}-${pageName}-${fieldId}`
+      filename: `GitText-${projectId}-${pageName}-${fieldId}`,
+      commitMessage,
+      prevVer,
     }
+
     // Send to the reducer
-    this.props.uploadFile(projectId, pageName, fieldId, uploadDetails, "gitText", this.onMetadataSaveSuccess, this.onMetadataSaveFailed)
+    this.props.uploadFile(
+      projectId,
+      pageName,
+      fieldId,
+      uploadDetails,
+      "gitText",
+      this.onMetadataSaveSuccess,
+      this.onMetadataSaveFailed)
   }
 
   onUploadToS3Failed = (error) => {
     console.log("ERROR uploading file to S3")
     console.error(error)
+    const { getNewToken, projectId, pageName } = this.props
     this.setState({
       state: ComponentState.UPLOADING_NEW_FILE_TO_SERVER_FAILED,
       errorMessage: Strings.ERROR_SAVING_CHANGES_TO_FIELD,
     })
+    getNewToken(projectId, pageName)
   }
 
   onMetadataSaveSuccess = () => {
@@ -186,18 +310,76 @@ export class TextWriter extends Component {
   }
 
   onMetadataSaveFailed = () => {
+    const { getNewToken, projectId, pageName } = this.props
     this.setState({
-      state: ComponentState.UPLOADING_NEW_FILE_TO_SERVER_FAILED,
+      state: ComponentState.UPDATING_METADATA_ON_SERVER_FAILED,
       errorMessage: Strings.ERROR_SAVING_CHANGES_TO_FIELD,
     })
+    getNewToken(projectId, pageName)
   }
 
+  handleCommitMessageChange = (event) => {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    if (value.length > 50) {
+      return
+    }
+
+    this.setState({
+      [name]: value
+    });
+  }
+
+
+  getCommitDialogueBox = () => {
+    return (
+      <PopOverHandler>
+        <div id='popup-greyer' onClick={(e) => {
+          this.cancelCommit()
+          e.stopPropagation()
+          }}>
+          <div id='popover'>
+            <div id='popup-box' className='fit-content'>
+              <div id="git-commit" className='popover-container' onClick={(e) => e.stopPropagation()}>
+                <h2 style={{marginBottom: '0.2em'}}>{ Strings.GIT_TEXT_COMMIT_TITLE }</h2>
+                <p>{ Strings.GIT_TEXT_COMMIT_DESCRIPTION }</p>
+
+                <input
+                  id="commitMessage"
+                  name="commitMessage"
+                  type="text"
+                  placeholder={ Strings.PLACEHOLDER_COMMIT_MESSAGE }
+                  value={this.state.commitMessage}
+                  onChange={this.handleCommitMessageChange}
+                  className={ this.state.commitMessage === '' ? "default" : "filled" }/>
+
+                {
+                  this.state.commitMessage.length === 50 ?
+                  <p className='error'>{ Strings.GIT_TEXT_COMMIT_MESSAGE_MAX_LENGTH_REACHED }</p> :
+                  <p className='info'>{ `${this.state.commitMessage.length}/50` }</p>
+                }
+
+                <input
+                  type="submit"
+                  value={ Strings.BUTTON_SAVE_CHANGES }
+                  className="save-button"
+                  onClick={(e) => this.onUploadRequest()} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </PopOverHandler>
+    )
+  }
 
   getEditor = () => {
     const { disabled } = this.props
     return (
       <Editor
         initialValue={this.state.initialContent}
+        value={this.state.content}
         apikey={process.env.REACT_APP_TINY_API_KEY}
         disabled={disabled}
         init={{
@@ -251,6 +433,11 @@ export class TextWriter extends Component {
           null
         }
         {
+          this.state.state === ComponentState.UPDATING_METADATA_ON_SERVER_FAILED ?
+          this.getErrorDownloading() :
+          null
+        }
+        {
           this.state.state === ComponentState.DOWNLOADING_EXISTING_FILE_FROM_SERVER_FAILED ?
           this.getErrorDownloading() :
           null
@@ -263,12 +450,17 @@ export class TextWriter extends Component {
           </React.Fragment> :
           null
         }
+        {
+          this.state.showCommitDialogueBox ?
+          this.getCommitDialogueBox() :
+          null
+        }
         <input
           type="submit"
           disabled={this.state.disabled}
           value={ Strings.BUTTON_SAVE_CHANGES }
           className="save-button"
-          onClick={(e) => this.onUploadRequest()} />
+          onClick={(e) => this.showCommitDialogueBox()} />
       </React.Fragment>
     )
   }

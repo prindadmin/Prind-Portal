@@ -6,7 +6,6 @@ import * as authReducer from './Reducers/authReducer'
 
 const mapStatetoProps = state => {
   return {
-    isSignedIn: state.auth.isSignedIn,
     auth: state.auth,
     user: state.user,
   }

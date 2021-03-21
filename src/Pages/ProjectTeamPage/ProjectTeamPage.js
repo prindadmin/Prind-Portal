@@ -1,4 +1,5 @@
 import React, { lazy, Component } from 'react'
+import PropTypes from 'prop-types'
 import { reduxForm } from 'redux-form'
 
 import ReactGA from 'react-ga';
@@ -8,100 +9,81 @@ import {
   ButtonGroup,
 } from '@blueprintjs/core'
 
+import Spinner from '../../Components/Common/LoadingSpinnerCSS'
+
 import * as Strings from '../../Data/Strings'
+import * as PageStates from '../PageStates'
 
 const NoProjectSelected = lazy(() => import('../../Components/Common/NoProjectSelected'));
 const ContactTile = lazy(() => import('../../Components/ContactTile'));
 const AddNewMemberForm = lazy(() => import('../../Components/AddNewTeamMember'));
 
+
 export class ProjectTeamPage extends Component {
   static propTypes = {
+    handleSubmit: PropTypes.func.isRequired,
   }
 
   constructor(props) {
     super(props)
-    this.state = {
-      selectedRoleID: "0",
-      selectedRoleName: Strings.NO_ROLE_SELECTED,
-      addingMember: false,
-      addMemberError: false,
-      errorText: ""
-    }
+    const { projectId } = props.projects.chosenProject
+    var initialState = PageStates.NO_PROJECT_SELECTED
 
-    if (props.projects.chosenProject.projectId !== "") {
+    if (projectId !== "") {
+      initialState = PageStates.FETCHING_CURRENT_PROJECT_MEMBERS
       // Get the members for the selected project
-      props.getCurrentMembers(
-        props.projects.chosenProject.projectId
-      )
-
+      props.getCurrentMembers(projectId)
       // Get the available roles for this project
-      props.getRoles(
-        props.projects.chosenProject.projectId
-      )
+      props.getRoles(projectId)
     }
 
+    this.state = {
+      state: initialState
+    }
   }
 
   componentDidMount() {
     const { location } = this.props
     // Register pageview with GA
-    ReactGA.pageview(location.pathname + location.search);
+    ReactGA.pageview(location.pathname);
   }
 
   componentDidUpdate(prevProps) {
     const { projects, getCurrentMembers, getRoles } = this.props
+    const { projectId } = projects.chosenProject
 
-    if (projects.chosenProject.projectId !== prevProps.projects.chosenProject.projectId &&
-      projects.chosenProject.projectId !== "") {
-
+    if (projectId !== prevProps.projects.chosenProject.projectId && projectId !== "") {
       // Get the current members of the project
-      getCurrentMembers(
-        projects.chosenProject.projectId
-      )
-
+      getCurrentMembers(projectId)
       // Get the available roles for this project
-      getRoles(
-        projects.chosenProject.projectId
-      )
+      getRoles(projectId)
+    }
+
+    if (projects.memberList !== prevProps.projects.memberList) {
+      this.setState({
+        state: PageStates.QUIESCENT
+      })
     }
   }
 
   addMemberResolve = () => {
     this.props.reset()
     this.setState({
-      addingMember: false,
+      state: PageStates.FETCHING_CURRENT_PROJECT_MEMBERS,
     })
 
     // Get the current members of the project
-    this.props.getCurrentMembers(
-      this.props.projects.chosenProject.projectId
-    )
+    this.props.getCurrentMembers(this.props.projects.chosenProject.projectId)
   }
 
 
   addMemberReject = () => {
     this.setState({
-      addMemberError: true,
+      state: PageStates.ADDING_MEMBER_TO_PROJECT_FAILED,
       errorText: Strings.ERROR_ADDING_MEMBER_TO_PROJECT
     })
   }
 
-  addMember = (values) => {
-    this.setState({
-      addingMember: true,
-      addMemberError: false,
-    })
-
-    var newValues = values
-    newValues.roleId = this.state.selectedRoleID
-
-    this.props.addMember(
-      this.props.projects.chosenProject.projectId,
-      newValues,
-      this.addMemberResolve,
-      this.addMemberReject,
-    )
-  }
 
   pageHeader = () => {
     return (
@@ -119,17 +101,11 @@ export class ProjectTeamPage extends Component {
     )
   }
 
-  onItemSelected = (item) => {
-    this.setState({
-      selectedRoleID: item.id,
-      selectedRoleName: item.name,
-    })
-  }
 
   cancelNewMember = () => {
     this.props.reset()
     this.setState({
-      addingMember: false,
+      state: PageStates.QUIESCENT
     })
   }
 
@@ -145,7 +121,7 @@ export class ProjectTeamPage extends Component {
     return (
       <ButtonGroup fill>
         <Button
-          onClick={(e) => this.setState({addingMember: true})}
+          onClick={(e) => this.setState({state: PageStates.SHOW_NEW_MEMBER_SETTINGS})}
           intent='primary'
           text={Strings.BUTTON_ADD_MEMBER_TO_PROJECT}
         />
@@ -212,11 +188,42 @@ export class ProjectTeamPage extends Component {
     )
   }
 
+  successAddingMember = () => {
+    const { projectId } = this.props.projects.chosenProject
+    this.props.getCurrentMembers(projectId)
+    this.closeAddMemberForm()
+  }
+
+  closeAddMemberForm = () => {
+    this.setState({
+      state: PageStates.QUIESCENT
+    })
+  }
+
+  getAddNewMemberForm = () => {
+    return <AddNewMemberForm
+      onSuccessAddingMember={this.successAddingMember}
+      onCancelAddMember={this.closeAddMemberForm} />
+  }
+
+  // TODO: code this
+  getFailedTeamMemberFetch = () => {
+    return (
+      <p>failed to fetch team members</p>
+    )
+  }
+
+  // TODO: code this
+  getFailedTeamMemberAdd = () => {
+    return (
+      <p>failed to fetch team members</p>
+    )
+  }
 
   pageFooter = () => {
     return (
       <div>
-        {/*new project page footer here*/}
+        {/*new team member footer here*/}
       </div>
     )
   }
@@ -224,17 +231,30 @@ export class ProjectTeamPage extends Component {
   teamDetails = () => {
     return (
       <div className="form-container">
-        {this.state.addingMember ? this.newMemberPageHeader() : this.pageHeader()}
         {
-          this.state.addingMember ?
-          <AddNewMemberForm
-            handleSubmit={this.props.handleSubmit(this.addMember)}
-            onItemSelected={this.onItemSelected}
-            {...this.state}
-            /> :
-          this.memberList()
+          this.state.state === PageStates.SHOW_NEW_MEMBER_SETTINGS ? this.newMemberPageHeader() : this.pageHeader()
         }
-        {this.pageFooter()}
+        {
+          this.state.state === PageStates.QUIESCENT ? this.memberList() : null
+        }
+        {
+          this.state.state === PageStates.SHOW_NEW_MEMBER_SETTINGS ? this.getAddNewMemberForm() : null
+        }
+        {
+          this.state.state === PageStates.ADDING_MEMBER_TO_PROJECT ? <Spinner /> : null
+        }
+        {
+          this.state.state === PageStates.ADDING_MEMBER_TO_PROJECT_FAILED ? this.getFailedTeamMemberAdd() : null
+        }
+        {
+          this.state.state === PageStates.FETCHING_CURRENT_PROJECT_MEMBERS ? <Spinner /> : null
+        }
+        {
+          this.state.state === PageStates.FETCHING_CURRENT_PROJECT_MEMBERS_FAILED ? this.getFailedTeamMemberFetch() : null
+        }
+        {
+          this.pageFooter()
+        }
       </div>
     )
   }
@@ -248,10 +268,12 @@ export class ProjectTeamPage extends Component {
 
 
   render() {
-
     return (
       <div id='project-team-page'>
         <div className='page-content-section row'>
+          {
+            this.state.state === PageStates.NO_PROJECT_SELECTED ? this.showEmptyPage() : null
+          }
           {
             this.props.projects !== undefined ?
               this.props.projects.chosenProject.projectName === Strings.NO_PROJECT_SELECTED ?

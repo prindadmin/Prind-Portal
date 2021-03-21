@@ -6,11 +6,11 @@ they have forgotten it and requested a reset code
 
 import { Auth } from 'aws-amplify';
 
-function ChangePassword(username, code, new_password) {
-
+function ChangePassword(payload) {
+  const { user_name, confirmation_code, password } = payload
   return new Promise((resolve, reject) => {
     try {
-      Auth.forgotPasswordSubmit(username, code, new_password).then(data => {
+      Auth.forgotPasswordSubmit(user_name, confirmation_code, password).then(data => {
         resolve(data)
       })
     } catch (e) {

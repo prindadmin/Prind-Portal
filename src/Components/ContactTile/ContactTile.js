@@ -49,7 +49,6 @@ export class ContactTile extends Component {
   }
 
   getImage = () => {
-
     const { memberDetails } = this.props
     const that = this
     const avatarLink = `${process.env.REACT_APP_AWS_S3_USER_AVATAR_ENDPOINT}/${memberDetails.username}`
@@ -99,9 +98,7 @@ export class ContactTile extends Component {
   }
 
   removeMember = (e) => {
-
     const { projects, removeMember, memberDetails } = this.props
-
     this.setState({
       removingMember: true,
       addMemberError: false,
@@ -116,10 +113,12 @@ export class ContactTile extends Component {
   }
 
   showUserDetails = () => {
-    console.log("hello, user")
-    this.setState({
-      showUserDetailsPopover: true,
-    })
+    if (process.env.REACT_APP_FUNCTIONALITY_USER_ACCREDITATIONS_LIST_V1 === "True") {
+      console.log("hello, user")
+      this.setState({
+        showUserDetailsPopover: true,
+      })
+    }
   }
 
   hideUserDetails = () => {
@@ -128,6 +127,29 @@ export class ContactTile extends Component {
       showUserDetailsPopover: false,
     })
   }
+
+  getUsername = () => {
+    const { memberDetails } = this.props
+    if (memberDetails.username === null) {
+      return memberDetails.emailAddress
+    }
+    if (memberDetails.firstName === null && memberDetails.lastName === null) {
+      return memberDetails.emailAddress
+    }
+    return `${memberDetails.firstName} ${memberDetails.lastName}`
+  }
+
+  getStatus = () => {
+    const { memberDetails, confirmed } = this.props
+    if (memberDetails.username === null) {
+      return Strings.MEMBER_NOT_YET_SIGNED_UP_TO_PRIND
+    }
+    if (confirmed) {
+      return Strings.MEMBER_IS_CONFIRMED
+    }
+    return Strings.MEMBER_ISNT_YET_CONFIRMED
+  }
+
 
   render() {
 
@@ -143,12 +165,7 @@ export class ContactTile extends Component {
       )
     })
 
-    const userName = memberDetails.firstName !== null && memberDetails.lastName !== null ?
-        memberDetails.firstName + " " + memberDetails.lastName :
-        Strings.MEMBER_NOT_YET_SIGNED_UP_TO_PRIND
-
     const isConfirmed = confirmed ? "row member-confirmed" : "row member-not-confirmed"
-
     return (
         <div id='contact-tile' className={isConfirmed} onClick={(e) => {
           e.stopPropagation()
@@ -162,7 +179,7 @@ export class ContactTile extends Component {
 
           <div className='col-md-9 col-sm-12'>
             <div className='row'>
-              <h4 className='bp3-heading'>{userName}</h4>
+              <h4 className='bp3-heading'>{this.getUsername()}</h4>
             </div>
 
             <div className="row">
@@ -188,7 +205,7 @@ export class ContactTile extends Component {
                 <b>{Strings.MEMBER_STATUS + ": "}</b>
               </div>
               <div className="col-lg-10 col-md-8">
-                { confirmed ? Strings.MEMBER_IS_CONFIRMED : Strings.MEMBER_ISNT_YET_CONFIRMED }
+                { this.getStatus() }
               </div>
             </div>
 
@@ -225,9 +242,13 @@ export class ContactTile extends Component {
             }
 
           </div>
-          <div className='view-accreditations'>
-            { Strings.ACCREDITATION_VIEW_ACCREDITATIONS }
-          </div>
+          {
+            process.env.REACT_APP_FUNCTIONALITY_USER_ACCREDITATIONS_LIST_V1 === "True" && confirmed ?
+            <div className='view-accreditations'>
+              { Strings.ACCREDITATION_VIEW_ACCREDITATIONS }
+            </div> :
+            null
+          }
         </div>
     )
   }

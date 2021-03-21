@@ -17,6 +17,8 @@ import * as ComponentState from '../../States'
 
 //const ProjectTypeSelector = lazy(() => import('../ProjectTypeSelector'));
 
+// TODO: SOON: Show invite projects here as well
+
 export class ProjectSelectorPopUp extends Component {
   static propTypes = {
     projects: PropTypes.shape({
@@ -112,14 +114,14 @@ export class ProjectSelectorPopUp extends Component {
   }
 
   resolveProjectFetch = () => {
-    console.log('successfully fetched project list')
+    //console.log('successfully fetched project list')
     this.setState({
       state: ComponentState.QUIESCENT
     })
   }
 
   rejectProjectFetch = () => {
-    console.error('failed to fetch project list')
+    //console.error('failed to fetch project list')
     this.setState({
       state: ComponentState.LOADING_ERROR,
       errorText: Strings.ERROR_FETCHING_PROJECT_LIST,
@@ -210,12 +212,15 @@ export class ProjectSelectorPopUp extends Component {
   }
 
 
+
   concatProjects = () => {
     const { accessibleProjects } = this.props.projects
     let projectsWhereCreator = accessibleProjects.projectCreator.map(project => project.projectId);
     const roleNotCreator = accessibleProjects.projectRole.filter(item => !projectsWhereCreator.includes(item.projectId))
     var allProjects = accessibleProjects.projectCreator
     allProjects = allProjects.concat(roleNotCreator)
+    // Edit this so that it only shows projects for the specific portal
+    allProjects = allProjects.filter(item => item.projectType === process.env.REACT_APP_PORTAL)
     return allProjects
   }
 

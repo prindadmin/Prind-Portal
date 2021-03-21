@@ -6,7 +6,7 @@ import * as Strings from '../../../Data/Strings'
 import * as States from '../../../States'
 
 // Components
-import { CanUseWebP } from '../../Common/CheckIfWebpSupported'
+import { CanUseWebP } from '../../../Functions/CheckIfWebpSupported'
 import {
   Callout,
 } from '@blueprintjs/core'
@@ -151,7 +151,7 @@ export class SignUpBox extends Component {
           name="lastName"
           type="text"
           placeholder={ Strings.PLACEHOLDER_LAST_NAME }
-          value={this.state.firstName}
+          value={this.state.lastName}
           onChange={this.handleInputChange}
           className={ this.state.lastName === null ? "default" : "filled" }/>
 

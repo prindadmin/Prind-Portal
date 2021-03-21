@@ -1,4 +1,5 @@
 import React, { Component, lazy, Suspense } from 'react';
+import PropTypes from 'prop-types'
 import './App.css';
 
 import Amplify, { Auth } from 'aws-amplify';
@@ -68,6 +69,16 @@ Amplify.configure({
 });
 
 class App extends Component{
+  static propTypes = {
+    refreshSession: PropTypes.func.isRequired,
+    auth: PropTypes.shape({
+      isSignedIn: PropTypes.string.isRequired
+    }).isRequired,
+    user: PropTypes.shape({
+      currentRoute: PropTypes.string.isRequired
+    }).isRequired
+  }
+
 
   constructor() {
     super()
@@ -75,7 +86,11 @@ class App extends Component{
       oldConsoleLog: null,
     }
 
-    // Initialise Google Analytics to log all page views
+    if (process.env.REACT_APP_GA_TEST === 'True') {
+      ReactGA.initialize('dummy', { testMode: true });
+      return;
+    }
+
     ReactGA.initialize(process.env.REACT_APP_GA_ID, {
       gaOptions: {
         siteSpeedSampleRate: 100
@@ -94,10 +109,6 @@ class App extends Component{
 
     // If the refreshToken is present, refresh the login
     this.props.refreshSession()
-  }
-
-  componentDidUpdate(prevState, prevProps) {
-
   }
 
   enableLogger = () => {
@@ -123,7 +134,6 @@ class App extends Component{
   }
 
   render() {
-
     const { auth } = this.props
 
     return (

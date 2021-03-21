@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render Signature History 1`] = `
+<div
+  id="signature-container"
+>
+  <div
+    className="element-title"
+  >
+    Signatures
+  </div>
+  <div
+    className="details-table"
+  >
+    <h4>
+      Signed By: 
+    </h4>
+    <h4>
+      Signed At: 
+    </h4>
+    <h4>
+      Proof: 
+    </h4>
+    <div
+      key="signer-0"
+    >
+      Signer One
+    </div>
+    <div
+      key="signatureDateTime-0"
+    >
+      2021-01-11T11:11:11
+    </div>
+    <div
+      key="proofLink-0"
+    >
+      <a
+        href="https://testnet.explorer.factom.pro/entries/93ae94fce1d960dc818c049f9a23f8305cdea54dd6954153c57be62179db1fcf"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        Link to Proof
+      </a>
+    </div>
+    <div
+      key="signer-1"
+    >
+      Signer Two
+    </div>
+    <div
+      key="signatureDateTime-1"
+    >
+      2021-02-22T22:22:22
+    </div>
+    <div
+      key="proofLink-1"
+    >
+      <a
+        href="https://testnet.explorer.factom.pro/entries/93ae94fce1d960dc818c049f9a23f8305cdea54dd6954153c57be62179db1fcf"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        Link to Proof
+      </a>
+    </div>
+  </div>
+</div>
+`;

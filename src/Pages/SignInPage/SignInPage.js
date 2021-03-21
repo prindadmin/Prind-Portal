@@ -8,13 +8,29 @@ import * as Endpoints from '../../Data/Endpoints'
 
 // Components
 import SignInUpBox from '../../Components/SignInUpBox'
-import { CanUseWebP } from '../../Components/Common/CheckIfWebpSupported'
+import { CanUseWebP } from '../../Components/../Functions/CheckIfWebpSupported'
 
 export class SignInPage extends Component {
+
+  constructor() {
+    super()
+    this.state = {
+      username: undefined
+    }
+  }
 
   componentDidMount() {
     // Register pageview with GA
     ReactGA.pageview("/signInPage");
+  }
+
+  componentDidUpdate(prevProps) {
+    const { state } = this.props.location
+    if(state !== undefined && state !== prevProps.location.state) {
+      this.setState({
+        username: state.username
+      })
+    }
   }
 
 
@@ -40,6 +56,7 @@ export class SignInPage extends Component {
         <SignInUpBox
           reference='sign-in-up-box'
           backgroundColor="#FFFFFF"
+          username={this.state.username}
           {...props}
         />
       </div>

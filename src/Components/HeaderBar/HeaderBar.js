@@ -47,15 +47,13 @@ export class HeaderBar extends Component {
 
 
   render() {
-
-    const { projects, openProjectSelector } = this.props
-
+    const { openProjectSelector } = this.props
     return (
       <React.Fragment>
         <div id='header-bar' className='full-width row'>
           <div className='header-content row'>
             {
-              projects !== undefined ? <ProjectSelector openProjectSelector={openProjectSelector}/> : null
+              <ProjectSelector openProjectSelector={openProjectSelector} />
             }
             <div className='nav-links'>
               {

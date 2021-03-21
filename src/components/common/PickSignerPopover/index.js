@@ -1,3 +1,3 @@
-import Element from './ElementContainer'
+import PickSignerPopover from './PickSignerPopoverContainer'
 
-export default Element
+export default PickSignerPopover

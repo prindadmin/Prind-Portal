@@ -1,0 +1,1370 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should create a dropdown field and create field sucessfully 1`] = `
+<PopOverHandler>
+  <div
+    id="popup-greyer"
+    onClick={[Function]}
+  >
+    <div
+      id="create-custom-field-popover"
+    >
+      <div
+        id="popup-box"
+      >
+        <div
+          className="create-custom-field-popover-container"
+          id="create-custom-field-popover-container"
+          onClick={[Function]}
+        >
+          <div
+            className="element-title"
+          >
+            Create Custom Field
+          </div>
+          <div
+            className="element-description"
+          >
+            <div
+              className="form-container"
+            >
+              <form
+                className="create-field-form"
+                onSubmit={[Function]}
+              >
+                <label
+                  htmlFor="title"
+                >
+                  Field Title
+                </label>
+                <input
+                  className="filled"
+                  id="title"
+                  name="title"
+                  onChange={[Function]}
+                  placeholder="Field Title"
+                  required={true}
+                  type="text"
+                  value="test title"
+                />
+                <label
+                  htmlFor="description"
+                >
+                  Field Description
+                </label>
+                <input
+                  className="filled"
+                  id="description"
+                  name="description"
+                  onChange={[Function]}
+                  placeholder="Field Description"
+                  required={true}
+                  type="text"
+                  value="test description"
+                />
+                <p>
+                  Field Type
+                </p>
+                <div
+                  className="radio-container"
+                >
+                  <span
+                    key="0"
+                  >
+                    <input
+                      id="fieldTypefile"
+                      name="type"
+                      onChange={[Function]}
+                      type="radio"
+                      value="file"
+                    />
+                    <label
+                      htmlFor="type"
+                    >
+                      File Upload
+                    </label>
+                  </span>
+                  <span
+                    key="1"
+                  >
+                    <input
+                      id="fieldTypecalendar"
+                      name="type"
+                      onChange={[Function]}
+                      type="radio"
+                      value="calendar"
+                    />
+                    <label
+                      htmlFor="type"
+                    >
+                      Date Picker
+                    </label>
+                  </span>
+                  <span
+                    key="2"
+                  >
+                    <input
+                      id="fieldTypedropdown"
+                      name="type"
+                      onChange={[Function]}
+                      type="radio"
+                      value="dropdown"
+                    />
+                    <label
+                      htmlFor="type"
+                    >
+                      Drop Down Menu
+                    </label>
+                  </span>
+                  <span
+                    key="3"
+                  >
+                    <input
+                      id="fieldTypelongText"
+                      name="type"
+                      onChange={[Function]}
+                      type="radio"
+                      value="longText"
+                    />
+                    <label
+                      htmlFor="type"
+                    >
+                      Text Box
+                    </label>
+                  </span>
+                </div>
+                <label
+                  htmlFor="fieldDropDownOptions"
+                >
+                  Drop Down Options
+                </label>
+                <input
+                  className="filled"
+                  id="fieldDropDownOptions"
+                  name="fieldDropDownOptions"
+                  onChange={[Function]}
+                  placeholder="Drop Down Options"
+                  required={true}
+                  type="text"
+                  value="Option 1, Option 2"
+                />
+                <div
+                  className="drop-down-container"
+                >
+                  <span
+                    key="0"
+                  >
+                    <input
+                      disabled={true}
+                      id="Option 1"
+                      key="0"
+                      label="Option 1"
+                      name="Option 1"
+                      type="checkbox"
+                    />
+                    <label>
+                      Option 1
+                    </label>
+                  </span>
+                  <span
+                    key="1"
+                  >
+                    <input
+                      disabled={true}
+                      id="Option 2"
+                      key="1"
+                      label="Option 2"
+                      name="Option 2"
+                      type="checkbox"
+                    />
+                    <label>
+                      Option 2
+                    </label>
+                  </span>
+                </div>
+                <input
+                  className="submit-button"
+                  id="submit"
+                  name="submit"
+                  onClick={[Function]}
+                  readOnly={true}
+                  type="submit"
+                  value="Create Field"
+                />
+                <input
+                  className="cancel-button"
+                  id="cancel"
+                  name="cancel"
+                  onClick={[Function]}
+                  readOnly={true}
+                  type="cancel"
+                  value="Cancel"
+                />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</PopOverHandler>
+`;
+
+exports[`Should populate title and description fields and create field fails 1`] = `
+<PopOverHandler>
+  <div
+    id="popup-greyer"
+    onClick={[Function]}
+  >
+    <div
+      id="create-custom-field-popover"
+    >
+      <div
+        id="popup-box"
+      >
+        <div
+          className="create-custom-field-popover-container"
+          id="create-custom-field-popover-container"
+          onClick={[Function]}
+        >
+          <div
+            className="element-title"
+          >
+            Create Custom Field
+          </div>
+          <div
+            className="element-description"
+          >
+            <Blueprint3.Callout
+              intent="danger"
+              style={
+                Object {
+                  "marginBottom": "15px",
+                }
+              }
+            >
+              <div>
+                There was an error creating the custom field, please try again.  If the problem persists, please contact technical support.
+              </div>
+            </Blueprint3.Callout>
+            <div
+              className="form-container"
+            >
+              <form
+                className="create-field-form"
+                onSubmit={[Function]}
+              >
+                <label
+                  htmlFor="title"
+                >
+                  Field Title
+                </label>
+                <input
+                  className="filled"
+                  id="title"
+                  name="title"
+                  onChange={[Function]}
+                  placeholder="Field Title"
+                  required={true}
+                  type="text"
+                  value="test title"
+                />
+                <label
+                  htmlFor="description"
+                >
+                  Field Description
+                </label>
+                <input
+                  className="filled"
+                  id="description"
+                  name="description"
+                  onChange={[Function]}
+                  placeholder="Field Description"
+                  required={true}
+                  type="text"
+                  value="test description"
+                />
+                <p>
+                  Field Type
+                </p>
+                <div
+                  className="radio-container"
+                >
+                  <span
+                    key="0"
+                  >
+                    <input
+                      id="fieldTypefile"
+                      name="type"
+                      onChange={[Function]}
+                      type="radio"
+                      value="file"
+                    />
+                    <label
+                      htmlFor="type"
+                    >
+                      File Upload
+                    </label>
+                  </span>
+                  <span
+                    key="1"
+                  >
+                    <input
+                      id="fieldTypecalendar"
+                      name="type"
+                      onChange={[Function]}
+                      type="radio"
+                      value="calendar"
+                    />
+                    <label
+                      htmlFor="type"
+                    >
+                      Date Picker
+                    </label>
+                  </span>
+                  <span
+                    key="2"
+                  >
+                    <input
+                      id="fieldTypedropdown"
+                      name="type"
+                      onChange={[Function]}
+                      type="radio"
+                      value="dropdown"
+                    />
+                    <label
+                      htmlFor="type"
+                    >
+                      Drop Down Menu
+                    </label>
+                  </span>
+                  <span
+                    key="3"
+                  >
+                    <input
+                      id="fieldTypelongText"
+                      name="type"
+                      onChange={[Function]}
+                      type="radio"
+                      value="longText"
+                    />
+                    <label
+                      htmlFor="type"
+                    >
+                      Text Box
+                    </label>
+                  </span>
+                </div>
+                <input
+                  className="submit-button"
+                  id="submit"
+                  name="submit"
+                  onClick={[Function]}
+                  readOnly={true}
+                  type="submit"
+                  value="Create Field"
+                />
+                <input
+                  className="cancel-button"
+                  id="cancel"
+                  name="cancel"
+                  onClick={[Function]}
+                  readOnly={true}
+                  type="cancel"
+                  value="Cancel"
+                />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</PopOverHandler>
+`;
+
+exports[`Should populate title and description fields and create field sucessfully 1`] = `
+<PopOverHandler>
+  <div
+    id="popup-greyer"
+    onClick={[Function]}
+  >
+    <div
+      id="create-custom-field-popover"
+    >
+      <div
+        id="popup-box"
+      >
+        <div
+          className="create-custom-field-popover-container"
+          id="create-custom-field-popover-container"
+          onClick={[Function]}
+        >
+          <div
+            className="element-title"
+          >
+            Create Custom Field
+          </div>
+          <div
+            className="element-description"
+          >
+            <div
+              className="form-container"
+            >
+              <form
+                className="create-field-form"
+                onSubmit={[Function]}
+              >
+                <label
+                  htmlFor="title"
+                >
+                  Field Title
+                </label>
+                <input
+                  className="filled"
+                  id="title"
+                  name="title"
+                  onChange={[Function]}
+                  placeholder="Field Title"
+                  required={true}
+                  type="text"
+                  value="test title"
+                />
+                <label
+                  htmlFor="description"
+                >
+                  Field Description
+                </label>
+                <input
+                  className="filled"
+                  id="description"
+                  name="description"
+                  onChange={[Function]}
+                  placeholder="Field Description"
+                  required={true}
+                  type="text"
+                  value="test description"
+                />
+                <p>
+                  Field Type
+                </p>
+                <div
+                  className="radio-container"
+                >
+                  <span
+                    key="0"
+                  >
+                    <input
+                      id="fieldTypefile"
+                      name="type"
+                      onChange={[Function]}
+                      type="radio"
+                      value="file"
+                    />
+                    <label
+                      htmlFor="type"
+                    >
+                      File Upload
+                    </label>
+                  </span>
+                  <span
+                    key="1"
+                  >
+                    <input
+                      id="fieldTypecalendar"
+                      name="type"
+                      onChange={[Function]}
+                      type="radio"
+                      value="calendar"
+                    />
+                    <label
+                      htmlFor="type"
+                    >
+                      Date Picker
+                    </label>
+                  </span>
+                  <span
+                    key="2"
+                  >
+                    <input
+                      id="fieldTypedropdown"
+                      name="type"
+                      onChange={[Function]}
+                      type="radio"
+                      value="dropdown"
+                    />
+                    <label
+                      htmlFor="type"
+                    >
+                      Drop Down Menu
+                    </label>
+                  </span>
+                  <span
+                    key="3"
+                  >
+                    <input
+                      id="fieldTypelongText"
+                      name="type"
+                      onChange={[Function]}
+                      type="radio"
+                      value="longText"
+                    />
+                    <label
+                      htmlFor="type"
+                    >
+                      Text Box
+                    </label>
+                  </span>
+                </div>
+                <input
+                  className="submit-button"
+                  id="submit"
+                  name="submit"
+                  onClick={[Function]}
+                  readOnly={true}
+                  type="submit"
+                  value="Create Field"
+                />
+                <input
+                  className="cancel-button"
+                  id="cancel"
+                  name="cancel"
+                  onClick={[Function]}
+                  readOnly={true}
+                  type="cancel"
+                  value="Cancel"
+                />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</PopOverHandler>
+`;
+
+exports[`Should render 1`] = `
+<PopOverHandler>
+  <div
+    id="popup-greyer"
+    onClick={[Function]}
+  >
+    <div
+      id="create-custom-field-popover"
+    >
+      <div
+        id="popup-box"
+      >
+        <div
+          className="create-custom-field-popover-container"
+          id="create-custom-field-popover-container"
+          onClick={[Function]}
+        >
+          <div
+            className="element-title"
+          >
+            Create Custom Field
+          </div>
+          <div
+            className="element-description"
+          >
+            <div
+              className="form-container"
+            >
+              <form
+                className="create-field-form"
+                onSubmit={[Function]}
+              >
+                <label
+                  htmlFor="title"
+                >
+                  Field Title
+                </label>
+                <input
+                  className="filled"
+                  id="title"
+                  name="title"
+                  onChange={[Function]}
+                  placeholder="Field Title"
+                  required={true}
+                  type="text"
+                  value=""
+                />
+                <label
+                  htmlFor="description"
+                >
+                  Field Description
+                </label>
+                <input
+                  className="filled"
+                  id="description"
+                  name="description"
+                  onChange={[Function]}
+                  placeholder="Field Description"
+                  required={true}
+                  type="text"
+                  value=""
+                />
+                <p>
+                  Field Type
+                </p>
+                <div
+                  className="radio-container"
+                >
+                  <span
+                    key="0"
+                  >
+                    <input
+                      id="fieldTypefile"
+                      name="type"
+                      onChange={[Function]}
+                      type="radio"
+                      value="file"
+                    />
+                    <label
+                      htmlFor="type"
+                    >
+                      File Upload
+                    </label>
+                  </span>
+                  <span
+                    key="1"
+                  >
+                    <input
+                      id="fieldTypecalendar"
+                      name="type"
+                      onChange={[Function]}
+                      type="radio"
+                      value="calendar"
+                    />
+                    <label
+                      htmlFor="type"
+                    >
+                      Date Picker
+                    </label>
+                  </span>
+                  <span
+                    key="2"
+                  >
+                    <input
+                      id="fieldTypedropdown"
+                      name="type"
+                      onChange={[Function]}
+                      type="radio"
+                      value="dropdown"
+                    />
+                    <label
+                      htmlFor="type"
+                    >
+                      Drop Down Menu
+                    </label>
+                  </span>
+                  <span
+                    key="3"
+                  >
+                    <input
+                      id="fieldTypelongText"
+                      name="type"
+                      onChange={[Function]}
+                      type="radio"
+                      value="longText"
+                    />
+                    <label
+                      htmlFor="type"
+                    >
+                      Text Box
+                    </label>
+                  </span>
+                </div>
+                <input
+                  className="submit-button"
+                  id="submit"
+                  name="submit"
+                  onClick={[Function]}
+                  readOnly={true}
+                  type="submit"
+                  value="Create Field"
+                />
+                <input
+                  className="cancel-button"
+                  id="cancel"
+                  name="cancel"
+                  onClick={[Function]}
+                  readOnly={true}
+                  type="cancel"
+                  value="Cancel"
+                />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</PopOverHandler>
+`;
+
+exports[`Should select each type of field 1`] = `
+<PopOverHandler>
+  <div
+    id="popup-greyer"
+    onClick={[Function]}
+  >
+    <div
+      id="create-custom-field-popover"
+    >
+      <div
+        id="popup-box"
+      >
+        <div
+          className="create-custom-field-popover-container"
+          id="create-custom-field-popover-container"
+          onClick={[Function]}
+        >
+          <div
+            className="element-title"
+          >
+            Create Custom Field
+          </div>
+          <div
+            className="element-description"
+          >
+            <div
+              className="form-container"
+            >
+              <form
+                className="create-field-form"
+                onSubmit={[Function]}
+              >
+                <label
+                  htmlFor="title"
+                >
+                  Field Title
+                </label>
+                <input
+                  className="filled"
+                  id="title"
+                  name="title"
+                  onChange={[Function]}
+                  placeholder="Field Title"
+                  required={true}
+                  type="text"
+                  value=""
+                />
+                <label
+                  htmlFor="description"
+                >
+                  Field Description
+                </label>
+                <input
+                  className="filled"
+                  id="description"
+                  name="description"
+                  onChange={[Function]}
+                  placeholder="Field Description"
+                  required={true}
+                  type="text"
+                  value=""
+                />
+                <p>
+                  Field Type
+                </p>
+                <div
+                  className="radio-container"
+                >
+                  <span
+                    key="0"
+                  >
+                    <input
+                      id="fieldTypefile"
+                      name="type"
+                      onChange={[Function]}
+                      type="radio"
+                      value="file"
+                    />
+                    <label
+                      htmlFor="type"
+                    >
+                      File Upload
+                    </label>
+                  </span>
+                  <span
+                    key="1"
+                  >
+                    <input
+                      id="fieldTypecalendar"
+                      name="type"
+                      onChange={[Function]}
+                      type="radio"
+                      value="calendar"
+                    />
+                    <label
+                      htmlFor="type"
+                    >
+                      Date Picker
+                    </label>
+                  </span>
+                  <span
+                    key="2"
+                  >
+                    <input
+                      id="fieldTypedropdown"
+                      name="type"
+                      onChange={[Function]}
+                      type="radio"
+                      value="dropdown"
+                    />
+                    <label
+                      htmlFor="type"
+                    >
+                      Drop Down Menu
+                    </label>
+                  </span>
+                  <span
+                    key="3"
+                  >
+                    <input
+                      id="fieldTypelongText"
+                      name="type"
+                      onChange={[Function]}
+                      type="radio"
+                      value="longText"
+                    />
+                    <label
+                      htmlFor="type"
+                    >
+                      Text Box
+                    </label>
+                  </span>
+                </div>
+                <input
+                  className="submit-button"
+                  id="submit"
+                  name="submit"
+                  onClick={[Function]}
+                  readOnly={true}
+                  type="submit"
+                  value="Create Field"
+                />
+                <input
+                  className="cancel-button"
+                  id="cancel"
+                  name="cancel"
+                  onClick={[Function]}
+                  readOnly={true}
+                  type="cancel"
+                  value="Cancel"
+                />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</PopOverHandler>
+`;
+
+exports[`Should select each type of field 2`] = `
+<PopOverHandler>
+  <div
+    id="popup-greyer"
+    onClick={[Function]}
+  >
+    <div
+      id="create-custom-field-popover"
+    >
+      <div
+        id="popup-box"
+      >
+        <div
+          className="create-custom-field-popover-container"
+          id="create-custom-field-popover-container"
+          onClick={[Function]}
+        >
+          <div
+            className="element-title"
+          >
+            Create Custom Field
+          </div>
+          <div
+            className="element-description"
+          >
+            <div
+              className="form-container"
+            >
+              <form
+                className="create-field-form"
+                onSubmit={[Function]}
+              >
+                <label
+                  htmlFor="title"
+                >
+                  Field Title
+                </label>
+                <input
+                  className="filled"
+                  id="title"
+                  name="title"
+                  onChange={[Function]}
+                  placeholder="Field Title"
+                  required={true}
+                  type="text"
+                  value=""
+                />
+                <label
+                  htmlFor="description"
+                >
+                  Field Description
+                </label>
+                <input
+                  className="filled"
+                  id="description"
+                  name="description"
+                  onChange={[Function]}
+                  placeholder="Field Description"
+                  required={true}
+                  type="text"
+                  value=""
+                />
+                <p>
+                  Field Type
+                </p>
+                <div
+                  className="radio-container"
+                >
+                  <span
+                    key="0"
+                  >
+                    <input
+                      id="fieldTypefile"
+                      name="type"
+                      onChange={[Function]}
+                      type="radio"
+                      value="file"
+                    />
+                    <label
+                      htmlFor="type"
+                    >
+                      File Upload
+                    </label>
+                  </span>
+                  <span
+                    key="1"
+                  >
+                    <input
+                      id="fieldTypecalendar"
+                      name="type"
+                      onChange={[Function]}
+                      type="radio"
+                      value="calendar"
+                    />
+                    <label
+                      htmlFor="type"
+                    >
+                      Date Picker
+                    </label>
+                  </span>
+                  <span
+                    key="2"
+                  >
+                    <input
+                      id="fieldTypedropdown"
+                      name="type"
+                      onChange={[Function]}
+                      type="radio"
+                      value="dropdown"
+                    />
+                    <label
+                      htmlFor="type"
+                    >
+                      Drop Down Menu
+                    </label>
+                  </span>
+                  <span
+                    key="3"
+                  >
+                    <input
+                      id="fieldTypelongText"
+                      name="type"
+                      onChange={[Function]}
+                      type="radio"
+                      value="longText"
+                    />
+                    <label
+                      htmlFor="type"
+                    >
+                      Text Box
+                    </label>
+                  </span>
+                </div>
+                <input
+                  className="submit-button"
+                  id="submit"
+                  name="submit"
+                  onClick={[Function]}
+                  readOnly={true}
+                  type="submit"
+                  value="Create Field"
+                />
+                <input
+                  className="cancel-button"
+                  id="cancel"
+                  name="cancel"
+                  onClick={[Function]}
+                  readOnly={true}
+                  type="cancel"
+                  value="Cancel"
+                />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</PopOverHandler>
+`;
+
+exports[`Should select each type of field 3`] = `
+<PopOverHandler>
+  <div
+    id="popup-greyer"
+    onClick={[Function]}
+  >
+    <div
+      id="create-custom-field-popover"
+    >
+      <div
+        id="popup-box"
+      >
+        <div
+          className="create-custom-field-popover-container"
+          id="create-custom-field-popover-container"
+          onClick={[Function]}
+        >
+          <div
+            className="element-title"
+          >
+            Create Custom Field
+          </div>
+          <div
+            className="element-description"
+          >
+            <div
+              className="form-container"
+            >
+              <form
+                className="create-field-form"
+                onSubmit={[Function]}
+              >
+                <label
+                  htmlFor="title"
+                >
+                  Field Title
+                </label>
+                <input
+                  className="filled"
+                  id="title"
+                  name="title"
+                  onChange={[Function]}
+                  placeholder="Field Title"
+                  required={true}
+                  type="text"
+                  value=""
+                />
+                <label
+                  htmlFor="description"
+                >
+                  Field Description
+                </label>
+                <input
+                  className="filled"
+                  id="description"
+                  name="description"
+                  onChange={[Function]}
+                  placeholder="Field Description"
+                  required={true}
+                  type="text"
+                  value=""
+                />
+                <p>
+                  Field Type
+                </p>
+                <div
+                  className="radio-container"
+                >
+                  <span
+                    key="0"
+                  >
+                    <input
+                      id="fieldTypefile"
+                      name="type"
+                      onChange={[Function]}
+                      type="radio"
+                      value="file"
+                    />
+                    <label
+                      htmlFor="type"
+                    >
+                      File Upload
+                    </label>
+                  </span>
+                  <span
+                    key="1"
+                  >
+                    <input
+                      id="fieldTypecalendar"
+                      name="type"
+                      onChange={[Function]}
+                      type="radio"
+                      value="calendar"
+                    />
+                    <label
+                      htmlFor="type"
+                    >
+                      Date Picker
+                    </label>
+                  </span>
+                  <span
+                    key="2"
+                  >
+                    <input
+                      id="fieldTypedropdown"
+                      name="type"
+                      onChange={[Function]}
+                      type="radio"
+                      value="dropdown"
+                    />
+                    <label
+                      htmlFor="type"
+                    >
+                      Drop Down Menu
+                    </label>
+                  </span>
+                  <span
+                    key="3"
+                  >
+                    <input
+                      id="fieldTypelongText"
+                      name="type"
+                      onChange={[Function]}
+                      type="radio"
+                      value="longText"
+                    />
+                    <label
+                      htmlFor="type"
+                    >
+                      Text Box
+                    </label>
+                  </span>
+                </div>
+                <label
+                  htmlFor="fieldDropDownOptions"
+                >
+                  Drop Down Options
+                </label>
+                <input
+                  className="filled"
+                  id="fieldDropDownOptions"
+                  name="fieldDropDownOptions"
+                  onChange={[Function]}
+                  placeholder="Drop Down Options"
+                  required={true}
+                  type="text"
+                  value=""
+                />
+                <div
+                  className="no-options"
+                >
+                  Please enter some options
+                </div>
+                <input
+                  className="submit-button"
+                  id="submit"
+                  name="submit"
+                  onClick={[Function]}
+                  readOnly={true}
+                  type="submit"
+                  value="Create Field"
+                />
+                <input
+                  className="cancel-button"
+                  id="cancel"
+                  name="cancel"
+                  onClick={[Function]}
+                  readOnly={true}
+                  type="cancel"
+                  value="Cancel"
+                />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</PopOverHandler>
+`;
+
+exports[`Should select each type of field 4`] = `
+<PopOverHandler>
+  <div
+    id="popup-greyer"
+    onClick={[Function]}
+  >
+    <div
+      id="create-custom-field-popover"
+    >
+      <div
+        id="popup-box"
+      >
+        <div
+          className="create-custom-field-popover-container"
+          id="create-custom-field-popover-container"
+          onClick={[Function]}
+        >
+          <div
+            className="element-title"
+          >
+            Create Custom Field
+          </div>
+          <div
+            className="element-description"
+          >
+            <div
+              className="form-container"
+            >
+              <form
+                className="create-field-form"
+                onSubmit={[Function]}
+              >
+                <label
+                  htmlFor="title"
+                >
+                  Field Title
+                </label>
+                <input
+                  className="filled"
+                  id="title"
+                  name="title"
+                  onChange={[Function]}
+                  placeholder="Field Title"
+                  required={true}
+                  type="text"
+                  value=""
+                />
+                <label
+                  htmlFor="description"
+                >
+                  Field Description
+                </label>
+                <input
+                  className="filled"
+                  id="description"
+                  name="description"
+                  onChange={[Function]}
+                  placeholder="Field Description"
+                  required={true}
+                  type="text"
+                  value=""
+                />
+                <p>
+                  Field Type
+                </p>
+                <div
+                  className="radio-container"
+                >
+                  <span
+                    key="0"
+                  >
+                    <input
+                      id="fieldTypefile"
+                      name="type"
+                      onChange={[Function]}
+                      type="radio"
+                      value="file"
+                    />
+                    <label
+                      htmlFor="type"
+                    >
+                      File Upload
+                    </label>
+                  </span>
+                  <span
+                    key="1"
+                  >
+                    <input
+                      id="fieldTypecalendar"
+                      name="type"
+                      onChange={[Function]}
+                      type="radio"
+                      value="calendar"
+                    />
+                    <label
+                      htmlFor="type"
+                    >
+                      Date Picker
+                    </label>
+                  </span>
+                  <span
+                    key="2"
+                  >
+                    <input
+                      id="fieldTypedropdown"
+                      name="type"
+                      onChange={[Function]}
+                      type="radio"
+                      value="dropdown"
+                    />
+                    <label
+                      htmlFor="type"
+                    >
+                      Drop Down Menu
+                    </label>
+                  </span>
+                  <span
+                    key="3"
+                  >
+                    <input
+                      id="fieldTypelongText"
+                      name="type"
+                      onChange={[Function]}
+                      type="radio"
+                      value="longText"
+                    />
+                    <label
+                      htmlFor="type"
+                    >
+                      Text Box
+                    </label>
+                  </span>
+                </div>
+                <input
+                  className="submit-button"
+                  id="submit"
+                  name="submit"
+                  onClick={[Function]}
+                  readOnly={true}
+                  type="submit"
+                  value="Create Field"
+                />
+                <input
+                  className="cancel-button"
+                  id="cancel"
+                  name="cancel"
+                  onClick={[Function]}
+                  readOnly={true}
+                  type="cancel"
+                  value="Cancel"
+                />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</PopOverHandler>
+`;

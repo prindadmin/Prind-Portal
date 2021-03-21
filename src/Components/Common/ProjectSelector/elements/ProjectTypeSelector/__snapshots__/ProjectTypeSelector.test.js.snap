@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render 1`] = `
+<div
+  className="project-selector-container"
+>
+  <lazy
+    description="A new project that is in the inception stage.  This type of project will guide you from inception to occupation through the construction process."
+    icon="building"
+    id="CDM2015Project"
+    key="0"
+    name="CDM2015 Project"
+    onSelect={[Function]}
+  />
+  <lazy
+    description="An existing build that you wish to store the Health & Safety File for.  This type of project will allow you to store all required parts of the Health & Safety File digitally."
+    icon="building"
+    id="DHSFProject"
+    key="1"
+    name="DHSF Project"
+    onSelect={[Function]}
+  />
+</div>
+`;

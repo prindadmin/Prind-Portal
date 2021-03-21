@@ -19,20 +19,26 @@ async function UploadFile(projectId, pageName, fieldId, fileDetails, fieldType) 
 
   return new Promise((resolve, reject) => {
 
+    const mergedFileDetails = {
+      tags: [],
+      ...fileDetails
+    }
+
+
+
     // Create the header for the request
     const myInit = {
         headers: {
           Authorization: identityToken
         },
         body: {
-          fieldDetails: {
-            filename: fileDetails.userFileName,
-            tags: []
-          },
+          fieldDetails: mergedFileDetails,
           type: fieldType
         },
         response: false,
     }
+
+    console.log(myInit)
 
     // Send the request
     API.post(apiName, path, myInit)

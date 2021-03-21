@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render 1`] = `
+<div
+  className="no-project-selected-container fill"
+>
+  <div
+    className="no-project-selected"
+  >
+    <ItemIcon
+      size="6x"
+      type="lock"
+    />
+    <p>
+      The requested project ID was not found in the system or you do not have access to the requested project.  Please select a project from the project drop down or contact the project administrator to request access.
+    </p>
+  </div>
+</div>
+`;

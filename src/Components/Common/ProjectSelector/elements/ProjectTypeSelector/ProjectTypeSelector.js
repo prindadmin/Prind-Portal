@@ -6,19 +6,19 @@ import ProjectTypesList from '../../../../../Data/ProjectTypes'
 
 const ProjectTypeTile = lazy(() => import('../../../../ProjectTypeTile'));
 
-// TODO: Test that this closing actually closes the project selector
-
 export class ProjectTypeSelector extends Component {
   static propTypes = {
     closePopup: PropTypes.func.isRequired,
+    history: PropTypes.shape({
+      push: PropTypes.func.isRequired
+    }).isRequired
   }
 
   createNewProject = ( projectType ) => {
-    console.log(`navigating to: ${Endpoints.NEWPROJECTPAGE}?project_type=${projectType}`)
-
+    //console.log(`navigating to: ${Endpoints.NEWPROJECTPAGE}?project_type=${projectType}`)
     const { history } = this.props
     history.push(`${Endpoints.NEWPROJECTPAGE}?project_type=${projectType}`)
-    console.log("closing popup")
+    //console.log("closing popup")
     this.props.closePopup()
   }
 

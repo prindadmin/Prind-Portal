@@ -16,9 +16,6 @@ const mapStatetoProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addMember: (projectID, memberValues, resolve, reject) => {
-      dispatch(memberReducer.addMemberToProject(projectID, memberValues, resolve, reject))
-    },
     getCurrentMembers: (projectID) => {
       dispatch(projectReducer.getCurrentMembers(projectID))
     },

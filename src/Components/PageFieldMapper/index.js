@@ -1,13 +1,15 @@
 import React from 'react'
 
-import { FileUpload, DropDown, CalendarPicker, LongText, GitText } from '../Common/ProjectDataFields'
+import { DropDown, CalendarPicker, LongText, GitText } from '../Common/ProjectDataFields'
+import * as PageFields from '../PageFields'
 
 const PageFieldMapper = props => {
 
   const { singleField, pageName, projectId } = props
 
   if (singleField.type === 'file') {
-    return <FileUpload
+
+    return <PageFields.FileUpload
               key={singleField.id}
               elementContent={singleField}
               pageName={pageName}
@@ -29,6 +31,7 @@ const PageFieldMapper = props => {
   if (singleField.type === 'calendar') {
     return <CalendarPicker
               key={singleField.id}
+              form={"field-" + singleField.id}
               elementContent={singleField}
               pageName={pageName}
               projectId={projectId}

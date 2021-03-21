@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import AWS from 'aws-sdk';
 
 import ItemIcon from '../../ItemIcon'
 
@@ -9,48 +10,6 @@ import * as ComponentState from '../ComponentStates'
 import Writer from './elements/Writer'
 import Comparer from './elements/Comparer'
 import LoadingSpinner from '../../LoadingSpinner'
-
-
-// TODO: Remove this once server sends this data
-const FILEDETAILS = [
-  {
-    ver: "5",
-    prevVer: "4",
-    s3VersionId: "wq2BhVu69txu8sfN_fav3I1jbzA2tt_P",
-    commitMessage: "Version 5"
-  },
-  {
-    ver: "1",
-    prevVer: "0",
-    s3VersionId: "u3.WYA9VlvVba2EY9NywkQHBExdKq9eA",
-    commitMessage: "Oldest Commit"
-  },
-  {
-    ver: "2",
-    prevVer: "1",
-    s3VersionId: "GndxW2exut63gfISgKr._bgLoxEBa1kh",
-    commitMessage: "Intermediate Commit"
-  },
-  {
-    ver: "3",
-    prevVer: "2",
-    s3VersionId: "IhHU28Y.7doCQmf9SijFU3M6C8VDCY5x",
-    commitMessage: "Another intermediate Commit"
-  },
-  {
-    ver: "4",
-    prevVer: "3",
-    s3VersionId: "BvjG3l1kV4Wmqd4PpT5PlhMEEc42V4_g",
-    commitMessage: "Latest Commit"
-  },
-  {
-    ver: "5",
-    prevVer: "4",
-    s3VersionId: "wq2BhVu69txu8sfN_fav3I1jbzA2tt_P",
-    commitMessage: "Version 5"
-  }
-
-]
 
 
 export class GitText extends Component {
@@ -80,14 +39,40 @@ export class GitText extends Component {
   constructor(props) {
     super()
     this.state = {
-      state: ComponentState.QUIESCENT,
+      state: props.user.projectS3Token.SessionToken === undefined ? ComponentState.NO_S3_TOKEN_AVAILABLE : ComponentState.QUIESCENT,
       view: ComponentState.GIT_TEXT_WRITER_OPEN,
       errorMessage: "",
       editable: false,
     }
+  }
 
-    // TODO: Remove this once server sends this data
-    props.elementContent.fileDetails = FILEDETAILS
+  componentDidMount() {
+    if (this.props.user.projectS3Token.SessionToken !== undefined) {
+      this.configureAWSAuthorisation(this.props.user.projectS3Token)
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.user.projectS3Token !== prevProps.user.projectS3Token) {
+      this.configureAWSAuthorisation(this.props.user.projectS3Token)
+    }
+  }
+
+
+  configureAWSAuthorisation = (token) => {
+    console.log("configuring AWS auth")
+    console.log(token)
+
+    // Update credentials to allow access to S3
+    const { AccessKeyId, SecretAccessKey, SessionToken } = token
+    AWS.config.update({
+      credentials: {
+        accessKeyId: AccessKeyId,
+        secretAccessKey: SecretAccessKey,
+        sessionToken: SessionToken
+      }
+    });
+    return;
   }
 
 
@@ -119,7 +104,6 @@ export class GitText extends Component {
   }
 
 
-  // TODO: style button
   getChangeViewButtons = () => {
     const isWriter = this.state.view === ComponentState.GIT_TEXT_WRITER_OPEN
     const changeTo = this.state.view === ComponentState.GIT_TEXT_WRITER_OPEN ? ComponentState.GIT_TEXT_COMPARER_OPEN : ComponentState.GIT_TEXT_WRITER_OPEN
@@ -139,7 +123,7 @@ export class GitText extends Component {
 
 
   render() {
-    const { title, description } = this.props.elementContent
+    const { title, description, fileDetails } = this.props.elementContent
     const { state } = this.state
     return (
       <div id='git-text-element'>
@@ -161,7 +145,7 @@ export class GitText extends Component {
             }
           </div>
           {
-            state === ComponentState.QUIESCENT ?
+            state === ComponentState.QUIESCENT && fileDetails.length !== 0 ?
             this.getChangeViewButtons() :
             null
           }

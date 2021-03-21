@@ -4,18 +4,15 @@ import PropTypes from 'prop-types'
 import { Editor } from '@tinymce/tinymce-react';
 import LoadingSpinner from '../../../LoadingSpinner'
 import * as ComponentState from '../../ComponentStates'
-import * as Diff from 'diff';
 
 import * as Strings from '../../../../../Data/Strings'
 import * as Constants from '../../Constants'
 
 import getFileFromS3 from './getFileFromS3'
+import AddFormatting from './diffFormatter'
 
 const EDITORCONTENTSTYLE = `mark.red { color: red; background: none; text-decoration: line-through; } mark.green { color: limegreen; background: none; } mark.grey { color: grey; background: none; }`;
 const CONTENTBEFORESELECTION = `<h2>${Strings.GIT_TEXT_NO_FILE_VERSION_SELECTED}</h2>`
-
-
-// TODO: Fix occasional errors with the S3 token not being present
 
 export class Comparer extends Component {
   static propTypes = {
@@ -118,44 +115,10 @@ export class Comparer extends Component {
   }
 
 
-  // Add colour formatting to the text
-  // TODO: Work out a way to format this text correctly for Version 5 vs 4 in test project
-  addFormatting = () => {
-    console.log(this.state)
-
-    if (this.state.oldVersion.initialContent === undefined || this.state.newVersion.initialContent === undefined) {
-      console.warn("One of the contents was empty")
-      console.warn(`old: ${this.state.oldVersion.initialContent}; new: ${this.state.newVersion.initialContent}`)
-      return this.state.newVersion.initialContent
-    }
-
-    const diff = Diff.diffWords(this.state.oldVersion.initialContent, this.state.newVersion.initialContent);
-    var outputDifference = ''
-
-    diff.forEach((part) => {
-      // green for additions, red for deletions
-      // grey for common parts
-      const colour = part.added ? 'green' :
-                     part.removed ? 'red' : 'grey';
-
-      if(colour === 'grey') {
-        outputDifference += `${part.value}`
-        return;
-      }
-
-      outputDifference += `<mark class="${colour}">${part.value}</mark>`
-    })
-
-    console.log(outputDifference)
-
-    return outputDifference
-  }
-
-
   getEditor = (content, shouldCompare, isNew) => {
     var displayContent = content.initialContent
     if (isNew && shouldCompare) {
-      displayContent = this.addFormatting()
+      displayContent = AddFormatting(this)
     }
     if (content === "") {
       displayContent = CONTENTBEFORESELECTION
@@ -201,12 +164,20 @@ export class Comparer extends Component {
 
     // Map the fileVersions to options
     const options = fileVersions.slice(1).map((version, index) => {
+      const date = new Date(version.uploadedDateTime)
+      const displayDate = date.toISOString().split('T')[0]
+      var isDisabled = false
       // If this is the old selector and the option is older than the new selector selection
       // disable the selection
       if (selectorName === Constants.OLDSELECTOR && index >= newIndex) {
-        return <option key={index} disabled value={version.s3VersionId}>{version.commitMessage}</option>
+        isDisabled = true
       }
-      return <option key={index} value={version.s3VersionId}>{version.commitMessage}</option>
+
+      if (version.commitMessage === undefined) {
+        return <option key={index} disabled={isDisabled} value={version.s3VersionId}>{`${displayDate} - ${Strings.GIT_TEXT_NO_COMMIT_MESSAGE_PROVIDED}`}</option>
+      }
+
+      return <option key={index} disabled={isDisabled} value={version.s3VersionId}>{`${displayDate} - ${version.commitMessage}`}</option>
     })
 
     const value = this.state[selectorName].s3VersionId

@@ -1,0 +1,159 @@
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+
+import DownloadBox from './DownloadBox'
+import Spinner from '../../../Common/LoadingSpinnerCSS'
+
+import * as Strings from '../../../../Data/Strings'
+
+// TODO: Improve structuring of propTypes to ensure errors are captured
+// TODO: Do something with error text state string
+export class UploadHistory extends Component {
+  static propTypes = {
+    details: PropTypes.array.isRequired,
+    projectID: PropTypes.any.isRequired,
+    pageName: PropTypes.any.isRequired,
+    fieldID: PropTypes.any.isRequired,
+  }
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      fileDetails: {},
+      fetchError: false,
+      errorText: "",
+      downloadInProgress: false
+    }
+  }
+
+
+  downloadResolve = () => {
+    this.setState({
+      downloadInProgress: false,
+      fetchError: false,
+      errorText: ""
+    })
+  }
+
+  downloadReject = () => {
+    this.setState({
+      downloadInProgress: false,
+      fetchError: true,
+      errorText: Strings.ERROR_FETCHING_DOWNLOAD_LINK
+    })
+  }
+
+
+  openProof = (e) => {
+    e.stopPropagation()
+  }
+
+
+  getProof = (proofLink) => {
+    if (proofLink === undefined) {
+      return(
+        Strings.NO_PROOF_AVAILABLE
+      )
+    } else {
+      return(
+        <a target="_blank" rel="noopener noreferrer" onClick={e => this.openProof(e)} href={proofLink}>{Strings.LINK_TO_PROOF}</a>
+      )
+    }
+  }
+
+  startDownload = (e) => {
+    this.setState({
+      downloadInProgress: true,
+    })
+  }
+
+  getDownloadButton = (fileUpload) => {
+    const { projectID, pageName, fieldID } = this.props
+
+    if (this.state.downloadInProgress) {
+      return (
+        <Spinner size={16} />
+      )
+    }
+
+    return (
+      <div onClick={this.startDownload}>
+        <DownloadBox
+          projectID={projectID}
+          pageName={pageName}
+          fieldID={fieldID}
+          fileVersionDetails={fileUpload}
+          onDownloadSuccess={this.downloadResolve}
+          onDownloadFailure={this.downloadReject}
+        />
+      </div>
+    )
+  }
+
+  // TODO: Fix the displaying of this details table at mobile widths
+  getDetailsTable = () => {
+    const { details } = this.props
+    var reversedDetails = details.filter(function(fileUpload) {
+      return(fileUpload.ver !== "0" && fileUpload.ver !== 0)
+    })
+    reversedDetails.reverse()
+    return (
+      <div className='details-table'>
+        <h4>{Strings.FILE_NAME}</h4>
+        <h4>{Strings.UPLOADED_BY}</h4>
+        <h4>{Strings.UPLOAD_VERSION}</h4>
+        <h4>{Strings.UPLOAD_DATE_TIME}</h4>
+        <h4>{Strings.PROOF}</h4>
+        <h4>{Strings.DOWNLOAD_WITH_COLON}</h4>
+        {
+          reversedDetails.map((fileUpload, index) => {
+            return (
+              <React.Fragment>
+                <div key={`uploadName-${index}`}>{fileUpload.uploadName === undefined ? Strings.NO_UPLOAD_NAME : fileUpload.uploadName}</div>
+                <div key={`uploadedBy-${index}`}>{fileUpload.uploadedBy === "None None" ? Strings.FILE_UPLOAD_UPLOADER_HAS_NO_NAME : fileUpload.uploadedBy}</div>
+                <div key={`ver-${index}`}>{fileUpload.ver}</div>
+                <div key={`uploadDateTime-${index}`}>{fileUpload.uploadedDateTime}</div>
+                <div key={`proof-${index}`}>
+                  {
+                    this.getProof(fileUpload.proofLink)
+                  }
+                </div>
+                <div  key={`downloadButton-${index}`}>
+                  {
+                    this.getDownloadButton(fileUpload)
+                  }
+                </div>
+              </React.Fragment>
+            )
+          })
+        }
+      </div>
+    )
+  }
+
+
+  uploadHistoryNotProvided = () => {
+    return (
+      <div>
+        {Strings.NO_PREVIOUS_VERSIONS}
+      </div>
+    )
+  }
+
+
+  render() {
+    const { details } = this.props
+    return(
+      <div id='upload-history-container'>
+        <div className='element-title'>
+          {Strings.UPLOAD_HISTORY_ELEMENT}
+        </div>
+        {
+          details.length === 0 ? this.uploadHistoryNotProvided() : this.getDetailsTable()
+        }
+      </div>
+    )
+  }
+}
+
+export default UploadHistory

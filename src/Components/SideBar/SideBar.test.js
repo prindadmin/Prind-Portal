@@ -2,9 +2,18 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import SideBar from './SideBar'
-
+/*
+beforeEach(() => {
+  process.env = Object.assign(process.env, {
+    REACT_APP_PORTAL: 'CDM2015Project'
+  });
+});
+*/
 
 it('Should render CDM project Sidebar', () => {
+  process.env = Object.assign(process.env, {
+    REACT_APP_PORTAL: 'CDM2015Project'
+  });
   const props = {
     projects: {
       chosenProject: {
@@ -22,6 +31,9 @@ it('Should render CDM project Sidebar', () => {
 
 
 it('Should render DSHF project Sidebar', () => {
+  process.env = Object.assign(process.env, {
+    REACT_APP_PORTAL: 'DHSFProject'
+  });
   const props = {
     projects: {
       chosenProject: {
