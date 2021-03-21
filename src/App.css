@@ -847,7 +847,6 @@ background-color: var(--field-element-grey);
 #git-text-element .element-description,
 #popup-box .element-description {
   width: 100%;
-  max-width: 600px;
   margin-bottom: 1em;
 }
 
@@ -2002,9 +2001,20 @@ mark.grey {
 #popup-box .project-list-container {
   display: grid;
   margin: auto var(--standard-margin);
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-template-columns: 1fr;
   grid-gap: 1rem;
 }
+
+
+@media (min-width: 800px) {
+  #popup-box .project-list-container {
+    display: grid;
+    margin: auto var(--standard-margin);
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    grid-gap: 1rem;
+  }
+}
+
 
 #popup-box .project-scroll-box button {
   height: auto;

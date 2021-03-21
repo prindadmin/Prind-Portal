@@ -28,10 +28,10 @@ export class SignatureHistory extends Component {
         {
           details.map((signature, index) => {
             return (
-              <React.Fragment>
-                <div>{signature.signerName}</div>
-                <div>{signature.signatureDateTime}</div>
-                <div><a href={signature.proofLink} target="_blank" rel="noopener noreferrer">{Strings.LINK_TO_PROOF}</a></div>
+              <React.Fragment key={index}>
+                <div key={`signer-${index}`}>{signature.signerName}</div>
+                <div key={`signatureDateTime-${index}`}>{signature.signatureDateTime}</div>
+                <div key={`proofLink-${index}`}><a href={signature.proofLink} target="_blank" rel="noopener noreferrer">{Strings.LINK_TO_PROOF}</a></div>
               </React.Fragment>
             )
           })
