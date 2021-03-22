@@ -1,7 +1,3 @@
-import selfSignFileDispatcher from './selfSignFile'
-import rejectSignatureRequestDispatcher from './rejectSignatureRequest'
 
-export {
-  selfSignFileDispatcher,
-  rejectSignatureRequestDispatcher,
-}
+export { default as selfSignFile } from './selfSignFile';
+export { default as rejectSignatureRequest } from './rejectSignatureRequest';

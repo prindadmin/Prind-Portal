@@ -1,12 +1,7 @@
 
 import { call, put, takeLatest } from 'redux-saga/effects'
 
-import {
-  addMemberToProjectDispatcher,
-  removeMemberFromProjectDispatcher,
-  getRolesDispatcher,
-} from '../Dispatchers/members'
-
+import * as MemberDispatchers from '../Dispatchers/members'
 import * as Actions from '../Actions'
 
 let defaultState = {
@@ -18,7 +13,7 @@ let defaultState = {
   roles: [],
 }
 
-function * init (action) {
+export function * init (action) {
   yield put({
     type: Actions.MEMBER_SET_STATE,
     payload: defaultState
@@ -26,7 +21,7 @@ function * init (action) {
 }
 
 
-function * addMemberToProject (action) {
+export function * addMemberToProject (action) {
 
   const { projectID, memberDetails } = action.payload
 
@@ -40,7 +35,7 @@ function * addMemberToProject (action) {
       }
     })
 
-    yield call(addMemberToProjectDispatcher, projectID, memberDetails)
+    yield call(MemberDispatchers.addMemberToProject, projectID, memberDetails)
 
     // Post-fetch update to store
     yield put({
@@ -70,7 +65,7 @@ function * addMemberToProject (action) {
 }
 
 
-function * removeMemberFromProject (action) {
+export function * removeMemberFromProject (action) {
 
   const { projectID, memberUsername } = action.payload
 
@@ -84,13 +79,13 @@ function * removeMemberFromProject (action) {
       }
     })
 
-    const result = yield call(removeMemberFromProjectDispatcher, projectID, memberUsername)
+    const result = yield call(MemberDispatchers.removeMemberFromProject, projectID, memberUsername)
 
     // Post-fetch update to store
     yield put({
       type: Actions.MEMBER_SET_STATE,
       payload: {
-        ...defaultState,
+        fetching: false,
         currentMember: result
       }
     })
@@ -118,7 +113,7 @@ function * removeMemberFromProject (action) {
 }
 
 
-function * getRoles (action) {
+export function * getRoles (action) {
 
   const { projectID } = action.payload
 
@@ -132,12 +127,13 @@ function * getRoles (action) {
       }
     })
 
-    const result  = yield call(getRolesDispatcher, projectID)
+    const result  = yield call(MemberDispatchers.getRoles, projectID)
 
     // Post-fetch update to store
     yield put({
       type: Actions.MEMBER_SET_STATE,
       payload: {
+        fetching: false,
         roles: result.body
       }
     })

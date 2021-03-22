@@ -3,10 +3,7 @@ import { call, put, takeLatest } from 'redux-saga/effects'
 
 // TODO: Implement resolver and rejector callbacks
 
-import {
-  selfSignFileDispatcher,
-  rejectSignatureRequestDispatcher
-} from '../Dispatchers/foundations'
+import * as FoundationsDispatchers from '../Dispatchers/foundations'
 
 import * as Actions from '../Actions'
 
@@ -14,7 +11,7 @@ let defaultState = {
   fetching: false,
 }
 
-function * init (action) {
+export function * init (action) {
   yield put({
     type: Actions.FOUNDATIONS_SET_STATE,
     payload: defaultState
@@ -22,12 +19,9 @@ function * init (action) {
 }
 
 
-function * selfSignFile (action) {
-
+export function * selfSignFile (action) {
   const { projectID, pageName, fieldID } = action.payload
-
   try {
-
     // Pre-fetch update to store
     yield put({
       type: Actions.FOUNDATIONS_SELF_SIGN_FILE_REQUEST_SENT,
@@ -36,9 +30,7 @@ function * selfSignFile (action) {
         fetching: true
       }
     })
-
-    yield call(selfSignFileDispatcher, projectID, pageName, fieldID)
-
+    yield call(FoundationsDispatchers.selfSignFile, projectID, pageName, fieldID)
     // Post-fetch update to store
     yield put({
       type: Actions.FOUNDATIONS_SET_STATE,
@@ -60,12 +52,9 @@ function * selfSignFile (action) {
 }
 
 
-function * rejectSignatureRequest (action) {
-
+export function * rejectSignatureRequest (action) {
   const { requestDetails } = action.payload
-
   try {
-
     // Pre-fetch update to store
     yield put({
       type: Actions.FOUNDATIONS_REJECT_SIGNATURE_REQUEST_REQUEST_SENT,
@@ -74,9 +63,7 @@ function * rejectSignatureRequest (action) {
         fetching: true
       }
     })
-
-    yield call(rejectSignatureRequestDispatcher, requestDetails)
-
+    yield call(FoundationsDispatchers.rejectSignatureRequest, requestDetails)
     // Post-fetch update to store
     yield put({
       type: Actions.FOUNDATIONS_SET_STATE,
@@ -84,13 +71,11 @@ function * rejectSignatureRequest (action) {
         ...defaultState,
       }
     })
-
     // Request that the signatures list is updated
     yield put({
       type: Actions.USER_GET_PROJECT_SIGNATURES_REQUESTED,
       payload: {}
     })
-
     if (action.payload.resolve !== undefined) {
       action.payload.resolve()
     }
@@ -104,7 +89,6 @@ function * rejectSignatureRequest (action) {
           error
         }
     })
-
     if (action.payload.reject !== undefined) {
       action.payload.reject()
     }

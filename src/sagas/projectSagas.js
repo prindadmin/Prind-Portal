@@ -23,14 +23,14 @@ const defaultState = {
   error: null,
 }
 
-function * init (action) {
+export function * init (action) {
   yield put({
     type: Actions.PROJECT_SET_STATE,
     payload: defaultState
   })
 }
 
-function * getAccessibleProjects (action) {
+export function * getAccessibleProjects (action) {
   try {
     // pre-fetch update
     yield put({
@@ -40,7 +40,7 @@ function * getAccessibleProjects (action) {
       }
     })
 
-    const result = yield call(Dispatchers.getAccessibleProjectsDispatcher)
+    const result = yield call(Dispatchers.getAccessibleProjects)
 
     // post-fetch update
     yield put({
@@ -70,7 +70,7 @@ function * getAccessibleProjects (action) {
   }
 }
 
-function * createNewProject (action) {
+export function * createNewProject (action) {
 
   const { projectValues } = action.payload
 
@@ -84,7 +84,7 @@ function * createNewProject (action) {
       }
     })
 
-    const result = yield call(Dispatchers.createNewProjectDispatcher, projectValues)
+    const result = yield call(Dispatchers.createNewProject, projectValues)
 
     yield put({
       type: Actions.PROJECT_UPDATE_PROJECT_CHOSEN_REQUESTED,
@@ -93,8 +93,9 @@ function * createNewProject (action) {
         project: result.body,
       }
     })
-
-    action.payload.resolve(result.body)
+    if (action.payload.resolve) {
+      action.payload.resolve(result.body)
+    }
 
     }
     catch (error) {
@@ -106,13 +107,14 @@ function * createNewProject (action) {
             error
           }
       })
-
-      action.payload.reject()
+      if (action.payload.reject) {
+        action.payload.reject()
+      }
     }
 }
 
 
-function * updateChosenProject (action) {
+export function * updateChosenProject (action) {
 
   const { project } = action.payload
 
@@ -126,9 +128,7 @@ function * updateChosenProject (action) {
       }
     })
 
-    console.log(action.payload)
-
-    const result = yield call(Dispatchers.fetchProjectDetailsDispatcher, project.projectId)
+    const result = yield call(Dispatchers.fetchProjectDetails, project.projectId)
 
     // Post-fetch update to store
     yield put({
@@ -161,7 +161,7 @@ function * updateChosenProject (action) {
 }
 
 
-function * updateProjectDetails (action) {
+export function * updateProjectDetails (action) {
 
   const { projectID, projectValues } = action.payload
 
@@ -175,7 +175,7 @@ function * updateProjectDetails (action) {
       }
     })
 
-    yield call(Dispatchers.updateProjectDetailsDispatcher, projectID, projectValues)
+    yield call(Dispatchers.updateProjectDetails, projectID, projectValues)
 
     // Post-fetch update to store
     yield put({
@@ -199,7 +199,7 @@ function * updateProjectDetails (action) {
 }
 
 
-function * getCurrentMembers (action) {
+export function * getCurrentMembers (action) {
 
   const { projectID } = action.payload
 
@@ -212,7 +212,7 @@ function * getCurrentMembers (action) {
       }
     })
 
-    const result = yield call(Dispatchers.getCurrentMembersDispatcher, projectID)
+    const result = yield call(Dispatchers.getCurrentMembers, projectID)
     console.log(result)
     const memberList = result.body.members
 
@@ -238,7 +238,7 @@ function * getCurrentMembers (action) {
 }
 
 
-function * uploadFile (action) {
+export function * uploadFile (action) {
 
   const { projectID, pageName, fieldID, fileDetails, fieldType, resolve, reject } = action.payload
 
@@ -252,7 +252,7 @@ function * uploadFile (action) {
       }
     })
 
-    const result = yield call(Dispatchers.uploadFileDispatcher, projectID, pageName, fieldID, fileDetails, fieldType)
+    const result = yield call(Dispatchers.uploadFile, projectID, pageName, fieldID, fileDetails, fieldType)
 
     console.log(result)
 
@@ -299,7 +299,7 @@ function * uploadFile (action) {
 }
 
 
-function * downloadFile (action) {
+export function * downloadFile (action) {
 
   const { projectID, pageName, fieldID, version } = action.payload
 
@@ -313,7 +313,7 @@ function * downloadFile (action) {
       }
     })
 
-    const result = yield call(Dispatchers.downloadFileDispatcher, projectID, pageName, fieldID, version)
+    const result = yield call(Dispatchers.downloadFile, projectID, pageName, fieldID, version)
 
     // Post-fetch update to store
     yield put({
@@ -343,7 +343,7 @@ function * downloadFile (action) {
 
 
 
-function * createField (action) {
+export function * createField (action) {
   const { projectID, pageName, fieldDetails, resolve, reject } = action.payload
 
   try {
@@ -355,7 +355,7 @@ function * createField (action) {
       }
     })
 
-    yield call(Dispatchers.createFieldDispatcher, projectID, pageName, fieldDetails)
+    yield call(Dispatchers.createField, projectID, pageName, fieldDetails)
 
     // Post-fetch update to store
     yield put({
@@ -393,7 +393,7 @@ function * createField (action) {
 }
 
 
-function * updateField (action) {
+export function * updateField (action) {
   const { projectID, pageName, fieldID, fieldDetails, resolve, reject } = action.payload
   try {
     // Pre-fetch update to store
@@ -404,7 +404,7 @@ function * updateField (action) {
       }
     })
 
-    yield call(Dispatchers.updateFieldDispatcher, projectID, pageName, fieldID, fieldDetails)
+    yield call(Dispatchers.updateField, projectID, pageName, fieldID, fieldDetails)
 
     // Post-fetch update to store
     yield put({
@@ -440,7 +440,7 @@ function * updateField (action) {
 }
 
 
-function * requestFileSignature (action) {
+export function * requestFileSignature (action) {
 
   const { projectID, pageName, fieldID, members } = action.payload
 
@@ -454,7 +454,7 @@ function * requestFileSignature (action) {
       }
     })
 
-    yield call(Dispatchers.requestSignatureDispatcher, projectID, pageName, fieldID, members)
+    yield call(Dispatchers.requestSignature, projectID, pageName, fieldID, members)
 
     // Post-fetch update to store
     yield put({
@@ -482,7 +482,7 @@ function * requestFileSignature (action) {
 }
 
 
-function * deleteProject (action) {
+export function * deleteProject (action) {
 
   const { projectID } = action.payload
 
@@ -496,7 +496,7 @@ function * deleteProject (action) {
       }
     })
 
-    yield call(Dispatchers.deleteProjectDispatcher, projectID,)
+    yield call(Dispatchers.deleteProject, projectID,)
 
     // Post-fetch update to store
     yield put({
