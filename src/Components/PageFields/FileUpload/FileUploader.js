@@ -19,7 +19,7 @@ import {
 import * as Strings from '../../../Data/Strings'
 
 // TODO: Improve propTypes so that errors are captured more easily
-export class Element extends Component {
+export class FileUploader extends Component {
   static propTypes = {
     elementContent: PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -29,6 +29,11 @@ export class Element extends Component {
       fileDetails: PropTypes.array.isRequired,
     }),
     pageName: PropTypes.string.isRequired,
+    projects: PropTypes.shape({
+      chosenProject: PropTypes.shape({
+        projectId: PropTypes.string.isRequired,
+      }).isRequired,
+    }).isRequired,
   }
 
   constructor() {
@@ -126,7 +131,7 @@ export class Element extends Component {
     return (
       <UploadHistory
         details={ elementContent.fileDetails }
-        projectID={projects.chosenProject.projectId}
+        projectId={projects.chosenProject.projectId}
         pageName={pageName}
         fieldID={elementContent.id}
         />
@@ -216,4 +221,4 @@ export class Element extends Component {
   }
 }
 
-export default Element
+export default FileUploader

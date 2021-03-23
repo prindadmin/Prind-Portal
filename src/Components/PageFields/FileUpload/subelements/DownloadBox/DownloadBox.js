@@ -4,9 +4,9 @@ import PropTypes from 'prop-types'
 import ItemIcon from '../../../../Common/ItemIcon'
 import * as Strings from '../../../../../Data/Strings'
 
-export class Element extends Component {
+export class DownloadBox extends Component {
   static propTypes = {
-    projectID: PropTypes.string.isRequired,
+    projectId: PropTypes.string.isRequired,
     pageName: PropTypes.string.isRequired,
     fieldID: PropTypes.string.isRequired,
     fileVersionDetails: PropTypes.object.isRequired,
@@ -59,14 +59,14 @@ export class Element extends Component {
 
   downloadFile = (e) => {
 
-    const { projectID, pageName, fieldID, fileVersionDetails, downloadFile } = this.props
+    const { projectId, pageName, fieldID, fileVersionDetails, downloadFile } = this.props
 
     this.setState({
       fetchError: false,
     })
 
     downloadFile(
-      projectID,
+      projectId,
       pageName,
       fieldID,
       fileVersionDetails.ver,
@@ -94,4 +94,4 @@ export class Element extends Component {
   }
 }
 
-export default Element
+export default DownloadBox 

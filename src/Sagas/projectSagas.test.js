@@ -89,8 +89,9 @@ const getAccessibleProjectsDispatcherReturn = {
     ]
   }
 }
+// Run successful fetch
 var it = sagaHelper(ProjectSagas.getAccessibleProjects(getAccessibleProjectsAction));
-it('getAccessibleProjects - test change to fetching status', (result) => {
+it('getAccessibleProjects - success - test change to fetching status', (result) => {
   expect(result).toEqual(put({
     type: Actions.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUEST_SENT,
     payload: {
@@ -98,11 +99,11 @@ it('getAccessibleProjects - test change to fetching status', (result) => {
     }
   }));
 });
-it('getAccessibleProjects - test request to dispatcher', (result) => {
+it('getAccessibleProjects - success - test request to dispatcher', (result) => {
   expect(result).toEqual(call(ProjectDispatchers.getAccessibleProjects));
   return getAccessibleProjectsDispatcherReturn
 });
-it('getAccessibleProjects - test end of send put', (result) => {
+it('getAccessibleProjects - success - test end of send put', (result) => {
   expect(result).toEqual(put({
     type: Actions.PROJECT_SET_STATE,
     payload: {
@@ -111,9 +112,47 @@ it('getAccessibleProjects - test end of send put', (result) => {
     }
   }));
 });
-it('getAccessibleProjects - test callback resolve', (result) => {
+it('getAccessibleProjects - success - test callback resolve', (result) => {
   expect(mockResolve).toHaveBeenCalledWith(getAccessibleProjectsDispatcherReturn.body)
 });
+
+const getAccessibleProjectsDispatcherError = {
+  "statusCode": 400,
+  "Error": {
+      "ErrorMessage": "Can't get projects",
+      "ErrorCode": "INVALID_PROJECT_FETCH",
+      "ErrorNumber": "0001"
+  }
+}
+
+/*
+// Run unsuccessful fetch
+var it = sagaHelper(ProjectSagas.getAccessibleProjects(getAccessibleProjectsAction));
+it('getAccessibleProjects - error - test change to fetching status', (result) => {
+  expect(result).toEqual(put({
+    type: Actions.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUEST_SENT,
+    payload: {
+      fetching: true
+    }
+  }));
+});
+it('getAccessibleProjects - error - test request to dispatcher', (result) => {
+  expect(result).toEqual(call(ProjectDispatchers.getAccessibleProjects));
+  return new Error(getAccessibleProjectsDispatcherError);
+});
+it('getAccessibleProjects - error - test error put', (result) => {
+  expect(result).toEqual(put({
+    type: Actions.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUEST_FAILED,
+    payload: {
+      ...defaultState,
+      error: getAccessibleProjectsDispatcherError
+    }
+  }));
+});
+it('getAccessibleProjects - error - test callback resolve', (result) => {
+  expect(mockReject).toHaveBeenCalled(getAccessibleProjectsDispatcherError)
+});
+*/
 
 
 
@@ -456,6 +495,191 @@ it('downloadFile - test end of send put', (result) => {
 });
 it('downloadFile - test callback resolve', (result) => {
   expect(mockResolve).toHaveBeenCalledWith(downloadFileDispatcherReturn.body)
+});
+
+
+
+const createFieldAction = {
+  payload: {
+    projectID: "123",
+    pageName: "Design",
+    fieldDetails: {
+      title: "New Test Field 1",
+      description: "This is a new test field",
+      type: "file"
+    },
+    resolve: mockResolve,
+    reject: mockReject
+  }
+}
+const createFieldDispatcherReturn = {
+  body: "Success",
+  statusCode: 201
+}
+var it = sagaHelper(ProjectSagas.createField(createFieldAction));
+it('createField - test change to fetching status', (result) => {
+  expect(result).toEqual(put({
+    type: Actions.PROJECT_CREATE_FIELD_REQUEST_SENT,
+    payload: {
+      fetching: true
+    }
+  }));
+});
+it('createField - test request to dispatcher', (result) => {
+  expect(result).toEqual(call(ProjectDispatchers.createField, createFieldAction.payload));
+  return createFieldDispatcherReturn
+});
+it('createField - test fetch of page data put', (result) => {
+  const { payload } = createFieldAction
+
+  expect(result).toEqual(put({
+    type: Actions.PROJECT_UPLOAD_FILE_REQUEST_SUCCESSFUL,
+    payload
+  }));
+});
+it('createField - test end of send put', (result) => {
+  expect(result).toEqual(put({
+    type: Actions.PROJECT_SET_STATE,
+    payload: {
+      fetching: false,
+    }
+  }));
+});
+it('createField - test callback resolve', (result) => {
+  expect(mockResolve).toHaveBeenCalled()
+});
+
+
+
+const updateFieldAction = {
+  payload: {
+    projectID: "123",
+    pageName: "Design",
+    fieldID: 2,
+    fieldDetails: {
+      title: "Update Test Field 1",
+      description: "This is a field being updated",
+      type: "file"
+    },
+    resolve: mockResolve,
+    reject: mockReject
+  }
+}
+const updateFieldDispatcherReturn = {
+  body: "Success",
+  statusCode: 201
+}
+var it = sagaHelper(ProjectSagas.updateField(updateFieldAction));
+it('updateField - test change to fetching status', (result) => {
+  expect(result).toEqual(put({
+    type: Actions.PROJECT_UPDATE_FIELD_REQUEST_SENT,
+    payload: {
+      fetching: true
+    }
+  }));
+});
+it('updateField - test request to dispatcher', (result) => {
+  expect(result).toEqual(call(ProjectDispatchers.updateField, updateFieldAction.payload));
+  return updateFieldDispatcherReturn
+});
+it('updateField - test fetch of page data put', (result) => {
+  const { payload } = updateFieldAction
+  expect(result).toEqual(put({
+    type: Actions.PROJECT_UPLOAD_FILE_REQUEST_SUCCESSFUL,
+    payload
+  }));
+});
+it('updateField - test end of send put', (result) => {
+  expect(result).toEqual(put({
+    type: Actions.PROJECT_SET_STATE,
+    payload: {
+      fetching: false,
+    }
+  }));
+});
+it('updateField - test callback resolve', (result) => {
+  expect(mockResolve).toHaveBeenCalled()
+});
+
+
+
+const requestFileSignatureAction = {
+  payload: {
+    projectID: "123",
+    pageName: "Design",
+    fieldID: 2,
+    members: [
+      'aaaa-aaaa-aaaaaaaa-aaaa',
+      'bbbb-bbbb-bbbbbbbb-bbbb'
+    ],
+    resolve: mockResolve,
+    reject: mockReject
+  }
+}
+const requestFileSignatureDispatcherReturn = {
+  body: "Success",
+  statusCode: 201
+}
+var it = sagaHelper(ProjectSagas.requestFileSignature(requestFileSignatureAction));
+it('requestFileSignature - test change to fetching status', (result) => {
+  expect(result).toEqual(put({
+    type: Actions.PROJECT_FILE_SIGNATURE_REQUEST_REQUEST_SENT,
+    payload: {
+      fetching: true
+    }
+  }));
+});
+it('requestFileSignature - test request to dispatcher', (result) => {
+  expect(result).toEqual(call(ProjectDispatchers.requestSignature, requestFileSignatureAction.payload));
+  return requestFileSignatureDispatcherReturn
+});
+it('requestFileSignature - test end of send put', (result) => {
+  expect(result).toEqual(put({
+    type: Actions.PROJECT_SET_STATE,
+    payload: {
+      fetching: false,
+      error: null,
+    }
+  }));
+});
+it('requestFileSignature - test callback resolve', (result) => {
+  expect(mockResolve).toHaveBeenCalled()
+});
+
+
+
+const deleteProjectAction = {
+  payload: {
+    projectID: "123",
+    resolve: mockResolve,
+    reject: mockReject
+  }
+}
+const deleteProjectDispatcherReturn = {
+  body: "Success",
+  statusCode: 200
+}
+var it = sagaHelper(ProjectSagas.deleteProject(deleteProjectAction));
+it('deleteProject - test change to fetching status', (result) => {
+  expect(result).toEqual(put({
+    type: Actions.PROJECT_DELETE_PROJECT_REQUEST_SENT,
+    payload: {
+      fetching: true
+    }
+  }));
+});
+it('deleteProject - test request to dispatcher', (result) => {
+  expect(result).toEqual(call(ProjectDispatchers.deleteProject, deleteProjectAction.payload.projectID));
+  return deleteProjectDispatcherReturn
+});
+it('deleteProject - test end of send put', (result) => {
+  expect(result).toEqual(put({
+    type: Actions.PROJECT_SET_STATE,
+    payload: defaultState
+  }));
+});
+it('deleteProject - test callback resolve', (result) => {
+  expect(mockResolve).toHaveBeenCalled()
 });
 
 

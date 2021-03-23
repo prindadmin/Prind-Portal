@@ -13,9 +13,11 @@ const mapStatetoProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    /*
     updateField: (pageName, fieldDetails) => {
       dispatch(projectsReducer.updateField(pageName, fieldDetails))
     }
+    */
   }
 }
 

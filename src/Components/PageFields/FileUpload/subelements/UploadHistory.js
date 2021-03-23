@@ -11,7 +11,7 @@ import * as Strings from '../../../../Data/Strings'
 export class UploadHistory extends Component {
   static propTypes = {
     details: PropTypes.array.isRequired,
-    projectID: PropTypes.any.isRequired,
+    projectId: PropTypes.string.isRequired,
     pageName: PropTypes.any.isRequired,
     fieldID: PropTypes.any.isRequired,
   }
@@ -68,7 +68,7 @@ export class UploadHistory extends Component {
   }
 
   getDownloadButton = (fileUpload) => {
-    const { projectID, pageName, fieldID } = this.props
+    const { projectId, pageName, fieldID } = this.props
 
     if (this.state.downloadInProgress) {
       return (
@@ -79,7 +79,7 @@ export class UploadHistory extends Component {
     return (
       <div onClick={this.startDownload}>
         <DownloadBox
-          projectID={projectID}
+          projectId={projectId}
           pageName={pageName}
           fieldID={fieldID}
           fileVersionDetails={fileUpload}
@@ -108,7 +108,7 @@ export class UploadHistory extends Component {
         {
           reversedDetails.map((fileUpload, index) => {
             return (
-              <React.Fragment>
+              <React.Fragment key={index}>
                 <div key={`uploadName-${index}`}>{fileUpload.uploadName === undefined ? Strings.NO_UPLOAD_NAME : fileUpload.uploadName}</div>
                 <div key={`uploadedBy-${index}`}>{fileUpload.uploadedBy === "None None" ? Strings.FILE_UPLOAD_UPLOADER_HAS_NO_NAME : fileUpload.uploadedBy}</div>
                 <div key={`ver-${index}`}>{fileUpload.ver}</div>

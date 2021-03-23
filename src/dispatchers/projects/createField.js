@@ -5,10 +5,10 @@ import API from '@aws-amplify/api';
 // Fixed values for the API request
 const apiName = process.env.REACT_APP_API_NAME
 
-async function CreateField(projectId, pageName, fieldDetails) {
+async function CreateField(payload) {
 
   // Build path for request
-  const path = `/project/${projectId}/page/${pageName}/create-field`
+  const path = `/project/${payload.projectID}/page/${payload.pageName}/create-field`
 
   // Get the current session and the identity jwtToken
   const identityToken = await Auth.currentSession()
@@ -23,7 +23,7 @@ async function CreateField(projectId, pageName, fieldDetails) {
         headers: {
           Authorization: identityToken
         },
-        body: fieldDetails,
+        body: payload.fieldDetails,
         response: false,
     }
 
