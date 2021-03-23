@@ -4,10 +4,10 @@ import API from '@aws-amplify/api';
 // Fixed values for the API request
 const apiName = process.env.REACT_APP_API_NAME
 
-async function UploadFile(projectId, pageName, fieldId, fileDetails, fieldType) {
+async function UploadFile(payload) {
 
   // Build path for request
-  const path = `/project/${projectId}/${pageName}/${fieldId}`
+  const path = `/project/${payload.projectID}/${payload.pageName}/${payload.fieldID}`
 
   console.log(`Uploading file to S3 @: ${path}`)
 
@@ -17,14 +17,14 @@ async function UploadFile(projectId, pageName, fieldId, fileDetails, fieldType) 
         return credentials.idToken.jwtToken
       })
 
+  const { fileDetails } = payload
+
   return new Promise((resolve, reject) => {
 
     const mergedFileDetails = {
       tags: [],
       ...fileDetails
     }
-
-
 
     // Create the header for the request
     const myInit = {
@@ -33,7 +33,7 @@ async function UploadFile(projectId, pageName, fieldId, fileDetails, fieldType) 
         },
         body: {
           fieldDetails: mergedFileDetails,
-          type: fieldType
+          type: payload.fieldType
         },
         response: false,
     }
@@ -44,6 +44,12 @@ async function UploadFile(projectId, pageName, fieldId, fileDetails, fieldType) 
     API.post(apiName, path, myInit)
       .then(response => {
         console.log(response)
+
+        if (response.errorMessage) {
+          reject(response)
+          return;
+        }
+
         resolve(response)
       })
       .catch(error => {

@@ -30,6 +30,8 @@ export function * init (action) {
   })
 }
 
+
+
 export function * getAccessibleProjects (action) {
   try {
     // pre-fetch update
@@ -39,9 +41,7 @@ export function * getAccessibleProjects (action) {
         fetching: true,
       }
     })
-
     const result = yield call(Dispatchers.getAccessibleProjects)
-
     // post-fetch update
     yield put({
       type: Actions.PROJECT_SET_STATE,
@@ -50,9 +50,8 @@ export function * getAccessibleProjects (action) {
         accessibleProjects: result.body
       }
     })
-
     if(action.payload.resolve !== null) {
-      action.payload.resolve()
+      action.payload.resolve(result.body)
     }
   }
   catch (error) {
@@ -70,12 +69,10 @@ export function * getAccessibleProjects (action) {
   }
 }
 
+
 export function * createNewProject (action) {
-
   const { projectValues } = action.payload
-
   try {
-
     // pre-fetch update
     yield put({
       type: Actions.PROJECT_CREATE_PROJECT_REQUEST_SENT,
@@ -83,9 +80,7 @@ export function * createNewProject (action) {
         fetching: true,
       }
     })
-
     const result = yield call(Dispatchers.createNewProject, projectValues)
-
     yield put({
       type: Actions.PROJECT_UPDATE_PROJECT_CHOSEN_REQUESTED,
       payload: {
@@ -96,30 +91,26 @@ export function * createNewProject (action) {
     if (action.payload.resolve) {
       action.payload.resolve(result.body)
     }
-
+  }
+  catch (error) {
+    console.error(error)
+    yield put({
+      type: Actions.PROJECT_CREATE_PROJECT_REQUEST_FAILED,
+        payload: {
+          fetching: false,
+          error
+        }
+    })
+    if (action.payload.reject) {
+      action.payload.reject(error)
     }
-    catch (error) {
-      console.error(error)
-      yield put({
-        type: Actions.PROJECT_CREATE_PROJECT_REQUEST_FAILED,
-          payload: {
-            fetching: false,
-            error
-          }
-      })
-      if (action.payload.reject) {
-        action.payload.reject()
-      }
-    }
+  }
 }
 
 
 export function * updateChosenProject (action) {
-
   const { project } = action.payload
-
   try {
-
     // Pre-fetch update to store
     yield put({
       type: Actions.PROJECT_UPDATE_PROJECT_CHOSEN_REQUEST_SENT,
@@ -127,9 +118,7 @@ export function * updateChosenProject (action) {
         fetching: true,
       }
     })
-
     const result = yield call(Dispatchers.fetchProjectDetails, project.projectId)
-
     // Post-fetch update to store
     yield put({
       type: Actions.PROJECT_SET_STATE,
@@ -139,9 +128,8 @@ export function * updateChosenProject (action) {
         error: null
       }
     })
-
     if (action.payload.resolve !== undefined) {
-      action.payload.resolve()
+      action.payload.resolve(result.body)
     }
   }
   catch (error) {
@@ -153,20 +141,16 @@ export function * updateChosenProject (action) {
           error,
         }
     })
-
     if (action.payload.reject !== undefined) {
-      action.payload.reject()
+      action.payload.reject(error)
     }
   }
 }
 
 
 export function * updateProjectDetails (action) {
-
   const { projectID, projectValues } = action.payload
-
   try {
-
     // Pre-fetch update to store
     yield put({
       type: Actions.PROJECT_UPDATE_PROJECT_DETAILS_REQUEST_SENT,
@@ -174,9 +158,7 @@ export function * updateProjectDetails (action) {
         fetching: true,
       }
     })
-
     yield call(Dispatchers.updateProjectDetails, projectID, projectValues)
-
     // Post-fetch update to store
     yield put({
       type: Actions.PROJECT_SET_STATE,
@@ -185,6 +167,9 @@ export function * updateProjectDetails (action) {
         chosenProject: projectValues,
       }
     })
+    if (action.payload.resolve !== undefined) {
+      action.payload.resolve()
+    }
   }
   catch (error) {
     console.error(error)
@@ -195,14 +180,15 @@ export function * updateProjectDetails (action) {
           error,
         }
     })
+    if (action.payload.reject !== undefined) {
+      action.payload.reject(error)
+    }
   }
 }
 
 
 export function * getCurrentMembers (action) {
-
   const { projectID } = action.payload
-
   try {
     // Pre-fetch update to store
     yield put({
@@ -211,11 +197,8 @@ export function * getCurrentMembers (action) {
         fetching: true,
       }
     })
-
     const result = yield call(Dispatchers.getCurrentMembers, projectID)
-    console.log(result)
     const memberList = result.body.members
-
     // Post-fetch update to store
     yield put({
       type: Actions.PROJECT_SET_STATE,
@@ -224,6 +207,9 @@ export function * getCurrentMembers (action) {
         memberList,
       }
     })
+    if (action.payload.resolve !== undefined) {
+      action.payload.resolve(memberList)
+    }
   }
   catch (error) {
     console.error(error)
@@ -234,16 +220,16 @@ export function * getCurrentMembers (action) {
           error,
         }
     })
+    if (action.payload.reject !== undefined) {
+      action.payload.reject(error)
+    }
   }
 }
 
 
 export function * uploadFile (action) {
-
-  const { projectID, pageName, fieldID, fileDetails, fieldType, resolve, reject } = action.payload
-
+  const { projectID, pageName, resolve, reject } = action.payload
   try {
-
     // Pre-fetch update to store
     yield put({
       type: Actions.PROJECT_UPLOAD_FILE_REQUEST_SENT,
@@ -251,11 +237,7 @@ export function * uploadFile (action) {
         fetching: true,
       }
     })
-
-    const result = yield call(Dispatchers.uploadFile, projectID, pageName, fieldID, fileDetails, fieldType)
-
-    console.log(result)
-
+    const result = yield call(Dispatchers.uploadFile, action.payload)
     // Post-fetch update to store
     yield put({
       type: Actions.PROJECT_UPLOAD_FILE_REQUEST_SUCCESSFUL,
@@ -266,7 +248,6 @@ export function * uploadFile (action) {
         reject,
       }
     })
-
     // Post-fetch update to store
     yield put({
       type: Actions.PROJECT_SET_STATE,
@@ -274,12 +255,10 @@ export function * uploadFile (action) {
         fetching: false,
       }
     })
-
     // Callback if provided
     if (action.payload.resolve !== undefined) {
       action.payload.resolve(result)
     }
-
   }
   catch (error) {
     console.error(error)
@@ -290,7 +269,6 @@ export function * uploadFile (action) {
           error,
         }
     })
-
     // Callback if provided
     if (action.payload.reject !== undefined) {
       action.payload.reject(error)
@@ -300,11 +278,7 @@ export function * uploadFile (action) {
 
 
 export function * downloadFile (action) {
-
-  const { projectID, pageName, fieldID, version } = action.payload
-
   try {
-
     // Pre-fetch update to store
     yield put({
       type: Actions.PROJECT_DOWNLOAD_FILE_REQUEST_SENT,
@@ -312,9 +286,7 @@ export function * downloadFile (action) {
         fetching: true,
       }
     })
-
-    const result = yield call(Dispatchers.downloadFile, projectID, pageName, fieldID, version)
-
+    const result = yield call(Dispatchers.downloadFile, action.payload)
     // Post-fetch update to store
     yield put({
       type: Actions.PROJECT_SET_STATE,
@@ -323,8 +295,9 @@ export function * downloadFile (action) {
         downloadURL: result.body
       }
     })
-
-    action.payload.resolve(result.body)
+    if (action.payload.resolve !== undefined) {
+      action.payload.resolve(result.body)
+    }
   }
   catch (error) {
     console.error(error)
@@ -335,8 +308,9 @@ export function * downloadFile (action) {
           error,
         }
     })
-
-    action.payload.reject()
+    if (action.payload.reject !== undefined) {
+      action.payload.reject(error)
+    }
   }
 }
 
@@ -345,7 +319,6 @@ export function * downloadFile (action) {
 
 export function * createField (action) {
   const { projectID, pageName, fieldDetails, resolve, reject } = action.payload
-
   try {
     // Pre-fetch update to store
     yield put({
@@ -354,9 +327,7 @@ export function * createField (action) {
         fetching: true,
       }
     })
-
     yield call(Dispatchers.createField, projectID, pageName, fieldDetails)
-
     // Post-fetch update to store
     yield put({
       type: Actions.PROJECT_UPLOAD_FILE_REQUEST_SUCCESSFUL,
@@ -367,7 +338,6 @@ export function * createField (action) {
         reject,
       }
     })
-
     // Post-fetch update to store
     yield put({
       type: Actions.PROJECT_SET_STATE,
@@ -375,8 +345,9 @@ export function * createField (action) {
         fetching: false,
       }
     })
-
-    action.payload.resolve()
+    if (action.payload.resolve !== undefined) {
+      action.payload.resolve()
+    }
   }
   catch (error) {
     console.error(error)
@@ -387,8 +358,9 @@ export function * createField (action) {
           error,
         }
     })
-
-    action.payload.reject()
+    if (action.payload.reject !== undefined) {
+      action.payload.reject(error)
+    }
   }
 }
 
@@ -403,9 +375,7 @@ export function * updateField (action) {
         fetching: true,
       }
     })
-
     yield call(Dispatchers.updateField, projectID, pageName, fieldID, fieldDetails)
-
     // Post-fetch update to store
     yield put({
       type: Actions.PROJECT_UPLOAD_FILE_REQUEST_SUCCESSFUL,
@@ -416,7 +386,7 @@ export function * updateField (action) {
         reject,
       }
     })
-
+    // TODO: Work out what this is doing; it doesn't look right
     // Post-fetch update to store
     yield put({
       type: action,
@@ -424,6 +394,9 @@ export function * updateField (action) {
         fetching: false,
       }
     })
+    if (action.payload.resolve !== undefined) {
+      action.payload.resolve()
+    }
   }
   catch (error) {
     console.error(error)
@@ -434,18 +407,16 @@ export function * updateField (action) {
           error,
         }
     })
-
-    action.payload.reject()
+    if (action.payload.reject !== undefined) {
+      action.payload.reject(error)
+    }
   }
 }
 
 
 export function * requestFileSignature (action) {
-
   const { projectID, pageName, fieldID, members } = action.payload
-
   try {
-
     // Pre-fetch update to store
     yield put({
       type: Actions.PROJECT_FILE_SIGNATURE_REQUEST_REQUEST_SENT,
@@ -453,9 +424,7 @@ export function * requestFileSignature (action) {
         fetching: true
       }
     })
-
     yield call(Dispatchers.requestSignature, projectID, pageName, fieldID, members)
-
     // Post-fetch update to store
     yield put({
       type: Actions.PROJECT_SET_STATE,
@@ -464,8 +433,9 @@ export function * requestFileSignature (action) {
         error: null,
       }
     })
-
-    action.payload.resolve()
+    if (action.payload.resolve !== undefined) {
+      action.payload.resolve()
+    }
   }
   catch (error) {
     console.error(error)
@@ -476,18 +446,16 @@ export function * requestFileSignature (action) {
           error
         }
     })
-
-    action.payload.reject()
+    if (action.payload.reject !== undefined) {
+      action.payload.reject(error)
+    }
   }
 }
 
 
 export function * deleteProject (action) {
-
   const { projectID } = action.payload
-
   try {
-
     // Pre-fetch update to store
     yield put({
       type: Actions.PROJECT_DELETE_PROJECT_REQUEST_SENT,
@@ -495,9 +463,7 @@ export function * deleteProject (action) {
         fetching: true,
       }
     })
-
     yield call(Dispatchers.deleteProject, projectID,)
-
     // Post-fetch update to store
     yield put({
       type: action,
@@ -505,7 +471,6 @@ export function * deleteProject (action) {
         fetching: false,
       }
     })
-
     // Callback if provided
     if (action.payload.resolve !== undefined) {
       action.payload.resolve()
@@ -520,10 +485,9 @@ export function * deleteProject (action) {
           error,
         }
     })
-
     // Callback if provided
     if (action.payload.reject !== undefined) {
-      action.payload.reject()
+      action.payload.reject(error)
     }
   }
 }

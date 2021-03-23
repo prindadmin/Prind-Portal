@@ -7,7 +7,7 @@ import * as Actions from '../Actions'
 import * as States from '../States'
 import * as AuthDispatchers from '../Dispatchers/Auth'
 
-// TODO: Test all the rejects from the Sagas
+// TODO: Test all the rejects from the Sagas (delete the asyncs, dummy)
 
 const defaultState = {
   info: {},

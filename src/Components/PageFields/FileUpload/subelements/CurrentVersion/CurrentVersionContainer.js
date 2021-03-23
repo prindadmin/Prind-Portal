@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 
 import * as foundationsReducer from '../../../../../Reducers/foundationsReducer'
 
-import Element from './CurrentVersion'
+import CurrentVersion from './CurrentVersion'
 
 const mapStatetoProps = state => {
   return {
@@ -20,4 +20,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default withRouter(connect(mapStatetoProps, mapDispatchToProps)(Element))
+export default withRouter(connect(mapStatetoProps, mapDispatchToProps)(CurrentVersion))

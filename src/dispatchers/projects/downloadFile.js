@@ -5,10 +5,10 @@ import API from '@aws-amplify/api';
 // Fixed values for the API request
 const apiName = process.env.REACT_APP_API_NAME
 
-async function DownloadFile(projectId, pageName, fieldId, version) {
+async function DownloadFile(payload) {
 
   // Build path for request
-  const path = `/project/${projectId}/${pageName}/${fieldId}/${version}/get-file-url`
+  const path = `/project/${payload.projectID}/${payload.pageName}/${payload.fieldID}/${payload.version}/get-file-url`
 
   // Get the current session and the identity jwtToken
   const identityToken = await Auth.currentSession()

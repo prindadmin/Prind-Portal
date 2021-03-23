@@ -232,6 +232,7 @@ export class LoggedInContent extends Component {
 
 
   render () {
+    // TODO: Urgent: Having an error should not completely stop the content from showing
     const { error } = this.props.projects
     const { width } = this.state
     const content = this.getContent()

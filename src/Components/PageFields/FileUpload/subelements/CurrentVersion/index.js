@@ -1,3 +1,3 @@
-import Element from './ElementContainer'
+import CurrentVersionContainer from './CurrentVersionContainer'
 
-export default Element
+export default CurrentVersionContainer
