@@ -27,6 +27,15 @@ const defaultState = {
   error: null,
 }
 
+const dispatcherError = new Error({
+  "statusCode": 400,
+  "Error": {
+      "ErrorMessage": "Test error",
+      "ErrorCode": "TEST_ERROR",
+      "ErrorNumber": "0001"
+  }
+})
+
 const mockResolve = jest.fn()
 const mockReject = jest.fn()
 
@@ -116,16 +125,7 @@ it('getAccessibleProjects - success - test callback resolve', (result) => {
   expect(mockResolve).toHaveBeenCalledWith(getAccessibleProjectsDispatcherReturn.body)
 });
 
-const getAccessibleProjectsDispatcherError = {
-  "statusCode": 400,
-  "Error": {
-      "ErrorMessage": "Can't get projects",
-      "ErrorCode": "INVALID_PROJECT_FETCH",
-      "ErrorNumber": "0001"
-  }
-}
 
-/*
 // Run unsuccessful fetch
 var it = sagaHelper(ProjectSagas.getAccessibleProjects(getAccessibleProjectsAction));
 it('getAccessibleProjects - error - test change to fetching status', (result) => {
@@ -138,21 +138,20 @@ it('getAccessibleProjects - error - test change to fetching status', (result) =>
 });
 it('getAccessibleProjects - error - test request to dispatcher', (result) => {
   expect(result).toEqual(call(ProjectDispatchers.getAccessibleProjects));
-  return new Error(getAccessibleProjectsDispatcherError);
+  return dispatcherError
 });
 it('getAccessibleProjects - error - test error put', (result) => {
   expect(result).toEqual(put({
     type: Actions.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUEST_FAILED,
     payload: {
       ...defaultState,
-      error: getAccessibleProjectsDispatcherError
+      error: dispatcherError
     }
   }));
 });
 it('getAccessibleProjects - error - test callback resolve', (result) => {
-  expect(mockReject).toHaveBeenCalled(getAccessibleProjectsDispatcherError)
+  expect(mockReject).toHaveBeenCalledWith(dispatcherError)
 });
-*/
 
 
 
@@ -191,8 +190,9 @@ const createNewProjectDispatcherReturn = {
     projectAddressCountry: "England",
   }
 }
+// Run successful fetch
 var it = sagaHelper(ProjectSagas.createNewProject(createNewProjectAction));
-it('createNewProject - test change to fetching status', (result) => {
+it('createNewProject - success - test change to fetching status', (result) => {
   expect(result).toEqual(put({
     type: Actions.PROJECT_CREATE_PROJECT_REQUEST_SENT,
     payload: {
@@ -200,11 +200,11 @@ it('createNewProject - test change to fetching status', (result) => {
     }
   }));
 });
-it('createNewProject - test request to dispatcher', (result) => {
+it('createNewProject - success - test request to dispatcher', (result) => {
   expect(result).toEqual(call(ProjectDispatchers.createNewProject, createNewProjectAction.payload.projectValues));
   return createNewProjectDispatcherReturn
 });
-it('createNewProject - test end of send put', (result) => {
+it('createNewProject - success - test end of send put', (result) => {
   expect(result).toEqual(put({
     type: Actions.PROJECT_UPDATE_PROJECT_CHOSEN_REQUESTED,
     payload: {
@@ -213,9 +213,39 @@ it('createNewProject - test end of send put', (result) => {
     }
   }));
 });
-it('createNewProject - test callback resolve', (result) => {
+it('createNewProject - success - test callback resolve', (result) => {
   expect(mockResolve).toHaveBeenCalledWith(createNewProjectDispatcherReturn.body)
 });
+
+
+// Run unsuccessful fetch
+var it = sagaHelper(ProjectSagas.createNewProject(createNewProjectAction));
+it('createNewProject - error - test change to fetching status', (result) => {
+  expect(result).toEqual(put({
+    type: Actions.PROJECT_CREATE_PROJECT_REQUEST_SENT,
+    payload: {
+      fetching: true
+    }
+  }));
+});
+it('createNewProject - error - test request to dispatcher', (result) => {
+  expect(result).toEqual(call(ProjectDispatchers.createNewProject, createNewProjectAction.payload.projectValues));
+  return dispatcherError
+});
+it('createNewProject - error - test error put', (result) => {
+  expect(result).toEqual(put({
+    type: Actions.PROJECT_CREATE_PROJECT_REQUEST_FAILED,
+    payload: {
+      fetching: false,
+      error: dispatcherError
+    }
+  }));
+});
+it('createNewProject - error - test callback resolve', (result) => {
+  expect(mockReject).toHaveBeenCalledWith(dispatcherError)
+});
+
+
 
 
 
@@ -245,7 +275,7 @@ const updateChosenProjectDispatcherReturn = {
   }
 }
 var it = sagaHelper(ProjectSagas.updateChosenProject(updateChosenProjectAction));
-it('updateChosenProject - test change to fetching status', (result) => {
+it('updateChosenProject - success - test change to fetching status', (result) => {
   expect(result).toEqual(put({
     type: Actions.PROJECT_UPDATE_PROJECT_CHOSEN_REQUEST_SENT,
     payload: {
@@ -253,11 +283,11 @@ it('updateChosenProject - test change to fetching status', (result) => {
     }
   }));
 });
-it('updateChosenProject - test request to dispatcher', (result) => {
+it('updateChosenProject - success - test request to dispatcher', (result) => {
   expect(result).toEqual(call(ProjectDispatchers.fetchProjectDetails, updateChosenProjectAction.payload.project.projectId));
   return updateChosenProjectDispatcherReturn
 });
-it('updateChosenProject - test end of send put', (result) => {
+it('updateChosenProject - success - test end of send put', (result) => {
   expect(result).toEqual(put({
     type: Actions.PROJECT_SET_STATE,
     payload: {
@@ -267,11 +297,43 @@ it('updateChosenProject - test end of send put', (result) => {
     }
   }));
 });
-it('updateChosenProject - test callback resolve', (result) => {
+it('updateChosenProject - success - test callback resolve', (result) => {
   expect(mockResolve).toHaveBeenCalledWith(updateChosenProjectDispatcherReturn.body)
 });
 
 
+// Run unsuccessful fetch
+var it = sagaHelper(ProjectSagas.updateChosenProject(updateChosenProjectAction));
+it('updateChosenProject - error - test change to fetching status', (result) => {
+  expect(result).toEqual(put({
+    type: Actions.PROJECT_UPDATE_PROJECT_CHOSEN_REQUEST_SENT,
+    payload: {
+      fetching: true
+    }
+  }));
+});
+it('updateChosenProject - error - test request to dispatcher', (result) => {
+  expect(result).toEqual(call(ProjectDispatchers.fetchProjectDetails, updateChosenProjectAction.payload.project.projectId));
+  return dispatcherError
+});
+it('updateChosenProject - error - test end of send put', (result) => {
+  expect(result).toEqual(put({
+    type: Actions.PROJECT_UPDATE_PROJECT_CHOSEN_REQUEST_FAILED,
+    payload: {
+      fetching: false,
+      error: dispatcherError
+    }
+  }));
+});
+it('updateChosenProject - error - test callback resolve', (result) => {
+  expect(mockReject).toHaveBeenCalledWith(dispatcherError)
+});
+
+/***
+
+  Continue adding error tests below here.
+
+***/
 
 
 const updateProjectDetailsAction = {
@@ -681,6 +743,12 @@ it('deleteProject - test end of send put', (result) => {
 it('deleteProject - test callback resolve', (result) => {
   expect(mockResolve).toHaveBeenCalled()
 });
+
+/***
+
+  Add calls without resolve and reject below here
+
+***/
 
 
 

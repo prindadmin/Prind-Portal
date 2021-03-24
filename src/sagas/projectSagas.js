@@ -54,17 +54,17 @@ export function * getAccessibleProjects (action) {
       action.payload.resolve(result.body)
     }
   }
-  catch (e) {
-    //console.log(JSON.stringify(e))
+  catch (error) {
+    //console.log(error)
     yield put({
       type: Actions.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUEST_FAILED,
         payload: {
           ...defaultState,
-          error: e
+          error
         }
     })
     if(action.payload.reject !== null) {
-      action.payload.reject(e)
+      action.payload.reject(error)
     }
   }
 }
@@ -93,7 +93,7 @@ export function * createNewProject (action) {
     }
   }
   catch (error) {
-    console.error(error)
+    //console.error(error)
     yield put({
       type: Actions.PROJECT_CREATE_PROJECT_REQUEST_FAILED,
         payload: {
@@ -133,7 +133,7 @@ export function * updateChosenProject (action) {
     }
   }
   catch (error) {
-    console.error(error)
+    //console.error(error)
     yield put({
       type: Actions.PROJECT_UPDATE_PROJECT_CHOSEN_REQUEST_FAILED,
         payload: {

@@ -49,7 +49,7 @@ export function * signUp (action) {
       action.payload.resolve()
     }
   } catch (e) {
-    console.log("caught error")
+    //console.log("caught error")
     yield put({
       type: Actions.AUTH_SET_STATE,
       payload: {

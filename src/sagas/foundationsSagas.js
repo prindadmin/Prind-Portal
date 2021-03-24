@@ -18,7 +18,7 @@ export function * init (action) {
   })
 }
 
-
+// TODO: Add resolve and reject function handling to this saga and reducer
 export function * selfSignFile (action) {
   const { projectID, pageName, fieldID } = action.payload
   try {
@@ -40,7 +40,7 @@ export function * selfSignFile (action) {
     })
   }
   catch (error) {
-    console.error(error)
+    //console.error(error)
     yield put({
       type: Actions.FOUNDATIONS_SELF_SIGN_FILE_REQUEST_FAILED,
         payload: {
@@ -81,7 +81,7 @@ export function * rejectSignatureRequest (action) {
     }
   }
   catch (error) {
-    console.error(error)
+    //console.error(error)
     yield put({
       type: Actions.FOUNDATIONS_REJECT_SIGNATURE_REQUEST_REQUEST_FAILED,
         payload: {
@@ -90,7 +90,7 @@ export function * rejectSignatureRequest (action) {
         }
     })
     if (action.payload.reject !== undefined) {
-      action.payload.reject()
+      action.payload.reject(error)
     }
   }
 }
