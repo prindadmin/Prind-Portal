@@ -13,9 +13,10 @@ let defaultState = {
   signatureRequests: [],
   projectS3Token: {},
   userS3Token: {},
+  error: undefined
 }
 
-function * init (action) {
+export function * init (action) {
   yield put({
     type: Actions.USER_SET_STATE,
     payload: defaultState
@@ -24,61 +25,68 @@ function * init (action) {
 
 
 
-function * getS3ProjectFileUploadToken (action) {
-
-  const { project_id, pageName, resolve, reject } = action.payload
-
+export function * getS3ProjectFileUploadToken (action) {
+  const { project_id, pageName } = action.payload
   try {
-    const result = yield call(Dispatchers.s3UploadProjectFileTokenDispatcher, project_id, pageName)
-    console.log(result)
+    const result = yield call(Dispatchers.getS3ProjectFileUploadToken, project_id, pageName)
     yield put({
       type: Actions.USER_SET_STATE,
       payload: {
         projectS3Token: result.body,
       }
     })
-
-    if (resolve !== undefined) {
-      resolve()
+    if (action.payload.resolve !== undefined) {
+      action.payload.resolve(result.body)
     }
-
-    }
-    catch (e) {
-      console.error(e)
-
-      if (reject !== undefined) {
-        reject(e)
+  }
+  catch (error) {
+    //console.error(error)
+    yield put({
+      type: Actions.USER_SET_STATE,
+      payload: {
+        error,
       }
+    })
+    if (action.payload.reject !== undefined) {
+      action.payload.reject(error)
+    }
   }
 }
 
 
-function * getS3UserFileUploadToken (action) {
-
+export function * getS3UserFileUploadToken (action) {
   const { fileType } = action.payload
-
   try {
-    const result = yield call(Dispatchers.s3UploadUserFileTokenDispatcher, fileType)
+    const result = yield call(Dispatchers.getS3UserFileUploadToken, fileType)
     yield put({
       type: Actions.USER_SET_STATE,
       payload: {
         userS3Token: result.body
       }
     })
+    if (action.payload.resolve !== undefined) {
+      action.payload.resolve(result.body)
     }
-    catch (e) {
-      console.error(e)
+  }
+  catch (error) {
+    //console.error(error)
+    yield put({
+      type: Actions.USER_SET_STATE,
+      payload: {
+        error,
+      }
+    })
+    if (action.payload.reject !== undefined) {
+      action.payload.reject(error)
+    }
   }
 }
 
 
 
-function * getUserDetails (action) {
-
+export function * getUserDetails (action) {
   const { identityToken } = action.payload
-
   try {
-
     // Pre-fetch update to store
     yield put({
       type: Actions.USER_GET_DETAILS_REQUEST_SENT,
@@ -86,9 +94,7 @@ function * getUserDetails (action) {
         fetching: true,
       }
     })
-
-    const result = yield call(Dispatchers.getUserDetailsDispatcher, identityToken)
-
+    const result = yield call(Dispatchers.getUserDetails, identityToken)
     // Post-fetch update to store
     yield put({
       type: Actions.USER_SET_STATE,
@@ -97,35 +103,30 @@ function * getUserDetails (action) {
         details: result.body,
       }
     })
-
     if (action.payload.resolve !== undefined) {
-      action.payload.resolve()
+      action.payload.resolve(result.body)
     }
   }
   catch (error) {
-    console.error(error)
+    //console.error(error)
     yield put({
       type: Actions.USER_GET_DETAILS_REQUEST_FAILED,
-        payload: {
-          fetching: false,
-          error,
-        }
+      payload: {
+        fetching: false,
+        error,
+      }
     })
-
     if (action.payload.reject !== undefined) {
-      action.payload.reject()
+      action.payload.reject(error)
     }
   }
 }
 
 
 
-function * getProjectInvitations (action) {
-
+export function * getProjectInvitations (action) {
   const { identityToken } = action.payload
-
   try {
-
     // Pre-fetch update to store
     yield put({
       type: Actions.USER_GET_PROJECT_INVITATIONS_REQUEST_SENT,
@@ -133,9 +134,7 @@ function * getProjectInvitations (action) {
         fetching: true,
       }
     })
-
-    const result = yield call(Dispatchers.getProjectInvitationsDispatcher, identityToken)
-
+    const result = yield call(Dispatchers.getProjectInvitations, identityToken)
     // Post-fetch update to store
     yield put({
       type: Actions.USER_SET_STATE,
@@ -144,35 +143,30 @@ function * getProjectInvitations (action) {
         projectInvitations: result.body,
       }
     })
-
     if (action.payload.resolve !== undefined) {
-      action.payload.resolve()
+      action.payload.resolve(result.body)
     }
   }
   catch (error) {
-    console.error(error)
+    //console.error(error)
     yield put({
       type: Actions.USER_GET_PROJECT_INVITATIONS_REQUEST_FAILED,
-        payload: {
-          fetching: false,
-          error,
-        }
+      payload: {
+        fetching: false,
+        error,
+      }
     })
-
     if (action.payload.reject !== undefined) {
-      action.payload.reject()
+      action.payload.reject(error)
     }
   }
 }
 
 
 
-function * respondToProjectInvitation (action) {
-
+export function * respondToProjectInvitation (action) {
   const { projectID, response } = action.payload
-
   try {
-
     // Pre-fetch update to store
     yield put({
       type: Actions.USER_PROJECT_INVITATION_SEND_RESPONSE_REQUEST_SENT,
@@ -180,9 +174,7 @@ function * respondToProjectInvitation (action) {
         fetching: true,
       }
     })
-
-    yield call(Dispatchers.respondToProjectInvitationDispatcher, projectID, response)
-
+    yield call(Dispatchers.respondToProjectInvitation, projectID, response)
     // Post-fetch update to store
     yield put({
       type: Actions.USER_SET_STATE,
@@ -190,34 +182,36 @@ function * respondToProjectInvitation (action) {
         fetching: false,
       }
     })
-
     // Trigger a fetch of the requests list again
+    // TODO: Fix this; without passing the identityToken as an argument, it won't work
     yield put({
       type: Actions.USER_GET_PROJECT_INVITATIONS_REQUESTED,
       payload: {}
     })
-
+    if (action.payload.resolve !== undefined) {
+      action.payload.resolve()
+    }
   }
   catch (error) {
-    console.error(error)
+    //console.error(error)
     yield put({
       type: Actions.USER_PROJECT_INVITATION_SEND_RESPONSE_REQUEST_FAILED,
-        payload: {
-          fetching: false,
-          error,
-        }
+      payload: {
+        fetching: false,
+        error,
+      }
     })
+    if (action.payload.reject !== undefined) {
+      action.payload.reject(error)
+    }
   }
 }
 
 
 
-function * getSignatureRequests (action) {
-
+export function * getSignatureRequests (action) {
   const { identityToken } = action.payload
-
   try {
-
     // Pre-fetch update to store
     yield put({
       type: Actions.USER_GET_PROJECT_SIGNATURES_REQUEST_SENT,
@@ -225,9 +219,7 @@ function * getSignatureRequests (action) {
         fetching: true,
       }
     })
-
-    const result = yield call(Dispatchers.getSignatureRequestsDispatcher, identityToken)
-
+    const result = yield call(Dispatchers.getSignatureRequests, identityToken)
     // Post-fetch update to store
     yield put({
       type: Actions.USER_SET_STATE,
@@ -236,14 +228,12 @@ function * getSignatureRequests (action) {
         signatureRequests: result.body,
       }
     })
-
     if (action.payload.resolve !== undefined) {
-      action.payload.resolve()
+      action.payload.resolve(result.body)
     }
-
   }
   catch (error) {
-    console.error(error)
+    //console.error(error)
     yield put({
       type: Actions.USER_GET_PROJECT_SIGNATURES_REQUEST_FAILED,
         payload: {
@@ -251,21 +241,17 @@ function * getSignatureRequests (action) {
           error,
         }
     })
-
     if (action.payload.reject !== undefined) {
-      action.payload.reject()
+      action.payload.reject(error)
     }
   }
 }
 
 
 
-function * respondToSignatureRequests (action) {
-
-  const { projectID, pageName, fieldID, response } = action.payload
-
+export function * respondToSignatureRequest (action) {
+  //const { projectID, pageName, fieldID, response } = action.payload
   try {
-
     // Pre-fetch update to store
     yield put({
       type: Actions.USER_PROJECT_SIGNATURE_SEND_RESPONSE_REQUEST_SENT,
@@ -273,9 +259,7 @@ function * respondToSignatureRequests (action) {
         fetching: true,
       }
     })
-
-    yield call(Dispatchers.respondToSignatureRequestDispatcher, projectID, pageName, fieldID, response)
-
+    yield call(Dispatchers.respondToSignatureRequest, action.payload)
     // Post-fetch update to store
     yield put({
       type: Actions.USER_SET_STATE,
@@ -283,16 +267,17 @@ function * respondToSignatureRequests (action) {
         fetching: false,
       }
     })
-
     // Trigger a fetch of the requests list again
     yield put({
       type: Actions.USER_GET_PROJECT_SIGNATURES_REQUESTED,
       payload: {}
     })
-
+    if (action.payload.resolve !== undefined) {
+      action.payload.resolve()
+    }
   }
   catch (error) {
-    console.error(error)
+    //console.error(error)
     yield put({
       type: Actions.USER_PROJECT_SIGNATURE_SEND_RESPONSE_REQUEST_FAILED,
         payload: {
@@ -300,16 +285,16 @@ function * respondToSignatureRequests (action) {
           error,
         }
     })
+    if (action.payload.reject !== undefined) {
+      action.payload.reject(error)
+    }
   }
 }
 
 
-function * getHistory (action) {
-
+export function * getHistory (action) {
   const { identityToken } = action.payload
-
   try {
-
     // Pre-fetch update to store
     yield put({
       type: Actions.USER_GET_HISTORY_REQUEST_SENT,
@@ -317,9 +302,7 @@ function * getHistory (action) {
         fetching: true,
       }
     })
-
-    const result = yield call(Dispatchers.getHistoryDispatcher, identityToken)
-
+    const result = yield call(Dispatchers.getHistory, identityToken)
     // Post-fetch update to store
     yield put({
       type: Actions.USER_SET_STATE,
@@ -328,11 +311,12 @@ function * getHistory (action) {
         history: result.body,
       }
     })
-
-    action.payload.resolve()
+    if (action.payload.resolve !== undefined) {
+      action.payload.resolve(result.body)
+    }
   }
   catch (error) {
-    console.error(error)
+    //console.error(error)
     yield put({
       type: Actions.USER_GET_HISTORY_REQUEST_FAILED,
         payload: {
@@ -340,8 +324,9 @@ function * getHistory (action) {
           error,
         }
     })
-
-    action.payload.reject()
+    if (action.payload.reject !== undefined) {
+      action.payload.reject(error)
+    }
   }
 }
 
@@ -355,6 +340,6 @@ export default function * Sagas () {
   yield takeLatest(Actions.USER_GET_PROJECT_INVITATIONS_REQUESTED, getProjectInvitations)
   yield takeLatest(Actions.USER_PROJECT_INVITATION_SEND_RESPONSE_REQUESTED, respondToProjectInvitation)
   yield takeLatest(Actions.USER_GET_PROJECT_SIGNATURES_REQUESTED, getSignatureRequests)
-  yield takeLatest(Actions.USER_PROJECT_SIGNATURE_SEND_RESPONSE_REQUESTED, respondToSignatureRequests)
+  yield takeLatest(Actions.USER_PROJECT_SIGNATURE_SEND_RESPONSE_REQUESTED, respondToSignatureRequest)
   yield takeLatest(Actions.USER_GET_HISTORY_REQUESTED, getHistory)
 }

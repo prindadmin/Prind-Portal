@@ -4,10 +4,10 @@ import API from '@aws-amplify/api';
 // Fixed values for the API request
 const apiName = process.env.REACT_APP_API_NAME
 
-async function RespondToSignatureRequest(projectId, pageName, fieldId, response) {
+async function RespondToSignatureRequest(payload) {
 
   // Build path for request
-  const path = `/project/${projectId}/${pageName}/${fieldId}/sign`
+  const path = `/project/${payload.projectID}/${payload.pageName}/${payload.fieldID}/sign`
 
   // Get the current session and the identity jwtToken
   const identityToken = await Auth.currentSession()
@@ -23,7 +23,7 @@ async function RespondToSignatureRequest(projectId, pageName, fieldId, response)
           Authorization: identityToken
         },
         body: {
-        	accepted: response
+        	accepted: payload.response
         },
         response: false,
     }
