@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Loading Spinner - Should render at default size 1`] = `
+<Fragment>
+  <div
+    className="lds-ring"
+    style={
+      Object {
+        "borderWidth": 12.5,
+        "height": 100,
+        "margin": 12.5,
+        "width": 100,
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "borderWidth": 12.5,
+          "height": 100,
+          "margin": 12.5,
+          "width": 100,
+        }
+      }
+    />
+    <div
+      style={
+        Object {
+          "borderWidth": 12.5,
+          "height": 100,
+          "margin": 12.5,
+          "width": 100,
+        }
+      }
+    />
+    <div
+      style={
+        Object {
+          "borderWidth": 12.5,
+          "height": 100,
+          "margin": 12.5,
+          "width": 100,
+        }
+      }
+    />
+    <div
+      style={
+        Object {
+          "borderWidth": 12.5,
+          "height": 100,
+          "margin": 12.5,
+          "width": 100,
+        }
+      }
+    />
+  </div>
+</Fragment>
+`;
+
+exports[`Loading Spinner - Should render at smaller size 1`] = `
+<Fragment>
+  <div
+    className="lds-ring"
+    style={
+      Object {
+        "borderWidth": 3.125,
+        "height": 25,
+        "margin": 3.125,
+        "width": 25,
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "borderWidth": 3.125,
+          "height": 25,
+          "margin": 3.125,
+          "width": 25,
+        }
+      }
+    />
+    <div
+      style={
+        Object {
+          "borderWidth": 3.125,
+          "height": 25,
+          "margin": 3.125,
+          "width": 25,
+        }
+      }
+    />
+    <div
+      style={
+        Object {
+          "borderWidth": 3.125,
+          "height": 25,
+          "margin": 3.125,
+          "width": 25,
+        }
+      }
+    />
+    <div
+      style={
+        Object {
+          "borderWidth": 3.125,
+          "height": 25,
+          "margin": 3.125,
+          "width": 25,
+        }
+      }
+    />
+  </div>
+</Fragment>
+`;

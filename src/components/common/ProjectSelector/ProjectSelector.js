@@ -11,7 +11,11 @@ import * as Strings from '../../../Data/Strings'
 
 class ProjectSelector extends React.Component {
   static propTypes = {
-    projects: PropTypes.object.isRequired,
+    projects: PropTypes.shape({
+      chosenProject: PropTypes.shape({
+        projectName: PropTypes.string,
+      }).isRequired,
+    }).isRequired,
     openProjectSelector: PropTypes.bool.isRequired,
   }
 

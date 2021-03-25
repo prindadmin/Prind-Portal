@@ -1,17 +1,18 @@
-import React from 'react';
+
 import { shallow } from 'enzyme';
 
-import Component from './ProjectLoading'
+import Component from './LoadingSpinnerCSS'
 
-it('Should render', () => {
+it('Loading Spinner - Should render at default size', () => {
   const props = {}
   const component = shallow(<Component {...props} />);
   expect(component).toMatchSnapshot();
 });
 
-it('Should render with custom text', () => {
+
+it('Loading Spinner - Should render at smaller size', () => {
   const props = {
-    text: "custom text"
+    size: 25
   }
   const component = shallow(<Component {...props} />);
   expect(component).toMatchSnapshot();

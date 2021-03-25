@@ -6,9 +6,7 @@ import * as projectsReducer from '../../../Reducers/projectsReducer'
 import CreateCustomFieldPopover from './CreateCustomFieldPopover'
 
 const mapStatetoProps = state => {
-  return {
-    projects: state.projects,
-  }
+  return {}
 }
 
 const mapDispatchToProps = dispatch => {

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { Editor } from '@tinymce/tinymce-react';
-import LoadingSpinner from '../../../LoadingSpinner'
+import LoadingSpinner from '../../../LoadingSpinnerCSS'
 import * as ComponentState from '../../ComponentStates'
 
 import * as Strings from '../../../../../Data/Strings'

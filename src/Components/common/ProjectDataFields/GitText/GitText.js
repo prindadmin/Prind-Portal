@@ -9,7 +9,7 @@ import * as ComponentState from '../ComponentStates'
 
 import Writer from './elements/Writer'
 import Comparer from './elements/Comparer'
-import LoadingSpinner from '../../LoadingSpinner'
+import LoadingSpinner from '../../LoadingSpinnerCSS'
 
 
 export class GitText extends Component {
