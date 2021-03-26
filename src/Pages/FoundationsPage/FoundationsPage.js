@@ -8,17 +8,15 @@ export class FoundationsPage extends Component {
   componentDidMount() {
     const { location } = this.props
     // Register pageview with GA
-    ReactGA.pageview(location.pathname + location.search);
+    ReactGA.pageview(location.pathname);
   }
 
   androidClicked = () => {
-    console.log("androidClicked")
     window.open("https://play.google.com/store/apps/details?id=com.buildingim.foundations", "_blank")
   }
 
   iosClicked = () => {
-    console.log("iosClicked")
-    window.open("https://apps.apple.com/us/app/foundations/id1499177355", "_blank")
+    window.open("https://apps.apple.com/us/app/foundations/id1499177355#?platform=iphone", "_blank")
   }
 
   getPageContent = () => {

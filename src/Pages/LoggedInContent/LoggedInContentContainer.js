@@ -8,7 +8,6 @@ import PageComponent from './LoggedInContent'
 
 const mapStatetoProps = state => {
   return {
-    user: state.user,
     projects: state.projects,
   }
 }
@@ -20,9 +19,6 @@ const mapDispatchToProps = dispatch => {
     },
     saveProjectID: (projectID) => {
       dispatch(projectsReducer.saveProjectID(projectID))
-    },
-    requestS3ProjectFileUploadToken: (project_id, pageName) => {
-      dispatch(userReducer.requestS3ProjectFileUploadToken(project_id, pageName))
     },
     getProjectMembers: (projectID) => {
       dispatch(projectsReducer.getCurrentMembers(projectID))

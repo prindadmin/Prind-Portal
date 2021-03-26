@@ -25,6 +25,8 @@ export class StagePage extends Component {
   static propTypes = {
     pageName: PropTypes.string.isRequired,
     projectId: PropTypes.string,
+    getContent: PropTypes.func.isRequired,
+    requestS3ProjectFileUploadToken: PropTypes.func.isRequired,
   }
 
   constructor() {
@@ -36,25 +38,28 @@ export class StagePage extends Component {
   }
 
   componentDidMount() {
-    const { location, projectId } = this.props
+    const { location, projectId, pageName } = this.props
 
     // Register pageview with GA
     ReactGA.pageview(location.pathname);
 
     if (projectId !== "") {
       this.fetchPageContent()
+      this.props.requestS3ProjectFileUploadToken(projectId, pageName)
     }
   }
 
   componentDidUpdate(prevProps) {
-    const { projectId } = this.props
+    const { projectId, pageName } = this.props
 
     if (projectId !== prevProps.projectId) {
       this.fetchPageContent()
+      this.props.requestS3ProjectFileUploadToken(projectId, pageName)
     }
 
-    if (this.props.pageName !== prevProps.pageName) {
+    if (pageName !== prevProps.pageName) {
       this.fetchPageContent()
+      this.props.requestS3ProjectFileUploadToken(projectId, pageName)
     }
   }
 

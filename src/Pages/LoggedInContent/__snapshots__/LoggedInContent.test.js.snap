@@ -1,0 +1,872 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoggedInContent Page - Should initial load with direct link to profile page 1`] = `
+<div
+  className="full-width row"
+  id="logged-in-content-container"
+>
+  <lazy
+    companyName="Prin-D"
+    openProjectSelector={false}
+  />
+  <lazy>
+    <lazy
+      getProjectDetails={[MockFunction]}
+      getProjectMembers={[MockFunction]}
+      location={
+        Object {
+          "pathname": "/profile",
+          "state": Object {},
+        }
+      }
+      projects={
+        Object {
+          "chosenProject": Object {},
+        }
+      }
+      saveProjectID={[MockFunction]}
+    />
+    <lazy>
+      <Suspense
+        fallback={
+          <ProjectLoading
+            text="Loading page data"
+          />
+        }
+      >
+        <lazy />
+      </Suspense>
+    </lazy>
+  </lazy>
+  <lazy />
+</div>
+`;
+
+exports[`LoggedInContent Page - Should initial load with direct link to project 1`] = `
+<div
+  className="full-width row"
+  id="logged-in-content-container"
+>
+  <lazy
+    companyName="Prin-D"
+    openProjectSelector={false}
+  />
+  <lazy>
+    <lazy
+      getProjectDetails={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              Object {
+                "projectId": "123",
+              },
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        }
+      }
+      getProjectMembers={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              "123",
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        }
+      }
+      location={
+        Object {
+          "pathname": "/inception/123",
+          "state": Object {},
+        }
+      }
+      projects={
+        Object {
+          "chosenProject": Object {},
+        }
+      }
+      saveProjectID={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              "123",
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        }
+      }
+    />
+    <lazy>
+      <Suspense
+        fallback={
+          <ProjectLoading
+            text="Loading page data"
+          />
+        }
+      >
+        <lazy
+          pageName="inception"
+          projectId="123"
+        />
+      </Suspense>
+    </lazy>
+  </lazy>
+  <lazy />
+</div>
+`;
+
+exports[`LoggedInContent Page - Should initial load with direct link to project and ending slash 1`] = `
+<div
+  className="full-width row"
+  id="logged-in-content-container"
+>
+  <lazy
+    companyName="Prin-D"
+    openProjectSelector={false}
+  />
+  <lazy>
+    <lazy
+      getProjectDetails={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              Object {
+                "projectId": "123",
+              },
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        }
+      }
+      getProjectMembers={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              "123",
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        }
+      }
+      location={
+        Object {
+          "pathname": "/inception/123/",
+          "state": Object {},
+        }
+      }
+      projects={
+        Object {
+          "chosenProject": Object {},
+        }
+      }
+      saveProjectID={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              "123",
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        }
+      }
+    />
+    <lazy>
+      <Suspense
+        fallback={
+          <ProjectLoading
+            text="Loading page data"
+          />
+        }
+      >
+        <lazy
+          pageName="inception"
+          projectId="123"
+        />
+      </Suspense>
+    </lazy>
+  </lazy>
+  <lazy />
+</div>
+`;
+
+exports[`LoggedInContent Page - Should initial load with direct link to project then update page 1`] = `
+<div
+  className="full-width row"
+  id="logged-in-content-container"
+>
+  <lazy
+    companyName="Prin-D"
+    openProjectSelector={false}
+  />
+  <lazy>
+    <lazy
+      getProjectDetails={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              Object {
+                "projectId": "123",
+              },
+            ],
+            Array [
+              Object {
+                "projectId": "123",
+              },
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        }
+      }
+      getProjectMembers={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              "123",
+            ],
+            Array [
+              "123",
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        }
+      }
+      location={
+        Object {
+          "pathname": "/inception/123",
+        }
+      }
+      projects={
+        Object {
+          "chosenProject": Object {
+            "projectId": "123",
+          },
+        }
+      }
+      saveProjectID={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              "123",
+            ],
+            Array [
+              "123",
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        }
+      }
+    />
+    <lazy>
+      <Suspense
+        fallback={
+          <ProjectLoading
+            text="Loading page data"
+          />
+        }
+      >
+        <lazy
+          pageName="inception"
+          projectId="123"
+        />
+      </Suspense>
+    </lazy>
+  </lazy>
+  <lazy />
+</div>
+`;
+
+exports[`LoggedInContent Page - Should initial load with direct link to project then update project 1`] = `
+<div
+  className="full-width row"
+  id="logged-in-content-container"
+>
+  <lazy
+    companyName="Prin-D"
+    openProjectSelector={false}
+  />
+  <lazy>
+    <lazy
+      getProjectDetails={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              Object {
+                "projectId": "123",
+              },
+            ],
+            Array [
+              Object {
+                "projectId": "456",
+              },
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        }
+      }
+      getProjectMembers={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              "123",
+            ],
+            Array [
+              "456",
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        }
+      }
+      location={
+        Object {
+          "pathname": "/inception/456",
+          "state": Object {},
+        }
+      }
+      projects={
+        Object {
+          "chosenProject": Object {},
+        }
+      }
+      saveProjectID={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              "123",
+            ],
+            Array [
+              "456",
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        }
+      }
+    />
+    <lazy>
+      <Suspense
+        fallback={
+          <ProjectLoading
+            text="Loading page data"
+          />
+        }
+      >
+        <lazy
+          pageName="inception"
+          projectId="456"
+        />
+      </Suspense>
+    </lazy>
+  </lazy>
+  <lazy />
+</div>
+`;
+
+exports[`LoggedInContent Page - Should render 404 for non-existent page 1`] = `
+<div
+  className="full-width row"
+  id="logged-in-content-container"
+>
+  <lazy
+    companyName="Prin-D"
+    openProjectSelector={true}
+  />
+  <lazy>
+    <lazy
+      getProjectDetails={[MockFunction]}
+      getProjectMembers={[MockFunction]}
+      location={
+        Object {
+          "pathname": "/carrot",
+          "state": Object {},
+        }
+      }
+      projects={
+        Object {
+          "chosenProject": Object {},
+        }
+      }
+      saveProjectID={[MockFunction]}
+    />
+    <lazy>
+      <Suspense
+        fallback={
+          <ProjectLoading
+            text="Loading page data"
+          />
+        }
+      >
+        <lazy />
+      </Suspense>
+    </lazy>
+  </lazy>
+  <lazy />
+</div>
+`;
+
+exports[`LoggedInContent Page - Should render foundations page 1`] = `
+<div
+  className="full-width row"
+  id="logged-in-content-container"
+>
+  <lazy
+    companyName="Prin-D"
+    openProjectSelector={false}
+  />
+  <lazy>
+    <lazy
+      getProjectDetails={[MockFunction]}
+      getProjectMembers={[MockFunction]}
+      location={
+        Object {
+          "pathname": "/foundations",
+          "state": Object {},
+        }
+      }
+      projects={
+        Object {
+          "chosenProject": Object {},
+        }
+      }
+      saveProjectID={[MockFunction]}
+    />
+    <lazy>
+      <Suspense
+        fallback={
+          <ProjectLoading
+            text="Loading page data"
+          />
+        }
+      >
+        <lazy />
+      </Suspense>
+    </lazy>
+  </lazy>
+  <lazy />
+</div>
+`;
+
+exports[`LoggedInContent Page - Should render newproject page 1`] = `
+<div
+  className="full-width row"
+  id="logged-in-content-container"
+>
+  <lazy
+    companyName="Prin-D"
+    openProjectSelector={false}
+  />
+  <lazy>
+    <lazy
+      getProjectDetails={[MockFunction]}
+      getProjectMembers={[MockFunction]}
+      location={
+        Object {
+          "pathname": "/newproject",
+          "state": Object {},
+        }
+      }
+      projects={
+        Object {
+          "chosenProject": Object {},
+        }
+      }
+      saveProjectID={[MockFunction]}
+    />
+    <lazy>
+      <Suspense
+        fallback={
+          <ProjectLoading
+            text="Loading page data"
+          />
+        }
+      >
+        <lazy />
+      </Suspense>
+    </lazy>
+  </lazy>
+  <lazy />
+</div>
+`;
+
+exports[`LoggedInContent Page - Should render no project selected 1`] = `
+<div
+  className="full-width row"
+  id="logged-in-content-container"
+>
+  <lazy
+    companyName="Prin-D"
+    openProjectSelector={true}
+  />
+  <lazy>
+    <lazy
+      getProjectDetails={[MockFunction]}
+      getProjectMembers={[MockFunction]}
+      location={
+        Object {
+          "pathname": "/inception",
+          "state": Object {},
+        }
+      }
+      projects={
+        Object {
+          "chosenProject": Object {},
+        }
+      }
+      saveProjectID={[MockFunction]}
+    />
+    <lazy>
+      <Suspense
+        fallback={
+          <ProjectLoading
+            text="Loading page data"
+          />
+        }
+      >
+        <lazy
+          pageName="inception"
+        />
+      </Suspense>
+    </lazy>
+  </lazy>
+  <lazy />
+</div>
+`;
+
+exports[`LoggedInContent Page - Should render no project selected at mobile resolution 1`] = `
+<div
+  className="full-width row"
+  id="logged-in-content-container"
+>
+  <lazy
+    companyName="Prin-D"
+    openProjectSelector={true}
+  />
+  <lazy>
+    <lazy
+      getProjectDetails={[MockFunction]}
+      getProjectMembers={[MockFunction]}
+      location={
+        Object {
+          "pathname": "/inception",
+          "state": Object {},
+        }
+      }
+      projects={
+        Object {
+          "chosenProject": Object {},
+        }
+      }
+      saveProjectID={[MockFunction]}
+    />
+    <lazy>
+      <Suspense
+        fallback={
+          <ProjectLoading
+            text="Loading page data"
+          />
+        }
+      >
+        <lazy
+          pageName="inception"
+        />
+      </Suspense>
+    </lazy>
+  </lazy>
+  <lazy />
+</div>
+`;
+
+exports[`LoggedInContent Page - Should render no project selected at mobile resolution with error 1`] = `
+<div
+  className="full-width row"
+  id="logged-in-content-container"
+>
+  <lazy
+    companyName="Prin-D"
+    openProjectSelector={true}
+  />
+  <lazy>
+    <lazy
+      getProjectDetails={[MockFunction]}
+      getProjectMembers={[MockFunction]}
+      location={
+        Object {
+          "pathname": "/inception",
+          "state": Object {},
+        }
+      }
+      projects={
+        Object {
+          "chosenProject": Object {},
+          "error": "There was an error",
+        }
+      }
+      saveProjectID={[MockFunction]}
+    />
+    <lazy>
+      <Suspense
+        fallback={
+          <ProjectLoading
+            text="Loading page data"
+          />
+        }
+      >
+        <lazy />
+      </Suspense>
+    </lazy>
+  </lazy>
+  <lazy />
+</div>
+`;
+
+exports[`LoggedInContent Page - Should render profile page 1`] = `
+<div
+  className="full-width row"
+  id="logged-in-content-container"
+>
+  <lazy
+    companyName="Prin-D"
+    openProjectSelector={false}
+  />
+  <lazy>
+    <lazy
+      getProjectDetails={[MockFunction]}
+      getProjectMembers={[MockFunction]}
+      location={
+        Object {
+          "pathname": "/profile",
+          "state": Object {},
+        }
+      }
+      projects={
+        Object {
+          "chosenProject": Object {},
+        }
+      }
+      saveProjectID={[MockFunction]}
+    />
+    <lazy>
+      <Suspense
+        fallback={
+          <ProjectLoading
+            text="Loading page data"
+          />
+        }
+      >
+        <lazy />
+      </Suspense>
+    </lazy>
+  </lazy>
+  <lazy />
+</div>
+`;
+
+exports[`LoggedInContent Page - Should render project page 1`] = `
+<div
+  className="full-width row"
+  id="logged-in-content-container"
+>
+  <lazy
+    companyName="Prin-D"
+    openProjectSelector={true}
+  />
+  <lazy>
+    <lazy
+      getProjectDetails={[MockFunction]}
+      getProjectMembers={[MockFunction]}
+      location={
+        Object {
+          "pathname": "/project",
+          "state": Object {},
+        }
+      }
+      projects={
+        Object {
+          "chosenProject": Object {},
+        }
+      }
+      saveProjectID={[MockFunction]}
+    />
+    <lazy>
+      <Suspense
+        fallback={
+          <ProjectLoading
+            text="Loading page data"
+          />
+        }
+      >
+        <lazy />
+      </Suspense>
+    </lazy>
+  </lazy>
+  <lazy />
+</div>
+`;
+
+exports[`LoggedInContent Page - Should render team page 1`] = `
+<div
+  className="full-width row"
+  id="logged-in-content-container"
+>
+  <lazy
+    companyName="Prin-D"
+    openProjectSelector={true}
+  />
+  <lazy>
+    <lazy
+      getProjectDetails={[MockFunction]}
+      getProjectMembers={[MockFunction]}
+      location={
+        Object {
+          "pathname": "/team",
+          "state": Object {},
+        }
+      }
+      projects={
+        Object {
+          "chosenProject": Object {},
+        }
+      }
+      saveProjectID={[MockFunction]}
+    />
+    <lazy>
+      <Suspense
+        fallback={
+          <ProjectLoading
+            text="Loading page data"
+          />
+        }
+      >
+        <lazy />
+      </Suspense>
+    </lazy>
+  </lazy>
+  <lazy />
+</div>
+`;
+
+exports[`LoggedInContent Page - Should render then have an error fetching a project 1`] = `
+<div
+  className="full-width row"
+  id="logged-in-content-container"
+>
+  <lazy
+    companyName="Prin-D"
+    openProjectSelector={true}
+  />
+  <lazy>
+    <lazy
+      getProjectDetails={[MockFunction]}
+      getProjectMembers={[MockFunction]}
+      location={
+        Object {
+          "pathname": "/inception",
+          "state": Object {},
+        }
+      }
+      projects={
+        Object {
+          "chosenProject": Object {},
+          "error": "There was an error",
+        }
+      }
+      saveProjectID={[MockFunction]}
+    />
+    <lazy>
+      <Suspense
+        fallback={
+          <ProjectLoading
+            text="Loading page data"
+          />
+        }
+      >
+        <lazy />
+      </Suspense>
+    </lazy>
+  </lazy>
+  <lazy />
+</div>
+`;

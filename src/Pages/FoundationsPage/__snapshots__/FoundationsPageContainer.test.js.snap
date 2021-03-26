@@ -1,0 +1,190 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <HashRouter>
+    <Router
+      history={
+        Object {
+          "action": "POP",
+          "block": [Function],
+          "createHref": [Function],
+          "go": [Function],
+          "goBack": [Function],
+          "goForward": [Function],
+          "length": 1,
+          "listen": [Function],
+          "location": Object {
+            "hash": "",
+            "pathname": "/",
+            "search": "",
+            "state": undefined,
+          },
+          "push": [Function],
+          "replace": [Function],
+        }
+      }
+    >
+      <withRouter(Connect(FoundationsPage))>
+        <Connect(FoundationsPage)
+          history={
+            Object {
+              "action": "POP",
+              "block": [Function],
+              "createHref": [Function],
+              "go": [Function],
+              "goBack": [Function],
+              "goForward": [Function],
+              "length": 1,
+              "listen": [Function],
+              "location": Object {
+                "hash": "",
+                "pathname": "/",
+                "search": "",
+                "state": undefined,
+              },
+              "push": [Function],
+              "replace": [Function],
+            }
+          }
+          location={
+            Object {
+              "hash": "",
+              "pathname": "/",
+              "search": "",
+              "state": undefined,
+            }
+          }
+          match={
+            Object {
+              "isExact": true,
+              "params": Object {},
+              "path": "/",
+              "url": "/",
+            }
+          }
+        >
+          <FoundationsPage
+            history={
+              Object {
+                "action": "POP",
+                "block": [Function],
+                "createHref": [Function],
+                "go": [Function],
+                "goBack": [Function],
+                "goForward": [Function],
+                "length": 1,
+                "listen": [Function],
+                "location": Object {
+                  "hash": "",
+                  "pathname": "/",
+                  "search": "",
+                  "state": undefined,
+                },
+                "push": [Function],
+                "replace": [Function],
+              }
+            }
+            location={
+              Object {
+                "hash": "",
+                "pathname": "/",
+                "search": "",
+                "state": undefined,
+              }
+            }
+            match={
+              Object {
+                "isExact": true,
+                "params": Object {},
+                "path": "/",
+                "url": "/",
+              }
+            }
+          >
+            <div
+              id="foundations-page"
+            >
+              <div
+                className="page-content-section row"
+              >
+                <div
+                  className="foundations-page-container full-height"
+                >
+                  <div
+                    className="foundations-icon row"
+                  >
+                    <div
+                      className="col-12"
+                    >
+                      <img
+                        alt="Foundations Logo"
+                        src="images/Foundations-Logo.png"
+                        width="100%"
+                      />
+                    </div>
+                  </div>
+                  <div
+                    className="foundations-icon-text row"
+                  >
+                    <div
+                      className="col-12"
+                    >
+                      Foundations allows users to enter their data into a single system and control the access to it. By using Foundations as the single source of data, you keep complete control of your personally identifiable information while allowing those granted access to it to receive the most up-to-date information automatically while protecting against GDPR violations.
+                    </div>
+                  </div>
+                  <div
+                    className="foundations-download-icons row"
+                  >
+                    <div
+                      className="col-6"
+                    >
+                      <img
+                        alt="Android Logo"
+                        height="75"
+                        onClick={[Function]}
+                        src="images/Download_Android.svg"
+                      />
+                    </div>
+                    <div
+                      className="col-6"
+                    >
+                      <img
+                        alt="iOS Logo"
+                        height="75"
+                        onClick={[Function]}
+                        src="images/Download_iOS.svg"
+                      />
+                    </div>
+                  </div>
+                  <div
+                    className="foundations-download-text row"
+                  >
+                    <div
+                      className="col-6"
+                    />
+                    <div
+                      className="col-6"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </FoundationsPage>
+        </Connect(FoundationsPage)>
+      </withRouter(Connect(FoundationsPage))>
+    </Router>
+  </HashRouter>
+</Provider>
+`;
