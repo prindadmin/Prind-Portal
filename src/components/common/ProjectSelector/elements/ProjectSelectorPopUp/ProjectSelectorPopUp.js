@@ -53,7 +53,8 @@ export class ProjectSelectorPopUp extends Component {
     }).isRequired,
     history: PropTypes.shape({
       push: PropTypes.func.isRequired,
-    }).isRequired
+    }).isRequired,
+    resetChosenProject: PropTypes.func.isRequired
   }
 
   constructor(props) {
@@ -162,6 +163,7 @@ export class ProjectSelectorPopUp extends Component {
 
   // This is the new function that goes straight to the project details entry screen
   createNewProject = () => {
+    this.props.resetChosenProject()
     this.props.history.push(`${Endpoints.NEWPROJECTPAGE}?project_type=${process.env.REACT_APP_PORTAL}`)
     this.cancelPopup()
   }

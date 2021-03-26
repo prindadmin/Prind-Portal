@@ -19,6 +19,9 @@ const mapDispatchToProps = dispatch => {
     },
     updateChosenProject: (project, resolve, reject) => {
       dispatch(projectsReducer.updateChosenProject(project, resolve, reject))
+    },
+    resetChosenProject: () => {
+      dispatch(projectsReducer.resetChosenProject())
     }
   }
 }

@@ -15,8 +15,14 @@ const ProfileRequestsTab = lazy(() => import('../../Components/ProfileRequestsTa
 
 export class ProfilePage extends Component {
   static propTypes = {
-    tabToOpen: PropTypes.string,
+    getUserDetails: PropTypes.func.isRequired,
     getProjectInvitations: PropTypes.func.isRequired,
+    getSignatureRequests: PropTypes.func.isRequired,
+    getHistory: PropTypes.func.isRequired,
+    location: PropTypes.shape({
+      state: PropTypes.object,
+    }).isRequired,
+    fetching: PropTypes.bool,
   }
 
   constructor(props) {
@@ -78,7 +84,6 @@ export class ProfilePage extends Component {
     this.setState({
       historyFetching: false,
     })
-
   }
 
   historyReject = () => {
@@ -93,7 +98,6 @@ export class ProfilePage extends Component {
     this.setState({
       profileFetching: false,
     })
-
   }
 
   profileReject = () => {
@@ -108,7 +112,6 @@ export class ProfilePage extends Component {
     this.setState({
       projectRequestsFetching: false,
     })
-
   }
 
   projectRequestsReject = () => {
@@ -123,7 +126,6 @@ export class ProfilePage extends Component {
     this.setState({
       projectRequestsFetching: false,
     })
-
   }
 
   signatureRequestsReject = () => {
@@ -221,16 +223,12 @@ export class ProfilePage extends Component {
 
 
   render() {
-
     const { fetching } = this.props
-
     return (
       <div id='profile-page'>
         <div className='page-content-section row'>
           {
-              fetching ?
-              this.showLoadingPage() :
-              this.showFilledPage()
+              fetching ? this.showLoadingPage() : this.showFilledPage()
           }
         </div>
       </div>

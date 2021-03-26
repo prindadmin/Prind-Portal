@@ -6,16 +6,18 @@ import * as Dispatchers from '../Dispatchers/projects'
 import * as Actions from '../Actions'
 import * as Strings from '../Data/Strings'
 
+const defaultChosenProject = {
+  projectName: Strings.NO_PROJECT_SELECTED,
+  projectId: "",
+  projectType: "",
+}
+
 const defaultState = {
   accessibleProjects: {
     projectCreator: [],
     projectRole: []
   },
-  chosenProject: {
-    projectName: Strings.NO_PROJECT_SELECTED,
-    projectId: "",
-    projectType: "",
-  },
+  chosenProject: defaultChosenProject,
   memberList: [],
   downloadURL: "",
   fileDetails: {},
@@ -119,12 +121,16 @@ export function * updateChosenProject (action) {
       }
     })
     const result = yield call(Dispatchers.fetchProjectDetails, project.projectId)
+    const resultBody = result.body
     // Post-fetch update to store
     yield put({
       type: Actions.PROJECT_SET_STATE,
       payload: {
         fetching: false,
-        chosenProject: result.body,
+        chosenProject: {
+          ...defaultChosenProject,
+          ...resultBody,
+        },
         error: null
       }
     })
@@ -164,7 +170,10 @@ export function * updateProjectDetails (action) {
       type: Actions.PROJECT_SET_STATE,
       payload: {
         fetching: false,
-        chosenProject: projectValues,
+        chosenProject: {
+          ...defaultChosenProject,
+          ...projectValues,
+        }
       }
     })
     if (action.payload.resolve !== undefined) {

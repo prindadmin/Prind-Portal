@@ -42,6 +42,7 @@ it('Should render', () => {
     history: {
       push: function() {},
     },
+    resetChosenProject: function() {}
   };
   const component = shallow(<Component {...props} />);
   expect(component).toMatchSnapshot();
@@ -92,6 +93,7 @@ it('Should render with two projects from creator', () => {
     history: {
       push: function() {},
     },
+    resetChosenProject: function() {}
   };
   const component = shallow(<Component {...props} />);
   expect(component).toMatchSnapshot();

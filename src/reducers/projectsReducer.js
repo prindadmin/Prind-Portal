@@ -1,16 +1,18 @@
 import * as action from '../Actions'
 import * as Strings from '../Data/Strings'
 
+const defaultChosenProject = {
+  projectName: Strings.NO_PROJECT_SELECTED,
+  projectId: "",
+  projectType: "",
+}
+
 const defaultState = {
   accessibleProjects: {
     projectCreator: [],
     projectRole: []
   },
-  chosenProject: {
-    projectName: Strings.NO_PROJECT_SELECTED,
-    projectId: "",
-    projectType: "",
-  },
+  chosenProject: defaultChosenProject,
   memberList: [],
   downloadURL: "",
   fileDetails: {},
@@ -19,10 +21,7 @@ const defaultState = {
 }
 
 const blankChosenState = {
-  chosenProject: {
-    projectName: Strings.NO_PROJECT_SELECTED,
-    projectId: "",
-  }
+  chosenProject: defaultChosenProject
 }
 
 
@@ -34,6 +33,7 @@ export const init = () => {
 }
 
 export const resetChosenProject = () => {
+  console.log('resetting project')
   return {
     type: action.PROJECT_RESET_CHOSEN_PROJECT,
     payload: blankChosenState
@@ -71,10 +71,19 @@ export const updateChosenProject = ( project, resolve, reject ) => {
 }
 
 export const saveProjectID = ( projectId ) => {
+
+  if (saveProjectID === undefined) {
+    return {
+      type: action.PROJECT_SET_STATE,
+      payload: blankChosenState
+    }
+  }
+
   return {
     type: action.PROJECT_SET_STATE,
     payload: {
       chosenProject: {
+        ...defaultChosenProject,
         projectId
       },
     }

@@ -1,0 +1,172 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Profile Page - Should render history tab 1`] = `
+<div
+  id="profile-page"
+>
+  <div
+    className="page-content-section row"
+  >
+    <div
+      className="page-content"
+    >
+      <div
+        className="page-title"
+      >
+        <h1>
+          Profile
+        </h1>
+        <span />
+      </div>
+      <div
+        className="row"
+      >
+        <Blueprint3.Tabs
+          animate={true}
+          className="nav nav-tabs"
+          id="profileTabs"
+          large={false}
+          onChange={[Function]}
+          renderActiveTabPanelOnly={false}
+          selectedTabId="history"
+          vertical={false}
+        >
+          <Blueprint3.Tab
+            disabled={false}
+            id="user"
+            panel={<UNDEFINED />}
+            title="Details"
+          />
+          <Blueprint3.Tab
+            disabled={false}
+            id="history"
+            panel={<UNDEFINED />}
+            title="History"
+          />
+          <Blueprint3.Tab
+            disabled={false}
+            id="requests"
+            panel={<UNDEFINED />}
+            title="Requests"
+          />
+          <Expander />
+        </Blueprint3.Tabs>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Profile Page - Should render requests tab 1`] = `
+<div
+  id="profile-page"
+>
+  <div
+    className="page-content-section row"
+  >
+    <div
+      className="page-content"
+    >
+      <div
+        className="page-title"
+      >
+        <h1>
+          Profile
+        </h1>
+        <span />
+      </div>
+      <div
+        className="row"
+      >
+        <Blueprint3.Tabs
+          animate={true}
+          className="nav nav-tabs"
+          id="profileTabs"
+          large={false}
+          onChange={[Function]}
+          renderActiveTabPanelOnly={false}
+          selectedTabId="requests"
+          vertical={false}
+        >
+          <Blueprint3.Tab
+            disabled={false}
+            id="user"
+            panel={<UNDEFINED />}
+            title="Details"
+          />
+          <Blueprint3.Tab
+            disabled={false}
+            id="history"
+            panel={<UNDEFINED />}
+            title="History"
+          />
+          <Blueprint3.Tab
+            disabled={false}
+            id="requests"
+            panel={<UNDEFINED />}
+            title="Requests"
+          />
+          <Expander />
+        </Blueprint3.Tabs>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Profile Page - Should render user tab 1`] = `
+<div
+  id="profile-page"
+>
+  <div
+    className="page-content-section row"
+  >
+    <div
+      className="page-content"
+    >
+      <div
+        className="page-title"
+      >
+        <h1>
+          Profile
+        </h1>
+        <span />
+      </div>
+      <div
+        className="row"
+      >
+        <Blueprint3.Tabs
+          animate={true}
+          className="nav nav-tabs"
+          id="profileTabs"
+          large={false}
+          onChange={[Function]}
+          renderActiveTabPanelOnly={false}
+          selectedTabId="user"
+          vertical={false}
+        >
+          <Blueprint3.Tab
+            disabled={false}
+            id="user"
+            panel={<UNDEFINED />}
+            title="Details"
+          />
+          <Blueprint3.Tab
+            disabled={false}
+            id="history"
+            panel={<UNDEFINED />}
+            title="History"
+          />
+          <Blueprint3.Tab
+            disabled={false}
+            id="requests"
+            panel={<UNDEFINED />}
+            title="Requests"
+          />
+          <Expander />
+        </Blueprint3.Tabs>
+      </div>
+    </div>
+  </div>
+</div>
+`;

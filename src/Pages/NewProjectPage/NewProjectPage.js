@@ -19,6 +19,7 @@ import * as Endpoints from '../../Data/Endpoints'
 const CreatingProjectPopover = lazy(() => import('../../Components/CreatingProjectPopover'));
 
 // TODO: FUTURE: Add ability to upload thumbnails or pick icon for a project
+// TODO: Replace all these fields with standard HTML input fields in a controlled state
 
 export class Page extends Component {
   static propTypes = {
@@ -52,9 +53,9 @@ export class Page extends Component {
       projectType: searchParams.project_type
     })
     */
-    console.log("finished mounting new project page")
+    //console.log("finished mounting new project page")
   }
-
+  /*
   getQueryStringParams = query => {
     return query
       ? (/^[?#]/.test(query) ? query.slice(1) : query)
@@ -67,7 +68,7 @@ export class Page extends Component {
           )
       : {}
   };
-
+  */
 
   createProject = (values) => {
 

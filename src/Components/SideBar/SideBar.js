@@ -39,7 +39,7 @@ export class SideBar extends Component {
     const { chosenProject } = projects
     const { projectId } = chosenProject
 
-    const pathForProject = projectId !== "" ? `/${projectId}` : ""
+    const pathForProject = projectId ? `/${projectId}` : ""
     // Removed to allow separate DHSF and CDM2015 project portals
     //const sidebarEntries = PAGENAMES[projectType] === undefined ? PAGENAMES["CDM2015Project"] : PAGENAMES[projectType]
     const sidebarEntries = PAGENAMES[process.env.REACT_APP_PORTAL]

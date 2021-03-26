@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
 
 import ReactGA from 'react-ga';
@@ -19,9 +20,29 @@ import * as Validators from '../../Validators'
 import * as Endpoints from '../../Data/Endpoints'
 
 // TODO: Add ability to upload thumbnails or pick icon for a project
+// TODO: Replace all these fields with standard HTML input fields in a controlled state
 
 export class ProjectDetailsPage extends Component {
   static propTypes = {
+    projects: PropTypes.shape({
+      chosenProject: PropTypes.shape({
+        projectId: PropTypes.string,
+        projectType: PropTypes.string,
+        projectName: PropTypes.string,
+        projectDescription: PropTypes.string,
+        projectReference: PropTypes.string,
+        projectAddressLine1: PropTypes.string,
+        projectAddressLine2: PropTypes.string,
+        projectAddressLine3: PropTypes.string,
+        projectAddressTown: PropTypes.string,
+        projectAddressRegion: PropTypes.string,
+        projectAddressPostalCode: PropTypes.string,
+        projectAddressCountry: PropTypes.string,
+      })
+    }).isRequired,
+    updateProjectDetails: PropTypes.func.isRequired,
+    deleteProject: PropTypes.func.isRequired,
+    resetChosenProject: PropTypes.func.isRequired,
   }
 
   constructor() {

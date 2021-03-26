@@ -101,7 +101,7 @@ export class LoggedInContent extends Component {
       const pageName = this.getPageName()
 
       // If the project ID has changed, fetch the common project data
-      if (newProjectId !== oldProjectId) {
+      if (newProjectId !== oldProjectId && !PAGENAMES.CommonPages.includes(pageName)) {
         this.getCommonProjectData()
       }
     }
