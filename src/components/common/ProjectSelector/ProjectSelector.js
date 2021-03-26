@@ -14,7 +14,7 @@ class ProjectSelector extends React.Component {
     projects: PropTypes.shape({
       chosenProject: PropTypes.shape({
         projectName: PropTypes.string,
-      }).isRequired,
+      }),
     }).isRequired,
     openProjectSelector: PropTypes.bool.isRequired,
   }

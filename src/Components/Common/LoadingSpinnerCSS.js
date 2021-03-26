@@ -10,7 +10,6 @@ function Spinner(props) {
   }
 
   if (props.size !== undefined) {
-    console.log("spinner size provided")
     style = {
       width: props.size,
       height: props.size,
