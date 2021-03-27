@@ -23,6 +23,10 @@ import * as Strings from '../../Data/Strings'
 
 export class StagePage extends Component {
   static propTypes = {
+    location: PropTypes.shape({
+      pathname: PropTypes.string.isRequired
+    }).isRequired,
+    pageContent: PropTypes.shape({}).isRequired,
     pageName: PropTypes.string.isRequired,
     projectId: PropTypes.string,
     getContent: PropTypes.func.isRequired,
@@ -45,7 +49,6 @@ export class StagePage extends Component {
 
     if (projectId !== "") {
       this.fetchPageContent()
-      this.props.requestS3ProjectFileUploadToken(projectId, pageName)
     }
   }
 
@@ -54,43 +57,40 @@ export class StagePage extends Component {
 
     if (projectId !== prevProps.projectId) {
       this.fetchPageContent()
-      this.props.requestS3ProjectFileUploadToken(projectId, pageName)
+      return;
     }
 
     if (pageName !== prevProps.pageName) {
       this.fetchPageContent()
-      this.props.requestS3ProjectFileUploadToken(projectId, pageName)
     }
   }
 
   fetchPageContent = () => {
     const { pageName, projectId } = this.props
-
-    if(projectId === undefined) {
+    if(projectId === "") {
       this.setState({
         state: ComponentState.CONTENT_NO_PROJECT_SELECTED,
       })
       return;
     }
-
     this.setState({
       state: ComponentState.CONTENT_FETCH_IN_PROGRESS,
     })
-
-    console.log(this.props)
+    this.props.requestS3ProjectFileUploadToken(projectId, pageName)
     this.props.getContent(projectId, pageName, this.contentFetchSuccessful, this.contentFetchFailed)
   }
 
+
   contentFetchSuccessful = (result) => {
-    console.log('success fetching page content')
-    console.log(result)
+    //console.log('success fetching page content')
+    //console.log(result)
     this.setState({
       state: ComponentState.CONTENT_FETCH_SUCCESSFUL,
     })
   }
 
   contentFetchFailed = (error) => {
-    console.log('error fetching page content')
+    //console.log('error fetching page content')
     this.setState({
       state: ComponentState.CONTENT_FETCH_FAILED,
       errorMessage: error.Error.ErrorMessage,
@@ -107,6 +107,7 @@ export class StagePage extends Component {
     return (
       <div className="create-custom-field-button-container">
         <Button
+          id='create-field-button'
           text={Strings.CREATE_CUSTOM_FIELD}
           intent={Intent.PRIMARY}
           onClick={(e) => this.setState({createFieldIsOpen: true})}
@@ -123,7 +124,7 @@ export class StagePage extends Component {
 
   showLoadingPage = () => {
     return (
-      <ProjectLoading />
+      <ProjectLoading text={Strings.STAGE_LOADING_PLEASE_WAIT}/>
     )
   }
 
@@ -134,8 +135,7 @@ export class StagePage extends Component {
   }
 
   showFilledPage = () => {
-    const { pageName, projects, pageContent } = this.props
-    const { projectId } = projects.chosenProject
+    const { projectId, pageName, pageContent } = this.props
     const { fields }  = pageContent[pageName]
 
     // Removed to allow separate DHSF and CDM2015 project portals
@@ -162,15 +162,13 @@ export class StagePage extends Component {
           <span>{description}</span>
         </div>
         {
-          fields !== undefined ?
           fields.map((singleField, index) => {
             return <PageFieldMapper
               key={index}
               pageName={pageName}
               projectId={projectId}
               singleField={singleField} />
-          }):
-          null
+          })
         }
         {this.getCreateFieldButton()}
       </div>
@@ -179,9 +177,7 @@ export class StagePage extends Component {
 
 
   render() {
-    const { pageName, projects } = this.props
-    const { projectId } = projects.chosenProject
-    console.log(this.state.state)
+    const { projectId, pageName } = this.props
     return (
       <div id='stage-page'>
         <div className='page-content-section'>

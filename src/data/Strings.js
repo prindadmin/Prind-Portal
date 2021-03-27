@@ -57,6 +57,7 @@ export const IF_XXX_PROVIDE_DETAILS_BELOW = "If XXX, please provide extra detail
 export const PLEASE_PROVIDE_DETAILS_HERE = "Please provide extra details here..."
 
 export const PROJECT_LOADING = "Project loading, please wait..."
+export const STAGE_LOADING_PLEASE_WAIT = "Stage loading, please wait..."
 export const UNABLE_TO_FETCH_CONTENT = "Unable to load the content for this page.  Please try again.  If this problem persists, please contact technical support."
 export const NO_PROJECT_SELECTED = "Please select a project"
 export const PROJECT_FETCH_ERROR_OCCURED = "The requested project ID was not found in the system or you do not have access to the requested project.  Please select a project from the project drop down or contact the project administrator to request access."

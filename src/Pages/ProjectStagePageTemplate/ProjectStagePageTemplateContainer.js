@@ -8,7 +8,6 @@ import ProjectStagePageTemplate from './ProjectStagePageTemplate'
 
 const mapStatetoProps = state => {
   return {
-    projects: state.projects,
     pageContent: state.pageContent,
   }
 }
