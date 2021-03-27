@@ -5,11 +5,11 @@ import ReactGA from 'react-ga';
 import Component from './ProfilePage'
 
 var props;
+const mockGetUserDetails = jest.fn()
+const mockGetProjectInvitations = jest.fn()
+const mockGetSignatureRequests = jest.fn()
+const mockGetHistory = jest.fn()
 
-var mockGetUserDetails = jest.fn((resolve, reject) => { resolve() })
-var mockGetProjectInvitations = jest.fn((resolve, reject) => { resolve() })
-var mockGetSignatureRequests = jest.fn((resolve, reject) => { resolve() })
-var mockGetHistory = jest.fn((resolve, reject) => { resolve() })
 
 beforeAll(() => {
   ReactGA.initialize('dummy', { testMode: true });
@@ -31,46 +31,140 @@ beforeEach(() => {
 })
 
 it('Profile Page - Should render user tab', () => {
+  const mockGetUserDetailsSuccess = jest.fn((resolve, reject) => {
+    resolve("Success")
+  })
+  const mockGetProjectInvitationsSuccess = jest.fn((resolve, reject) => {
+    resolve("Success")
+  })
+  const mockGetSignatureRequestsSuccess = jest.fn((resolve, reject) => {
+    resolve("Success")
+  })
+  const mockGetHistorySuccess = jest.fn((resolve, reject) => {
+    resolve("Success")
+  })
+
+  props = {
+    getUserDetails: mockGetUserDetailsSuccess,
+    getProjectInvitations: mockGetProjectInvitationsSuccess,
+    getSignatureRequests: mockGetSignatureRequestsSuccess,
+    getHistory: mockGetHistorySuccess,
+    location: {
+      pathname: "/profile",
+      state: {},
+    },
+    fetching: false
+  }
   const component = shallow(<Component {...props} />);
   expect(component).toMatchSnapshot();
-  expect(mockGetUserDetails).toHaveBeenCalled()
-  expect(mockGetProjectInvitations).toHaveBeenCalled()
-  expect(mockGetSignatureRequests).toHaveBeenCalled()
-  expect(mockGetHistory).toHaveBeenCalled()
+  expect(mockGetUserDetailsSuccess).toHaveBeenCalled()
+  expect(mockGetProjectInvitationsSuccess).toHaveBeenCalled()
+  expect(mockGetSignatureRequestsSuccess).toHaveBeenCalled()
+  expect(mockGetHistorySuccess).toHaveBeenCalled()
 });
 
 
 it('Profile Page - Should render history tab', () => {
-  props.location.state = {
-    tabToOpen: "history"
+  const mockGetUserDetailsSuccess = jest.fn((resolve, reject) => {
+    resolve("Success")
+  })
+  const mockGetProjectInvitationsSuccess = jest.fn((resolve, reject) => {
+    resolve("Success")
+  })
+  const mockGetSignatureRequestsSuccess = jest.fn((resolve, reject) => {
+    resolve("Success")
+  })
+  const mockGetHistorySuccess = jest.fn((resolve, reject) => {
+    resolve("Success")
+  })
+  props = {
+    getUserDetails: mockGetUserDetailsSuccess,
+    getProjectInvitations: mockGetProjectInvitationsSuccess,
+    getSignatureRequests: mockGetSignatureRequestsSuccess,
+    getHistory: mockGetHistorySuccess,
+    location: {
+      pathname: "/profile",
+      state: {
+        tabToOpen: "history"
+      },
+    },
+    fetching: false
   }
   const component = shallow(<Component {...props} />);
   expect(component).toMatchSnapshot();
-  expect(mockGetUserDetails).toHaveBeenCalled()
-  expect(mockGetProjectInvitations).toHaveBeenCalled()
-  expect(mockGetSignatureRequests).toHaveBeenCalled()
-  expect(mockGetHistory).toHaveBeenCalled()
+  expect(mockGetUserDetailsSuccess).toHaveBeenCalled()
+  expect(mockGetProjectInvitationsSuccess).toHaveBeenCalled()
+  expect(mockGetSignatureRequestsSuccess).toHaveBeenCalled()
+  expect(mockGetHistorySuccess).toHaveBeenCalled()
 });
 
 
 it('Profile Page - Should render requests tab', () => {
-  props.location.state = {
-    tabToOpen: "requests"
+  const mockGetUserDetailsSuccess = jest.fn((resolve, reject) => {
+    resolve("Success")
+  })
+  const mockGetProjectInvitationsSuccess = jest.fn((resolve, reject) => {
+    resolve("Success")
+  })
+  const mockGetSignatureRequestsSuccess = jest.fn((resolve, reject) => {
+    resolve("Success")
+  })
+  const mockGetHistorySuccess = jest.fn((resolve, reject) => {
+    resolve("Success")
+  })
+  props = {
+    getUserDetails: mockGetUserDetailsSuccess,
+    getProjectInvitations: mockGetProjectInvitationsSuccess,
+    getSignatureRequests: mockGetSignatureRequestsSuccess,
+    getHistory: mockGetHistorySuccess,
+    location: {
+      pathname: "/profile",
+      state: {
+        tabToOpen: "requests"
+      },
+    },
+    fetching: false
   }
   const component = shallow(<Component {...props} />);
   expect(component).toMatchSnapshot();
-  expect(mockGetUserDetails).toHaveBeenCalled()
-  expect(mockGetProjectInvitations).toHaveBeenCalled()
-  expect(mockGetSignatureRequests).toHaveBeenCalled()
-  expect(mockGetHistory).toHaveBeenCalled()
+  expect(mockGetUserDetailsSuccess).toHaveBeenCalled()
+  expect(mockGetProjectInvitationsSuccess).toHaveBeenCalled()
+  expect(mockGetSignatureRequestsSuccess).toHaveBeenCalled()
+  expect(mockGetHistorySuccess).toHaveBeenCalled()
 });
 
-/*
-it('Profile Page - Should render requests tab then change to history tab', () => {
-  const component = mount(<Component {...props} />);
-  expect(component).toMatchSnapshot();
-  const historyTabButton = component.find('#history')
-  historyTabButton.simulate('click')
+
+it('Profile Page - Should render with failed fetches', () => {
+  const mockGetUserDetailsFailed = jest.fn((resolve, reject) => {
+    reject("Failed")
+  })
+  const mockGetProjectInvitationsFailed = jest.fn((resolve, reject) => {
+    reject("Failed")
+  })
+  const mockGetSignatureRequestsFailed = jest.fn((resolve, reject) => {
+    reject("Failed")
+  })
+  const mockGetHistoryFailed = jest.fn((resolve, reject) => {
+    reject("Failed")
+  })
+
+  props = {
+    getUserDetails: mockGetUserDetailsFailed,
+    getProjectInvitations: mockGetProjectInvitationsFailed,
+    getSignatureRequests: mockGetSignatureRequestsFailed,
+    getHistory: mockGetHistoryFailed,
+    location: {
+      pathname: "/profile",
+      state: {},
+    },
+    fetching: false
+  }
+  const component = shallow(<Component {...props} />);
+  expect(mockGetUserDetailsFailed).toHaveBeenCalled()
+  expect(mockGetProjectInvitationsFailed).toHaveBeenCalled()
+  expect(mockGetSignatureRequestsFailed).toHaveBeenCalled()
+  expect(mockGetHistoryFailed).toHaveBeenCalled()
   expect(component).toMatchSnapshot();
 });
-*/
+
+// TODO: Simulate a tab change

@@ -372,7 +372,10 @@ it('updateProjectDetails - test end of send put', (result) => {
     type: Actions.PROJECT_SET_STATE,
     payload: {
       fetching: false,
-      chosenProject: updateProjectDetailsAction.payload.projectValues
+      chosenProject: {
+        projectId: updateProjectDetailsAction.payload.projectID,
+        ...updateProjectDetailsAction.payload.projectValues
+      }
     }
   }));
 });

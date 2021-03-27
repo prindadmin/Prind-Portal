@@ -28,26 +28,6 @@ export class ProfilePage extends Component {
   constructor(props) {
     super(props)
 
-    props.getUserDetails(
-      this.profileResolve,
-      this.profileReject,
-    )
-
-    props.getProjectInvitations(
-      this.projectRequestsResolve,
-      this.projectRequestsReject,
-    )
-
-    props.getSignatureRequests(
-      this.signatureRequestsResolve,
-      this.signatureRequestsReject,
-    )
-
-    props.getHistory(
-      this.historyResolve,
-      this.historyReject,
-    )
-
     var tabName = "user"
 
     if (props.location.state !== undefined) {
@@ -70,6 +50,7 @@ export class ProfilePage extends Component {
       signatureRequestsFetching: true,
       signatureRequestsError: false,
       signatureRequestsErrorText: "",
+      fetching: true,
     }
 
   }
@@ -78,11 +59,32 @@ export class ProfilePage extends Component {
     const { location } = this.props
     // Register pageview with GA
     ReactGA.pageview(location.pathname + location.search);
+
+    this.props.getUserDetails(
+      this.profileResolve,
+      this.profileReject,
+    )
+
+    this.props.getProjectInvitations(
+      this.projectRequestsResolve,
+      this.projectRequestsReject,
+    )
+
+    this.props.getSignatureRequests(
+      this.signatureRequestsResolve,
+      this.signatureRequestsReject,
+    )
+
+    this.props.getHistory(
+      this.historyResolve,
+      this.historyReject,
+    )
   }
 
   historyResolve = () => {
     this.setState({
       historyFetching: false,
+      fetching: this.finishedFetching()
     })
   }
 
@@ -90,13 +92,15 @@ export class ProfilePage extends Component {
     this.setState({
       historyFetching: false,
       historyError: true,
-      historyErrorText: Strings.ERROR_FETCHING_USER_HISTORY
+      historyErrorText: Strings.ERROR_FETCHING_USER_HISTORY,
+      fetching: this.finishedFetching()
     })
   }
 
   profileResolve = () => {
     this.setState({
       profileFetching: false,
+      fetching: this.finishedFetching()
     })
   }
 
@@ -104,13 +108,15 @@ export class ProfilePage extends Component {
     this.setState({
       profileFetching: false,
       profileError: true,
-      profileErrorText: Strings.ERROR_FETCHING_USER_PROFILE
+      profileErrorText: Strings.ERROR_FETCHING_USER_PROFILE,
+      fetching: this.finishedFetching()
     })
   }
 
   projectRequestsResolve = () => {
     this.setState({
       projectRequestsFetching: false,
+      fetching: this.finishedFetching()
     })
   }
 
@@ -118,13 +124,15 @@ export class ProfilePage extends Component {
     this.setState({
       projectRequestsFetching: false,
       projectRequestsError: true,
-      projectRequestsErrorText: Strings.ERROR_FETCHING_USER_PROJECT_REQUESTS
+      projectRequestsErrorText: Strings.ERROR_FETCHING_USER_PROJECT_REQUESTS,
+      fetching: this.finishedFetching()
     })
   }
 
   signatureRequestsResolve = () => {
     this.setState({
       projectRequestsFetching: false,
+      fetching: this.finishedFetching()
     })
   }
 
@@ -132,10 +140,16 @@ export class ProfilePage extends Component {
     this.setState({
       signatureRequestsFetching: false,
       signatureRequestsError: true,
-      signatureRequestsErrorText: Strings.ERROR_FETCHING_USER_SIGNATURE_REQUESTS
+      signatureRequestsErrorText: Strings.ERROR_FETCHING_USER_SIGNATURE_REQUESTS,
+      fetching: this.finishedFetching()
     })
   }
 
+  finishedFetching = () => {
+    const { historyFetching, profileFetching, projectRequestsFetching, signatureRequestsFetching } = this.state
+    const fetching = !historyFetching && !profileFetching && !projectRequestsFetching && ! signatureRequestsFetching
+    return fetching
+  }
 
   showLoadingPage = () => {
     return (
@@ -223,7 +237,7 @@ export class ProfilePage extends Component {
 
 
   render() {
-    const { fetching } = this.props
+    const { fetching } = this.state
     return (
       <div id='profile-page'>
         <div className='page-content-section row'>

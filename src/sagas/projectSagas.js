@@ -171,7 +171,7 @@ export function * updateProjectDetails (action) {
       payload: {
         fetching: false,
         chosenProject: {
-          ...defaultChosenProject,
+          projectId: projectID,
           ...projectValues,
         }
       }
