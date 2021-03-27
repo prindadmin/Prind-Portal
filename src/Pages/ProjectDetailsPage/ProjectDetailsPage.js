@@ -20,7 +20,7 @@ import * as Validators from '../../Validators'
 import * as Endpoints from '../../Data/Endpoints'
 
 // TODO: Add ability to upload thumbnails or pick icon for a project
-// TODO: Replace all these fields with standard HTML input fields in a controlled state
+// TODO: Refactor component without redux form and blueprintjs
 
 export class ProjectDetailsPage extends Component {
   static propTypes = {

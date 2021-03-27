@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 // Tools
 import ReactGA from 'react-ga';
@@ -11,6 +12,14 @@ import SignInUpBox from '../../Components/SignInUpBox'
 import { CanUseWebP } from '../../Components/../Functions/CheckIfWebpSupported'
 
 export class SignInPage extends Component {
+  static propTypes = {
+    location: PropTypes.shape({
+      pathname: PropTypes.string.isRequired,
+      state: PropTypes.shape({
+        username: PropTypes.string
+      }),
+    }).isRequired
+  }
 
   constructor() {
     super()
@@ -20,13 +29,27 @@ export class SignInPage extends Component {
   }
 
   componentDidMount() {
+    const { pathname, state } = this.props.location
     // Register pageview with GA
-    ReactGA.pageview("/signInPage");
+    ReactGA.pageview(pathname);
+
+    if (!state) {
+      return;
+    }
+
+    this.setState({
+      username: state.username
+    })
   }
 
   componentDidUpdate(prevProps) {
     const { state } = this.props.location
-    if(state !== undefined && state !== prevProps.location.state) {
+
+    if (!state) {
+      return;
+    }
+
+    if(state.username !== undefined && state !== prevProps.location.state) {
       this.setState({
         username: state.username
       })

@@ -18,10 +18,21 @@ const NoProjectSelected = lazy(() => import('../../Components/Common/NoProjectSe
 const ContactTile = lazy(() => import('../../Components/ContactTile'));
 const AddNewMemberForm = lazy(() => import('../../Components/AddNewTeamMember'));
 
+// TODO: Refactor component without redux form and blueprintjs
 
 export class ProjectTeamPage extends Component {
   static propTypes = {
-    handleSubmit: PropTypes.func.isRequired,
+    projects: PropTypes.shape({
+      chosenProject: PropTypes.shape({
+        projectId: PropTypes.string
+      }).isRequired
+    }).isRequired,
+    location: PropTypes.shape({
+      pathname: PropTypes.string.isRequired
+    }).isRequired,
+    getCurrentMembers: PropTypes.func.isRequired,
+    getRoles: PropTypes.func.isRequired,
+    reset: PropTypes.func.isRequired,
   }
 
   constructor(props) {
