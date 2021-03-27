@@ -4,38 +4,30 @@ import PropTypes from 'prop-types'
 // Data
 import * as Strings from '../../../Data/Strings'
 import * as States from '../../../States'
-import * as ComponentState from '../States'
+import * as ComponentStates from '../../ComponentStates'
 
 // Components
-import { CanUseWebP } from '../../../Functions/CheckIfWebpSupported'
-
-import {
-  Callout,
-} from '@blueprintjs/core'
-
+import CanUseWebP from '../../../Functions/CheckIfWebpSupported'
 
 export class ForgotPasswordBox extends Component {
   static propTypes = {
     toggleVisibleForm: PropTypes.func.isRequired,
+    resetPassword: PropTypes.func.isRequired,
   }
 
   constructor() {
     super()
     this.state = {
-      state: ComponentState.QUIESCENT,
-      username: '',
-      password: '',
+      state: ComponentStates.QUIESCENT,
+      email: '',
       errorMessage: '',
     }
   }
 
   handleInputChange = (event) => {
     const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
-
     this.setState({
-      [name]: value
+      [target.name]: target.value
     });
   }
 
@@ -44,39 +36,38 @@ export class ForgotPasswordBox extends Component {
 
     // Remove the error if it is showing
     this.setState({
-      state: ComponentState.LOADING,
+      state: ComponentStates.LOADING,
       errorMessage: '',
     })
 
     // Request sign in
-    this.props.resetPassword(e.target.elements.email.value.toLowerCase(), this.passwordResetSuccessful, this.passwordResetFailed)
+    this.props.resetPassword(this.state.email.toLowerCase(), this.passwordResetSuccessful, this.passwordResetFailed)
   }
 
 
   passwordResetSuccessful = (result) => {
-    console.log("password reset successful")
+    //console.log("password reset successful")
     this.setState({
-      state: ComponentState.FORGOT_PASSWORD_SUCCESS,
+      state: ComponentStates.FORGOT_PASSWORD_SUCCESS,
     })
   }
 
 
   passwordResetFailed = (result) => {
-    console.log(result)
+    //console.log(result)
     this.setState({
-      state: ComponentState.FORGOT_PASSWORD_FAILED,
+      state: ComponentStates.FORGOT_PASSWORD_FAILED,
       errorMessage: result.message,
     })
   }
 
+  // TODO: Can we fake this test to show with and without webp version
   getLogo = () => {
-
     const logoLocation = CanUseWebP ? "/images/logos/prind-tech-logo.webp" : "/images/logos/prind-tech-logo.png"
-
     return (
       <React.Fragment>
         <div className="logo-container">
-          <a href="https://prind.tech" target="_blank" rel="noopener noreferrer"><img src={logoLocation} alt="Prin D Tech logo"></img></a>
+          <a href="https://buildingim.com" target="_blank" rel="noopener noreferrer"><img src={logoLocation} alt="BuildingIM logo"></img></a>
         </div>
         <div className="welcome-text-heading">
           { Strings.WELCOME_TEXT }
@@ -90,7 +81,7 @@ export class ForgotPasswordBox extends Component {
 
   getForgotPasswordForm = () => {
     return (
-      <form className="sign-in-form form" onSubmit={this.resetPassword}>
+      <form id="forgot-password-form" className="sign-in-form" onSubmit={(e) => e.preventDefault()}>
 
         <input
           id="email"
@@ -99,19 +90,20 @@ export class ForgotPasswordBox extends Component {
           placeholder={ Strings.PLACEHOLDER_EMAIL }
           value={this.state.email}
           onChange={this.handleInputChange}
-          className={ this.state.email === null ? "default" : "filled" }/>
-
+          className={ this.state.email === '' ? "default" : "filled" }/>
 
         <div className='spacer' />
 
         <input
+          id="submit"
           type="submit"
           value={ Strings.BUTTON_SEND_PASSWORD_RESET_CODE }
-          className="submit-button" />
+          className="submit-button"
+          onClick={(e) => this.resetPassword(e)}/>
 
         <div className='spacer' />
 
-        <p className="sign-up-in-text" onClick={(e) => this.props.toggleVisibleForm(States.SIGNINFORM)}>{Strings.ALREADY_HAVE_AN_ACCOUNT}</p>
+        <p id="sign-in-form-text" className="sign-up-in-text" onClick={(e) => this.props.toggleVisibleForm(States.SIGNINFORM)}>{Strings.ALREADY_HAVE_AN_ACCOUNT}</p>
 
       </form>
     )
@@ -120,9 +112,9 @@ export class ForgotPasswordBox extends Component {
   getForgotPasswordFailed = () => {
     return(
       <React.Fragment>
-        <Callout style={{marginBottom: '15px'}} intent='danger'>
+        <div className='error-callout'>
           <p>{ this.state.errorMessage }</p>
-        </Callout>
+        </div>
         <div className='spacer' />
         {
           this.getForgotPasswordForm()
@@ -145,6 +137,7 @@ export class ForgotPasswordBox extends Component {
         <h3>{Strings.YOUR_CHANGE_PASSWORD_REQUEST_WAS_SUCCESS}</h3>
         <div className='spacer' />
         <input
+          id="submit"
           type="submit"
           value={ Strings.ACCOUNT_BACK_TO_LOGIN_PAGE }
           className="submit-button"
@@ -154,23 +147,20 @@ export class ForgotPasswordBox extends Component {
   }
 
   render () {
-
-    console.log(this.state.state)
-
     return (
       <React.Fragment>
         { this.getLogo() }
         {
-          this.state.state === ComponentState.QUIESCENT ? this.getForgotPasswordForm() : null
+          this.state.state === ComponentStates.QUIESCENT ? this.getForgotPasswordForm() : null
         }
         {
-          this.state.state === ComponentState.LOADING ? this.getSpinner() : null
+          this.state.state === ComponentStates.LOADING ? this.getSpinner() : null
         }
         {
-          this.state.state === ComponentState.FORGOT_PASSWORD_FAILED ? this.getForgotPasswordFailed() : null
+          this.state.state === ComponentStates.FORGOT_PASSWORD_FAILED ? this.getForgotPasswordFailed() : null
         }
         {
-          this.state.state === ComponentState.FORGOT_PASSWORD_SUCCESS ? this.getForgotPasswordSuccess() : null
+          this.state.state === ComponentStates.FORGOT_PASSWORD_SUCCESS ? this.getForgotPasswordSuccess() : null
         }
       </React.Fragment>
     )

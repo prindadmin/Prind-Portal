@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should click forgot password text 1`] = `
+exports[`Should click form 1`] = `
 <Fragment>
   <div
     className="logo-container"
@@ -24,10 +24,11 @@ exports[`Should click forgot password text 1`] = `
   <div
     className="welcome-text-body"
   >
-    Fil in your login details to access the portal
+    Fill in the form below to sign up to the Foundations portal
   </div>
   <form
-    className="sign-in-form"
+    className="sign-up-form form"
+    onSubmit={[Function]}
   >
     <input
       className="default"
@@ -35,7 +36,7 @@ exports[`Should click forgot password text 1`] = `
       name="email"
       onChange={[Function]}
       placeholder="Email"
-      type="email"
+      type="text"
       value=""
     />
     <input
@@ -47,21 +48,42 @@ exports[`Should click forgot password text 1`] = `
       type="password"
       value=""
     />
-    <p
-      className="forgot-your-password-text"
-      onClick={[Function]}
-    >
-      Forgot your password?
-    </p>
+    <input
+      className="default"
+      id="firstName"
+      name="firstName"
+      onChange={[Function]}
+      placeholder="First Name"
+      type="text"
+      value=""
+    />
+    <input
+      className="default"
+      id="lastName"
+      name="lastName"
+      onChange={[Function]}
+      placeholder="Surname"
+      type="text"
+      value=""
+    />
+    <input
+      className="default"
+      id="company"
+      name="company"
+      onChange={[Function]}
+      placeholder="Company"
+      type="text"
+      value=""
+    />
     <div
       className="spacer"
     />
     <input
-      id="signInButton"
-      name="signInButton"
+      className="submit-button"
+      id="signUpButton"
       onClick={[Function]}
       type="submit"
-      value="Login"
+      value="Sign up"
     />
     <div
       className="spacer"
@@ -70,13 +92,13 @@ exports[`Should click forgot password text 1`] = `
       className="sign-up-in-text"
       onClick={[Function]}
     >
-      Haven't got an account yet?  Click here to sign up
+      Already have an account?  Click here to sign in
     </p>
   </form>
 </Fragment>
 `;
 
-exports[`Should click sign up text 1`] = `
+exports[`Should click sign in text 1`] = `
 <Fragment>
   <div
     className="logo-container"
@@ -100,10 +122,11 @@ exports[`Should click sign up text 1`] = `
   <div
     className="welcome-text-body"
   >
-    Fil in your login details to access the portal
+    Fill in the form below to sign up to the Foundations portal
   </div>
   <form
-    className="sign-in-form"
+    className="sign-up-form form"
+    onSubmit={[Function]}
   >
     <input
       className="default"
@@ -111,7 +134,7 @@ exports[`Should click sign up text 1`] = `
       name="email"
       onChange={[Function]}
       placeholder="Email"
-      type="email"
+      type="text"
       value=""
     />
     <input
@@ -123,21 +146,42 @@ exports[`Should click sign up text 1`] = `
       type="password"
       value=""
     />
-    <p
-      className="forgot-your-password-text"
-      onClick={[Function]}
-    >
-      Forgot your password?
-    </p>
+    <input
+      className="default"
+      id="firstName"
+      name="firstName"
+      onChange={[Function]}
+      placeholder="First Name"
+      type="text"
+      value=""
+    />
+    <input
+      className="default"
+      id="lastName"
+      name="lastName"
+      onChange={[Function]}
+      placeholder="Surname"
+      type="text"
+      value=""
+    />
+    <input
+      className="default"
+      id="company"
+      name="company"
+      onChange={[Function]}
+      placeholder="Company"
+      type="text"
+      value=""
+    />
     <div
       className="spacer"
     />
     <input
-      id="signInButton"
-      name="signInButton"
+      className="submit-button"
+      id="signUpButton"
       onClick={[Function]}
       type="submit"
-      value="Login"
+      value="Sign up"
     />
     <div
       className="spacer"
@@ -146,7 +190,7 @@ exports[`Should click sign up text 1`] = `
       className="sign-up-in-text"
       onClick={[Function]}
     >
-      Haven't got an account yet?  Click here to sign up
+      Already have an account?  Click here to sign in
     </p>
   </form>
 </Fragment>
@@ -168,24 +212,9 @@ exports[`Should complete login 1`] = `
       />
     </a>
   </div>
-  <div
-    className="welcome-text-heading"
-  >
-    Welcome
-  </div>
-  <div
-    className="welcome-text-body"
-  >
-    Fil in your login details to access the portal
-  </div>
-  <div
-    className="lds-ring"
-  >
-    <div />
-    <div />
-    <div />
-    <div />
-  </div>
+  <p>
+    Thank you for signing up; please check your email for a confirmation email.
+  </p>
 </Fragment>
 `;
 
@@ -213,10 +242,11 @@ exports[`Should fail login 1`] = `
   <div
     className="welcome-text-body"
   >
-    Fil in your login details to access the portal
+    Fill in the form below to sign up to the Foundations portal
   </div>
   <form
-    className="sign-in-form"
+    className="sign-up-form form"
+    onSubmit={[Function]}
   >
     <input
       className="filled"
@@ -224,8 +254,8 @@ exports[`Should fail login 1`] = `
       name="email"
       onChange={[Function]}
       placeholder="Email"
-      type="email"
-      value="hootsuite@buildingim.com"
+      type="text"
+      value="Hootsuite@buildingim.com"
     />
     <input
       className="filled"
@@ -236,14 +266,32 @@ exports[`Should fail login 1`] = `
       type="password"
       value="Password1234!"
     />
-    <p
-      className="forgot-your-password-text"
-      onClick={[Function]}
-    >
-      Forgot your password?
-    </p>
-    <div
-      className="spacer"
+    <input
+      className="filled"
+      id="firstName"
+      name="firstName"
+      onChange={[Function]}
+      placeholder="First Name"
+      type="text"
+      value="Testy"
+    />
+    <input
+      className="filled"
+      id="lastName"
+      name="lastName"
+      onChange={[Function]}
+      placeholder="Surname"
+      type="text"
+      value="McTesterson"
+    />
+    <input
+      className="filled"
+      id="company"
+      name="company"
+      onChange={[Function]}
+      placeholder="Company"
+      type="text"
+      value="test company"
     />
     <div
       className="error-callout"
@@ -256,11 +304,11 @@ exports[`Should fail login 1`] = `
       className="spacer"
     />
     <input
-      id="signInButton"
-      name="signInButton"
+      className="submit-button"
+      id="signUpButton"
       onClick={[Function]}
       type="submit"
-      value="Login"
+      value="Sign up"
     />
     <div
       className="spacer"
@@ -269,93 +317,7 @@ exports[`Should fail login 1`] = `
       className="sign-up-in-text"
       onClick={[Function]}
     >
-      Haven't got an account yet?  Click here to sign up
-    </p>
-  </form>
-</Fragment>
-`;
-
-exports[`Should load with username prop 1`] = `
-<Fragment>
-  <div
-    className="logo-container"
-  >
-    <a
-      href="https://buildingim.com"
-      rel="noopener noreferrer"
-      target="_blank"
-    >
-      <img
-        alt="BuildingIM logo"
-        src="/images/logos/prind-tech-logo.webp"
-      />
-    </a>
-  </div>
-  <div
-    className="welcome-text-heading"
-  >
-    Welcome
-  </div>
-  <div
-    className="welcome-text-body"
-  >
-    Fil in your login details to access the portal
-  </div>
-  <form
-    className="sign-in-form"
-  >
-    <input
-      className="filled"
-      id="email"
-      name="email"
-      onChange={[Function]}
-      placeholder="Email"
-      type="email"
-      value="hootsuite@buildingim.com"
-    />
-    <input
-      className="filled"
-      id="password"
-      name="password"
-      onChange={[Function]}
-      placeholder="Password"
-      type="password"
-      value="Password1234!"
-    />
-    <p
-      className="forgot-your-password-text"
-      onClick={[Function]}
-    >
-      Forgot your password?
-    </p>
-    <div
-      className="spacer"
-    />
-    <div
-      className="error-callout"
-    >
-      <p>
-        failed
-      </p>
-    </div>
-    <div
-      className="spacer"
-    />
-    <input
-      id="signInButton"
-      name="signInButton"
-      onClick={[Function]}
-      type="submit"
-      value="Login"
-    />
-    <div
-      className="spacer"
-    />
-    <p
-      className="sign-up-in-text"
-      onClick={[Function]}
-    >
-      Haven't got an account yet?  Click here to sign up
+      Already have an account?  Click here to sign in
     </p>
   </form>
 </Fragment>
@@ -385,10 +347,11 @@ exports[`Should render sign in box 1`] = `
   <div
     className="welcome-text-body"
   >
-    Fil in your login details to access the portal
+    Fill in the form below to sign up to the Foundations portal
   </div>
   <form
-    className="sign-in-form"
+    className="sign-up-form form"
+    onSubmit={[Function]}
   >
     <input
       className="default"
@@ -396,7 +359,7 @@ exports[`Should render sign in box 1`] = `
       name="email"
       onChange={[Function]}
       placeholder="Email"
-      type="email"
+      type="text"
       value=""
     />
     <input
@@ -408,21 +371,42 @@ exports[`Should render sign in box 1`] = `
       type="password"
       value=""
     />
-    <p
-      className="forgot-your-password-text"
-      onClick={[Function]}
-    >
-      Forgot your password?
-    </p>
+    <input
+      className="default"
+      id="firstName"
+      name="firstName"
+      onChange={[Function]}
+      placeholder="First Name"
+      type="text"
+      value=""
+    />
+    <input
+      className="default"
+      id="lastName"
+      name="lastName"
+      onChange={[Function]}
+      placeholder="Surname"
+      type="text"
+      value=""
+    />
+    <input
+      className="default"
+      id="company"
+      name="company"
+      onChange={[Function]}
+      placeholder="Company"
+      type="text"
+      value=""
+    />
     <div
       className="spacer"
     />
     <input
-      id="signInButton"
-      name="signInButton"
+      className="submit-button"
+      id="signUpButton"
       onClick={[Function]}
       type="submit"
-      value="Login"
+      value="Sign up"
     />
     <div
       className="spacer"
@@ -431,7 +415,7 @@ exports[`Should render sign in box 1`] = `
       className="sign-up-in-text"
       onClick={[Function]}
     >
-      Haven't got an account yet?  Click here to sign up
+      Already have an account?  Click here to sign in
     </p>
   </form>
 </Fragment>

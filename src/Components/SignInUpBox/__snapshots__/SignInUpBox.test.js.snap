@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render forgot password 1`] = `
+<div
+  id="component-sign-in-up-box"
+>
+  <Suspense
+    fallback={<Spinner />}
+  >
+    <div
+      className="component-sign-in-up-box-content-container"
+    >
+      <lazy
+        toggleVisibleForm={[Function]}
+      />
+    </div>
+  </Suspense>
+</div>
+`;
+
+exports[`Should render password reset 1`] = `
+<div
+  id="component-sign-in-up-box"
+>
+  <Suspense
+    fallback={<Spinner />}
+  >
+    <div
+      className="component-sign-in-up-box-content-container"
+    >
+      <lazy
+        toggleVisibleForm={[Function]}
+      />
+    </div>
+  </Suspense>
+</div>
+`;
+
+exports[`Should render sign in 1`] = `
+<div
+  id="component-sign-in-up-box"
+>
+  <Suspense
+    fallback={<Spinner />}
+  >
+    <div
+      className="component-sign-in-up-box-content-container"
+    >
+      <lazy
+        toggleVisibleForm={[Function]}
+        username="testing@buildingim.com"
+      />
+    </div>
+  </Suspense>
+</div>
+`;
+
+exports[`Should render sign in, change props to logged in, and update 1`] = `
+<div
+  id="component-sign-in-up-box"
+>
+  <Suspense
+    fallback={<Spinner />}
+  >
+    <div
+      className="component-sign-in-up-box-content-container"
+    >
+      <lazy
+        toggleVisibleForm={[Function]}
+        username="testing@buildingim.com"
+      />
+    </div>
+  </Suspense>
+</div>
+`;
+
+exports[`Should render sign up 1`] = `
+<div
+  id="component-sign-in-up-box"
+>
+  <Suspense
+    fallback={<Spinner />}
+  >
+    <div
+      className="component-sign-in-up-box-content-container"
+    >
+      <lazy
+        toggleVisibleForm={[Function]}
+      />
+    </div>
+  </Suspense>
+</div>
+`;

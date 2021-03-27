@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render loading spinner with given state 1`] = `
+<div
+  id="component-sign-in-up-box"
+>
+  <div
+    className="lds-ring"
+    style={Object {}}
+  >
+    <div
+      style={Object {}}
+    />
+    <div
+      style={Object {}}
+    />
+    <div
+      style={Object {}}
+    />
+    <div
+      style={Object {}}
+    />
+  </div>
+</div>
+`;

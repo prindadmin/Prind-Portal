@@ -1,6 +1,6 @@
 
 import { combineReducers } from 'redux'
-import * as authReducer from './authReducer'
+import * as auth from './auth'
 import * as userReducer from './userReducer'
 import * as projectsReducer from './projectsReducer'
 import * as memberReducer from './memberReducer'
@@ -9,7 +9,7 @@ import { reducer as formReducer } from 'redux-form'
 import * as stagePageReducer from './stagePageReducer'
 
 const Reducers = combineReducers({
-  auth: authReducer.reducer,
+  auth: auth.reducer,
   user: userReducer.reducer,
   projects: projectsReducer.reducer,
   foundations: foundationsReducer.reducer,

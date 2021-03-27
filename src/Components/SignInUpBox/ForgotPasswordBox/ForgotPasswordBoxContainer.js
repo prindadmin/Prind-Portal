@@ -1,21 +1,18 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import * as authReducer from '../../../Reducers/authReducer'
+import * as auth from '../../../Reducers/auth'
 
 import ForgotPasswordBox from './ForgotPasswordBox'
 
 const mapStatetoProps = state => {
-  return {
-    auth: state.auth,
-    user: state.user,
-  }
+  return {}
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     resetPassword: (userDetails, resolve, reject) => {
-      dispatch(authReducer.forgotPassword(userDetails, resolve, reject))
+      dispatch(auth.forgotPassword(userDetails, resolve, reject))
     }
   }
 }

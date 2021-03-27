@@ -1,6 +1,8 @@
-import React, { Component, lazy } from 'react'
+import React, { Component, lazy, Suspense } from 'react'
 import PropTypes from 'prop-types'
 import ReactGA from 'react-ga';
+
+import LoadingSpinner from '../LoadingSpinner'
 
 import * as Endpoints from '../../Data/Endpoints'
 import * as States from '../../States'
@@ -20,6 +22,18 @@ export class SignInUpBox extends Component {
     isForgotPassword: PropTypes.bool.isRequired,
     isPasswordReset: PropTypes.bool.isRequired,
     username: PropTypes.string,
+    history: PropTypes.shape({
+      push: PropTypes.func.isRequired,
+    }).isRequired,
+    location: PropTypes.shape({
+      pathname: PropTypes.string.isRequired
+    }).isRequired,
+    auth: PropTypes.shape({
+      isSignedIn: PropTypes.string.isRequired
+    }).isRequired,
+    user: PropTypes.shape({
+      currentRoute: PropTypes.string.isRequired
+    }).isRequired
   }
 
 
@@ -37,9 +51,7 @@ export class SignInUpBox extends Component {
     this.checkIfLoggedIn({})
   }
 
-
-  componentDidUpdate(prevState, prevProps) {
-    console.log("updating component")
+  componentDidUpdate(prevProps) {
     this.checkIfLoggedIn(prevProps)
   }
 
@@ -48,7 +60,7 @@ export class SignInUpBox extends Component {
 
     if (auth !== prevProps.auth) {
       if (auth.isSignedIn === States.AUTH_SUCCESS) {
-        console.log("redirecting to logged in page")
+        //console.log("redirecting to logged in page")
         history.push(user.currentRoute)
         return;
       }
@@ -133,25 +145,29 @@ export class SignInUpBox extends Component {
       showForgotPasswordForm: false,
       showResetPasswordForm: false,
     })
+    this.props.history.push(Endpoints.SIGNINPAGE)
+    ReactGA.pageview(this.props.location.pathname)
   }
 
   render () {
     return (
       <div id='component-sign-in-up-box'>
-        <div className="component-sign-in-up-box-content-container">
-            {
-              this.state.showSignInForm ? this.showSignInForm() : null
-            }
-            {
-              this.state.showSignUpForm ? this.showSignUpForm() : null
-            }
-            {
-              this.state.showForgotPasswordForm ? this.showForgotPasswordForm() : null
-            }
-            {
-              this.state.showResetPasswordForm ? this.showPasswordResetForm() : null
-            }
-        </div>
+        <Suspense fallback={<LoadingSpinner />}>
+          <div className="component-sign-in-up-box-content-container">
+              {
+                this.state.showSignInForm ? this.showSignInForm() : null
+              }
+              {
+                this.state.showSignUpForm ? this.showSignUpForm() : null
+              }
+              {
+                this.state.showForgotPasswordForm ? this.showForgotPasswordForm() : null
+              }
+              {
+                this.state.showResetPasswordForm ? this.showPasswordResetForm() : null
+              }
+          </div>
+        </Suspense>
       </div>
     )
   }

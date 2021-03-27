@@ -175,6 +175,18 @@ exports[`should render 1`] = `
                   reference="sign-in-up-box"
                 >
                   <SignInUpBox
+                    auth={
+                      Object {
+                        "error": Object {},
+                        "hasChangedPassword": "AUTH_UNKNOWN",
+                        "hasSentCode": "AUTH_UNKNOWN",
+                        "hasSignedUp": "AUTH_UNKNOWN",
+                        "info": Object {},
+                        "isConfirmed": "AUTH_UNKNOWN",
+                        "isSignedIn": "AUTH_UNKNOWN",
+                        "passwordResetRequired": "AUTH_UNKNOWN",
+                      }
+                    }
                     backgroundColor="#FFFFFF"
                     history={
                       Object {
@@ -217,13 +229,24 @@ exports[`should render 1`] = `
                       }
                     }
                     reference="sign-in-up-box"
+                    user={
+                      Object {
+                        "currentRoute": "/profile",
+                        "details": Object {},
+                        "fetching": false,
+                      }
+                    }
                   >
                     <div
                       id="component-sign-in-up-box"
                     >
-                      <div
-                        className="component-sign-in-up-box-content-container"
-                      />
+                      <Suspense
+                        fallback={<Spinner />}
+                      >
+                        <div
+                          className="component-sign-in-up-box-content-container"
+                        />
+                      </Suspense>
                     </div>
                   </SignInUpBox>
                 </Connect(SignInUpBox)>

@@ -1,20 +1,19 @@
-import { Provider, connect } from 'react-redux'
-import { shallow, mount } from 'enzyme';
+import { Provider } from 'react-redux'
 import configureStore from 'redux-mock-store';
 import renderer from 'react-test-renderer';
 
-import ReactGA from 'react-ga';
-import { HashRouter as Router } from "react-router-dom";
+import {
+  HashRouter as Router
+} from "react-router-dom";
 
+import * as Component from './SignInUpBoxContainer'
 import * as States from '../../States'
-import Component from './SignInPageContainer'
+
+// https://www.robinwieruch.de/react-connected-component-test
 
 const mockStore = configureStore([]);
-var component;
 
-beforeAll(() => {
-  ReactGA.initialize('dummy', { testMode: true });
-}); 
+var component;
 
 beforeEach(() => {
   const store = mockStore({
@@ -34,18 +33,32 @@ beforeEach(() => {
       details: {},
     }
   });
-  const props = {};
 
-  component = mount(
+  const mockHistoryPush = jest.fn()
+  const props = {
+    isSignIn: true,
+    isSignUp: false,
+    isForgotPassword: false,
+    isPasswordReset: false,
+    username: "testing@buildingim.com",
+    history: {
+      push: mockHistoryPush
+    },
+    location: {
+      pathname: '/signin'
+    }
+  };
+
+  component = renderer.create(
     <Provider store={store}>
       <Router>
-        <Component {...props} />
+        <Component.default {...props} />
       </Router>
     </Provider>
   );
 });
 
 
-it('should render', () => {
-  expect(component).toMatchSnapshot();
+it('should render loading spinner with given state', () => {
+  expect(component.toJSON()).toMatchSnapshot();
 });

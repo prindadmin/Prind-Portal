@@ -4,14 +4,10 @@ import PropTypes from 'prop-types'
 // Data
 import * as Strings from '../../../Data/Strings'
 import * as FormOptions from '../../../States'
-import * as ComponentState from '../States'
+import * as ComponentStates from '../../ComponentStates'
 
 // Components
-import { CanUseWebP } from '../../../Functions/CheckIfWebpSupported'
-
-import {
-  Callout,
-} from '@blueprintjs/core'
+import CanUseWebP from '../../../Functions/CheckIfWebpSupported'
 
 // TODO: FUTURE: Make the "Click here" text change the mouse icon like a real link
 // TODO: FUTURE: Add icons to username and password boxes
@@ -20,16 +16,22 @@ export class SignInBox extends Component {
   static propTypes = {
     toggleVisibleForm: PropTypes.func.isRequired,
     username: PropTypes.string,
+    signIn: PropTypes.func.isRequired,
+    history: PropTypes.shape({
+      push: PropTypes.func.isRequired
+    }).isRequired,
+    user: PropTypes.shape({
+      currentRoute: PropTypes.string.isRequired
+    }).isRequired
   }
 
   constructor(props) {
     super()
-    const email = props.username !== undefined ? props.username : ''
     this.state = {
-      email,
+      email: props.username === undefined ? '' : props.username,
       password: '',
       errorMessage: '',
-      state: ComponentState.QUIESCENT,
+      state: ComponentStates.QUIESCENT,
     }
   }
 
@@ -39,16 +41,13 @@ export class SignInBox extends Component {
   handleInputChange = (event) => {
     //console.log(event)
     const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
-
     this.setState({
-      [name]: value
+      [name]: target.value
     });
   }
 
   forgotPasswordClicked = () => {
-    console.log("forgot password was clicked")
     this.props.toggleVisibleForm(FormOptions.FORGOTPASSWORDFORM)
   }
 
@@ -63,7 +62,7 @@ export class SignInBox extends Component {
 
     // Remove the error if it is showing
     this.setState({
-      state: ComponentState.LOADING,
+      state: ComponentStates.LOADING,
       errorMessage: '',
     })
 
@@ -76,18 +75,15 @@ export class SignInBox extends Component {
 
 
   signInSuccessful = (result) => {
-    console.log("sign in successful")
-    this.setState({
-      state: ComponentState.SIGN_IN_SUCCESS,
-    })
+    //console.log("sign in successful")
     this.props.history.push(this.props.user.currentRoute)
   }
 
 
   signInFailed = (result) => {
-    console.log(result)
+    //console.log(result)
     this.setState({
-        state: ComponentState.SIGN_IN_FAILED,
+        state: ComponentStates.SIGN_IN_FAILED,
         errorMessage: result.message,
     })
   }
@@ -98,7 +94,7 @@ export class SignInBox extends Component {
     return (
       <React.Fragment>
         <div className="logo-container">
-          <a href="https://prind.tech" target="_blank" rel="noopener noreferrer"><img src={logoLocation} alt="Prin D Tech logo"></img></a>
+          <a href="https://buildingim.com" target="_blank" rel="noopener noreferrer"><img src={logoLocation} alt="BuildingIM logo"></img></a>
         </div>
         <div className="welcome-text-heading">
           { Strings.WELCOME_TEXT }
@@ -118,18 +114,29 @@ export class SignInBox extends Component {
     )
   }
 
+  getErrorCallout = () => {
+    return (
+      <React.Fragment>
+        <div className='error-callout'>
+          <p>{ this.state.errorMessage }</p>
+        </div>
+        <div className='spacer' />
+      </React.Fragment>
+    )
+  }
+
   getSignInForm = () => {
     return (
-      <form className="sign-in-form form">
+      <form className="sign-in-form">
 
         <input
           id="email"
           name="email"
-          type="text"
+          type="email"
           placeholder={ Strings.PLACEHOLDER_EMAIL }
           value={this.state.email}
           onChange={this.handleInputChange}
-          className={ this.state.email === null ? "default" : "filled" }/>
+          className={ this.state.email === '' ? "default" : "filled" }/>
 
         <input
           id="password"
@@ -138,17 +145,13 @@ export class SignInBox extends Component {
           placeholder={ Strings.PLACEHOLDER_PASSWORD }
           value={this.state.password}
           onChange={this.handleInputChange}
-          className={ this.state.password === null ? "default" : "filled" }/>
+          className={ this.state.password === '' ? "default" : "filled" }/>
 
         <p className="forgot-your-password-text" onClick={this.forgotPasswordClicked}>{Strings.BUTTON_FORGOT_PASSWORD}</p>
 
         <div className='spacer' />
         {
-          this.state.state === ComponentState.SIGN_IN_FAILED ?
-          <Callout style={{marginBottom: '15px'}} intent='danger'>
-            <p>{ this.state.errorMessage }</p>
-          </Callout> :
-          null
+          this.state.state === ComponentStates.SIGN_IN_FAILED ? this.getErrorCallout() : null
         }
 
         <input
@@ -156,7 +159,6 @@ export class SignInBox extends Component {
           name="signInButton"
           type="submit"
           value={ Strings.BUTTON_LOGIN }
-          className="submit-button"
           onClick={(e) => this.signIn(e)}/>
 
         <div className='spacer' />
@@ -173,13 +175,13 @@ export class SignInBox extends Component {
       <React.Fragment>
         { this.getLogo() }
         {
-          this.state.state === ComponentState.QUIESCENT ? this.getSignInForm() : null
+          this.state.state === ComponentStates.QUIESCENT ? this.getSignInForm() : null
         }
         {
-          this.state.state === ComponentState.LOADING ? this.getSpinner() : null
+          this.state.state === ComponentStates.LOADING ? this.getSpinner() : null
         }
         {
-          this.state.state === ComponentState.SIGN_IN_FAILED ? this.getSignInForm() : null
+          this.state.state === ComponentStates.SIGN_IN_FAILED ? this.getSignInForm() : null
         }
       </React.Fragment>
     )

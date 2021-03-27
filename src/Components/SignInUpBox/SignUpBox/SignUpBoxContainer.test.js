@@ -1,22 +1,23 @@
-import { Provider, connect } from 'react-redux'
-import { shallow, mount } from 'enzyme';
+import { Provider } from 'react-redux'
 import configureStore from 'redux-mock-store';
 import renderer from 'react-test-renderer';
 
+import {
+  HashRouter as Router
+} from "react-router-dom";
 import ReactGA from 'react-ga';
-import { HashRouter as Router } from "react-router-dom";
 
-import * as States from '../../States'
-import Component from './SignInPageContainer'
+import * as Component from './SignUpBoxContainer'
+import * as States from '../../../States'
+
+// https://www.robinwieruch.de/react-connected-component-test
 
 const mockStore = configureStore([]);
+
 var component;
 
-beforeAll(() => {
-  ReactGA.initialize('dummy', { testMode: true });
-}); 
-
 beforeEach(() => {
+  ReactGA.initialize('dummy', { testMode: true });
   const store = mockStore({
     auth: {
       info: {},
@@ -34,18 +35,25 @@ beforeEach(() => {
       details: {},
     }
   });
-  const props = {};
 
-  component = mount(
+  const mockHistoryPush = jest.fn()
+  const props = {
+    toggleVisibleForm: function() { },
+    history: {
+      push: mockHistoryPush,
+    },
+  };
+
+  component = renderer.create(
     <Provider store={store}>
       <Router>
-        <Component {...props} />
+        <Component.default {...props} />
       </Router>
     </Provider>
   );
 });
 
 
-it('should render', () => {
-  expect(component).toMatchSnapshot();
+it('should render with given state', () => {
+  expect(component.toJSON()).toMatchSnapshot();
 });
