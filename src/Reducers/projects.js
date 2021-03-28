@@ -70,14 +70,12 @@ export const updateChosenProject = ( project, resolve, reject ) => {
 }
 
 export const saveProjectID = ( projectId ) => {
-
-  if (saveProjectID === undefined) {
+  if (projectId === undefined) {
     return {
       type: action.PROJECT_SET_STATE,
       payload: blankChosenState
     }
   }
-
   return {
     type: action.PROJECT_SET_STATE,
     payload: {
@@ -101,21 +99,25 @@ export const createProject = ( projectValues, resolve, reject ) => {
   }
 }
 
-export const updateProjectDetails = ( projectID, projectValues ) => {
+export const updateProjectDetails = ( projectID, projectValues, resolve, reject ) => {
   return {
     type: action.PROJECT_UPDATE_PROJECT_DETAILS_REQUESTED,
     payload: {
       projectID,
       projectValues,
+      resolve,
+      reject
     }
   }
 }
 
-export const getCurrentMembers = ( projectID ) => {
+export const getCurrentMembers = ( projectID, resolve, reject ) => {
   return {
     type: action.PROJECT_GET_CURRENT_MEMBERS_REQUESTED,
     payload: {
       projectID,
+      resolve,
+      reject
     }
   }
 }

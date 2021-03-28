@@ -42,7 +42,6 @@ it('Projects Reducer - init ', () => {
 
 
 it('Projects Reducer - resetChosenProject ', () => {
-
   const returnValue = {
     type: Actions.PROJECT_RESET_CHOSEN_PROJECT,
     payload: blankChosenState
@@ -51,43 +50,176 @@ it('Projects Reducer - resetChosenProject ', () => {
   expect(result).toEqual(returnValue);
 });
 
+
+it('Projects Reducer - resetDownloadURL ', () => {
+  const returnValue = {
+    type: Actions.PROJECT_RESET_DOWNLOAD_URL,
+    payload: {
+      downloadURL: "",
+    }
+  }
+  const result = Functions.resetDownloadURL()
+  expect(result).toEqual(returnValue);
+});
+
+
+it('Projects Reducer - getAccessibleProjects ', () => {
+  const mockResolve = jest.fn()
+  const mockReject = jest.fn()
+  const returnValue = {
+    type: Actions.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUESTED,
+    payload: {
+      resolve: mockResolve,
+      reject: mockReject
+    }
+  }
+  const result = Functions.getAccessibleProjects(mockResolve, mockReject)
+  expect(result).toEqual(returnValue);
+});
+
+
+it('Projects Reducer - updateChosenProject ', () => {
+  const chosenProject = {
+    projectId: "123"
+  }
+  const mockResolve = jest.fn()
+  const mockReject = jest.fn()
+  const returnValue = {
+    type: Actions.PROJECT_UPDATE_PROJECT_CHOSEN_REQUESTED,
+    payload: {
+      project: chosenProject,
+      resolve: mockResolve,
+      reject: mockReject
+    }
+  }
+  const result = Functions.updateChosenProject(chosenProject, mockResolve, mockReject)
+  expect(result).toEqual(returnValue);
+});
+
+
+it('Projects Reducer - saveProjectID with id provided', () => {
+  const projectId = "123"
+  const mockResolve = jest.fn()
+  const mockReject = jest.fn()
+  const returnValue = {
+    type: Actions.PROJECT_SET_STATE,
+    payload: {
+      chosenProject: {
+        projectName: Strings.NO_PROJECT_SELECTED,
+        projectId: "123",
+        projectType: "",
+      }
+    }
+  }
+  const result = Functions.saveProjectID(projectId)
+  expect(result).toEqual(returnValue);
+});
+
+
+it('Projects Reducer - saveProjectID without id provided', () => {
+  const projectId = "123"
+  const mockResolve = jest.fn()
+  const mockReject = jest.fn()
+  const returnValue = {
+    type: Actions.PROJECT_SET_STATE,
+    payload: {
+      chosenProject: {
+        projectName: Strings.NO_PROJECT_SELECTED,
+        projectId: "",
+        projectType: "",
+      }
+    }
+  }
+  const result = Functions.saveProjectID()
+  expect(result).toEqual(returnValue);
+});
+
+
+it('Projects Reducer - createProject ', () => {
+  const projectValues = {
+    projectId: "123"
+  }
+  const mockResolve = jest.fn()
+  const mockReject = jest.fn()
+  const returnValue = {
+    type: Actions.PROJECT_CREATE_PROJECT_REQUESTED,
+    payload: {
+      projectValues,
+      resolve: mockResolve,
+      reject: mockReject
+    }
+  }
+  const result = Functions.createProject(projectValues, mockResolve, mockReject)
+  expect(result).toEqual(returnValue);
+});
+
+
+it('Projects Reducer - updateProjectDetails ', () => {
+  const projectID = "123"
+  const projectValues = {
+    projectName: "hello, project"
+  }
+  const mockResolve = jest.fn()
+  const mockReject = jest.fn()
+  const returnValue = {
+    type: Actions.PROJECT_UPDATE_PROJECT_DETAILS_REQUESTED,
+    payload: {
+      projectID,
+      projectValues,
+      resolve: mockResolve,
+      reject: mockReject
+    }
+  }
+  const result = Functions.updateProjectDetails(projectID, projectValues, mockResolve, mockReject)
+  expect(result).toEqual(returnValue);
+});
+
+
+it('Projects Reducer - getCurrentMembers ', () => {
+  const projectID = "123"
+  const mockResolve = jest.fn()
+  const mockReject = jest.fn()
+  const returnValue = {
+    type: Actions.PROJECT_GET_CURRENT_MEMBERS_REQUESTED,
+    payload: {
+      projectID,
+      resolve: mockResolve,
+      reject: mockReject
+    }
+  }
+  const result = Functions.getCurrentMembers(projectID, mockResolve, mockReject)
+  expect(result).toEqual(returnValue);
+});
+
+
+it('Projects Reducer - uploadFile ', () => {
+  const projectID = "123"
+  const pageName = "design"
+  const fieldID = 2
+  const fileDetails = {
+    name: "some name"
+  }
+  const fieldType = "file"
+
+  const mockResolve = jest.fn()
+  const mockReject = jest.fn()
+  const returnValue = {
+    type: Actions.PROJECT_UPLOAD_FILE_REQUESTED,
+    payload: {
+      projectID,
+      pageName,
+      fieldID,
+      fileDetails,
+      fieldType,
+      resolve: mockResolve,
+      reject: mockReject
+    }
+  }
+  const result = Functions.uploadFile(projectID, pageName, fieldID, fileDetails, fieldType, mockResolve, mockReject)
+  expect(result).toEqual(returnValue);
+});
+
 /*
-it('Projects Reducer - removeMemberFromProject ', () => {
-  const projectID = "123"
-  const memberUsername = "aaaa-aaaa-aaaaaaaa-aaaa-aaaa"
-  const mockResolve = jest.fn()
-  const mockReject = jest.fn()
-  const returnValue = {
-    type: Actions.PROJECT_REMOVE_PROJECT_REQUESTED,
-    payload: {
-      projectID,
-      memberUsername,
-      resolve: mockResolve,
-      reject: mockReject
-    }
-  }
-  const result = Functions.removeMemberFromProject(projectID, memberUsername, mockResolve, mockReject)
-  expect(result).toEqual(returnValue);
-});
-
-
-it('Projects Reducer - getRoles ', () => {
-  const projectID = "123"
-  const mockResolve = jest.fn()
-  const mockReject = jest.fn()
-  const returnValue = {
-    type: Actions.PROJECT_GET_AVAILABLE_ROLES_REQUESTED,
-    payload: {
-      projectID,
-      resolve: mockResolve,
-      reject: mockReject
-    }
-  }
-  const result = Functions.getRoles(projectID, mockResolve, mockReject)
-  expect(result).toEqual(returnValue);
-});
-
-
 it('Projects Reducer - getUserAccreditations ', () => {
   const username = "aaaa-aaaa-aaaaaaaa-aaaa-aaaa"
   const mockResolve = jest.fn()
