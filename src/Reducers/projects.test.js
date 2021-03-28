@@ -219,24 +219,118 @@ it('Projects Reducer - uploadFile ', () => {
   expect(result).toEqual(returnValue);
 });
 
-/*
-it('Projects Reducer - getUserAccreditations ', () => {
-  const username = "aaaa-aaaa-aaaaaaaa-aaaa-aaaa"
+
+it('Projects Reducer - downloadFile ', () => {
+  const projectID = "123"
+  const pageName = "design"
+  const fieldID = 2
+  const version = "123456"
+
   const mockResolve = jest.fn()
   const mockReject = jest.fn()
   const returnValue = {
-    type: Actions.PROJECT_SET_STATE,
+    type: Actions.PROJECT_DOWNLOAD_FILE_REQUESTED,
     payload: {
-      currentMember: {
-        username,
-        accreditations: UserAccreditations,
-      },
+      projectID,
+      pageName,
+      fieldID,
+      version,
+      resolve: mockResolve,
+      reject: mockReject
     }
   }
-  const result = Functions.tempGetUserAccreditations(username, mockResolve, mockReject)
+  const result = Functions.downloadFile(projectID, pageName, fieldID, version, mockResolve, mockReject)
   expect(result).toEqual(returnValue);
 });
-*/
+
+
+it('Projects Reducer - createField ', () => {
+  const projectID = "123"
+  const pageName = "design"
+  const fieldDetails = {
+    test: "test"
+  }
+  const mockResolve = jest.fn()
+  const mockReject = jest.fn()
+  const returnValue = {
+    type: Actions.PROJECT_CREATE_FIELD_REQUESTED,
+    payload: {
+      projectID,
+      pageName,
+      fieldDetails,
+      resolve: mockResolve,
+      reject: mockReject
+    }
+  }
+  const result = Functions.createField(projectID, pageName, fieldDetails, mockResolve, mockReject)
+  expect(result).toEqual(returnValue);
+});
+
+
+it('Projects Reducer - updateField ', () => {
+  const projectID = "123"
+  const pageName = "design"
+  const fieldID = 2
+  const fieldDetails = {
+    test: "test"
+  }
+  const mockResolve = jest.fn()
+  const mockReject = jest.fn()
+  const returnValue = {
+    type: Actions.PROJECT_UPDATE_FIELD_REQUESTED,
+    payload: {
+      projectID,
+      pageName,
+      fieldID,
+      fieldDetails,
+      resolve: mockResolve,
+      reject: mockReject
+    }
+  }
+  const result = Functions.updateField(projectID, pageName, fieldID, fieldDetails, mockResolve, mockReject)
+  expect(result).toEqual(returnValue);
+});
+
+
+it('Projects Reducer - requestSignature ', () => {
+  const projectID = "123"
+  const pageName = "design"
+  const fieldID = 2
+  const members = ["1", "2"]
+  const mockResolve = jest.fn()
+  const mockReject = jest.fn()
+  const returnValue = {
+    type: Actions.PROJECT_FILE_SIGNATURE_REQUEST_REQUESTED,
+    payload: {
+      projectID,
+      pageName,
+      fieldID,
+      members,
+      resolve: mockResolve,
+      reject: mockReject
+    }
+  }
+  const result = Functions.requestSignature(projectID, pageName, fieldID, members, mockResolve, mockReject)
+  expect(result).toEqual(returnValue);
+});
+
+
+it('Projects Reducer - deleteProject ', () => {
+  const projectID = "123"
+  const mockResolve = jest.fn()
+  const mockReject = jest.fn()
+  const returnValue = {
+    type: Actions.PROJECT_DELETE_PROJECT_REQUESTED,
+    payload: {
+      projectID,
+      resolve: mockResolve,
+      reject: mockReject
+    }
+  }
+  const result = Functions.deleteProject(projectID, mockResolve, mockReject)
+  expect(result).toEqual(returnValue);
+});
+
 
 it('test reducer handler with non-existent action', () => {
   const mockResolve = jest.fn()
@@ -285,12 +379,12 @@ it('test reducer handler with set state action', () => {
   expect(result).toEqual(action.payload);
 });
 
-/*
-it('test reducer handler with add member requested action', () => {
+
+it('test reducer handler with get accessible projects requested', () => {
   const mockResolve = jest.fn()
   const mockReject = jest.fn()
   const action = {
-    type: Actions.PROJECT_ADD_PROJECT_REQUESTED,
+    type: Actions.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUESTED,
     payload: {
       test: 'test',
       resolve: mockResolve,
@@ -301,7 +395,7 @@ it('test reducer handler with add member requested action', () => {
   expect(result).toEqual({});
 });
 
-
+/*
 it('test reducer handler with remove member requested action', () => {
   const mockResolve = jest.fn()
   const mockReject = jest.fn()
