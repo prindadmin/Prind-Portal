@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import * as projectsReducer from '../../../../../Reducers/projectsReducer'
+import * as projects from '../../../../../Reducers/projects'
 
 import DownloadBox from './DownloadBox'
 
@@ -13,10 +13,10 @@ const mapStatetoProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     downloadFile: (projectID, pageName, fieldID, version, resolve, reject) => {
-      dispatch(projectsReducer.downloadFile(projectID, pageName, fieldID, version, resolve, reject))
+      dispatch(projects.downloadFile(projectID, pageName, fieldID, version, resolve, reject))
     },
     resetDownloadURL: () => {
-      dispatch(projectsReducer.resetDownloadURL())
+      dispatch(projects.resetDownloadURL())
     }
   }
 }

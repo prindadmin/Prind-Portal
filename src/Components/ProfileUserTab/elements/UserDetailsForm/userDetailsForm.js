@@ -225,7 +225,7 @@ export class Page extends Component {
                   : null
                 }
               </div>
-              <h6>{Strings.MEMBER_UPLOAD_DIFFERENT_AVATAR}</h6>
+              <h6>{Strings.MEMBERS_UPLOAD_DIFFERENT_AVATAR}</h6>
 
               <FileInput
                 className="field bp3-fill"
@@ -261,7 +261,7 @@ export class Page extends Component {
 
               <div className="row">
                 <FormGroup
-                  label={Strings.MEMBER_FIRST_NAME}
+                  label={Strings.MEMBERS_FIRST_NAME}
                   labelFor="firstName"
                   labelInfo={Strings.FIELD_IS_REQUIRED}
                   className="col-lg-6 col-md-12"
@@ -270,14 +270,14 @@ export class Page extends Component {
                     name="firstName"
                     validate={[Validators.required, Validators.maxLength64]}
                     component={FormInputs.TextInput}
-                    placeholder={Strings.MEMBER_FIRST_NAME}
+                    placeholder={Strings.MEMBERS_FIRST_NAME}
                     disabled={true}
                     //disabled={initialValues.foundationsID !== null}
                   />
                 </FormGroup>
 
                 <FormGroup
-                  label={Strings.MEMBER_LAST_NAME}
+                  label={Strings.MEMBERS_LAST_NAME}
                   labelFor="lastName"
                   labelInfo={Strings.FIELD_IS_REQUIRED}
                   className="col-lg-6 col-md-12"
@@ -286,27 +286,27 @@ export class Page extends Component {
                     name="lastName"
                     validate={[Validators.required, Validators.maxLength64]}
                     component={FormInputs.TextInput}
-                    placeholder={Strings.MEMBER_LAST_NAME}
+                    placeholder={Strings.MEMBERS_LAST_NAME}
                     disabled={true}
                     //disabled={initialValues.foundationsID !== null}
                   />
                 </FormGroup>
 
                 <FormGroup
-                  label={Strings.MEMBER_FOUNDATIONS_ID}
+                  label={Strings.MEMBERS_FOUNDATIONS_ID}
                   labelFor="foundationsID"
                   className="col-lg-6 col-md-12"
                 >
                   <Field
                     name="foundationsID"
                     component={FormInputs.TextInput}
-                    placeholder={Strings.MEMBER_FOUNDATIONS_ID_NOT_FOUND}
+                    placeholder={Strings.MEMBERS_FOUNDATIONS_ID_NOT_FOUND}
                     disabled={true}
                   />
                 </FormGroup>
 
                 <FormGroup
-                  label={Strings.MEMBER_EMAIL_ADDRESS}
+                  label={Strings.MEMBERS_EMAIL_ADDRESS}
                   labelFor="emailAddress"
                   className="col-lg-6 col-md-12"
                 >
@@ -314,13 +314,13 @@ export class Page extends Component {
                     name="emailAddress"
                     validate={[Validators.required, Validators.isEmailAddress]}
                     component={FormInputs.TextInput}
-                    placeholder={Strings.MEMBER_EMAIL_ADDRESS}
+                    placeholder={Strings.MEMBERS_EMAIL_ADDRESS}
                     disabled={true}
                   />
                 </FormGroup>
 
                 <FormGroup
-                  label={Strings.MEMBER_LANDLINE_PHONE_NUMBER_WORK}
+                  label={Strings.MEMBERS_LANDLINE_PHONE_NUMBER_WORK}
                   labelFor="homePhoneNumber"
                   className="col-lg-6 col-md-12"
                 >
@@ -328,14 +328,14 @@ export class Page extends Component {
                     name="homePhoneNumber"
                     validate={[Validators.maxLength32]}
                     component={FormInputs.TextInput}
-                    placeholder={Strings.MEMBER_LANDLINE_PHONE_NUMBER_WORK}
+                    placeholder={Strings.MEMBERS_LANDLINE_PHONE_NUMBER_WORK}
                     disabled={true}
                     //disabled={initialValues.foundationsID !== null}
                   />
                 </FormGroup>
 
                 <FormGroup
-                  label={Strings.MEMBER_MOBILE_PHONE_NUMBER_WORK}
+                  label={Strings.MEMBERS_MOBILE_PHONE_NUMBER_WORK}
                   labelFor="mobilePhoneNumber"
                   className="col-lg-6 col-md-12"
                 >
@@ -343,7 +343,7 @@ export class Page extends Component {
                     name="mobilePhoneNumber"
                     validate={[Validators.maxLength32]}
                     component={FormInputs.TextInput}
-                    placeholder={Strings.MEMBER_MOBILE_PHONE_NUMBER_WORK}
+                    placeholder={Strings.MEMBERS_MOBILE_PHONE_NUMBER_WORK}
                     disabled={true}
                     //disabled={initialValues.foundationsID !== null}
                   />

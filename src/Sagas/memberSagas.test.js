@@ -29,7 +29,7 @@ const mockReject = jest.fn()
 var it = sagaHelper(MemberSagas.init());
 it('test init', async (result) => {
   expect(result).toEqual(put({
-    type: Actions.MEMBER_SET_STATE,
+    type: Actions.MEMBERS_SET_STATE,
     payload: {
       ...defaultState
     }
@@ -51,7 +51,7 @@ const addMemberToProjectAction = {
 var it = sagaHelper(MemberSagas.addMemberToProject(addMemberToProjectAction));
 it('test change to fetching status', async (result) => {
   expect(result).toEqual(put({
-    type: Actions.MEMBER_ADD_MEMBER_REQUEST_SENT,
+    type: Actions.MEMBERS_ADD_MEMBERS_REQUEST_SENT,
     payload: {
       fetching: true
     }
@@ -62,7 +62,7 @@ it('test request to dispatcher', async (result) => {
 });
 it('test end of send put', async (result) => {
   expect(result).toEqual(put({
-    type: Actions.MEMBER_SET_STATE,
+    type: Actions.MEMBERS_SET_STATE,
     payload: {}
   }));
 });
@@ -85,7 +85,7 @@ const removeMemberFromProjectAction = {
 var it = sagaHelper(MemberSagas.removeMemberFromProject(removeMemberFromProjectAction));
 it('test change to fetching status', async (result) => {
   expect(result).toEqual(put({
-    type: Actions.MEMBER_REMOVE_MEMBER_REQUEST_SENT,
+    type: Actions.MEMBERS_REMOVE_MEMBERS_REQUEST_SENT,
     payload: {
       fetching: true
     }
@@ -96,7 +96,7 @@ it('test request to dispatcher', async (result) => {
 });
 it('test end of send put', async (result) => {
   expect(result).toEqual(put({
-    type: Actions.MEMBER_SET_STATE,
+    type: Actions.MEMBERS_SET_STATE,
     payload: {
       fetching: false,
       currentMember: expect.any(Promise)
@@ -119,7 +119,7 @@ const getRolesAction = {
 var it = sagaHelper(MemberSagas.getRoles(getRolesAction));
 it('test change to fetching status', async (result) => {
   expect(result).toEqual(put({
-    type: Actions.MEMBER_GET_AVAILABLE_ROLES_REQUEST_SENT,
+    type: Actions.MEMBERS_GET_AVAILABLE_ROLES_REQUEST_SENT,
     payload: {
       fetching: true
     }
@@ -130,7 +130,7 @@ it('test request to dispatcher', async (result) => {
 });
 it('test end of send put', async (result) => {
   expect(result).toEqual(put({
-    type: Actions.MEMBER_SET_STATE,
+    type: Actions.MEMBERS_SET_STATE,
     payload: {
       fetching: false,
       roles: undefined
@@ -145,22 +145,22 @@ it('test end of send put', async (result) => {
 
 var it = sagaHelper(MemberSagas.default());
 it('test all member sagas - init', async (result) => {
-  var expectedResult = fork(takeLatest, Actions.MEMBER_INIT, MemberSagas.init);
+  var expectedResult = fork(takeLatest, Actions.MEMBERS_INIT, MemberSagas.init);
   result.payload.fn = takeLatest
   expect(result).toEqual(expectedResult);
 });
 it('test all member sagas - addMemberToProject', async (result) => {
-  var expectedResult = fork(takeLatest, Actions.MEMBER_ADD_MEMBER_REQUESTED, MemberSagas.addMemberToProject);
+  var expectedResult = fork(takeLatest, Actions.MEMBERS_ADD_MEMBERS_REQUESTED, MemberSagas.addMemberToProject);
   result.payload.fn = takeLatest
   expect(result).toEqual(expectedResult);
 });
 it('test all member sagas - removeMemberFromProject', async (result) => {
-  var expectedResult = fork(takeLatest, Actions.MEMBER_REMOVE_MEMBER_REQUESTED, MemberSagas.removeMemberFromProject);
+  var expectedResult = fork(takeLatest, Actions.MEMBERS_REMOVE_MEMBERS_REQUESTED, MemberSagas.removeMemberFromProject);
   result.payload.fn = takeLatest
   expect(result).toEqual(expectedResult);
 });
 it('test all member sagas - getRoles', async (result) => {
-  var expectedResult = fork(takeLatest, Actions.MEMBER_GET_AVAILABLE_ROLES_REQUESTED, MemberSagas.getRoles);
+  var expectedResult = fork(takeLatest, Actions.MEMBERS_GET_AVAILABLE_ROLES_REQUESTED, MemberSagas.getRoles);
   result.payload.fn = takeLatest
   expect(result).toEqual(expectedResult);
 });

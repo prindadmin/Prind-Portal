@@ -110,7 +110,7 @@ export class AddNewTeamMember extends Component {
     return (
       <form className='add-member-form'>
 
-        <label htmlFor="emailAddress">{Strings.MEMBER_DETAILS}</label>
+        <label htmlFor="emailAddress">{Strings.MEMBERS_DETAILS}</label>
         <input
           id="emailAddress"
           name="emailAddress"
@@ -120,7 +120,7 @@ export class AddNewTeamMember extends Component {
           onChange={this.handleInputChange}
           className={ this.state.emailAddress === '' ? "default" : "filled" }/>
 
-        <label htmlFor="roleId">{Strings.MEMBER_PROJECT_ROLE}</label>
+        <label htmlFor="roleId">{Strings.MEMBERS_PROJECT_ROLE}</label>
         <select
           id="roleId"
           name="roleId"

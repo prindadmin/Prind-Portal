@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 import * as userReducer from '../../Reducers/userReducer'
-import * as projectsReducer from '../../Reducers/projectsReducer'
+import * as projects from '../../Reducers/projects'
 
 import PageComponent from './LoggedInContent'
 
@@ -15,13 +15,13 @@ const mapStatetoProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getProjectDetails: (project, resolve) => {
-      dispatch(projectsReducer.updateChosenProject(project, resolve))
+      dispatch(projects.updateChosenProject(project, resolve))
     },
     saveProjectID: (projectID) => {
-      dispatch(projectsReducer.saveProjectID(projectID))
+      dispatch(projects.saveProjectID(projectID))
     },
     getProjectMembers: (projectID) => {
-      dispatch(projectsReducer.getCurrentMembers(projectID))
+      dispatch(projects.getCurrentMembers(projectID))
     }
   }
 }

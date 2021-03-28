@@ -15,7 +15,7 @@ let defaultState = {
 
 export function * init (action) {
   yield put({
-    type: Actions.MEMBER_SET_STATE,
+    type: Actions.MEMBERS_SET_STATE,
     payload: defaultState
   })
 }
@@ -29,7 +29,7 @@ export function * addMemberToProject (action) {
 
     // Pre-fetch update to store
     yield put({
-      type: Actions.MEMBER_ADD_MEMBER_REQUEST_SENT,
+      type: Actions.MEMBERS_ADD_MEMBERS_REQUEST_SENT,
       payload: {
         fetching: true
       }
@@ -39,7 +39,7 @@ export function * addMemberToProject (action) {
 
     // Post-fetch update to store
     yield put({
-      type: Actions.MEMBER_SET_STATE,
+      type: Actions.MEMBERS_SET_STATE,
       payload: {}
     })
 
@@ -51,7 +51,7 @@ export function * addMemberToProject (action) {
   catch (error) {
     console.error(error)
     yield put({
-      type: Actions.MEMBER_ADD_MEMBER_REQUEST_FAILED,
+      type: Actions.MEMBERS_ADD_MEMBERS_REQUEST_FAILED,
         payload: {
           error
         }
@@ -73,7 +73,7 @@ export function * removeMemberFromProject (action) {
 
     // Pre-fetch update to store
     yield put({
-      type: Actions.MEMBER_REMOVE_MEMBER_REQUEST_SENT,
+      type: Actions.MEMBERS_REMOVE_MEMBERS_REQUEST_SENT,
       payload: {
         fetching: true
       }
@@ -83,7 +83,7 @@ export function * removeMemberFromProject (action) {
 
     // Post-fetch update to store
     yield put({
-      type: Actions.MEMBER_SET_STATE,
+      type: Actions.MEMBERS_SET_STATE,
       payload: {
         fetching: false,
         currentMember: result
@@ -98,7 +98,7 @@ export function * removeMemberFromProject (action) {
   catch (error) {
     console.error(error)
     yield put({
-      type: Actions.MEMBER_REMOVE_MEMBER_REQUEST_FAILED,
+      type: Actions.MEMBERS_REMOVE_MEMBERS_REQUEST_FAILED,
         payload: {
           ...defaultState,
           error
@@ -121,7 +121,7 @@ export function * getRoles (action) {
 
     // Pre-fetch update to store
     yield put({
-      type: Actions.MEMBER_GET_AVAILABLE_ROLES_REQUEST_SENT,
+      type: Actions.MEMBERS_GET_AVAILABLE_ROLES_REQUEST_SENT,
       payload: {
         fetching: true,
       }
@@ -131,7 +131,7 @@ export function * getRoles (action) {
 
     // Post-fetch update to store
     yield put({
-      type: Actions.MEMBER_SET_STATE,
+      type: Actions.MEMBERS_SET_STATE,
       payload: {
         fetching: false,
         roles: result.body
@@ -141,7 +141,7 @@ export function * getRoles (action) {
   catch (error) {
     console.error(error)
     yield put({
-      type: Actions.MEMBER_GET_AVAILABLE_ROLES_REQUEST_FAILED,
+      type: Actions.MEMBERS_GET_AVAILABLE_ROLES_REQUEST_FAILED,
         payload: {
           ...defaultState,
           error
@@ -151,8 +151,8 @@ export function * getRoles (action) {
 }
 
 export default function * Sagas () {
-  yield takeLatest(Actions.MEMBER_INIT, init)
-  yield takeLatest(Actions.MEMBER_ADD_MEMBER_REQUESTED, addMemberToProject)
-  yield takeLatest(Actions.MEMBER_REMOVE_MEMBER_REQUESTED, removeMemberFromProject)
-  yield takeLatest(Actions.MEMBER_GET_AVAILABLE_ROLES_REQUESTED, getRoles)
+  yield takeLatest(Actions.MEMBERS_INIT, init)
+  yield takeLatest(Actions.MEMBERS_ADD_MEMBERS_REQUESTED, addMemberToProject)
+  yield takeLatest(Actions.MEMBERS_REMOVE_MEMBERS_REQUESTED, removeMemberFromProject)
+  yield takeLatest(Actions.MEMBERS_GET_AVAILABLE_ROLES_REQUESTED, getRoles)
 }

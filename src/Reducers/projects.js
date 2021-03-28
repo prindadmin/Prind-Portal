@@ -33,7 +33,6 @@ export const init = () => {
 }
 
 export const resetChosenProject = () => {
-  console.log('resetting project')
   return {
     type: action.PROJECT_RESET_CHOSEN_PROJECT,
     payload: blankChosenState

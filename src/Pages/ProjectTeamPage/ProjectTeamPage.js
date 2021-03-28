@@ -90,8 +90,8 @@ export class ProjectTeamPage extends Component {
 
   addMemberReject = () => {
     this.setState({
-      state: PageStates.ADDING_MEMBER_TO_PROJECT_FAILED,
-      errorText: Strings.ERROR_ADDING_MEMBER_TO_PROJECT
+      state: PageStates.ADDING_MEMBERS_TO_PROJECT_FAILED,
+      errorText: Strings.ERROR_ADDING_MEMBERS_TO_PROJECT
     })
   }
 
@@ -132,9 +132,9 @@ export class ProjectTeamPage extends Component {
     return (
       <ButtonGroup fill>
         <Button
-          onClick={(e) => this.setState({state: PageStates.SHOW_NEW_MEMBER_SETTINGS})}
+          onClick={(e) => this.setState({state: PageStates.SHOW_NEW_MEMBERS_SETTINGS})}
           intent='primary'
-          text={Strings.BUTTON_ADD_MEMBER_TO_PROJECT}
+          text={Strings.BUTTON_ADD_MEMBERS_TO_PROJECT}
         />
       </ButtonGroup>
     )
@@ -243,19 +243,19 @@ export class ProjectTeamPage extends Component {
     return (
       <div className="form-container">
         {
-          this.state.state === PageStates.SHOW_NEW_MEMBER_SETTINGS ? this.newMemberPageHeader() : this.pageHeader()
+          this.state.state === PageStates.SHOW_NEW_MEMBERS_SETTINGS ? this.newMemberPageHeader() : this.pageHeader()
         }
         {
           this.state.state === PageStates.QUIESCENT ? this.memberList() : null
         }
         {
-          this.state.state === PageStates.SHOW_NEW_MEMBER_SETTINGS ? this.getAddNewMemberForm() : null
+          this.state.state === PageStates.SHOW_NEW_MEMBERS_SETTINGS ? this.getAddNewMemberForm() : null
         }
         {
-          this.state.state === PageStates.ADDING_MEMBER_TO_PROJECT ? <Spinner /> : null
+          this.state.state === PageStates.ADDING_MEMBERS_TO_PROJECT ? <Spinner /> : null
         }
         {
-          this.state.state === PageStates.ADDING_MEMBER_TO_PROJECT_FAILED ? this.getFailedTeamMemberAdd() : null
+          this.state.state === PageStates.ADDING_MEMBERS_TO_PROJECT_FAILED ? this.getFailedTeamMemberAdd() : null
         }
         {
           this.state.state === PageStates.FETCHING_CURRENT_PROJECT_MEMBERS ? <Spinner /> : null

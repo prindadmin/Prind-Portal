@@ -122,7 +122,7 @@ export class PickSignerPopover extends Component {
 
   getName = (memberDetails) => {
     if (memberDetails.firstName === null || memberDetails.lastName === null) {
-      return Strings.MEMBER_NEEDS_FOUNDATIONS_TO_SIGN
+      return Strings.MEMBERS_NEEDS_FOUNDATIONS_TO_SIGN
     }
     return `${memberDetails.firstName} ${memberDetails.lastName}`
   }
@@ -142,9 +142,9 @@ export class PickSignerPopover extends Component {
 
     return(
       <div id='contact-tile' className={className} key={index} onClick={(e) => this.tileClicked(e, memberDetails, canSign)}>
-        <h4>{`${Strings.MEMBER_NAME}:`}</h4>
+        <h4>{`${Strings.MEMBERS_NAME}:`}</h4>
         <p>{this.getName(memberDetails)}</p>
-        <h4>{`${Strings.MEMBER_EMAIL_ADDRESS}:`}</h4>
+        <h4>{`${Strings.MEMBERS_EMAIL_ADDRESS}:`}</h4>
         <p>{`${memberDetails.emailAddress}`}</p>
         <div className="member-tile-tickbox">
           {isSelected ? <ItemIcon size='2x' type='ticked' /> : <ItemIcon size='2x' type='unticked' />}

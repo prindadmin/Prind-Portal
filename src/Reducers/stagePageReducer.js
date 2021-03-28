@@ -35,7 +35,7 @@ const defaultState = {
 
 export const init = () => {
   return {
-    type: action.PROJECT_INIT,
+    type: action.PAGE_INIT,
     payload: defaultState
   }
 }
@@ -55,7 +55,7 @@ export const getPageContent = ( projectID, pageName, resolve, reject ) => {
 
 const ACTION_HANDLERS = {
   [action.PAGE_GET_CONTENT_REQUESTED]: state => ({ ...state }),
-  [action.PROJECT_INIT]: (state, action) => { return { ...state, ...action.payload }},
+  [action.PAGE_INIT]: (state, action) => { return { ...state, ...action.payload }},
   [action.PAGE_SET_STATE]: (state, action) => { return { ...state, ...action.payload }},
 }
 

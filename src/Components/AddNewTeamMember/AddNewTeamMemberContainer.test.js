@@ -9,7 +9,7 @@ import * as States from '../../States'
 import * as Endpoints from '../../Data/Endpoints'
 import * as Strings from '../../Data/Strings'
 
-import * as memberReducer from '../../Reducers/memberReducer'
+import * as members from '../../Reducers/members'
 
 const mockStore = configureStore([]);
 
@@ -121,6 +121,6 @@ it('should call dispatcher for addMember', () => {
   username.simulate('change', { target: { name: "emailAddress", value: 'hootsuite@prind.tech' }});
   expect(instanceComponent.state('emailAddress')).toEqual("hootsuite@prind.tech")
   button.simulate('click')
-  expect(store.dispatch).toHaveBeenCalledWith(memberReducer.addMemberToProject("123", expectedMemberValues, expect.any(Function), expect.any(Function)))
+  expect(store.dispatch).toHaveBeenCalledWith(members.addMemberToProject("123", expectedMemberValues, expect.any(Function), expect.any(Function)))
 });
 */

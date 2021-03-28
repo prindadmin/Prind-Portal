@@ -1,8 +1,8 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import * as foundationsReducer from '../../../../Reducers/foundationsReducer'
-import * as projectsReducer from '../../../../Reducers/projectsReducer'
+import * as foundations from '../../../../Reducers/foundations'
+import * as projects from '../../../../Reducers/projects'
 
 import SignatureRequestTile from './SignatureRequestTile'
 
@@ -14,10 +14,10 @@ const mapStatetoProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     rejectSignatureRequest: (requestDetails, resolve, reject) => {
-      dispatch(foundationsReducer.rejectSignatureRequest(requestDetails, resolve, reject))
+      dispatch(foundations.rejectSignatureRequest(requestDetails, resolve, reject))
     },
     updateChosenProject: (project, resolve, reject) => {
-      dispatch(projectsReducer.updateChosenProject(project, resolve, reject))
+      dispatch(projects.updateChosenProject(project, resolve, reject))
     },
   }
 }

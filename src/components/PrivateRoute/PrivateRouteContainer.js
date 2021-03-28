@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import PrivateRouteComponent from './PrivateRoute'
 
 import * as userReducer from '../../Reducers/userReducer'
-import * as projectsReducer from '../../Reducers/projectsReducer'
+import * as projects from '../../Reducers/projects'
 
 const mapStatetoProps = state => {
   return {
@@ -21,7 +21,7 @@ const mapDispatchToProps = dispatch => {
     },
     updateChosenProject: (idToken, project, resolve) => {
       console.log("getting project details")
-      dispatch(projectsReducer.updateChosenProject(idToken, project, resolve))
+      dispatch(projects.updateChosenProject(idToken, project, resolve))
     },
   }
 }

@@ -1,8 +1,8 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import * as memberReducer from '../../Reducers/memberReducer'
-import * as projectReducer from '../../Reducers/projectsReducer'
+import * as members from '../../Reducers/members'
+import * as projectReducer from '../../Reducers/projects'
 
 import PageComponent from './ProjectTeamPage'
 
@@ -20,7 +20,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(projectReducer.getCurrentMembers(projectID))
     },
     getRoles: (projectID) => {
-      dispatch(memberReducer.getRoles(projectID))
+      dispatch(members.getRoles(projectID))
     },
   }
 }

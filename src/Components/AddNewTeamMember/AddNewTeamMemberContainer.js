@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 
 import AddNewTeamMember from './AddNewTeamMember'
 
-import * as memberReducer from '../../Reducers/memberReducer'
+import * as members from '../../Reducers/members'
 
 const mapStatetoProps = state => {
   return {
@@ -15,7 +15,7 @@ const mapStatetoProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     addMember: (projectID, memberValues, resolve, reject) => {
-      dispatch(memberReducer.addMemberToProject(projectID, memberValues, resolve, reject))
+      dispatch(members.addMemberToProject(projectID, memberValues, resolve, reject))
     },
   }
 }

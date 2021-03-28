@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import * as projectsReducer from '../../../Reducers/projectsReducer'
+import * as projects from '../../../Reducers/projects'
 
 import PickSignerPopover from './PickSignerPopover'
 
@@ -14,7 +14,7 @@ const mapStatetoProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     requestSignature: (projectID, pageName, fieldID, members, resolve, reject) => {
-      dispatch(projectsReducer.requestSignature(projectID, pageName, fieldID, members, resolve, reject))
+      dispatch(projects.requestSignature(projectID, pageName, fieldID, members, resolve, reject))
     }
   }
 }

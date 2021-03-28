@@ -93,7 +93,7 @@ export class ContactTile extends Component {
     this.setState({
       removingMember: false,
       removeMemberError: true,
-      errorText: Strings.ERROR_REMOVING_MEMBER_FROM_PROJECT
+      errorText: Strings.ERROR_REMOVING_MEMBERS_FROM_PROJECT
     })
   }
 
@@ -142,12 +142,12 @@ export class ContactTile extends Component {
   getStatus = () => {
     const { memberDetails, confirmed } = this.props
     if (memberDetails.username === null) {
-      return Strings.MEMBER_NOT_YET_SIGNED_UP_TO_PRIND
+      return Strings.MEMBERS_NOT_YET_SIGNED_UP_TO_PRIND
     }
     if (confirmed) {
-      return Strings.MEMBER_IS_CONFIRMED
+      return Strings.MEMBERS_IS_CONFIRMED
     }
-    return Strings.MEMBER_ISNT_YET_CONFIRMED
+    return Strings.MEMBERS_ISNT_YET_CONFIRMED
   }
 
 
@@ -184,7 +184,7 @@ export class ContactTile extends Component {
 
             <div className="row">
               <div className="col-lg-2 col-md-4">
-                <b>{Strings.MEMBER_EMAIL_ADDRESS + ": "}</b>
+                <b>{Strings.MEMBERS_EMAIL_ADDRESS + ": "}</b>
               </div>
               <div className="col-lg-10 col-md-8">
                 {memberDetails.emailAddress}
@@ -193,7 +193,7 @@ export class ContactTile extends Component {
 
             <div className="row">
               <div className="col-lg-2 col-md-4">
-                <b>{Strings.MEMBER_PROJECT_ROLE + ": "}</b>
+                <b>{Strings.MEMBERS_PROJECT_ROLE + ": "}</b>
               </div>
               <div className="col-lg-10 col-md-8">
                 {memberDetails.roleName}
@@ -202,7 +202,7 @@ export class ContactTile extends Component {
 
             <div className="row">
               <div className="col-lg-2 col-md-4">
-                <b>{Strings.MEMBER_STATUS + ": "}</b>
+                <b>{Strings.MEMBERS_STATUS + ": "}</b>
               </div>
               <div className="col-lg-10 col-md-8">
                 { this.getStatus() }

@@ -14,7 +14,7 @@ let defaultState = {
 export const init = () => {
   return {
     type: Actions.AUTH_INIT,
-    payload: {}
+    payload: defaultState
   }
 }
 
@@ -88,11 +88,11 @@ export const updatePassword = (username, oldPassword, newPassword, resolve, reje
   }
 }
 
-export const confirmUser = ( userParameters, resolve, reject ) => {
+export const confirmUser = ( values, resolve, reject ) => {
   return {
     type: Actions.AUTH_CONFIRM_USER_REQUESTED,
     payload: {
-      ...userParameters,
+      ...values,
       resolve,
       reject
     }
