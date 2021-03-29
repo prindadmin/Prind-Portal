@@ -1,0 +1,327 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render 1`] = `
+<Suspense
+  fallback={
+    <p>
+      error
+    </p>
+  }
+>
+  <Provider
+    store={
+      Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      }
+    }
+  >
+    <HashRouter>
+      <Router
+        history={
+          Object {
+            "action": "POP",
+            "block": [Function],
+            "createHref": [Function],
+            "go": [Function],
+            "goBack": [Function],
+            "goForward": [Function],
+            "length": 1,
+            "listen": [Function],
+            "location": Object {
+              "hash": "",
+              "pathname": "/",
+              "search": "",
+              "state": undefined,
+            },
+            "push": [Function],
+            "replace": [Function],
+          }
+        }
+      >
+        <withRouter(Connect(SignatureRequestTile))
+          requestDetails={
+            Object {
+              "fieldID": "2",
+              "fieldTitle": "Field title 1",
+              "filename": "filename.txt",
+              "pageName": "design",
+              "projectID": "123",
+              "projectName": "Test Project 1",
+              "requestedAt": "2021-03-29T06:53:31",
+              "requestedBy": Object {
+                "firstName": "Testy",
+                "lastName": "McTesterson",
+                "username": "aaaa-aaaa-aaaaaaaa-aaaa-aaaa-aaaa",
+              },
+            }
+          }
+        >
+          <Connect(SignatureRequestTile)
+            history={
+              Object {
+                "action": "POP",
+                "block": [Function],
+                "createHref": [Function],
+                "go": [Function],
+                "goBack": [Function],
+                "goForward": [Function],
+                "length": 1,
+                "listen": [Function],
+                "location": Object {
+                  "hash": "",
+                  "pathname": "/",
+                  "search": "",
+                  "state": undefined,
+                },
+                "push": [Function],
+                "replace": [Function],
+              }
+            }
+            location={
+              Object {
+                "hash": "",
+                "pathname": "/",
+                "search": "",
+                "state": undefined,
+              }
+            }
+            match={
+              Object {
+                "isExact": true,
+                "params": Object {},
+                "path": "/",
+                "url": "/",
+              }
+            }
+            requestDetails={
+              Object {
+                "fieldID": "2",
+                "fieldTitle": "Field title 1",
+                "filename": "filename.txt",
+                "pageName": "design",
+                "projectID": "123",
+                "projectName": "Test Project 1",
+                "requestedAt": "2021-03-29T06:53:31",
+                "requestedBy": Object {
+                  "firstName": "Testy",
+                  "lastName": "McTesterson",
+                  "username": "aaaa-aaaa-aaaaaaaa-aaaa-aaaa-aaaa",
+                },
+              }
+            }
+          >
+            <SignatureRequestTile
+              history={
+                Object {
+                  "action": "POP",
+                  "block": [Function],
+                  "createHref": [Function],
+                  "go": [Function],
+                  "goBack": [Function],
+                  "goForward": [Function],
+                  "length": 1,
+                  "listen": [Function],
+                  "location": Object {
+                    "hash": "",
+                    "pathname": "/",
+                    "search": "",
+                    "state": undefined,
+                  },
+                  "push": [Function],
+                  "replace": [Function],
+                }
+              }
+              location={
+                Object {
+                  "hash": "",
+                  "pathname": "/",
+                  "search": "",
+                  "state": undefined,
+                }
+              }
+              match={
+                Object {
+                  "isExact": true,
+                  "params": Object {},
+                  "path": "/",
+                  "url": "/",
+                }
+              }
+              rejectSignatureRequest={[Function]}
+              requestDetails={
+                Object {
+                  "fieldID": "2",
+                  "fieldTitle": "Field title 1",
+                  "filename": "filename.txt",
+                  "pageName": "design",
+                  "projectID": "123",
+                  "projectName": "Test Project 1",
+                  "requestedAt": "2021-03-29T06:53:31",
+                  "requestedBy": Object {
+                    "firstName": "Testy",
+                    "lastName": "McTesterson",
+                    "username": "aaaa-aaaa-aaaaaaaa-aaaa-aaaa-aaaa",
+                  },
+                }
+              }
+              updateChosenProject={[Function]}
+            >
+              <div
+                id="signature-request"
+              >
+                <div
+                  className="signature-tile-content-container"
+                >
+                  <h4>
+                    Requested By:
+                  </h4>
+                  <div>
+                    Testy McTesterson
+                  </div>
+                  <h4>
+                    Project Name:
+                  </h4>
+                  <div>
+                    Test Project 1
+                  </div>
+                  <h4>
+                    Project Stage:
+                  </h4>
+                  <div>
+                    Design
+                  </div>
+                  <h4>
+                    Field Title:
+                  </h4>
+                  <div>
+                    Field title 1
+                  </div>
+                  <h4>
+                    File Name:
+                  </h4>
+                  <div>
+                    filename.txt
+                  </div>
+                </div>
+                <div
+                  className="row button-row"
+                >
+                  <Blueprint3.Button
+                    icon="document"
+                    id="go-to-document-button"
+                    intent="primary"
+                    onClick={[Function]}
+                    text="Go To Document"
+                  >
+                    <button
+                      className="bp3-button bp3-intent-primary"
+                      id="go-to-document-button"
+                      onBlur={[Function]}
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      onKeyUp={[Function]}
+                      type="button"
+                    >
+                      <Blueprint3.Icon
+                        icon="document"
+                        key="leftIcon"
+                      >
+                        <span
+                          className="bp3-icon bp3-icon-document"
+                          icon="document"
+                        >
+                          <svg
+                            data-icon="document"
+                            height={16}
+                            viewBox="0 0 16 16"
+                            width={16}
+                          >
+                            <desc>
+                              document
+                            </desc>
+                            <path
+                              d="M9 0H3c-.55 0-1 .45-1 1v14c0 .55.45 1 1 1h10c.55 0 1-.45 1-1V5L9 0zm3 14H4V2h4v4h4v8z"
+                              fillRule="evenodd"
+                              key="0"
+                            />
+                          </svg>
+                        </span>
+                      </Blueprint3.Icon>
+                      <span
+                        className="bp3-button-text"
+                        key="text"
+                      >
+                        Go To Document
+                      </span>
+                      <Blueprint3.Icon
+                        key="rightIcon"
+                      />
+                    </button>
+                  </Blueprint3.Button>
+                  <Blueprint3.Button
+                    icon="cross"
+                    id="reject-signature-request-button"
+                    intent="danger"
+                    onClick={[Function]}
+                    text="Reject"
+                  >
+                    <button
+                      className="bp3-button bp3-intent-danger"
+                      id="reject-signature-request-button"
+                      onBlur={[Function]}
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      onKeyUp={[Function]}
+                      type="button"
+                    >
+                      <Blueprint3.Icon
+                        icon="cross"
+                        key="leftIcon"
+                      >
+                        <span
+                          className="bp3-icon bp3-icon-cross"
+                          icon="cross"
+                        >
+                          <svg
+                            data-icon="cross"
+                            height={16}
+                            viewBox="0 0 16 16"
+                            width={16}
+                          >
+                            <desc>
+                              cross
+                            </desc>
+                            <path
+                              d="M9.41 8l3.29-3.29c.19-.18.3-.43.3-.71a1.003 1.003 0 00-1.71-.71L8 6.59l-3.29-3.3a1.003 1.003 0 00-1.42 1.42L6.59 8 3.3 11.29c-.19.18-.3.43-.3.71a1.003 1.003 0 001.71.71L8 9.41l3.29 3.29c.18.19.43.3.71.3a1.003 1.003 0 00.71-1.71L9.41 8z"
+                              fillRule="evenodd"
+                              key="0"
+                            />
+                          </svg>
+                        </span>
+                      </Blueprint3.Icon>
+                      <span
+                        className="bp3-button-text"
+                        key="text"
+                      >
+                        Reject
+                      </span>
+                      <Blueprint3.Icon
+                        key="rightIcon"
+                      />
+                    </button>
+                  </Blueprint3.Button>
+                </div>
+              </div>
+            </SignatureRequestTile>
+          </Connect(SignatureRequestTile)>
+        </withRouter(Connect(SignatureRequestTile))>
+      </Router>
+    </HashRouter>
+  </Provider>
+</Suspense>
+`;

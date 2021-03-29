@@ -26,6 +26,9 @@ export class SignatureRequestTile extends Component {
     }).isRequired,
     rejectSignatureRequest: PropTypes.func.isRequired,
     updateChosenProject: PropTypes.func.isRequired,
+    history: PropTypes.shape({
+      push: PropTypes.func.isRequired,
+    }).isRequired
   }
 
 
@@ -106,12 +109,14 @@ export class SignatureRequestTile extends Component {
 
         <div className='row button-row'>
           <Button
+            id="go-to-document-button"
             intent={Intent.PRIMARY}
             onClick={(e) => this.goToDocument()}
             text={Strings.BUTTON_GO_TO_DOCUMENT}
             icon="document"
           />
           <Button
+            id="reject-signature-request-button"
             intent={Intent.DANGER}
             onClick={(e) => this.rejectSignatureRequest()}
             text={Strings.BUTTON_REJECT}

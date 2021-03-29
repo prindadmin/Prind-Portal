@@ -43,12 +43,14 @@ exports[`Should render 1`] = `
   >
     <Blueprint3.Button
       icon="document"
+      id="go-to-document-button"
       intent="primary"
       onClick={[Function]}
       text="Go To Document"
     />
     <Blueprint3.Button
       icon="cross"
+      id="reject-signature-request-button"
       intent="danger"
       onClick={[Function]}
       text="Reject"
