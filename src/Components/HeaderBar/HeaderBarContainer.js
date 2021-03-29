@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 
 import HeaderBarComponent from './HeaderBar'
 
-import * as userReducer from '../../Reducers/userReducer'
+import * as user from '../../Reducers/user'
 
 const mapStatetoProps = state => {
   return {
@@ -16,7 +16,7 @@ const mapStatetoProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getUserDetails: (resolve, reject) => {
-      dispatch(userReducer.getUserDetails(resolve, reject))
+      dispatch(user.getUserDetails(resolve, reject))
     }
   }
 }

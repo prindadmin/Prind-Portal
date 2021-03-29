@@ -4,8 +4,6 @@ import { Auth } from 'aws-amplify';
 jest.mock('aws-amplify')
 
 // TODO: Add toHaveBeenCalledWith to all the mocked Auth calls
-// TODO: Test all the error catchers as well
-
 it('change user password after forgotten', async () => {
   const returnValue = {
       user_name: "test@buildingim.com",
@@ -22,7 +20,7 @@ it('change user password after forgotten', async () => {
 })
 
 
-it('confirm user - success', async () => {
+it('confirm user', async () => {
   const returnValue = {
       user_name: "test@buildingim.com",
       confirmation_code: '12345678'
@@ -35,20 +33,6 @@ it('confirm user - success', async () => {
   expect(confirmUser).toEqual(returnValue);
 })
 
-/*
-it('confirm user - error', async () => {
-  const returnValue = {
-    body: "There was an error",
-    errorCode: "0001"
-  }
-  Auth.confirmSignUp.mockRejectedValue(returnValue)
-  const confirmUser = await Dispatchers.confirmUser({
-    user_name: "test@buildingim.com",
-    confirmation_code: '12345678'
-  })
-  expect(confirmUser).toEqual(returnValue);
-})
-*/
 
 it('forgot password reset request', async () => {
   const returnValue = "test@buildingim.com"
@@ -78,6 +62,23 @@ it('change user password', async () => {
   })
   expect(updatePassword).toEqual(returnValueChangePassword);
 })
+
+/*
+// TODO: get this working to test the reject
+it('change user password and reject on change password', async () => {
+  const returnValueAuthUser = "new session"
+  const returnValueChangePassword = "password changed"
+  Auth.currentAuthenticatedUser.mockResolvedValue(returnValueAuthUser)
+  Auth.changePassword.mockRejectedValue('Async error');
+  expect(() => {
+    Dispatchers.updatePassword({
+      username: "test@buildingim.com",
+      oldPassword: "Password1234!",
+      newPassword: "Password12345678!"
+    })
+  }).toThrow('Async error')
+})
+*/
 
 
 it('signs the user in', async () => {

@@ -54,9 +54,9 @@ export const getPageContent = ( projectID, pageName, resolve, reject ) => {
 
 
 const ACTION_HANDLERS = {
-  [action.PAGE_GET_CONTENT_REQUESTED]: state => ({ ...state }),
   [action.PAGE_INIT]: (state, action) => { return { ...state, ...action.payload }},
   [action.PAGE_SET_STATE]: (state, action) => { return { ...state, ...action.payload }},
+  [action.PAGE_GET_CONTENT_REQUESTED]: state => ({ ...state }),
 }
 
 

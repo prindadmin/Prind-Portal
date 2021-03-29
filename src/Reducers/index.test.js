@@ -4,8 +4,8 @@ import * as AuthFunctions from './auth';
 import * as FoundationsFunctions from './foundations';
 import * as MemberFunctions from './members';
 import * as ProjectsFunctions from './projects';
-import * as PageContentFunctions from './stagePageReducer';
-import * as UserFunctions from './userReducer';
+import * as PageContentFunctions from './stagePage';
+import * as UserFunctions from './user';
 import * as Endpoints from '../Data/Endpoints'
 import * as Strings from '../Data/Strings'
 import * as States from '../States'

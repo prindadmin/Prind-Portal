@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 import * as projects from '../../../../Reducers/projects'
-import * as userReducer from '../../../../Reducers/userReducer'
+import * as user from '../../../../Reducers/user'
 
 import GitText from './GitText'
 
@@ -20,7 +20,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(projects.uploadFile(projectID, pageName, fieldID, fileDetails, fieldType, resolve, reject))
     },
     requestS3ProjectFileUploadToken: (project_id, pageName, resolve, reject) => {
-      dispatch(userReducer.requestS3ProjectFileUploadToken(project_id, pageName, resolve, reject))
+      dispatch(user.requestS3ProjectFileUploadToken(project_id, pageName, resolve, reject))
     },
   }
 }

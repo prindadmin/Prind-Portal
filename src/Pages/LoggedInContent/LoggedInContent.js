@@ -128,6 +128,10 @@ export class LoggedInContent extends Component {
   getCommonProjectData = () => {
     const projectId = this.getURLProjectId()
 
+    if (!projectId || projectId === "") {
+      return
+    }
+
     // Quick save the ID
     this.props.saveProjectID(projectId)
     // Fetch the details of the project

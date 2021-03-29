@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import * as userReducer from '../../../../Reducers/userReducer'
+import * as user from '../../../../Reducers/user'
 
 import Element from './Element'
 
@@ -13,7 +13,7 @@ const mapStatetoProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     respondToProjectInvitation: (identityToken, projectID, response) => {
-      dispatch(userReducer.respondToProjectInvitation(identityToken, projectID, response))
+      dispatch(user.respondToProjectInvitation(identityToken, projectID, response))
     }
   }
 }

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import * as userReducer from '../../Reducers/userReducer'
+import * as user from '../../Reducers/user'
 import * as projects from '../../Reducers/projects'
 
 import PageComponent from './LoggedInContent'

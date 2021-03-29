@@ -349,14 +349,10 @@ it('test reducer handler with non-existent action', () => {
 
 
 it('test reducer handler with init action', () => {
-  const mockResolve = jest.fn()
-  const mockReject = jest.fn()
   const action = {
     type: Actions.PROJECT_INIT,
     payload: {
       test: 'test',
-      resolve: mockResolve,
-      reject: mockReject
     }
   }
   const result = Functions.reducer({}, action)
@@ -365,14 +361,10 @@ it('test reducer handler with init action', () => {
 
 
 it('test reducer handler with set state action', () => {
-  const mockResolve = jest.fn()
-  const mockReject = jest.fn()
   const action = {
     type: Actions.PROJECT_SET_STATE,
     payload: {
       test: 'test',
-      resolve: mockResolve,
-      reject: mockReject
     }
   }
   const result = Functions.reducer({}, action)
@@ -381,30 +373,22 @@ it('test reducer handler with set state action', () => {
 
 
 it('test reducer handler with get accessible projects requested', () => {
-  const mockResolve = jest.fn()
-  const mockReject = jest.fn()
   const action = {
     type: Actions.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUESTED,
     payload: {
       test: 'test',
-      resolve: mockResolve,
-      reject: mockReject
     }
   }
   const result = Functions.reducer({}, action)
   expect(result).toEqual({});
 });
 
-/*
-it('test reducer handler with remove member requested action', () => {
-  const mockResolve = jest.fn()
-  const mockReject = jest.fn()
+
+it('test reducer handler with create project requested', () => {
   const action = {
-    type: Actions.PROJECT_REMOVE_PROJECT_REQUESTED,
+    type: Actions.PROJECT_CREATE_PROJECT_REQUESTED,
     payload: {
       test: 'test',
-      resolve: mockResolve,
-      reject: mockReject
     }
   }
   const result = Functions.reducer({}, action)
@@ -412,15 +396,11 @@ it('test reducer handler with remove member requested action', () => {
 });
 
 
-it('test reducer handler with get available roles requested action', () => {
-  const mockResolve = jest.fn()
-  const mockReject = jest.fn()
+it('test reducer handler with update project details requested', () => {
   const action = {
-    type: Actions.PROJECT_GET_AVAILABLE_ROLES_REQUESTED,
+    type: Actions.PROJECT_UPDATE_PROJECT_DETAILS_REQUESTED,
     payload: {
       test: 'test',
-      resolve: mockResolve,
-      reject: mockReject
     }
   }
   const result = Functions.reducer({}, action)
@@ -428,13 +408,107 @@ it('test reducer handler with get available roles requested action', () => {
 });
 
 
-it('test reducer handler with add member request dispatched', () => {
-  const mockResolve = jest.fn()
-  const mockReject = jest.fn()
+it('test reducer handler with update project chosen requested', () => {
   const action = {
-    type: Actions.PROJECT_ADD_PROJECT_REQUEST_SENT,
+    type: Actions.PROJECT_UPDATE_PROJECT_CHOSEN_REQUESTED,
     payload: {
-      fetching: true,
+      test: 'test',
+    }
+  }
+  const result = Functions.reducer({}, action)
+  expect(result).toEqual({});
+});
+
+
+it('test reducer handler with get current members requested', () => {
+  const action = {
+    type: Actions.PROJECT_GET_CURRENT_MEMBERS_REQUESTED,
+    payload: {
+      test: 'test',
+    }
+  }
+  const result = Functions.reducer({}, action)
+  expect(result).toEqual({});
+});
+
+
+it('test reducer handler with upload file requested', () => {
+  const action = {
+    type: Actions.PROJECT_UPLOAD_FILE_REQUESTED,
+    payload: {
+      test: 'test',
+    }
+  }
+  const result = Functions.reducer({}, action)
+  expect(result).toEqual({});
+});
+
+
+it('test reducer handler with download file requested', () => {
+  const action = {
+    type: Actions.PROJECT_DOWNLOAD_FILE_REQUESTED,
+    payload: {
+      test: 'test',
+    }
+  }
+  const result = Functions.reducer({}, action)
+  expect(result).toEqual({});
+});
+
+
+it('test reducer handler with create field requested', () => {
+  const action = {
+    type: Actions.PROJECT_CREATE_FIELD_REQUESTED,
+    payload: {
+      test: 'test',
+    }
+  }
+  const result = Functions.reducer({}, action)
+  expect(result).toEqual({});
+});
+
+
+it('test reducer handler with update field requested', () => {
+  const action = {
+    type: Actions.PROJECT_UPDATE_FIELD_REQUESTED,
+    payload: {
+      test: 'test',
+    }
+  }
+  const result = Functions.reducer({}, action)
+  expect(result).toEqual({});
+});
+
+
+it('test reducer handler with file signature requested', () => {
+  const action = {
+    type: Actions.PROJECT_FILE_SIGNATURE_REQUEST_REQUESTED,
+    payload: {
+      test: 'test',
+    }
+  }
+  const result = Functions.reducer({}, action)
+  expect(result).toEqual({});
+});
+
+
+it('test reducer handler with delete project requested', () => {
+  const action = {
+    type: Actions.PROJECT_DELETE_PROJECT_REQUESTED,
+    payload: {
+      test: 'test',
+    }
+  }
+  const result = Functions.reducer({}, action)
+  expect(result).toEqual({});
+});
+
+
+it('test reducer handler with get accessible project request sent action', () => {
+  const action = {
+    type: Actions.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUEST_SENT,
+    payload: {
+      test: 'test',
     }
   }
   const result = Functions.reducer({}, action)
@@ -442,13 +516,11 @@ it('test reducer handler with add member request dispatched', () => {
 });
 
 
-it('test reducer handler with remove member request dispatched', () => {
-  const mockResolve = jest.fn()
-  const mockReject = jest.fn()
+it('test reducer handler with update chosen project request sent action', () => {
   const action = {
-    type: Actions.PROJECT_REMOVE_PROJECT_REQUEST_SENT,
+    type: Actions.PROJECT_UPDATE_PROJECT_CHOSEN_REQUEST_SENT,
     payload: {
-      fetching: true,
+      test: 'test',
     }
   }
   const result = Functions.reducer({}, action)
@@ -456,13 +528,11 @@ it('test reducer handler with remove member request dispatched', () => {
 });
 
 
-it('test reducer handler with get available roles request dispatched', () => {
-  const mockResolve = jest.fn()
-  const mockReject = jest.fn()
+it('test reducer handler with create project request sent action', () => {
   const action = {
-    type: Actions.PROJECT_GET_AVAILABLE_ROLES_REQUEST_SENT,
+    type: Actions.PROJECT_CREATE_PROJECT_REQUEST_SENT,
     payload: {
-      fetching: true,
+      test: 'test',
     }
   }
   const result = Functions.reducer({}, action)
@@ -470,13 +540,11 @@ it('test reducer handler with get available roles request dispatched', () => {
 });
 
 
-it('test reducer handler with add member request failed', () => {
-  const mockResolve = jest.fn()
-  const mockReject = jest.fn()
+it('test reducer handler with update project details request sent action', () => {
   const action = {
-    type: Actions.PROJECT_ADD_PROJECT_REQUEST_FAILED,
+    type: Actions.PROJECT_UPDATE_PROJECT_DETAILS_REQUEST_SENT,
     payload: {
-      fetching: false,
+      test: 'test',
     }
   }
   const result = Functions.reducer({}, action)
@@ -484,13 +552,11 @@ it('test reducer handler with add member request failed', () => {
 });
 
 
-it('test reducer handler with remove member request failed', () => {
-  const mockResolve = jest.fn()
-  const mockReject = jest.fn()
+it('test reducer handler with get current members request sent action', () => {
   const action = {
-    type: Actions.PROJECT_REMOVE_PROJECT_REQUEST_FAILED,
+    type: Actions.PROJECT_GET_CURRENT_MEMBERS_REQUEST_SENT,
     payload: {
-      fetching: false,
+      test: 'test',
     }
   }
   const result = Functions.reducer({}, action)
@@ -498,18 +564,237 @@ it('test reducer handler with remove member request failed', () => {
 });
 
 
-it('test reducer handler with get available roles request failed', () => {
-  const mockResolve = jest.fn()
-  const mockReject = jest.fn()
+it('test reducer handler with upload file request sent action', () => {
   const action = {
-    type: Actions.PROJECT_GET_AVAILABLE_ROLES_REQUEST_FAILED,
+    type: Actions.PROJECT_UPLOAD_FILE_REQUEST_SENT,
     payload: {
-      fetching: false,
+      test: 'test',
     }
   }
   const result = Functions.reducer({}, action)
   expect(result).toEqual(action.payload);
 });
+
+
+it('test reducer handler with download file request sent action', () => {
+  const action = {
+    type: Actions.PROJECT_DOWNLOAD_FILE_REQUEST_SENT,
+    payload: {
+      test: 'test',
+    }
+  }
+  const result = Functions.reducer({}, action)
+  expect(result).toEqual(action.payload);
+});
+
+
+it('test reducer handler with create file request sent action', () => {
+  const action = {
+    type: Actions.PROJECT_CREATE_FIELD_REQUEST_SENT,
+    payload: {
+      test: 'test',
+    }
+  }
+  const result = Functions.reducer({}, action)
+  expect(result).toEqual(action.payload);
+});
+
+
+it('test reducer handler with update field request sent action', () => {
+  const action = {
+    type: Actions.PROJECT_UPDATE_FIELD_REQUEST_SENT,
+    payload: {
+      test: 'test',
+    }
+  }
+  const result = Functions.reducer({}, action)
+  expect(result).toEqual(action.payload);
+});
+
+
+it('test reducer handler with file signature request sent action', () => {
+  const action = {
+    type: Actions.PROJECT_FILE_SIGNATURE_REQUEST_REQUEST_SENT,
+    payload: {
+      test: 'test',
+    }
+  }
+  const result = Functions.reducer({}, action)
+  expect(result).toEqual(action.payload);
+});
+
+
+it('test reducer handler with project delete request sent action', () => {
+  const action = {
+    type: Actions.PROJECT_DELETE_PROJECT_REQUEST_SENT,
+    payload: {
+      test: 'test',
+    }
+  }
+  const result = Functions.reducer({}, action)
+  expect(result).toEqual(action.payload);
+});
+
+
+it('test reducer handler with get accessible project request failed action', () => {
+  const action = {
+    type: Actions.PROJECT_GET_ACCESSIBLE_PROJECTS_REQUEST_FAILED,
+    payload: {
+      test: 'test',
+    }
+  }
+  const result = Functions.reducer({}, action)
+  expect(result).toEqual(action.payload);
+});
+
+
+it('test reducer handler with update chosen project request failed action', () => {
+  const action = {
+    type: Actions.PROJECT_UPDATE_PROJECT_CHOSEN_REQUEST_FAILED,
+    payload: {
+      test: 'test',
+    }
+  }
+  const result = Functions.reducer({}, action)
+  expect(result).toEqual(action.payload);
+});
+
+
+it('test reducer handler with create project request failed action', () => {
+  const action = {
+    type: Actions.PROJECT_CREATE_PROJECT_REQUEST_FAILED,
+    payload: {
+      test: 'test',
+    }
+  }
+  const result = Functions.reducer({}, action)
+  expect(result).toEqual(action.payload);
+});
+
+
+it('test reducer handler with update project details request failed action', () => {
+  const action = {
+    type: Actions.PROJECT_UPDATE_PROJECT_DETAILS_REQUEST_FAILED,
+    payload: {
+      test: 'test',
+    }
+  }
+  const result = Functions.reducer({}, action)
+  expect(result).toEqual(action.payload);
+});
+
+
+it('test reducer handler with get current members request failed action', () => {
+  const action = {
+    type: Actions.PROJECT_GET_CURRENT_MEMBERS_REQUEST_FAILED,
+    payload: {
+      test: 'test',
+    }
+  }
+  const result = Functions.reducer({}, action)
+  expect(result).toEqual(action.payload);
+});
+
+
+it('test reducer handler with upload file request failed action', () => {
+  const action = {
+    type: Actions.PROJECT_UPLOAD_FILE_REQUEST_FAILED,
+    payload: {
+      test: 'test',
+    }
+  }
+  const result = Functions.reducer({}, action)
+  expect(result).toEqual(action.payload);
+});
+
+
+it('test reducer handler with download file request failed action', () => {
+  const action = {
+    type: Actions.PROJECT_DOWNLOAD_FILE_REQUEST_FAILED,
+    payload: {
+      test: 'test',
+    }
+  }
+  const result = Functions.reducer({}, action)
+  expect(result).toEqual(action.payload);
+});
+
+
+it('test reducer handler with create file request failed action', () => {
+  const action = {
+    type: Actions.PROJECT_CREATE_FIELD_REQUEST_FAILED,
+    payload: {
+      test: 'test',
+    }
+  }
+  const result = Functions.reducer({}, action)
+  expect(result).toEqual(action.payload);
+});
+
+
+it('test reducer handler with update field request failed action', () => {
+  const action = {
+    type: Actions.PROJECT_UPDATE_FIELD_REQUEST_FAILED,
+    payload: {
+      test: 'test',
+    }
+  }
+  const result = Functions.reducer({}, action)
+  expect(result).toEqual(action.payload);
+});
+
+
+it('test reducer handler with file signature request failed action', () => {
+  const action = {
+    type: Actions.PROJECT_FILE_SIGNATURE_REQUEST_REQUEST_FAILED,
+    payload: {
+      test: 'test',
+    }
+  }
+  const result = Functions.reducer({}, action)
+  expect(result).toEqual(action.payload);
+});
+
+
+it('test reducer handler with project delete request failed action', () => {
+  const action = {
+    type: Actions.PROJECT_DELETE_PROJECT_REQUEST_FAILED,
+    payload: {
+      test: 'test',
+    }
+  }
+  const result = Functions.reducer({}, action)
+  expect(result).toEqual(action.payload);
+});
+
+
+it('test reducer handler with reset project request action', () => {
+  const action = {
+    type: Actions.PROJECT_RESET_CHOSEN_PROJECT,
+    payload: {
+      test: 'test',
+    }
+  }
+  const result = Functions.reducer({}, action)
+  expect(result).toEqual(action.payload);
+});
+
+
+it('test reducer handler with reset download url request action', () => {
+  const action = {
+    type: Actions.PROJECT_RESET_DOWNLOAD_URL,
+    payload: {
+      test: 'test',
+    }
+  }
+  const result = Functions.reducer({}, action)
+  expect(result).toEqual(action.payload);
+});
+
+
+
+
+
 
 
 it('test reducer handler with undefined state action', () => {
@@ -519,11 +804,8 @@ it('test reducer handler with undefined state action', () => {
     type: Actions.PROJECT_INIT,
     payload: {
       test: 'test',
-      resolve: mockResolve,
-      reject: mockReject
     }
   }
   const result = Functions.reducer(undefined, action)
   expect(result).toEqual({...defaultState, ...action.payload });
 });
-*/

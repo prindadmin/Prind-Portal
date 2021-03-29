@@ -1,8 +1,8 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import * as pageReducer from '../../Reducers/stagePageReducer'
-import * as userReducer from '../../Reducers/userReducer'
+import * as pageReducer from '../../Reducers/stagePage'
+import * as user from '../../Reducers/user'
 
 import ProjectStagePageTemplate from './ProjectStagePageTemplate'
 
@@ -18,7 +18,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(pageReducer.getPageContent(projectID, pageName, resolve, reject))
     },
     requestS3ProjectFileUploadToken: (project_id, pageName) => {
-      dispatch(userReducer.requestS3ProjectFileUploadToken(project_id, pageName))
+      dispatch(user.requestS3ProjectFileUploadToken(project_id, pageName))
     },
   }
 }

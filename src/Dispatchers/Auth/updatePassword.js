@@ -17,7 +17,7 @@ function UpdatePassword(payload) {
       resolve(data)
     })
     .catch(err => {
-      //console.log(err)
+      console.log(err)
       reject(err)
     });
   })
