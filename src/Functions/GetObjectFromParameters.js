@@ -15,4 +15,4 @@ export function GetObjectFromParameters(parameters) {
   }
 }
 
-export default GetObjectFromParameters
+export default GetObjectFromParameters 

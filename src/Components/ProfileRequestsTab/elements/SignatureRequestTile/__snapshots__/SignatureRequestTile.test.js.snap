@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render 1`] = `
+<div
+  id="signature-request"
+>
+  <div
+    className="signature-tile-content-container"
+  >
+    <h4>
+      Requested By:
+    </h4>
+    <div>
+      Testy McTesterson
+    </div>
+    <h4>
+      Project Name:
+    </h4>
+    <div>
+      Test Project 1
+    </div>
+    <h4>
+      Project Stage:
+    </h4>
+    <div>
+      Design
+    </div>
+    <h4>
+      Field Title:
+    </h4>
+    <div>
+      Field title 1
+    </div>
+    <h4>
+      File Name:
+    </h4>
+    <div>
+      filename.txt
+    </div>
+  </div>
+  <div
+    className="row button-row"
+  >
+    <Blueprint3.Button
+      icon="document"
+      intent="primary"
+      onClick={[Function]}
+      text="Go To Document"
+    />
+    <Blueprint3.Button
+      icon="cross"
+      intent="danger"
+      onClick={[Function]}
+      text="Reject"
+    />
+  </div>
+</div>
+`;

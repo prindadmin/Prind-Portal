@@ -43,11 +43,13 @@ export const requestS3ProjectFileUploadToken = ( project_id, pageName, resolve, 
 }
 
 
-export const requestS3UserFileUploadToken = ( fileType ) => {
+export const requestS3UserFileUploadToken = ( fileType, resolve, reject ) => {
   return {
     type: action.USER_S3_UPLOAD_USER_FILE_TOKEN_REQUESTED,
     payload: {
       fileType,
+      resolve,
+      reject,
     }
   }
 }
@@ -75,12 +77,14 @@ export const getProjectInvitations = ( resolve, reject  ) => {
   }
 }
 
-export const respondToProjectInvitation = ( projectID, response ) => {
+export const respondToProjectInvitation = ( projectID, response, resolve, reject ) => {
   return {
     type: action.USER_PROJECT_INVITATION_SEND_RESPONSE_REQUESTED,
     payload: {
       projectID,
       response,
+      resolve,
+      reject,
     }
   }
 }
@@ -96,7 +100,7 @@ export const getSignatureRequests = ( resolve, reject  ) => {
   }
 }
 
-export const respondToSignatureRequest = ( projectID, pageName, fieldID, response ) => {
+export const respondToSignatureRequest = ( projectID, pageName, fieldID, response, resolve, reject ) => {
   return {
     type: action.USER_PROJECT_SIGNATURE_SEND_RESPONSE_REQUESTED,
     payload: {
@@ -104,6 +108,8 @@ export const respondToSignatureRequest = ( projectID, pageName, fieldID, respons
       pageName,
       fieldID,
       response,
+      resolve,
+      reject,
     }
   }
 }
@@ -119,18 +125,8 @@ export const getHistory = ( resolve, reject ) => {
 }
 
 const ACTION_HANDLERS = {
-
   [action.USER_INIT]: (state, action) => { return { ...state, ...action.payload }},
   [action.USER_SET_STATE]: (state, action) => { return { ...state, ...action.payload }},
-
-
-  [action.USER_S3_UPLOAD_PROJECT_FILE_TOKEN_REQUESTED]: state => ({ ...state }),
-  [action.USER_GET_DETAILS_REQUESTED]: state => ({ ...state }),
-  [action.USER_GET_PROJECT_INVITATIONS_REQUESTED]: state => ({ ...state }),
-  [action.USER_PROJECT_INVITATION_SEND_RESPONSE_REQUESTED]: state => ({ ...state }),
-  [action.USER_GET_PROJECT_SIGNATURES_REQUESTED]: state => ({ ...state }),
-  [action.USER_PROJECT_SIGNATURE_SEND_RESPONSE_REQUESTED]: state => ({ ...state }),
-  [action.USER_GET_HISTORY_REQUESTED]: state => ({ ...state }),
 
   [action.USER_S3_UPLOAD_PROJECT_FILE_TOKEN_REQUEST_SENT]: (state, action) => ({ ...state, ...action.payload }),
   [action.USER_S3_UPLOAD_USER_FILE_TOKEN_REQUEST_SENT]: (state, action) => ({ ...state, ...action.payload }),

@@ -58,7 +58,7 @@ export class ProfilePage extends Component {
   componentDidMount() {
     const { location } = this.props
     // Register pageview with GA
-    ReactGA.pageview(location.pathname + location.search);
+    ReactGA.pageview(location.pathname);
 
     this.props.getUserDetails(
       this.profileResolve,
