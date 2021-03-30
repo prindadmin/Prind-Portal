@@ -1,25 +1,55 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should render loading spinner with given state 1`] = `
-<div
-  id="component-sign-in-up-box"
+<ContextProvider
+  value={
+    Object {
+      "store": Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "subscription": Subscription {
+        "handleChangeWrapper": [Function],
+        "listeners": Object {
+          "notify": [Function],
+        },
+        "onStateChange": [Function],
+        "parentSub": undefined,
+        "store": Object {
+          "clearActions": [Function],
+          "dispatch": [Function],
+          "getActions": [Function],
+          "getState": [Function],
+          "replaceReducer": [Function],
+          "subscribe": [Function],
+        },
+        "unsubscribe": null,
+      },
+    }
+  }
 >
-  <div
-    className="lds-ring"
-    style={Object {}}
-  >
-    <div
-      style={Object {}}
+  <HashRouter>
+    <withRouter(Connect(SignInUpBox))
+      history={
+        Object {
+          "push": [MockFunction],
+        }
+      }
+      isForgotPassword={false}
+      isPasswordReset={false}
+      isSignIn={true}
+      isSignUp={false}
+      location={
+        Object {
+          "pathname": "/signin",
+        }
+      }
+      username="testing@buildingim.com"
     />
-    <div
-      style={Object {}}
-    />
-    <div
-      style={Object {}}
-    />
-    <div
-      style={Object {}}
-    />
-  </div>
-</div>
+  </HashRouter>
+</ContextProvider>
 `;

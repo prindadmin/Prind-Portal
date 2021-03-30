@@ -1,6 +1,6 @@
 import { Provider } from 'react-redux'
+import { shallow, mount } from 'enzyme';
 import configureStore from 'redux-mock-store';
-import renderer from 'react-test-renderer';
 
 import {
   HashRouter as Router
@@ -49,7 +49,7 @@ beforeEach(() => {
     }
   };
 
-  component = renderer.create(
+  component = shallow(
     <Provider store={store}>
       <Router>
         <Component.default {...props} />
@@ -60,5 +60,5 @@ beforeEach(() => {
 
 
 it('should render loading spinner with given state', () => {
-  expect(component.toJSON()).toMatchSnapshot();
+  expect(component).toMatchSnapshot();
 });
