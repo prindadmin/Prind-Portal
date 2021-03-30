@@ -41,6 +41,6 @@ async function GetAccessibleProjects() {
         reject(error)
      })
    })
-}
+} 
 
 export default GetAccessibleProjects
