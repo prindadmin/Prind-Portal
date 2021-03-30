@@ -7,7 +7,6 @@ import * as members from '../../Reducers/members'
 
 const mapStatetoProps = state => {
   return {
-    projects: state.projects,
     members: state.members,
   }
 }

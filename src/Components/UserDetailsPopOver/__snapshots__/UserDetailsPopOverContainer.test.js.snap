@@ -1,0 +1,246 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render 1`] = `
+<Suspense
+  fallback={
+    <p>
+      error
+    </p>
+  }
+>
+  <Provider
+    store={
+      Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      }
+    }
+  >
+    <HashRouter>
+      <Router
+        history={
+          Object {
+            "action": "POP",
+            "block": [Function],
+            "createHref": [Function],
+            "go": [Function],
+            "goBack": [Function],
+            "goForward": [Function],
+            "length": 1,
+            "listen": [Function],
+            "location": Object {
+              "hash": "",
+              "pathname": "/",
+              "search": "",
+              "state": undefined,
+            },
+            "push": [Function],
+            "replace": [Function],
+          }
+        }
+      >
+        <withRouter(Connect(UserDetailsPopOver))
+          memberDetails={
+            Object {
+              "username": "aaaa-aaaa-aaaaaaaa-aaaa-aaaa",
+            }
+          }
+          onCancelPopup={[MockFunction]}
+        >
+          <Connect(UserDetailsPopOver)
+            history={
+              Object {
+                "action": "POP",
+                "block": [Function],
+                "createHref": [Function],
+                "go": [Function],
+                "goBack": [Function],
+                "goForward": [Function],
+                "length": 1,
+                "listen": [Function],
+                "location": Object {
+                  "hash": "",
+                  "pathname": "/",
+                  "search": "",
+                  "state": undefined,
+                },
+                "push": [Function],
+                "replace": [Function],
+              }
+            }
+            location={
+              Object {
+                "hash": "",
+                "pathname": "/",
+                "search": "",
+                "state": undefined,
+              }
+            }
+            match={
+              Object {
+                "isExact": true,
+                "params": Object {},
+                "path": "/",
+                "url": "/",
+              }
+            }
+            memberDetails={
+              Object {
+                "username": "aaaa-aaaa-aaaaaaaa-aaaa-aaaa",
+              }
+            }
+            onCancelPopup={[MockFunction]}
+          >
+            <UserDetailsPopOver
+              history={
+                Object {
+                  "action": "POP",
+                  "block": [Function],
+                  "createHref": [Function],
+                  "go": [Function],
+                  "goBack": [Function],
+                  "goForward": [Function],
+                  "length": 1,
+                  "listen": [Function],
+                  "location": Object {
+                    "hash": "",
+                    "pathname": "/",
+                    "search": "",
+                    "state": undefined,
+                  },
+                  "push": [Function],
+                  "replace": [Function],
+                }
+              }
+              location={
+                Object {
+                  "hash": "",
+                  "pathname": "/",
+                  "search": "",
+                  "state": undefined,
+                }
+              }
+              match={
+                Object {
+                  "isExact": true,
+                  "params": Object {},
+                  "path": "/",
+                  "url": "/",
+                }
+              }
+              memberDetails={
+                Object {
+                  "username": "aaaa-aaaa-aaaaaaaa-aaaa-aaaa",
+                }
+              }
+              members={
+                Object {
+                  "currentMember": Object {
+                    "accreditations": Array [
+                      Object {
+                        "accreditationID": "constructionBasics",
+                        "accreditationName": "Construction Basics 101",
+                        "issuedDate": "2019-10-01T12:59:12.142216",
+                        "issuer": "did:fctr:d85be1f5baa83fa83850d8b58731a7f7c8ba65c33dec107c2e16e0dd65c7bcc7",
+                        "revocationDate": "2019-11-01T12:59:12.142216",
+                        "revocationReason": "expired",
+                        "status": "revoked",
+                        "subject": "did:fnds:31a24b270fe86d9c595e715854028c319cc75957718861eb66996929eb5c8025",
+                      },
+                    ],
+                  },
+                }
+              }
+              onCancelPopup={[MockFunction]}
+              tempGetUserAccreditations={[Function]}
+            >
+              <div
+                id="popup-greyer"
+                onClick={[Function]}
+              >
+                <div
+                  id="user-details-popover"
+                >
+                  <div
+                    id="popup-box"
+                    onClick={[Function]}
+                  >
+                    <div
+                      className="popup-box-header"
+                    >
+                      <h2>
+                        Professional Accreditations
+                      </h2>
+                      <input
+                        className="close-button"
+                        id="close-button"
+                        onClick={[Function]}
+                        type="submit"
+                        value="Close"
+                      />
+                    </div>
+                    <div
+                      className="accreditation-list-container"
+                    >
+                      <div
+                        className="accreditation-list"
+                      >
+                        <div
+                          className="fill"
+                        >
+                          <div
+                            className="loading-spinner"
+                          >
+                            <Blueprint3.Spinner
+                              intent="danger"
+                              size={100}
+                            >
+                              <div
+                                className="bp3-spinner bp3-intent-danger"
+                              >
+                                <div
+                                  className="bp3-spinner-animation"
+                                >
+                                  <svg
+                                    height={100}
+                                    strokeWidth="4.00"
+                                    viewBox="3.00 3.00 94.00 94.00"
+                                    width={100}
+                                  >
+                                    <path
+                                      className="bp3-spinner-track"
+                                      d="M 50,50 m 0,-45 a 45,45 0 1 1 0,90 a 45,45 0 1 1 0,-90"
+                                    />
+                                    <path
+                                      className="bp3-spinner-head"
+                                      d="M 50,50 m 0,-45 a 45,45 0 1 1 0,90 a 45,45 0 1 1 0,-90"
+                                      pathLength={280}
+                                      strokeDasharray="280 280"
+                                      strokeDashoffset={210}
+                                    />
+                                  </svg>
+                                </div>
+                              </div>
+                            </Blueprint3.Spinner>
+                            <p>
+                              Fetching Accreditations
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </UserDetailsPopOver>
+          </Connect(UserDetailsPopOver)>
+        </withRouter(Connect(UserDetailsPopOver))>
+      </Router>
+    </HashRouter>
+  </Provider>
+</Suspense>
+`;
