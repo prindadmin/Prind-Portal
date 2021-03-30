@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 
 import * as user from '../../../../Reducers/user'
 
-import UserDetailsForm from './userDetailsForm'
+import UserDetailsForm from './UserDetailsForm'
 
 const mapStatetoProps = state => {
   return {

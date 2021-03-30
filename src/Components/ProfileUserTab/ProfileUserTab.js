@@ -8,7 +8,6 @@ export class ProfileUserTab extends Component {
   static propTypes = {}
 
   render() {
-
     return(
       <div className="tab-pane active">
         <UserDetailsForm />

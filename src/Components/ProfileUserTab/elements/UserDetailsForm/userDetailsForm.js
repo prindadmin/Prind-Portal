@@ -19,10 +19,31 @@ import * as FormInputs from '../../../Common/formInputs'
 
 const defaultAvatar = `images/default-avatar.png`
 
-// TODO: Fix avatar upload
-export class Page extends Component {
+// TODO: Rewrite without blueprintjs
+// TODO: URGENT: Fix avatar upload
+export class UserDetailsForm extends Component {
   static propTypes = {
-    user: PropTypes.object.isRequired,
+    user: PropTypes.shape({
+      username: PropTypes.string.isRequired,
+      details: PropTypes.shape({
+        firstName: PropTypes.string,
+        homePhoneNumber: PropTypes.string,
+        lastName: PropTypes.string,
+        mobilePhoneNumber: PropTypes.string,
+        foundationsID: PropTypes.string,
+        emailAddress: PropTypes.string,
+      }),
+      userS3Token: PropTypes.shape({
+        SessionToken: PropTypes.string,
+        Expiration: PropTypes.string,
+        AccessKeyId: PropTypes.string,
+        SecretAccessKey: PropTypes.string
+      }).isRequired,
+      error: PropTypes.object
+    }).isRequired,
+    requestS3UserFileUploadToken: PropTypes.func.isRequired,
+    initialValues: PropTypes.object.isRequired,
+    handleSubmit: PropTypes.func.isRequired
   }
 
   constructor(props) {
@@ -362,4 +383,4 @@ export class Page extends Component {
 export default reduxForm({
   enableReinitialize: true,
   form: 'profile'
-})(Page)
+})(UserDetailsForm)

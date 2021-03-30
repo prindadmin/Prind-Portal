@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render 1`] = `
+<div
+  className="tab-pane active"
+>
+  <withRouter(Connect(ReduxForm)) />
+  <div
+    className="horizontal-line"
+  />
+  <withRouter(Connect(ReduxForm)) />
+</div>
+`;

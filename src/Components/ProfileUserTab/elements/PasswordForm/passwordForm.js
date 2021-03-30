@@ -14,8 +14,13 @@ import * as Validators from '../../../../Validators'
 
 import * as FormInputs from '../../../Common/formInputs'
 
-export class Page extends Component {
+// TODO: Rewrite without blueprintjs
+export class PasswordForm extends Component {
   static propTypes = {
+    user: PropTypes.shape({
+      username: PropTypes.string.isRequired,
+    }).isRequired,
+    updatePassword: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
   }
 
@@ -146,4 +151,4 @@ export class Page extends Component {
 export default reduxForm({
   enableReinitialize: true,
   form: 'password'
-})(Page)
+})(PasswordForm)

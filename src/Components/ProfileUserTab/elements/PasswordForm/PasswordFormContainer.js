@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 
 import * as reducer from '../../../../Reducers/auth'
 
-import PasswordForm from './passwordForm'
+import PasswordForm from './PasswordForm'
 
 const mapStatetoProps = state => {
   return {
