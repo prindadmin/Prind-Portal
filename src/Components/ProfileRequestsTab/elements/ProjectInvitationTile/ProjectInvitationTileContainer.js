@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 
 import * as user from '../../../../Reducers/user'
 
-import Element from './Element'
+import ProjectInvitationTile from './ProjectInvitationTile'
 
 const mapStatetoProps = state => {
   return {
@@ -18,4 +18,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default withRouter(connect(mapStatetoProps, mapDispatchToProps)(Element))
+export default withRouter(connect(mapStatetoProps, mapDispatchToProps)(ProjectInvitationTile))

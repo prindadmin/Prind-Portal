@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render 1`] = `
+<div
+  id="project-invitation-request"
+>
+  <h4
+    className="bp3-heading"
+  >
+    Project Invitation
+  </h4>
+  <div
+    className="bp3-heading"
+  >
+    Project Name: Test Project 123
+  </div>
+  <div
+    className="row button-row"
+  >
+    <Blueprint3.Button
+      icon="tick"
+      id="accept-button"
+      intent="primary"
+      onClick={[Function]}
+      text="Accept"
+    />
+    <Blueprint3.Button
+      icon="cross"
+      id="reject-button"
+      intent="danger"
+      onClick={[Function]}
+      text="Reject"
+    />
+  </div>
+</div>
+`;

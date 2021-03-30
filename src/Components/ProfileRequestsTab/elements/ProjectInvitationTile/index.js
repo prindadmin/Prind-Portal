@@ -1,3 +1,3 @@
-import Container from './Container'
+import ProjectInvitationTileContainer from './ProjectInvitationTileContainer'
 
-export default Container
+export default ProjectInvitationTileContainer

@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render then change route 1`] = `
+<Route
+  auth={
+    Object {
+      "isSignedIn": "AUTH_SUCCESS",
+    }
+  }
+  location={
+    Object {
+      "pathname": "/documents",
+    }
+  }
+  path="/documents"
+  render={[Function]}
+  storeRoute={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          "/documents",
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
+  user={
+    Object {
+      "currentRoute": "/profile",
+    }
+  }
+/>
+`;
+
+exports[`Should render when logged in 1`] = `
+<Route
+  auth={
+    Object {
+      "isSignedIn": "AUTH_SUCCESS",
+    }
+  }
+  location={
+    Object {
+      "pathname": "/documents",
+    }
+  }
+  path="/documents"
+  render={[Function]}
+  storeRoute={[MockFunction]}
+  user={
+    Object {
+      "currentRoute": "/documents",
+    }
+  }
+/>
+`;
+
+exports[`Should render when not logged in 1`] = `
+<Route
+  auth={
+    Object {
+      "isSignedIn": "AUTH_UNKNOWN",
+    }
+  }
+  location={
+    Object {
+      "pathname": "/documents",
+    }
+  }
+  path="/documents"
+  render={[Function]}
+  storeRoute={[MockFunction]}
+  user={
+    Object {
+      "currentRoute": "/documents",
+    }
+  }
+/>
+`;

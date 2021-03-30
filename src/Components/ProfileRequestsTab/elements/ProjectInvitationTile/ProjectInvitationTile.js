@@ -8,34 +8,31 @@ import {
   Intent,
 } from '@blueprintjs/core'
 
-export class Element extends Component {
+export class ProjectInvitationTile extends Component {
   static propTypes = {
-    auth: PropTypes.object.isRequired,
     requestDetails: PropTypes.shape({
       projectId: PropTypes.string.isRequired,
       projectName: PropTypes.string.isRequired,
-      requestedBy: PropTypes.string.isRequired,
-      requestedAt: PropTypes.string.isRequired,
-      roleId: PropTypes.string.isRequired,
-      requestedByUser: PropTypes.string.isRequired,
+      requestedBy: PropTypes.string,
+      requestedAt: PropTypes.string,
+      roleId: PropTypes.string,
+      requestedByUser: PropTypes.string,
     }).isRequired,
     respondToProjectInvitation: PropTypes.func.isRequired,
   }
 
+
   acceptInvitation = () => {
-
     const { requestDetails, respondToProjectInvitation } = this.props
-
     respondToProjectInvitation(
       requestDetails.projectId,
       true,
     )
   }
 
+
   rejectInvitation = () => {
-
     const { requestDetails, respondToProjectInvitation } = this.props
-
     respondToProjectInvitation(
       requestDetails.projectId,
       false,
@@ -44,21 +41,21 @@ export class Element extends Component {
 
 
   render() {
-
     const { requestDetails } = this.props
-
     return(
       <div id="project-invitation-request">
         <h4 className='bp3-heading'>{Strings.PROJECT_INVITATION}</h4>
         <div className='bp3-heading'>{`${Strings.PROJECT_NAME}: ${requestDetails.projectName}`}</div>
         <div className='row button-row'>
           <Button
+            id='accept-button'
             intent={Intent.PRIMARY}
             onClick={(e) => this.acceptInvitation()}
             text={Strings.BUTTON_ACCEPT}
             icon="tick"
           />
           <Button
+            id='reject-button'
             intent={Intent.DANGER}
             onClick={(e) => this.rejectInvitation()}
             text={Strings.BUTTON_REJECT}
@@ -70,4 +67,4 @@ export class Element extends Component {
   }
 }
 
-export default Element
+export default ProjectInvitationTile

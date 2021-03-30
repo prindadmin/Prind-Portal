@@ -1,0 +1,134 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render with given state from Redux store 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <HashRouter>
+    <Router
+      history={
+        Object {
+          "action": "REPLACE",
+          "block": [Function],
+          "createHref": [Function],
+          "go": [Function],
+          "goBack": [Function],
+          "goForward": [Function],
+          "length": 1,
+          "listen": [Function],
+          "location": Object {
+            "hash": "",
+            "pathname": "/",
+            "search": "",
+            "state": undefined,
+          },
+          "push": [Function],
+          "replace": [Function],
+        }
+      }
+    >
+      <Connect(PrivateRoute)
+        auth={
+          Object {
+            "isSignedIn": "AUTH_UNKNOWN",
+          }
+        }
+        component={<Error404 />}
+        location={
+          Object {
+            "pathname": "/documents",
+          }
+        }
+        path="/documents"
+        storeRoute={[MockFunction]}
+        user={
+          Object {
+            "currentRoute": "/documents",
+          }
+        }
+      >
+        <PrivateRoute
+          auth={
+            Object {
+              "error": Object {},
+              "hasChangedPassword": "AUTH_UNKNOWN",
+              "hasSentCode": "AUTH_UNKNOWN",
+              "hasSignedUp": "AUTH_UNKNOWN",
+              "info": Object {},
+              "isConfirmed": "AUTH_UNKNOWN",
+              "isSignedIn": "AUTH_UNKNOWN",
+              "passwordResetRequired": "AUTH_UNKNOWN",
+            }
+          }
+          component={<Error404 />}
+          location={
+            Object {
+              "pathname": "/documents",
+            }
+          }
+          path="/documents"
+          storeRoute={[Function]}
+          updateChosenProject={[Function]}
+          user={
+            Object {
+              "currentRoute": "/profile",
+              "details": Object {},
+              "fetching": false,
+            }
+          }
+        >
+          <Route
+            auth={
+              Object {
+                "error": Object {},
+                "hasChangedPassword": "AUTH_UNKNOWN",
+                "hasSentCode": "AUTH_UNKNOWN",
+                "hasSignedUp": "AUTH_UNKNOWN",
+                "info": Object {},
+                "isConfirmed": "AUTH_UNKNOWN",
+                "isSignedIn": "AUTH_UNKNOWN",
+                "passwordResetRequired": "AUTH_UNKNOWN",
+              }
+            }
+            location={
+              Object {
+                "pathname": "/documents",
+              }
+            }
+            path="/documents"
+            render={[Function]}
+            storeRoute={[Function]}
+            updateChosenProject={[Function]}
+            user={
+              Object {
+                "currentRoute": "/profile",
+                "details": Object {},
+                "fetching": false,
+              }
+            }
+          >
+            <Redirect
+              to="/"
+            >
+              <Lifecycle
+                onMount={[Function]}
+                onUpdate={[Function]}
+                to="/"
+              />
+            </Redirect>
+          </Route>
+        </PrivateRoute>
+      </Connect(PrivateRoute)>
+    </Router>
+  </HashRouter>
+</Provider>
+`;

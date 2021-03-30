@@ -1,15 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Route } from 'react-router-dom'
-import { Redirect } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
 
 import * as States from '../../States'
 
 class PrivateRoute extends React.Component {
   static propTypes = {
-    auth: PropTypes.object.isRequired,
+    auth: PropTypes.shape({
+      isSignedIn: PropTypes.string.isRequired
+    }).isRequired,
     path: PropTypes.string.isRequired,
-    user: PropTypes.object.isRequired,
+    location: PropTypes.shape({
+      pathname: PropTypes.string.isRequired
+    }).isRequired,
+    user: PropTypes.shape({
+      currentRoute: PropTypes.string.isRequired
+    }).isRequired,
+    component: PropTypes.object.isRequired,
+    storeRoute: PropTypes.func.isRequired
   }
 
   componentDidMount() {
