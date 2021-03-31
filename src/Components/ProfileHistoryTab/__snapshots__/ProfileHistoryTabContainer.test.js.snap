@@ -1,0 +1,422 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render 1`] = `
+<Suspense
+  fallback={
+    <p>
+      error
+    </p>
+  }
+>
+  <Provider
+    store={
+      Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      }
+    }
+  >
+    <HashRouter>
+      <Router
+        history={
+          Object {
+            "action": "POP",
+            "block": [Function],
+            "createHref": [Function],
+            "go": [Function],
+            "goBack": [Function],
+            "goForward": [Function],
+            "length": 1,
+            "listen": [Function],
+            "location": Object {
+              "hash": "",
+              "pathname": "/",
+              "search": "",
+              "state": undefined,
+            },
+            "push": [Function],
+            "replace": [Function],
+          }
+        }
+      >
+        <withRouter(Connect(ProfileHistoryTab))>
+          <Connect(ProfileHistoryTab)
+            history={
+              Object {
+                "action": "POP",
+                "block": [Function],
+                "createHref": [Function],
+                "go": [Function],
+                "goBack": [Function],
+                "goForward": [Function],
+                "length": 1,
+                "listen": [Function],
+                "location": Object {
+                  "hash": "",
+                  "pathname": "/",
+                  "search": "",
+                  "state": undefined,
+                },
+                "push": [Function],
+                "replace": [Function],
+              }
+            }
+            location={
+              Object {
+                "hash": "",
+                "pathname": "/",
+                "search": "",
+                "state": undefined,
+              }
+            }
+            match={
+              Object {
+                "isExact": true,
+                "params": Object {},
+                "path": "/",
+                "url": "/",
+              }
+            }
+          >
+            <ProfileHistoryTab
+              history={
+                Object {
+                  "action": "POP",
+                  "block": [Function],
+                  "createHref": [Function],
+                  "go": [Function],
+                  "goBack": [Function],
+                  "goForward": [Function],
+                  "length": 1,
+                  "listen": [Function],
+                  "location": Object {
+                    "hash": "",
+                    "pathname": "/",
+                    "search": "",
+                    "state": undefined,
+                  },
+                  "push": [Function],
+                  "replace": [Function],
+                }
+              }
+              initialValues={Object {}}
+              location={
+                Object {
+                  "hash": "",
+                  "pathname": "/",
+                  "search": "",
+                  "state": undefined,
+                }
+              }
+              match={
+                Object {
+                  "isExact": true,
+                  "params": Object {},
+                  "path": "/",
+                  "url": "/",
+                }
+              }
+              user={
+                Object {
+                  "currentRoute": undefined,
+                  "details": Object {},
+                  "fetching": false,
+                  "history": Object {
+                    "documentVersions": Array [
+                      Object {
+                        "dateTime": "2020-03-09T16:56:36.217421",
+                        "projectName": "Test Project 123",
+                        "type": "DOCUMENT_UPLOADED",
+                      },
+                    ],
+                    "projects": Object {
+                      "projectCreator": Array [
+                        Object {
+                          "dateTime": "2020-03-10T16:56:36.217421",
+                          "projectName": "Test Project 123",
+                          "type": "PROJECT_CREATED",
+                        },
+                      ],
+                      "projectRole": Array [
+                        Object {
+                          "dateTime": "2020-03-11T16:56:36.217421",
+                          "projectName": "Test Project 123",
+                          "type": "PROJECT_JOINED",
+                        },
+                      ],
+                    },
+                    "signedDocuments": Array [
+                      Object {
+                        "dateTime": "2020-03-12T16:56:36.217421",
+                        "filename": "Test File 1.txt",
+                        "projectName": "Test Project 123",
+                        "signedAt": "2020-03-12T16:56:36.217421",
+                        "type": "DOCUMENT_SIGNED",
+                      },
+                    ],
+                  },
+                  "projectInvitations": Array [],
+                  "projectS3Token": Object {},
+                  "signatureRequests": Array [],
+                  "userS3Token": Object {},
+                }
+              }
+            >
+              <div
+                className="tab-pane active"
+              >
+                <div
+                  id="history-tab-container"
+                >
+                  <div
+                    className="history-list row"
+                  >
+                    <div
+                      className="col-md-12 col-lg-6 col-xl-4"
+                      key="0"
+                    >
+                      <DocumentSignedTile
+                        details={
+                          Object {
+                            "dateTime": "2020-03-12T16:56:36.217421",
+                            "filename": "Test File 1.txt",
+                            "projectName": "Test Project 123",
+                            "signedAt": "2020-03-12T16:56:36.217421",
+                            "type": "DOCUMENT_SIGNED",
+                          }
+                        }
+                      >
+                        <Blueprint3.Callout
+                          icon="tick"
+                          intent="primary"
+                          title="Document Signed"
+                        >
+                          <div
+                            className="bp3-callout bp3-intent-primary bp3-callout-icon"
+                          >
+                            <Blueprint3.Icon
+                              icon="tick"
+                              iconSize={20}
+                            >
+                              <span
+                                className="bp3-icon bp3-icon-tick"
+                                icon="tick"
+                              >
+                                <svg
+                                  data-icon="tick"
+                                  height={20}
+                                  viewBox="0 0 20 20"
+                                  width={20}
+                                >
+                                  <desc>
+                                    tick
+                                  </desc>
+                                  <path
+                                    d="M17 4c-.28 0-.53.11-.71.29L7 13.59 3.71 10.3A.965.965 0 003 10a1.003 1.003 0 00-.71 1.71l4 4c.18.18.43.29.71.29s.53-.11.71-.29l10-10A1.003 1.003 0 0017 4z"
+                                    fillRule="evenodd"
+                                    key="0"
+                                  />
+                                </svg>
+                              </span>
+                            </Blueprint3.Icon>
+                            <Component>
+                              <h4
+                                className="bp3-heading"
+                              >
+                                Document Signed
+                              </h4>
+                            </Component>
+                            You signed a document called Test File 1.txt for project Test Project 123 on the March 12, 2020
+                          </div>
+                        </Blueprint3.Callout>
+                      </DocumentSignedTile>
+                    </div>
+                    <div
+                      className="col-md-12 col-lg-6 col-xl-4"
+                      key="1"
+                    >
+                      <ProjectJoinTile
+                        details={
+                          Object {
+                            "dateTime": "2020-03-11T16:56:36.217421",
+                            "projectName": "Test Project 123",
+                            "type": "PROJECT_JOINED",
+                          }
+                        }
+                      >
+                        <Blueprint3.Callout
+                          icon="new-person"
+                          intent="warning"
+                          title="Project Joined"
+                        >
+                          <div
+                            className="bp3-callout bp3-intent-warning bp3-callout-icon"
+                          >
+                            <Blueprint3.Icon
+                              icon="new-person"
+                              iconSize={20}
+                            >
+                              <span
+                                className="bp3-icon bp3-icon-new-person"
+                                icon="new-person"
+                              >
+                                <svg
+                                  data-icon="new-person"
+                                  height={20}
+                                  viewBox="0 0 20 20"
+                                  width={20}
+                                >
+                                  <desc>
+                                    new-person
+                                  </desc>
+                                  <path
+                                    d="M11.41 15.92c-1.46-.65-1.26-1.05-1.31-1.59-.01-.07-.01-.15-.01-.23.5-.45.91-1.07 1.18-1.78 0 0 .01-.04.02-.05.06-.15.11-.32.15-.48.33-.07.53-.44.6-.78.08-.14.23-.48.2-.87-.05-.5-.24-.73-.47-.82v-.09c0-.63-.06-1.55-.17-2.15-.02-.17-.06-.33-.11-.5-.22-.73-.67-1.4-1.27-1.86C9.58 4.25 8.7 4 7.92 4c-.78 0-1.66.25-2.28.73-.61.47-1.06 1.13-1.27 1.86-.05.16-.08.33-.11.5-.12.6-.18 1.51-.18 2.14v.08c-.23.09-.43.32-.48.83-.04.39.12.73.2.87.08.35.28.72.62.78.04.17.09.33.15.48 0 .01.01.02.01.03l.01.01c.27.72.69 1.35 1.21 1.8 0 .07-.01.14-.01.21-.05.54.1.94-1.36 1.59-1.46.65-3.66 1.35-4.11 2.4C-.14 19.38.04 20 .04 20h15.75s.18-.62-.27-1.67c-.45-1.06-2.65-1.75-4.11-2.41zM18.87 3h-2V1c0-.55-.45-1-1-1s-1 .45-1 1v2h-2c-.55 0-1 .45-1 1s.45 1 1 1h2v2c0 .55.45 1 1 1s1-.45 1-1V5h2c.55 0 1-.45 1-1s-.45-1-1-1z"
+                                    fillRule="evenodd"
+                                    key="0"
+                                  />
+                                </svg>
+                              </span>
+                            </Blueprint3.Icon>
+                            <Component>
+                              <h4
+                                className="bp3-heading"
+                              >
+                                Project Joined
+                              </h4>
+                            </Component>
+                            You joined a project called Test Project 123 on the January 1, 1970
+                          </div>
+                        </Blueprint3.Callout>
+                      </ProjectJoinTile>
+                    </div>
+                    <div
+                      className="col-md-12 col-lg-6 col-xl-4"
+                      key="2"
+                    >
+                      <ProjectCreateTile
+                        details={
+                          Object {
+                            "dateTime": "2020-03-10T16:56:36.217421",
+                            "projectName": "Test Project 123",
+                            "type": "PROJECT_CREATED",
+                          }
+                        }
+                      >
+                        <Blueprint3.Callout
+                          icon="build"
+                          intent="success"
+                          title="Project Created"
+                        >
+                          <div
+                            className="bp3-callout bp3-intent-success bp3-callout-icon"
+                          >
+                            <Blueprint3.Icon
+                              icon="build"
+                              iconSize={20}
+                            >
+                              <span
+                                className="bp3-icon bp3-icon-build"
+                                icon="build"
+                              >
+                                <svg
+                                  data-icon="build"
+                                  height={20}
+                                  viewBox="0 0 20 20"
+                                  width={20}
+                                >
+                                  <desc>
+                                    build
+                                  </desc>
+                                  <path
+                                    d="M19.43 16.67L9.31 7.81l1.47-1.56c.41-.44-.15-.8.15-1.6 1.08-2.76 4.19-2.99 4.19-2.99s.45-.47.87-.92C11.98-1 9.26.7 8.04 1.8L3.83 6.25l-.86.92c-.48.51-.48 1.33 0 1.84l-.87.92c-.48-.51-1.26-.51-1.74 0s-.48 1.33 0 1.84l1.74 1.84c.48.51 1.26.51 1.74 0s.48-1.33 0-1.84l.87-.92c.48.51 1.26.51 1.74 0l1.41-1.49 8.81 10.07c.76.76 2 .76 2.76 0 .76-.76.76-2 0-2.76z"
+                                    fillRule="evenodd"
+                                    key="0"
+                                  />
+                                </svg>
+                              </span>
+                            </Blueprint3.Icon>
+                            <Component>
+                              <h4
+                                className="bp3-heading"
+                              >
+                                Project Created
+                              </h4>
+                            </Component>
+                            You created a project called Test Project 123 on the January 1, 1970
+                          </div>
+                        </Blueprint3.Callout>
+                      </ProjectCreateTile>
+                    </div>
+                    <div
+                      className="col-md-12 col-lg-6 col-xl-4"
+                      key="3"
+                    >
+                      <DocumentUploadTile
+                        details={
+                          Object {
+                            "dateTime": "2020-03-09T16:56:36.217421",
+                            "projectName": "Test Project 123",
+                            "type": "DOCUMENT_UPLOADED",
+                          }
+                        }
+                      >
+                        <Blueprint3.Callout
+                          icon="folder-new"
+                          intent="danger"
+                          title="Document Uploaded"
+                        >
+                          <div
+                            className="bp3-callout bp3-intent-danger bp3-callout-icon"
+                          >
+                            <Blueprint3.Icon
+                              icon="folder-new"
+                              iconSize={20}
+                            >
+                              <span
+                                className="bp3-icon bp3-icon-folder-new"
+                                icon="folder-new"
+                              >
+                                <svg
+                                  data-icon="folder-new"
+                                  height={20}
+                                  viewBox="0 0 20 20"
+                                  width={20}
+                                >
+                                  <desc>
+                                    folder-new
+                                  </desc>
+                                  <path
+                                    d="M12.994 7c0 1.655 1.344 3 2.998 3a3.002 3.002 0 002.999-3H20v10c0 .55-.45 1-1 1H1.01c-.55 0-1-.45-1-1V7h12.984zM10.76 6H0V3c0-.55.45-1 1-1h3.998c.28 0 .53.11.71.29L7.415 4h2.579c0 .768.29 1.469.765 2zm8.23-3c.55 0 1 .45 1 1s-.45 1-1 1h-1.998v2c0 .55-.45 1-1 1s-1-.45-1-1V5h-1.998c-.55 0-1-.45-1-1s.45-1 1-1h1.999V1c0-.55.45-1 .999-1 .55 0 1 .45 1 1v2h1.999z"
+                                    fillRule="evenodd"
+                                    key="0"
+                                  />
+                                </svg>
+                              </span>
+                            </Blueprint3.Icon>
+                            <Component>
+                              <h4
+                                className="bp3-heading"
+                              >
+                                Document Uploaded
+                              </h4>
+                            </Component>
+                            You uploaded a document called undefined to project Test Project 123 on the March 9, 2020
+                          </div>
+                        </Blueprint3.Callout>
+                      </DocumentUploadTile>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ProfileHistoryTab>
+          </Connect(ProfileHistoryTab)>
+        </withRouter(Connect(ProfileHistoryTab))>
+      </Router>
+    </HashRouter>
+  </Provider>
+</Suspense>
+`;

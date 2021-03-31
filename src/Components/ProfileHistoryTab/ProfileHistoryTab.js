@@ -12,7 +12,43 @@ import {
 
 export class ProfileHistoryTab extends Component {
   static propTypes = {
-    user: PropTypes.object.isRequired,
+    user: PropTypes.shape({
+      history: PropTypes.shape({
+        documentVersions: PropTypes.arrayOf(
+          PropTypes.shape({
+            type: PropTypes.string.isRequired,
+            projectName: PropTypes.string.isRequired,
+            dateTime: PropTypes.string,
+            signedAt: PropTypes.string,
+          })
+        ),
+        projects: PropTypes.shape({
+          projectCreator: PropTypes.arrayOf(
+            PropTypes.shape({
+              type: PropTypes.string.isRequired,
+              projectName: PropTypes.string.isRequired,
+              dateTime: PropTypes.string.isRequired
+            })
+          ).isRequired,
+          projectRole: PropTypes.arrayOf(
+            PropTypes.shape({
+              type: PropTypes.string.isRequired,
+              projectName: PropTypes.string.isRequired,
+              dateTime: PropTypes.string.isRequired
+            })
+          ).isRequired
+        }),
+        signedDocuments: PropTypes.arrayOf(
+          PropTypes.shape({
+            type: PropTypes.string.isRequired,
+            filename: PropTypes.string.isRequired,
+            projectName: PropTypes.string.isRequired,
+            signedAt: PropTypes.string,
+            dateTime: PropTypes.string
+          })
+        ),
+      })
+    }).isRequired,
   }
 
   orderHistoryChronologically = () => {

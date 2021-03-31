@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render 1`] = `
+<Blueprint3.Callout
+  icon="build"
+  intent="success"
+  title="Project Created"
+>
+  You created a project called test project on the January 1, 1970
+</Blueprint3.Callout>
+`;

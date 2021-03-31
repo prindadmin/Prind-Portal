@@ -7,6 +7,7 @@ import {
 
 import * as Strings from '../../../Data/Strings'
 
+// TODO: Replace blueprintjs
 const DocumentUploadTile = props => {
 
   const { details } = props
