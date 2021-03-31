@@ -28,12 +28,10 @@ async function GetAccessibleProjects() {
     // Send the request
     API.get(apiName, path, myInit)
       .then(response => {
-        console.log(response)
-
-        if (response.errorMessage !== undefined) {
+        if (response.Error) {
           reject(response)
+          return;
         }
-
         resolve(response)
       })
       .catch(error => {
@@ -41,6 +39,6 @@ async function GetAccessibleProjects() {
         reject(error)
      })
    })
-} 
+}
 
 export default GetAccessibleProjects
