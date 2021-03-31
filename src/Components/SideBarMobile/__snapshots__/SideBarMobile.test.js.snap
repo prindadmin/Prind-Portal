@@ -13,42 +13,52 @@ exports[`Should render CDM project Sidebar 1`] = `
       items={
         Array [
           Object {
+            "id": "projectDetails",
             "linkTo": "/project",
             "name": "Project Details",
           },
           Object {
+            "id": "projectTeam",
             "linkTo": "/team",
             "name": "Project Team",
           },
           Object {
+            "id": "stageInception",
             "linkTo": "/inception",
             "name": "Inception",
           },
           Object {
+            "id": "stageFeasibility",
             "linkTo": "/feasibility",
             "name": "Feasibility",
           },
           Object {
+            "id": "stageDesign",
             "linkTo": "/design",
             "name": "Design",
           },
           Object {
+            "id": "stageTender",
             "linkTo": "/tender",
             "name": "Tender",
           },
           Object {
+            "id": "stageConstruction",
             "linkTo": "/construction",
             "name": "Construction",
           },
           Object {
+            "id": "stageHandover",
             "linkTo": "/handover",
             "name": "Handover",
           },
           Object {
+            "id": "stageOccupation",
             "linkTo": "/occupation",
             "name": "Occupation",
           },
           Object {
+            "id": "stageRefurbishment",
             "linkTo": "/refurbishment",
             "name": "Refurbishment",
           },
@@ -81,14 +91,17 @@ exports[`Should render DSHF project Sidebar 1`] = `
       items={
         Array [
           Object {
+            "id": "projectDetails",
             "linkTo": "/project",
             "name": "Project Details",
           },
           Object {
+            "id": "projectTeam",
             "linkTo": "/team",
             "name": "Project Team",
           },
           Object {
+            "id": "stageOccupation",
             "linkTo": "/occupation",
             "name": "HSF",
           },

@@ -59,6 +59,7 @@ export class SideBar extends Component {
 
     const pageNameList = Object.keys(menuEntries).map(page => {
       return {
+        id: menuEntries[page].id,
         name: menuEntries[page].name,
         linkTo: menuEntries[page].linkTo
       }
