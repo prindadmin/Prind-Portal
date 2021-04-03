@@ -6,7 +6,7 @@ exports[`Sign In Page - Should render sign in page 1`] = `
   id="sign-in-up-page"
   style={
     Object {
-      "backgroundImage": "url(/images/backgrounds/building-site-1.webp)",
+      "backgroundImage": "url(/images/backgrounds/building-site-1.png)",
     }
   }
 >
@@ -27,7 +27,7 @@ exports[`Sign In Page - Should render sign in page without state 1`] = `
   id="sign-in-up-page"
   style={
     Object {
-      "backgroundImage": "url(/images/backgrounds/building-site-1.webp)",
+      "backgroundImage": "url(/images/backgrounds/building-site-1.png)",
     }
   }
 >
@@ -48,7 +48,7 @@ exports[`Sign In Page - Should render sign in page without state then add state 
   id="sign-in-up-page"
   style={
     Object {
-      "backgroundImage": "url(/images/backgrounds/building-site-1.webp)",
+      "backgroundImage": "url(/images/backgrounds/building-site-1.png)",
     }
   }
 >
@@ -69,7 +69,7 @@ exports[`Sign In Page - Should render sign in page without state then add state 
   id="sign-in-up-page"
   style={
     Object {
-      "backgroundImage": "url(/images/backgrounds/building-site-1.webp)",
+      "backgroundImage": "url(/images/backgrounds/building-site-1.png)",
     }
   }
 >
@@ -91,7 +91,7 @@ exports[`Sign In Page - Should render sign in page without state then change pag
   id="sign-in-up-page"
   style={
     Object {
-      "backgroundImage": "url(/images/backgrounds/building-site-1.webp)",
+      "backgroundImage": "url(/images/backgrounds/building-site-1.png)",
     }
   }
 >
@@ -112,7 +112,7 @@ exports[`Sign In Page - Should render sign in page without state then change pag
   id="sign-in-up-page"
   style={
     Object {
-      "backgroundImage": "url(/images/backgrounds/building-site-1.webp)",
+      "backgroundImage": "url(/images/backgrounds/building-site-1.png)",
     }
   }
 >

@@ -5,7 +5,11 @@ import ReactGA from 'react-ga';
 import Component from './SignInPage'
 import * as Endpoints from '../../Data/Endpoints'
 
+import CanUseWebP from '../../Functions/CheckIfWebpSupported'
+jest.mock('../../Functions/CheckIfWebpSupported')
+
 beforeAll(() => {
+  CanUseWebP.mockReturnValue(false)
   ReactGA.initialize('dummy', { testMode: true });
 });
 

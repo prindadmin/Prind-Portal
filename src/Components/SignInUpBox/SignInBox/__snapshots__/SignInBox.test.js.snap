@@ -12,7 +12,7 @@ exports[`Should click forgot password text 1`] = `
     >
       <img
         alt="BuildingIM logo"
-        src="/images/logos/prind-tech-logo.webp"
+        src="/images/logos/prind-tech-logo.png"
       />
     </a>
   </div>
@@ -88,7 +88,7 @@ exports[`Should click sign up text 1`] = `
     >
       <img
         alt="BuildingIM logo"
-        src="/images/logos/prind-tech-logo.webp"
+        src="/images/logos/prind-tech-logo.png"
       />
     </a>
   </div>
@@ -164,7 +164,7 @@ exports[`Should complete login 1`] = `
     >
       <img
         alt="BuildingIM logo"
-        src="/images/logos/prind-tech-logo.webp"
+        src="/images/logos/prind-tech-logo.png"
       />
     </a>
   </div>
@@ -201,7 +201,7 @@ exports[`Should fail login 1`] = `
     >
       <img
         alt="BuildingIM logo"
-        src="/images/logos/prind-tech-logo.webp"
+        src="/images/logos/prind-tech-logo.png"
       />
     </a>
   </div>
@@ -287,7 +287,7 @@ exports[`Should load with username prop 1`] = `
     >
       <img
         alt="BuildingIM logo"
-        src="/images/logos/prind-tech-logo.webp"
+        src="/images/logos/prind-tech-logo.png"
       />
     </a>
   </div>
@@ -362,6 +362,82 @@ exports[`Should load with username prop 1`] = `
 `;
 
 exports[`Should render sign in box 1`] = `
+<Fragment>
+  <div
+    className="logo-container"
+  >
+    <a
+      href="https://buildingim.com"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      <img
+        alt="BuildingIM logo"
+        src="/images/logos/prind-tech-logo.png"
+      />
+    </a>
+  </div>
+  <div
+    className="welcome-text-heading"
+  >
+    Welcome
+  </div>
+  <div
+    className="welcome-text-body"
+  >
+    Fil in your login details to access the portal
+  </div>
+  <form
+    className="sign-in-form"
+  >
+    <input
+      className="default"
+      id="email"
+      name="email"
+      onChange={[Function]}
+      placeholder="Email"
+      type="email"
+      value=""
+    />
+    <input
+      className="default"
+      id="password"
+      name="password"
+      onChange={[Function]}
+      placeholder="Password"
+      type="password"
+      value=""
+    />
+    <p
+      className="forgot-your-password-text"
+      onClick={[Function]}
+    >
+      Forgot your password?
+    </p>
+    <div
+      className="spacer"
+    />
+    <input
+      id="signInButton"
+      name="signInButton"
+      onClick={[Function]}
+      type="submit"
+      value="Login"
+    />
+    <div
+      className="spacer"
+    />
+    <p
+      className="sign-up-in-text"
+      onClick={[Function]}
+    >
+      Haven't got an account yet?  Click here to sign up
+    </p>
+  </form>
+</Fragment>
+`;
+
+exports[`Should render sign in box with webp 1`] = `
 <Fragment>
   <div
     className="logo-container"

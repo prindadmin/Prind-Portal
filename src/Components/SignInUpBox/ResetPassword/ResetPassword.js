@@ -67,19 +67,12 @@ class ResetPassword extends Component {
       return;
     }
 
-    //console.log(this.props.location.search)
-
-    // TODO: Test this
     const query = GetObjectFromParameters(this.props.location.search)
-
-    console.log(query)
 
     const values = {
       password,
       ...query
     }
-
-    //console.log(values)
 
     this.setState({
       state: ComponentStates.LOADING,
@@ -106,7 +99,7 @@ class ResetPassword extends Component {
 
   getLogo = () => {
     const logoName = "/images/logos/buildingim-logo"
-    const logoLocation = CanUseWebP ? `${logoName}.webp` : `${logoName}.png`
+    const logoLocation = CanUseWebP() ? `${logoName}.webp` : `${logoName}.png`
 
     return (
       <React.Fragment>

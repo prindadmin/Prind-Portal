@@ -118,7 +118,267 @@ exports[`should render 1`] = `
               id="sign-in-up-page"
               style={
                 Object {
-                  "backgroundImage": "url(/images/backgrounds/building-site-1.webp)",
+                  "backgroundImage": "url(/images/backgrounds/building-site-1.png)",
+                }
+              }
+            >
+              <withRouter(Connect(SignInUpBox))
+                backgroundColor="#FFFFFF"
+                isForgotPassword={false}
+                isPasswordReset={false}
+                isSignIn={false}
+                isSignUp={false}
+                reference="sign-in-up-box"
+              >
+                <Connect(SignInUpBox)
+                  backgroundColor="#FFFFFF"
+                  history={
+                    Object {
+                      "action": "POP",
+                      "block": [Function],
+                      "createHref": [Function],
+                      "go": [Function],
+                      "goBack": [Function],
+                      "goForward": [Function],
+                      "length": 1,
+                      "listen": [Function],
+                      "location": Object {
+                        "hash": "",
+                        "pathname": "/",
+                        "search": "",
+                        "state": undefined,
+                      },
+                      "push": [Function],
+                      "replace": [Function],
+                    }
+                  }
+                  isForgotPassword={false}
+                  isPasswordReset={false}
+                  isSignIn={false}
+                  isSignUp={false}
+                  location={
+                    Object {
+                      "hash": "",
+                      "pathname": "/",
+                      "search": "",
+                      "state": undefined,
+                    }
+                  }
+                  match={
+                    Object {
+                      "isExact": true,
+                      "params": Object {},
+                      "path": "/",
+                      "url": "/",
+                    }
+                  }
+                  reference="sign-in-up-box"
+                >
+                  <SignInUpBox
+                    auth={
+                      Object {
+                        "error": Object {},
+                        "hasChangedPassword": "AUTH_UNKNOWN",
+                        "hasSentCode": "AUTH_UNKNOWN",
+                        "hasSignedUp": "AUTH_UNKNOWN",
+                        "info": Object {},
+                        "isConfirmed": "AUTH_UNKNOWN",
+                        "isSignedIn": "AUTH_UNKNOWN",
+                        "passwordResetRequired": "AUTH_UNKNOWN",
+                      }
+                    }
+                    backgroundColor="#FFFFFF"
+                    history={
+                      Object {
+                        "action": "POP",
+                        "block": [Function],
+                        "createHref": [Function],
+                        "go": [Function],
+                        "goBack": [Function],
+                        "goForward": [Function],
+                        "length": 1,
+                        "listen": [Function],
+                        "location": Object {
+                          "hash": "",
+                          "pathname": "/",
+                          "search": "",
+                          "state": undefined,
+                        },
+                        "push": [Function],
+                        "replace": [Function],
+                      }
+                    }
+                    isForgotPassword={false}
+                    isPasswordReset={false}
+                    isSignIn={false}
+                    isSignUp={false}
+                    location={
+                      Object {
+                        "hash": "",
+                        "pathname": "/",
+                        "search": "",
+                        "state": undefined,
+                      }
+                    }
+                    match={
+                      Object {
+                        "isExact": true,
+                        "params": Object {},
+                        "path": "/",
+                        "url": "/",
+                      }
+                    }
+                    reference="sign-in-up-box"
+                    user={
+                      Object {
+                        "currentRoute": "/profile",
+                        "details": Object {},
+                        "fetching": false,
+                      }
+                    }
+                  >
+                    <div
+                      id="component-sign-in-up-box"
+                    >
+                      <Suspense
+                        fallback={<Spinner />}
+                      >
+                        <div
+                          className="component-sign-in-up-box-content-container"
+                        />
+                      </Suspense>
+                    </div>
+                  </SignInUpBox>
+                </Connect(SignInUpBox)>
+              </withRouter(Connect(SignInUpBox))>
+            </div>
+          </SignInPage>
+        </Connect(SignInPage)>
+      </withRouter(Connect(SignInPage))>
+    </Router>
+  </HashRouter>
+</Provider>
+`;
+
+exports[`should render with WebP 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <HashRouter>
+    <Router
+      history={
+        Object {
+          "action": "POP",
+          "block": [Function],
+          "createHref": [Function],
+          "go": [Function],
+          "goBack": [Function],
+          "goForward": [Function],
+          "length": 1,
+          "listen": [Function],
+          "location": Object {
+            "hash": "",
+            "pathname": "/",
+            "search": "",
+            "state": undefined,
+          },
+          "push": [Function],
+          "replace": [Function],
+        }
+      }
+    >
+      <withRouter(Connect(SignInPage))>
+        <Connect(SignInPage)
+          history={
+            Object {
+              "action": "POP",
+              "block": [Function],
+              "createHref": [Function],
+              "go": [Function],
+              "goBack": [Function],
+              "goForward": [Function],
+              "length": 1,
+              "listen": [Function],
+              "location": Object {
+                "hash": "",
+                "pathname": "/",
+                "search": "",
+                "state": undefined,
+              },
+              "push": [Function],
+              "replace": [Function],
+            }
+          }
+          location={
+            Object {
+              "hash": "",
+              "pathname": "/",
+              "search": "",
+              "state": undefined,
+            }
+          }
+          match={
+            Object {
+              "isExact": true,
+              "params": Object {},
+              "path": "/",
+              "url": "/",
+            }
+          }
+        >
+          <SignInPage
+            history={
+              Object {
+                "action": "POP",
+                "block": [Function],
+                "createHref": [Function],
+                "go": [Function],
+                "goBack": [Function],
+                "goForward": [Function],
+                "length": 1,
+                "listen": [Function],
+                "location": Object {
+                  "hash": "",
+                  "pathname": "/",
+                  "search": "",
+                  "state": undefined,
+                },
+                "push": [Function],
+                "replace": [Function],
+              }
+            }
+            location={
+              Object {
+                "hash": "",
+                "pathname": "/",
+                "search": "",
+                "state": undefined,
+              }
+            }
+            match={
+              Object {
+                "isExact": true,
+                "params": Object {},
+                "path": "/",
+                "url": "/",
+              }
+            }
+          >
+            <div
+              className="full-width full-height"
+              id="sign-in-up-page"
+              style={
+                Object {
+                  "backgroundImage": "url(/images/backgrounds/building-site-1.png)",
                 }
               }
             >

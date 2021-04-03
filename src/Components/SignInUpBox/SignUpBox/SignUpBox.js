@@ -92,7 +92,7 @@ export class SignUpBox extends Component {
 
 
   getLogo = () => {
-    const logoLocation = CanUseWebP ? "/images/logos/prind-tech-logo.webp" : "/images/logos/prind-tech-logo.png"
+    const logoLocation = CanUseWebP() ? "/images/logos/prind-tech-logo.webp" : "/images/logos/prind-tech-logo.png"
     return (
       <React.Fragment>
         <div className="logo-container">

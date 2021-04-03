@@ -9,14 +9,18 @@ import { HashRouter as Router } from "react-router-dom";
 import * as States from '../../States'
 import Component from './SignInPageContainer'
 
+import CanUseWebP from '../../Functions/CheckIfWebpSupported'
+jest.mock('../../Functions/CheckIfWebpSupported')
+
 const mockStore = configureStore([]);
 var component;
 
 beforeAll(() => {
   ReactGA.initialize('dummy', { testMode: true });
-}); 
+});
 
 beforeEach(() => {
+  CanUseWebP.mockReturnValue(false)
   const store = mockStore({
     auth: {
       info: {},
@@ -47,5 +51,11 @@ beforeEach(() => {
 
 
 it('should render', () => {
+  expect(component).toMatchSnapshot();
+});
+
+
+it('should render with WebP', () => {
+  CanUseWebP.mockReturnValue(true)
   expect(component).toMatchSnapshot();
 });

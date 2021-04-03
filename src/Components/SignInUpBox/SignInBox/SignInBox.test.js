@@ -2,6 +2,8 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import SignInBox from './SignInBox'
+import CanUseWebP from '../../../Functions/CheckIfWebpSupported'
+jest.mock('../../../Functions/CheckIfWebpSupported')
 
 
 it('Should render sign in box', () => {
@@ -21,6 +23,25 @@ it('Should render sign in box', () => {
   expect(component).toMatchSnapshot();
 });
 
+
+
+it('Should render sign in box with webp', () => {
+  CanUseWebP.mockReturnValue(true)
+  const mockSignIn = jest.fn();
+  const mockHistoryPush = jest.fn()
+  const props = {
+    toggleVisibleForm: function() { },
+    signIn: mockSignIn,
+    history: {
+      push: mockHistoryPush,
+    },
+    user: {
+      currentRoute: '/profile'
+    }
+  };
+  const component = shallow(<SignInBox {...props} />);
+  expect(component).toMatchSnapshot();
+});
 
 it('Should find all controls', () => {
   const mockSignIn = jest.fn();

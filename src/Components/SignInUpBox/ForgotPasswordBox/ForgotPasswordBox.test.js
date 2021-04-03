@@ -4,10 +4,24 @@ import Component from './ForgotPasswordBox';
 import * as States from '../../../States'
 
 import * as Functions from '../../../Functions'
-//jest.mock('../../../Functions/CheckIfWebpSupported')
+import CanUseWebP from '../../../Functions/CheckIfWebpSupported'
+jest.mock('../../../Functions/CheckIfWebpSupported')
 
 
 it('Should render', () => {
+  const mockToggleVisibleForm = jest.fn()
+  const mockResetPassword = jest.fn()
+  const props = {
+    toggleVisibleForm: mockToggleVisibleForm,
+    resetPassword: mockResetPassword,
+  }
+  const component = shallow(<Component {...props} />);
+  expect(component).toMatchSnapshot();
+});
+
+
+it('Should render with WebP', () => {
+  CanUseWebP.mockReturnValue(true)
   const mockToggleVisibleForm = jest.fn()
   const mockResetPassword = jest.fn()
   const props = {

@@ -9,6 +9,9 @@ import {
 import * as Component from './SignInUpBoxContainer'
 import * as States from '../../States'
 
+import CanUseWebP from '../../Functions/CheckIfWebpSupported'
+jest.mock('../../Functions/CheckIfWebpSupported')
+
 // https://www.robinwieruch.de/react-connected-component-test
 
 const mockStore = configureStore([]);
@@ -16,6 +19,7 @@ const mockStore = configureStore([]);
 var component;
 
 beforeEach(() => {
+  CanUseWebP.mockReturnValue(true)
   const store = mockStore({
     auth: {
       info: {},

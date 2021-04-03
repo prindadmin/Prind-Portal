@@ -2,6 +2,9 @@ import { Provider } from 'react-redux'
 import configureStore from 'redux-mock-store';
 import renderer from 'react-test-renderer';
 
+import CanUseWebP from '../../../Functions/CheckIfWebpSupported'
+jest.mock('../../../Functions/CheckIfWebpSupported')
+
 import {
   HashRouter as Router
 } from "react-router-dom";
@@ -17,6 +20,7 @@ const mockStore = configureStore([]);
 var component;
 
 beforeEach(() => {
+  CanUseWebP.mockReturnValue(true)
   ReactGA.initialize('dummy', { testMode: true });
   const store = mockStore({
     auth: {

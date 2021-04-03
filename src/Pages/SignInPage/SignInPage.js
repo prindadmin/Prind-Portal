@@ -59,7 +59,7 @@ export class SignInPage extends Component {
 
   render () {
     const { location } = this.props
-    const pageStyle = CanUseWebP ? {
+    const pageStyle = CanUseWebP() ? {
       backgroundImage: `url(/images/backgrounds/building-site-1.webp)`
     } : {
       backgroundImage: `url(/images/backgrounds/building-site-1.png)`

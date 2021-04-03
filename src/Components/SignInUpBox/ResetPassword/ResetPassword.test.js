@@ -5,8 +5,33 @@ import * as States from '../../../States'
 import * as Endpoints from '../../../Data/Endpoints'
 import ReactGA from 'react-ga';
 
+import CanUseWebP from '../../../Functions/CheckIfWebpSupported'
+jest.mock('../../../Functions/CheckIfWebpSupported')
+
 
 it('Should render', () => {
+  ReactGA.initialize('dummy', { testMode: true });
+  const mockToggleVisibleForm = jest.fn()
+  const mockSetNewPassword = jest.fn()
+  const mockHistoryPush = jest.fn()
+  const props = {
+    toggleVisibleForm: mockToggleVisibleForm,
+    setNewPassword: mockSetNewPassword,
+    history: {
+      push: mockHistoryPush,
+    },
+    location: {
+      search: "client_id=fbss4knsc8gmgct526ci8kp3a&user_name=892107a6-b223-4774-8dff-0b6fe5414ffe&confirmation_code=587828",
+      pathname: "reset-password?",
+    }
+  }
+  const component = shallow(<Component {...props} />);
+  expect(component).toMatchSnapshot();
+});
+
+
+it('Should render with webp', () => {
+  CanUseWebP.mockReturnValue(true)
   ReactGA.initialize('dummy', { testMode: true });
   const mockToggleVisibleForm = jest.fn()
   const mockSetNewPassword = jest.fn()

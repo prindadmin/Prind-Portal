@@ -10,6 +10,9 @@ import ReactGA from 'react-ga';
 import * as Component from './SignInBoxContainer'
 import * as States from '../../../States'
 
+import CanUseWebP from '../../../Functions/CheckIfWebpSupported'
+jest.mock('../../../Functions/CheckIfWebpSupported')
+
 // https://www.robinwieruch.de/react-connected-component-test
 
 const mockStore = configureStore([]);
@@ -17,6 +20,7 @@ const mockStore = configureStore([]);
 var component;
 
 beforeEach(() => {
+  CanUseWebP.mockReturnValue(true)
   ReactGA.initialize('dummy', { testMode: true });
   const store = mockStore({
     auth: {
