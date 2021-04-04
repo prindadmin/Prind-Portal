@@ -1,0 +1,264 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <HashRouter>
+    <Router
+      history={
+        Object {
+          "action": "POP",
+          "block": [Function],
+          "createHref": [Function],
+          "go": [Function],
+          "goBack": [Function],
+          "goForward": [Function],
+          "length": 1,
+          "listen": [Function],
+          "location": Object {
+            "hash": "",
+            "pathname": "/",
+            "search": "",
+            "state": undefined,
+          },
+          "push": [Function],
+          "replace": [Function],
+        }
+      }
+    >
+      <withRouter(Connect(ContactTile))
+        confirmed={false}
+        memberDetails={
+          Object {
+            "emailAddress": "testy.mctesterson@prind.tech",
+            "firstName": "Testy",
+            "lastName": "McTesterson",
+            "username": "aaaa-aaaaaaaa-aaaa-aaaa-aaaa",
+          }
+        }
+        onMemberRemove={[MockFunction]}
+        removeMember={[MockFunction]}
+      >
+        <Connect(ContactTile)
+          confirmed={false}
+          history={
+            Object {
+              "action": "POP",
+              "block": [Function],
+              "createHref": [Function],
+              "go": [Function],
+              "goBack": [Function],
+              "goForward": [Function],
+              "length": 1,
+              "listen": [Function],
+              "location": Object {
+                "hash": "",
+                "pathname": "/",
+                "search": "",
+                "state": undefined,
+              },
+              "push": [Function],
+              "replace": [Function],
+            }
+          }
+          location={
+            Object {
+              "hash": "",
+              "pathname": "/",
+              "search": "",
+              "state": undefined,
+            }
+          }
+          match={
+            Object {
+              "isExact": true,
+              "params": Object {},
+              "path": "/",
+              "url": "/",
+            }
+          }
+          memberDetails={
+            Object {
+              "emailAddress": "testy.mctesterson@prind.tech",
+              "firstName": "Testy",
+              "lastName": "McTesterson",
+              "username": "aaaa-aaaaaaaa-aaaa-aaaa-aaaa",
+            }
+          }
+          onMemberRemove={[MockFunction]}
+          removeMember={[MockFunction]}
+        >
+          <ContactTile
+            confirmed={false}
+            history={
+              Object {
+                "action": "POP",
+                "block": [Function],
+                "createHref": [Function],
+                "go": [Function],
+                "goBack": [Function],
+                "goForward": [Function],
+                "length": 1,
+                "listen": [Function],
+                "location": Object {
+                  "hash": "",
+                  "pathname": "/",
+                  "search": "",
+                  "state": undefined,
+                },
+                "push": [Function],
+                "replace": [Function],
+              }
+            }
+            location={
+              Object {
+                "hash": "",
+                "pathname": "/",
+                "search": "",
+                "state": undefined,
+              }
+            }
+            match={
+              Object {
+                "isExact": true,
+                "params": Object {},
+                "path": "/",
+                "url": "/",
+              }
+            }
+            memberDetails={
+              Object {
+                "emailAddress": "testy.mctesterson@prind.tech",
+                "firstName": "Testy",
+                "lastName": "McTesterson",
+                "username": "aaaa-aaaaaaaa-aaaa-aaaa-aaaa",
+              }
+            }
+            onMemberRemove={[MockFunction]}
+            projects={
+              Object {
+                "accessibleProjects": Object {
+                  "projectCreator": Array [],
+                  "projectRole": Array [],
+                },
+                "chosenProject": Object {
+                  "projectId": "TestProjectID",
+                  "projectName": "Test Project 1",
+                  "projectType": "CDM2015",
+                },
+                "downloadURL": "",
+                "error": null,
+                "fetching": false,
+                "fileDetails": Object {},
+                "memberList": Object {
+                  "confirmed": Array [
+                    Object {
+                      "roleID": "creator",
+                      "username": "aaaa-aaaaaaaa-aaaa-aaaa-aaaa",
+                    },
+                  ],
+                },
+              }
+            }
+            removeMember={[Function]}
+            user={
+              Object {
+                "username": "aaaa-aaaaaaaa-aaaa-aaaa-aaaa",
+              }
+            }
+          >
+            <div
+              className="row member-not-confirmed"
+              id="contact-tile"
+              onClick={[Function]}
+            >
+              <div
+                className="col-md-3 col-sm-12"
+              >
+                <div
+                  className="text-center avatar-container"
+                >
+                  <img
+                    alt="avatar"
+                    className="avatar img-circle img-thumbnail"
+                    src="images/default-avatar.png"
+                  />
+                </div>
+              </div>
+              <div
+                className="col-md-9 col-sm-12"
+              >
+                <div
+                  className="row"
+                >
+                  <h4
+                    className="bp3-heading"
+                  >
+                    Testy McTesterson
+                  </h4>
+                </div>
+                <div
+                  className="row"
+                >
+                  <div
+                    className="col-lg-2 col-md-4"
+                  >
+                    <b>
+                      Email: 
+                    </b>
+                  </div>
+                  <div
+                    className="col-lg-10 col-md-8"
+                  >
+                    testy.mctesterson@prind.tech
+                  </div>
+                </div>
+                <div
+                  className="row"
+                >
+                  <div
+                    className="col-lg-2 col-md-4"
+                  >
+                    <b>
+                      Role: 
+                    </b>
+                  </div>
+                  <div
+                    className="col-lg-10 col-md-8"
+                  />
+                </div>
+                <div
+                  className="row"
+                >
+                  <div
+                    className="col-lg-2 col-md-4"
+                  >
+                    <b>
+                      Status: 
+                    </b>
+                  </div>
+                  <div
+                    className="col-lg-10 col-md-8"
+                  >
+                    Invited
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ContactTile>
+        </Connect(ContactTile)>
+      </withRouter(Connect(ContactTile))>
+    </Router>
+  </HashRouter>
+</Provider>
+`;

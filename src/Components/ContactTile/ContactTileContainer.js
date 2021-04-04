@@ -7,7 +7,7 @@ import ContactTile from './ContactTile'
 
 const mapStatetoProps = state => {
   return {
-    auth: state.auth,
+    user: state.user,
     projects: state.projects,
   }
 }

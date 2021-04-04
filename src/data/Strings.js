@@ -2,6 +2,7 @@
 export const ERROR_404_MESSAGE = "Error 404: This resource was not found"
 
 export const ERROR_CONFIRMING_USER = "There was an error confirming your email address.  Please check that the link has not expired and try again."
+export const ERROR_CONFIRMING_USER_NO_SEARCH_TERMS = "There was an error confirming your email address.  Please close this tab, find the confirmation email, and click the link again."
 export const CONFIRMING_EMAIL_PLEASE_WAIT = "Confirming your email address, please wait..."
 export const DONT_HAVE_AN_ACCOUNT = "Haven't got an account yet?  Click here to sign up"
 export const ALREADY_HAVE_AN_ACCOUNT = "Already have an account?  Click here to sign in"

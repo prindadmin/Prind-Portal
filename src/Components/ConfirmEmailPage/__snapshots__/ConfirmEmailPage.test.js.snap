@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConfirmEmailPage - Should confirm user 1`] = `
+<div
+  id="confirming-email-address"
+>
+  <ProjectLoading
+    text="Confirming your email address, please wait..."
+  />
+</div>
+`;
+
+exports[`ConfirmEmailPage - Should reject confirmation of user 1`] = `
+<div
+  id="confirming-email-address"
+>
+  <div
+    className="error-container"
+  >
+    <Blueprint3.Callout
+      intent="danger"
+      style={
+        Object {
+          "marginBottom": "15px",
+        }
+      }
+    >
+      <div>
+        There was an error confirming your email address.  Please check that the link has not expired and try again.
+      </div>
+    </Blueprint3.Callout>
+    <Blueprint3.ButtonGroup
+      fill={true}
+      style={
+        Object {
+          "marginBottom": "15px",
+        }
+      }
+    >
+      <Blueprint3.Button
+        id="retry-button"
+        intent="primary"
+        onClick={[Function]}
+        text="Retry"
+      />
+    </Blueprint3.ButtonGroup>
+  </div>
+</div>
+`;
+
+exports[`ConfirmEmailPage - Should reject confirmation of user then retry 1`] = `
+<div
+  id="confirming-email-address"
+>
+  <div
+    className="error-container"
+  >
+    <Blueprint3.Callout
+      intent="danger"
+      style={
+        Object {
+          "marginBottom": "15px",
+        }
+      }
+    >
+      <div>
+        There was an error confirming your email address.  Please check that the link has not expired and try again.
+      </div>
+    </Blueprint3.Callout>
+    <Blueprint3.ButtonGroup
+      fill={true}
+      style={
+        Object {
+          "marginBottom": "15px",
+        }
+      }
+    >
+      <Blueprint3.Button
+        id="retry-button"
+        intent="primary"
+        onClick={[Function]}
+        text="Retry"
+      />
+    </Blueprint3.ButtonGroup>
+  </div>
+</div>
+`;
+
+exports[`ConfirmEmailPage - Should render 1`] = `
+<div
+  id="confirming-email-address"
+>
+  <ProjectLoading
+    text="Confirming your email address, please wait..."
+  />
+</div>
+`;
+
+exports[`ConfirmEmailPage - Should render but no search terms were provided 1`] = `
+<div
+  id="confirming-email-address"
+>
+  <ProjectLoading
+    text="Confirming your email address, please wait..."
+  />
+</div>
+`;
