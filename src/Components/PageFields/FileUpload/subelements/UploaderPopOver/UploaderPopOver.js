@@ -18,12 +18,29 @@ const windowCloseDelay = 1500
 
 export class UploaderPopOver extends Component {
   static propTypes = {
-    fileDetails: PropTypes.object.isRequired,
-    projectID: PropTypes.any.isRequired,
-    pageName: PropTypes.any.isRequired,
-    fieldID: PropTypes.any.isRequired,
+    fileDetails: PropTypes.shape({
+      files: PropTypes.arrayOf(
+        PropTypes.shape({
+          name: PropTypes.string.isRequired,
+          type: PropTypes.string.isRequired,
+          size: PropTypes.number.isRequired,
+          value: PropTypes.string.isRequired
+        }).isRequired
+      ).isRequired
+    }).isRequired,
+    projectID: PropTypes.string.isRequired,
+    pageName: PropTypes.string.isRequired,
+    fieldID: PropTypes.number.isRequired,
     fieldType: PropTypes.string.isRequired,
     onCancelPopup: PropTypes.func.isRequired,
+    user: PropTypes.shape({
+      projectS3Token: PropTypes.shape({
+        AccessKeyId: PropTypes.string.isRequired,
+        SecretAccessKey: PropTypes.string.isRequired,
+        SessionToken: PropTypes.string.isRequired
+      })
+    }).isRequired,
+    requestS3ProjectFileUploadToken: PropTypes.func.isRequired
   }
 
   constructor() {
@@ -83,7 +100,6 @@ export class UploaderPopOver extends Component {
     // Update the s3 credentials to allow upload of file to S3
     this.configureAWSAuthorisation(token)
 
-
     // Create an S3 service provider
     const s3 = new AWS.S3()
 
@@ -110,12 +126,10 @@ export class UploaderPopOver extends Component {
         that.setState({
           uploadProgress: progress.loaded
         })
-
       })
 
       .on('success', function(response) {
         // Timer to keep the window open for a few seconds after upload completes
-
         setTimeout(() => {
           that.informServer(response)
         }, windowCloseDelay);
@@ -123,9 +137,8 @@ export class UploaderPopOver extends Component {
       })
 
       .on('error', function(error, response) {
-        console.log("Error!");
-        console.error(error)
-
+        //console.log("Error!");
+        //console.error(error)
         that.setState({
           uploadError: true
         })
@@ -171,6 +184,7 @@ export class UploaderPopOver extends Component {
         </div>
         <div>
           <Button
+            id="close-button"
             text={Strings.CLOSE_WINDOW}
             onClick={(e) => this.cancelPopup()}
             intent={Intent.DANGER}
@@ -186,7 +200,8 @@ export class UploaderPopOver extends Component {
     const { fileDetails } = this.props
     const { uploadProgress, uploadError } = this.state
 
-    var fileSize = fileDetails.files[0].size
+    const file = fileDetails.files[0]
+    var fileSize = file.size
 
     const progressValue = uploadProgress / fileSize
     const uploadStatus = uploadError ? "error" : ""
@@ -202,7 +217,7 @@ export class UploaderPopOver extends Component {
                   {Strings.UPLOAD_IN_PROGESS}
                 </div>
                 <div className='element-description'>
-                  <p><b>{Strings.FILE_NAME}</b> {fileDetails.value.replace("C:\\fakepath\\", "")}</p>
+                  <p><b>{Strings.FILE_NAME}</b> {file.value.replace("C:\\fakepath\\", "")}</p>
                   <p><b>{Strings.UPLOADED_SIZE}</b> {uploadProgress + " / " + fileSize + " bytes"}</p>
                 </div>
                 <ProgressBar

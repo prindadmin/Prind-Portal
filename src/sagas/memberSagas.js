@@ -22,11 +22,8 @@ export function * init (action) {
 
 
 export function * addMemberToProject (action) {
-
   const { projectID, memberDetails } = action.payload
-
   try {
-
     // Pre-fetch update to store
     yield put({
       type: Actions.MEMBERS_ADD_MEMBERS_REQUEST_SENT,
@@ -34,29 +31,28 @@ export function * addMemberToProject (action) {
         fetching: true
       }
     })
-
     yield call(MemberDispatchers.addMemberToProject, projectID, memberDetails)
-
     // Post-fetch update to store
     yield put({
       type: Actions.MEMBERS_SET_STATE,
-      payload: {}
+      payload: {
+        fetching: false
+      }
     })
-
     // Callback if provided
     if (action.payload.resolve !== undefined) {
       action.payload.resolve()
     }
   }
   catch (error) {
-    console.error(error)
+    //console.error(error)
     yield put({
       type: Actions.MEMBERS_ADD_MEMBERS_REQUEST_FAILED,
         payload: {
+          fetching: false,
           error
         }
     })
-
     // Callback if provided
     if (action.payload.reject !== undefined) {
       action.payload.reject()
@@ -66,11 +62,8 @@ export function * addMemberToProject (action) {
 
 
 export function * removeMemberFromProject (action) {
-
   const { projectID, memberUsername } = action.payload
-
   try {
-
     // Pre-fetch update to store
     yield put({
       type: Actions.MEMBERS_REMOVE_MEMBERS_REQUEST_SENT,
@@ -78,9 +71,7 @@ export function * removeMemberFromProject (action) {
         fetching: true
       }
     })
-
     const result = yield call(MemberDispatchers.removeMemberFromProject, projectID, memberUsername)
-
     // Post-fetch update to store
     yield put({
       type: Actions.MEMBERS_SET_STATE,
@@ -89,14 +80,13 @@ export function * removeMemberFromProject (action) {
         currentMember: result
       }
     })
-
     // Callback if provided
     if (action.payload.resolve !== undefined) {
       action.payload.resolve()
     }
   }
   catch (error) {
-    console.error(error)
+    //console.error(error)
     yield put({
       type: Actions.MEMBERS_REMOVE_MEMBERS_REQUEST_FAILED,
         payload: {
@@ -104,7 +94,6 @@ export function * removeMemberFromProject (action) {
           error
         }
     })
-
     // Callback if provided
     if (action.payload.reject !== undefined) {
       action.payload.reject()
@@ -114,11 +103,8 @@ export function * removeMemberFromProject (action) {
 
 
 export function * getRoles (action) {
-
   const { projectID } = action.payload
-
   try {
-
     // Pre-fetch update to store
     yield put({
       type: Actions.MEMBERS_GET_AVAILABLE_ROLES_REQUEST_SENT,
@@ -126,9 +112,7 @@ export function * getRoles (action) {
         fetching: true,
       }
     })
-
     const result  = yield call(MemberDispatchers.getRoles, projectID)
-
     // Post-fetch update to store
     yield put({
       type: Actions.MEMBERS_SET_STATE,
@@ -137,9 +121,12 @@ export function * getRoles (action) {
         roles: result.body
       }
     })
+    if (action.payload.resolve !== undefined) {
+      action.payload.resolve()
+    }
   }
   catch (error) {
-    console.error(error)
+    //console.error(error)
     yield put({
       type: Actions.MEMBERS_GET_AVAILABLE_ROLES_REQUEST_FAILED,
         payload: {
@@ -147,6 +134,9 @@ export function * getRoles (action) {
           error
         }
     })
+    if (action.payload.reject !== undefined) {
+      action.payload.reject()
+    }
   }
 }
 

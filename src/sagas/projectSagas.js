@@ -52,7 +52,7 @@ export function * getAccessibleProjects (action) {
         accessibleProjects: result.body
       }
     })
-    if(action.payload.resolve !== null) {
+    if(action.payload.resolve) {
       action.payload.resolve(result.body)
     }
   }
@@ -65,7 +65,7 @@ export function * getAccessibleProjects (action) {
           error
         }
     })
-    if(action.payload.reject !== null) {
+    if(action.payload.reject) {
       action.payload.reject(error)
     }
   }
@@ -134,7 +134,7 @@ export function * updateChosenProject (action) {
         error: null
       }
     })
-    if (action.payload.resolve !== undefined) {
+    if (action.payload.resolve) {
       action.payload.resolve(result.body)
     }
   }
@@ -147,7 +147,7 @@ export function * updateChosenProject (action) {
           error,
         }
     })
-    if (action.payload.reject !== undefined) {
+    if (action.payload.reject) {
       action.payload.reject(error)
     }
   }
@@ -176,12 +176,12 @@ export function * updateProjectDetails (action) {
         }
       }
     })
-    if (action.payload.resolve !== undefined) {
+    if (action.payload.resolve) {
       action.payload.resolve()
     }
   }
   catch (error) {
-    console.error(error)
+    //console.error(error)
     yield put({
       type: Actions.PROJECT_GET_CURRENT_MEMBERS_REQUEST_FAILED,
         payload: {
@@ -189,7 +189,7 @@ export function * updateProjectDetails (action) {
           error,
         }
     })
-    if (action.payload.reject !== undefined) {
+    if (action.payload.reject) {
       action.payload.reject(error)
     }
   }
@@ -216,12 +216,12 @@ export function * getCurrentMembers (action) {
         memberList,
       }
     })
-    if (action.payload.resolve !== undefined) {
+    if (action.payload.resolve) {
       action.payload.resolve(memberList)
     }
   }
   catch (error) {
-    console.error(error)
+    //console.error(error)
     yield put({
       type: Actions.PROJECT_GET_CURRENT_MEMBERS_REQUEST_FAILED,
         payload: {
@@ -229,7 +229,7 @@ export function * getCurrentMembers (action) {
           error,
         }
     })
-    if (action.payload.reject !== undefined) {
+    if (action.payload.reject) {
       action.payload.reject(error)
     }
   }
@@ -265,12 +265,12 @@ export function * uploadFile (action) {
       }
     })
     // Callback if provided
-    if (action.payload.resolve !== undefined) {
+    if (action.payload.resolve) {
       action.payload.resolve(result)
     }
   }
   catch (error) {
-    console.error(error)
+    //console.error(error)
     yield put({
       type: Actions.PROJECT_UPLOAD_FILE_REQUEST_FAILED,
         payload: {
@@ -279,7 +279,7 @@ export function * uploadFile (action) {
         }
     })
     // Callback if provided
-    if (action.payload.reject !== undefined) {
+    if (action.payload.reject) {
       action.payload.reject(error)
     }
   }
@@ -304,12 +304,12 @@ export function * downloadFile (action) {
         downloadURL: result.body
       }
     })
-    if (action.payload.resolve !== undefined) {
+    if (action.payload.resolve) {
       action.payload.resolve(result.body)
     }
   }
   catch (error) {
-    console.error(error)
+    //console.error(error)
     yield put({
       type: Actions.PROJECT_DOWNLOAD_FILE_REQUEST_FAILED,
         payload: {
@@ -317,7 +317,7 @@ export function * downloadFile (action) {
           error,
         }
     })
-    if (action.payload.reject !== undefined) {
+    if (action.payload.reject) {
       action.payload.reject(error)
     }
   }
@@ -349,12 +349,12 @@ export function * createField (action) {
         fetching: false,
       }
     })
-    if (action.payload.resolve !== undefined) {
+    if (action.payload.resolve) {
       action.payload.resolve()
     }
   }
   catch (error) {
-    console.error(error)
+    //console.error(error)
     yield put({
       type: Actions.PROJECT_CREATE_FIELD_REQUEST_FAILED,
         payload: {
@@ -362,7 +362,7 @@ export function * createField (action) {
           error,
         }
     })
-    if (action.payload.reject !== undefined) {
+    if (action.payload.reject) {
       action.payload.reject(error)
     }
   }
@@ -392,12 +392,12 @@ export function * updateField (action) {
         fetching: false,
       }
     })
-    if (action.payload.resolve !== undefined) {
+    if (action.payload.resolve) {
       action.payload.resolve()
     }
   }
   catch (error) {
-    console.error(error)
+    //console.error(error)
     yield put({
       type: Actions.PROJECT_UPDATE_FIELD_REQUEST_FAILED,
         payload: {
@@ -405,7 +405,7 @@ export function * updateField (action) {
           error,
         }
     })
-    if (action.payload.reject !== undefined) {
+    if (action.payload.reject) {
       action.payload.reject(error)
     }
   }
@@ -431,12 +431,12 @@ export function * requestFileSignature (action) {
         error: null,
       }
     })
-    if (action.payload.resolve !== undefined) {
+    if (action.payload.resolve) {
       action.payload.resolve()
     }
   }
   catch (error) {
-    console.error(error)
+    //console.error(error)
     yield put({
       type: Actions.PROJECT_FILE_SIGNATURE_REQUEST_REQUEST_FAILED,
         payload: {
@@ -444,7 +444,7 @@ export function * requestFileSignature (action) {
           error
         }
     })
-    if (action.payload.reject !== undefined) {
+    if (action.payload.reject) {
       action.payload.reject(error)
     }
   }
@@ -468,12 +468,12 @@ export function * deleteProject (action) {
       payload: defaultState
     })
     // Callback if provided
-    if (action.payload.resolve !== undefined) {
+    if (action.payload.resolve) {
       action.payload.resolve()
     }
   }
   catch (error) {
-    console.error(error)
+    //console.error(error)
     yield put({
       type: Actions.PROJECT_DELETE_PROJECT_REQUEST_FAILED,
         payload: {
@@ -482,7 +482,7 @@ export function * deleteProject (action) {
         }
     })
     // Callback if provided
-    if (action.payload.reject !== undefined) {
+    if (action.payload.reject) {
       action.payload.reject(error)
     }
   }

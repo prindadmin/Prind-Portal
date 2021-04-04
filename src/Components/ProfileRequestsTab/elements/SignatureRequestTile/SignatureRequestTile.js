@@ -81,11 +81,13 @@ export class SignatureRequestTile extends Component {
   }
 
   resolveRejectRequest = () => {
-    console.log("request was rejected successfully")
+    // TODO: implement this
+    //console.log("request was rejected successfully")
   }
 
   rejectRejectRequest = () => {
-    console.log("request was NOT rejected successfully")
+    // TODO: implement this
+    //console.log("request was NOT rejected successfully")
   }
 
   render() {
