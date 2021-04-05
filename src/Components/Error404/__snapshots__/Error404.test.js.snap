@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Error404 - Should render 1`] = `
+<div
+  className="full-height full-width"
+  id="error-page"
+>
+  <h1>
+    Error 404: This resource was not found
+  </h1>
+</div>
+`;

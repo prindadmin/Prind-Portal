@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import SignatureHistory from './SignatureHistory'
 
-it('Should render Signature History', () => {
+it('SignatureHistory - Should render Signature History', () => {
   const props = {
     details: [
       {
@@ -17,6 +17,14 @@ it('Should render Signature History', () => {
         proofLink: "https://testnet.explorer.factom.pro/entries/93ae94fce1d960dc818c049f9a23f8305cdea54dd6954153c57be62179db1fcf",
       }
     ]
+  }
+  const component = shallow(<SignatureHistory {...props} />);
+  expect(component).toMatchSnapshot();
+});
+
+it('SignatureHistory - Should render Signature History without signatures', () => {
+  const props = {
+    details: []
   }
   const component = shallow(<SignatureHistory {...props} />);
   expect(component).toMatchSnapshot();

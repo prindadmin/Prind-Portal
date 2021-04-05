@@ -10,10 +10,18 @@ import * as Strings from '../../../../Data/Strings'
 // TODO: Do something with error text state string
 export class UploadHistory extends Component {
   static propTypes = {
-    details: PropTypes.array.isRequired,
+    details: PropTypes.arrayOf(
+      PropTypes.shape({
+        uploadName: PropTypes.string.isRequired,
+        uploadedBy: PropTypes.string.isRequired,
+        ver: PropTypes.string.isRequired,
+        uploadedDateTime: PropTypes.string.isRequired,
+        proofLink: PropTypes.string
+      })
+    ).isRequired,
     projectId: PropTypes.string.isRequired,
-    pageName: PropTypes.any.isRequired,
-    fieldID: PropTypes.any.isRequired,
+    pageName: PropTypes.string.isRequired,
+    fieldID: PropTypes.string.isRequired,
   }
 
   constructor(props) {
@@ -56,7 +64,7 @@ export class UploadHistory extends Component {
       )
     } else {
       return(
-        <a target="_blank" rel="noopener noreferrer" onClick={e => this.openProof(e)} href={proofLink}>{Strings.LINK_TO_PROOF}</a>
+        <a id='proof-link' target="_blank" rel="noopener noreferrer" onClick={e => this.openProof(e)} href={proofLink}>{Strings.LINK_TO_PROOF}</a>
       )
     }
   }
@@ -77,7 +85,7 @@ export class UploadHistory extends Component {
     }
 
     return (
-      <div onClick={this.startDownload}>
+      <div id='download-box-container' onClick={this.startDownload}>
         <DownloadBox
           projectId={projectId}
           pageName={pageName}
@@ -109,7 +117,7 @@ export class UploadHistory extends Component {
           reversedDetails.map((fileUpload, index) => {
             return (
               <React.Fragment key={index}>
-                <div key={`uploadName-${index}`}>{fileUpload.uploadName === undefined ? Strings.NO_UPLOAD_NAME : fileUpload.uploadName}</div>
+                <div key={`uploadName-${index}`}>{fileUpload.uploadName? fileUpload.uploadName : Strings.NO_UPLOAD_NAME }</div>
                 <div key={`uploadedBy-${index}`}>{fileUpload.uploadedBy === "None None" ? Strings.FILE_UPLOAD_UPLOADER_HAS_NO_NAME : fileUpload.uploadedBy}</div>
                 <div key={`ver-${index}`}>{fileUpload.ver}</div>
                 <div key={`uploadDateTime-${index}`}>{fileUpload.uploadedDateTime}</div>

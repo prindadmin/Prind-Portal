@@ -1,0 +1,325 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FileUploader - Should render 1`] = `
+<div
+  id="file-upload-element"
+>
+  <div
+    className="file-upload-element-container has-anchor"
+  >
+    <div
+      className="element-title"
+    >
+      File Uploader Box
+    </div>
+    <div
+      className="element-description"
+    >
+      This box allows files to be uploaded
+    </div>
+    <div
+      className="element-file-uploader"
+    >
+      <Blueprint3.Tabs
+        animate={true}
+        className="nav nav-tabs"
+        id="fileTabs"
+        large={false}
+        onChange={[Function]}
+        renderActiveTabPanelOnly={false}
+        selectedTabId="current"
+        vertical={false}
+      >
+        <Blueprint3.Tab
+          disabled={false}
+          id="current"
+          panel={
+            <React.Fragment>
+              <withRouter(Connect(CurrentVersion))
+                details={
+                  Object {
+                    "proofLink": "https://prind.tech",
+                    "signatures": Array [
+                      Object {
+                        "proofLink": "https://prind.tech",
+                        "signatureDateTime": "2021-04-05T08:02:43",
+                        "signerName": "Testy McTesterson",
+                      },
+                    ],
+                    "uploadName": "Test File One.txt",
+                    "uploadedBy": "Testy McTesterson",
+                    "uploadedDateTime": "2021-04-05T08:38:32",
+                    "ver": "1",
+                  }
+                }
+                editable={true}
+                fieldID="1"
+                pageName="design"
+                projectId="123"
+              />
+            </React.Fragment>
+          }
+          title="Current"
+        />
+        <Blueprint3.Tab
+          disabled={false}
+          id="signatures"
+          panel={
+            <SignatureHistory
+              details={
+                Array [
+                  Object {
+                    "proofLink": "https://prind.tech",
+                    "signatureDateTime": "2021-04-05T08:02:43",
+                    "signerName": "Testy McTesterson",
+                  },
+                ]
+              }
+            />
+          }
+          title="Signatures"
+        />
+        <Blueprint3.Tab
+          disabled={false}
+          id="versions"
+          panel={
+            <UploadHistory
+              details={
+                Array [
+                  Object {
+                    "proofLink": "https://prind.tech",
+                    "signatures": Array [
+                      Object {
+                        "proofLink": "https://prind.tech",
+                        "signatureDateTime": "2021-04-05T08:02:43",
+                        "signerName": "Testy McTesterson",
+                      },
+                    ],
+                    "uploadName": "Test File One.txt",
+                    "uploadedBy": "Testy McTesterson",
+                    "uploadedDateTime": "2021-04-05T08:38:32",
+                    "ver": "1",
+                  },
+                  Object {
+                    "proofLink": "https://prind.tech",
+                    "signatures": Array [
+                      Object {
+                        "proofLink": "https://prind.tech",
+                        "signatureDateTime": "2021-04-05T08:02:43",
+                        "signerName": "Testy McTesterson",
+                      },
+                    ],
+                    "uploadName": "Test File One.txt",
+                    "uploadedBy": "Testy McTesterson",
+                    "uploadedDateTime": "2021-04-05T08:38:32",
+                    "ver": "1",
+                  },
+                ]
+              }
+              fieldID="1"
+              pageName="design"
+              projectId="123"
+            />
+          }
+          title="Versions"
+        />
+        <Blueprint3.Tab
+          disabled={false}
+          id="upload"
+          panel={
+            <div
+              id="upload-tab-container"
+            >
+              <div
+                className="element-title"
+              >
+                Upload New Version
+              </div>
+              <Blueprint3.FileInput
+                className="field bp3-fill"
+                disabled={false}
+                hasSelection={false}
+                id="file-input-field"
+                inputProps={Object {}}
+                onInputChange={[Function]}
+                text="Choose a file..."
+              />
+              <input
+                disabled={true}
+                id="upload-button"
+                onClick={[Function]}
+                text="Upload File"
+                type="submit"
+              />
+            </div>
+          }
+          title="Upload"
+        />
+        <Expander />
+      </Blueprint3.Tabs>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`FileUploader - Should render with first element not having a proof link 1`] = `
+<div
+  id="file-upload-element"
+>
+  <div
+    className="file-upload-element-container has-upload"
+  >
+    <div
+      className="element-title"
+    >
+      File Uploader Box
+    </div>
+    <div
+      className="element-description"
+    >
+      This box allows files to be uploaded
+    </div>
+    <div
+      className="element-file-uploader"
+    >
+      <Blueprint3.Tabs
+        animate={true}
+        className="nav nav-tabs"
+        id="fileTabs"
+        large={false}
+        onChange={[Function]}
+        renderActiveTabPanelOnly={false}
+        selectedTabId="current"
+        vertical={false}
+      >
+        <Blueprint3.Tab
+          disabled={false}
+          id="current"
+          panel={
+            <React.Fragment>
+              <withRouter(Connect(CurrentVersion))
+                details={
+                  Object {
+                    "proofLink": undefined,
+                    "signatures": Array [
+                      Object {
+                        "proofLink": "https://prind.tech",
+                        "signatureDateTime": "2021-04-05T08:02:43",
+                        "signerName": "Testy McTesterson",
+                      },
+                    ],
+                    "uploadName": "Test File One.txt",
+                    "uploadedBy": "Testy McTesterson",
+                    "uploadedDateTime": "2021-04-05T08:38:32",
+                    "ver": "1",
+                  }
+                }
+                editable={true}
+                fieldID="1"
+                pageName="design"
+                projectId="123"
+              />
+            </React.Fragment>
+          }
+          title="Current"
+        />
+        <Blueprint3.Tab
+          disabled={false}
+          id="signatures"
+          panel={
+            <SignatureHistory
+              details={
+                Array [
+                  Object {
+                    "proofLink": "https://prind.tech",
+                    "signatureDateTime": "2021-04-05T08:02:43",
+                    "signerName": "Testy McTesterson",
+                  },
+                ]
+              }
+            />
+          }
+          title="Signatures"
+        />
+        <Blueprint3.Tab
+          disabled={false}
+          id="versions"
+          panel={
+            <UploadHistory
+              details={
+                Array [
+                  Object {
+                    "proofLink": undefined,
+                    "signatures": Array [
+                      Object {
+                        "proofLink": "https://prind.tech",
+                        "signatureDateTime": "2021-04-05T08:02:43",
+                        "signerName": "Testy McTesterson",
+                      },
+                    ],
+                    "uploadName": "Test File One.txt",
+                    "uploadedBy": "Testy McTesterson",
+                    "uploadedDateTime": "2021-04-05T08:38:32",
+                    "ver": "1",
+                  },
+                  Object {
+                    "proofLink": "https://prind.tech",
+                    "signatures": Array [
+                      Object {
+                        "proofLink": "https://prind.tech",
+                        "signatureDateTime": "2021-04-05T08:02:43",
+                        "signerName": "Testy McTesterson",
+                      },
+                    ],
+                    "uploadName": "Test File One.txt",
+                    "uploadedBy": "Testy McTesterson",
+                    "uploadedDateTime": "2021-04-05T08:38:32",
+                    "ver": "1",
+                  },
+                ]
+              }
+              fieldID="1"
+              pageName="design"
+              projectId="123"
+            />
+          }
+          title="Versions"
+        />
+        <Blueprint3.Tab
+          disabled={false}
+          id="upload"
+          panel={
+            <div
+              id="upload-tab-container"
+            >
+              <div
+                className="element-title"
+              >
+                Upload New Version
+              </div>
+              <Blueprint3.FileInput
+                className="field bp3-fill"
+                disabled={false}
+                hasSelection={false}
+                id="file-input-field"
+                inputProps={Object {}}
+                onInputChange={[Function]}
+                text="Choose a file..."
+              />
+              <input
+                disabled={true}
+                id="upload-button"
+                onClick={[Function]}
+                text="Upload File"
+                type="submit"
+              />
+            </div>
+          }
+          title="Upload"
+        />
+        <Expander />
+      </Blueprint3.Tabs>
+    </div>
+  </div>
+</div>
+`;

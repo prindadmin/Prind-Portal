@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoggedInLayout - ContentArea1x1 - Should render 1`] = `
+<div
+  className="col-xl-10 col-lg-9 col-md-9 col-sm-9"
+  id="logged-in-content-area-1x1"
+>
+  <div
+    id="hello-content-area"
+    key="1"
+  />
+</div>
+`;

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should render Signature History 1`] = `
+exports[`SignatureHistory - Should render Signature History 1`] = `
 <div
   id="signature-container"
 >
@@ -63,6 +63,21 @@ exports[`Should render Signature History 1`] = `
         Link to Proof
       </a>
     </div>
+  </div>
+</div>
+`;
+
+exports[`SignatureHistory - Should render Signature History without signatures 1`] = `
+<div
+  id="signature-container"
+>
+  <div
+    className="element-title"
+  >
+    Signatures
+  </div>
+  <div>
+    There are no signatures for this file
   </div>
 </div>
 `;

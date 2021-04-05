@@ -197,6 +197,10 @@ input[type=submit]  {
   width: 100%;
 }
 
+input[type=submit]:disabled {
+  background-color: #BBB;
+}
+
 input[type=cancel]  {
   display: inline-flex;
   flex-direction: row;
@@ -919,6 +923,11 @@ background-color: var(--field-element-grey);
 #file-upload-element .element-file-uploader .detail-view-open-button {
   margin-left: auto;
   padding-right: 0.67em;
+}
+
+#file-upload-element #upload-button {
+  width: 150px;
+  margin-right: 1em;
 }
 
 #file-upload-element .bp3-button {

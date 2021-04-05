@@ -19,6 +19,8 @@ import {
 import * as Strings from '../../../Data/Strings'
 
 // TODO: Improve propTypes so that errors are captured more easily
+// TODO: Refactor to remove blueprintjs
+
 export class FileUploader extends Component {
   static propTypes = {
     elementContent: PropTypes.shape({
@@ -26,7 +28,22 @@ export class FileUploader extends Component {
       title: PropTypes.string.isRequired,
       description: PropTypes.string,
       editable: PropTypes.bool.isRequired,
-      fileDetails: PropTypes.array.isRequired,
+      fileDetails: PropTypes.arrayOf(
+        PropTypes.shape({
+          uploadName: PropTypes.string.isRequired,
+          uploadedBy: PropTypes.string.isRequired,
+          ver: PropTypes.string.isRequired,
+          uploadedDateTime: PropTypes.string.isRequired,
+          proofLink: PropTypes.string,
+          signatures: PropTypes.arrayOf(
+            PropTypes.shape({
+              signerName: PropTypes.string.isRequired,
+              signatureDateTime: PropTypes.string.isRequired,
+              proofLink: PropTypes.string.isRequired,
+            })
+          ).isRequired
+        })
+      ).isRequired,
     }),
     pageName: PropTypes.string.isRequired,
     projects: PropTypes.shape({
@@ -51,7 +68,7 @@ export class FileUploader extends Component {
   componentDidMount() {
     const { fileDetails } = this.props.elementContent
     if (fileDetails.length !== 0) {
-      if (fileDetails[0].proofLink !== undefined) {
+      if (fileDetails[0].proofLink) {
         this.setState({
           fileState: ' has-anchor'
         })
@@ -146,6 +163,7 @@ export class FileUploader extends Component {
       <div id='upload-tab-container'>
         <div className='element-title'>{Strings.TAB_UPLOAD_FILE_HEADING}</div>
         <FileInput
+          id='file-input-field'
           className="field bp3-fill"
           ref='fileInput'
           onInputChange={(e) => this.fileChosen(e)}
@@ -153,8 +171,9 @@ export class FileUploader extends Component {
           disabled={!elementContent.editable}
         />
 
-        <Button
-          intent={Intent.PRIMARY}
+        <input
+          id="upload-button"
+          type="submit"
           onClick={(e) => this.uploadFile(e)}
           disabled={!hasChosenFile}
           text={Strings.BUTTON_UPLOAD_FILE}

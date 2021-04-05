@@ -69,13 +69,9 @@ it('Sign In Page - Should render sign in page without state then change page', (
   expect(component).toMatchSnapshot();
 });
 
-/*
-// TODO: LOW PRIORITY: Test Can use webp
+
 it('Sign In Page - Should render with webp', () => {
-  const webP = jest.mock('../../Components/../Functions/CheckIfWebpSupported')
-
-  webP.default.mockResolvedValue(true)
-
+  CanUseWebP.mockReturnValue(true)
   const props = {
     location: {
       pathname: Endpoints.SIGNINPAGE,
@@ -84,4 +80,3 @@ it('Sign In Page - Should render with webp', () => {
   const component = shallow(<Component {...props} />);
   expect(component).toMatchSnapshot();
 });
-*/

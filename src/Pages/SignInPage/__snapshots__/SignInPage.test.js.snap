@@ -126,3 +126,24 @@ exports[`Sign In Page - Should render sign in page without state then change pag
   />
 </div>
 `;
+
+exports[`Sign In Page - Should render with webp 1`] = `
+<div
+  className="full-width full-height"
+  id="sign-in-up-page"
+  style={
+    Object {
+      "backgroundImage": "url(/images/backgrounds/building-site-1.webp)",
+    }
+  }
+>
+  <withRouter(Connect(SignInUpBox))
+    backgroundColor="#FFFFFF"
+    isForgotPassword={false}
+    isPasswordReset={false}
+    isSignIn={true}
+    isSignUp={false}
+    reference="sign-in-up-box"
+  />
+</div>
+`;

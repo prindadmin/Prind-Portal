@@ -3,16 +3,14 @@ import { withRouter } from 'react-router-dom'
 
 //import * as reducer from '../../../../Reducers/projects'
 
-import Component from './CreatingProjectPopover'
+import CreatingProjectPopover from './CreatingProjectPopover'
 
 const mapStatetoProps = state => {
-  return {
-  }
+  return {}
 }
 
 const mapDispatchToProps = dispatch => {
-  return {
-  }
+  return {}
 }
 
-export default withRouter(connect(mapStatetoProps, mapDispatchToProps)(Component))
+export default withRouter(connect(mapStatetoProps, mapDispatchToProps)(CreatingProjectPopover))
