@@ -1,0 +1,975 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CurrentVersionContainer - Click self-sign button 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <HashRouter>
+    <Router
+      history={
+        Object {
+          "action": "POP",
+          "block": [Function],
+          "createHref": [Function],
+          "go": [Function],
+          "goBack": [Function],
+          "goForward": [Function],
+          "length": 1,
+          "listen": [Function],
+          "location": Object {
+            "hash": "",
+            "pathname": "/",
+            "search": "",
+            "state": undefined,
+          },
+          "push": [Function],
+          "replace": [Function],
+        }
+      }
+    >
+      <withRouter(Connect(CurrentVersion))
+        details={
+          Object {
+            "proofLink": "https://prind.tech",
+            "uploadName": "File123.txt",
+            "uploadedBy": "Testy McTesterson",
+            "uploadedDateTime": "2021-04-06T07:06:23",
+            "ver": "0",
+          }
+        }
+        editable={true}
+        fieldID="1"
+        pageName="design"
+      >
+        <Connect(CurrentVersion)
+          details={
+            Object {
+              "proofLink": "https://prind.tech",
+              "uploadName": "File123.txt",
+              "uploadedBy": "Testy McTesterson",
+              "uploadedDateTime": "2021-04-06T07:06:23",
+              "ver": "0",
+            }
+          }
+          editable={true}
+          fieldID="1"
+          history={
+            Object {
+              "action": "POP",
+              "block": [Function],
+              "createHref": [Function],
+              "go": [Function],
+              "goBack": [Function],
+              "goForward": [Function],
+              "length": 1,
+              "listen": [Function],
+              "location": Object {
+                "hash": "",
+                "pathname": "/",
+                "search": "",
+                "state": undefined,
+              },
+              "push": [Function],
+              "replace": [Function],
+            }
+          }
+          location={
+            Object {
+              "hash": "",
+              "pathname": "/",
+              "search": "",
+              "state": undefined,
+            }
+          }
+          match={
+            Object {
+              "isExact": true,
+              "params": Object {},
+              "path": "/",
+              "url": "/",
+            }
+          }
+          pageName="design"
+        >
+          <CurrentVersion
+            details={
+              Object {
+                "proofLink": "https://prind.tech",
+                "uploadName": "File123.txt",
+                "uploadedBy": "Testy McTesterson",
+                "uploadedDateTime": "2021-04-06T07:06:23",
+                "ver": "0",
+              }
+            }
+            editable={true}
+            fieldID="1"
+            history={
+              Object {
+                "action": "POP",
+                "block": [Function],
+                "createHref": [Function],
+                "go": [Function],
+                "goBack": [Function],
+                "goForward": [Function],
+                "length": 1,
+                "listen": [Function],
+                "location": Object {
+                  "hash": "",
+                  "pathname": "/",
+                  "search": "",
+                  "state": undefined,
+                },
+                "push": [Function],
+                "replace": [Function],
+              }
+            }
+            location={
+              Object {
+                "hash": "",
+                "pathname": "/",
+                "search": "",
+                "state": undefined,
+              }
+            }
+            match={
+              Object {
+                "isExact": true,
+                "params": Object {},
+                "path": "/",
+                "url": "/",
+              }
+            }
+            pageName="design"
+            projects={
+              Object {
+                "accessibleProjects": Object {
+                  "projectCreator": Array [],
+                  "projectRole": Array [],
+                },
+                "chosenProject": Object {
+                  "projectId": "TestProjectID",
+                  "projectName": "Test Project 1",
+                  "projectType": "CDM2015",
+                },
+                "error": null,
+                "fetching": false,
+              }
+            }
+            selfSignFile={[Function]}
+            user={
+              Object {
+                "details": Object {
+                  "foundationsID": "1234",
+                },
+                "username": "aaaa-aaaaaaaa-aaaa-aaaa-aaaa",
+              }
+            }
+          >
+            <div
+              id="current-version-container"
+            >
+              <div
+                className="element-title"
+              >
+                Current Version
+              </div>
+              <div
+                className="details-table"
+              >
+                <h4>
+                  File Name: 
+                </h4>
+                <div>
+                  File123.txt
+                </div>
+                <h4>
+                  Uploaded At: 
+                </h4>
+                <div>
+                  2021-04-06T07:06:23
+                </div>
+                <h4>
+                  Uploaded By: 
+                </h4>
+                <div>
+                  Testy McTesterson
+                </div>
+                <h4>
+                  Proof: 
+                </h4>
+                <div>
+                  <div
+                    id="proof-link-container"
+                    onClick={[Function]}
+                  >
+                    <a
+                      href="https://prind.tech"
+                      id="proof-link"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      Link to Proof
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="row button-row"
+                style={
+                  Object {
+                    "marginTop": "1rem",
+                  }
+                }
+              >
+                <input
+                  className="button"
+                  disabled={false}
+                  id="request-signatures-button"
+                  onClick={[Function]}
+                  type="submit"
+                  value="Request Signatures"
+                />
+                <input
+                  className="button"
+                  disabled={false}
+                  id="self-sign-button"
+                  onClick={[Function]}
+                  type="submit"
+                  value="Self Sign Document"
+                />
+              </div>
+              <div
+                className="download-box-cell"
+                onClick={[Function]}
+              >
+                <withRouter(Connect(DownloadBox))
+                  fieldID="1"
+                  fileVersionDetails={
+                    Object {
+                      "proofLink": "https://prind.tech",
+                      "uploadName": "File123.txt",
+                      "uploadedBy": "Testy McTesterson",
+                      "uploadedDateTime": "2021-04-06T07:06:23",
+                      "ver": "0",
+                    }
+                  }
+                  onDownloadFailure={[Function]}
+                  onDownloadSuccess={[Function]}
+                  pageName="design"
+                  projectId="TestProjectID"
+                >
+                  <Connect(DownloadBox)
+                    fieldID="1"
+                    fileVersionDetails={
+                      Object {
+                        "proofLink": "https://prind.tech",
+                        "uploadName": "File123.txt",
+                        "uploadedBy": "Testy McTesterson",
+                        "uploadedDateTime": "2021-04-06T07:06:23",
+                        "ver": "0",
+                      }
+                    }
+                    history={
+                      Object {
+                        "action": "POP",
+                        "block": [Function],
+                        "createHref": [Function],
+                        "go": [Function],
+                        "goBack": [Function],
+                        "goForward": [Function],
+                        "length": 1,
+                        "listen": [Function],
+                        "location": Object {
+                          "hash": "",
+                          "pathname": "/",
+                          "search": "",
+                          "state": undefined,
+                        },
+                        "push": [Function],
+                        "replace": [Function],
+                      }
+                    }
+                    location={
+                      Object {
+                        "hash": "",
+                        "pathname": "/",
+                        "search": "",
+                        "state": undefined,
+                      }
+                    }
+                    match={
+                      Object {
+                        "isExact": true,
+                        "params": Object {},
+                        "path": "/",
+                        "url": "/",
+                      }
+                    }
+                    onDownloadFailure={[Function]}
+                    onDownloadSuccess={[Function]}
+                    pageName="design"
+                    projectId="TestProjectID"
+                  >
+                    <DownloadBox
+                      downloadFile={[Function]}
+                      fieldID="1"
+                      fileVersionDetails={
+                        Object {
+                          "proofLink": "https://prind.tech",
+                          "uploadName": "File123.txt",
+                          "uploadedBy": "Testy McTesterson",
+                          "uploadedDateTime": "2021-04-06T07:06:23",
+                          "ver": "0",
+                        }
+                      }
+                      history={
+                        Object {
+                          "action": "POP",
+                          "block": [Function],
+                          "createHref": [Function],
+                          "go": [Function],
+                          "goBack": [Function],
+                          "goForward": [Function],
+                          "length": 1,
+                          "listen": [Function],
+                          "location": Object {
+                            "hash": "",
+                            "pathname": "/",
+                            "search": "",
+                            "state": undefined,
+                          },
+                          "push": [Function],
+                          "replace": [Function],
+                        }
+                      }
+                      location={
+                        Object {
+                          "hash": "",
+                          "pathname": "/",
+                          "search": "",
+                          "state": undefined,
+                        }
+                      }
+                      match={
+                        Object {
+                          "isExact": true,
+                          "params": Object {},
+                          "path": "/",
+                          "url": "/",
+                        }
+                      }
+                      onDownloadFailure={[Function]}
+                      onDownloadSuccess={[Function]}
+                      pageName="design"
+                      projectId="TestProjectID"
+                      resetDownloadURL={[Function]}
+                    >
+                      <div
+                        className="download-box"
+                        id="download-box"
+                        onClick={[Function]}
+                      >
+                        <div>
+                          <ItemIcon
+                            size="4x"
+                            type="download"
+                          >
+                            <Blueprint3.Icon
+                              icon={
+                                <FontAwesomeIcon
+                                  border={false}
+                                  className=""
+                                  fixedWidth={false}
+                                  flip={null}
+                                  icon={
+                                    Object {
+                                      "icon": Array [
+                                        512,
+                                        512,
+                                        Array [],
+                                        "f019",
+                                        "M216 0h80c13.3 0 24 10.7 24 24v168h87.7c17.8 0 26.7 21.5 14.1 34.1L269.7 378.3c-7.5 7.5-19.8 7.5-27.3 0L90.1 226.1c-12.6-12.6-3.7-34.1 14.1-34.1H192V24c0-13.3 10.7-24 24-24zm296 376v112c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V376c0-13.3 10.7-24 24-24h146.7l49 49c20.1 20.1 52.5 20.1 72.6 0l49-49H488c13.3 0 24 10.7 24 24zm-124 88c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20zm64 0c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20z",
+                                      ],
+                                      "iconName": "download",
+                                      "prefix": "fas",
+                                    }
+                                  }
+                                  inverse={false}
+                                  listItem={false}
+                                  mask={null}
+                                  pull={null}
+                                  pulse={false}
+                                  rotation={null}
+                                  size="4x"
+                                  spin={false}
+                                  swapOpacity={false}
+                                  symbol={false}
+                                  title=""
+                                  transform={null}
+                                />
+                              }
+                            >
+                              <FontAwesomeIcon
+                                border={false}
+                                className=""
+                                fixedWidth={false}
+                                flip={null}
+                                icon={
+                                  Object {
+                                    "icon": Array [
+                                      512,
+                                      512,
+                                      Array [],
+                                      "f019",
+                                      "M216 0h80c13.3 0 24 10.7 24 24v168h87.7c17.8 0 26.7 21.5 14.1 34.1L269.7 378.3c-7.5 7.5-19.8 7.5-27.3 0L90.1 226.1c-12.6-12.6-3.7-34.1 14.1-34.1H192V24c0-13.3 10.7-24 24-24zm296 376v112c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V376c0-13.3 10.7-24 24-24h146.7l49 49c20.1 20.1 52.5 20.1 72.6 0l49-49H488c13.3 0 24 10.7 24 24zm-124 88c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20zm64 0c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20z",
+                                    ],
+                                    "iconName": "download",
+                                    "prefix": "fas",
+                                  }
+                                }
+                                inverse={false}
+                                listItem={false}
+                                mask={null}
+                                pull={null}
+                                pulse={false}
+                                rotation={null}
+                                size="4x"
+                                spin={false}
+                                swapOpacity={false}
+                                symbol={false}
+                                title=""
+                                transform={null}
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  className="svg-inline--fa fa-download fa-w-16 fa-4x "
+                                  data-icon="download"
+                                  data-prefix="fas"
+                                  focusable="false"
+                                  role="img"
+                                  style={Object {}}
+                                  viewBox="0 0 512 512"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M216 0h80c13.3 0 24 10.7 24 24v168h87.7c17.8 0 26.7 21.5 14.1 34.1L269.7 378.3c-7.5 7.5-19.8 7.5-27.3 0L90.1 226.1c-12.6-12.6-3.7-34.1 14.1-34.1H192V24c0-13.3 10.7-24 24-24zm296 376v112c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V376c0-13.3 10.7-24 24-24h146.7l49 49c20.1 20.1 52.5 20.1 72.6 0l49-49H488c13.3 0 24 10.7 24 24zm-124 88c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20zm64 0c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20z"
+                                    fill="currentColor"
+                                    style={Object {}}
+                                  />
+                                </svg>
+                              </FontAwesomeIcon>
+                            </Blueprint3.Icon>
+                          </ItemIcon>
+                          <p>
+                            Download
+                          </p>
+                        </div>
+                      </div>
+                    </DownloadBox>
+                  </Connect(DownloadBox)>
+                </withRouter(Connect(DownloadBox))>
+              </div>
+            </div>
+          </CurrentVersion>
+        </Connect(CurrentVersion)>
+      </withRouter(Connect(CurrentVersion))>
+    </Router>
+  </HashRouter>
+</Provider>
+`;
+
+exports[`CurrentVersionContainer - should render 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <HashRouter>
+    <Router
+      history={
+        Object {
+          "action": "POP",
+          "block": [Function],
+          "createHref": [Function],
+          "go": [Function],
+          "goBack": [Function],
+          "goForward": [Function],
+          "length": 1,
+          "listen": [Function],
+          "location": Object {
+            "hash": "",
+            "pathname": "/",
+            "search": "",
+            "state": undefined,
+          },
+          "push": [Function],
+          "replace": [Function],
+        }
+      }
+    >
+      <withRouter(Connect(CurrentVersion))
+        details={
+          Object {
+            "proofLink": "https://prind.tech",
+            "uploadName": "File123.txt",
+            "uploadedBy": "Testy McTesterson",
+            "uploadedDateTime": "2021-04-06T07:06:23",
+            "ver": "0",
+          }
+        }
+        editable={true}
+        fieldID="1"
+        pageName="design"
+      >
+        <Connect(CurrentVersion)
+          details={
+            Object {
+              "proofLink": "https://prind.tech",
+              "uploadName": "File123.txt",
+              "uploadedBy": "Testy McTesterson",
+              "uploadedDateTime": "2021-04-06T07:06:23",
+              "ver": "0",
+            }
+          }
+          editable={true}
+          fieldID="1"
+          history={
+            Object {
+              "action": "POP",
+              "block": [Function],
+              "createHref": [Function],
+              "go": [Function],
+              "goBack": [Function],
+              "goForward": [Function],
+              "length": 1,
+              "listen": [Function],
+              "location": Object {
+                "hash": "",
+                "pathname": "/",
+                "search": "",
+                "state": undefined,
+              },
+              "push": [Function],
+              "replace": [Function],
+            }
+          }
+          location={
+            Object {
+              "hash": "",
+              "pathname": "/",
+              "search": "",
+              "state": undefined,
+            }
+          }
+          match={
+            Object {
+              "isExact": true,
+              "params": Object {},
+              "path": "/",
+              "url": "/",
+            }
+          }
+          pageName="design"
+        >
+          <CurrentVersion
+            details={
+              Object {
+                "proofLink": "https://prind.tech",
+                "uploadName": "File123.txt",
+                "uploadedBy": "Testy McTesterson",
+                "uploadedDateTime": "2021-04-06T07:06:23",
+                "ver": "0",
+              }
+            }
+            editable={true}
+            fieldID="1"
+            history={
+              Object {
+                "action": "POP",
+                "block": [Function],
+                "createHref": [Function],
+                "go": [Function],
+                "goBack": [Function],
+                "goForward": [Function],
+                "length": 1,
+                "listen": [Function],
+                "location": Object {
+                  "hash": "",
+                  "pathname": "/",
+                  "search": "",
+                  "state": undefined,
+                },
+                "push": [Function],
+                "replace": [Function],
+              }
+            }
+            location={
+              Object {
+                "hash": "",
+                "pathname": "/",
+                "search": "",
+                "state": undefined,
+              }
+            }
+            match={
+              Object {
+                "isExact": true,
+                "params": Object {},
+                "path": "/",
+                "url": "/",
+              }
+            }
+            pageName="design"
+            projects={
+              Object {
+                "accessibleProjects": Object {
+                  "projectCreator": Array [],
+                  "projectRole": Array [],
+                },
+                "chosenProject": Object {
+                  "projectId": "TestProjectID",
+                  "projectName": "Test Project 1",
+                  "projectType": "CDM2015",
+                },
+                "error": null,
+                "fetching": false,
+              }
+            }
+            selfSignFile={[Function]}
+            user={
+              Object {
+                "details": Object {
+                  "foundationsID": "1234",
+                },
+                "username": "aaaa-aaaaaaaa-aaaa-aaaa-aaaa",
+              }
+            }
+          >
+            <div
+              id="current-version-container"
+            >
+              <div
+                className="element-title"
+              >
+                Current Version
+              </div>
+              <div
+                className="details-table"
+              >
+                <h4>
+                  File Name: 
+                </h4>
+                <div>
+                  File123.txt
+                </div>
+                <h4>
+                  Uploaded At: 
+                </h4>
+                <div>
+                  2021-04-06T07:06:23
+                </div>
+                <h4>
+                  Uploaded By: 
+                </h4>
+                <div>
+                  Testy McTesterson
+                </div>
+                <h4>
+                  Proof: 
+                </h4>
+                <div>
+                  <div
+                    id="proof-link-container"
+                    onClick={[Function]}
+                  >
+                    <a
+                      href="https://prind.tech"
+                      id="proof-link"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      Link to Proof
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="row button-row"
+                style={
+                  Object {
+                    "marginTop": "1rem",
+                  }
+                }
+              >
+                <input
+                  className="button"
+                  disabled={false}
+                  id="request-signatures-button"
+                  onClick={[Function]}
+                  type="submit"
+                  value="Request Signatures"
+                />
+                <input
+                  className="button"
+                  disabled={false}
+                  id="self-sign-button"
+                  onClick={[Function]}
+                  type="submit"
+                  value="Self Sign Document"
+                />
+              </div>
+              <div
+                className="download-box-cell"
+                onClick={[Function]}
+              >
+                <withRouter(Connect(DownloadBox))
+                  fieldID="1"
+                  fileVersionDetails={
+                    Object {
+                      "proofLink": "https://prind.tech",
+                      "uploadName": "File123.txt",
+                      "uploadedBy": "Testy McTesterson",
+                      "uploadedDateTime": "2021-04-06T07:06:23",
+                      "ver": "0",
+                    }
+                  }
+                  onDownloadFailure={[Function]}
+                  onDownloadSuccess={[Function]}
+                  pageName="design"
+                  projectId="TestProjectID"
+                >
+                  <Connect(DownloadBox)
+                    fieldID="1"
+                    fileVersionDetails={
+                      Object {
+                        "proofLink": "https://prind.tech",
+                        "uploadName": "File123.txt",
+                        "uploadedBy": "Testy McTesterson",
+                        "uploadedDateTime": "2021-04-06T07:06:23",
+                        "ver": "0",
+                      }
+                    }
+                    history={
+                      Object {
+                        "action": "POP",
+                        "block": [Function],
+                        "createHref": [Function],
+                        "go": [Function],
+                        "goBack": [Function],
+                        "goForward": [Function],
+                        "length": 1,
+                        "listen": [Function],
+                        "location": Object {
+                          "hash": "",
+                          "pathname": "/",
+                          "search": "",
+                          "state": undefined,
+                        },
+                        "push": [Function],
+                        "replace": [Function],
+                      }
+                    }
+                    location={
+                      Object {
+                        "hash": "",
+                        "pathname": "/",
+                        "search": "",
+                        "state": undefined,
+                      }
+                    }
+                    match={
+                      Object {
+                        "isExact": true,
+                        "params": Object {},
+                        "path": "/",
+                        "url": "/",
+                      }
+                    }
+                    onDownloadFailure={[Function]}
+                    onDownloadSuccess={[Function]}
+                    pageName="design"
+                    projectId="TestProjectID"
+                  >
+                    <DownloadBox
+                      downloadFile={[Function]}
+                      fieldID="1"
+                      fileVersionDetails={
+                        Object {
+                          "proofLink": "https://prind.tech",
+                          "uploadName": "File123.txt",
+                          "uploadedBy": "Testy McTesterson",
+                          "uploadedDateTime": "2021-04-06T07:06:23",
+                          "ver": "0",
+                        }
+                      }
+                      history={
+                        Object {
+                          "action": "POP",
+                          "block": [Function],
+                          "createHref": [Function],
+                          "go": [Function],
+                          "goBack": [Function],
+                          "goForward": [Function],
+                          "length": 1,
+                          "listen": [Function],
+                          "location": Object {
+                            "hash": "",
+                            "pathname": "/",
+                            "search": "",
+                            "state": undefined,
+                          },
+                          "push": [Function],
+                          "replace": [Function],
+                        }
+                      }
+                      location={
+                        Object {
+                          "hash": "",
+                          "pathname": "/",
+                          "search": "",
+                          "state": undefined,
+                        }
+                      }
+                      match={
+                        Object {
+                          "isExact": true,
+                          "params": Object {},
+                          "path": "/",
+                          "url": "/",
+                        }
+                      }
+                      onDownloadFailure={[Function]}
+                      onDownloadSuccess={[Function]}
+                      pageName="design"
+                      projectId="TestProjectID"
+                      resetDownloadURL={[Function]}
+                    >
+                      <div
+                        className="download-box"
+                        id="download-box"
+                        onClick={[Function]}
+                      >
+                        <div>
+                          <ItemIcon
+                            size="4x"
+                            type="download"
+                          >
+                            <Blueprint3.Icon
+                              icon={
+                                <FontAwesomeIcon
+                                  border={false}
+                                  className=""
+                                  fixedWidth={false}
+                                  flip={null}
+                                  icon={
+                                    Object {
+                                      "icon": Array [
+                                        512,
+                                        512,
+                                        Array [],
+                                        "f019",
+                                        "M216 0h80c13.3 0 24 10.7 24 24v168h87.7c17.8 0 26.7 21.5 14.1 34.1L269.7 378.3c-7.5 7.5-19.8 7.5-27.3 0L90.1 226.1c-12.6-12.6-3.7-34.1 14.1-34.1H192V24c0-13.3 10.7-24 24-24zm296 376v112c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V376c0-13.3 10.7-24 24-24h146.7l49 49c20.1 20.1 52.5 20.1 72.6 0l49-49H488c13.3 0 24 10.7 24 24zm-124 88c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20zm64 0c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20z",
+                                      ],
+                                      "iconName": "download",
+                                      "prefix": "fas",
+                                    }
+                                  }
+                                  inverse={false}
+                                  listItem={false}
+                                  mask={null}
+                                  pull={null}
+                                  pulse={false}
+                                  rotation={null}
+                                  size="4x"
+                                  spin={false}
+                                  swapOpacity={false}
+                                  symbol={false}
+                                  title=""
+                                  transform={null}
+                                />
+                              }
+                            >
+                              <FontAwesomeIcon
+                                border={false}
+                                className=""
+                                fixedWidth={false}
+                                flip={null}
+                                icon={
+                                  Object {
+                                    "icon": Array [
+                                      512,
+                                      512,
+                                      Array [],
+                                      "f019",
+                                      "M216 0h80c13.3 0 24 10.7 24 24v168h87.7c17.8 0 26.7 21.5 14.1 34.1L269.7 378.3c-7.5 7.5-19.8 7.5-27.3 0L90.1 226.1c-12.6-12.6-3.7-34.1 14.1-34.1H192V24c0-13.3 10.7-24 24-24zm296 376v112c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V376c0-13.3 10.7-24 24-24h146.7l49 49c20.1 20.1 52.5 20.1 72.6 0l49-49H488c13.3 0 24 10.7 24 24zm-124 88c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20zm64 0c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20z",
+                                    ],
+                                    "iconName": "download",
+                                    "prefix": "fas",
+                                  }
+                                }
+                                inverse={false}
+                                listItem={false}
+                                mask={null}
+                                pull={null}
+                                pulse={false}
+                                rotation={null}
+                                size="4x"
+                                spin={false}
+                                swapOpacity={false}
+                                symbol={false}
+                                title=""
+                                transform={null}
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  className="svg-inline--fa fa-download fa-w-16 fa-4x "
+                                  data-icon="download"
+                                  data-prefix="fas"
+                                  focusable="false"
+                                  role="img"
+                                  style={Object {}}
+                                  viewBox="0 0 512 512"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M216 0h80c13.3 0 24 10.7 24 24v168h87.7c17.8 0 26.7 21.5 14.1 34.1L269.7 378.3c-7.5 7.5-19.8 7.5-27.3 0L90.1 226.1c-12.6-12.6-3.7-34.1 14.1-34.1H192V24c0-13.3 10.7-24 24-24zm296 376v112c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V376c0-13.3 10.7-24 24-24h146.7l49 49c20.1 20.1 52.5 20.1 72.6 0l49-49H488c13.3 0 24 10.7 24 24zm-124 88c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20zm64 0c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20z"
+                                    fill="currentColor"
+                                    style={Object {}}
+                                  />
+                                </svg>
+                              </FontAwesomeIcon>
+                            </Blueprint3.Icon>
+                          </ItemIcon>
+                          <p>
+                            Download
+                          </p>
+                        </div>
+                      </div>
+                    </DownloadBox>
+                  </Connect(DownloadBox)>
+                </withRouter(Connect(DownloadBox))>
+              </div>
+            </div>
+          </CurrentVersion>
+        </Connect(CurrentVersion)>
+      </withRouter(Connect(CurrentVersion))>
+    </Router>
+  </HashRouter>
+</Provider>
+`;

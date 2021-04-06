@@ -1,0 +1,363 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UploaderPopOverContainer - should render 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <HashRouter>
+    <Router
+      history={
+        Object {
+          "action": "POP",
+          "block": [Function],
+          "createHref": [Function],
+          "go": [Function],
+          "goBack": [Function],
+          "goForward": [Function],
+          "length": 1,
+          "listen": [Function],
+          "location": Object {
+            "hash": "",
+            "pathname": "/",
+            "search": "",
+            "state": undefined,
+          },
+          "push": [Function],
+          "replace": [Function],
+        }
+      }
+    >
+      <withRouter(Connect(UploaderPopOver))
+        fieldID={1}
+        fieldType="file"
+        fileDetails={
+          Object {
+            "files": Array [
+              Object {
+                "name": "hello.csv",
+                "size": 100,
+                "type": "text.csv",
+                "value": "C:\\\\fakepath\\\\hello.csv",
+              },
+            ],
+          }
+        }
+        onCancelPopup={[MockFunction]}
+        pageName="design"
+        projectID="123"
+      >
+        <Connect(UploaderPopOver)
+          fieldID={1}
+          fieldType="file"
+          fileDetails={
+            Object {
+              "files": Array [
+                Object {
+                  "name": "hello.csv",
+                  "size": 100,
+                  "type": "text.csv",
+                  "value": "C:\\\\fakepath\\\\hello.csv",
+                },
+              ],
+            }
+          }
+          history={
+            Object {
+              "action": "POP",
+              "block": [Function],
+              "createHref": [Function],
+              "go": [Function],
+              "goBack": [Function],
+              "goForward": [Function],
+              "length": 1,
+              "listen": [Function],
+              "location": Object {
+                "hash": "",
+                "pathname": "/",
+                "search": "",
+                "state": undefined,
+              },
+              "push": [Function],
+              "replace": [Function],
+            }
+          }
+          location={
+            Object {
+              "hash": "",
+              "pathname": "/",
+              "search": "",
+              "state": undefined,
+            }
+          }
+          match={
+            Object {
+              "isExact": true,
+              "params": Object {},
+              "path": "/",
+              "url": "/",
+            }
+          }
+          onCancelPopup={[MockFunction]}
+          pageName="design"
+          projectID="123"
+        >
+          <UploaderPopOver
+            fieldID={1}
+            fieldType="file"
+            fileDetails={
+              Object {
+                "files": Array [
+                  Object {
+                    "name": "hello.csv",
+                    "size": 100,
+                    "type": "text.csv",
+                    "value": "C:\\\\fakepath\\\\hello.csv",
+                  },
+                ],
+              }
+            }
+            history={
+              Object {
+                "action": "POP",
+                "block": [Function],
+                "createHref": [Function],
+                "go": [Function],
+                "goBack": [Function],
+                "goForward": [Function],
+                "length": 1,
+                "listen": [Function],
+                "location": Object {
+                  "hash": "",
+                  "pathname": "/",
+                  "search": "",
+                  "state": undefined,
+                },
+                "push": [Function],
+                "replace": [Function],
+              }
+            }
+            location={
+              Object {
+                "hash": "",
+                "pathname": "/",
+                "search": "",
+                "state": undefined,
+              }
+            }
+            match={
+              Object {
+                "isExact": true,
+                "params": Object {},
+                "path": "/",
+                "url": "/",
+              }
+            }
+            onCancelPopup={[MockFunction]}
+            pageName="design"
+            projectID="123"
+            requestS3ProjectFileUploadToken={[Function]}
+            uploadFile={[Function]}
+            user={
+              Object {
+                "details": Object {
+                  "foundationsID": "1234",
+                },
+                "projectS3Token": Object {
+                  "AccessKeyId": "TokenAccessKeyId",
+                  "SecretAccessKey": "TokenSecretAccessKey",
+                  "SessionToken": "TokenSessionToken",
+                },
+                "username": "aaaa-aaaaaaaa-aaaa-aaaa-aaaa",
+              }
+            }
+          >
+            <PopOverHandler>
+              <Portal
+                containerInfo={
+                  <div
+                    id="popOver"
+                  >
+                    <div
+                      id="popup-greyer"
+                    >
+                      <div
+                        id="uploader-popover"
+                      >
+                        <div
+                          class="error"
+                          id="popup-box"
+                        >
+                          <div
+                            class="uploader-popover-container"
+                          >
+                            <div
+                              class="element-title"
+                            >
+                              Upload in progress.  Please wait...
+                            </div>
+                            <div
+                              class="element-description"
+                            >
+                              <p>
+                                <b>
+                                  File Name: 
+                                </b>
+                                 
+                                hello.csv
+                              </p>
+                              <p>
+                                <b>
+                                  Uploaded: 
+                                </b>
+                                 
+                                0 / 100 bytes
+                              </p>
+                            </div>
+                            <div
+                              class="bp3-progress-bar bp3-intent-danger"
+                            >
+                              <div
+                                class="bp3-progress-meter"
+                                style="width: 0%;"
+                              />
+                            </div>
+                            <div>
+                              <div>
+                                <b>
+                                  ERROR: There was an error uploading the file, please try again
+                                </b>
+                              </div>
+                              <div>
+                                <button
+                                  class="bp3-button bp3-intent-danger"
+                                  id="close-button"
+                                  type="button"
+                                >
+                                  <span
+                                    class="bp3-button-text"
+                                  >
+                                    Close
+                                  </span>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                }
+              >
+                <div
+                  id="popup-greyer"
+                >
+                  <div
+                    id="uploader-popover"
+                  >
+                    <div
+                      className="error"
+                      id="popup-box"
+                    >
+                      <div
+                        className="uploader-popover-container"
+                      >
+                        <div
+                          className="element-title"
+                        >
+                          Upload in progress.  Please wait...
+                        </div>
+                        <div
+                          className="element-description"
+                        >
+                          <p>
+                            <b>
+                              File Name: 
+                            </b>
+                             
+                            hello.csv
+                          </p>
+                          <p>
+                            <b>
+                              Uploaded: 
+                            </b>
+                             
+                            0 / 100 bytes
+                          </p>
+                        </div>
+                        <Blueprint3.ProgressBar
+                          intent="danger"
+                          value={0}
+                        >
+                          <div
+                            className="bp3-progress-bar bp3-intent-danger"
+                          >
+                            <div
+                              className="bp3-progress-meter"
+                              style={
+                                Object {
+                                  "width": "0%",
+                                }
+                              }
+                            />
+                          </div>
+                        </Blueprint3.ProgressBar>
+                        <div>
+                          <div>
+                            <b>
+                              ERROR: There was an error uploading the file, please try again
+                            </b>
+                          </div>
+                          <div>
+                            <Blueprint3.Button
+                              id="close-button"
+                              intent="danger"
+                              onClick={[Function]}
+                              text="Close"
+                            >
+                              <button
+                                className="bp3-button bp3-intent-danger"
+                                id="close-button"
+                                onBlur={[Function]}
+                                onClick={[Function]}
+                                onKeyDown={[Function]}
+                                onKeyUp={[Function]}
+                                type="button"
+                              >
+                                <Blueprint3.Icon
+                                  key="leftIcon"
+                                />
+                                <span
+                                  className="bp3-button-text"
+                                  key="text"
+                                >
+                                  Close
+                                </span>
+                                <Blueprint3.Icon
+                                  key="rightIcon"
+                                />
+                              </button>
+                            </Blueprint3.Button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Portal>
+            </PopOverHandler>
+          </UploaderPopOver>
+        </Connect(UploaderPopOver)>
+      </withRouter(Connect(UploaderPopOver))>
+    </Router>
+  </HashRouter>
+</Provider>
+`;

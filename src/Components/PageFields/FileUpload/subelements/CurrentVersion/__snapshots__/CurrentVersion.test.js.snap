@@ -1,0 +1,224 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CurrentVersion - Should click request signatures button 1`] = `
+<div
+  id="current-version-container"
+>
+  <div
+    className="element-title"
+  >
+    Current Version
+  </div>
+  <div
+    className="details-table"
+  >
+    <h4>
+      File Name: 
+    </h4>
+    <div>
+      File123.txt
+    </div>
+    <h4>
+      Uploaded At: 
+    </h4>
+    <div>
+      2021-04-06T07:06:23
+    </div>
+    <h4>
+      Uploaded By: 
+    </h4>
+    <div>
+      Testy McTesterson
+    </div>
+    <h4>
+      Proof: 
+    </h4>
+    <div>
+      <div
+        id="proof-link-container"
+        onClick={[Function]}
+      >
+        <a
+          href="https://prind.tech"
+          id="proof-link"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Link to Proof
+        </a>
+      </div>
+    </div>
+  </div>
+  <div
+    className="row button-row"
+    style={
+      Object {
+        "marginTop": "1rem",
+      }
+    }
+  >
+    <input
+      className="button"
+      disabled={false}
+      id="request-signatures-button"
+      onClick={[Function]}
+      type="submit"
+      value="Request Signatures"
+    />
+    <input
+      className="button"
+      disabled={false}
+      id="self-sign-button"
+      onClick={[Function]}
+      type="submit"
+      value="Self Sign Document"
+    />
+  </div>
+  <div
+    className="download-box-cell"
+    onClick={[Function]}
+  >
+    <withRouter(Connect(DownloadBox))
+      fieldID="1"
+      fileVersionDetails={
+        Object {
+          "proofLink": "https://prind.tech",
+          "uploadName": "File123.txt",
+          "uploadedBy": "Testy McTesterson",
+          "uploadedDateTime": "2021-04-06T07:06:23",
+        }
+      }
+      onDownloadFailure={[Function]}
+      onDownloadSuccess={[Function]}
+      pageName="design"
+      projectId="5678"
+    />
+  </div>
+  <withRouter(Connect(PickSignerPopover))
+    fieldID="1"
+    fileDetails={
+      Object {
+        "proofLink": "https://prind.tech",
+        "uploadName": "File123.txt",
+        "uploadedBy": "Testy McTesterson",
+        "uploadedDateTime": "2021-04-06T07:06:23",
+      }
+    }
+    onClosePopover={[Function]}
+    pageName="design"
+    projectId="5678"
+  />
+</div>
+`;
+
+exports[`CurrentVersion - Should render 1`] = `
+<div
+  id="current-version-container"
+>
+  <div
+    className="element-title"
+  >
+    Current Version
+  </div>
+  <div
+    className="details-table"
+  >
+    <h4>
+      File Name: 
+    </h4>
+    <div>
+      File123.txt
+    </div>
+    <h4>
+      Uploaded At: 
+    </h4>
+    <div>
+      2021-04-06T07:06:23
+    </div>
+    <h4>
+      Uploaded By: 
+    </h4>
+    <div>
+      Testy McTesterson
+    </div>
+    <h4>
+      Proof: 
+    </h4>
+    <div>
+      <div
+        id="proof-link-container"
+        onClick={[Function]}
+      >
+        <a
+          href="https://prind.tech"
+          id="proof-link"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Link to Proof
+        </a>
+      </div>
+    </div>
+  </div>
+  <div
+    className="row button-row"
+    style={
+      Object {
+        "marginTop": "1rem",
+      }
+    }
+  >
+    <input
+      className="button"
+      disabled={false}
+      id="request-signatures-button"
+      onClick={[Function]}
+      type="submit"
+      value="Request Signatures"
+    />
+    <input
+      className="button"
+      disabled={false}
+      id="self-sign-button"
+      onClick={[Function]}
+      type="submit"
+      value="Self Sign Document"
+    />
+  </div>
+  <div
+    className="download-box-cell"
+    onClick={[Function]}
+  >
+    <withRouter(Connect(DownloadBox))
+      fieldID="1"
+      fileVersionDetails={
+        Object {
+          "proofLink": "https://prind.tech",
+          "uploadName": "File123.txt",
+          "uploadedBy": "Testy McTesterson",
+          "uploadedDateTime": "2021-04-06T07:06:23",
+        }
+      }
+      onDownloadFailure={[Function]}
+      onDownloadSuccess={[Function]}
+      pageName="design"
+      projectId="5678"
+    />
+  </div>
+</div>
+`;
+
+exports[`CurrentVersion - Should render with no current version 1`] = `
+<div
+  id="current-version-container"
+>
+  <div
+    className="element-title"
+  >
+    Current Version
+  </div>
+  <div>
+    There is no current version of this file.
+  </div>
+</div>
+`;

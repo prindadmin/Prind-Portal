@@ -173,6 +173,7 @@ export class FileUploader extends Component {
 
         <input
           id="upload-button"
+          className="button"
           type="submit"
           onClick={(e) => this.uploadFile(e)}
           disabled={!hasChosenFile}

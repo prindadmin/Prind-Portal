@@ -925,12 +925,7 @@ background-color: var(--field-element-grey);
   padding-right: 0.67em;
 }
 
-#file-upload-element #upload-button {
-  width: 150px;
-  margin-right: 1em;
-}
-
-#file-upload-element .bp3-button {
+#file-upload-element .button {
   width: 150px;
   margin-right: 1em;
 }
@@ -1013,6 +1008,8 @@ background-color: var(--field-element-grey);
 
 #file-upload-element .button-row {
   margin-top: 0.5em;
+  display: flex;
+  flex-direction: row;
 }
 
 #file-upload-element .button-row button {

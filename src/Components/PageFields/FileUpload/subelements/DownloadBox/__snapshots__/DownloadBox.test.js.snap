@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DownloadBox - Should click download button and resolve 1`] = `
+<div
+  className="download-box"
+  id="download-box"
+  onClick={[Function]}
+>
+  <div>
+    <ItemIcon
+      size="4x"
+      type="download"
+    />
+    <p>
+      Download
+    </p>
+  </div>
+</div>
+`;
+
+exports[`DownloadBox - Should render 1`] = `
+<div
+  className="download-box"
+  id="download-box"
+  onClick={[Function]}
+>
+  <div>
+    <ItemIcon
+      size="4x"
+      type="download"
+    />
+    <p>
+      Download
+    </p>
+  </div>
+</div>
+`;
+
+exports[`DownloadBox - Should render then unmount 1`] = `
+<div
+  className="download-box"
+  id="download-box"
+  onClick={[Function]}
+>
+  <div>
+    <ItemIcon
+      size="4x"
+      type="download"
+    />
+    <p>
+      Download
+    </p>
+  </div>
+</div>
+`;

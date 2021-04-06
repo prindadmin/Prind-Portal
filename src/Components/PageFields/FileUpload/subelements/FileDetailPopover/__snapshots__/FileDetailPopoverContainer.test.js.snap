@@ -1,0 +1,842 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FileDetailPopoverContainer - should render 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <HashRouter>
+    <Router
+      history={
+        Object {
+          "action": "POP",
+          "block": [Function],
+          "createHref": [Function],
+          "go": [Function],
+          "goBack": [Function],
+          "goForward": [Function],
+          "length": 1,
+          "listen": [Function],
+          "location": Object {
+            "hash": "",
+            "pathname": "/",
+            "search": "",
+            "state": undefined,
+          },
+          "push": [Function],
+          "replace": [Function],
+        }
+      }
+    >
+      <withRouter(Connect(FileDetailPopover))
+        chosenFileDetails={
+          Object {
+            "proofLink": "https://prind.tech",
+            "signatures": Array [
+              Object {
+                "proofLink": "https://testnet.explorer.factom.pro/entries/93ae94fce1d960dc818c049f9a23f8305cdea54dd6954153c57be62179db1fcf",
+                "signatureDateTime": "2021-01-11T11:11:11",
+                "signerName": "Signer One",
+              },
+              Object {
+                "proofLink": "https://testnet.explorer.factom.pro/entries/93ae94fce1d960dc818c049f9a23f8305cdea54dd6954153c57be62179db1fcf",
+                "signatureDateTime": "2021-02-22T22:22:22",
+                "signerName": "Signer Two",
+              },
+            ],
+            "uploadDateTime": "2021-04-06T07:06:23",
+            "uploadName": "File123.txt",
+            "uploadedBy": "Testy McTesterson",
+            "ver": "0",
+          }
+        }
+        fieldID="1"
+        onClosePopover={[MockFunction]}
+        pageName="design"
+      >
+        <Connect(FileDetailPopover)
+          chosenFileDetails={
+            Object {
+              "proofLink": "https://prind.tech",
+              "signatures": Array [
+                Object {
+                  "proofLink": "https://testnet.explorer.factom.pro/entries/93ae94fce1d960dc818c049f9a23f8305cdea54dd6954153c57be62179db1fcf",
+                  "signatureDateTime": "2021-01-11T11:11:11",
+                  "signerName": "Signer One",
+                },
+                Object {
+                  "proofLink": "https://testnet.explorer.factom.pro/entries/93ae94fce1d960dc818c049f9a23f8305cdea54dd6954153c57be62179db1fcf",
+                  "signatureDateTime": "2021-02-22T22:22:22",
+                  "signerName": "Signer Two",
+                },
+              ],
+              "uploadDateTime": "2021-04-06T07:06:23",
+              "uploadName": "File123.txt",
+              "uploadedBy": "Testy McTesterson",
+              "ver": "0",
+            }
+          }
+          fieldID="1"
+          history={
+            Object {
+              "action": "POP",
+              "block": [Function],
+              "createHref": [Function],
+              "go": [Function],
+              "goBack": [Function],
+              "goForward": [Function],
+              "length": 1,
+              "listen": [Function],
+              "location": Object {
+                "hash": "",
+                "pathname": "/",
+                "search": "",
+                "state": undefined,
+              },
+              "push": [Function],
+              "replace": [Function],
+            }
+          }
+          location={
+            Object {
+              "hash": "",
+              "pathname": "/",
+              "search": "",
+              "state": undefined,
+            }
+          }
+          match={
+            Object {
+              "isExact": true,
+              "params": Object {},
+              "path": "/",
+              "url": "/",
+            }
+          }
+          onClosePopover={[MockFunction]}
+          pageName="design"
+        >
+          <FileDetailPopover
+            chosenFileDetails={
+              Object {
+                "proofLink": "https://prind.tech",
+                "signatures": Array [
+                  Object {
+                    "proofLink": "https://testnet.explorer.factom.pro/entries/93ae94fce1d960dc818c049f9a23f8305cdea54dd6954153c57be62179db1fcf",
+                    "signatureDateTime": "2021-01-11T11:11:11",
+                    "signerName": "Signer One",
+                  },
+                  Object {
+                    "proofLink": "https://testnet.explorer.factom.pro/entries/93ae94fce1d960dc818c049f9a23f8305cdea54dd6954153c57be62179db1fcf",
+                    "signatureDateTime": "2021-02-22T22:22:22",
+                    "signerName": "Signer Two",
+                  },
+                ],
+                "uploadDateTime": "2021-04-06T07:06:23",
+                "uploadName": "File123.txt",
+                "uploadedBy": "Testy McTesterson",
+                "ver": "0",
+              }
+            }
+            fieldID="1"
+            history={
+              Object {
+                "action": "POP",
+                "block": [Function],
+                "createHref": [Function],
+                "go": [Function],
+                "goBack": [Function],
+                "goForward": [Function],
+                "length": 1,
+                "listen": [Function],
+                "location": Object {
+                  "hash": "",
+                  "pathname": "/",
+                  "search": "",
+                  "state": undefined,
+                },
+                "push": [Function],
+                "replace": [Function],
+              }
+            }
+            location={
+              Object {
+                "hash": "",
+                "pathname": "/",
+                "search": "",
+                "state": undefined,
+              }
+            }
+            match={
+              Object {
+                "isExact": true,
+                "params": Object {},
+                "path": "/",
+                "url": "/",
+              }
+            }
+            onClosePopover={[MockFunction]}
+            pageName="design"
+            projects={
+              Object {
+                "accessibleProjects": Object {
+                  "projectCreator": Array [],
+                  "projectRole": Array [],
+                },
+                "chosenProject": Object {
+                  "projectId": "TestProjectID",
+                  "projectName": "Test Project 1",
+                  "projectType": "CDM2015",
+                },
+                "error": null,
+                "fetching": false,
+              }
+            }
+          >
+            <PopOverHandler>
+              <Portal
+                containerInfo={
+                  <div
+                    id="popOver"
+                  >
+                    <div
+                      id="popup-greyer"
+                    >
+                      <div
+                        id="file-details-popover"
+                      >
+                        <div
+                          id="popup-box"
+                        >
+                          <div
+                            class="file-details-popover-container"
+                          >
+                            <div
+                              class="element-title"
+                            >
+                              File Details
+                            </div>
+                            <div
+                              class="element-description"
+                            >
+                              <div
+                                class="row"
+                              >
+                                <div
+                                  class="col"
+                                >
+                                  <div
+                                    class="file-details"
+                                  >
+                                    <div
+                                      class="row"
+                                    >
+                                      <div
+                                        class="field-names col-4"
+                                      >
+                                        <div>
+                                          File Name: 
+                                        </div>
+                                        <div>
+                                          Uploaded At: 
+                                        </div>
+                                        <div>
+                                          Uploaded By: 
+                                        </div>
+                                        <div>
+                                          Proof: 
+                                        </div>
+                                      </div>
+                                      <div
+                                        class="field-values col-auto"
+                                      >
+                                        <div>
+                                          File123.txt
+                                        </div>
+                                        <div>
+                                          <br />
+                                        </div>
+                                        <div>
+                                          Testy McTesterson
+                                        </div>
+                                        <div
+                                          id="proof-link-container"
+                                        >
+                                          <a
+                                            href="https://prind.tech"
+                                            rel="noopener noreferrer"
+                                            target="_blank"
+                                          >
+                                            Link to Proof
+                                          </a>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div
+                                  class="col download-box-cell"
+                                >
+                                  <div
+                                    class="download-box"
+                                    id="download-box"
+                                  >
+                                    <div>
+                                      <svg
+                                        aria-hidden="true"
+                                        class="svg-inline--fa fa-download fa-w-16 fa-4x "
+                                        data-icon="download"
+                                        data-prefix="fas"
+                                        focusable="false"
+                                        role="img"
+                                        viewBox="0 0 512 512"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                      >
+                                        <path
+                                          d="M216 0h80c13.3 0 24 10.7 24 24v168h87.7c17.8 0 26.7 21.5 14.1 34.1L269.7 378.3c-7.5 7.5-19.8 7.5-27.3 0L90.1 226.1c-12.6-12.6-3.7-34.1 14.1-34.1H192V24c0-13.3 10.7-24 24-24zm296 376v112c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V376c0-13.3 10.7-24 24-24h146.7l49 49c20.1 20.1 52.5 20.1 72.6 0l49-49H488c13.3 0 24 10.7 24 24zm-124 88c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20zm64 0c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20z"
+                                          fill="currentColor"
+                                        />
+                                      </svg>
+                                      <p>
+                                        Download
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div
+                                class="row"
+                              >
+                                <div
+                                  class="col"
+                                >
+                                  <div
+                                    class="signature-details"
+                                  >
+                                    <div>
+                                      <div
+                                        id="signature-container"
+                                      >
+                                        <div
+                                          class="element-title"
+                                        >
+                                          Signatures
+                                        </div>
+                                        <div
+                                          class="details-table"
+                                        >
+                                          <h4>
+                                            Signed By: 
+                                          </h4>
+                                          <h4>
+                                            Signed At: 
+                                          </h4>
+                                          <h4>
+                                            Proof: 
+                                          </h4>
+                                          <div>
+                                            Signer One
+                                          </div>
+                                          <div>
+                                            2021-01-11T11:11:11
+                                          </div>
+                                          <div>
+                                            <a
+                                              href="https://testnet.explorer.factom.pro/entries/93ae94fce1d960dc818c049f9a23f8305cdea54dd6954153c57be62179db1fcf"
+                                              rel="noopener noreferrer"
+                                              target="_blank"
+                                            >
+                                              Link to Proof
+                                            </a>
+                                          </div>
+                                          <div>
+                                            Signer Two
+                                          </div>
+                                          <div>
+                                            2021-02-22T22:22:22
+                                          </div>
+                                          <div>
+                                            <a
+                                              href="https://testnet.explorer.factom.pro/entries/93ae94fce1d960dc818c049f9a23f8305cdea54dd6954153c57be62179db1fcf"
+                                              rel="noopener noreferrer"
+                                              target="_blank"
+                                            >
+                                              Link to Proof
+                                            </a>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                }
+              >
+                <div
+                  id="popup-greyer"
+                  onClick={[Function]}
+                >
+                  <div
+                    id="file-details-popover"
+                  >
+                    <div
+                      id="popup-box"
+                    >
+                      <div
+                        className="file-details-popover-container"
+                        onClick={[Function]}
+                      >
+                        <div
+                          className="element-title"
+                        >
+                          File Details
+                        </div>
+                        <div
+                          className="element-description"
+                        >
+                          <div
+                            className="row"
+                          >
+                            <div
+                              className="col"
+                            >
+                              <div
+                                className="file-details"
+                              >
+                                <div
+                                  className="row"
+                                >
+                                  <div
+                                    className="field-names col-4"
+                                  >
+                                    <div>
+                                      File Name: 
+                                    </div>
+                                    <div>
+                                      Uploaded At: 
+                                    </div>
+                                    <div>
+                                      Uploaded By: 
+                                    </div>
+                                    <div>
+                                      Proof: 
+                                    </div>
+                                  </div>
+                                  <div
+                                    className="field-values col-auto"
+                                  >
+                                    <div>
+                                      File123.txt
+                                    </div>
+                                    <div>
+                                      <br />
+                                    </div>
+                                    <div>
+                                      Testy McTesterson
+                                    </div>
+                                    <div
+                                      id="proof-link-container"
+                                      onClick={[Function]}
+                                    >
+                                      <a
+                                        href="https://prind.tech"
+                                        rel="noopener noreferrer"
+                                        target="_blank"
+                                      >
+                                        Link to Proof
+                                      </a>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div
+                              className="col download-box-cell"
+                            >
+                              <withRouter(Connect(DownloadBox))
+                                fieldID="1"
+                                fileVersionDetails={
+                                  Object {
+                                    "proofLink": "https://prind.tech",
+                                    "signatures": Array [
+                                      Object {
+                                        "proofLink": "https://testnet.explorer.factom.pro/entries/93ae94fce1d960dc818c049f9a23f8305cdea54dd6954153c57be62179db1fcf",
+                                        "signatureDateTime": "2021-01-11T11:11:11",
+                                        "signerName": "Signer One",
+                                      },
+                                      Object {
+                                        "proofLink": "https://testnet.explorer.factom.pro/entries/93ae94fce1d960dc818c049f9a23f8305cdea54dd6954153c57be62179db1fcf",
+                                        "signatureDateTime": "2021-02-22T22:22:22",
+                                        "signerName": "Signer Two",
+                                      },
+                                    ],
+                                    "uploadDateTime": "2021-04-06T07:06:23",
+                                    "uploadName": "File123.txt",
+                                    "uploadedBy": "Testy McTesterson",
+                                    "ver": "0",
+                                  }
+                                }
+                                onDownloadFailure={[Function]}
+                                onDownloadSuccess={[Function]}
+                                pageName="design"
+                                projectId="TestProjectID"
+                              >
+                                <Connect(DownloadBox)
+                                  fieldID="1"
+                                  fileVersionDetails={
+                                    Object {
+                                      "proofLink": "https://prind.tech",
+                                      "signatures": Array [
+                                        Object {
+                                          "proofLink": "https://testnet.explorer.factom.pro/entries/93ae94fce1d960dc818c049f9a23f8305cdea54dd6954153c57be62179db1fcf",
+                                          "signatureDateTime": "2021-01-11T11:11:11",
+                                          "signerName": "Signer One",
+                                        },
+                                        Object {
+                                          "proofLink": "https://testnet.explorer.factom.pro/entries/93ae94fce1d960dc818c049f9a23f8305cdea54dd6954153c57be62179db1fcf",
+                                          "signatureDateTime": "2021-02-22T22:22:22",
+                                          "signerName": "Signer Two",
+                                        },
+                                      ],
+                                      "uploadDateTime": "2021-04-06T07:06:23",
+                                      "uploadName": "File123.txt",
+                                      "uploadedBy": "Testy McTesterson",
+                                      "ver": "0",
+                                    }
+                                  }
+                                  history={
+                                    Object {
+                                      "action": "POP",
+                                      "block": [Function],
+                                      "createHref": [Function],
+                                      "go": [Function],
+                                      "goBack": [Function],
+                                      "goForward": [Function],
+                                      "length": 1,
+                                      "listen": [Function],
+                                      "location": Object {
+                                        "hash": "",
+                                        "pathname": "/",
+                                        "search": "",
+                                        "state": undefined,
+                                      },
+                                      "push": [Function],
+                                      "replace": [Function],
+                                    }
+                                  }
+                                  location={
+                                    Object {
+                                      "hash": "",
+                                      "pathname": "/",
+                                      "search": "",
+                                      "state": undefined,
+                                    }
+                                  }
+                                  match={
+                                    Object {
+                                      "isExact": true,
+                                      "params": Object {},
+                                      "path": "/",
+                                      "url": "/",
+                                    }
+                                  }
+                                  onDownloadFailure={[Function]}
+                                  onDownloadSuccess={[Function]}
+                                  pageName="design"
+                                  projectId="TestProjectID"
+                                >
+                                  <DownloadBox
+                                    downloadFile={[Function]}
+                                    fieldID="1"
+                                    fileVersionDetails={
+                                      Object {
+                                        "proofLink": "https://prind.tech",
+                                        "signatures": Array [
+                                          Object {
+                                            "proofLink": "https://testnet.explorer.factom.pro/entries/93ae94fce1d960dc818c049f9a23f8305cdea54dd6954153c57be62179db1fcf",
+                                            "signatureDateTime": "2021-01-11T11:11:11",
+                                            "signerName": "Signer One",
+                                          },
+                                          Object {
+                                            "proofLink": "https://testnet.explorer.factom.pro/entries/93ae94fce1d960dc818c049f9a23f8305cdea54dd6954153c57be62179db1fcf",
+                                            "signatureDateTime": "2021-02-22T22:22:22",
+                                            "signerName": "Signer Two",
+                                          },
+                                        ],
+                                        "uploadDateTime": "2021-04-06T07:06:23",
+                                        "uploadName": "File123.txt",
+                                        "uploadedBy": "Testy McTesterson",
+                                        "ver": "0",
+                                      }
+                                    }
+                                    history={
+                                      Object {
+                                        "action": "POP",
+                                        "block": [Function],
+                                        "createHref": [Function],
+                                        "go": [Function],
+                                        "goBack": [Function],
+                                        "goForward": [Function],
+                                        "length": 1,
+                                        "listen": [Function],
+                                        "location": Object {
+                                          "hash": "",
+                                          "pathname": "/",
+                                          "search": "",
+                                          "state": undefined,
+                                        },
+                                        "push": [Function],
+                                        "replace": [Function],
+                                      }
+                                    }
+                                    location={
+                                      Object {
+                                        "hash": "",
+                                        "pathname": "/",
+                                        "search": "",
+                                        "state": undefined,
+                                      }
+                                    }
+                                    match={
+                                      Object {
+                                        "isExact": true,
+                                        "params": Object {},
+                                        "path": "/",
+                                        "url": "/",
+                                      }
+                                    }
+                                    onDownloadFailure={[Function]}
+                                    onDownloadSuccess={[Function]}
+                                    pageName="design"
+                                    projectId="TestProjectID"
+                                    resetDownloadURL={[Function]}
+                                  >
+                                    <div
+                                      className="download-box"
+                                      id="download-box"
+                                      onClick={[Function]}
+                                    >
+                                      <div>
+                                        <ItemIcon
+                                          size="4x"
+                                          type="download"
+                                        >
+                                          <Blueprint3.Icon
+                                            icon={
+                                              <FontAwesomeIcon
+                                                border={false}
+                                                className=""
+                                                fixedWidth={false}
+                                                flip={null}
+                                                icon={
+                                                  Object {
+                                                    "icon": Array [
+                                                      512,
+                                                      512,
+                                                      Array [],
+                                                      "f019",
+                                                      "M216 0h80c13.3 0 24 10.7 24 24v168h87.7c17.8 0 26.7 21.5 14.1 34.1L269.7 378.3c-7.5 7.5-19.8 7.5-27.3 0L90.1 226.1c-12.6-12.6-3.7-34.1 14.1-34.1H192V24c0-13.3 10.7-24 24-24zm296 376v112c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V376c0-13.3 10.7-24 24-24h146.7l49 49c20.1 20.1 52.5 20.1 72.6 0l49-49H488c13.3 0 24 10.7 24 24zm-124 88c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20zm64 0c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20z",
+                                                    ],
+                                                    "iconName": "download",
+                                                    "prefix": "fas",
+                                                  }
+                                                }
+                                                inverse={false}
+                                                listItem={false}
+                                                mask={null}
+                                                pull={null}
+                                                pulse={false}
+                                                rotation={null}
+                                                size="4x"
+                                                spin={false}
+                                                swapOpacity={false}
+                                                symbol={false}
+                                                title=""
+                                                transform={null}
+                                              />
+                                            }
+                                          >
+                                            <FontAwesomeIcon
+                                              border={false}
+                                              className=""
+                                              fixedWidth={false}
+                                              flip={null}
+                                              icon={
+                                                Object {
+                                                  "icon": Array [
+                                                    512,
+                                                    512,
+                                                    Array [],
+                                                    "f019",
+                                                    "M216 0h80c13.3 0 24 10.7 24 24v168h87.7c17.8 0 26.7 21.5 14.1 34.1L269.7 378.3c-7.5 7.5-19.8 7.5-27.3 0L90.1 226.1c-12.6-12.6-3.7-34.1 14.1-34.1H192V24c0-13.3 10.7-24 24-24zm296 376v112c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V376c0-13.3 10.7-24 24-24h146.7l49 49c20.1 20.1 52.5 20.1 72.6 0l49-49H488c13.3 0 24 10.7 24 24zm-124 88c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20zm64 0c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20z",
+                                                  ],
+                                                  "iconName": "download",
+                                                  "prefix": "fas",
+                                                }
+                                              }
+                                              inverse={false}
+                                              listItem={false}
+                                              mask={null}
+                                              pull={null}
+                                              pulse={false}
+                                              rotation={null}
+                                              size="4x"
+                                              spin={false}
+                                              swapOpacity={false}
+                                              symbol={false}
+                                              title=""
+                                              transform={null}
+                                            >
+                                              <svg
+                                                aria-hidden="true"
+                                                className="svg-inline--fa fa-download fa-w-16 fa-4x "
+                                                data-icon="download"
+                                                data-prefix="fas"
+                                                focusable="false"
+                                                role="img"
+                                                style={Object {}}
+                                                viewBox="0 0 512 512"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                              >
+                                                <path
+                                                  d="M216 0h80c13.3 0 24 10.7 24 24v168h87.7c17.8 0 26.7 21.5 14.1 34.1L269.7 378.3c-7.5 7.5-19.8 7.5-27.3 0L90.1 226.1c-12.6-12.6-3.7-34.1 14.1-34.1H192V24c0-13.3 10.7-24 24-24zm296 376v112c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V376c0-13.3 10.7-24 24-24h146.7l49 49c20.1 20.1 52.5 20.1 72.6 0l49-49H488c13.3 0 24 10.7 24 24zm-124 88c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20zm64 0c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20z"
+                                                  fill="currentColor"
+                                                  style={Object {}}
+                                                />
+                                              </svg>
+                                            </FontAwesomeIcon>
+                                          </Blueprint3.Icon>
+                                        </ItemIcon>
+                                        <p>
+                                          Download
+                                        </p>
+                                      </div>
+                                    </div>
+                                  </DownloadBox>
+                                </Connect(DownloadBox)>
+                              </withRouter(Connect(DownloadBox))>
+                            </div>
+                          </div>
+                          <div
+                            className="row"
+                          >
+                            <div
+                              className="col"
+                            >
+                              <div
+                                className="signature-details"
+                              >
+                                <div>
+                                  <SignatureHistory
+                                    details={
+                                      Array [
+                                        Object {
+                                          "proofLink": "https://testnet.explorer.factom.pro/entries/93ae94fce1d960dc818c049f9a23f8305cdea54dd6954153c57be62179db1fcf",
+                                          "signatureDateTime": "2021-01-11T11:11:11",
+                                          "signerName": "Signer One",
+                                        },
+                                        Object {
+                                          "proofLink": "https://testnet.explorer.factom.pro/entries/93ae94fce1d960dc818c049f9a23f8305cdea54dd6954153c57be62179db1fcf",
+                                          "signatureDateTime": "2021-02-22T22:22:22",
+                                          "signerName": "Signer Two",
+                                        },
+                                      ]
+                                    }
+                                  >
+                                    <div
+                                      id="signature-container"
+                                    >
+                                      <div
+                                        className="element-title"
+                                      >
+                                        Signatures
+                                      </div>
+                                      <div
+                                        className="details-table"
+                                      >
+                                        <h4>
+                                          Signed By: 
+                                        </h4>
+                                        <h4>
+                                          Signed At: 
+                                        </h4>
+                                        <h4>
+                                          Proof: 
+                                        </h4>
+                                        <div
+                                          key="signer-0"
+                                        >
+                                          Signer One
+                                        </div>
+                                        <div
+                                          key="signatureDateTime-0"
+                                        >
+                                          2021-01-11T11:11:11
+                                        </div>
+                                        <div
+                                          key="proofLink-0"
+                                        >
+                                          <a
+                                            href="https://testnet.explorer.factom.pro/entries/93ae94fce1d960dc818c049f9a23f8305cdea54dd6954153c57be62179db1fcf"
+                                            rel="noopener noreferrer"
+                                            target="_blank"
+                                          >
+                                            Link to Proof
+                                          </a>
+                                        </div>
+                                        <div
+                                          key="signer-1"
+                                        >
+                                          Signer Two
+                                        </div>
+                                        <div
+                                          key="signatureDateTime-1"
+                                        >
+                                          2021-02-22T22:22:22
+                                        </div>
+                                        <div
+                                          key="proofLink-1"
+                                        >
+                                          <a
+                                            href="https://testnet.explorer.factom.pro/entries/93ae94fce1d960dc818c049f9a23f8305cdea54dd6954153c57be62179db1fcf"
+                                            rel="noopener noreferrer"
+                                            target="_blank"
+                                          >
+                                            Link to Proof
+                                          </a>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </SignatureHistory>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Portal>
+            </PopOverHandler>
+          </FileDetailPopover>
+        </Connect(FileDetailPopover)>
+      </withRouter(Connect(FileDetailPopover))>
+    </Router>
+  </HashRouter>
+</Provider>
+`;

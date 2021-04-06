@@ -40,6 +40,7 @@ export class UploaderPopOver extends Component {
         SessionToken: PropTypes.string.isRequired
       })
     }).isRequired,
+    uploadFile: PropTypes.func.isRequired,
     requestS3ProjectFileUploadToken: PropTypes.func.isRequired
   }
 

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import {
-  Button,
   Intent,
   Callout,
 } from '@blueprintjs/core'
@@ -13,15 +12,30 @@ import DownloadBox from '../DownloadBox'
 import * as Strings from '../../../../../Data/Strings'
 
 // TODO: Get Simon to change "uploadedBy" from "None None" to the users email address
+// TODO: Remove blueprintjs
 
 export class CurrentVersion extends Component {
   static propTypes = {
-    user: PropTypes.object.isRequired,
-    details: PropTypes.object,
-    projectId: PropTypes.string,
-    pageName: PropTypes.string,
-    fieldID: PropTypes.string,
+    user: PropTypes.shape({
+      details: PropTypes.shape({
+        foundationsID: PropTypes.string
+      }).isRequired
+    }).isRequired,
+    details: PropTypes.shape({
+      uploadName: PropTypes.string.isRequired,
+      uploadedDateTime: PropTypes.string.isRequired,
+      uploadedBy: PropTypes.string.isRequired,
+      proofLink: PropTypes.string.isRequired,
+    }),
+    projects: PropTypes.shape({
+      chosenProject: PropTypes.shape({
+        projectId: PropTypes.string.isRequired,
+      })
+    }),
+    pageName: PropTypes.string.isRequired,
+    fieldID: PropTypes.string.isRequired,
     editable: PropTypes.bool,
+    selfSignFile: PropTypes.func.isRequired
   }
 
   constructor() {
@@ -59,23 +73,24 @@ export class CurrentVersion extends Component {
 
   // Perform Actions to request your own signature
   sendSelfSignRequest = (e) => {
-    console.log("Self sign file clicked")
-    const { projectId, pageName, fieldID } = this.props
+    //console.log("Self sign file clicked")
+    const { pageName, fieldID } = this.props
+    const { projectId } = this.props.projects.chosenProject
     // Send the request
     this.props.selfSignFile(
       projectId,
       pageName,
       fieldID,
     )
-    // Stop the click propagating up and opening the upload history section
+    // Stop the click propagating up
     e.stopPropagation();
   }
 
 
   // Perform Actions to request a signature
   requestSignature = (e) => {
-    console.log("Signature requested")
-    // Stop the click proporgating up and opening the upload history section
+    //console.log("Signature requested")
+    // Stop the click propagating up
     e.stopPropagation();
     this.setState({
       signerPickerOpen: true,
@@ -98,8 +113,8 @@ export class CurrentVersion extends Component {
           {
             details.proofLink === null  || details.proofLink === undefined ?
               Strings.NO_PROOF_AVAILABLE :
-              <div onClick={e => e.stopPropagation()}>
-                <a href={details.proofLink} target="_blank" rel="noopener noreferrer">{Strings.LINK_TO_PROOF}</a>
+              <div id='proof-link-container' onClick={e => e.stopPropagation()}>
+                <a id="proof-link" href={details.proofLink} target="_blank" rel="noopener noreferrer">{Strings.LINK_TO_PROOF}</a>
               </div>
           }
         </div>
@@ -109,7 +124,8 @@ export class CurrentVersion extends Component {
 
 
   getDownloadButton = () => {
-    const { projectId, pageName, fieldID, details } = this.props
+    const { pageName, fieldID, details } = this.props
+    const { projectId } = this.props.projects.chosenProject
     return (
       <div className="download-box-cell" onClick={(e) => e.stopPropagation()}>
         <DownloadBox
@@ -153,18 +169,22 @@ export class CurrentVersion extends Component {
             </div> :
             null
         }
-        <div className='row button-row'>
-          <Button
-            intent={Intent.PRIMARY}
+        <div className='row button-row' style={{ marginTop: "1rem" }}>
+          <input
+            id='request-signatures-button'
+            className='button'
+            type='submit'
             onClick={(e) => this.requestSignature(e)}
             disabled={!this.state.fileCanBeSign || !this.props.editable}
-            text={Strings.BUTTON_REQUEST_SIGNATURES}
+            value={Strings.BUTTON_REQUEST_SIGNATURES}
           />
-          <Button
-            intent={Intent.PRIMARY}
+          <input
+            id='self-sign-button'
+            className='button'
+            type='submit'
             onClick={(e) => this.sendSelfSignRequest(e)}
             disabled={this.state.fileIsSelfSigned || !this.props.editable || noFoundationsID}
-            text={Strings.BUTTON_SELF_SIGN_FILE}
+            value={Strings.BUTTON_SELF_SIGN_FILE}
           />
         </div>
         {
@@ -185,7 +205,8 @@ export class CurrentVersion extends Component {
 
 
   render() {
-    const { details, projectId, pageName, fieldID } = this.props
+    const { details, pageName, fieldID } = this.props
+    const { projectId } = this.props.projects.chosenProject
     const { signerPickerOpen } = this.state
     return(
       <div id='current-version-container'>
@@ -193,7 +214,7 @@ export class CurrentVersion extends Component {
           {Strings.CURRENT_VERSION_ELEMENT}
         </div>
         {
-          details === null ? this.currentVersionNotProvided() : this.currentVersionProvided()
+          !details || Object.keys(details).length === 0 ? this.currentVersionNotProvided() : this.currentVersionProvided()
         }
         {
           signerPickerOpen ? <PickSignerPopover

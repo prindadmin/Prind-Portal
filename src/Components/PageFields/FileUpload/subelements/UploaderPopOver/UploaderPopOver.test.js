@@ -49,6 +49,7 @@ beforeEach(() => {
         SessionToken: "TokenSessionToken"
       }
     },
+    uploadFile: jest.fn(),
     requestS3ProjectFileUploadToken: jest.fn()
   };
 });

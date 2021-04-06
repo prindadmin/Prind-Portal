@@ -9,9 +9,13 @@ export class DownloadBox extends Component {
     projectId: PropTypes.string.isRequired,
     pageName: PropTypes.string.isRequired,
     fieldID: PropTypes.string.isRequired,
-    fileVersionDetails: PropTypes.object.isRequired,
+    fileVersionDetails: PropTypes.shape({
+      ver: PropTypes.string.isRequired
+    }).isRequired,
     onDownloadSuccess: PropTypes.func.isRequired,
     onDownloadFailure: PropTypes.func.isRequired,
+    downloadFile: PropTypes.func.isRequired,
+    resetDownloadURL: PropTypes.func.isRequired
   }
 
   constructor() {
@@ -83,7 +87,7 @@ export class DownloadBox extends Component {
     this.state.width < 992 ? itemSize = "3x" : itemSize = "4x"
 
     return (
-      <div className="download-box" onClick={(e) => this.downloadFile(e)}>
+      <div id='download-box' className="download-box" onClick={(e) => this.downloadFile(e)}>
         <div>
           <ItemIcon size={itemSize} type='download' />
           <p>{Strings.DOWNLOAD}</p>
@@ -94,4 +98,4 @@ export class DownloadBox extends Component {
   }
 }
 
-export default DownloadBox 
+export default DownloadBox
