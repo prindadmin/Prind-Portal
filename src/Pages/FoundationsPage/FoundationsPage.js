@@ -12,11 +12,11 @@ export class FoundationsPage extends Component {
   }
 
   androidClicked = () => {
-    window.open("https://play.google.com/store/apps/details?id=com.buildingim.foundations", "_blank")
+    window.open(encodeURI("https://play.google.com/store/apps/details?id=com.buildingim.foundations"), "_blank")
   }
 
   iosClicked = () => {
-    window.open("https://apps.apple.com/us/app/foundations/id1499177355#?platform=iphone", "_blank")
+    window.open(encodeURI("https://apps.apple.com/us/app/foundations/id1499177355#?platform=iphone"), "_blank")
   }
 
   getPageContent = () => {
