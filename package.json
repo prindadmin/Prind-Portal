@@ -67,6 +67,7 @@
     "deploy:all-dev": "npm run deploy:dev-cdm && npm run deploy:dev-dhsf",
     "deploy:all-staging": "npm run deploy:staging-cdm && npm run deploy:staging-dhsf",
     "deploy:all-production": "npm run deploy:production-cdm && npm run deploy:production-dhsf",
+    "deploy:all": "npm run deploy:all-dhsf && npm run deploy:all-cdm",
     "start": "react-scripts start",
     "start-cdm": "env-cmd -f .env.developmentCDM react-scripts start",
     "start-dhsf": "env-cmd -f .env.developmentDHSF react-scripts start",

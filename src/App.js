@@ -31,7 +31,6 @@ const LoggedInContent = lazy(() => import('./Pages/LoggedInContent'));
 
 // TODO: make mobile version pages the right height (1x1 content is way longer than it needs to be)
 // TODO: make the page menu float over other elements and not be 100% width in mobile size
-// TODO: Add error boundaries
 // TODO: Add error handling when a page cannot load
 // TODO: Strip out axios dependency (not needed as a root dependency)
 // TODO: Strip out bootstrap
@@ -39,10 +38,9 @@ const LoggedInContent = lazy(() => import('./Pages/LoggedInContent'));
 // TODO: Strip out node-sass (why is this used?)
 // TODO: Strip out typescript???
 // TODO: Migrate to CSS Grid from bootstrap where possible (no rows and cols in classnames)
-// TODO: Simplify CSS using media queries and global variables
+// TODO: Simplify CSS by using modules
 // TODO: Remove the Long Text box once the Git Text box is complete
 // TODO: Make page content in Redux follow the available fields for a projectType
-// TODO: Use Endpoints import for all routes
 // TODO: Put a dev password on the front of the dev portal
 // TODO: Fix loading issue where, when no project selected, projectId gets set to undefined
 
@@ -148,40 +146,40 @@ class App extends Component{
               <Route path={Endpoints.RESETPASSWORDPAGE} component={SignInPage} />
               <Route path={Endpoints.CONFIRMEMAILPAGE} component={ConfirmEmailPage} />
 
-              <PrivateRoute path='/project' component={LoggedInContent} />
-              <PrivateRoute path='/project/:id?' component={LoggedInContent} />
+              <PrivateRoute path={Endpoints.PROJECTDETAILSPAGE} component={LoggedInContent} />
+              <PrivateRoute path={`${Endpoints.PROJECTDETAILSPAGE}/:id`} component={LoggedInContent} />
 
-              <PrivateRoute path='/team' component={LoggedInContent} />
-              <PrivateRoute path='/team/:id?' component={LoggedInContent} />
+              <PrivateRoute path={Endpoints.PROJECTTEAMPAGE} component={LoggedInContent} />
+              <PrivateRoute path={`${Endpoints.PROJECTTEAMPAGE}/:id`} component={LoggedInContent} />
 
-              <PrivateRoute path='/inception' component={LoggedInContent} />
-              <PrivateRoute path='/inception/:id?' component={LoggedInContent} />
+              <PrivateRoute path={Endpoints.INCEPTIONPAGE} component={LoggedInContent} />
+              <PrivateRoute path={`${Endpoints.INCEPTIONPAGE}/:id`} component={LoggedInContent} />
 
-              <PrivateRoute path='/feasibility' component={LoggedInContent} />
-              <PrivateRoute path='/feasibility/:id?' component={LoggedInContent} />
+              <PrivateRoute path={Endpoints.FEASIBILITYPAGE} component={LoggedInContent} />
+              <PrivateRoute path={`${Endpoints.FEASIBILITYPAGE}/:id`} component={LoggedInContent} />
 
-              <PrivateRoute path='/design' component={LoggedInContent} />
-              <PrivateRoute path='/design/:id?' component={LoggedInContent} />
+              <PrivateRoute path={Endpoints.DESIGNPAGE} component={LoggedInContent} />
+              <PrivateRoute path={`${Endpoints.DESIGNPAGE}/:id`} component={LoggedInContent} />
 
-              <PrivateRoute path='/tender' component={LoggedInContent} />
-              <PrivateRoute path='/tender/:id?' component={LoggedInContent} />
+              <PrivateRoute path={Endpoints.TENDERPAGE} component={LoggedInContent} />
+              <PrivateRoute path={`${Endpoints.TENDERPAGE}/:id`} component={LoggedInContent} />
 
-              <PrivateRoute path='/construction' component={LoggedInContent} />
-              <PrivateRoute path='/construction/:id?' component={LoggedInContent} />
+              <PrivateRoute path={Endpoints.CONSTRUCTIONPAGE} component={LoggedInContent} />
+              <PrivateRoute path={`${Endpoints.CONSTRUCTIONPAGE}/:id`} component={LoggedInContent} />
 
-              <PrivateRoute path='/handover' component={LoggedInContent} />
-              <PrivateRoute path='/handover/:id?' component={LoggedInContent} />
+              <PrivateRoute path={Endpoints.HANDOVERPAGE} component={LoggedInContent} />
+              <PrivateRoute path={`${Endpoints.HANDOVERPAGE}/:id`} component={LoggedInContent} />
 
-              <PrivateRoute path='/occupation' component={LoggedInContent} />
-              <PrivateRoute path='/occupation/:id?' component={LoggedInContent} />
+              <PrivateRoute path={Endpoints.OCCUPATIONPAGE} component={LoggedInContent} />
+              <PrivateRoute path={`${Endpoints.OCCUPATIONPAGE}/:id`} component={LoggedInContent} />
 
-              <PrivateRoute path='/refurbishment' component={LoggedInContent} />
-              <PrivateRoute path='/refurbishment/:id?' component={LoggedInContent} />
+              <PrivateRoute path={Endpoints.REFURBISHMENTPAGE} component={LoggedInContent} />
+              <PrivateRoute path={`${Endpoints.REFURBISHMENTPAGE}/:id`} component={LoggedInContent} />
 
-              <PrivateRoute path='/newproject' component={LoggedInContent} />
+              <PrivateRoute path={Endpoints.NEWPROJECTPAGE} component={LoggedInContent} />
 
-              <PrivateRoute path='/profile' component={LoggedInContent} />
-              <PrivateRoute path='/foundations' component={LoggedInContent} />
+              <PrivateRoute path={Endpoints.PROFILEPAGE} component={LoggedInContent} />
+              <PrivateRoute path={Endpoints.FOUNDATIONSPAGE} component={LoggedInContent} />
 
               <Route path='/'
                 render={() =>

@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
+import * as auth from '../../Reducers/auth'
 import * as user from '../../Reducers/user'
 import * as projects from '../../Reducers/projects'
 
@@ -14,6 +15,9 @@ const mapStatetoProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    resetSite: () => {
+      dispatch(auth.init())
+    },
     getProjectDetails: (project, resolve) => {
       dispatch(projects.updateChosenProject(project, resolve))
     },

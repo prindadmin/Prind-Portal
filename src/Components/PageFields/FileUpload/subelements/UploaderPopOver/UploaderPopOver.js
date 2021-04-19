@@ -44,8 +44,9 @@ export class UploaderPopOver extends Component {
     requestS3ProjectFileUploadToken: PropTypes.func.isRequired
   }
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
+    console.log(props)
     this.state = {
       uploadProgress: 0,
       uploadError: false,
@@ -197,6 +198,8 @@ export class UploaderPopOver extends Component {
 
 
   render() {
+    //console.log(this.props.fileDetails)
+    //console.log(this.props.fileDetails.files)
 
     const { fileDetails } = this.props
     const { uploadProgress, uploadError } = this.state
@@ -218,7 +221,7 @@ export class UploaderPopOver extends Component {
                   {Strings.UPLOAD_IN_PROGESS}
                 </div>
                 <div className='element-description'>
-                  <p><b>{Strings.FILE_NAME}</b> {file.value.replace("C:\\fakepath\\", "")}</p>
+                  <p><b>{Strings.FILE_NAME}</b> {file.name}</p>
                   <p><b>{Strings.UPLOADED_SIZE}</b> {uploadProgress + " / " + fileSize + " bytes"}</p>
                 </div>
                 <ProgressBar

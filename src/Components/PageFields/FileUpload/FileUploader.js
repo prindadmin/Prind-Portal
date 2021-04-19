@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import classes from './FileUploader.module.css'
 
 import {
   FileInput,
@@ -16,11 +17,13 @@ import {
   SignatureHistory,
 } from './subelements'
 
+import LoadingSpinner from '../../LoadingSpinner'
+
 import * as Strings from '../../../Data/Strings'
+import * as ComponentStates from '../ComponentStates'
 
-// TODO: Improve propTypes so that errors are captured more easily
+
 // TODO: Refactor to remove blueprintjs
-
 export class FileUploader extends Component {
   static propTypes = {
     elementContent: PropTypes.shape({
@@ -62,6 +65,7 @@ export class FileUploader extends Component {
       uploadFileRequested: false,
       fileState: '',
       activeTab: 'current',
+      state: ComponentStates.QUIESCENT
     }
   }
 
@@ -99,6 +103,7 @@ export class FileUploader extends Component {
       hasChosenFile: false,
       uploadFileRequested: true,
       fileState: '',
+      state: ComponentStates.UPLOADING_NEW_FILE_TO_SERVER
     })
     e.stopPropagation();
   }
@@ -220,7 +225,10 @@ export class FileUploader extends Component {
           </div>
           <div className='element-file-uploader'>
             {
-              this.getTabs()
+              this.state.state === ComponentStates.QUIESCENT ? this.getTabs() : null
+            }
+            {
+              this.state.state === ComponentStates.UPLOADING_NEW_FILE_TO_SERVER ? <div className={classes.centerChildren}><LoadingSpinner /></div> : null
             }
           </div>
         </div>

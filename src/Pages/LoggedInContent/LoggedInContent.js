@@ -7,6 +7,7 @@ import * as Strings from '../../Data/Strings'
 import PAGENAMES from '../../Data/pageNames'
 
 // Components
+import ErrorBoundary from '../../Components/ErrorBoundary'
 const HeaderBar = lazy(() => import('../../Components/HeaderBar'));
 const SideBar = lazy(() => import('../../Components/SideBar'));
 const SideBarMobile = lazy(() => import('../../Components/SideBarMobile'));
@@ -43,6 +44,7 @@ export class LoggedInContent extends Component {
     getProjectDetails: PropTypes.func.isRequired,
     saveProjectID: PropTypes.func.isRequired,
     getProjectMembers: PropTypes.func.isRequired,
+    resetSite: PropTypes.func.isRequired,
   }
 
   constructor() {
@@ -242,18 +244,24 @@ export class LoggedInContent extends Component {
     )
   }
 
+  onRetry = (e) => {
+    this.props.resetSite()
+  }
+
   render () {
     return (
       <div id='logged-in-content-container' className='full-width row'>
         <HeaderBar companyName='Prin-D' openProjectSelector={this.shouldOpenProjectSelector()}/>
-        <LayoutBody>
-          {
-            this.state.width > MOBILE_WIDTH_BREAKPOINT ? <SideBar {...this.props} /> : <SideBarMobile {...this.props} />
-          }
-          {
-            this.state.width > MOBILE_WIDTH_BREAKPOINT ? this.getDesktopContent() : this.getMobileContent()
-          }
-        </LayoutBody>
+        <ErrorBoundary onRetry={this.onRetry}>
+          <LayoutBody>
+            {
+              this.state.width > MOBILE_WIDTH_BREAKPOINT ? <SideBar {...this.props} /> : <SideBarMobile {...this.props} />
+            }
+            {
+              this.state.width > MOBILE_WIDTH_BREAKPOINT ? this.getDesktopContent() : this.getMobileContent()
+            }
+          </LayoutBody>
+        </ErrorBoundary>
         <Footer />
       </div>
     )

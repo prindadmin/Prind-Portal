@@ -325,6 +325,10 @@ p.error {
   padding: 5px 0 0 5px;
 }
 
+.sidebar h2 {
+  cursor: default;
+}
+
 @media only screen and (min-width: 992px) {
 
   .chooser-section {

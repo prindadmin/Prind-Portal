@@ -1,64 +1,66 @@
 
+import * as Endpoints from './Endpoints'
+
 const PAGENAMES = {
   CDM2015Project: {
     project: {
       id: "projectDetails",
       name: "Project Details",
-      linkTo: "/project",
+      linkTo: Endpoints.PROJECTDETAILSPAGE,
       isStagePage: false,
     },
     team: {
       id: "projectTeam",
       name: "Project Team",
-      linkTo: "/team",
+      linkTo: Endpoints.PROJECTTEAMPAGE,
       isStagePage: false,
     },
     inception: {
       id: "stageInception",
       name: "Inception",
-      linkTo: "/inception",
+      linkTo: Endpoints.INCEPTIONPAGE,
       isStagePage: true,
     },
     feasibility: {
       id: "stageFeasibility",
       name: "Feasibility",
-      linkTo: "/feasibility",
+      linkTo: Endpoints.FEASIBILITYPAGE,
       isStagePage: true,
     },
     design: {
       id: "stageDesign",
       name: "Design",
-      linkTo: "/design",
+      linkTo: Endpoints.DESIGNPAGE,
       isStagePage: true,
     },
     tender: {
       id: "stageTender",
       name: "Tender",
-      linkTo: "/tender",
+      linkTo: Endpoints.TENDERPAGE,
       isStagePage: true,
     },
     construction: {
       id: "stageConstruction",
       name: "Construction",
-      linkTo: "/construction",
+      linkTo: Endpoints.CONSTRUCTIONPAGE,
       isStagePage: true,
     },
     handover: {
       id: "stageHandover",
       name: "Handover",
-      linkTo: "/handover",
+      linkTo: Endpoints.HANDOVERPAGE,
       isStagePage: true,
     },
     occupation: {
       id: "stageOccupation",
       name: "Occupation",
-      linkTo: "/occupation",
+      linkTo: Endpoints.OCCUPATIONPAGE,
       isStagePage: true,
     },
     refurbishment: {
       id: "stageRefurbishment",
       name: "Refurbishment",
-      linkTo: "/refurbishment",
+      linkTo: Endpoints.REFURBISHMENTPAGE,
       isStagePage: true,
     }
   },
@@ -66,19 +68,19 @@ const PAGENAMES = {
     project: {
       id: "projectDetails",
       name: "Project Details",
-      linkTo: "/project",
+      linkTo: Endpoints.PROJECTDETAILSPAGE,
       isStagePage: false,
     },
     team: {
       id: "projectTeam",
       name: "Project Team",
-      linkTo: "/team",
+      linkTo: Endpoints.PROJECTTEAMPAGE,
       isStagePage: false,
     },
     occupation: {
       id: "stageOccupation",
       name: "HSF",
-      linkTo: "/occupation",
+      linkTo: Endpoints.OCCUPATIONPAGE,
       isStagePage: true,
     },
   },
