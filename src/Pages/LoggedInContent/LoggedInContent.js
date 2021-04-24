@@ -6,6 +6,9 @@ import ProjectLoading from '../../Components/Common/ProjectLoading'
 import * as Strings from '../../Data/Strings'
 import PAGENAMES from '../../Data/pageNames'
 
+// Data
+import * as PageStates from '../PageStates'
+
 // Components
 import ErrorBoundary from '../../Components/ErrorBoundary'
 const HeaderBar = lazy(() => import('../../Components/HeaderBar'));
@@ -52,6 +55,7 @@ export class LoggedInContent extends Component {
     this.state = {
       historyOpenProjectSelectorState: true,
       width: 0,
+      state: PageStates.LOADING
     }
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
   }
@@ -117,6 +121,21 @@ export class LoggedInContent extends Component {
         historyOpenProjectSelectorState: locationState.openProjectSelector
       })
     }
+  }
+
+  onServerHasAccess = () => {
+    this.setState({
+      state: PageStates.QUIESCENT
+    })
+  }
+
+  onServerDoesNotHaveAccess = () => {
+    //console.log("Redirect to Procore Auth Service to be coded")
+    this.setState({
+      state: PageStates.QUIESCENT
+    })
+    const procoreURL = process.env.REACT_APP_PROCORE_AUTH_URL.replace("<CLIENT_ID>", process.env.REACT_APP_PROCORE_CLIENT_ID).replace("<REDIRECT_URI>", process.env.REACT_APP_PROCORE_REDIRECT_URL)
+    window.open(procoreURL,"_self")
   }
 
   getProjectDataForSpecificStage = () => {
@@ -237,9 +256,9 @@ export class LoggedInContent extends Component {
 
     return (
       <LayoutContentArea1x1Mobile>
-          <Suspense fallback={this.loadingPlaceholder()}>
-              { error ? <ProjectFetchError /> : this.getContent() }
-          </Suspense>
+        <Suspense fallback={this.loadingPlaceholder()}>
+            { error ? <ProjectFetchError /> : this.getContent() }
+        </Suspense>
       </LayoutContentArea1x1Mobile>
     )
   }

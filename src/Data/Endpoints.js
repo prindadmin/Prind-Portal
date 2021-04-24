@@ -21,3 +21,5 @@ export const REFURBISHMENTPAGE = '/refurbishment'
 
 export const PROFILEPAGE = '/profile'
 export const FOUNDATIONSPAGE = '/foundations'
+
+export const PROCOREAUTHPAGE = "/procore-auth"

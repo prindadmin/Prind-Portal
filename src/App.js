@@ -25,6 +25,7 @@ import * as Strings from './Data/Strings'
 /* Before sign in pages */
 const SignInPage = lazy(() => import('./Pages/SignInPage'))
 const ConfirmEmailPage = lazy(() => import('./Components/ConfirmEmailPage'));
+const ProcoreAuthPage = lazy(() => import('./Pages/ProcoreAuthPage'));
 
 /* Other pages */
 const LoggedInContent = lazy(() => import('./Pages/LoggedInContent'));
@@ -42,7 +43,7 @@ const LoggedInContent = lazy(() => import('./Pages/LoggedInContent'));
 // TODO: Remove the Long Text box once the Git Text box is complete
 // TODO: Make page content in Redux follow the available fields for a projectType
 // TODO: Put a dev password on the front of the dev portal
-// TODO: Fix loading issue where, when no project selected, projectId gets set to undefined
+
 
 
 // Use existing Cognito resource for auth
@@ -145,6 +146,8 @@ class App extends Component{
               <Route path={Endpoints.FORGOTPASSWORDPAGE} component={SignInPage} />
               <Route path={Endpoints.RESETPASSWORDPAGE} component={SignInPage} />
               <Route path={Endpoints.CONFIRMEMAILPAGE} component={ConfirmEmailPage} />
+
+              <PrivateRoute path={Endpoints.PROCOREAUTHPAGE} component={ProcoreAuthPage} />
 
               <PrivateRoute path={Endpoints.PROJECTDETAILSPAGE} component={LoggedInContent} />
               <PrivateRoute path={`${Endpoints.PROJECTDETAILSPAGE}/:id`} component={LoggedInContent} />

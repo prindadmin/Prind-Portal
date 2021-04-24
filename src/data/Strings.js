@@ -343,3 +343,7 @@ export const YOUR_CHANGE_PASSWORD_REQUEST_WAS_SUCCESS = "Your change password re
 export const YOUR_PASSWORD_WAS_SUCCESSFULLY_CHANGED = "Your password has been successfully changed."
 export const LOADING_DATA_FOR_PAGE = "Loading page data"
 export const LOADING = "Loading"
+
+// Procore Auth Process
+export const AUTHORISE_WITH_PROCORE = "Authorise with Procore"
+export const ERROR_GETTING_PROCORE_ACCESS = "There was an error authorising access with Procore.  Would you like to try again?"
