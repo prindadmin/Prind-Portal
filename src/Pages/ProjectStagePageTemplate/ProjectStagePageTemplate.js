@@ -67,7 +67,7 @@ export class StagePage extends Component {
 
   fetchPageContent = () => {
     const { pageName, projectId } = this.props
-    if(projectId === "") {
+    if(projectId === "" || !projectId) {
       this.setState({
         state: ComponentState.CONTENT_NO_PROJECT_SELECTED,
       })
@@ -91,6 +91,7 @@ export class StagePage extends Component {
 
   contentFetchFailed = (error) => {
     //console.log('error fetching page content')
+    //console.log(error)
     this.setState({
       state: ComponentState.CONTENT_FETCH_FAILED,
       errorMessage: error.Error.ErrorMessage,

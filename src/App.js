@@ -7,7 +7,7 @@ import Amplify, { Auth } from 'aws-amplify';
 import ReactGA from 'react-ga';
 
 import {
-  HashRouter as Router,
+  BrowserRouter as Router,
   Route,
   Redirect,
   Switch
