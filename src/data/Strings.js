@@ -347,3 +347,34 @@ export const LOADING = "Loading"
 // Procore Auth Process
 export const AUTHORISE_WITH_PROCORE = "Authorise with Procore"
 export const ERROR_GETTING_PROCORE_ACCESS = "There was an error authorising access with Procore.  Would you like to try again?"
+
+// Procore File Select Process
+export const BUTTON_SELECT_FILE = 'Select file'
+export const BUTTON_CLOSE = 'Close'
+
+// Procore Document Table
+export const PROCORE_DOCUMENT_NAME = "Document Name"
+export const PROCORE_DOCUMENT_VERSION_NAME = "Version Name"
+export const PROCORE_DOCUMENT_DESCRIPTION = "Description"
+export const PROCORE_DOCUMENT_DOWNLOAD = "Download"
+export const PROCORE_DOCUMENT_ANCHOR = "Anchor with Foundations"
+export const PROCORE_DOCUMENT_ANCHOR_LATEST = "Anchor Latest Version"
+export const PROCORE_DOCUMENT_SIGN = "Sign with Foundations"
+export const PROCORE_DOCUMENT_SIGNATURES = "Signatures"
+export const PROCORE_DOCUMENT_SIGN_LATEST = "Sign Latest Version"
+export const PROCORE_DOCUMENT_NUMBER_OF_VERSIONS = "Versions"
+export const PROCORE_DOCUMENT_VIEW_VERSIONS = "View Versions"
+export const BUTTON_ANCHOR = "Anchor"
+export const BUTTON_VIEW_ANCHOR = "View Anchor"
+export const BUTTON_SIGN = "Sign"
+export const BUTTON_DOWNLOAD = "Download"
+export const BUTTON_VIEW_VERSIONS = "Versions"
+export const BUTTON_CLOSE_VERSIONS = "Close Versions"
+export const FULL_SCREEN_NO_FILES = "Procore contains no files for this project"
+export const FULL_SCREEN_FILTER_TOO_HARSH = "No files found with given filter"
+export const ERROR_FETCHING_DATA = "Error fetching data"
+export const ERROR_ANCHORING_FAILED = "Error when anchoring file; please try again"
+export const ERROR_SIGNING_FAILED = "Error when signing file; please try again"
+
+// Misc
+export const DEFAULT_FULL_SCREEN_TILE = ""

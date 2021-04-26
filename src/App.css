@@ -41,11 +41,13 @@
   --project-selector-grid-columns: 1fr;
   --popup-header-height: 80px;
   --popup-footer-height: 80px;
+  --document-table-grid-columns: 1fr
 }
 
 @media (min-width: 1024px) {
   :root {
     --project-selector-grid-columns: 1fr 1fr;
+    --document-table-grid-columns: repeat(6, auto);
   }
 
 }

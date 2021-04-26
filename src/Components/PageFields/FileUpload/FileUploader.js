@@ -21,6 +21,7 @@ import LoadingSpinner from '../../LoadingSpinner'
 
 import * as Strings from '../../../Data/Strings'
 import * as ComponentStates from '../ComponentStates'
+import ProcoreFilePicker from '../../ProcoreFilePicker'
 
 
 // TODO: Refactor to remove blueprintjs
@@ -65,7 +66,8 @@ export class FileUploader extends Component {
       uploadFileRequested: false,
       fileState: '',
       activeTab: 'current',
-      state: ComponentStates.QUIESCENT
+      state: ComponentStates.QUIESCENT,
+      procoreFilePickerOpen: false
     }
   }
 
@@ -182,11 +184,51 @@ export class FileUploader extends Component {
           type="submit"
           onClick={(e) => this.uploadFile(e)}
           disabled={!hasChosenFile}
-          text={Strings.BUTTON_UPLOAD_FILE}
+          value={Strings.BUTTON_UPLOAD_FILE}
         />
 
       </div>
     )
+  }
+
+  // TODO: Implement this
+  uploadTabProcore = () => {
+    const { filePrompt, hasChosenFile } = this.state
+    const { elementContent } = this.props
+    return (
+      <div id='upload-tab-container'>
+        <div className='element-title'>{Strings.TAB_UPLOAD_FILE_HEADING}</div>
+
+        <input
+          id="procore-file-picker-button"
+          className="button"
+          type="submit"
+          onClick={(e) => this.setState({ procoreFilePickerOpen: true })}
+          value={Strings.BUTTON_SELECT_FILE}
+        />
+
+        <input
+          id="upload-button"
+          className="button"
+          type="submit"
+          onClick={(e) => this.uploadFile(e)}
+          disabled={!hasChosenFile}
+          value={Strings.BUTTON_UPLOAD_FILE}
+        />
+
+      </div>
+    )
+  }
+
+  // TODO: Implement this
+  getProcoreFileSelectorPopover = () => {
+    return <ProcoreFilePicker handleClose={this.handleCloseProcoreFilePicker} />
+  }
+
+  handleCloseProcoreFilePicker = () => {
+    this.setState({
+      procoreFilePickerOpen: false
+    })
   }
 
 
@@ -204,7 +246,7 @@ export class FileUploader extends Component {
         <Tab id="current" title={Strings.TAB_CURRENT_FILE} panel={this.currentTab()} />
         <Tab id="signatures" title={Strings.TAB_SIGNATURES} panel={this.signatureTab()} />
         <Tab id="versions" title={Strings.TAB_FILE_VERSIONS} panel={this.versionsTab()} />
-        <Tab id="upload" title={Strings.TAB_UPLOAD_FILE} panel={this.uploadTab()} />
+        <Tab id="upload" title={Strings.TAB_UPLOAD_FILE} panel={process.env.REACT_APP_IS_PROCORE === "True" ? this.uploadTabProcore() : this.uploadTab()} />
         <Tabs.Expander />
       </Tabs>
     )
@@ -214,6 +256,7 @@ export class FileUploader extends Component {
   render() {
     const { fileState, fileDetails } = this.state
     const { elementContent, pageName, projects } = this.props
+    console.log(this.state)
     return (
       <div id='file-upload-element'>
         <div className={'file-upload-element-container' + fileState}>
@@ -243,6 +286,9 @@ export class FileUploader extends Component {
               onCancelPopup={ this.cancelPopup }
               /> :
             null
+        }
+        {
+          this.state.procoreFilePickerOpen ? this.getProcoreFileSelectorPopover() : null
         }
       </div>
     )

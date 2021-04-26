@@ -6,6 +6,7 @@ import projectSagas from './projectSagas'
 import memberSagas from './memberSagas'
 import foundationsSagas from './foundationsSagas'
 import stagePageSagas from './stagePageSagas'
+import procore from './procore'
 
 export default function * root () {
   yield all([
@@ -15,5 +16,6 @@ export default function * root () {
     fork(memberSagas),
     fork(foundationsSagas),
     fork(stagePageSagas),
+    fork(procore),
   ])
 }

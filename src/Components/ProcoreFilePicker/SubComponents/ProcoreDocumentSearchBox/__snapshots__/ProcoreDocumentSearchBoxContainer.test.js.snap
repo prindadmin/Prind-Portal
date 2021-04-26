@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render with given state 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [MockFunction],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <BrowserRouter>
+    <Router
+      history={
+        Object {
+          "action": "POP",
+          "block": [Function],
+          "createHref": [Function],
+          "go": [Function],
+          "goBack": [Function],
+          "goForward": [Function],
+          "length": 1,
+          "listen": [Function],
+          "location": Object {
+            "hash": "",
+            "pathname": "/",
+            "search": "",
+            "state": undefined,
+          },
+          "push": [Function],
+          "replace": [Function],
+        }
+      }
+    >
+      <Connect(ProcoreDocumentSearchBox)>
+        <ProcoreDocumentSearchBox
+          procore={
+            Object {
+              "companyId": "28592",
+              "companyName": "",
+              "error": Object {},
+              "fetching": false,
+              "files": Array [],
+              "folders": Array [],
+              "projectId": "1234",
+              "projectName": "",
+              "searchTerm": "",
+            }
+          }
+          updateSearchTerm={[Function]}
+        >
+          <div
+            className=""
+            id="procore-search-box"
+          >
+            <input
+              className="default"
+              id="search"
+              name="search"
+              onChange={[Function]}
+              placeholder="Search this folder"
+              type="text"
+              value=""
+            />
+          </div>
+        </ProcoreDocumentSearchBox>
+      </Connect(ProcoreDocumentSearchBox)>
+    </Router>
+  </BrowserRouter>
+</Provider>
+`;
