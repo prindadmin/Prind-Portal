@@ -7,8 +7,8 @@ import DownloadBox from '../DownloadBox'
 
 var props;
 /*
-// TODO: Mock the DownloadBox and trigger the return functions
-// TODO: Mock the PickSignerPopover and trigger the return function
+// TODO: FUTURE: Mock the DownloadBox and trigger the return functions
+// TODO: FUTURE: Mock the PickSignerPopover and trigger the return function
 const mockOnDownloadSuccess = jest.fn()
 const mockOnDownloadFailure = jest.fn()
 const mockOnClosePopover = jest.fn()

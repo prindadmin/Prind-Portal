@@ -3,7 +3,7 @@ import * as Dispatchers from './index'
 import { Auth } from 'aws-amplify';
 jest.mock('aws-amplify')
 
-// TODO: Add toHaveBeenCalledWith to all the mocked Auth calls
+// TODO: FUTURE: Add toHaveBeenCalledWith to all the mocked Auth calls
 it('change user password after forgotten', async () => {
   const returnValue = {
       user_name: "test@buildingim.com",
@@ -64,7 +64,7 @@ it('change user password', async () => {
 })
 
 /*
-// TODO: get this working to test the reject
+// TODO: FUTURE: get this working to test the reject
 it('change user password and reject on change password', async () => {
   const returnValueAuthUser = "new session"
   const returnValueChangePassword = "password changed"

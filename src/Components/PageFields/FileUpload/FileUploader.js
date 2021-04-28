@@ -24,7 +24,7 @@ import * as ComponentStates from '../ComponentStates'
 import ProcoreFilePicker from '../../ProcoreFilePicker'
 
 
-// TODO: Refactor to remove blueprintjs
+// TODO: FUTURE: Refactor to remove blueprintjs
 export class FileUploader extends Component {
   static propTypes = {
     elementContent: PropTypes.shape({
@@ -191,10 +191,11 @@ export class FileUploader extends Component {
     )
   }
 
-  // TODO: Implement this
+  // TODO: add a text box field to show the location of the file selected
   uploadTabProcore = () => {
     const { filePrompt, hasChosenFile } = this.state
     const { elementContent } = this.props
+
     return (
       <div id='upload-tab-container'>
         <div className='element-title'>{Strings.TAB_UPLOAD_FILE_HEADING}</div>
@@ -220,10 +221,18 @@ export class FileUploader extends Component {
     )
   }
 
-  // TODO: Implement this
+
   getProcoreFileSelectorPopover = () => {
-    return <ProcoreFilePicker handleClose={this.handleCloseProcoreFilePicker} />
+    return <ProcoreFilePicker onFileSelected={this.fileSelected} handleClose={this.handleCloseProcoreFilePicker} />
   }
+
+
+  // TODO: File selected functionality
+  fileSelected = (doc) => {
+    console.log(doc)
+    this.handleCloseProcoreFilePicker()
+  }
+
 
   handleCloseProcoreFilePicker = () => {
     this.setState({
@@ -252,11 +261,10 @@ export class FileUploader extends Component {
     )
   }
 
-
   render() {
     const { fileState, fileDetails } = this.state
     const { elementContent, pageName, projects } = this.props
-    console.log(this.state)
+    //console.log(this.state)
     return (
       <div id='file-upload-element'>
         <div className={'file-upload-element-container' + fileState}>

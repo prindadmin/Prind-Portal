@@ -18,8 +18,8 @@ import {
 
 import * as Strings from '../../Data/Strings'
 
-// TODO: Page updating doesn't show the loading spinner when refreshing from Git Text
-// TODO: Wait on this page until the project S3 token is available
+// TODO: FUTURE: Page updating doesn't show the loading spinner when refreshing from Git Text
+// TODO: FUTURE: Wait on this page until the project S3 token is available
 
 export class StagePage extends Component {
   static propTypes = {

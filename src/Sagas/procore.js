@@ -8,9 +8,9 @@ import * as Dispatchers from '../Dispatchers/Procore'
 
 export const defaultState = {
   fetching: false,
-  companyId: "28592",
+  companyId: "30140",
   companyName: "",
-  projectId: "1234",
+  projectId: "23292",
   projectName: "",
   folders: [],
   files: [],

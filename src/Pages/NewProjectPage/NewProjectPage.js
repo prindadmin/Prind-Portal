@@ -19,7 +19,7 @@ import * as Endpoints from '../../Data/Endpoints'
 const CreatingProjectPopover = lazy(() => import('../../Components/CreatingProjectPopover'));
 
 // TODO: FUTURE: Add ability to upload thumbnails or pick icon for a project
-// TODO: Refactor component without redux form and blueprintjs
+// TODO: FUTURE: Refactor component without redux form and blueprintjs
 
 export class Page extends Component {
   static propTypes = {

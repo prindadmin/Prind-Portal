@@ -15,7 +15,7 @@ import * as Endpoints from '../../../Data/Endpoints'
 import * as Strings from '../../../Data/Strings'
 import * as ComponentStates from '../../ComponentStates'
 
-// TODO: Test error message
+// TODO: FUTURE: Test error message
 
 class ResetPassword extends Component {
   static propTypes = {

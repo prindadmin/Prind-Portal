@@ -31,6 +31,7 @@
   --prind-palette-color-3: #178CA4;
   --prind-palette-color-4: #8D818C;
   --prind-palette-color-5: #072A40;
+  --prind-palette-color-9: #F5F2FF;
   --max-width-popover: 1200px;
   --standard-border-radius: 15px;
   --standard-padding: 15px;
@@ -47,9 +48,8 @@
 @media (min-width: 1024px) {
   :root {
     --project-selector-grid-columns: 1fr 1fr;
-    --document-table-grid-columns: repeat(6, auto);
+    --document-table-grid-columns: 1fr 3fr auto 1fr;
   }
-
 }
 
 

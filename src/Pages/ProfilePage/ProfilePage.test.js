@@ -167,4 +167,4 @@ it('Profile Page - Should render with failed fetches', () => {
   expect(component).toMatchSnapshot();
 });
 
-// TODO: Simulate a tab change
+// TODO: FUTURE: Simulate a tab change

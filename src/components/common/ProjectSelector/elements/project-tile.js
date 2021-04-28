@@ -5,8 +5,8 @@ import ItemIcon from '../../ItemIcon'
 
 import * as Strings from '../../../../Data/Strings'
 
-// TODO: Add ability to display thumbnails or icon for project
-// TODO: Add styling as per project team member tiles (drop shadow, etc)
+// TODO: FUTURE: Add ability to display thumbnails or icon for project
+// TODO: FUTURE: Add styling as per project team member tiles (drop shadow, etc)
 const ProjectTile = props => {
   const { project, selected, onSelect } = props
   let className = 'site-select-tile'

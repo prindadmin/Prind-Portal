@@ -13,8 +13,8 @@ import {
 } from '@blueprintjs/core'
 */
 
-// TODO: Test the signing up functionality
-// TODO: Add styling to components
+// TODO: FUTURE: Test the signing up functionality
+// TODO: FUTURE: Add styling to components
 
 export class SignUpBox extends Component {
   static propTypes = {

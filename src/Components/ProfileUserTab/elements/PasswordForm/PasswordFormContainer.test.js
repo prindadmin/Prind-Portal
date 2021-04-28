@@ -197,7 +197,7 @@ beforeEach(() => {
 
   const props = {};
 
-  // TODO: Change to mount once sub elements are fixed
+  // TODO: FUTURE: Change to mount once sub elements are fixed
   component = shallow (
     <Suspense fallback={<p>error</p>}>
       <Provider store={store}>

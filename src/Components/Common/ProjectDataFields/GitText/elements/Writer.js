@@ -11,13 +11,13 @@ import * as Strings from '../../../../../Data/Strings'
 import getFileFromS3 from './getFileFromS3'
 import uploadFileToS3 from './uploadFileToS3'
 
-// TODO: Implement styling depending on state
-// TODO: Implement error message displaying
-// TODO: Style save button when disabled
-// TODO: Style text editor when disabled
-// TODO: Fix occasional errors with the S3 token
-// TODO: Store changes so that a failure of upload doesn't lose information
-// TODO: New line (enter) moves the cursor back to the beginning of the box!!!
+// TODO: FUTURE: Implement styling depending on state
+// TODO: FUTURE: Implement error message displaying
+// TODO: FUTURE: Style save button when disabled
+// TODO: FUTURE: Style text editor when disabled
+// TODO: FUTURE: Fix occasional errors with the S3 token
+// TODO: FUTURE: Store changes so that a failure of upload doesn't lose information
+// TODO: FUTURE: New line (enter) moves the cursor back to the beginning of the box!!!
 
 export class TextWriter extends Component {
   static propTypes = {

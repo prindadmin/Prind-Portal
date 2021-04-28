@@ -7,7 +7,7 @@ import {
 
 import * as Strings from '../../../Data/Strings'
 
-// TODO: Replace blueprintjs
+// TODO: FUTURE: Replace blueprintjs
 const ProjectJoinTile = props => {
 
   const { details } = props

@@ -148,8 +148,8 @@ export class Comparer extends Component {
   }
 
 
-  // TODO: Load the latest version in componentDidMount for both old and new
-  // TODO: Add "Please select version" as hidden option to the drop down
+  // TODO: FUTURE: Load the latest version in componentDidMount for both old and new
+  // TODO: FUTURE: Add "Please select version" as hidden option to the drop down
   getVersionSelectSystem = (selectorName) => {
     const { fileVersions } = this.props
     const { oldVersion, newVersion } = this.state

@@ -11,8 +11,8 @@ import DownloadBox from '../DownloadBox'
 
 import * as Strings from '../../../../../Data/Strings'
 
-// TODO: Get Simon to change "uploadedBy" from "None None" to the users email address
-// TODO: Remove blueprintjs
+// TODO: FUTURE: Get Simon to change "uploadedBy" from "None None" to the users email address
+// TODO: FUTURE: Remove blueprintjs
 
 export class CurrentVersion extends Component {
   static propTypes = {

@@ -19,8 +19,8 @@ import * as Strings from '../../Data/Strings'
 import * as Validators from '../../Validators'
 import * as Endpoints from '../../Data/Endpoints'
 
-// TODO: Add ability to upload thumbnails or pick icon for a project
-// TODO: Refactor component without redux form and blueprintjs
+// TODO: FUTURE: Add ability to upload thumbnails or pick icon for a project
+// TODO: FUTURE: Refactor component without redux form and blueprintjs
 
 export class ProjectDetailsPage extends Component {
   static propTypes = {

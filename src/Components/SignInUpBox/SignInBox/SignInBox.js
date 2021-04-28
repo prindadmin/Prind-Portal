@@ -9,7 +9,6 @@ import * as ComponentStates from '../../ComponentStates'
 // Components
 import CanUseWebP from '../../../Functions/CheckIfWebpSupported'
 
-// TODO: FUTURE: Make the "Click here" text change the mouse icon like a real link
 // TODO: FUTURE: Add icons to username and password boxes
 
 export class SignInBox extends Component {

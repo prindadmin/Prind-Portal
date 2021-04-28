@@ -18,7 +18,7 @@ const NoProjectSelected = lazy(() => import('../../Components/Common/NoProjectSe
 const ContactTile = lazy(() => import('../../Components/ContactTile'));
 const AddNewMemberForm = lazy(() => import('../../Components/AddNewTeamMember'));
 
-// TODO: Refactor component without redux form and blueprintjs
+// TODO: FUTURE: Refactor component without redux form and blueprintjs
 
 export class ProjectTeamPage extends Component {
   static propTypes = {

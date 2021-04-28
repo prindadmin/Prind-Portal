@@ -81,7 +81,7 @@ export class UserDetailsPopOver extends Component {
 
   // Get the code to display the user's accreditations
   getAccreditationsPresentation = () => {
-    // TODO: Implement fetchError from state
+    // TODO: FUTURE: Implement fetchError from state
 
     const { accreditations } = this.props.members.currentMember
 

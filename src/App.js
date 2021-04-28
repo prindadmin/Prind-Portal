@@ -30,19 +30,19 @@ const ProcoreAuthPage = lazy(() => import('./Pages/ProcoreAuthPage'));
 /* Other pages */
 const LoggedInContent = lazy(() => import('./Pages/LoggedInContent'));
 
-// TODO: make mobile version pages the right height (1x1 content is way longer than it needs to be)
-// TODO: make the page menu float over other elements and not be 100% width in mobile size
+// TODO: FUTURE: make mobile version pages the right height (1x1 content is way longer than it needs to be)
+// TODO: FUTURE: make the page menu float over other elements and not be 100% width in mobile size
 // TODO: Add error handling when a page cannot load
-// TODO: Strip out axios dependency (not needed as a root dependency)
-// TODO: Strip out bootstrap
-// TODO: Strip out blueprint (if possible; date picker is important)
-// TODO: Strip out node-sass (why is this used?)
-// TODO: Strip out typescript???
-// TODO: Migrate to CSS Grid from bootstrap where possible (no rows and cols in classnames)
-// TODO: Simplify CSS by using modules
-// TODO: Remove the Long Text box once the Git Text box is complete
-// TODO: Make page content in Redux follow the available fields for a projectType
-// TODO: Put a dev password on the front of the dev portal
+// TODO: FUTURE: Strip out axios dependency (not needed as a root dependency)
+// TODO: FUTURE: Strip out bootstrap
+// TODO: FUTURE: Strip out blueprint (if possible; date picker is important)
+// TODO: FUTURE: Strip out node-sass (why is this used?)
+// TODO: FUTURE: Strip out typescript???
+// TODO: FUTURE: Migrate to CSS Grid from bootstrap where possible (no rows and cols in classnames)
+// TODO: FUTURE: Simplify CSS by using modules
+// TODO: FUTURE: Remove the Long Text box once the Git Text box is complete
+// TODO: FUTURE: Make page content in Redux follow the available fields for a projectType
+// TODO: FUTURE: Put a dev password on the front of the dev portal
 
 
 

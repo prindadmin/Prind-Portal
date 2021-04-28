@@ -106,7 +106,7 @@ it('should render', () => {
   expect(component.toJSON()).toMatchSnapshot();
 });
 
-// TODO: Fix this test
+// TODO: FUTURE: Fix this test
 /*
 it('should call dispatcher for addMember', () => {
   const expectedMemberValues = {

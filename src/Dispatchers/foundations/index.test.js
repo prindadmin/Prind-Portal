@@ -64,7 +64,7 @@ it('Foundations Dispatchers - SelfSignFile - Server Error', async () => {
 })
 
 /*
-// TODO: Create connection failure tests
+// TODO: FUTURE: Create connection failure tests
 it('Foundations Dispatchers - SelfSignFile - Connection Failure', async () => {
   Auth.currentSession.mockResolvedValue(authReturn)
   API.post.mockResolvedValue(connectionFailureReturn)

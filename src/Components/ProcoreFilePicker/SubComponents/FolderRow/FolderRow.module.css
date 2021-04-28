@@ -1,0 +1,30 @@
+
+.field {
+  display: flex;
+  align-items: center;
+  padding: calc(var(--standard-padding) /2);
+}
+
+.fieldCenter {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.folderNameHolder {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.folderNameHolder:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.folderNameHolderImg {
+  height: 1.5rem;
+  margin-right: 1rem;
+}

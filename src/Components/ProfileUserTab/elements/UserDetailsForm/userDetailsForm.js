@@ -19,7 +19,7 @@ import * as FormInputs from '../../../Common/formInputs'
 
 const defaultAvatar = `images/default-avatar.png`
 
-// TODO: Rewrite without blueprintjs
+// TODO: FUTURE: Rewrite without blueprintjs
 // TODO: URGENT: Fix avatar upload
 export class UserDetailsForm extends Component {
   static propTypes = {

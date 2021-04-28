@@ -14,7 +14,7 @@ import * as Validators from '../../../../Validators'
 
 import * as FormInputs from '../../../Common/formInputs'
 
-// TODO: Rewrite without blueprintjs
+// TODO: FUTURE: Rewrite without blueprintjs
 export class PasswordForm extends Component {
   static propTypes = {
     user: PropTypes.shape({

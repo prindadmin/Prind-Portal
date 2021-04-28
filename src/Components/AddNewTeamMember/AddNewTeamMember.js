@@ -7,7 +7,7 @@ import Spinner from '../Common/LoadingSpinnerCSS'
 
 import * as ComponentStates from './ComponentStates'
 
-// TODO: Improve look of select box
+// TODO: FUTURE: Improve look of select box
 
 export class AddNewTeamMember extends Component {
   static propTypes = {

@@ -5,8 +5,8 @@ import API from '@aws-amplify/api';
 jest.mock('@aws-amplify/api')
 jest.mock('aws-amplify')
 
-// TODO: Add toHaveBeenCalledWith to all the mocked Auth calls
-// TODO: Test all the error catchers as well
+// TODO: FUTURE: Add toHaveBeenCalledWith to all the mocked Auth calls
+// TODO: FUTURE: Test all the error catchers as well
 
 const authReturn = {
   idToken: {

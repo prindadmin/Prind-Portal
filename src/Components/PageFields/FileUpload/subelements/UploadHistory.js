@@ -7,7 +7,7 @@ import Spinner from '../../../Common/LoadingSpinnerCSS'
 import * as Strings from '../../../../Data/Strings'
 
 // TODO: Improve structuring of propTypes to ensure errors are captured
-// TODO: Do something with error text state string
+// TODO: FUTURE: Do something with error text state string
 export class UploadHistory extends Component {
   static propTypes = {
     details: PropTypes.arrayOf(

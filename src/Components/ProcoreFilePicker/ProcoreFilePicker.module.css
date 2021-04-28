@@ -4,6 +4,7 @@
   grid-gap: var(--standard-margin);
   text-align: left;
   margin: auto;
+  width: 100%;
 }
 
 @media (min-width: 1024px) {
@@ -24,4 +25,20 @@
   position: absolute;
   top: 1em;
   right: 1em;
+}
+
+.heading {
+  color: var(--palette-color-8);
+  font-weight: bold;
+  margin-bottom: var(--standard-margin);
+  padding: 0 calc(var(--standard-padding) /2);
+}
+
+.headingCenter {
+  color: var(--palette-color-8);
+  font-weight: bold;
+  margin-bottom: var(--standard-margin);
+  padding: 0 calc(var(--standard-padding) /2);
+  margin-left: auto;
+  margin-right: auto;
 }

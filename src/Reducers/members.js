@@ -53,7 +53,7 @@ export const getRoles = ( projectID, resolve, reject ) => {
   }
 }
 
-// TODO: Replace with real fetch function
+// TODO: FUTURE: Replace with real fetch function
 export const tempGetUserAccreditations = ( username, resolve, reject ) => {
 
   if (resolve !== null) {

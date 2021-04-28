@@ -9,8 +9,8 @@ import EmailConfirming from '../Common/ProjectLoading'
 
 import * as Strings from '../../Data/Strings'
 
-// TODO: Get the confirmation page to log the user in rather than navigate to the login page
-// TODO: Remove blueprintjs
+// TODO: FUTURE: Get the confirmation page to log the user in rather than navigate to the login page
+// TODO: FUTURE: Remove blueprintjs
 
 class ConfirmEmailPage extends Component {
   static propTypes = {

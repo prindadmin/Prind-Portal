@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import classes from './FolderRow.module.css'
 
 export class FolderRow extends Component {
   static propTypes = {
@@ -44,8 +45,8 @@ export class FolderRow extends Component {
 
   getNameDiv = (name) => {
     return (
-      <div id='folder-name-holder' onClick={this.onFolderClick}>
-        <img src={this.folderIcon()} alt='' />
+      <div id='folder-name-holder' className={classes.folderNameHolder} onClick={this.onFolderClick}>
+        <img className={classes.folderNameHolderImg} src={this.folderIcon()} alt='' />
         { name }
       </div>
     )
@@ -54,7 +55,7 @@ export class FolderRow extends Component {
   render() {
     const { index, folder } = this.props
     const isEven = index % 2 === 0
-    const style = isEven ? { backgroundColor: "var(--palette-color-9)" } : {}
+    const style = isEven ? { backgroundColor: "var(--prind-palette-color-9)" } : {}
 
     // If this folder isn't accessible, don't show it
     if(folder.is_deleted || folder.is_recycle_bin) {
@@ -63,12 +64,10 @@ export class FolderRow extends Component {
 
     return (
       <React.Fragment key={`react-fragment-folder-${index}`}>
-        <div key={`folder-${index}-name`}                           className='field' style={style}>{this.getNameDiv(folder.name)}</div>
-        <div key={`folder-${index}-document-description`}           className='field center' style={style}></div>
-        <div key={`folder-${index}-document-versions`}              className='field center' style={style}></div>
-        <div key={`folder-${index}-document-anchor-button`}         className='field center' style={style}></div>
-        <div key={`folder-${index}-document-sign-button`}           className='field center' style={style}></div>
-        <div key={`folder-${index}-document-view-versions-button`}  className='field center' style={style}></div>
+        <div key={`folder-${index}-name`}                           className={classes.field} style={style}>{this.getNameDiv(folder.name)}</div>
+        <div key={`folder-${index}-document-description`}           className={classes.fieldCenter} style={style}></div>
+        <div key={`folder-${index}-document-download-button`}       className={classes.fieldCenter} style={style}></div>
+        <div key={`folder-${index}-document-select-button`}         className={classes.fieldCenter} style={style}></div>
       </React.Fragment>
     )
   }

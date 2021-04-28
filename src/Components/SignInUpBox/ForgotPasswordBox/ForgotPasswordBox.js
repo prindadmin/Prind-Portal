@@ -61,7 +61,7 @@ export class ForgotPasswordBox extends Component {
     })
   }
 
-  // TODO: Can we fake this test to show with and without webp version
+  // TODO: FUTURE: Can we fake this test to show with and without webp version
   getLogo = () => {
     const logoLocation = CanUseWebP() ? "/images/logos/prind-tech-logo.webp" : "/images/logos/prind-tech-logo.png"
     return (

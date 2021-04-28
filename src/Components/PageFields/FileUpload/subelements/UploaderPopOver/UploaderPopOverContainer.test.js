@@ -77,4 +77,4 @@ it('UploaderPopOverContainer - should render', () => {
   expect(component).toMatchSnapshot();
 });
 
-// TODO: Write test for when upload is successful
+// TODO: FUTURE: Write test for when upload is successful

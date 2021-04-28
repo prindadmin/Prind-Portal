@@ -1,7 +1,7 @@
 
 import { call, put, takeLatest } from 'redux-saga/effects'
 
-// TODO: Implement resolver and rejector callbacks
+// TODO: FUTURE: Implement resolver and rejector callbacks
 
 import * as FoundationsDispatchers from '../Dispatchers/foundations'
 
@@ -18,7 +18,7 @@ export function * init (action) {
   })
 }
 
-// TODO: Add resolve and reject function handling to this saga and reducer
+// TODO: FUTURE: Add resolve and reject function handling to this saga and reducer
 export function * selfSignFile (action) {
   const { projectID, pageName, fieldID } = action.payload
   try {

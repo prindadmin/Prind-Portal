@@ -4,7 +4,7 @@ import * as Actions from '../Actions'
 import * as States from '../States'
 import * as Strings from '../Data/Strings'
 
-// TODO: Remove this once accreditations is working
+// TODO: FUTURE: Remove this once accreditations is working
 import UserAccreditations from '../Components/Temp/UserAccreditations'
 
 const defaultChosenProject = {

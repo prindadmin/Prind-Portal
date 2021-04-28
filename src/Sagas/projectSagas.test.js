@@ -8,7 +8,7 @@ import * as States from '../States'
 import * as Strings from '../Data/Strings'
 import * as Dispatchers from '../Dispatchers/projects'
 
-// TODO: Test all the rejects from the Sagas
+// TODO: FUTURE: Test all the rejects from the Sagas
 
 const defaultState = {
   accessibleProjects: {

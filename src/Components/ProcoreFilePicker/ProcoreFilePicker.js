@@ -13,7 +13,7 @@ const FullScreenTile = lazy(() => import('../FullScreenTile'));
 const FileRow = lazy(() => import('./SubComponents/FileRow'));
 const FolderRow = lazy(() => import('./SubComponents/FolderRow'));
 
-// TODO: Create this file picker
+
 // TODO: Create the breadcrumbs
 export class ProcoreFilePicker extends Component {
   static propTypes = {
@@ -55,6 +55,7 @@ export class ProcoreFilePicker extends Component {
       ).isRequired,
     }).isRequired,
     getProjectFilesAndFolders: PropTypes.func.isRequired,
+    onFileSelected: PropTypes.func.isRequired,
     handleClose: PropTypes.func.isRequired
   }
 
@@ -159,7 +160,7 @@ export class ProcoreFilePicker extends Component {
 
   mapFilesToDivsDesktop = () => {
     const mappedDocuments = this.getFilteredFiles().map((doc, index) => {
-      return <FileRow key={index} index={index} doc={doc} />
+      return <FileRow key={index} index={index} doc={doc} onFileSelected={this.fileSelected} />
     })
     return mappedDocuments
   }
@@ -173,15 +174,19 @@ export class ProcoreFilePicker extends Component {
     return mappedDocuments
   }
 
+
+  fileSelected = (doc) => {
+    this.props.onFileSelected(doc)
+  }
+
+
   getPopulatedTableDesktopResolution = () => {
     return (
       <React.Fragment key={'react-fragment'}>
-        <div id='document-name' className='heading'>{Strings.PROCORE_DOCUMENT_NAME}</div>
-        <div id='document-description' className='heading'>{Strings.PROCORE_DOCUMENT_DESCRIPTION}</div>
-        <div id='document-versions' className='heading'>{Strings.PROCORE_DOCUMENT_NUMBER_OF_VERSIONS}</div>
-        <div id='document-anchor-button' className='heading center'>{Strings.PROCORE_DOCUMENT_ANCHOR_LATEST}</div>
-        <div id='document-sign-button' className='heading center'>{Strings.PROCORE_DOCUMENT_SIGN_LATEST}</div>
-        <div id='document-sign-button' className='heading center'>{Strings.PROCORE_DOCUMENT_VIEW_VERSIONS}</div>
+        <div id='document-name' className={classes.heading}>{Strings.PROCORE_DOCUMENT_NAME}</div>
+        <div id='document-description' className={classes.heading}>{Strings.PROCORE_DOCUMENT_DESCRIPTION}</div>
+        <div id='document-download-button' className={classes.headingCenter}>{Strings.PROCORE_DOCUMENT_DOWNLOAD}</div>
+        <div id='document-select-button' className={classes.headingCenter}>{Strings.PROCORE_DOCUMENT_SELECT}</div>
         { this.mapFoldersToDivsDesktop() }
         { this.mapFilesToDivsDesktop() }
       </React.Fragment>

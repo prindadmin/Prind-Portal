@@ -49,8 +49,8 @@ it('Should render', () => {
 });
 
 
-// TODO: Currently has spinner rather than data; needs to respond to project request (getAccessibleProjects)
-// TODO: Give this function a project list to render
+// TODO: FUTURE: Currently has spinner rather than data; needs to respond to project request (getAccessibleProjects)
+// TODO: FUTURE: Give this function a project list to render
 it('Should render with two projects from creator', () => {
   const fetchProjectListFunc = jest.fn((projectId, resolve, reject) => {
     resolve()

@@ -141,7 +141,7 @@ export class LoggedInContent extends Component {
   getProjectDataForSpecificStage = () => {
     const pageName = this.getPageName()
     const projectId = this.getURLProjectId()
-    // TODO: Move this to the stage page template
+    // TODO: FUTURE: Move this to the stage page template
     //this.props.requestS3ProjectFileUploadToken(projectId, pageName)
   }
 
