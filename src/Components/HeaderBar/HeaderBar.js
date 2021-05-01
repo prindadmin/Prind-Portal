@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
+import classes from './HeaderBar.module.css'
 
 import ProjectSelector from '../Common/ProjectSelector';
 import UserMenu from '../Common/UserMenu'
@@ -37,7 +38,6 @@ export class HeaderBar extends Component {
   }
 
   getMenu = () => {
-
     return (
       <div className='menu-container'>
         <UserMenu />
@@ -45,15 +45,18 @@ export class HeaderBar extends Component {
     )
   }
 
+  getLogo = () => {
+    return <img className={classes.logoImg} src="/images/logos/prind-tech-logo-white-text.svg" />
+  }
 
   render() {
     const { openProjectSelector } = this.props
     return (
-      <React.Fragment>
+      <Fragment>
         <div id='header-bar' className='full-width row'>
           <div className='header-content row'>
             {
-              <ProjectSelector openProjectSelector={openProjectSelector} />
+              process.env.REACT_APP_IS_PROCORE !== "True" ? <ProjectSelector openProjectSelector={openProjectSelector} /> : this.getLogo()
             }
             <div className='nav-links'>
               {
@@ -65,7 +68,7 @@ export class HeaderBar extends Component {
         {
           <NoFoundationsIDBanner />
         }
-      </React.Fragment>
+      </Fragment>
     )
   }
 }

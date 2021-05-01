@@ -15,6 +15,10 @@ import * as Strings from '../../../../../Data/Strings'
 const windowCloseDelay = 1500
 
 // TODO: After success, this should change the page that called it to the loading spinner, not just sit there
+// TODO: Different actions if this is a procore integration
+
+// Send ID to the server
+//this.props.uploadProcoreFile(latestVersion, resolve, reject)
 
 export class UploaderPopOver extends Component {
   static propTypes = {

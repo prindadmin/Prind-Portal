@@ -21,18 +21,25 @@ export class FolderRow extends Component {
     }).isRequired,
     location: PropTypes.shape({
       pathname: PropTypes.string.isRequired
-    }).isRequired
+    }).isRequired,
+    procore: PropTypes.shape({
+      currentFolder: PropTypes.number,
+      folderHistory: PropTypes.shape({
+        chain: PropTypes.arrayOf(PropTypes.number).isRequired
+      }).isRequired,
+    }).isRequired,
+    updateFolderHistory: PropTypes.func.isRequired,
+    updateCurrentFolder: PropTypes.func.isRequired
   }
 
   onFolderClick = () => {
     console.log("folder clicked with id:", this.props.folder.id)
-    console.log(this.props.history.location)
-    var historyState = this.props.history.location.state
-    if (!historyState) {
-      historyState = {}
-    }
-    historyState[this.props.folder.id] = this.props.folder.name
-    this.props.history.push(`${this.props.location.pathname}/${this.props.folder.id}`, historyState)
+    var folderHistory = this.props.procore.folderHistory
+    folderHistory[this.props.folder.id] = this.props.folder.name
+    const newChain = folderHistory.chain.concat(this.props.folder.id)
+    folderHistory.chain = newChain
+    this.props.updateFolderHistory(folderHistory)
+    this.props.updateCurrentFolder(this.props.folder.id)
   }
 
   // Replace folder icon depending on content

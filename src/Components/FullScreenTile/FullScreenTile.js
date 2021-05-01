@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import classes from './FullScreenTile.module.css'
 import * as Strings from '../../Data/Strings'
 
 export class FullScreenTile extends Component {
@@ -13,8 +14,8 @@ export class FullScreenTile extends Component {
   render() {
     const text = this.props.text === undefined ? Strings.DEFAULT_FULL_SCREEN_TILE : this.props.text
     return (
-      <div id='full-screen-tile' className='full-height full-width center-content' style={{ minHeight: "50vh" }}>
-        <img alt='' src={`/images/icons/${this.props.icon}.svg`}/>
+      <div id='full-screen-tile' className={classes.fullScreenTile} style={{ minHeight: "50vh" }}>
+        <img alt='' className={classes.icon} src={`/images/icons/${this.props.icon}.svg`}/>
         { text }
         { this.props.children ? this.props.children : null }
       </div>

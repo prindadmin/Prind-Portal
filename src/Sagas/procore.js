@@ -12,6 +12,10 @@ export const defaultState = {
   companyName: "",
   projectId: "23292",
   projectName: "",
+  currentFolder: null,
+  folderHistory: {
+    chain: []
+  },
   folders: [],
   files: [],
   error: {},

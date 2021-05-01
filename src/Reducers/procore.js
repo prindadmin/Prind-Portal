@@ -26,6 +26,24 @@ export const getProjectFilesAndFolders = ( payload, resolve, reject ) => {
   }
 }
 
+export const updateCurrentFolder = ( folderNumber ) => {
+  return {
+    type: Actions.PROCORE_SET_STATE,
+    payload: {
+      currentFolder: folderNumber
+    }
+  }
+}
+
+export const updateFolderHistory = ( folders ) => {
+  return {
+    type: Actions.PROCORE_SET_STATE,
+    payload: {
+      folderHistory: folders
+    }
+  }
+}
+
 export const updateSearchTerm = ( searchTerm ) => {
   return {
     type: Actions.PROCORE_SET_STATE,

@@ -9,17 +9,20 @@ import ErrorBoundary from '../ErrorBoundary'
 import * as Strings from '../../Data/Strings'
 import * as ComponentStates from '../ComponentStates'
 
+// Components
+import ProcoreBreadcrumbs from '../ProcoreBreadcrumbs'
 const FullScreenTile = lazy(() => import('../FullScreenTile'));
 const FileRow = lazy(() => import('./SubComponents/FileRow'));
 const FolderRow = lazy(() => import('./SubComponents/FolderRow'));
 
 
-// TODO: Create the breadcrumbs
 export class ProcoreFilePicker extends Component {
   static propTypes = {
     procore: PropTypes.shape({
       companyId: PropTypes.string.isRequired,
       projectId: PropTypes.string.isRequired,
+      currentFolder: PropTypes.number,
+      folderHistory: PropTypes.shape().isRequired,
       searchTerm: PropTypes.string.isRequired,
       folders: PropTypes.arrayOf(
         PropTypes.shape({
@@ -81,7 +84,7 @@ export class ProcoreFilePicker extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.location.pathname !== prevProps.location.pathname) {
+    if (this.props.procore.currentFolder !== prevProps.procore.currentFolder) {
       this.updateSagas()
     }
   }
@@ -92,9 +95,8 @@ export class ProcoreFilePicker extends Component {
       companyId,
       projectId
     }
-    const lastElement = this.props.location.pathname.split("/").slice(-1)[0]
-    if (lastElement !== "documents") {
-      payload.folderId = lastElement
+    if (this.props.procore.currentFolder) {
+      payload.folderId = this.props.procore.currentFolder
     }
     this.props.getProjectFilesAndFolders(payload, this.onResolveGetProjectFiles, this.onRejectGetProjectFiles)
     this.props.updateSearchTerm("")
@@ -235,7 +237,14 @@ export class ProcoreFilePicker extends Component {
             this.state.state === ComponentStates.ERROR_WHEN_LOADING ? this.getErrorMessage() : null
           }
           {
-            this.state.state === ComponentStates.QUIESCENT ? <ErrorBoundary onRetry={this.updateSagas}>{this.getPopulatedTable()}</ErrorBoundary> : null
+            this.state.state === ComponentStates.QUIESCENT ?
+              <ErrorBoundary onRetry={this.updateSagas}>
+                <ProcoreBreadcrumbs />
+                <div className={classes.navTable}>
+                  { this.getPopulatedTable() }
+                </div>
+              </ErrorBoundary> :
+              null
           }
         </div>
       </Popover>

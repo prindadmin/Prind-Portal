@@ -191,7 +191,7 @@ export class FileUploader extends Component {
     )
   }
 
-  // TODO: add a text box field to show the location of the file selected
+
   uploadTabProcore = () => {
     const { filePrompt, hasChosenFile } = this.state
     const { elementContent } = this.props
@@ -200,23 +200,36 @@ export class FileUploader extends Component {
       <div id='upload-tab-container'>
         <div className='element-title'>{Strings.TAB_UPLOAD_FILE_HEADING}</div>
 
-        <input
-          id="procore-file-picker-button"
-          className="button"
-          type="submit"
-          onClick={(e) => this.setState({ procoreFilePickerOpen: true })}
-          value={Strings.BUTTON_SELECT_FILE}
-        />
+        <div className={classes.uploadTabContainer} >
+          {
+            this.state.fileDetails.prostore_file !== undefined ?
+            <input
+              type="text"
+              disabled={true}
+              value={this.state.fileDetails.prostore_file.filename}
+              /> :
+              null
+          }
 
-        <input
-          id="upload-button"
-          className="button"
-          type="submit"
-          onClick={(e) => this.uploadFile(e)}
-          disabled={!hasChosenFile}
-          value={Strings.BUTTON_UPLOAD_FILE}
-        />
+          <div className={classes.uploadTabButtonRow} >
+            <input
+              id="procore-file-picker-button"
+              className="button"
+              type="submit"
+              onClick={(e) => this.setState({ procoreFilePickerOpen: true })}
+              value={Strings.BUTTON_SELECT_FILE}
+            />
 
+            <input
+              id="upload-button"
+              className="button"
+              type="submit"
+              onClick={(e) => this.uploadFile(e)}
+              disabled={!hasChosenFile}
+              value={Strings.BUTTON_UPLOAD_FILE}
+            />
+          </div>
+        </div>
       </div>
     )
   }
@@ -226,10 +239,25 @@ export class FileUploader extends Component {
     return <ProcoreFilePicker onFileSelected={this.fileSelected} handleClose={this.handleCloseProcoreFilePicker} />
   }
 
+  getLatestFileVersion = (doc) => {
+    // Find if of the latest version of the file uploaded
+    const latestVersion = doc.file_versions.reduce(function(prev, current) {
+      return (Date.parse(prev.created_at) > Date.parse(current.created_at)) ? prev : current
+    })
+    return latestVersion
+  }
 
-  // TODO: File selected functionality
+
   fileSelected = (doc) => {
     console.log(doc)
+    // Get latest version of the file
+    const latestVersion = this.getLatestFileVersion(doc)
+    // Save the latest version
+    this.setState({
+      fileDetails: latestVersion,
+      hasChosenFile: true
+    })
+    // Close the File picker
     this.handleCloseProcoreFilePicker()
   }
 

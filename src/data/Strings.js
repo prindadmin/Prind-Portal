@@ -147,6 +147,8 @@ export const ERROR_ADDING_MEMBERS_TO_PROJECT = "There was an error adding member
 export const ERROR_REMOVING_MEMBERS_FROM_PROJECT = "There was an error removing a member from the project, please try again.  If the problem persists, please contact technical support."
 export const ERROR_DELETING_PROJECT = "There was an error deleting the project, please try again.  If the problem persists, please contact technical support."
 
+// Team Members Page
+
 export const MEMBERS_DETAILS = "Member Details"
 export const MEMBERS_FIRST_NAME = "First Name"
 export const MEMBERS_LAST_NAME = "Surname"
@@ -162,6 +164,7 @@ export const MEMBERS_UPLOAD_DIFFERENT_AVATAR = "Upload a different photo..."
 export const MEMBERS_FOUNDATIONS_ID = "Foundations ID"
 export const MEMBERS_FOUNDATIONS_ID_NOT_FOUND = "No Foundations ID for this Email"
 export const BUTTON_REMOVE_MEMBER = "Remove From Project"
+export const FULL_SCREEN_FAILED_FETCHING_TEAM_MEMBERS = "Failed when updating team member list"
 
 export const USER_DETAILS_LOADING = "Fetching details, please wait..."
 

@@ -17,6 +17,7 @@ import * as PageStates from '../PageStates'
 const NoProjectSelected = lazy(() => import('../../Components/Common/NoProjectSelected'));
 const ContactTile = lazy(() => import('../../Components/ContactTile'));
 const AddNewMemberForm = lazy(() => import('../../Components/AddNewTeamMember'));
+const FullScreenTile = lazy(() => import('../../Components/FullScreenTile'));
 
 // TODO: FUTURE: Refactor component without redux form and blueprintjs
 
@@ -217,17 +218,19 @@ export class ProjectTeamPage extends Component {
       onCancelAddMember={this.closeAddMemberForm} />
   }
 
-  // TODO: code this
   getFailedTeamMemberFetch = () => {
     return (
-      <p>failed to fetch team members</p>
+      <FullScreenTile
+        text={Strings.FULL_SCREEN_FAILED_FETCHING_TEAM_MEMBERS}
+        icon='times-circle' />
     )
   }
 
-  // TODO: code this
   getFailedTeamMemberAdd = () => {
     return (
-      <p>failed to fetch team members</p>
+      <FullScreenTile
+        text={Strings.FULL_SCREEN_FAILED_FETCHING_TEAM_MEMBERS}
+        icon='times-circle' />
     )
   }
 
