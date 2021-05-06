@@ -16,7 +16,7 @@ export class ProfileHistoryTab extends Component {
       history: PropTypes.shape({
         documentVersions: PropTypes.arrayOf(
           PropTypes.shape({
-            type: PropTypes.string.isRequired,
+            type: PropTypes.string,
             projectName: PropTypes.string.isRequired,
             dateTime: PropTypes.string,
             signedAt: PropTypes.string,
@@ -25,14 +25,14 @@ export class ProfileHistoryTab extends Component {
         projects: PropTypes.shape({
           projectCreator: PropTypes.arrayOf(
             PropTypes.shape({
-              type: PropTypes.string.isRequired,
+              type: PropTypes.string,
               projectName: PropTypes.string.isRequired,
               dateTime: PropTypes.string.isRequired
             })
           ).isRequired,
           projectRole: PropTypes.arrayOf(
             PropTypes.shape({
-              type: PropTypes.string.isRequired,
+              type: PropTypes.string,
               projectName: PropTypes.string.isRequired,
               dateTime: PropTypes.string.isRequired
             })
@@ -40,7 +40,7 @@ export class ProfileHistoryTab extends Component {
         }),
         signedDocuments: PropTypes.arrayOf(
           PropTypes.shape({
-            type: PropTypes.string.isRequired,
+            type: PropTypes.string,
             filename: PropTypes.string.isRequired,
             projectName: PropTypes.string.isRequired,
             signedAt: PropTypes.string,
@@ -126,7 +126,6 @@ export class ProfileHistoryTab extends Component {
 
 
   render() {
-
     const orderedHistory = this.orderHistoryChronologically()
 
     return(

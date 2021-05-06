@@ -1,15 +1,16 @@
 import React, { Component, lazy, Suspense } from 'react'
 import PropTypes from 'prop-types'
 
-import ProjectLoading from '../../Components/Common/ProjectLoading'
-
-import * as Strings from '../../Data/Strings'
-import PAGENAMES from '../../Data/pageNames'
-
 // Data
+import PAGENAMES from '../../Data/pageNames'
+import * as Strings from '../../Data/Strings'
 import * as PageStates from '../PageStates'
+import * as Endpoints from '../../Data/Endpoints'
+
+
 
 // Components
+import ProjectLoading from '../../Components/Common/ProjectLoading'
 import ErrorBoundary from '../../Components/ErrorBoundary'
 const HeaderBar = lazy(() => import('../../Components/HeaderBar'));
 const SideBar = lazy(() => import('../../Components/SideBar'));
@@ -48,6 +49,7 @@ export class LoggedInContent extends Component {
     saveProjectID: PropTypes.func.isRequired,
     getProjectMembers: PropTypes.func.isRequired,
     resetSite: PropTypes.func.isRequired,
+    checkServerAccessToProcore: PropTypes.func.isRequired
   }
 
   constructor() {
@@ -61,7 +63,23 @@ export class LoggedInContent extends Component {
   }
 
   componentDidMount() {
-    const { projects } = this.props
+    // Set up the listener for the screen width so the right components can be shown
+    window.addEventListener('resize', this.updateWindowDimensions);
+    this.updateWindowDimensions();
+    // if this is a Procore integration, load as Procore
+    if (process.env.REACT_APP_IS_PROCORE === "True") {
+      this.procoreMount()
+      return;
+    }
+    // Load as web portal
+    this.webPortalMount()
+  }
+
+  procoreMount = () => {
+    this.props.checkServerAccessToProcore(this.onServerHasAccess, this.onServerDoesNotHaveAccess)
+  }
+
+  webPortalMount = () => {
     const projectName = this.getURLProjectId()
     const pageName = this.getPageName()
     // If a project has been linked to directly then fetch the common project data
@@ -72,11 +90,7 @@ export class LoggedInContent extends Component {
     if (projectName && !PAGENAMES.CommonPages.includes(pageName)) {
       this.getProjectDataForSpecificStage()
     }
-    // Set up the listener for the screen width so the right components can be shown
-    window.addEventListener('resize', this.updateWindowDimensions);
-    this.updateWindowDimensions();
   }
-
 
   // Removes the screen size listener when component is removed
   componentWillUnmount() {
@@ -130,12 +144,11 @@ export class LoggedInContent extends Component {
   }
 
   onServerDoesNotHaveAccess = () => {
-    //console.log("Redirect to Procore Auth Service to be coded")
     this.setState({
       state: PageStates.QUIESCENT
     })
-    const procoreURL = process.env.REACT_APP_PROCORE_AUTH_URL.replace("<CLIENT_ID>", process.env.REACT_APP_PROCORE_CLIENT_ID).replace("<REDIRECT_URI>", process.env.REACT_APP_PROCORE_REDIRECT_URL)
-    window.open(procoreURL,"_self")
+    // Push the page that will open the auth window
+    this.props.history.push(Endpoints.PROCOREAUTHSENDPAGE)
   }
 
   getProjectDataForSpecificStage = () => {

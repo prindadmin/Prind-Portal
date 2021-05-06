@@ -23,3 +23,5 @@ export const PROFILEPAGE = '/profile'
 export const FOUNDATIONSPAGE = '/foundations'
 
 export const PROCOREAUTHPAGE = "/procore-auth"
+export const PROCOREAUTHRECEIVEPAGE = "/procore-auth"
+export const PROCOREAUTHSENDPAGE = "/procore-auth-send"

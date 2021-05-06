@@ -1,19 +1,27 @@
 
 import { call, put, takeLatest } from 'redux-saga/effects'
 import * as Actions from '../Actions'
-
+import * as Endpoints from '../Data/Endpoints'
 import * as Dispatchers from '../Dispatchers/user'
 
-
-let defaultState = {
+export const defaultState = {
   fetching: false,
   details: {},
-  history: {},
+  history: {
+    documentVersions: []
+  },
   projectInvitations: [],
   signatureRequests: [],
   projectS3Token: {},
   userS3Token: {},
-  error: undefined
+  error: undefined,
+  currentRoute: Endpoints.DEFAULTLOGGEDINPAGE,
+  currentRouteObject: {
+    hash: "",
+    pathname: Endpoints.DEFAULTLOGGEDINPAGE,
+    search: "",
+    state: undefined
+  }
 }
 
 export function * init (action) {
@@ -330,6 +338,77 @@ export function * getHistory (action) {
   }
 }
 
+export function * authoriseWithProcoreServer (action) {
+  try {
+    // Pre-fetch update to store
+    yield put({
+      type: Actions.USER_SET_STATE,
+      payload: {
+        fetching: true,
+      }
+    })
+    yield call(Dispatchers.authoriseWithProcoreServer, action.payload.parameters)
+    // Post-fetch update to store
+    yield put({
+      type: Actions.USER_SET_STATE,
+      payload: {
+        fetching: false,
+      }
+    })
+    if (action.payload.resolve !== undefined) {
+      action.payload.resolve()
+    }
+  }
+  catch (error) {
+    //console.error(error)
+    yield put({
+      type: Actions.USER_SET_STATE,
+        payload: {
+          fetching: false,
+          error,
+        }
+    })
+    if (action.payload.reject !== undefined) {
+      action.payload.reject()
+    }
+  }
+}
+
+export function * checkServerAccessToProcore (action) {
+  try {
+    // Pre-fetch update to store
+    yield put({
+      type: Actions.USER_SET_STATE,
+      payload: {
+        fetching: true,
+      }
+    })
+    yield call(Dispatchers.checkServerAccessToProcore)
+    // Post-fetch update to store
+    yield put({
+      type: Actions.USER_SET_STATE,
+      payload: {
+        fetching: false,
+      }
+    })
+    if (action.payload.resolve !== undefined) {
+      action.payload.resolve()
+    }
+  }
+  catch (error) {
+    yield put({
+      type: Actions.USER_SET_STATE,
+        payload: {
+          fetching: false,
+          error,
+        }
+    })
+    if (action.payload.reject !== undefined) {
+      action.payload.reject()
+    }
+  }
+}
+
 
 
 export default function * Sagas () {
@@ -342,4 +421,6 @@ export default function * Sagas () {
   yield takeLatest(Actions.USER_GET_PROJECT_SIGNATURES_REQUESTED, getSignatureRequests)
   yield takeLatest(Actions.USER_PROJECT_SIGNATURE_SEND_RESPONSE_REQUESTED, respondToSignatureRequest)
   yield takeLatest(Actions.USER_GET_HISTORY_REQUESTED, getHistory)
+  yield takeLatest(Actions.USER_AUTHORISE_PROCORE_ACCESS_REQUESTED, authoriseWithProcoreServer)
+  yield takeLatest(Actions.USER_CHECK_SERVER_PROCORE_ACCESS_REQUESTED, checkServerAccessToProcore)
 }

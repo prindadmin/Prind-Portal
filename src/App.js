@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import './App.css';
 
 import Amplify, { Auth } from 'aws-amplify';
-
 import ReactGA from 'react-ga';
 
 import {
@@ -13,19 +12,23 @@ import {
   Switch
 } from "react-router-dom";
 
+// Data
 import { AUTH_SUCCESS } from './States'
-
 import * as Endpoints from './Data/Endpoints'
-import PrivateRoute from './Components/PrivateRoute';
-import ProjectLoading from './Components/Common/ProjectLoading'
-
-import Error404 from './Components/Error404'
 import * as Strings from './Data/Strings'
 
+// Functions
+import GetObjectFromParameters from './Functions/GetObjectFromParameters'
+
 /* Before sign in pages */
+import PrivateRoute from './Components/PrivateRoute';
+import ProjectLoading from './Components/Common/ProjectLoading'
+import Error404 from './Components/Error404'
+
+const ProcoreAuthSendPage = lazy(() => import('./Pages/ProcoreAuthSendPage'));
+const ProcoreAuthReceivePage = lazy(() => import('./Pages/ProcoreAuthReceivePage'));
 const SignInPage = lazy(() => import('./Pages/SignInPage'))
 const ConfirmEmailPage = lazy(() => import('./Components/ConfirmEmailPage'));
-const ProcoreAuthPage = lazy(() => import('./Pages/ProcoreAuthPage'));
 
 /* Other pages */
 const LoggedInContent = lazy(() => import('./Pages/LoggedInContent'));
@@ -70,20 +73,28 @@ Amplify.configure({
 
 class App extends Component{
   static propTypes = {
-    refreshSession: PropTypes.func.isRequired,
     auth: PropTypes.shape({
       isSignedIn: PropTypes.string.isRequired
     }).isRequired,
     user: PropTypes.shape({
       currentRoute: PropTypes.string.isRequired
-    }).isRequired
+    }).isRequired,
+    refreshSession: PropTypes.func.isRequired,
+    storeProcoreDetails: PropTypes.func.isRequired
   }
 
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       oldConsoleLog: null,
+    }
+    if (process.env.REACT_APP_IS_PROCORE === "True") {
+      // Store the Procore details if they are provided
+      const parameters = GetObjectFromParameters(window.location.search)
+      if (parameters.companyId && parameters.projectId) {
+        props.storeProcoreDetails(parameters)
+      }
     }
 
     if (process.env.REACT_APP_GA_TEST === 'True') {
@@ -99,24 +110,14 @@ class App extends Component{
   }
 
   componentDidMount() {
-
     // Turn off the logger if this is a production environment
-    process.env.REACT_APP_STAGE === "PRODUCTION" ? this.disableLogger() : this.enableLogger()
-
-    // Show the details of the Auth configuration
-    const currentConfig = Auth.configure();
-    console.log(currentConfig)
-
+    if (process.env.REACT_APP_STAGE === "PRODUCTION") {
+      this.disableLogger()
+    }
     // If the refreshToken is present, refresh the login
     this.props.refreshSession()
   }
 
-  enableLogger = () => {
-      if(this.state.oldConsoleLog == null) {
-          return
-      }
-      window['console']['log'] = this.state.oldConsoleLog;
-  };
 
   disableLogger = () => {
       this.setState({
@@ -146,8 +147,9 @@ class App extends Component{
               <Route path={Endpoints.FORGOTPASSWORDPAGE} component={SignInPage} />
               <Route path={Endpoints.RESETPASSWORDPAGE} component={SignInPage} />
               <Route path={Endpoints.CONFIRMEMAILPAGE} component={ConfirmEmailPage} />
+              <Route path={Endpoints.PROCOREAUTHRECEIVEPAGE} component={ProcoreAuthReceivePage} />
 
-              <PrivateRoute path={Endpoints.PROCOREAUTHPAGE} component={ProcoreAuthPage} />
+              <PrivateRoute path={Endpoints.PROCOREAUTHSENDPAGE} component={ProcoreAuthSendPage} />
 
               <PrivateRoute path={Endpoints.PROJECTDETAILSPAGE} component={LoggedInContent} />
               <PrivateRoute path={`${Endpoints.PROJECTDETAILSPAGE}/:id`} component={LoggedInContent} />

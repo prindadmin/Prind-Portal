@@ -32,7 +32,6 @@ export class ProjectSelectorPopUp extends Component {
           projectType: PropTypes.string.isRequired,
         })),
         projectRole: PropTypes.arrayOf(PropTypes.shape({
-          data: PropTypes.string.isRequired,
           projectId: PropTypes.string.isRequired,
           projectName: PropTypes.string.isRequired,
           projectDescription: PropTypes.string,

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import AppComponent from './App'
 
 import * as auth from './Reducers/auth'
+import * as procore from './Reducers/procore'
 
 const mapStatetoProps = state => {
   return {
@@ -16,6 +17,9 @@ const mapDispatchToProps = dispatch => {
     refreshSession: () => {
       dispatch(auth.refreshSession())
     },
+    storeProcoreDetails: (parameters) => {
+      dispatch(procore.storeProcoreDetails(parameters))
+    }
   }
 }
 

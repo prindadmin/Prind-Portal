@@ -2,6 +2,8 @@ import * as Actions from '../Actions'
 
 import * as Endpoints from '../Data/Endpoints'
 
+import { defaultState } from '../Sagas/userSagas'
+/*
 let defaultState = {
   fetching: false,
   details: {},
@@ -12,7 +14,7 @@ let defaultState = {
   userS3Token: {},
   currentRoute: Endpoints.DEFAULTLOGGEDINPAGE,
 }
-
+*/
 
 export const init = () => {
   return {

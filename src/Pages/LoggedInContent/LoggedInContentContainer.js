@@ -26,6 +26,9 @@ const mapDispatchToProps = dispatch => {
     },
     getProjectMembers: (projectID) => {
       dispatch(projects.getCurrentMembers(projectID))
+    },
+    checkServerAccessToProcore: (resolve, reject) => {
+      dispatch(user.checkServerAccessToProcore(resolve, reject))
     }
   }
 }

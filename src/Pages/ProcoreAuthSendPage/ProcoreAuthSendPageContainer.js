@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 
 import * as user from '../../Reducers/user'
 
-import ProcoreAuthPage from './ProcoreAuthPage'
+import ProcoreAuthSendPage from './ProcoreAuthSendPage'
 
 const mapStatetoProps = state => {
   return {
@@ -19,4 +19,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default withRouter(connect(mapStatetoProps, mapDispatchToProps)(ProcoreAuthPage))
+export default withRouter(connect(mapStatetoProps, mapDispatchToProps)(ProcoreAuthSendPage))

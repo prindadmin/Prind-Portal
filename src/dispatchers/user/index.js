@@ -7,3 +7,6 @@ export { default as respondToProjectInvitation } from './respondToProjectInvitat
 export { default as getSignatureRequests } from './getSignatureRequests';
 export { default as respondToSignatureRequest } from './respondToSignatureRequest';
 export { default as getHistory } from './getHistory';
+
+export { default as authoriseWithProcoreServer } from './authoriseWithProcoreServer'
+export { default as checkServerAccessToProcore } from './checkServerAccessToProcore';
