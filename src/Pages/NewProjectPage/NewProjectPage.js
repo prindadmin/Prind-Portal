@@ -1,4 +1,5 @@
 import React, { Component, lazy } from 'react'
+import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
 
 import ReactGA from 'react-ga';
@@ -27,6 +28,11 @@ const CreatingProjectPopover = lazy(() => import('../../Components/CreatingProje
 
 export class Page extends Component {
   static propTypes = {
+    createProject: PropTypes.func.isRequired,
+    resetChosenProject: PropTypes.func.isRequired,
+    history: PropTypes.shape({
+      push: PropTypes.func.isRequired
+    }).isRequired,
   }
 
   constructor() {
