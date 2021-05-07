@@ -6,6 +6,7 @@ import PAGENAMES from '../../Data/pageNames'
 import * as Strings from '../../Data/Strings'
 import * as PageStates from '../PageStates'
 import * as Endpoints from '../../Data/Endpoints'
+import * as ServerErrors from '../../Data/ServerErrors'
 
 
 
@@ -21,6 +22,7 @@ const LayoutContentArea1x1Mobile  = lazy(() => import('../../Components/LoggedIn
 const Footer = lazy(() => import('../../Components/Common/footer'));
 const ProjectFetchError = lazy(() => import('../../Components/Common/ProjectFetchError'));
 const Error404 = lazy(() => import('../../Components/Error404'))
+const ProcoreProjectDoesNotExist = lazy(() => import('../../Components/ProcoreProjectDoesNotExist'))
 
 /* Pages that can be loaded */
 const ProjectDetailsPage = lazy(() => import('../ProjectDetailsPage'));
@@ -248,15 +250,38 @@ export class LoggedInContent extends Component {
     return projectNotSelected && pageCanAutoShowProjectSelector && historyOpenProjectSelectorState
   }
 
+  projectFetchError = () => {
+    var errorCode = ServerErrors.PROJECT_NOT_FOUND
+    try {
+      errorCode = this.props.projects.error.Error.ErrorCode
+    } catch (e) {
+      console.error("Couldn't get the error code")
+    }
+
+    if (errorCode === ServerErrors.PROJECT_NOT_FOUND) {
+      // If this is a procore presentation, show the create project dialogue
+      if (process.env.REACT_APP_IS_PROCORE === "True") {
+        return <ProcoreProjectDoesNotExist />
+      }
+      // Otherwise, return the project not found error
+      return <ProjectFetchError text={Strings.PROJECT_FETCH_ERROR_DOES_NOT_EXIST}/>
+    }
+
+    if (errorCode === ServerErrors.INSUFFICIENT_PERMISSION) {
+      return <ProjectFetchError text={Strings.PROJECT_FETCH_ERROR_INSUFFICICENT_PERMISSIONS}/>
+    }
+
+    return <ProjectFetchError />
+  }
+
   // Get the layout of the screen if the width is above the breakpoint
   getDesktopContent = () => {
-    // TODO: Urgent: Having an error should not completely stop the content from showing
     const { error } = this.props.projects
 
     return (
       <LayoutContentArea1x1>
           <Suspense fallback={this.loadingPlaceholder()}>
-              { error ? <ProjectFetchError /> : this.getContent() }
+              { error ? this.projectFetchError() : this.getContent() }
           </Suspense>
       </LayoutContentArea1x1>
     )
@@ -264,13 +289,12 @@ export class LoggedInContent extends Component {
 
   // Get the layout of the screen if the width is below the breakpoint
   getMobileContent = () => {
-    // TODO: Urgent: Having an error should not completely stop the content from showing
     const { error } = this.props.projects
 
     return (
       <LayoutContentArea1x1Mobile>
         <Suspense fallback={this.loadingPlaceholder()}>
-            { error ? <ProjectFetchError /> : this.getContent() }
+            { error ? this.projectFetchError() : this.getContent() }
         </Suspense>
       </LayoutContentArea1x1Mobile>
     )
