@@ -47,6 +47,10 @@ export class LoggedInContent extends Component {
       }).isRequired,
       error: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
     }).isRequired,
+    procore: PropTypes.shape({
+      companyId: PropTypes.string.isRequired,
+      projectId: PropTypes.string.isRequired
+    }).isRequired,
     getProjectDetails: PropTypes.func.isRequired,
     saveProjectID: PropTypes.func.isRequired,
     getProjectMembers: PropTypes.func.isRequired,
@@ -110,7 +114,7 @@ export class LoggedInContent extends Component {
   componentDidUpdate(prevProps, prevState, snapshot) {
     // If there was an error, don't do anything
     if (this.props.projects.error) {
-      //console.log("error fetching project")
+      console.log("error fetching project")
       return;
     }
     // If the props changed in the update
@@ -187,6 +191,11 @@ export class LoggedInContent extends Component {
 
 
   getURLProjectId = () => {
+
+    if (process.env.REACT_APP_IS_PROCORE) {
+      return `${this.props.procore.companyId}${this.props.procore.projectId}`
+    }
+
     const { pathname } = this.props.location
     // Remove final character slash if it is present
     const pathnameToCheck = pathname.endsWith("/") ? pathname.slice(0, -1) : pathname
@@ -207,9 +216,9 @@ export class LoggedInContent extends Component {
     return PAGENAMES[process.env.REACT_APP_PORTAL]
   }
 
+
   getContent = () => {
-    const { location } = this.props
-    const { pathname } = location
+    const { pathname } = this.props.location
     const pageName = this.getPageName()
     const projectName = this.getURLProjectId()
     const possiblePages = this.getPossiblePages()

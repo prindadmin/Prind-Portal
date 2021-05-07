@@ -415,6 +415,7 @@ p.error {
   float: right;
   margin-left: auto;
   text-align: right;
+  margin-bottom: auto;
 }
 
 #header-bar .nav-links svg {

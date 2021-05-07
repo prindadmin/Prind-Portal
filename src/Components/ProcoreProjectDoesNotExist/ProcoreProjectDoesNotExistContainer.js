@@ -5,7 +5,9 @@ import * as projects from '../../Reducers/projects'
 
 import ProcoreProjectDoesNotExist from './ProcoreProjectDoesNotExist'
 
-const mapStatetoProps = state => {}
+const mapStatetoProps = state => {
+  return {}
+}
 
 const mapDispatchToProps = dispatch => {
   return {

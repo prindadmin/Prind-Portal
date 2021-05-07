@@ -21,7 +21,8 @@ const defaultState = {
 }
 
 const blankChosenState = {
-  chosenProject: defaultChosenProject
+  chosenProject: defaultChosenProject,
+  error: null,
 }
 
 

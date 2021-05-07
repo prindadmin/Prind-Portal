@@ -21,6 +21,10 @@ const CreatingProjectPopover = lazy(() => import('../../Components/CreatingProje
 // TODO: FUTURE: Add ability to upload thumbnails or pick icon for a project
 // TODO: FUTURE: Refactor component without redux form and blueprintjs
 
+// TODO: CONTINUE HERE: ADD IN PROJECT NAME FROM PROCORE DETAILS TO PROJECT NAME
+// TODO: CONTINUE HERE: Add in sending of projectId to /project/create
+// TODO: Add in proptype checking!!!
+
 export class Page extends Component {
   static propTypes = {
   }

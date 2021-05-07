@@ -353,6 +353,10 @@ export const LOADING = "Loading"
 export const AUTHORISE_WITH_PROCORE = "Authorise with Procore"
 export const ERROR_GETTING_PROCORE_ACCESS = "There was an error authorising access with Procore.  Would you like to try again?"
 
+// Procore Projects
+export const PROCORE_PROJECT_DOES_NOT_EXIST_IN_PRIND = "This project does not exist in the CDM Compliance Platform.  Would you like to create it?"
+export const BUTTON_PROCORE_PROJECT_CREATE = "Create Project"
+
 // Procore File Select Process
 export const BUTTON_SELECT_FILE = 'Select file'
 export const BUTTON_CLOSE = 'Close'
