@@ -20,6 +20,10 @@ import * as Strings from './Data/Strings'
 // Functions
 import GetObjectFromParameters from './Functions/GetObjectFromParameters'
 
+// Add Toast
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 /* Before sign in pages */
 import PrivateRoute from './Components/PrivateRoute';
 import ProjectLoading from './Components/Common/ProjectLoading'
@@ -197,6 +201,17 @@ class App extends Component{
             </Switch>
           </Suspense>
         </Router>
+        <ToastContainer
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          />
       </div>
     )
   }

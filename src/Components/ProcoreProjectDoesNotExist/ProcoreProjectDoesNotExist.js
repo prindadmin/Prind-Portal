@@ -9,7 +9,6 @@ import * as Strings from '../../Data/Strings'
 // Components
 import FullScreenTile from '../FullScreenTile'
 
-// TODO: PROCORE: Add in button to create project
 export class ProcoreProjectDoesNotExist extends Component {
   static propTypes = {}
 

@@ -245,6 +245,9 @@ export const DOWNLOAD = "Download"
 export const NO_UPLOAD_NAME = "No name supplied"
 export const ERROR_FETCHING_DOWNLOAD_LINK = "There was an error fetching the file, please try again.  If the problem persists, please contact technical support."
 
+
+// Profile Page
+export const ERROR_UPLOADING_AVATAR = "Error uploading image; please try again."
 export const PROFILE_PAGE_TITLE = "Profile"
 export const PROFILE_PAGE_DESCRIPTION = ""
 

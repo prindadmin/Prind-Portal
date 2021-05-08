@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
+import { toast } from 'react-toastify';
 import PropTypes from 'prop-types'
 
 import {
@@ -12,15 +13,14 @@ import {
 
 import AWS from 'aws-sdk';
 
+// Data
 import * as Strings from '../../../../Data/Strings'
 import * as Validators from '../../../../Validators'
-
 import * as FormInputs from '../../../Common/formInputs'
 
 const defaultAvatar = `images/default-avatar.png`
 
 // TODO: FUTURE: Rewrite without blueprintjs
-// TODO: URGENT: Fix avatar upload
 export class UserDetailsForm extends Component {
   static propTypes = {
     user: PropTypes.shape({
@@ -35,7 +35,7 @@ export class UserDetailsForm extends Component {
       }),
       userS3Token: PropTypes.shape({
         SessionToken: PropTypes.string,
-        Expiration: PropTypes.string,
+        Expiration: PropTypes.number,
         AccessKeyId: PropTypes.string,
         SecretAccessKey: PropTypes.string
       }).isRequired,
@@ -48,9 +48,7 @@ export class UserDetailsForm extends Component {
 
   constructor(props) {
     super(props)
-
     const defaultAvatar = `images/default-avatar.png`
-
     // Check if there is an error fetching the user details
     if (props.user.error !== undefined) {
       this.state = {
@@ -62,7 +60,6 @@ export class UserDetailsForm extends Component {
       }
       return
     }
-
     this.state = {
       avatarLink: defaultAvatar,
       avatarLoading: true,
@@ -70,18 +67,14 @@ export class UserDetailsForm extends Component {
       detailsFetchError: false,
       errorText: "",
     }
-
     this.getImage(props)
   }
 
   getImage = (props) => {
-
     const { username } = props.user
     const that = this
     const avatarLink = `${process.env.REACT_APP_AWS_S3_USER_AVATAR_ENDPOINT}/${username}`
-
     var image = new Image();
-
     image.onload = function() {
         // image exists and is loaded
         that.setState({
@@ -90,18 +83,20 @@ export class UserDetailsForm extends Component {
         })
         return
     }
-
     image.onerror = function() {
         // image did not load
         that.setState({
           avatarLink: defaultAvatar,
           avatarLoading: false,
         })
-
         return
     }
-
     image.src = avatarLink
+  }
+
+  componentDidMount() {
+    // Get a token to allow the uploading of an avatar
+    this.props.requestS3UserFileUploadToken("profile-avatar", this.successFetchingUserFileUploadToken, this.failureFetchingUserFileUploadToken)
   }
 
 
@@ -110,7 +105,6 @@ export class UserDetailsForm extends Component {
     // If the user details change
     if (this.props.user.details !== prevProps.user.details) {
       this.getImage(this.props)
-
       if (this.props.user.details.emailAddress !== undefined) {
         this.setState({
           detailsFetchError: false,
@@ -122,46 +116,41 @@ export class UserDetailsForm extends Component {
     if (this.props.user.userS3Token !== "" && this.state.avatarFile.value !== undefined) {
       this.uploadToS3()
     }
-
   }
 
 
   fileChosen = (e) => {
-
-    const { requestS3UserFileUploadToken } = this.props
-
-    // Get a token to allow the uploading of the file
-    requestS3UserFileUploadToken("profile-avatar")
-
-    e.persist()
-
-    console.log(e)
-
     // Store the avatarFile event
     this.setState({
       avatarFile: e.target,
       avatarLoading: true,
     })
+  }
 
+
+  successFetchingUserFileUploadToken = (result) => {
+    //console.log(result)
+  }
+
+
+  failureFetchingUserFileUploadToken = (error) => {
+    //console.log(error)
+    toast(Strings.ERROR_UPLOADING_AVATAR)
   }
 
 
   uploadToS3 = () => {
-
     const { user } = this.props
     const { avatarFile } = this.state
-
-    console.log(avatarFile)
-
     const file = avatarFile.files[0]
-
-    if (user.userS3Token === undefined) {
+    if (user.userS3Token === {}) {
       console.log("error uploading image")
+      toast(Strings.ERROR_UPLOADING_AVATAR)
+      // Try and fetch the avatar upload token again
+      this.props.requestS3UserFileUploadToken("profile-avatar", this.successFetchingUserFileUploadToken, this.failureFetchingUserFileUploadToken)
       return;
     }
-
     const { AccessKeyId, SecretAccessKey, SessionToken } = user.userS3Token
-
     // Update credentials to allow access to S3
     AWS.config.update({
       credentials: {
@@ -194,20 +183,16 @@ export class UserDetailsForm extends Component {
     var request = s3.putObject(uploadParams);
 
     request.on('success', function(response) {
-
         that.setState({
           avatarFile: {},
           avatarLink: defaultAvatar,
         })
-
         that.getImage(that.props)
-
       })
-
       .on('error', function(error, response) {
         console.log("Error!");
         console.error(error)
-
+        toast(Strings.ERROR_UPLOADING_AVATAR)
         that.setState({
           avatarFile: {},
           avatarLink: defaultAvatar,
@@ -224,12 +209,9 @@ export class UserDetailsForm extends Component {
   }
 
 
-
   render() {
-
     const { handleSubmit, initialValues }  = this.props
     const { avatarLink, avatarLoading } = this.state
-
     return(
       <div className="tab-pane active" id="profile-tab-container">
         <div className="row">
