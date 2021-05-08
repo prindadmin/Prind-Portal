@@ -1,0 +1,17 @@
+.errorTile {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  background-color: rgba(219,55,55,.15);
+  padding: 1em;
+  border-radius: var(--standard-border-radius-button);
+  font-weight: bold;
+}
+
+.errorTile img {
+  width: 1.5em;
+  height: 1.5em;
+  margin-right: 1em;
+}

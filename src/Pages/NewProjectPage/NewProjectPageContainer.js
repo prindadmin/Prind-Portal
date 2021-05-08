@@ -6,7 +6,9 @@ import * as reducer from '../../Reducers/projects'
 import PageComponent from './NewProjectPage'
 
 const mapStatetoProps = state => {
-  return {}
+  return {
+    procore: state.procore
+  }
 }
 
 const mapDispatchToProps = dispatch => {

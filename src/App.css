@@ -31,8 +31,10 @@
   --prind-palette-color-3: #178CA4;
   --prind-palette-color-4: #8D818C;
   --prind-palette-color-5: #072A40;
+  --prind-palette-color-6: #D9E0FF;
   --prind-palette-color-9: #F5F2FF;
   --max-width-popover: 1200px;
+  --max-width-component-thin: 500px;
   --standard-border-radius: 15px;
   --standard-padding: 15px;
   --standard-margin: 15px;
@@ -223,6 +225,7 @@ input[type=cancel]  {
   width: 100%;
 }
 
+input[type=text],
 input[type=email]  {
   width: 100%;
   appearance: none;
@@ -242,7 +245,17 @@ input[type=email]  {
   margin-bottom: calc(var(--standard-margin) / 2);
 }
 
+input[type=email].filled,
+input[type=password].filled,
+input[type=text].filled {
+  background: var(--prind-palette-color-6);
+}
 
+input[type=email].filled,
+input[type=password].filled,
+input[type=text].filled {
+  background: var(--prind-palette-color-6);
+}
 
 p.info {
   color: darkgreen;

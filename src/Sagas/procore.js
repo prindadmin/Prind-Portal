@@ -9,9 +9,9 @@ import * as Dispatchers from '../Dispatchers/Procore'
 export const defaultState = {
   fetching: false,
   companyId: "30140",
-  companyName: "",
+  companyName: "Test Company Name",
   projectId: "23292",
-  projectName: "",
+  projectName: "Test Project Name",
   currentFolder: null,
   folderHistory: {
     chain: []
