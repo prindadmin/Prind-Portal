@@ -25,6 +25,8 @@ import ProcoreFilePicker from '../../ProcoreFilePicker'
 
 
 // TODO: FUTURE: Refactor to remove blueprintjs
+// TODO: FUTURE: Fix display at mobile resolutions
+
 export class FileUploader extends Component {
   static propTypes = {
     elementContent: PropTypes.shape({

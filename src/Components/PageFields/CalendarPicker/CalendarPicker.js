@@ -11,9 +11,9 @@ import SHORTCUTS from './shortcuts'
 const ErrorTile = lazy(() => import('../../ErrorTile'));
 const LoadingSpinner = lazy(() => import('../../LoadingSpinner'))
 
-// TODO: BUG: Fix at mobile resolutions (extends past edge of screen)
 // TODO: FUTURE: Remove blueprintjs/datetime from calendar
 
+const MOBILE_WIDTH_BREAKPOINT = 992;
 
 export class CalendarPicker extends Component {
   static propTypes = {
@@ -41,16 +41,33 @@ export class CalendarPicker extends Component {
       updateError: false,
       errorText: "",
       selectedDate: new Date(),
-      state: ComponentStates.QUIESCENT
+      state: ComponentStates.QUIESCENT,
+      width: 0
     }
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
   }
 
   componentDidMount() {
+    // Set up the listener for the screen width so the right components can be shown
+    window.addEventListener('resize', this.updateWindowDimensions);
+    this.updateWindowDimensions();
     if (this.props.elementContent.fieldDetails.dateValue) {
       this.setState({
         selectedDate: new Date(this.props.elementContent.fieldDetails.dateValue)
       })
     }
+  }
+
+  // Removes the screen size listener when component is removed
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWindowDimensions);
+  }
+
+  // Stores the current screen size in the components state
+  updateWindowDimensions() {
+    this.setState({
+      width: window.innerWidth
+    });
   }
 
 
@@ -120,7 +137,7 @@ export class CalendarPicker extends Component {
         onChange={this.onChangeDateSelection}
         highlightCurrentDay={true}
         reverseMonthAndYearMenus={true}
-        shortcuts={SHORTCUTS}
+        shortcuts={this.state.width > MOBILE_WIDTH_BREAKPOINT ? SHORTCUTS : false}
         value={this.state.selectedDate}
         />
     )

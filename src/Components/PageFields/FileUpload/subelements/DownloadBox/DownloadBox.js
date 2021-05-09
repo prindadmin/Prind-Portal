@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import classes from './DownloadBox.module.css'
 
 import ItemIcon from '../../../../Common/ItemIcon'
 import * as Strings from '../../../../../Data/Strings'
+
+const MOBILE_WIDTH_BREAKPOINT = 992;
 
 export class DownloadBox extends Component {
   static propTypes = {
@@ -82,15 +85,17 @@ export class DownloadBox extends Component {
 
   render () {
 
-    var itemSize = "4x"
+    const isMobileSize = this.state.width < MOBILE_WIDTH_BREAKPOINT
 
-    this.state.width < 992 ? itemSize = "3x" : itemSize = "4x"
+    const itemSize = isMobileSize ? "3x" : "4x"
 
     return (
-      <div id='download-box' className="download-box" onClick={(e) => this.downloadFile(e)}>
+      <div id='download-box' className={classes.downloadBox} onClick={(e) => this.downloadFile(e)}>
         <div>
           <ItemIcon size={itemSize} type='download' />
-          <p>{Strings.DOWNLOAD}</p>
+          {
+            isMobileSize ? null : <p>{Strings.DOWNLOAD}</p>
+          }
         </div>
       </div>
     )

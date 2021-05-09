@@ -69,7 +69,7 @@ export const getUserDetails = ( resolve, reject ) => {
 
 
 
-export const getProjectInvitations = ( resolve, reject  ) => {
+export const getProjectInvitations = ( resolve, reject ) => {
   return {
     type: Actions.USER_GET_PROJECT_INVITATIONS_REQUESTED,
     payload: {

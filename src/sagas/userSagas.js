@@ -133,7 +133,6 @@ export function * getUserDetails (action) {
 
 
 export function * getProjectInvitations (action) {
-  const { identityToken } = action.payload
   try {
     // Pre-fetch update to store
     yield put({
@@ -142,7 +141,7 @@ export function * getProjectInvitations (action) {
         fetching: true,
       }
     })
-    const result = yield call(Dispatchers.getProjectInvitations, identityToken)
+    const result = yield call(Dispatchers.getProjectInvitations)
     // Post-fetch update to store
     yield put({
       type: Actions.USER_SET_STATE,
@@ -191,7 +190,6 @@ export function * respondToProjectInvitation (action) {
       }
     })
     // Trigger a fetch of the requests list again
-    // TODO: BUG: Fix this; without passing the identityToken as an argument, it won't work
     yield put({
       type: Actions.USER_GET_PROJECT_INVITATIONS_REQUESTED,
       payload: {}

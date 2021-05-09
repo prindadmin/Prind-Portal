@@ -16,11 +16,11 @@ const mapDispatchToProps = dispatch => {
     getUserDetails: (resolve, reject) => {
       dispatch(user.getUserDetails(resolve, reject))
     },
-    getProjectInvitations: () => {
-      dispatch(user.getProjectInvitations())
+    getProjectInvitations: (resolve, reject) => {
+      dispatch(user.getProjectInvitations(resolve, reject))
     },
-    getSignatureRequests: () => {
-      dispatch(user.getSignatureRequests())
+    getSignatureRequests: (resolve, reject) => {
+      dispatch(user.getSignatureRequests(resolve, reject))
     },
     getHistory: (resolve, reject) => {
       dispatch(user.getHistory(resolve, reject))
