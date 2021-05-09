@@ -68,11 +68,10 @@ export class AddNewTeamMember extends Component {
     this.props.onSuccessAddingMember()
   }
 
-  // TODO: Check that error.message is the right key for the error text
   failedAddingUser = (error) => {
     //console.error(`failed to add a new user to the system with email: ${this.state.emailAddress}`)
     this.setState({
-      errorText: error.message,
+      errorText: error.ErrorMessage,
       state: ComponentStates.CREATING_NEW_USER_FAILED
     })
   }

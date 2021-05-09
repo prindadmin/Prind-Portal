@@ -12,8 +12,8 @@ import * as FormInputs from '../../formInputs'
 
 import * as Strings from '../../../../Data/Strings'
 
-// TODO: Fix at mobile resolutions (extends past edge of screen)
-// TODO: URGENT: This doesn't change to the chosen date
+// TODO: BUG: Fix at mobile resolutions (extends past edge of screen)
+// TODO: BUG: URGENT: This doesn't change to the chosen date
 
 export class CalendarPicker extends Component {
   static propTypes = {

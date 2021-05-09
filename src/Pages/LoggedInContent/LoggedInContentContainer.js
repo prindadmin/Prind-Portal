@@ -10,7 +10,8 @@ import PageComponent from './LoggedInContent'
 const mapStatetoProps = state => {
   return {
     projects: state.projects,
-    procore: state.procore
+    procore: state.procore,
+    user: state.user
   }
 }
 

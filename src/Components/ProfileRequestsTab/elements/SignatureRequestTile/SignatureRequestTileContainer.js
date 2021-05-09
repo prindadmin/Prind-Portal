@@ -3,12 +3,12 @@ import { withRouter } from 'react-router-dom'
 
 import * as foundations from '../../../../Reducers/foundations'
 import * as projects from '../../../../Reducers/projects'
+import * as user from '../../../../Reducers/user'
 
 import SignatureRequestTile from './SignatureRequestTile'
 
 const mapStatetoProps = state => {
-  return {
-  }
+  return {}
 }
 
 const mapDispatchToProps = dispatch => {
@@ -18,6 +18,9 @@ const mapDispatchToProps = dispatch => {
     },
     updateChosenProject: (project, resolve, reject) => {
       dispatch(projects.updateChosenProject(project, resolve, reject))
+    },
+    getSignatureRequests: () => {
+      dispatch(user.getSignatureRequests())
     },
   }
 }

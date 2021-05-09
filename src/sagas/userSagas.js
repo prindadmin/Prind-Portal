@@ -191,7 +191,7 @@ export function * respondToProjectInvitation (action) {
       }
     })
     // Trigger a fetch of the requests list again
-    // TODO: Fix this; without passing the identityToken as an argument, it won't work
+    // TODO: BUG: Fix this; without passing the identityToken as an argument, it won't work
     yield put({
       type: Actions.USER_GET_PROJECT_INVITATIONS_REQUESTED,
       payload: {}

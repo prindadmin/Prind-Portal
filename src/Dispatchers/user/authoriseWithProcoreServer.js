@@ -3,7 +3,7 @@ import API from '@aws-amplify/api';
 
 async function AuthoriseWithProcoreServer(parameters) {
 
-  // TODO: Remove so that procore uses real function
+  // TODO: LAUNCH: Remove so that procore uses real function
   if (process.env.REACT_APP_IS_PROCORE) {
     return new Promise((resolve, reject) => {
       resolve()

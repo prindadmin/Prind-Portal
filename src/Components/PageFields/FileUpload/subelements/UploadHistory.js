@@ -6,7 +6,6 @@ import Spinner from '../../../Common/LoadingSpinnerCSS'
 
 import * as Strings from '../../../../Data/Strings'
 
-// TODO: Improve structuring of propTypes to ensure errors are captured
 // TODO: FUTURE: Do something with error text state string
 export class UploadHistory extends Component {
   static propTypes = {
@@ -98,7 +97,7 @@ export class UploadHistory extends Component {
     )
   }
 
-  // TODO: Fix the displaying of this details table at mobile widths
+  // TODO: BUG: Fix the displaying of this details table at mobile widths
   getDetailsTable = () => {
     const { details } = this.props
     var reversedDetails = details.filter(function(fileUpload) {

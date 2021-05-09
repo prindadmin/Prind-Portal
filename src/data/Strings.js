@@ -298,7 +298,11 @@ export const BUTTON_GO_TO_DOCUMENT = "Go To Document"
 export const NO_FOUNDATIONS_ID_BANNER_TEXT = "You do not have a Foundations ID and therefore cannot sign any documents.  Click here to find out more..."
 export const FOUNDATIONS_DESCRIPTION = "Foundations allows users to enter their data into a single system and control the access to it. By using Foundations as the single source of data, you keep complete control of your personally identifiable information while allowing those granted access to it to receive the most up-to-date information automatically while protecting against GDPR violations."
 
+
+// Profile History Tab
 export const NO_HISTORY_YET = "You haven't done anything that will be stored in your history yet.  This will soon contain all the projects you have created and have joined, all the documents you have uploaded, and all the documents you have signed."
+export const ERROR_CHANGING_TO_PROJECT = "Unable to change project.  Please try again."
+export const ERROR_REJECTING_SIGNATURE_REQUEST = "Unable to reject signature request at this time.  Please try again."
 
 export const TILE_PROJECT_CREATED = "Project Created"
 export const TILE_PROJECT_JOINED = "Project Joined"

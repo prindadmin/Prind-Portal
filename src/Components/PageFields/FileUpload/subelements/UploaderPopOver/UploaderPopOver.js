@@ -14,7 +14,7 @@ import * as Strings from '../../../../../Data/Strings'
 
 const windowCloseDelay = 1500
 
-// TODO: Different actions if this is a procore integration
+// TODO: LAUNCH: Different actions if this is a procore integration
 // Send ID to the server
 //this.props.uploadProcoreFile(latestVersion, resolve, reject)
 
@@ -57,19 +57,18 @@ export class UploaderPopOver extends Component {
 
   componentDidMount() {
     const { projectID, pageName } = this.props
-
     // Upload the file to S3
     this.uploadToS3()
     this.props.requestS3ProjectFileUploadToken(projectID, pageName)
   }
 
   getValidS3Token = () => {
-    // TODO: Make this refresh the token if required; stops fetching if not present
-    const { user } = this.props
+    const { user, projectID, pageName } = this.props
     if (user.projectS3Token === undefined) {
       this.setState({
-        uploadFileError: true
+        uploadError: true
       })
+      this.props.requestS3ProjectFileUploadToken(projectID, pageName)
       return undefined;
     }
     return user.projectS3Token

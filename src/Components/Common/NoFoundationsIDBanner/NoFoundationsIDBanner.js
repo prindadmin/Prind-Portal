@@ -19,7 +19,7 @@ class NoFoundationsIDBanner extends Component {
       return null;
     }
 
-    if (user.details.foundationsID === null || user.details.foundationsID === undefined ) {
+    if (!user.details.foundationsID) {
       return (
         <div id="no-foundations-id-banner" className="row full-width" onClick={(e) => this.props.history.push("/foundations")}>
           <p>{Strings.NO_FOUNDATIONS_ID_BANNER_TEXT}</p>

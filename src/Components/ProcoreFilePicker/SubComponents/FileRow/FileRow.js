@@ -52,7 +52,7 @@ export class FileRow extends Component {
   }
 
 
-  // TODO: Test this because it seems to open with the url appended to the current address bar content
+  // TODO: BUG: Test this because it seems to open with the url appended to the current address bar content
   fileDownloadButton = (doc, index) => {
     const id = `filedownloadbutton-${index}`
 

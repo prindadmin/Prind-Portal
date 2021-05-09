@@ -72,6 +72,7 @@ export const updateChosenProject = ( project, resolve, reject ) => {
 
 export const saveProjectID = ( projectId ) => {
   if (projectId === undefined) {
+    console.log("projectId was undefined")
     return {
       type: action.PROJECT_SET_STATE,
       payload: blankChosenState

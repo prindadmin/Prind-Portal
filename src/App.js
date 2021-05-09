@@ -39,7 +39,6 @@ const LoggedInContent = lazy(() => import('./Pages/LoggedInContent'));
 
 // TODO: FUTURE: make mobile version pages the right height (1x1 content is way longer than it needs to be)
 // TODO: FUTURE: make the page menu float over other elements and not be 100% width in mobile size
-// TODO: Add error handling when a page cannot load
 // TODO: FUTURE: Strip out axios dependency (not needed as a root dependency)
 // TODO: FUTURE: Strip out bootstrap
 // TODO: FUTURE: Strip out blueprint (if possible; date picker is important)
@@ -50,6 +49,7 @@ const LoggedInContent = lazy(() => import('./Pages/LoggedInContent'));
 // TODO: FUTURE: Remove the Long Text box once the Git Text box is complete
 // TODO: FUTURE: Make page content in Redux follow the available fields for a projectType
 // TODO: FUTURE: Put a dev password on the front of the dev portal
+// TODO: FUTURE: Add Toasts when errors occur
 
 
 

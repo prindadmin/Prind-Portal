@@ -51,6 +51,11 @@ export class LoggedInContent extends Component {
       companyId: PropTypes.string.isRequired,
       projectId: PropTypes.string.isRequired
     }).isRequired,
+    user: PropTypes.shape({
+      details: PropTypes.shape({
+        foundationsID: PropTypes.string
+      })
+    }).isRequired,
     getProjectDetails: PropTypes.func.isRequired,
     saveProjectID: PropTypes.func.isRequired,
     getProjectMembers: PropTypes.func.isRequired,
@@ -169,8 +174,11 @@ export class LoggedInContent extends Component {
     const projectId = this.getURLProjectId()
 
     if (!projectId || projectId === "") {
+      console.log("No project ID present in URL")
       return
     }
+
+    console.log(projectId)
 
     // Quick save the ID
     this.props.saveProjectID(projectId)
@@ -191,17 +199,17 @@ export class LoggedInContent extends Component {
 
 
   getURLProjectId = () => {
-
+    // If this is a Procore portal, return the details passed to the iframe
     if (process.env.REACT_APP_IS_PROCORE) {
       return `${this.props.procore.companyId}${this.props.procore.projectId}`
     }
-
     const { pathname } = this.props.location
     // Remove final character slash if it is present
     const pathnameToCheck = pathname.endsWith("/") ? pathname.slice(0, -1) : pathname
     // Split the pathname
     const splitPath = pathnameToCheck.split("/")
-    // eturn the project name or undefined
+    // return the project name or undefined
+    console.log(splitPath)
     return splitPath.length > 2 ? splitPath[2] : undefined
   }
 
@@ -318,7 +326,7 @@ export class LoggedInContent extends Component {
       <div id='logged-in-content-container' className='full-width row'>
         <HeaderBar companyName='Prin-D' openProjectSelector={this.shouldOpenProjectSelector()}/>
         <ErrorBoundary onRetry={this.onRetry}>
-          <LayoutBody>
+          <LayoutBody noFoundationsBannerShowing={!this.props.user.details.foundationsID}>
             {
               this.state.width > MOBILE_WIDTH_BREAKPOINT ? <SideBar {...this.props} /> : <SideBarMobile {...this.props} />
             }

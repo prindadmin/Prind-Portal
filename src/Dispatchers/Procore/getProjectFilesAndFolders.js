@@ -7,7 +7,7 @@ on the specified project
 import { Auth } from 'aws-amplify';
 import API from '@aws-amplify/api';
 
-// TODO: Implement the /files/${companyId}/${projectId} endpoint
+// TODO: LAUNCH: Implement the /files/${companyId}/${projectId} endpoint
 
 /*
 async function GetProjectFilesAndFolders(payload) {

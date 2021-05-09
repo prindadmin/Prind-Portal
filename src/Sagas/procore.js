@@ -4,14 +4,12 @@ import * as Actions from '../Actions'
 
 import * as Dispatchers from '../Dispatchers/Procore'
 
-// TODO: LAUNCH: Remove this default companyId and projectId and fetch from URL on first load
-
 export const defaultState = {
   fetching: false,
-  companyId: "30140",
-  companyName: "Test Company Name",
-  projectId: "23292",
-  projectName: "Test Project Name",
+  companyId: process.env.REACT_APP_STAGE === "DEVELOPMENTLOCAL" ? "30140" : "",
+  companyName: process.env.REACT_APP_STAGE === "DEVELOPMENTLOCAL" ? "Test Company Name" : "",
+  projectId: process.env.REACT_APP_STAGE === "DEVELOPMENTLOCAL" ? "23292" : "",
+  projectName: process.env.REACT_APP_STAGE === "DEVELOPMENTLOCAL" ? "Test Project Name" : "",
   currentFolder: null,
   folderHistory: {
     chain: []

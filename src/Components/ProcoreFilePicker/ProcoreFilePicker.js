@@ -167,7 +167,7 @@ export class ProcoreFilePicker extends Component {
     return mappedDocuments
   }
 
-  // TODO: Mobile version
+  // TODO: FEATURE: Mobile version
   mapFilesToDivsMobile = () => {
     const mappedDocuments = this.getFilteredFiles().map((doc, index) => {
         //return <ProcoreDocumentTableMobileTile key={index} doc={doc} />
