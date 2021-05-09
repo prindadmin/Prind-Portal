@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import * as projects from '../../../../Reducers/projects'
+import * as projects from '../../../Reducers/projects'
 
 import CalendarPicker from './CalendarPicker'
 
@@ -13,8 +13,8 @@ const mapStatetoProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateField: (identityToken, projectID, pageName, fieldID, fieldDetails, resolve, reject) => {
-      dispatch(projects.updateField(identityToken, projectID, pageName, fieldID, fieldDetails, resolve, reject))
+    updateField: (projectID, pageName, fieldID, fieldDetails, resolve, reject) => {
+      dispatch(projects.updateField(projectID, pageName, fieldID, fieldDetails, resolve, reject))
     }
   }
 }

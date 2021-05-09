@@ -172,14 +172,9 @@ export class LoggedInContent extends Component {
 
   getCommonProjectData = () => {
     const projectId = this.getURLProjectId()
-
     if (!projectId || projectId === "") {
-      console.log("No project ID present in URL")
       return
     }
-
-    console.log(projectId)
-
     // Quick save the ID
     this.props.saveProjectID(projectId)
     // Fetch the details of the project
@@ -200,7 +195,7 @@ export class LoggedInContent extends Component {
 
   getURLProjectId = () => {
     // If this is a Procore portal, return the details passed to the iframe
-    if (process.env.REACT_APP_IS_PROCORE) {
+    if (process.env.REACT_APP_IS_PROCORE === "True") {
       return `${this.props.procore.companyId}${this.props.procore.projectId}`
     }
     const { pathname } = this.props.location
@@ -209,7 +204,6 @@ export class LoggedInContent extends Component {
     // Split the pathname
     const splitPath = pathnameToCheck.split("/")
     // return the project name or undefined
-    console.log(splitPath)
     return splitPath.length > 2 ? splitPath[2] : undefined
   }
 
@@ -230,7 +224,6 @@ export class LoggedInContent extends Component {
     const pageName = this.getPageName()
     const projectName = this.getURLProjectId()
     const possiblePages = this.getPossiblePages()
-
     const stagePageNames = Object.keys(possiblePages).map((singlePageName, index) => {
       if (possiblePages[singlePageName].isStagePage) {
         return singlePageName

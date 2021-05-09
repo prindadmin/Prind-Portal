@@ -133,6 +133,10 @@ export class FileUploader extends Component {
           /> :
           <CurrentVersion
             details={null}
+            projectId={projects.chosenProject.projectId}
+            pageName={pageName}
+            fieldID={elementContent.id}
+            editable={elementContent.editable}
           />
         }
       </React.Fragment>
