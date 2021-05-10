@@ -57,6 +57,7 @@ export class FileUploader extends Component {
         projectId: PropTypes.string.isRequired,
       }).isRequired,
     }).isRequired,
+    uploadFile: PropTypes.func.isRequired
   }
 
   constructor() {
@@ -110,6 +111,31 @@ export class FileUploader extends Component {
       state: ComponentStates.UPLOADING_NEW_FILE_TO_SERVER
     })
     e.stopPropagation();
+  }
+
+  uploadProcoreFile = (e) => {
+    e.stopPropagation();
+    console.log("procore file submit clicked")
+    this.setState({
+      hasChosenFile: false,
+      uploadFileRequested: false,
+      fileState: '',
+      state: ComponentStates.UPLOADING_NEW_FILE_TO_SERVER
+    })
+
+    const { fileDetails } = this.state
+    const { projects, pageName, elementContent } = this.props
+
+    const projectId = projects.chosenProject.projectId
+    const fieldId = elementContent.id
+    const uploadDetails = {
+      filename: fileDetails.prostore_file.filename,
+      procoreFileUrl: fileDetails.prostore_file.url
+    }
+    const fieldType = "file"
+
+    // Send to the reducer
+    this.props.uploadFile(projectId, pageName, fieldId, uploadDetails, fieldType)
   }
 
 
@@ -230,7 +256,7 @@ export class FileUploader extends Component {
               id="upload-button"
               className="button"
               type="submit"
-              onClick={(e) => this.uploadFile(e)}
+              onClick={(e) => this.uploadProcoreFile(e)}
               disabled={!hasChosenFile}
               value={Strings.BUTTON_UPLOAD_FILE}
             />

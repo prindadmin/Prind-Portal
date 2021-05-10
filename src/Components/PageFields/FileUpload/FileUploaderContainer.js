@@ -18,6 +18,9 @@ const mapDispatchToProps = dispatch => {
       dispatch(projects.updateField(pageName, fieldDetails))
     }
     */
+    uploadFile: (projectID, pageName, fieldID, fileDetails, fieldType) => {
+      dispatch(projects.uploadFile(projectID, pageName, fieldID, fileDetails, fieldType))
+    },
   }
 }
 

@@ -11,12 +11,11 @@ import {
 
 import AWS from 'aws-sdk';
 import * as Strings from '../../../../../Data/Strings'
+import * as ComponentStates from '../../../../ComponentStates'
 
 const windowCloseDelay = 1500
 
-// TODO: LAUNCH: Different actions if this is a procore integration
-// Send ID to the server
-//this.props.uploadProcoreFile(latestVersion, resolve, reject)
+// TODO: FUTURE: Do something with the QUIESCENT state
 
 export class UploaderPopOver extends Component {
   static propTypes = {
@@ -48,10 +47,9 @@ export class UploaderPopOver extends Component {
 
   constructor(props) {
     super(props)
-    console.log(props)
     this.state = {
       uploadProgress: 0,
-      uploadError: false,
+      state: ComponentStates.UPLOAD_IN_PROGESS
     }
   }
 
@@ -59,14 +57,19 @@ export class UploaderPopOver extends Component {
     const { projectID, pageName } = this.props
     // Upload the file to S3
     this.uploadToS3()
-    this.props.requestS3ProjectFileUploadToken(projectID, pageName)
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.user.projectS3Token !== prevProps.user.projectS3Token) {
+      this.uploadToS3()
+    }
   }
 
   getValidS3Token = () => {
     const { user, projectID, pageName } = this.props
     if (user.projectS3Token === undefined) {
       this.setState({
-        uploadError: true
+        state: ComponentStates.ERROR_WHEN_LOADING
       })
       this.props.requestS3ProjectFileUploadToken(projectID, pageName)
       return undefined;
@@ -92,10 +95,9 @@ export class UploaderPopOver extends Component {
     const file = fileDetails.files[0]
 
     const token = this.getValidS3Token()
-    if (token === undefined) {
-      console.log("there was an issue getting an S3 token")
+    if (!token) {
       this.setState({
-        uploadError: true
+        state: ComponentStates.ERROR_WHEN_LOADING
       })
       return;
     }
@@ -134,6 +136,9 @@ export class UploaderPopOver extends Component {
       .on('success', function(response) {
         // Timer to keep the window open for a few seconds after upload completes
         setTimeout(() => {
+          that.setState({
+            state: ComponentStates.QUIESCENT
+          })
           that.informServer(response)
         }, windowCloseDelay);
 
@@ -143,7 +148,7 @@ export class UploaderPopOver extends Component {
         //console.log("Error!");
         //console.error(error)
         that.setState({
-          uploadError: true
+          state: ComponentStates.ERROR_WHEN_LOADING
         })
       })
 
@@ -203,13 +208,13 @@ export class UploaderPopOver extends Component {
     //console.log(this.props.fileDetails.files)
 
     const { fileDetails } = this.props
-    const { uploadProgress, uploadError } = this.state
+    const { uploadProgress } = this.state
 
     const file = fileDetails.files[0]
     var fileSize = file.size
 
     const progressValue = uploadProgress / fileSize
-    const uploadStatus = uploadError ? "error" : ""
+    const uploadStatus = this.state.state === ComponentStates.ERROR_WHEN_LOADING ? "error" : ""
 
 
     return(
@@ -226,11 +231,11 @@ export class UploaderPopOver extends Component {
                   <p><b>{Strings.UPLOADED_SIZE}</b> {uploadProgress + " / " + fileSize + " bytes"}</p>
                 </div>
                 <ProgressBar
-                  intent={uploadError? Intent.DANGER : Intent.PRIMARY}
+                  intent={this.state.state === ComponentStates.ERROR_WHEN_LOADING ? Intent.DANGER : Intent.PRIMARY}
                   value={progressValue}
                   />
                 {
-                  uploadError ? this.getErrorBlock() : null
+                  this.state.state === ComponentStates.ERROR_WHEN_LOADING ? this.getErrorBlock() : null
                 }
               </div>
             </div>

@@ -20,9 +20,7 @@ async function CreateField(payload) {
 
     // Create the header for the request
     const myInit = {
-        headers: {
-          Authorization: identityToken
-        },
+        headers: { Authorization: identityToken },
         body: payload.fieldDetails,
         response: false,
     }

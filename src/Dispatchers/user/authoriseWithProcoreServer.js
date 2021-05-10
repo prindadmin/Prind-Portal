@@ -3,12 +3,7 @@ import API from '@aws-amplify/api';
 
 async function AuthoriseWithProcoreServer(parameters) {
 
-  // TODO: LAUNCH: Remove so that procore uses real function
-  if (process.env.REACT_APP_IS_PROCORE) {
-    return new Promise((resolve, reject) => {
-      resolve()
-    })
-  }
+  console.log(parameters)
 
   // Get the current session and the identity jwtToken
   const identityToken = await Auth.currentSession()
@@ -29,6 +24,7 @@ async function AuthoriseWithProcoreServer(parameters) {
     // Send the request
     API.post(apiName, path, myInit)
       .then(response => {
+        console.log(response)
         if (response.Error) {
           reject(response)
           return;
@@ -36,6 +32,7 @@ async function AuthoriseWithProcoreServer(parameters) {
         resolve(response)
       })
       .catch(error => {
+        console.log(error);
         reject(error)
      })
    })

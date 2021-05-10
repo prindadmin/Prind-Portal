@@ -7,9 +7,6 @@ on the specified project
 import { Auth } from 'aws-amplify';
 import API from '@aws-amplify/api';
 
-// TODO: LAUNCH: Implement the /files/${companyId}/${projectId} endpoint
-
-/*
 async function GetProjectFilesAndFolders(payload) {
 
   // Get the current session and the identity jwtToken
@@ -28,7 +25,7 @@ async function GetProjectFilesAndFolders(payload) {
   const { companyId, projectId, folderId } = payload
 
   // Build path for request
-  var path = `/files/${companyId}/${projectId}`
+  var path = `/procorefiles/${companyId}/${projectId}`
   if (folderId) {
     path = `${path}/${folderId}`
   }
@@ -50,8 +47,8 @@ async function GetProjectFilesAndFolders(payload) {
      })
    })
 }
-*/
 
+/*
 function GetProjectFilesAndFolders(payload) {
 
   return {
@@ -340,5 +337,5 @@ function GetProjectFilesAndFolders(payload) {
     }
   }
 }
-
+*/
 export default GetProjectFilesAndFolders

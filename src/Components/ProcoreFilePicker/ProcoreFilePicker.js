@@ -199,16 +199,12 @@ export class ProcoreFilePicker extends Component {
     const filteredLength = this.getFilteredFiles().length + this.getFilteredFolders().length
     if (filteredLength === 0 && this.props.procore.searchTerm === "") {
       return (
-        <FullScreenTile
-          text={Strings.FULL_SCREEN_NO_FILES}
-          icon='file-search' />
+        <FullScreenTile text={Strings.FULL_SCREEN_NO_FILES} icon='file-search' style={{ gridColumnStart: "1", gridColumnEnd: "-1" }}/>
       )
     }
     if (filteredLength === 0) {
       return (
-        <FullScreenTile
-          text={Strings.FULL_SCREEN_FILTER_TOO_HARSH}
-          icon='file-search' />
+        <FullScreenTile text={Strings.FULL_SCREEN_FILTER_TOO_HARSH} icon='file-search' style={{ gridColumnStart: "1", gridColumnEnd: "-1" }}/>
       )
     }
     if (this.state.width < 1024) {
