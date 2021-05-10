@@ -24,7 +24,7 @@ async function AuthoriseWithProcoreServer(parameters) {
     // Send the request
     API.post(apiName, path, myInit)
       .then(response => {
-        console.log(response)
+        //console.log(response)
         if (response.Error) {
           reject(response)
           return;
@@ -32,7 +32,7 @@ async function AuthoriseWithProcoreServer(parameters) {
         resolve(response)
       })
       .catch(error => {
-        console.log(error);
+        //console.log(error);
         reject(error)
      })
    })

@@ -16,7 +16,10 @@ export class FullScreenTile extends Component {
     const text = this.props.text === undefined ? Strings.DEFAULT_FULL_SCREEN_TILE : this.props.text
     const icon = this.props.icon === undefined ? '/images/icons/file-search.svg'  : `/images/icons/${this.props.icon}.svg`
 
-    const style = Object.assign({ minHeight: "50vh" }, this.props.style)
+    var style = { minHeight: "50vh" }
+    if (this.props.style) {
+      style = Object.assign(style, this.props.style)
+    }
 
     return (
       <div id='full-screen-tile' className={classes.fullScreenTile} style={style}>

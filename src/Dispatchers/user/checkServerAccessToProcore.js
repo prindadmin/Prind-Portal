@@ -30,7 +30,7 @@ async function CheckServerAccessToProcore() {
     // Send the request
     API.get(apiName, path, myInit)
       .then(response => {
-        console.log(response)
+        //console.log(response)
         if (response.Error) {
           reject(response)
           return;
@@ -38,7 +38,7 @@ async function CheckServerAccessToProcore() {
         resolve(response)
       })
       .catch(error => {
-        console.log(error);
+        //console.log(error);
         reject(error)
      })
    })

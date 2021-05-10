@@ -223,11 +223,11 @@ export class ProcoreFilePicker extends Component {
 
   render () {
     return (
-      <Popover handleClose={this.props.handleClose}>
+      <Popover handleClose={this.props.handleClose} style={{ justifyContent: "flex-start", alignItems: "flex-start" }}>
         <div className={classes.container}>
           <img className={ classes.closeButton }src='/images/icons/times-circle.svg' onClick={(e) => this.props.handleClose()} alt={Strings.BUTTON_CLOSE} />
           {
-            this.state.state === ComponentStates.LOADING ? <LoadingSpinner /> : null
+            this.state.state === ComponentStates.LOADING ? <LoadingSpinner style={{ margin: "auto" }} /> : null
           }
           {
             this.state.state === ComponentStates.ERROR_WHEN_LOADING ? this.getErrorMessage() : null

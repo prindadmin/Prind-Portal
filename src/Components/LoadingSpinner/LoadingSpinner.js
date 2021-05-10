@@ -4,13 +4,17 @@ function Spinner(props) {
 
   var style = {}
 
-  if (props.size !== undefined) {
+  if (props.size) {
     style = {
       width: props.size,
       height: props.size,
       margin: props.size / 8,
       borderWidth: props.size / 8,
     }
+  }
+
+  if (props.style) {
+    style = Object.assign(props.style, style)
   }
 
   return (
