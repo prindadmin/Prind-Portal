@@ -50,7 +50,7 @@ const LoggedInContent = lazy(() => import('./Pages/LoggedInContent'));
 // TODO: FUTURE: Make page content in Redux follow the available fields for a projectType
 // TODO: FUTURE: Put a dev password on the front of the dev portal
 // TODO: FUTURE: Add Toasts when errors occur
-
+// TODO: URGENT: Procore crashes in Team member page and project details page
 
 
 // Use existing Cognito resource for auth
