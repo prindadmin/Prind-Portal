@@ -18,7 +18,9 @@ export class DownloadBox extends Component {
     onDownloadSuccess: PropTypes.func.isRequired,
     onDownloadFailure: PropTypes.func.isRequired,
     downloadFile: PropTypes.func.isRequired,
-    resetDownloadURL: PropTypes.func.isRequired
+    resetDownloadURL: PropTypes.func.isRequired,
+    style: PropTypes.object,
+    size: PropTypes.string
   }
 
   constructor() {
@@ -84,15 +86,18 @@ export class DownloadBox extends Component {
   }
 
   render () {
-
-    const isMobileSize = this.state.width < MOBILE_WIDTH_BREAKPOINT
-
+    const isMobileSize = this.state.width < MOBILE_WIDTH_BREAKPOINT || this.props.size === 'small'
     const itemSize = isMobileSize ? "3x" : "4x"
 
+    var style = {}
+    if (this.props.style) {
+      style = Object.assign(this.props.style, style)
+    }
+
     return (
-      <div id='download-box' className={classes.downloadBox} onClick={(e) => this.downloadFile(e)}>
+      <div id='download-box' className={classes.downloadBox} style={style} onClick={(e) => this.downloadFile(e)}>
         <div>
-          <ItemIcon size={itemSize} type='download' />
+          <ItemIcon size={this.props.size === 'small' ? "1x" : itemSize} type='download' />
           {
             isMobileSize ? null : <p>{Strings.DOWNLOAD}</p>
           }

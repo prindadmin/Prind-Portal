@@ -134,6 +134,8 @@ export class FileUploader extends Component {
     }
     const fieldType = "file"
 
+    console.log(uploadDetails)
+
     // Send to the reducer
     this.props.uploadFile(projectId, pageName, fieldId, uploadDetails, fieldType)
   }

@@ -42,7 +42,8 @@ export function * getProjectFilesAndFolders (action) {
       type: Actions.PROCORE_SET_STATE,
       payload: {
         fetching: false,
-        ...result.body
+        folders: result.body.folders,
+        files: result.body.files,
       }
     })
     if (action.payload.resolve !== undefined) {

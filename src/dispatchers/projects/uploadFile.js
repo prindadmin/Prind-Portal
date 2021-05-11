@@ -2,7 +2,6 @@ import { Auth } from 'aws-amplify';
 import API from '@aws-amplify/api';
 
 async function UploadFile(payload) {
-
   // Get the current session and the identity jwtToken
   const identityToken = await Auth.currentSession()
     .then(credentials => {
@@ -14,7 +13,7 @@ async function UploadFile(payload) {
   const path = `/project/${payload.projectID}/${payload.pageName}/${payload.fieldID}`
   const mergedFileDetails = {
     tags: [],
-    fileDetails: payload.fileDetails
+    ...payload.fileDetails
   }
   // Create the header for the request
   const myInit = {
@@ -30,6 +29,7 @@ async function UploadFile(payload) {
     // Send the request
     API.post(apiName, path, myInit)
       .then(response => {
+        console.log(response)
         if (response.Error) {
           reject(response)
           return;
@@ -37,6 +37,7 @@ async function UploadFile(payload) {
         resolve(response)
       })
       .catch(error => {
+        console.log(error)
         reject(error)
      })
    })

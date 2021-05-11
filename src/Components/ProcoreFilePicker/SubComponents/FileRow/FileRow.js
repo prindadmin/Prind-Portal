@@ -21,18 +21,18 @@ export class FileRow extends Component {
     doc: PropTypes.shape({
       id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
+      description: PropTypes.string,
       file_versions: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.number.isRequired,
         url: PropTypes.string.isRequired,
         number: PropTypes.number.isRequired,
         created_at: PropTypes.string.isRequired,
         anchor: PropTypes.shape({
-          entryHash: PropTypes.string
-        }).isRequired,
+          entry_hash: PropTypes.string
+        }),
         signatures: PropTypes.arrayOf(PropTypes.shape({
-          entryHash: PropTypes.string
-        })).isRequired,
+          entry_hash: PropTypes.string
+        })),
       })).isRequired,
     }),
     procore: PropTypes.shape({

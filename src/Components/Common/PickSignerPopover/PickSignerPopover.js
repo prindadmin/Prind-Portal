@@ -43,7 +43,7 @@ export class PickSignerPopover extends Component {
       s3VersionId: PropTypes.string.isRequired,
       uploadName: PropTypes.string.isRequired,
     }).isRequired,
-    projectID: PropTypes.string.isRequired,
+    projectId: PropTypes.string.isRequired,
     pageName: PropTypes.string.isRequired,
     fieldID: PropTypes.string.isRequired,
     onClosePopover: PropTypes.func.isRequired,
@@ -63,11 +63,11 @@ export class PickSignerPopover extends Component {
   // When the user wants to send the signing request, this is called
   sendSigningRequest = (e) => {
     e.preventDefault()
-    const { projectID, pageName, fieldID } = this.props
+    const { projectId, pageName, fieldID } = this.props
     const { selectedMembers } = this.state
     var members = selectedMembers.map(value => value.username);
     this.props.requestSignature(
-      projectID,
+      projectId,
       pageName,
       fieldID,
       members,

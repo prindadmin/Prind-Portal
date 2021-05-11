@@ -92,6 +92,8 @@ export class UploadHistory extends Component {
           fileVersionDetails={fileUpload}
           onDownloadSuccess={this.downloadResolve}
           onDownloadFailure={this.downloadReject}
+          size="small"
+          style={{ border: "0px black solid", height: "1.5em", width: "1.5em", alignItems: "flex-start", margin: "auto" }}
         />
       </div>
     )

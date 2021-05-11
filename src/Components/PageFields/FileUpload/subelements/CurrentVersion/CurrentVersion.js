@@ -25,7 +25,7 @@ export class CurrentVersion extends Component {
       uploadName: PropTypes.string.isRequired,
       uploadedDateTime: PropTypes.string.isRequired,
       uploadedBy: PropTypes.string.isRequired,
-      proofLink: PropTypes.string.isRequired,
+      proofLink: PropTypes.string,
     }),
     projects: PropTypes.shape({
       chosenProject: PropTypes.shape({
@@ -100,18 +100,19 @@ export class CurrentVersion extends Component {
 
   getDetailsTable = () => {
     const { details } = this.props
+    const uploadedDate = !details.uploadedDateTime ? undefined : new Date(details.uploadedDateTime)
     return (
       <div className='details-table'>
         <h4>{Strings.FILE_NAME}</h4>
-        <div>{details.uploadName !== undefined ? details.uploadName : ""}</div>
+        <div>{!details.uploadName ? "" : details.uploadName }</div>
         <h4>{Strings.UPLOAD_DATE_TIME}</h4>
-        <div>{details.uploadedDateTime !== undefined ? details.uploadedDateTime : ""}</div>
+        <div>{!uploadedDate ? Strings.ERROR_DATE_UNAVAILABLE : uploadedDate.toLocaleString({ timeZone: 'UTC' })}</div>
         <h4>{Strings.UPLOADED_BY}</h4>
-        <div>{details.uploadedBy !== undefined && details.uploadedBy !== "None None" ? details.uploadedBy : Strings.FILE_UPLOAD_UPLOADER_HAS_NO_NAME}</div>
+        <div>{!details.uploadedBy || details.uploadedBy !== "None None" ? Strings.FILE_UPLOAD_UPLOADER_HAS_NO_NAME : details.uploadedBy }</div>
         <h4>{Strings.PROOF}</h4>
         <div>
           {
-            details.proofLink === null  || details.proofLink === undefined ?
+            !details.proofLink ?
               Strings.NO_PROOF_AVAILABLE :
               <div id='proof-link-container' onClick={e => e.stopPropagation()}>
                 <a id="proof-link" href={details.proofLink} target="_blank" rel="noopener noreferrer">{Strings.LINK_TO_PROOF}</a>
