@@ -11,7 +11,6 @@ import * as Strings from '../../../Data/Strings'
 const ProjectJoinTile = props => {
 
   const { details } = props
-
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
 
   const displayText = Strings.JOINED_PROJECT_TEXT

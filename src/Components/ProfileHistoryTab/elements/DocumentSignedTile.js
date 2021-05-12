@@ -12,7 +12,6 @@ import * as Strings from '../../../Data/Strings'
 const DocumentSignedTile = props => {
 
   const { details } = props
-
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
 
   const displayText = Strings.SIGNED_DOCUMENT_TEXT
