@@ -65,16 +65,12 @@ export class ProfileHistoryTab extends Component {
     if (historyEntry.dateTime && !historyEntry.signedAt) {
       returnValue = new Date(parseInt(historyEntry.dateTime) * 1000)
     }
-    console.log(returnValue)
-    //returnValue = new Date(0)
     return returnValue
   }
 
 
   orderHistoryChronologically = () => {
-
     const { history } = this.props.user
-
     var orderedHistory = []
 
     // If the history fetch worked for projects
@@ -119,15 +115,12 @@ export class ProfileHistoryTab extends Component {
       }))
     }
 
-    console.log(orderedHistory)
     return orderedHistory.sort((a,b) => a.dateTime - b.dateTime).reverse();
   }
 
 
-
   render() {
     const orderedHistory = this.orderHistoryChronologically()
-
     return(
       <div className="tab-pane active">
         <div id="history-tab-container">
