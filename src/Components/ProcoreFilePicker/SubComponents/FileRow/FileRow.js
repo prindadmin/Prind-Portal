@@ -9,7 +9,7 @@ import * as Strings from '../../../../Data/Strings'
 import * as Functions from '../../../../Functions'
 
 // Components
-const LoadingSpinner = lazy(() => import('../../../LoadingSpinner'))
+import LoadingSpinner from '../../../LoadingSpinner'
 
 // TODO: FUTURE: Add icon to the beginning of the file name depending on type
 export class FileRow extends Component {

@@ -9,8 +9,8 @@ import {
 
 import * as Strings from '../../Data/Strings'
 
-const PopOverHandler = lazy(() => import('../Common/popOverHandler'));
-const UserDetailsPopOver = lazy(() => import('../UserDetailsPopOver'));
+import PopOverHandler from '../Common/popOverHandler'
+import UserDetailsPopOver from '../UserDetailsPopOver'
 
 export class ContactTile extends Component {
   static propTypes = {

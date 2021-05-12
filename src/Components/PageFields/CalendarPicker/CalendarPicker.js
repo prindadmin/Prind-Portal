@@ -8,8 +8,8 @@ import * as Strings from '../../../Data/Strings'
 import * as ComponentStates from '../../ComponentStates'
 import SHORTCUTS from './shortcuts'
 
-const ErrorTile = lazy(() => import('../../ErrorTile'));
-const LoadingSpinner = lazy(() => import('../../LoadingSpinner'))
+import ErrorTile from '../../ErrorTile'
+import LoadingSpinner from '../../LoadingSpinner'
 
 // TODO: FUTURE: Remove blueprintjs/datetime from calendar
 

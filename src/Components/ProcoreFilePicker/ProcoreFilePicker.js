@@ -11,9 +11,9 @@ import * as ComponentStates from '../ComponentStates'
 
 // Components
 import ProcoreBreadcrumbs from '../ProcoreBreadcrumbs'
-const FullScreenTile = lazy(() => import('../FullScreenTile'));
-const FileRow = lazy(() => import('./SubComponents/FileRow'));
-const FolderRow = lazy(() => import('./SubComponents/FolderRow'));
+import FullScreenTile from '../FullScreenTile'
+import FileRow from './SubComponents/FileRow'
+import FolderRow from './SubComponents/FolderRow'
 
 
 export class ProcoreFilePicker extends Component {

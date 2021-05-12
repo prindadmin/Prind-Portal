@@ -8,8 +8,8 @@ import {
 
 import * as Strings from '../../Data/Strings'
 
-const UserAccreditationTile = lazy(() => import('../UserAccreditationTile'));
-const NoAccreditationsAvailable = lazy(() => import('../Common/NoAccreditationsAvailable'));
+import UserAccreditationTile from '../UserAccreditationTile'
+import NoAccreditationsAvailable from '../Common/NoAccreditationsAvailable'
 
 export class UserDetailsPopOver extends Component {
   static propTypes = {

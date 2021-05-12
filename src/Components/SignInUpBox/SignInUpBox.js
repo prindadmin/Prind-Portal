@@ -8,10 +8,10 @@ import * as Endpoints from '../../Data/Endpoints'
 import * as States from '../../States'
 
 // Components
-const SignUpBox  = lazy(() => import('./SignUpBox'));
-const SignInBox  = lazy(() => import('./SignInBox'));
-const ForgotPasswordBox = lazy(() => import('./ForgotPasswordBox'));
-const PasswordResetBox = lazy(() => import('./ResetPassword'));
+import SignUpBox from './SignUpBox'
+import SignInBox from './SignInBox'
+import ForgotPasswordBox from './ForgotPasswordBox'
+import PasswordResetBox from './ResetPassword'
 
 // FUTURE: Make the "Click here" text change the mouse icon like a real link
 
