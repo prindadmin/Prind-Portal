@@ -18,7 +18,7 @@ const DocumentSignedTile = props => {
   const displayText = Strings.SIGNED_DOCUMENT_TEXT
     .replace("XXX", details.filename)
     .replace("YYY", details.projectName)
-    .replace("ZZZ", new Date(details.dateTime).toLocaleDateString('en-GB', options))
+    .replace("ZZZ", details.dateTime.toLocaleDateString('en-GB', options))
 
 
   return (

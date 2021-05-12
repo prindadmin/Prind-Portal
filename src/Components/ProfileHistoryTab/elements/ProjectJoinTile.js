@@ -16,7 +16,7 @@ const ProjectJoinTile = props => {
 
   const displayText = Strings.JOINED_PROJECT_TEXT
     .replace("XXX", details.projectName)
-    .replace("YYY", new Date(parseInt(details.dateTime) * 1000).toLocaleDateString('en-GB', options))
+    .replace("YYY", details.dateTime.toLocaleDateString('en-GB', options))
 
 
   return (

@@ -43,13 +43,33 @@ export class ProfileHistoryTab extends Component {
             type: PropTypes.string,
             filename: PropTypes.string.isRequired,
             projectName: PropTypes.string.isRequired,
-            signedAt: PropTypes.string,
-            dateTime: PropTypes.string
+            signedAt: PropTypes.number,
+            dateTime: PropTypes.number
           })
         ),
       })
     }).isRequired,
   }
+
+  findDateTime = (historyEntry) => {
+    var returnValue = new Date(0)
+    if (historyEntry.data) {
+      return new Date(parseInt(historyEntry.data) * 1000)
+    }
+    if (typeof historyEntry.dateTime === "string") {
+      return new Date(historyEntry.dateTime)
+    }
+    if (!historyEntry.dateTime && historyEntry.signedAt) {
+      returnValue = new Date(parseInt(historyEntry.signedAt) * 1000)
+    }
+    if (historyEntry.dateTime && !historyEntry.signedAt) {
+      returnValue = new Date(parseInt(historyEntry.dateTime) * 1000)
+    }
+    console.log(returnValue)
+    //returnValue = new Date(0)
+    return returnValue
+  }
+
 
   orderHistoryChronologically = () => {
 
@@ -59,22 +79,19 @@ export class ProfileHistoryTab extends Component {
 
     // If the history fetch worked for projects
     if (history.projects !== undefined) {
-
       // Add the projects the user created
-      orderedHistory = orderedHistory.concat(history.projects.projectCreator.map((projectDetails) => {
-        var updatedProjectDetails = projectDetails
-
+      orderedHistory = orderedHistory.concat(history.projects.projectCreator.map((details) => {
+        var updatedProjectDetails = { ...details}
         updatedProjectDetails.type = "PROJECT_CREATED"
-
+        updatedProjectDetails.dateTime = this.findDateTime(details)
         return updatedProjectDetails
       }))
 
       // Add the projects the user joined
-      orderedHistory = orderedHistory.concat(history.projects.projectRole.map((projectDetails) => {
-        var updatedProjectDetails = projectDetails
-
+      orderedHistory = orderedHistory.concat(history.projects.projectRole.map((details) => {
+        var updatedProjectDetails = { ...details}
         updatedProjectDetails.type = "PROJECT_JOINED"
-
+        updatedProjectDetails.dateTime = this.findDateTime(details)
         return updatedProjectDetails
       }))
     }
@@ -82,45 +99,28 @@ export class ProfileHistoryTab extends Component {
 
     // If the history fetch worked for signatures
     if (history.signedDocuments !== undefined) {
-
       // Add the projects the user created
       orderedHistory = orderedHistory.concat(history.signedDocuments.map((details) => {
-        var updatedDetails = details
-
+        var updatedDetails = { ...details}
         updatedDetails.type = "DOCUMENT_SIGNED"
-
-        if (details.dateTime === undefined) {
-          updatedDetails.dateTime = details.signedAt
-        }
-
+        updatedDetails.dateTime = this.findDateTime(details)
         return updatedDetails
       }))
     }
-
 
     // If the history fetch worked for uploaded documents
     if (history.documentVersions !== undefined) {
-
       // Add the projects the user created
       orderedHistory = orderedHistory.concat(history.documentVersions.map((details) => {
-        var updatedDetails = details
-
+        var updatedDetails = { ...details}
         updatedDetails.type = "DOCUMENT_UPLOADED"
-
-        if (details.dateTime === undefined) {
-          updatedDetails.dateTime = details.signedAt
-        }
-
+        updatedDetails.dateTime = this.findDateTime(details)
         return updatedDetails
       }))
     }
 
-
-
-
-
-    return orderedHistory.sort((a,b) => new Date(a.dateTime).getTime() - new Date(b.dateTime).getTime()).reverse();
-
+    console.log(orderedHistory)
+    return orderedHistory.sort((a,b) => a.dateTime - b.dateTime).reverse();
   }
 
 

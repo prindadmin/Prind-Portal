@@ -13,7 +13,17 @@ import * as ServerErrors from '../../Data/ServerErrors'
 // Components
 import ProjectLoading from '../../Components/Common/ProjectLoading'
 import ErrorBoundary from '../../Components/ErrorBoundary'
-const HeaderBar = lazy(() => import('../../Components/HeaderBar'));
+import HeaderBar from '../../Components/HeaderBar'
+
+// Pages
+import ProjectDetailsPage from '../ProjectDetailsPage'
+import ProjectTeamPage from '../ProjectTeamPage'
+import ProjectStagePage from '../ProjectStagePageTemplate'
+import FoundationsPage from '../FoundationsPage'
+import NewProjectPage from '../NewProjectPage'
+import ProfilePage from '../ProfilePage'
+
+// Lazy components
 const SideBar = lazy(() => import('../../Components/SideBar'));
 const SideBarMobile = lazy(() => import('../../Components/SideBarMobile'));
 const LayoutBody  = lazy(() => import('../../Components/LoggedInLayout/Body'));
@@ -23,14 +33,6 @@ const Footer = lazy(() => import('../../Components/Common/footer'));
 const ProjectFetchError = lazy(() => import('../../Components/Common/ProjectFetchError'));
 const Error404 = lazy(() => import('../../Components/Error404'))
 const ProcoreProjectDoesNotExist = lazy(() => import('../../Components/ProcoreProjectDoesNotExist'))
-
-/* Pages that can be loaded */
-const ProjectDetailsPage = lazy(() => import('../ProjectDetailsPage'));
-const ProjectTeamPage = lazy(() => import('../ProjectTeamPage'));
-const ProjectStagePage = lazy(() => import('../ProjectStagePageTemplate'));
-const FoundationsPage = lazy(() => import('../FoundationsPage'));
-const NewProjectPage = lazy(() => import('../NewProjectPage'));
-const ProfilePage = lazy(() => import('../ProfilePage'));
 
 const MOBILE_WIDTH_BREAKPOINT = 992;
 const PAGES_WITHOUT_PROJECT_SELECTOR = ['newproject', 'profile', 'foundations']
@@ -319,14 +321,16 @@ export class LoggedInContent extends Component {
       <div id='logged-in-content-container' className='full-width row'>
         <HeaderBar companyName='Prin-D' openProjectSelector={this.shouldOpenProjectSelector()}/>
         <ErrorBoundary onRetry={this.onRetry}>
-          <LayoutBody noFoundationsBannerShowing={!this.props.user.details.foundationsID}>
-            {
-              this.state.width > MOBILE_WIDTH_BREAKPOINT ? <SideBar {...this.props} /> : <SideBarMobile {...this.props} />
-            }
-            {
-              this.state.width > MOBILE_WIDTH_BREAKPOINT ? this.getDesktopContent() : this.getMobileContent()
-            }
-          </LayoutBody>
+          <Suspense fallback={this.loadingPlaceholder()}>
+            <LayoutBody noFoundationsBannerShowing={!this.props.user.details.foundationsID}>
+              {
+                this.state.width > MOBILE_WIDTH_BREAKPOINT ? <SideBar {...this.props} /> : <SideBarMobile {...this.props} />
+              }
+              {
+                this.state.width > MOBILE_WIDTH_BREAKPOINT ? this.getDesktopContent() : this.getMobileContent()
+              }
+            </LayoutBody>
+          </Suspense>
         </ErrorBoundary>
         <Footer />
       </div>

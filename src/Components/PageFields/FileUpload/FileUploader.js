@@ -39,12 +39,12 @@ export class FileUploader extends Component {
           uploadName: PropTypes.string.isRequired,
           uploadedBy: PropTypes.string.isRequired,
           ver: PropTypes.string.isRequired,
-          uploadedDateTime: PropTypes.string.isRequired,
+          uploadedDateTime: PropTypes.number.isRequired,
           proofLink: PropTypes.string,
           signatures: PropTypes.arrayOf(
             PropTypes.shape({
               signerName: PropTypes.string.isRequired,
-              signatureDateTime: PropTypes.string.isRequired,
+              signatureDateTime: PropTypes.number.isRequired,
               proofLink: PropTypes.string.isRequired,
             })
           ).isRequired

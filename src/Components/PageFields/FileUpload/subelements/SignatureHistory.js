@@ -11,7 +11,7 @@ export class SignatureHistory extends Component {
     details: PropTypes.arrayOf(
       PropTypes.shape({
         signerName: PropTypes.string.isRequired,
-        signatureDateTime: PropTypes.string.isRequired,
+        signatureDateTime: PropTypes.number.isRequired,
         proofLink: PropTypes.string.isRequired,
       })
     ).isRequired,
@@ -27,10 +27,12 @@ export class SignatureHistory extends Component {
         <h4>{Strings.PROOF}</h4>
         {
           details.map((signature, index) => {
+            const signatureDateTime = !signature.signatureDateTime ? undefined : new Date(signature.signatureDateTime * 1000)
+
             return (
               <React.Fragment key={index}>
                 <div key={`signer-${index}`}>{signature.signerName}</div>
-                <div key={`signatureDateTime-${index}`}>{signature.signatureDateTime}</div>
+                <div key={`signatureDateTime-${index}`}>{!signatureDateTime ? Strings.ERROR_DATE_UNAVAILABLE : signatureDateTime.toLocaleString()}</div>
                 <div key={`proofLink-${index}`}><a href={signature.proofLink} target="_blank" rel="noopener noreferrer">{Strings.LINK_TO_PROOF}</a></div>
               </React.Fragment>
             )

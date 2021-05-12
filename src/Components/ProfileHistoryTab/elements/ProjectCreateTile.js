@@ -8,6 +8,7 @@ import {
 import * as Strings from '../../../Data/Strings'
 
 // TODO: FUTURE: Replace blueprintjs
+// TODO: Get Simon to fix the dateTime data that is sent; always a string of 0s at the moment
 const ProjectCreateTile = props => {
 
   const { details } = props
@@ -16,7 +17,7 @@ const ProjectCreateTile = props => {
 
   const displayText = Strings.CREATED_PROJECT_TEXT
     .replace("XXX", details.projectName)
-    .replace("YYY", new Date(parseInt(details.dateTime) * 1000).toLocaleDateString('en-GB', options))
+    .replace("YYY", details.dateTime.toLocaleDateString('en-GB', options))
 
 
   return (

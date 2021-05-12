@@ -14,7 +14,7 @@ export class UploadHistory extends Component {
         uploadName: PropTypes.string.isRequired,
         uploadedBy: PropTypes.string.isRequired,
         ver: PropTypes.string.isRequired,
-        uploadedDateTime: PropTypes.string.isRequired,
+        uploadedDateTime: PropTypes.number.isRequired,
         proofLink: PropTypes.string
       })
     ).isRequired,
@@ -116,12 +116,14 @@ export class UploadHistory extends Component {
         <h4>{Strings.DOWNLOAD_WITH_COLON}</h4>
         {
           reversedDetails.map((fileUpload, index) => {
+            const uploadedDate = !fileUpload.uploadedDateTime ? undefined : new Date(fileUpload.uploadedDateTime * 1000)
+
             return (
               <React.Fragment key={index}>
                 <div key={`uploadName-${index}`}>{fileUpload.uploadName? fileUpload.uploadName : Strings.NO_UPLOAD_NAME }</div>
                 <div key={`uploadedBy-${index}`}>{fileUpload.uploadedBy === "None None" ? Strings.FILE_UPLOAD_UPLOADER_HAS_NO_NAME : fileUpload.uploadedBy}</div>
                 <div key={`ver-${index}`}>{fileUpload.ver}</div>
-                <div key={`uploadDateTime-${index}`}>{fileUpload.uploadedDateTime}</div>
+                <div key={`uploadDateTime-${index}`}>{!uploadedDate ? Strings.ERROR_DATE_UNAVAILABLE : uploadedDate.toLocaleString()}</div>
                 <div key={`proof-${index}`}>
                   {
                     this.getProof(fileUpload.proofLink)

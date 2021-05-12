@@ -179,7 +179,7 @@ export class ProjectDetailsPage extends Component {
         </ButtonGroup>
 
 
-
+        {/*
         <ButtonGroup fill>
           <Button
             loading={this.props.submitting}
@@ -191,7 +191,7 @@ export class ProjectDetailsPage extends Component {
             })}
           />
         </ButtonGroup>
-
+        */}
 
 
       </form>

@@ -23,7 +23,7 @@ export class CurrentVersion extends Component {
     }).isRequired,
     details: PropTypes.shape({
       uploadName: PropTypes.string.isRequired,
-      uploadedDateTime: PropTypes.string.isRequired,
+      uploadedDateTime: PropTypes.number.isRequired,
       uploadedBy: PropTypes.string.isRequired,
       proofLink: PropTypes.string,
     }),
@@ -100,13 +100,13 @@ export class CurrentVersion extends Component {
 
   getDetailsTable = () => {
     const { details } = this.props
-    const uploadedDate = !details.uploadedDateTime ? undefined : new Date(details.uploadedDateTime)
+    const uploadedDate = !details.uploadedDateTime ? undefined : new Date(details.uploadedDateTime * 1000)
     return (
       <div className='details-table'>
         <h4>{Strings.FILE_NAME}</h4>
         <div>{!details.uploadName ? "" : details.uploadName }</div>
         <h4>{Strings.UPLOAD_DATE_TIME}</h4>
-        <div>{!uploadedDate ? Strings.ERROR_DATE_UNAVAILABLE : uploadedDate.toLocaleString({ timeZone: 'UTC' })}</div>
+        <div>{!uploadedDate ? Strings.ERROR_DATE_UNAVAILABLE : uploadedDate.toLocaleString()}</div>
         <h4>{Strings.UPLOADED_BY}</h4>
         <div>{!details.uploadedBy || details.uploadedBy !== "None None" ? Strings.FILE_UPLOAD_UPLOADER_HAS_NO_NAME : details.uploadedBy }</div>
         <h4>{Strings.PROOF}</h4>
