@@ -69,12 +69,9 @@ export class FileRow extends Component {
     const id = `filesignbutton-${index}`
 
     return (
-      <input
-        id={id}
-        type="submit"
-        value={ Strings.BUTTON_SELECT_FILE }
-        className="submit-button"
-        onClick={(e) => this.fileSelected(doc)} />
+      <button id={id} type="submit" className={ classes.textButton } onClick={(e) => this.fileSelected(doc)} >
+        { Strings.BUTTON_SELECT_FILE }
+      </button>
     )
   }
 

@@ -330,7 +330,7 @@ p.error {
 
 .chooser-section {
   overflow: scroll;
-  padding: 0 0 10px 0;
+  padding: 0;
 }
 
 .sidebar  {
@@ -467,6 +467,10 @@ p.error {
 /* ================================== */
 /*    logged-in-content-container     */
 /* ================================== */
+
+#logged-in-content-area-1x1 {
+  padding: 0;
+}
 
 #logged-in-content-container {
   margin: 0;
