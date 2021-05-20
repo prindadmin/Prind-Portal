@@ -129,10 +129,6 @@ export function * updateChosenProject (action) {
         fetching: true,
       }
     })
-<<<<<<< Updated upstream
-    const result = yield call(Dispatchers.fetchProjectDetails, project.projectId)
-    const resultBody = result.body
-=======
 
     const result = yield call(Dispatchers.fetchProjectDetails, project.projectId)
     var resultBody = result.body
@@ -142,7 +138,6 @@ export function * updateChosenProject (action) {
       }
     }
 
->>>>>>> Stashed changes
     // Post-fetch update to store
     yield put({
       type: Actions.PROJECT_SET_STATE,

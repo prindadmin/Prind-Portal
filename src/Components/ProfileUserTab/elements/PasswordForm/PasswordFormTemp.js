@@ -28,7 +28,7 @@ export class PasswordForm extends Component {
     super()
     this.state = {
       passwordError: false
-    }
+    } 
   }
 
   passwordUpdatedSuccessfully = (e) => {
