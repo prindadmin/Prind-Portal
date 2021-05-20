@@ -21,7 +21,7 @@ let defaultState = {
 = Init function - Populates the store with the initial values  =
 ================================================================
 */
-function * init (action) {
+export function * init (action) {
   yield put({
     type: Actions.AUTH_SET_STATE,
     payload: {
@@ -35,7 +35,7 @@ function * init (action) {
 === User Sign Up function - Signs the user up for the portal ===
 ================================================================
 */
-function * signUp (action) {
+export function * signUp (action) {
   try {
     yield call(Dispatchers.registerNewUser, action.payload.values)
     yield put({
@@ -49,6 +49,7 @@ function * signUp (action) {
       action.payload.resolve()
     }
   } catch (e) {
+    //console.log("caught error")
     yield put({
       type: Actions.AUTH_SET_STATE,
       payload: {
@@ -67,10 +68,9 @@ function * signUp (action) {
 ==== User Sign In function - signs the user into the portal ====
 ================================================================
 */
-function * signIn (action) {
+export function * signIn (action) {
   try {
     const result = yield call(Dispatchers.signIn, action.payload.values)
-    console.log(result)
     yield put({
       type: Actions.AUTH_SET_STATE,
       payload: {
@@ -106,7 +106,7 @@ function * signIn (action) {
 == User Sign Out function - signs the user out of the portal  ==
 ================================================================
 */
-function * signOut (action) {
+export function * signOut (action) {
   try {
     const result = yield call(Dispatchers.signOut)
     yield put({
@@ -139,7 +139,7 @@ function * signOut (action) {
 ================================================================
 */
 
-function * refreshSession (action) {
+export function * refreshSession (action) {
   try {
     const result = yield call(Dispatchers.refreshSession)
     yield put({
@@ -177,7 +177,7 @@ function * refreshSession (action) {
 == User Forgot Password function - signs the user into the portal ==
 ====================================================================
 */
-function * forgotPassword (action) {
+export function * forgotPassword (action) {
   try {
     const result = yield call(Dispatchers.forgotPassword, action.payload.username)
     if (action.payload.resolve !== undefined) {
@@ -203,7 +203,7 @@ function * forgotPassword (action) {
 == user if they have requested a new one                          ==
 ====================================================================
 */
-function * changePassword (action) {
+export function * changePassword (action) {
   try {
     const result = yield call(Dispatchers.changePassword, action.payload)
     yield put({
@@ -235,7 +235,7 @@ function * changePassword (action) {
 == using their old password as proof                              ==
 ====================================================================
 */
-function * updatePassword (action) {
+export function * updatePassword (action) {
   try {
     const result = yield call(Dispatchers.updatePassword, action.payload)
     if (action.payload.resolve !== undefined) {
@@ -262,7 +262,7 @@ function * updatePassword (action) {
 ====================================================================
 */
 
-function * confirmUserEmail (action) {
+export function * confirmUserEmail (action) {
   try {
     yield call(Dispatchers.confirmUser, action.payload)
     if (action.payload.resolve !== undefined) {

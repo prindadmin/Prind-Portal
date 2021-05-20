@@ -15,32 +15,18 @@ const ProfileRequestsTab = lazy(() => import('../../Components/ProfileRequestsTa
 
 export class ProfilePage extends Component {
   static propTypes = {
-    tabToOpen: PropTypes.string,
+    getUserDetails: PropTypes.func.isRequired,
     getProjectInvitations: PropTypes.func.isRequired,
+    getSignatureRequests: PropTypes.func.isRequired,
+    getHistory: PropTypes.func.isRequired,
+    location: PropTypes.shape({
+      state: PropTypes.object,
+    }).isRequired,
+    fetching: PropTypes.bool,
   }
 
   constructor(props) {
     super(props)
-
-    props.getUserDetails(
-      this.profileResolve,
-      this.profileReject,
-    )
-
-    props.getProjectInvitations(
-      this.projectRequestsResolve,
-      this.projectRequestsReject,
-    )
-
-    props.getSignatureRequests(
-      this.signatureRequestsResolve,
-      this.signatureRequestsReject,
-    )
-
-    props.getHistory(
-      this.historyResolve,
-      this.historyReject,
-    )
 
     var tabName = "user"
 
@@ -64,6 +50,7 @@ export class ProfilePage extends Component {
       signatureRequestsFetching: true,
       signatureRequestsError: false,
       signatureRequestsErrorText: "",
+      fetching: true,
     }
 
   }
@@ -71,69 +58,98 @@ export class ProfilePage extends Component {
   componentDidMount() {
     const { location } = this.props
     // Register pageview with GA
-    ReactGA.pageview(location.pathname + location.search);
+    ReactGA.pageview(location.pathname);
+
+    this.props.getUserDetails(
+      this.profileResolve,
+      this.profileReject,
+    )
+
+    this.props.getProjectInvitations(
+      this.projectRequestsResolve,
+      this.projectRequestsReject,
+    )
+
+    this.props.getSignatureRequests(
+      this.signatureRequestsResolve,
+      this.signatureRequestsReject,
+    )
+
+    this.props.getHistory(
+      this.historyResolve,
+      this.historyReject,
+    )
   }
 
   historyResolve = () => {
     this.setState({
       historyFetching: false,
+      fetching: this.finishedFetching()
     })
-
   }
 
   historyReject = () => {
     this.setState({
       historyFetching: false,
       historyError: true,
-      historyErrorText: Strings.ERROR_FETCHING_USER_HISTORY
+      historyErrorText: Strings.ERROR_FETCHING_USER_HISTORY,
+      fetching: this.finishedFetching()
     })
   }
 
   profileResolve = () => {
     this.setState({
       profileFetching: false,
+      fetching: this.finishedFetching()
     })
-
   }
 
   profileReject = () => {
     this.setState({
       profileFetching: false,
       profileError: true,
-      profileErrorText: Strings.ERROR_FETCHING_USER_PROFILE
+      profileErrorText: Strings.ERROR_FETCHING_USER_PROFILE,
+      fetching: this.finishedFetching()
     })
   }
 
   projectRequestsResolve = () => {
     this.setState({
       projectRequestsFetching: false,
+      fetching: this.finishedFetching()
     })
-
   }
 
   projectRequestsReject = () => {
     this.setState({
       projectRequestsFetching: false,
       projectRequestsError: true,
-      projectRequestsErrorText: Strings.ERROR_FETCHING_USER_PROJECT_REQUESTS
+      projectRequestsErrorText: Strings.ERROR_FETCHING_USER_PROJECT_REQUESTS,
+      fetching: this.finishedFetching()
     })
   }
 
   signatureRequestsResolve = () => {
     this.setState({
       projectRequestsFetching: false,
+      fetching: this.finishedFetching()
     })
-
   }
 
   signatureRequestsReject = () => {
     this.setState({
       signatureRequestsFetching: false,
       signatureRequestsError: true,
-      signatureRequestsErrorText: Strings.ERROR_FETCHING_USER_SIGNATURE_REQUESTS
+      signatureRequestsErrorText: Strings.ERROR_FETCHING_USER_SIGNATURE_REQUESTS,
+      fetching: this.finishedFetching()
     })
   }
 
+  finishedFetching = () => {
+    const { historyFetching, profileFetching, projectRequestsFetching, signatureRequestsFetching } = this.state
+    const fetching = !historyFetching && !profileFetching && !projectRequestsFetching && ! signatureRequestsFetching
+    return fetching
+  }
 
   showLoadingPage = () => {
     return (
@@ -221,16 +237,12 @@ export class ProfilePage extends Component {
 
 
   render() {
-
-    const { fetching } = this.props
-
+    const { fetching } = this.state
     return (
       <div id='profile-page'>
         <div className='page-content-section row'>
           {
-              fetching ?
-              this.showLoadingPage() :
-              this.showFilledPage()
+              fetching ? this.showLoadingPage() : this.showFilledPage()
           }
         </div>
       </div>

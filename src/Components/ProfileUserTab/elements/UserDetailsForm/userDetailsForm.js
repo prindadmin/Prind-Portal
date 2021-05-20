@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
+import { toast } from 'react-toastify';
 import PropTypes from 'prop-types'
 
 import {
@@ -12,24 +13,42 @@ import {
 
 import AWS from 'aws-sdk';
 
+// Data
 import * as Strings from '../../../../Data/Strings'
 import * as Validators from '../../../../Validators'
-
 import * as FormInputs from '../../../Common/formInputs'
 
 const defaultAvatar = `images/default-avatar.png`
 
-// TODO: Fix avatar upload
-export class Page extends Component {
+// TODO: FUTURE: Rewrite without blueprintjs
+export class UserDetailsForm extends Component {
   static propTypes = {
-    user: PropTypes.object.isRequired,
+    user: PropTypes.shape({
+      username: PropTypes.string.isRequired,
+      details: PropTypes.shape({
+        firstName: PropTypes.string,
+        homePhoneNumber: PropTypes.string,
+        lastName: PropTypes.string,
+        mobilePhoneNumber: PropTypes.string,
+        foundationsID: PropTypes.string,
+        emailAddress: PropTypes.string,
+      }),
+      userS3Token: PropTypes.shape({
+        SessionToken: PropTypes.string,
+        Expiration: PropTypes.number,
+        AccessKeyId: PropTypes.string,
+        SecretAccessKey: PropTypes.string
+      }).isRequired,
+      error: PropTypes.object
+    }).isRequired,
+    requestS3UserFileUploadToken: PropTypes.func.isRequired,
+    initialValues: PropTypes.object.isRequired,
+    handleSubmit: PropTypes.func.isRequired
   }
 
   constructor(props) {
     super(props)
-
     const defaultAvatar = `images/default-avatar.png`
-
     // Check if there is an error fetching the user details
     if (props.user.error !== undefined) {
       this.state = {
@@ -41,7 +60,6 @@ export class Page extends Component {
       }
       return
     }
-
     this.state = {
       avatarLink: defaultAvatar,
       avatarLoading: true,
@@ -49,18 +67,14 @@ export class Page extends Component {
       detailsFetchError: false,
       errorText: "",
     }
-
     this.getImage(props)
   }
 
   getImage = (props) => {
-
     const { username } = props.user
     const that = this
     const avatarLink = `${process.env.REACT_APP_AWS_S3_USER_AVATAR_ENDPOINT}/${username}`
-
     var image = new Image();
-
     image.onload = function() {
         // image exists and is loaded
         that.setState({
@@ -69,18 +83,20 @@ export class Page extends Component {
         })
         return
     }
-
     image.onerror = function() {
         // image did not load
         that.setState({
           avatarLink: defaultAvatar,
           avatarLoading: false,
         })
-
         return
     }
-
     image.src = avatarLink
+  }
+
+  componentDidMount() {
+    // Get a token to allow the uploading of an avatar
+    this.props.requestS3UserFileUploadToken("profile-avatar", this.successFetchingUserFileUploadToken, this.failureFetchingUserFileUploadToken)
   }
 
 
@@ -89,7 +105,6 @@ export class Page extends Component {
     // If the user details change
     if (this.props.user.details !== prevProps.user.details) {
       this.getImage(this.props)
-
       if (this.props.user.details.emailAddress !== undefined) {
         this.setState({
           detailsFetchError: false,
@@ -101,46 +116,41 @@ export class Page extends Component {
     if (this.props.user.userS3Token !== "" && this.state.avatarFile.value !== undefined) {
       this.uploadToS3()
     }
-
   }
 
 
   fileChosen = (e) => {
-
-    const { requestS3UserFileUploadToken } = this.props
-
-    // Get a token to allow the uploading of the file
-    requestS3UserFileUploadToken("profile-avatar")
-
-    e.persist()
-
-    console.log(e)
-
     // Store the avatarFile event
     this.setState({
       avatarFile: e.target,
       avatarLoading: true,
     })
+  }
 
+
+  successFetchingUserFileUploadToken = (result) => {
+    //console.log(result)
+  }
+
+
+  failureFetchingUserFileUploadToken = (error) => {
+    //console.log(error)
+    toast(Strings.ERROR_UPLOADING_AVATAR)
   }
 
 
   uploadToS3 = () => {
-
     const { user } = this.props
     const { avatarFile } = this.state
-
-    console.log(avatarFile)
-
     const file = avatarFile.files[0]
-
-    if (user.userS3Token === undefined) {
+    if (user.userS3Token === {}) {
       console.log("error uploading image")
+      toast(Strings.ERROR_UPLOADING_AVATAR)
+      // Try and fetch the avatar upload token again
+      this.props.requestS3UserFileUploadToken("profile-avatar", this.successFetchingUserFileUploadToken, this.failureFetchingUserFileUploadToken)
       return;
     }
-
     const { AccessKeyId, SecretAccessKey, SessionToken } = user.userS3Token
-
     // Update credentials to allow access to S3
     AWS.config.update({
       credentials: {
@@ -173,20 +183,16 @@ export class Page extends Component {
     var request = s3.putObject(uploadParams);
 
     request.on('success', function(response) {
-
         that.setState({
           avatarFile: {},
           avatarLink: defaultAvatar,
         })
-
         that.getImage(that.props)
-
       })
-
       .on('error', function(error, response) {
         console.log("Error!");
         console.error(error)
-
+        toast(Strings.ERROR_UPLOADING_AVATAR)
         that.setState({
           avatarFile: {},
           avatarLink: defaultAvatar,
@@ -203,12 +209,9 @@ export class Page extends Component {
   }
 
 
-
   render() {
-
     const { handleSubmit, initialValues }  = this.props
     const { avatarLink, avatarLoading } = this.state
-
     return(
       <div className="tab-pane active" id="profile-tab-container">
         <div className="row">
@@ -225,7 +228,7 @@ export class Page extends Component {
                   : null
                 }
               </div>
-              <h6>{Strings.MEMBER_UPLOAD_DIFFERENT_AVATAR}</h6>
+              <h6>{Strings.MEMBERS_UPLOAD_DIFFERENT_AVATAR}</h6>
 
               <FileInput
                 className="field bp3-fill"
@@ -261,7 +264,7 @@ export class Page extends Component {
 
               <div className="row">
                 <FormGroup
-                  label={Strings.MEMBER_FIRST_NAME}
+                  label={Strings.MEMBERS_FIRST_NAME}
                   labelFor="firstName"
                   labelInfo={Strings.FIELD_IS_REQUIRED}
                   className="col-lg-6 col-md-12"
@@ -270,14 +273,14 @@ export class Page extends Component {
                     name="firstName"
                     validate={[Validators.required, Validators.maxLength64]}
                     component={FormInputs.TextInput}
-                    placeholder={Strings.MEMBER_FIRST_NAME}
+                    placeholder={Strings.MEMBERS_FIRST_NAME}
                     disabled={true}
                     //disabled={initialValues.foundationsID !== null}
                   />
                 </FormGroup>
 
                 <FormGroup
-                  label={Strings.MEMBER_LAST_NAME}
+                  label={Strings.MEMBERS_LAST_NAME}
                   labelFor="lastName"
                   labelInfo={Strings.FIELD_IS_REQUIRED}
                   className="col-lg-6 col-md-12"
@@ -286,27 +289,27 @@ export class Page extends Component {
                     name="lastName"
                     validate={[Validators.required, Validators.maxLength64]}
                     component={FormInputs.TextInput}
-                    placeholder={Strings.MEMBER_LAST_NAME}
+                    placeholder={Strings.MEMBERS_LAST_NAME}
                     disabled={true}
                     //disabled={initialValues.foundationsID !== null}
                   />
                 </FormGroup>
 
                 <FormGroup
-                  label={Strings.MEMBER_FOUNDATIONS_ID}
+                  label={Strings.MEMBERS_FOUNDATIONS_ID}
                   labelFor="foundationsID"
                   className="col-lg-6 col-md-12"
                 >
                   <Field
                     name="foundationsID"
                     component={FormInputs.TextInput}
-                    placeholder={Strings.MEMBER_FOUNDATIONS_ID_NOT_FOUND}
+                    placeholder={Strings.MEMBERS_FOUNDATIONS_ID_NOT_FOUND}
                     disabled={true}
                   />
                 </FormGroup>
 
                 <FormGroup
-                  label={Strings.MEMBER_EMAIL_ADDRESS}
+                  label={Strings.MEMBERS_EMAIL_ADDRESS}
                   labelFor="emailAddress"
                   className="col-lg-6 col-md-12"
                 >
@@ -314,13 +317,13 @@ export class Page extends Component {
                     name="emailAddress"
                     validate={[Validators.required, Validators.isEmailAddress]}
                     component={FormInputs.TextInput}
-                    placeholder={Strings.MEMBER_EMAIL_ADDRESS}
+                    placeholder={Strings.MEMBERS_EMAIL_ADDRESS}
                     disabled={true}
                   />
                 </FormGroup>
 
                 <FormGroup
-                  label={Strings.MEMBER_LANDLINE_PHONE_NUMBER_WORK}
+                  label={Strings.MEMBERS_LANDLINE_PHONE_NUMBER_WORK}
                   labelFor="homePhoneNumber"
                   className="col-lg-6 col-md-12"
                 >
@@ -328,14 +331,14 @@ export class Page extends Component {
                     name="homePhoneNumber"
                     validate={[Validators.maxLength32]}
                     component={FormInputs.TextInput}
-                    placeholder={Strings.MEMBER_LANDLINE_PHONE_NUMBER_WORK}
+                    placeholder={Strings.MEMBERS_LANDLINE_PHONE_NUMBER_WORK}
                     disabled={true}
                     //disabled={initialValues.foundationsID !== null}
                   />
                 </FormGroup>
 
                 <FormGroup
-                  label={Strings.MEMBER_MOBILE_PHONE_NUMBER_WORK}
+                  label={Strings.MEMBERS_MOBILE_PHONE_NUMBER_WORK}
                   labelFor="mobilePhoneNumber"
                   className="col-lg-6 col-md-12"
                 >
@@ -343,7 +346,7 @@ export class Page extends Component {
                     name="mobilePhoneNumber"
                     validate={[Validators.maxLength32]}
                     component={FormInputs.TextInput}
-                    placeholder={Strings.MEMBER_MOBILE_PHONE_NUMBER_WORK}
+                    placeholder={Strings.MEMBERS_MOBILE_PHONE_NUMBER_WORK}
                     disabled={true}
                     //disabled={initialValues.foundationsID !== null}
                   />
@@ -362,4 +365,4 @@ export class Page extends Component {
 export default reduxForm({
   enableReinitialize: true,
   form: 'profile'
-})(Page)
+})(UserDetailsForm)

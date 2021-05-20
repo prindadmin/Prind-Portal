@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageFieldMapper - Should render calendar 1`] = `
+<withRouter(Connect(ReduxForm))
+  elementContent={
+    Object {
+      "id": "1",
+      "type": "calendar",
+    }
+  }
+  form="field-1"
+  key="1"
+  pageName="design"
+  projectId="123"
+/>
+`;
+
+exports[`PageFieldMapper - Should render dropdown 1`] = `
+<withRouter(Connect(ReduxForm))
+  elementContent={
+    Object {
+      "fieldDetails": "fieldDetails",
+      "id": "1",
+      "type": "dropdown",
+    }
+  }
+  form="field-1"
+  initialValues="fieldDetails"
+  key="1"
+  pageName="design"
+  projectId="123"
+/>
+`;
+
+exports[`PageFieldMapper - Should render file uploader 1`] = `
+<withRouter(Connect(FileUploader))
+  elementContent={
+    Object {
+      "fieldDetails": "fieldDetails",
+      "id": "1",
+      "type": "file",
+    }
+  }
+  key="1"
+  pageName="design"
+  projectId="123"
+/>
+`;
+
+exports[`PageFieldMapper - Should render gitText 1`] = `
+<withRouter(Connect(GitText))
+  elementContent={
+    Object {
+      "id": "1",
+      "type": "gitText",
+    }
+  }
+  form="field-1"
+  key="1"
+  pageName="design"
+  projectId="123"
+/>
+`;
+
+exports[`PageFieldMapper - Should render longText 1`] = `
+<withRouter(Connect(LongText))
+  elementContent={
+    Object {
+      "fieldDetails": "fieldDetails",
+      "id": "1",
+      "type": "longText",
+    }
+  }
+  form="field-1"
+  initialValues="fieldDetails"
+  key="1"
+  pageName="design"
+  projectId="123"
+/>
+`;

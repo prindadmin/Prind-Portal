@@ -1,0 +1,214 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <HashRouter>
+    <Router
+      history={
+        Object {
+          "action": "POP",
+          "block": [Function],
+          "createHref": [Function],
+          "go": [Function],
+          "goBack": [Function],
+          "goForward": [Function],
+          "length": 1,
+          "listen": [Function],
+          "location": Object {
+            "hash": "",
+            "pathname": "/",
+            "search": "",
+            "state": undefined,
+          },
+          "push": [Function],
+          "replace": [Function],
+        }
+      }
+    >
+      <withRouter(Connect(ConfirmEmailPage))
+        history={
+          Object {
+            "push": [MockFunction],
+          }
+        }
+        location={
+          Object {
+            "pathname": "/confirm-email",
+            "search": "?user_name=1234567890&confirmation_code=abcdef",
+          }
+        }
+      >
+        <Connect(ConfirmEmailPage)
+          history={
+            Object {
+              "action": "POP",
+              "block": [Function],
+              "createHref": [Function],
+              "go": [Function],
+              "goBack": [Function],
+              "goForward": [Function],
+              "length": 1,
+              "listen": [Function],
+              "location": Object {
+                "hash": "",
+                "pathname": "/",
+                "search": "",
+                "state": undefined,
+              },
+              "push": [Function],
+              "replace": [Function],
+            }
+          }
+          location={
+            Object {
+              "hash": "",
+              "pathname": "/",
+              "search": "",
+              "state": undefined,
+            }
+          }
+          match={
+            Object {
+              "isExact": true,
+              "params": Object {},
+              "path": "/",
+              "url": "/",
+            }
+          }
+        >
+          <ConfirmEmailPage
+            confirmUser={[Function]}
+            history={
+              Object {
+                "action": "POP",
+                "block": [Function],
+                "createHref": [Function],
+                "go": [Function],
+                "goBack": [Function],
+                "goForward": [Function],
+                "length": 1,
+                "listen": [Function],
+                "location": Object {
+                  "hash": "",
+                  "pathname": "/",
+                  "search": "",
+                  "state": undefined,
+                },
+                "push": [Function],
+                "replace": [Function],
+              }
+            }
+            location={
+              Object {
+                "hash": "",
+                "pathname": "/",
+                "search": "",
+                "state": undefined,
+              }
+            }
+            match={
+              Object {
+                "isExact": true,
+                "params": Object {},
+                "path": "/",
+                "url": "/",
+              }
+            }
+          >
+            <div
+              id="confirming-email-address"
+            >
+              <ProjectLoading
+                text="Confirming your email address, please wait..."
+              >
+                <div
+                  className="project-loading-container fill"
+                >
+                  <div
+                    className="project-loading"
+                  >
+                    <div
+                      className="section-spinner"
+                    >
+                      <Spinner
+                        size={100}
+                      >
+                        <div
+                          className="lds-ring"
+                          style={
+                            Object {
+                              "borderWidth": 12.5,
+                              "height": 100,
+                              "margin": 12.5,
+                              "width": 100,
+                            }
+                          }
+                        >
+                          <div
+                            style={
+                              Object {
+                                "borderWidth": 12.5,
+                                "height": 100,
+                                "margin": 12.5,
+                                "width": 100,
+                              }
+                            }
+                          />
+                          <div
+                            style={
+                              Object {
+                                "borderWidth": 12.5,
+                                "height": 100,
+                                "margin": 12.5,
+                                "width": 100,
+                              }
+                            }
+                          />
+                          <div
+                            style={
+                              Object {
+                                "borderWidth": 12.5,
+                                "height": 100,
+                                "margin": 12.5,
+                                "width": 100,
+                              }
+                            }
+                          />
+                          <div
+                            style={
+                              Object {
+                                "borderWidth": 12.5,
+                                "height": 100,
+                                "margin": 12.5,
+                                "width": 100,
+                              }
+                            }
+                          />
+                        </div>
+                      </Spinner>
+                    </div>
+                    <div>
+                      Confirming your email address, please wait...
+                    </div>
+                  </div>
+                </div>
+              </ProjectLoading>
+            </div>
+          </ConfirmEmailPage>
+        </Connect(ConfirmEmailPage)>
+      </withRouter(Connect(ConfirmEmailPage))>
+    </Router>
+  </HashRouter>
+</Provider>
+`;

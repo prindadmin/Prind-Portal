@@ -1,9 +1,9 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import * as authReducer from '../../../Reducers/authReducer'
-import * as userReducer from '../../../Reducers/userReducer'
-import * as stagePageReducer from '../../../Reducers/stagePageReducer'
+import * as auth from '../../../Reducers/auth'
+import * as user from '../../../Reducers/user'
+import * as stagePage from '../../../Reducers/stagePage'
 
 import UserMenuComponent from './UserMenu'
 
@@ -16,14 +16,14 @@ const mapStatetoProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     signOut: () => {
-      dispatch(authReducer.signOut())
-      dispatch(stagePageReducer.init())
+      dispatch(auth.signOut())
+      dispatch(stagePage.init())
     },
     getUserProjectInvitations: (resolve, reject) => {
-      dispatch(userReducer.getProjectInvitations(resolve, reject))
+      dispatch(user.getProjectInvitations(resolve, reject))
     },
     getUserSignatureRequests: (resolve, reject) => {
-      dispatch(userReducer.getSignatureRequests(resolve, reject))
+      dispatch(user.getSignatureRequests(resolve, reject))
     }
   }
 }

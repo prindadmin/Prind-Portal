@@ -1,0 +1,151 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FileDetailPopover - render 1`] = `
+<PopOverHandler>
+  <div
+    id="popup-greyer"
+    onClick={[Function]}
+  >
+    <div
+      id="file-details-popover"
+    >
+      <div
+        id="popup-box"
+      >
+        <div
+          className="file-details-popover-container"
+          onClick={[Function]}
+        >
+          <div
+            className="element-title"
+          >
+            File Details
+          </div>
+          <div
+            className="element-description"
+          >
+            <div
+              className="row"
+            >
+              <div
+                className="col"
+              >
+                <div
+                  className="file-details"
+                >
+                  <div
+                    className="row"
+                  >
+                    <div
+                      className="field-names col-4"
+                    >
+                      <div>
+                        File Name: 
+                      </div>
+                      <div>
+                        Uploaded At: 
+                      </div>
+                      <div>
+                        Uploaded By: 
+                      </div>
+                      <div>
+                        Proof: 
+                      </div>
+                    </div>
+                    <div
+                      className="field-values col-auto"
+                    >
+                      <div>
+                        File123.txt
+                      </div>
+                      <div>
+                        <br />
+                      </div>
+                      <div>
+                        Testy McTesterson
+                      </div>
+                      <div
+                        id="proof-link-container"
+                        onClick={[Function]}
+                      >
+                        <a
+                          href="https://prind.tech"
+                          rel="noopener noreferrer"
+                          target="_blank"
+                        >
+                          Link to Proof
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="col download-box-cell"
+              >
+                <withRouter(Connect(DownloadBox))
+                  fieldID="1"
+                  fileVersionDetails={
+                    Object {
+                      "proofLink": "https://prind.tech",
+                      "signatures": Array [
+                        Object {
+                          "proofLink": "https://testnet.explorer.factom.pro/entries/93ae94fce1d960dc818c049f9a23f8305cdea54dd6954153c57be62179db1fcf",
+                          "signatureDateTime": "2021-01-11T11:11:11",
+                          "signerName": "Signer One",
+                        },
+                        Object {
+                          "proofLink": "https://testnet.explorer.factom.pro/entries/93ae94fce1d960dc818c049f9a23f8305cdea54dd6954153c57be62179db1fcf",
+                          "signatureDateTime": "2021-02-22T22:22:22",
+                          "signerName": "Signer Two",
+                        },
+                      ],
+                      "uploadDateTime": "2021-04-06T07:06:23",
+                      "uploadName": "File123.txt",
+                      "uploadedBy": "Testy McTesterson",
+                    }
+                  }
+                  onDownloadFailure={[Function]}
+                  onDownloadSuccess={[Function]}
+                  pageName="design"
+                  projectId="5678"
+                />
+              </div>
+            </div>
+            <div
+              className="row"
+            >
+              <div
+                className="col"
+              >
+                <div
+                  className="signature-details"
+                >
+                  <div>
+                    <SignatureHistory
+                      details={
+                        Array [
+                          Object {
+                            "proofLink": "https://testnet.explorer.factom.pro/entries/93ae94fce1d960dc818c049f9a23f8305cdea54dd6954153c57be62179db1fcf",
+                            "signatureDateTime": "2021-01-11T11:11:11",
+                            "signerName": "Signer One",
+                          },
+                          Object {
+                            "proofLink": "https://testnet.explorer.factom.pro/entries/93ae94fce1d960dc818c049f9a23f8305cdea54dd6954153c57be62179db1fcf",
+                            "signatureDateTime": "2021-02-22T22:22:22",
+                            "signerName": "Signer Two",
+                          },
+                        ]
+                      }
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</PopOverHandler>
+`;

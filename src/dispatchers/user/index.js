@@ -1,19 +1,12 @@
-import s3UploadProjectFileTokenDispatcher from './getS3ProjectFileUploadToken'
-import s3UploadUserFileTokenDispatcher from './getS3UserFileUploadToken'
-import getUserDetailsDispatcher from './getDetails'
-import getProjectInvitationsDispatcher from './getProjectInvitations'
-import respondToProjectInvitationDispatcher from './respondToProjectInvitation'
-import getSignatureRequestsDispatcher from './getSignatureRequests'
-import respondToSignatureRequestDispatcher from './respondToSignatureRequest'
-import getHistoryDispatcher from './getHistory'
 
-export {
-  s3UploadProjectFileTokenDispatcher,
-  s3UploadUserFileTokenDispatcher,
-  getUserDetailsDispatcher,
-  getProjectInvitationsDispatcher,
-  respondToProjectInvitationDispatcher,
-  getSignatureRequestsDispatcher,
-  respondToSignatureRequestDispatcher,
-  getHistoryDispatcher,
-}
+export { default as getS3ProjectFileUploadToken } from './getS3ProjectFileUploadToken';
+export { default as getS3UserFileUploadToken } from './getS3UserFileUploadToken';
+export { default as getUserDetails } from './getDetails';
+export { default as getProjectInvitations } from './getProjectInvitations';
+export { default as respondToProjectInvitation } from './respondToProjectInvitation';
+export { default as getSignatureRequests } from './getSignatureRequests';
+export { default as respondToSignatureRequest } from './respondToSignatureRequest';
+export { default as getHistory } from './getHistory';
+
+export { default as authoriseWithProcoreServer } from './authoriseWithProcoreServer'
+export { default as checkServerAccessToProcore } from './checkServerAccessToProcore';

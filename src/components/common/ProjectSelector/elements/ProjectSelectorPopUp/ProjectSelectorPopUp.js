@@ -17,7 +17,7 @@ import * as ComponentState from '../../States'
 
 //const ProjectTypeSelector = lazy(() => import('../ProjectTypeSelector'));
 
-// TODO: SOON: Show invite projects here as well
+// TODO: FUTURE: Show invite projects here as well
 
 export class ProjectSelectorPopUp extends Component {
   static propTypes = {
@@ -32,7 +32,6 @@ export class ProjectSelectorPopUp extends Component {
           projectType: PropTypes.string.isRequired,
         })),
         projectRole: PropTypes.arrayOf(PropTypes.shape({
-          data: PropTypes.string.isRequired,
           projectId: PropTypes.string.isRequired,
           projectName: PropTypes.string.isRequired,
           projectDescription: PropTypes.string,
@@ -53,7 +52,8 @@ export class ProjectSelectorPopUp extends Component {
     }).isRequired,
     history: PropTypes.shape({
       push: PropTypes.func.isRequired,
-    }).isRequired
+    }).isRequired,
+    resetChosenProject: PropTypes.func.isRequired
   }
 
   constructor(props) {
@@ -162,6 +162,7 @@ export class ProjectSelectorPopUp extends Component {
 
   // This is the new function that goes straight to the project details entry screen
   createNewProject = () => {
+    this.props.resetChosenProject()
     this.props.history.push(`${Endpoints.NEWPROJECTPAGE}?project_type=${process.env.REACT_APP_PORTAL}`)
     this.cancelPopup()
   }

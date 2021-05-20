@@ -1,17 +1,26 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import classes from './DownloadBox.module.css'
 
 import ItemIcon from '../../../../Common/ItemIcon'
 import * as Strings from '../../../../../Data/Strings'
 
-export class Element extends Component {
+const MOBILE_WIDTH_BREAKPOINT = 992;
+
+export class DownloadBox extends Component {
   static propTypes = {
-    projectID: PropTypes.string.isRequired,
+    projectId: PropTypes.string.isRequired,
     pageName: PropTypes.string.isRequired,
     fieldID: PropTypes.string.isRequired,
-    fileVersionDetails: PropTypes.object.isRequired,
+    fileVersionDetails: PropTypes.shape({
+      ver: PropTypes.string.isRequired
+    }).isRequired,
     onDownloadSuccess: PropTypes.func.isRequired,
     onDownloadFailure: PropTypes.func.isRequired,
+    downloadFile: PropTypes.func.isRequired,
+    resetDownloadURL: PropTypes.func.isRequired,
+    style: PropTypes.object,
+    size: PropTypes.string
   }
 
   constructor() {
@@ -59,14 +68,14 @@ export class Element extends Component {
 
   downloadFile = (e) => {
 
-    const { projectID, pageName, fieldID, fileVersionDetails, downloadFile } = this.props
+    const { projectId, pageName, fieldID, fileVersionDetails, downloadFile } = this.props
 
     this.setState({
       fetchError: false,
     })
 
     downloadFile(
-      projectID,
+      projectId,
       pageName,
       fieldID,
       fileVersionDetails.ver,
@@ -77,16 +86,21 @@ export class Element extends Component {
   }
 
   render () {
+    const isMobileSize = this.state.width < MOBILE_WIDTH_BREAKPOINT || this.props.size === 'small'
+    const itemSize = isMobileSize ? "3x" : "4x"
 
-    var itemSize = "4x"
-
-    this.state.width < 992 ? itemSize = "3x" : itemSize = "4x"
+    var style = {}
+    if (this.props.style) {
+      style = Object.assign(this.props.style, style)
+    }
 
     return (
-      <div className="download-box" onClick={(e) => this.downloadFile(e)}>
+      <div id='download-box' className={classes.downloadBox} style={style} onClick={(e) => this.downloadFile(e)}>
         <div>
-          <ItemIcon size={itemSize} type='download' />
-          <p>{Strings.DOWNLOAD}</p>
+          <ItemIcon size={this.props.size === 'small' ? "1x" : itemSize} type='download' />
+          {
+            isMobileSize ? null : <p>{Strings.DOWNLOAD}</p>
+          }
         </div>
       </div>
     )
@@ -94,4 +108,4 @@ export class Element extends Component {
   }
 }
 
-export default Element
+export default DownloadBox

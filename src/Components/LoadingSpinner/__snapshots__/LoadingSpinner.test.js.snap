@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render 1`] = `
+<Fragment>
+  <div
+    className="lds-ring"
+    style={Object {}}
+  >
+    <div
+      style={Object {}}
+    />
+    <div
+      style={Object {}}
+    />
+    <div
+      style={Object {}}
+    />
+    <div
+      style={Object {}}
+    />
+  </div>
+</Fragment>
+`;
+
+exports[`Should render at a smaller size 1`] = `
+<Fragment>
+  <div
+    className="lds-ring"
+    style={
+      Object {
+        "borderWidth": 5,
+        "height": 40,
+        "margin": 5,
+        "width": 40,
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "borderWidth": 5,
+          "height": 40,
+          "margin": 5,
+          "width": 40,
+        }
+      }
+    />
+    <div
+      style={
+        Object {
+          "borderWidth": 5,
+          "height": 40,
+          "margin": 5,
+          "width": 40,
+        }
+      }
+    />
+    <div
+      style={
+        Object {
+          "borderWidth": 5,
+          "height": 40,
+          "margin": 5,
+          "width": 40,
+        }
+      }
+    />
+    <div
+      style={
+        Object {
+          "borderWidth": 5,
+          "height": 40,
+          "margin": 5,
+          "width": 40,
+        }
+      }
+    />
+  </div>
+</Fragment>
+`;

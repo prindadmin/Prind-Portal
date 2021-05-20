@@ -1,6 +1,2 @@
 
-import stagePageDispatcher from './stagePageDispatcher'
-
-export {
-  stagePageDispatcher,
-}
+export { default as getPageContent } from './stagePageDispatcher';

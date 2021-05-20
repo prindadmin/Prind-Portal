@@ -7,18 +7,7 @@ details provided.
 import { Auth } from 'aws-amplify';
 
 function RefreshSession() {
-
-  return new Promise((resolve, reject) => {
-    try {
-      Auth.currentAuthenticatedUser().then(function(cognitoUser) {
-        resolve(cognitoUser)
-      })
-    } catch (e) {
-      console.log('Unable to refresh Token', e);
-      reject(e)
-    }
-  })
-
+  return Auth.currentAuthenticatedUser()
 }
 
 export default RefreshSession

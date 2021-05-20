@@ -1,3 +1,3 @@
-import Container from './Container'
+import UserDetailsFormContainer from './UserDetailsFormContainer'
 
-export default Container
+export default UserDetailsFormContainer

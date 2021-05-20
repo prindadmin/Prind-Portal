@@ -1,0 +1,945 @@
+
+it('ProcoreDocumentTable - Should click sign button and resolve', () => {
+  const mockGetProjectFiles = jest.fn((data, resolve, reject) => {
+    resolve("success")
+  });
+  const mockRequestDocumentAnchor = jest.fn()
+  const mockRequestDocumentSelfSignature = jest.fn((data, resolve, reject) => {
+    resolve("success")
+  });
+
+  const props = {
+    user: {
+      fetching: false,
+      details: {},
+      currentRoute: Endpoints.DEFAULTLOGGEDINPAGE,
+    },
+    procore: {
+      companyId: "123456",
+      projectId: "ABCDEF",
+      searchTerm: "",
+      files: [
+        {
+          id: 12,
+          name: "First File 1",
+          description: "This is the first test file",
+          file_versions: [
+            {
+              id: 12,
+              file_id: 13,
+              url: "https://buildingim.com",
+              number: 1,
+              created_at: "2017-01-04T21:27:18Z",
+              anchor: {},
+              signatures: []
+            },
+            {
+              id: 12,
+              file_id: 14,
+              url: "https://buildingim.com",
+              number: 2,
+              created_at: "2017-01-06T21:27:18Z",
+              anchor: {},
+              signatures: []
+            },
+            {
+              id: 12,
+              file_id: 15,
+              url: "https://buildingim.com",
+              number: 2,
+              created_at: "2017-01-02T21:27:18Z",
+              anchor: {},
+              signatures: []
+            }
+          ]
+        }
+      ]
+    },
+    getProjectFiles: mockGetProjectFiles,
+    requestDocumentAnchor: mockRequestDocumentAnchor,
+    requestDocumentSelfSignature: mockRequestDocumentSelfSignature,
+  };
+
+  const expectedCall = {
+    companyId: "123456",
+    projectId: "ABCDEF",
+  }
+
+  const component = shallow(<Component {...props} />);
+  expect(mockGetProjectFiles).toHaveBeenCalledWith(expectedCall, expect.any(Function), expect.any(Function))
+
+  const fileSignButton = component.find(`input[id="filesignbutton-0"]`)
+  fileSignButton.simulate('click');
+
+  const expectedCallSign = {
+    companyId: "123456",
+    projectId: "ABCDEF",
+    fileId: 14
+  }
+
+  expect(mockRequestDocumentSelfSignature).toHaveBeenCalledWith(expectedCallSign, expect.any(Function), expect.any(Function))
+
+  expect(component).toMatchSnapshot();
+});
+
+
+
+it('Should click sign button and reject', () => {
+  const mockGetProjectFiles = jest.fn((data, resolve, reject) => {
+    resolve("success")
+  });
+  const mockRequestDocumentAnchor = jest.fn()
+  const mockRequestDocumentSelfSignature = jest.fn((data, resolve, reject) => {
+    reject("failed")
+  });
+
+  const props = {
+    user: {
+      fetching: false,
+      details: {},
+      currentRoute: Endpoints.DEFAULTLOGGEDINPAGE,
+    },
+    procore: {
+      companyId: "123456",
+      projectId: "ABCDEF",
+      searchTerm: "",
+      files: [
+        {
+          id: 12,
+          name: "First File 1",
+          description: "This is the first test file",
+          file_versions: [
+            {
+              id: 12,
+              file_id: 13,
+              url: "https://buildingim.com",
+              number: 1,
+              created_at: "2017-01-04T21:27:18Z",
+              anchor: {},
+              signatures: []
+            },
+            {
+              id: 12,
+              file_id: 14,
+              url: "https://buildingim.com",
+              number: 2,
+              created_at: "2017-01-06T21:27:18Z",
+              anchor: {},
+              signatures: []
+            }
+          ]
+        }
+      ]
+    },
+    getProjectFiles: mockGetProjectFiles,
+    requestDocumentAnchor: mockRequestDocumentAnchor,
+    requestDocumentSelfSignature: mockRequestDocumentSelfSignature,
+  };
+
+  const expectedCall = {
+    companyId: "123456",
+    projectId: "ABCDEF",
+  }
+
+  const component = shallow(<Component {...props} />);
+  expect(mockGetProjectFiles).toHaveBeenCalledWith(expectedCall, expect.any(Function), expect.any(Function))
+
+  const fileSignButton = component.find(`input[id="filesignbutton-0"]`)
+  fileSignButton.simulate('click');
+
+  const expectedCallSign = {
+    companyId: "123456",
+    projectId: "ABCDEF",
+    fileId: 14
+  }
+
+  expect(mockRequestDocumentSelfSignature).toHaveBeenCalledWith(expectedCallSign, expect.any(Function), expect.any(Function))
+
+  expect(component).toMatchSnapshot();
+});
+
+
+
+
+it('Should click anchor button and resolve', () => {
+  const mockGetProjectFiles = jest.fn((data, resolve, reject) => {
+    resolve("success")
+  });
+  const mockRequestDocumentAnchor = jest.fn((data, resolve, reject) => {
+    resolve("success")
+  });
+  const mockRequestDocumentSelfSignature = jest.fn()
+
+  const props = {
+    user: {
+      fetching: false,
+      details: {},
+      currentRoute: Endpoints.DEFAULTLOGGEDINPAGE,
+    },
+    procore: {
+      companyId: "123456",
+      projectId: "ABCDEF",
+      searchTerm: "",
+      files: [
+        {
+          id: 12,
+          name: "First File 1",
+          description: "This is the first test file",
+          file_versions: [
+            {
+              id: 12,
+              file_id: 13,
+              url: "https://buildingim.com",
+              number: 1,
+              created_at: "2017-01-04T21:27:18Z",
+              anchor: {},
+              signatures: []
+            },
+            {
+              id: 12,
+              file_id: 14,
+              url: "https://buildingim.com",
+              number: 2,
+              created_at: "2017-01-06T21:27:18Z",
+              anchor: {},
+              signatures: []
+            },
+            {
+              id: 12,
+              file_id: 15,
+              url: "https://buildingim.com",
+              number: 2,
+              created_at: "2017-01-02T21:27:18Z",
+              anchor: {},
+              signatures: []
+            }
+          ]
+        }
+      ]
+    },
+    getProjectFiles: mockGetProjectFiles,
+    requestDocumentAnchor: mockRequestDocumentAnchor,
+    requestDocumentSelfSignature: mockRequestDocumentSelfSignature,
+  };
+
+  const expectedCall = {
+    companyId: "123456",
+    projectId: "ABCDEF",
+  }
+
+  const component = shallow(<Component {...props} />);
+  expect(mockGetProjectFiles).toHaveBeenCalledWith(expectedCall, expect.any(Function), expect.any(Function))
+
+  const fileAnchorButton = component.find(`input[id="fileanchorbutton-0"]`)
+  fileAnchorButton.simulate('click');
+
+  const expectedCallAnchor = {
+    companyId: "123456",
+    projectId: "ABCDEF",
+    fileId: 14
+  }
+
+  expect(mockRequestDocumentAnchor).toHaveBeenCalledWith(expectedCallAnchor, expect.any(Function), expect.any(Function))
+  expect(component).toMatchSnapshot();
+});
+
+
+
+
+it('Should click anchor button and reject', () => {
+  const mockGetProjectFiles = jest.fn((data, resolve, reject) => {
+    resolve("success")
+  });
+  const mockRequestDocumentAnchor = jest.fn((data, resolve, reject) => {
+    reject("failed")
+  });
+  const mockRequestDocumentSelfSignature = jest.fn()
+
+  const props = {
+    user: {
+      fetching: false,
+      details: {},
+      currentRoute: Endpoints.DEFAULTLOGGEDINPAGE,
+    },
+    procore: {
+      companyId: "123456",
+      projectId: "ABCDEF",
+      searchTerm: "",
+      files: [
+        {
+          id: 12,
+          name: "First File 1",
+          description: "This is the first test file",
+          file_versions: [
+            {
+              id: 12,
+              file_id: 13,
+              url: "https://buildingim.com",
+              number: 1,
+              created_at: "2017-01-04T21:27:18Z",
+              anchor: {},
+              signatures: []
+            },
+            {
+              id: 12,
+              file_id: 14,
+              url: "https://buildingim.com",
+              number: 2,
+              created_at: "2017-01-06T21:27:18Z",
+              anchor: {},
+              signatures: []
+            }
+          ]
+        }
+      ]
+    },
+    getProjectFiles: mockGetProjectFiles,
+    requestDocumentAnchor: mockRequestDocumentAnchor,
+    requestDocumentSelfSignature: mockRequestDocumentSelfSignature,
+  };
+
+  const expectedCall = {
+    companyId: "123456",
+    projectId: "ABCDEF",
+  }
+
+  const component = shallow(<Component {...props} />);
+  expect(mockGetProjectFiles).toHaveBeenCalledWith(expectedCall, expect.any(Function), expect.any(Function))
+
+  const fileAnchorButton = component.find(`input[id="fileanchorbutton-0"]`)
+  fileAnchorButton.simulate('click');
+
+  const expectedCallAnchor = {
+    companyId: "123456",
+    projectId: "ABCDEF",
+    fileId: 14
+  }
+
+  expect(mockRequestDocumentAnchor).toHaveBeenCalledWith(expectedCallAnchor, expect.any(Function), expect.any(Function))
+  expect(component).toMatchSnapshot();
+});
+
+
+
+
+it('Should click versions button', () => {
+  const mockGetProjectFiles = jest.fn((data, resolve, reject) => {
+    resolve("success")
+  });
+  const mockRequestDocumentAnchor = jest.fn()
+  const mockRequestDocumentSelfSignature = jest.fn()
+
+  const props = {
+    user: {
+      fetching: false,
+      details: {},
+      currentRoute: Endpoints.DEFAULTLOGGEDINPAGE,
+    },
+    procore: {
+      companyId: "123456",
+      projectId: "ABCDEF",
+      searchTerm: "",
+      files: [
+        {
+          id: 12,
+          name: "First File 1",
+          description: "This is the first test file",
+          file_versions: [
+            {
+              id: 12,
+              file_id: 13,
+              url: "https://buildingim.com",
+              number: 1,
+              created_at: "2017-01-04T21:27:18Z",
+              anchor: {},
+              signatures: []
+            },
+            {
+              id: 12,
+              file_id: 14,
+              url: "https://buildingim.com",
+              number: 2,
+              created_at: "2017-01-06T21:27:18Z",
+              anchor: {},
+              signatures: []
+            }
+          ]
+        }
+      ]
+    },
+    getProjectFiles: mockGetProjectFiles,
+    requestDocumentAnchor: mockRequestDocumentAnchor,
+    requestDocumentSelfSignature: mockRequestDocumentSelfSignature,
+  };
+
+  const expectedCall = {
+    companyId: "123456",
+    projectId: "ABCDEF",
+  }
+
+  const component = shallow(<Component {...props} />);
+  expect(mockGetProjectFiles).toHaveBeenCalledWith(expectedCall, expect.any(Function), expect.any(Function))
+
+  const fileVersionsButton = component.find(`input[id="fileversionsbutton-0"]`)
+  fileVersionsButton.simulate('click');
+
+  expect(component).toMatchSnapshot();
+});
+
+
+
+
+it('Should click versions button, then unclick versions button', () => {
+  const mockGetProjectFiles = jest.fn((data, resolve, reject) => {
+    resolve("success")
+  });
+  const mockRequestDocumentAnchor = jest.fn()
+  const mockRequestDocumentSelfSignature = jest.fn()
+
+  const props = {
+    user: {
+      fetching: false,
+      details: {},
+      currentRoute: Endpoints.DEFAULTLOGGEDINPAGE,
+    },
+    procore: {
+      companyId: "123456",
+      projectId: "ABCDEF",
+      searchTerm: "",
+      files: [
+        {
+          id: 12,
+          name: "First File 1",
+          description: "This is the first test file",
+          file_versions: [
+            {
+              id: 12,
+              file_id: 13,
+              url: "https://buildingim.com",
+              number: 1,
+              created_at: "2017-01-04T21:27:18Z",
+              anchor: {},
+              signatures: []
+            },
+            {
+              id: 12,
+              file_id: 14,
+              url: "https://buildingim.com",
+              number: 2,
+              created_at: "2017-01-06T21:27:18Z",
+              anchor: {},
+              signatures: []
+            }
+          ]
+        }
+      ]
+    },
+    getProjectFiles: mockGetProjectFiles,
+    requestDocumentAnchor: mockRequestDocumentAnchor,
+    requestDocumentSelfSignature: mockRequestDocumentSelfSignature,
+  };
+
+  const expectedCall = {
+    companyId: "123456",
+    projectId: "ABCDEF",
+  }
+
+  const component = shallow(<Component {...props} />);
+  expect(mockGetProjectFiles).toHaveBeenCalledWith(expectedCall, expect.any(Function), expect.any(Function))
+
+  const fileVersionsButton = component.find(`input[id="fileversionsbutton-0"]`)
+
+  fileVersionsButton.simulate('click');
+  expect(component).toMatchSnapshot();
+
+  fileVersionsButton.simulate('click');
+  expect(component).toMatchSnapshot();
+});
+
+
+
+it('Should click versions button for both files', () => {
+  const mockGetProjectFiles = jest.fn((data, resolve, reject) => {
+    resolve("success")
+  });
+  const mockRequestDocumentAnchor = jest.fn()
+  const mockRequestDocumentSelfSignature = jest.fn()
+
+  const props = {
+    user: {
+      fetching: false,
+      details: {},
+      currentRoute: Endpoints.DEFAULTLOGGEDINPAGE,
+    },
+    procore: {
+      companyId: "123456",
+      projectId: "ABCDEF",
+      searchTerm: "",
+      files: [
+        {
+          id: 12,
+          name: "First File 1",
+          description: "This is the first test file",
+          file_versions: [
+            {
+              id: 12,
+              file_id: 13,
+              url: "https://buildingim.com",
+              number: 1,
+              created_at: "2017-01-04T21:27:18Z",
+              anchor: {},
+              signatures: []
+            },
+            {
+              id: 12,
+              file_id: 14,
+              url: "https://buildingim.com",
+              number: 2,
+              created_at: "2017-01-06T21:27:18Z",
+              anchor: {},
+              signatures: []
+            },
+            {
+              id: 12,
+              file_id: 15,
+              url: "https://buildingim.com",
+              number: 2,
+              created_at: "2017-01-02T21:27:18Z",
+              anchor: {},
+              signatures: []
+            }
+          ]
+        },
+        {
+          id: 13,
+          name: "Second File 1",
+          description: "This is the second test file",
+          file_versions: [
+            {
+              id: 13,
+              file_id: 20,
+              url: "https://buildingim.com",
+              number: 16,
+              created_at: "2017-01-01T21:27:18Z",
+              anchor: {},
+              signatures: []
+            },
+            {
+              id: 13,
+              file_id: 21,
+              url: "https://buildingim.com",
+              number: 17,
+              created_at: "2017-01-02T21:27:18Z",
+              anchor: {},
+              signatures: []
+            }
+          ]
+        }
+      ]
+    },
+    getProjectFiles: mockGetProjectFiles,
+    requestDocumentAnchor: mockRequestDocumentAnchor,
+    requestDocumentSelfSignature: mockRequestDocumentSelfSignature,
+  };
+
+  const expectedCall = {
+    companyId: "123456",
+    projectId: "ABCDEF",
+  }
+
+  const component = shallow(<Component {...props} />);
+  expect(mockGetProjectFiles).toHaveBeenCalledWith(expectedCall, expect.any(Function), expect.any(Function))
+
+  const fileVersionsButtonOne = component.find(`input[id="fileversionsbutton-0"]`)
+  const fileVersionsButtonTwo = component.find(`input[id="fileversionsbutton-1"]`)
+
+  fileVersionsButtonOne.simulate('click');
+  fileVersionsButtonTwo.simulate('click');
+  expect(component).toMatchSnapshot();
+});
+
+
+it('Should render then unmount', () => {
+  const mockGetProjectFiles = jest.fn()
+  const mockRequestDocumentAnchor = jest.fn()
+  const mockRequestDocumentSelfSignature = jest.fn()
+
+  const mockWindowRemoveListener = jest.fn()
+  window.removeEventListener = mockWindowRemoveListener
+
+  const props = {
+    user: {
+      fetching: false,
+      details: {},
+      currentRoute: Endpoints.DEFAULTLOGGEDINPAGE,
+    },
+    procore: {
+      companyId: "123456",
+      projectId: "ABCDEF",
+      searchTerm: "",
+      files: [
+        {
+          id: 12,
+          name: "First File 1",
+          description: "This is the first test file",
+          file_versions: [
+            {
+              id: 12,
+              file_id: 13,
+              url: "https://buildingim.com",
+              number: 1,
+              created_at: "2017-01-04T21:27:18Z",
+              anchor: {},
+              signatures: []
+            },
+            {
+              id: 12,
+              file_id: 14,
+              url: "https://buildingim.com",
+              number: 2,
+              created_at: "2017-01-06T21:27:18Z",
+              anchor: {},
+              signatures: []
+            }
+          ]
+        }
+      ]
+    },
+    getProjectFiles: mockGetProjectFiles,
+    requestDocumentAnchor: mockRequestDocumentAnchor,
+    requestDocumentSelfSignature: mockRequestDocumentSelfSignature,
+  };
+
+  const component = shallow(<Component {...props} />);
+  component.instance().componentWillUnmount()
+  expect(mockWindowRemoveListener).toHaveBeenCalled();
+});
+
+
+it('Should display a filtered list of files', () => {
+  const mockGetProjectFiles = jest.fn((data, resolve, reject) => {
+    resolve("success")
+  });
+  const mockRequestDocumentAnchor = jest.fn()
+  const mockRequestDocumentSelfSignature = jest.fn()
+
+  const props = {
+    user: {
+      fetching: false,
+      details: {},
+      currentRoute: Endpoints.DEFAULTLOGGEDINPAGE,
+    },
+    procore: {
+      companyId: "123456",
+      projectId: "ABCDEF",
+      searchTerm: "Second",
+      files: [
+        {
+          id: 12,
+          name: "First File 1",
+          description: "This is the first test file",
+          file_versions: [
+            {
+              id: 12,
+              file_id: 13,
+              url: "https://buildingim.com",
+              number: 1,
+              created_at: "2017-01-04T21:27:18Z",
+              anchor: {},
+              signatures: []
+            },
+            {
+              id: 12,
+              file_id: 14,
+              url: "https://buildingim.com",
+              number: 2,
+              created_at: "2017-01-06T21:27:18Z",
+              anchor: {},
+              signatures: []
+            },
+            {
+              id: 12,
+              file_id: 15,
+              url: "https://buildingim.com",
+              number: 2,
+              created_at: "2017-01-02T21:27:18Z",
+              anchor: {},
+              signatures: []
+            }
+          ]
+        },
+        {
+          id: 13,
+          name: "Second File 1",
+          description: "This is the second test file",
+          file_versions: [
+            {
+              id: 13,
+              file_id: 20,
+              url: "https://buildingim.com",
+              number: 16,
+              created_at: "2017-01-01T21:27:18Z",
+              anchor: {},
+              signatures: []
+            },
+            {
+              id: 13,
+              file_id: 21,
+              url: "https://buildingim.com",
+              number: 17,
+              created_at: "2017-01-02T21:27:18Z",
+              anchor: {},
+              signatures: []
+            }
+          ]
+        }
+      ]
+    },
+    getProjectFiles: mockGetProjectFiles,
+    requestDocumentAnchor: mockRequestDocumentAnchor,
+    requestDocumentSelfSignature: mockRequestDocumentSelfSignature,
+  };
+
+  const component = shallow(<Component {...props} />);
+  expect(component).toMatchSnapshot();
+});
+
+
+
+it('Should render table at mobile resolution', () => {
+  const mockGetProjectFiles = jest.fn((data, resolve, reject) => {
+    resolve("success")
+  });
+  const mockRequestDocumentAnchor = jest.fn()
+  const mockRequestDocumentSelfSignature = jest.fn()
+
+  const props = {
+    user: {
+      fetching: false,
+      details: {},
+      currentRoute: Endpoints.DEFAULTLOGGEDINPAGE,
+    },
+    procore: {
+      companyId: "123456",
+      projectId: "ABCDEF",
+      searchTerm: "",
+      files: [
+        {
+          id: 12,
+          name: "First File 1",
+          description: "This is the first test file",
+          file_versions: [
+            {
+              id: 12,
+              file_id: 13,
+              url: "https://buildingim.com",
+              number: 1,
+              created_at: "2017-01-04T21:27:18Z",
+              anchor: {},
+              signatures: []
+            },
+            {
+              id: 12,
+              file_id: 14,
+              url: "https://buildingim.com",
+              number: 2,
+              created_at: "2017-01-06T21:27:18Z",
+              anchor: {},
+              signatures: []
+            }
+          ]
+        }
+      ]
+    },
+    getProjectFiles: mockGetProjectFiles,
+    requestDocumentAnchor: mockRequestDocumentAnchor,
+    requestDocumentSelfSignature: mockRequestDocumentSelfSignature,
+  };
+  window.innerWidth = 800;
+
+  const expectedCall = {
+    companyId: "123456",
+    projectId: "ABCDEF",
+  }
+
+  const component = shallow(<Component {...props} />);
+  expect(mockGetProjectFiles).toHaveBeenCalledWith(expectedCall, expect.any(Function), expect.any(Function))
+  expect(component).toMatchSnapshot();
+});
+
+
+
+it('Should render zero files without error', () => {
+  const mockGetProjectFiles = jest.fn((data, resolve, reject) => {
+    resolve("success")
+  });
+  const mockRequestDocumentAnchor = jest.fn()
+  const mockRequestDocumentSelfSignature = jest.fn()
+
+  const props = {
+    user: {
+      fetching: false,
+      details: {},
+      currentRoute: Endpoints.DEFAULTLOGGEDINPAGE,
+    },
+    procore: {
+      companyId: "123456",
+      projectId: "ABCDEF",
+      searchTerm: "",
+      files: []
+    },
+    getProjectFiles: mockGetProjectFiles,
+    requestDocumentAnchor: mockRequestDocumentAnchor,
+    requestDocumentSelfSignature: mockRequestDocumentSelfSignature,
+  };
+  window.innerWidth = 800;
+
+  const expectedCall = {
+    companyId: "123456",
+    projectId: "ABCDEF",
+  }
+
+  const component = shallow(<Component {...props} />);
+  expect(mockGetProjectFiles).toHaveBeenCalledWith(expectedCall, expect.any(Function), expect.any(Function))
+  expect(component).toMatchSnapshot();
+});
+
+
+
+it('Should render zero files because filter is too harsh', () => {
+  const mockGetProjectFiles = jest.fn((data, resolve, reject) => {
+    resolve("success")
+  });
+  const mockRequestDocumentAnchor = jest.fn()
+  const mockRequestDocumentSelfSignature = jest.fn()
+
+  const props = {
+    user: {
+      fetching: false,
+      details: {},
+      currentRoute: Endpoints.DEFAULTLOGGEDINPAGE,
+    },
+    procore: {
+      companyId: "123456",
+      projectId: "ABCDEF",
+      searchTerm: "Hello, filter",
+      files: [
+        {
+          id: 12,
+          name: "First File 1",
+          description: "This is the first test file",
+          file_versions: [
+            {
+              id: 12,
+              file_id: 13,
+              url: "https://buildingim.com",
+              number: 1,
+              created_at: "2017-01-04T21:27:18Z",
+              anchor: {},
+              signatures: []
+            },
+            {
+              id: 12,
+              file_id: 14,
+              url: "https://buildingim.com",
+              number: 2,
+              created_at: "2017-01-06T21:27:18Z",
+              anchor: {},
+              signatures: []
+            }
+          ]
+        }
+      ]
+    },
+    getProjectFiles: mockGetProjectFiles,
+    requestDocumentAnchor: mockRequestDocumentAnchor,
+    requestDocumentSelfSignature: mockRequestDocumentSelfSignature,
+  };
+  window.innerWidth = 800;
+
+  const expectedCall = {
+    companyId: "123456",
+    projectId: "ABCDEF",
+  }
+
+  const component = shallow(<Component {...props} />);
+  expect(mockGetProjectFiles).toHaveBeenCalledWith(expectedCall, expect.any(Function), expect.any(Function))
+  expect(component).toMatchSnapshot();
+});
+
+
+
+it('Should click view anchor button', () => {
+  const mockGetProjectFiles = jest.fn((data, resolve, reject) => {
+    resolve("success")
+  });
+  const mockRequestDocumentAnchor = jest.fn()
+  const mockRequestDocumentSelfSignature = jest.fn()
+
+  global.open = jest.fn()
+  window.innerWidth = 1200;
+
+  const props = {
+    user: {
+      fetching: false,
+      details: {},
+      currentRoute: Endpoints.DEFAULTLOGGEDINPAGE,
+    },
+    procore: {
+      companyId: "123456",
+      projectId: "ABCDEF",
+      searchTerm: "",
+      files: [
+        {
+          id: 12,
+          name: "First File 1",
+          description: "This is the first test file",
+          file_versions: [
+            {
+              id: 12,
+              file_id: 13,
+              url: "https://buildingim.com",
+              number: 1,
+              created_at: "2017-01-04T21:27:18Z",
+              anchor: {},
+              signatures: []
+            },
+            {
+              id: 12,
+              file_id: 14,
+              url: "https://buildingim.com",
+              number: 2,
+              created_at: "2017-01-06T21:27:18Z",
+              anchor: {
+                "keyName": "keys-1",
+                "signature": "H9fPcp6BokwC+krq+mxsNA+QY+ajSxnA5sa4AtlpVszp8hCWb6iSl1vEmIQHxpSddIcaDpqkIbDaOZPRA3zQABDvvvHF2KWtfej22DVTrLQXrrwSRT9UsHqd9kC+JaNlYk1b1rpXm7GQytncjNwr8kkg/dDxjYm6Ai77Hry5ntNBEb+it5bJcg6JjpcosF2PftzKzzyTCEZQD2/eCNLrcPei6odQfWM6wqU/dbwAWN3bO3IwIEDDZdZbin+JTbuZaZf+rOUYSCCijaNGPHoD8YXv2X0Nqevazah2Y4I6aZ4obrWi3qgPC09N+VzagErIGrER30cn31r272d9+U3Vrtnzor+aNEMkThpxpxsLbcgOHDk7N/KMu65fokCwxdq3pOMfHIk5PAo6FLZeUYhGQ4uW9UTEteln/ZW+Whokvo6eBfDnsGJQ/zJiI96VspNyCuwQYJneWLwz4D2nodj9UWww5RfEu+1uJ2PRvdoVvpUA0Bt0j0xdTTxtVotA98DjnXbeM3WeABKM5lSvYYwWnYmQNRxkfIyUenGrYFayYtgOeHbBBXyLaGf4TDLo0liA//2E0bDD5nFx6AobGdrl4aDf5o0a/bkADjDJCnFbuLE4kukqqpfmU6QdDP9QbpVzfNTozu3klOqQX9DevmZfiYUilYcb42FBUKlf8nExygE=",
+                "signingAlgorithm": "rs256",
+                "didVersion": 1.0,
+                "did": "did:fctr:d85be1f5baa83fa83850d8b58731a7f7c8ba65c33dec107c2e16e0dd65c7bcc7",
+                "entryHash": "b8102421677d1a407e36f76ceef172772dd3784611ae0170cb266f73ebf1d395"
+              },
+              signatures: []
+            }
+          ]
+        }
+      ]
+    },
+    getProjectFiles: mockGetProjectFiles,
+    requestDocumentAnchor: mockRequestDocumentAnchor,
+    requestDocumentSelfSignature: mockRequestDocumentSelfSignature,
+  };
+
+  const expectedCall = {
+    companyId: "123456",
+    projectId: "ABCDEF",
+  }
+
+  const component = shallow(<Component {...props} />);
+  expect(mockGetProjectFiles).toHaveBeenCalledWith(expectedCall, expect.any(Function), expect.any(Function))
+
+  const viewAnchorButton = component.find('input[id="fileanchorbutton-0"]')
+
+  viewAnchorButton.simulate('click')
+  expect(global.open).toHaveBeenCalledWith(`${process.env.REACT_APP_FACTOM_EXPLORER_SITE}/b8102421677d1a407e36f76ceef172772dd3784611ae0170cb266f73ebf1d395`, "_blank")
+  expect(component).toMatchSnapshot();
+});

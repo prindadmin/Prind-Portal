@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { DropDown, CalendarPicker, LongText, GitText } from '../Common/ProjectDataFields'
+import { DropDown, LongText, GitText } from '../Common/ProjectDataFields'
 import * as PageFields from '../PageFields'
 
 const PageFieldMapper = props => {
@@ -29,7 +29,7 @@ const PageFieldMapper = props => {
   }
 
   if (singleField.type === 'calendar') {
-    return <CalendarPicker
+    return <PageFields.CalendarPicker
               key={singleField.id}
               form={"field-" + singleField.id}
               elementContent={singleField}

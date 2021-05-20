@@ -1,12 +1,7 @@
 
 import { call, put, takeLatest } from 'redux-saga/effects'
 
-import {
-  addMemberToProjectDispatcher,
-  removeMemberFromProjectDispatcher,
-  getRolesDispatcher,
-} from '../Dispatchers/members'
-
+import * as MemberDispatchers from '../Dispatchers/members'
 import * as Actions from '../Actions'
 
 let defaultState = {
@@ -18,50 +13,46 @@ let defaultState = {
   roles: [],
 }
 
-function * init (action) {
+export function * init (action) {
   yield put({
-    type: Actions.MEMBER_SET_STATE,
+    type: Actions.MEMBERS_SET_STATE,
     payload: defaultState
   })
 }
 
 
-function * addMemberToProject (action) {
-
+export function * addMemberToProject (action) {
   const { projectID, memberDetails } = action.payload
-
   try {
-
     // Pre-fetch update to store
     yield put({
-      type: Actions.MEMBER_ADD_MEMBER_REQUEST_SENT,
+      type: Actions.MEMBERS_ADD_MEMBERS_REQUEST_SENT,
       payload: {
         fetching: true
       }
     })
-
-    yield call(addMemberToProjectDispatcher, projectID, memberDetails)
-
+    yield call(MemberDispatchers.addMemberToProject, projectID, memberDetails)
     // Post-fetch update to store
     yield put({
-      type: Actions.MEMBER_SET_STATE,
-      payload: {}
+      type: Actions.MEMBERS_SET_STATE,
+      payload: {
+        fetching: false
+      }
     })
-
     // Callback if provided
     if (action.payload.resolve !== undefined) {
       action.payload.resolve()
     }
   }
   catch (error) {
-    console.error(error)
+    //console.error(error)
     yield put({
-      type: Actions.MEMBER_ADD_MEMBER_REQUEST_FAILED,
+      type: Actions.MEMBERS_ADD_MEMBERS_REQUEST_FAILED,
         payload: {
+          fetching: false,
           error
         }
     })
-
     // Callback if provided
     if (action.payload.reject !== undefined) {
       action.payload.reject()
@@ -70,46 +61,39 @@ function * addMemberToProject (action) {
 }
 
 
-function * removeMemberFromProject (action) {
-
+export function * removeMemberFromProject (action) {
   const { projectID, memberUsername } = action.payload
-
   try {
-
     // Pre-fetch update to store
     yield put({
-      type: Actions.MEMBER_REMOVE_MEMBER_REQUEST_SENT,
+      type: Actions.MEMBERS_REMOVE_MEMBERS_REQUEST_SENT,
       payload: {
         fetching: true
       }
     })
-
-    const result = yield call(removeMemberFromProjectDispatcher, projectID, memberUsername)
-
+    const result = yield call(MemberDispatchers.removeMemberFromProject, projectID, memberUsername)
     // Post-fetch update to store
     yield put({
-      type: Actions.MEMBER_SET_STATE,
+      type: Actions.MEMBERS_SET_STATE,
       payload: {
-        ...defaultState,
+        fetching: false,
         currentMember: result
       }
     })
-
     // Callback if provided
     if (action.payload.resolve !== undefined) {
       action.payload.resolve()
     }
   }
   catch (error) {
-    console.error(error)
+    //console.error(error)
     yield put({
-      type: Actions.MEMBER_REMOVE_MEMBER_REQUEST_FAILED,
+      type: Actions.MEMBERS_REMOVE_MEMBERS_REQUEST_FAILED,
         payload: {
           ...defaultState,
           error
         }
     })
-
     // Callback if provided
     if (action.payload.reject !== undefined) {
       action.payload.reject()
@@ -118,45 +102,47 @@ function * removeMemberFromProject (action) {
 }
 
 
-function * getRoles (action) {
-
+export function * getRoles (action) {
   const { projectID } = action.payload
-
   try {
-
     // Pre-fetch update to store
     yield put({
-      type: Actions.MEMBER_GET_AVAILABLE_ROLES_REQUEST_SENT,
+      type: Actions.MEMBERS_GET_AVAILABLE_ROLES_REQUEST_SENT,
       payload: {
         fetching: true,
       }
     })
-
-    const result  = yield call(getRolesDispatcher, projectID)
-
+    const result  = yield call(MemberDispatchers.getRoles, projectID)
     // Post-fetch update to store
     yield put({
-      type: Actions.MEMBER_SET_STATE,
+      type: Actions.MEMBERS_SET_STATE,
       payload: {
+        fetching: false,
         roles: result.body
       }
     })
+    if (action.payload.resolve !== undefined) {
+      action.payload.resolve()
+    }
   }
   catch (error) {
-    console.error(error)
+    //console.error(error)
     yield put({
-      type: Actions.MEMBER_GET_AVAILABLE_ROLES_REQUEST_FAILED,
+      type: Actions.MEMBERS_GET_AVAILABLE_ROLES_REQUEST_FAILED,
         payload: {
           ...defaultState,
           error
         }
     })
+    if (action.payload.reject !== undefined) {
+      action.payload.reject()
+    }
   }
 }
 
 export default function * Sagas () {
-  yield takeLatest(Actions.MEMBER_INIT, init)
-  yield takeLatest(Actions.MEMBER_ADD_MEMBER_REQUESTED, addMemberToProject)
-  yield takeLatest(Actions.MEMBER_REMOVE_MEMBER_REQUESTED, removeMemberFromProject)
-  yield takeLatest(Actions.MEMBER_GET_AVAILABLE_ROLES_REQUESTED, getRoles)
+  yield takeLatest(Actions.MEMBERS_INIT, init)
+  yield takeLatest(Actions.MEMBERS_ADD_MEMBERS_REQUESTED, addMemberToProject)
+  yield takeLatest(Actions.MEMBERS_REMOVE_MEMBERS_REQUESTED, removeMemberFromProject)
+  yield takeLatest(Actions.MEMBERS_GET_AVAILABLE_ROLES_REQUESTED, getRoles)
 }

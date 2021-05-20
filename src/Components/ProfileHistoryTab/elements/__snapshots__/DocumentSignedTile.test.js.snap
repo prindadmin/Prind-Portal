@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render 1`] = `
+<Blueprint3.Callout
+  icon="tick"
+  intent="primary"
+  title="Document Signed"
+>
+  You signed a document called test-file.txt for project test project on the March 31, 2021
+</Blueprint3.Callout>
+`;

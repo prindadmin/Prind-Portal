@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import * as reducer from '../../Reducers/authReducer'
+import * as reducer from '../../Reducers/auth'
 
 import ConfirmEmailPage from './ConfirmEmailPage'
 

@@ -7,15 +7,15 @@ import {
 
 import * as Strings from '../../../Data/Strings'
 
+// TODO: FUTURE: Replace blueprintjs
 const ProjectJoinTile = props => {
 
   const { details } = props
-
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
 
   const displayText = Strings.JOINED_PROJECT_TEXT
     .replace("XXX", details.projectName)
-    .replace("YYY", new Date(parseInt(details.dateTime) * 1000).toLocaleDateString('en-GB', options))
+    .replace("YYY", details.dateTime.toLocaleDateString('en-GB', options))
 
 
   return (

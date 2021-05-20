@@ -1,0 +1,23 @@
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+
+import * as foundations from '../../../../../Reducers/foundations'
+
+import CurrentVersion from './CurrentVersion'
+
+const mapStatetoProps = state => {
+  return {
+    projects: state.projects,
+    user: state.user,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    selfSignFile: (projectID, pageName, fieldID) => {
+      dispatch(foundations.selfSignFile(projectID, pageName, fieldID))
+    }
+  }
+}
+
+export default withRouter(connect(mapStatetoProps, mapDispatchToProps)(CurrentVersion))

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import * as projectsReducer from '../../../Reducers/projectsReducer'
+import * as projects from '../../../Reducers/projects'
 
 import FileUploader from './FileUploader'
 
@@ -13,9 +13,14 @@ const mapStatetoProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    /*
     updateField: (pageName, fieldDetails) => {
-      dispatch(projectsReducer.updateField(pageName, fieldDetails))
+      dispatch(projects.updateField(pageName, fieldDetails))
     }
+    */
+    uploadFile: (projectID, pageName, fieldID, fileDetails, fieldType) => {
+      dispatch(projects.uploadFile(projectID, pageName, fieldID, fileDetails, fieldType))
+    },
   }
 }
 

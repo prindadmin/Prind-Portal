@@ -28,12 +28,10 @@ async function StagePageFetch(projectId, pageName) {
     // Send the request
     API.get(apiName, path, myInit)
       .then(response => {
-        console.log(response)
-
-        if (response.Error !== undefined) {
+        if (response.Error) {
           reject(response)
+          return;
         }
-
         resolve(response)
       })
       .catch(error => {

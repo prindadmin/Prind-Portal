@@ -21,7 +21,7 @@ it('Should render', () => {
   expect(component).toMatchSnapshot();
 });
 
-// TODO: Work out how to open the menu and click the options
+// TODO: FUTURE: Work out how to open the menu and click the options
 /*
 it('Should open user menu', () => {
   const props = {

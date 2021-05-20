@@ -1,0 +1,229 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render 1`] = `
+<Suspense
+  fallback={
+    <p>
+      error
+    </p>
+  }
+>
+  <Provider
+    store={
+      Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      }
+    }
+  >
+    <HashRouter>
+      <Router
+        history={
+          Object {
+            "action": "POP",
+            "block": [Function],
+            "createHref": [Function],
+            "go": [Function],
+            "goBack": [Function],
+            "goForward": [Function],
+            "length": 1,
+            "listen": [Function],
+            "location": Object {
+              "hash": "",
+              "pathname": "/",
+              "search": "",
+              "state": undefined,
+            },
+            "push": [Function],
+            "replace": [Function],
+          }
+        }
+      >
+        <withRouter(Connect(ProfilePage))>
+          <Connect(ProfilePage)
+            history={
+              Object {
+                "action": "POP",
+                "block": [Function],
+                "createHref": [Function],
+                "go": [Function],
+                "goBack": [Function],
+                "goForward": [Function],
+                "length": 1,
+                "listen": [Function],
+                "location": Object {
+                  "hash": "",
+                  "pathname": "/",
+                  "search": "",
+                  "state": undefined,
+                },
+                "push": [Function],
+                "replace": [Function],
+              }
+            }
+            location={
+              Object {
+                "hash": "",
+                "pathname": "/",
+                "search": "",
+                "state": undefined,
+              }
+            }
+            match={
+              Object {
+                "isExact": true,
+                "params": Object {},
+                "path": "/",
+                "url": "/",
+              }
+            }
+          >
+            <ProfilePage
+              getHistory={[Function]}
+              getProjectInvitations={[Function]}
+              getSignatureRequests={[Function]}
+              getUserDetails={[Function]}
+              history={
+                Object {
+                  "action": "POP",
+                  "block": [Function],
+                  "createHref": [Function],
+                  "go": [Function],
+                  "goBack": [Function],
+                  "goForward": [Function],
+                  "length": 1,
+                  "listen": [Function],
+                  "location": Object {
+                    "hash": "",
+                    "pathname": "/",
+                    "search": "",
+                    "state": undefined,
+                  },
+                  "push": [Function],
+                  "replace": [Function],
+                }
+              }
+              location={
+                Object {
+                  "hash": "",
+                  "pathname": "/",
+                  "search": "",
+                  "state": undefined,
+                }
+              }
+              match={
+                Object {
+                  "isExact": true,
+                  "params": Object {},
+                  "path": "/",
+                  "url": "/",
+                }
+              }
+              user={
+                Object {
+                  "currentRoute": undefined,
+                  "details": Object {},
+                  "fetching": false,
+                  "history": Object {},
+                  "projectInvitations": Array [],
+                  "projectS3Token": Object {},
+                  "signatureRequests": Array [],
+                  "userS3Token": Object {},
+                }
+              }
+            >
+              <div
+                id="profile-page"
+              >
+                <div
+                  className="page-content-section row"
+                >
+                  <ProjectLoading
+                    text="Fetching details, please wait..."
+                  >
+                    <div
+                      className="project-loading-container fill"
+                    >
+                      <div
+                        className="project-loading"
+                      >
+                        <div
+                          className="section-spinner"
+                        >
+                          <Spinner
+                            size={100}
+                          >
+                            <div
+                              className="lds-ring"
+                              style={
+                                Object {
+                                  "borderWidth": 12.5,
+                                  "height": 100,
+                                  "margin": 12.5,
+                                  "width": 100,
+                                }
+                              }
+                            >
+                              <div
+                                style={
+                                  Object {
+                                    "borderWidth": 12.5,
+                                    "height": 100,
+                                    "margin": 12.5,
+                                    "width": 100,
+                                  }
+                                }
+                              />
+                              <div
+                                style={
+                                  Object {
+                                    "borderWidth": 12.5,
+                                    "height": 100,
+                                    "margin": 12.5,
+                                    "width": 100,
+                                  }
+                                }
+                              />
+                              <div
+                                style={
+                                  Object {
+                                    "borderWidth": 12.5,
+                                    "height": 100,
+                                    "margin": 12.5,
+                                    "width": 100,
+                                  }
+                                }
+                              />
+                              <div
+                                style={
+                                  Object {
+                                    "borderWidth": 12.5,
+                                    "height": 100,
+                                    "margin": 12.5,
+                                    "width": 100,
+                                  }
+                                }
+                              />
+                            </div>
+                          </Spinner>
+                        </div>
+                        <div>
+                          Fetching details, please wait...
+                        </div>
+                      </div>
+                    </div>
+                  </ProjectLoading>
+                </div>
+              </div>
+            </ProfilePage>
+          </Connect(ProfilePage)>
+        </withRouter(Connect(ProfilePage))>
+      </Router>
+    </HashRouter>
+  </Provider>
+</Suspense>
+`;

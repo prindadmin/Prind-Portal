@@ -1,13 +1,13 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import * as memberReducer from '../../Reducers/memberReducer'
+import * as members from '../../Reducers/members'
 
 import ContactTile from './ContactTile'
 
 const mapStatetoProps = state => {
   return {
-    auth: state.auth,
+    user: state.user,
     projects: state.projects,
   }
 }
@@ -15,7 +15,7 @@ const mapStatetoProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     removeMember: (projectID, memberUsername, resolve, reject) => {
-      dispatch(memberReducer.removeMemberFromProject(projectID, memberUsername, resolve, reject))
+      dispatch(members.removeMemberFromProject(projectID, memberUsername, resolve, reject))
     }
   }
 }

@@ -1,0 +1,253 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render 1`] = `
+<div
+  className="tab-pane active"
+>
+  <div
+    id="history-tab-container"
+  >
+    <div
+      className="history-list row"
+    >
+      <div
+        className="col-md-12 col-lg-6 col-xl-4"
+        key="0"
+      >
+        <DocumentSignedTile
+          details={
+            Object {
+              "dateTime": "2020-03-12T16:56:36.217421",
+              "filename": "Test File 1.txt",
+              "projectName": "Test Project 123",
+              "signedAt": "2020-03-12T16:56:36.217421",
+              "type": "DOCUMENT_SIGNED",
+            }
+          }
+        />
+      </div>
+      <div
+        className="col-md-12 col-lg-6 col-xl-4"
+        key="1"
+      >
+        <ProjectJoinTile
+          details={
+            Object {
+              "dateTime": "2020-03-11T16:56:36.217421",
+              "projectName": "Test Project 123",
+              "type": "PROJECT_JOINED",
+            }
+          }
+        />
+      </div>
+      <div
+        className="col-md-12 col-lg-6 col-xl-4"
+        key="2"
+      >
+        <ProjectCreateTile
+          details={
+            Object {
+              "dateTime": "2020-03-10T16:56:36.217421",
+              "projectName": "Test Project 123",
+              "type": "PROJECT_CREATED",
+            }
+          }
+        />
+      </div>
+      <div
+        className="col-md-12 col-lg-6 col-xl-4"
+        key="3"
+      >
+        <DocumentUploadTile
+          details={
+            Object {
+              "dateTime": "2020-03-09T16:56:36.217421",
+              "projectName": "Test Project 123",
+              "type": "DOCUMENT_UPLOADED",
+            }
+          }
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Should render with different date time supplied to document versions 1`] = `
+<div
+  className="tab-pane active"
+>
+  <div
+    id="history-tab-container"
+  >
+    <div
+      className="history-list row"
+    >
+      <div
+        className="col-md-12 col-lg-6 col-xl-4"
+        key="0"
+      >
+        <DocumentSignedTile
+          details={
+            Object {
+              "dateTime": "2020-03-12T16:56:36.217421",
+              "filename": "Test File 1.txt",
+              "projectName": "Test Project 123",
+              "signedAt": "2020-03-12T16:56:36.217421",
+              "type": "DOCUMENT_SIGNED",
+            }
+          }
+        />
+      </div>
+      <div
+        className="col-md-12 col-lg-6 col-xl-4"
+        key="1"
+      >
+        <ProjectJoinTile
+          details={
+            Object {
+              "dateTime": "2020-03-11T16:56:36.217421",
+              "projectName": "Test Project 123",
+              "type": "PROJECT_JOINED",
+            }
+          }
+        />
+      </div>
+      <div
+        className="col-md-12 col-lg-6 col-xl-4"
+        key="2"
+      >
+        <ProjectCreateTile
+          details={
+            Object {
+              "dateTime": "2020-03-10T16:56:36.217421",
+              "projectName": "Test Project 123",
+              "type": "PROJECT_CREATED",
+            }
+          }
+        />
+      </div>
+      <div
+        className="col-md-12 col-lg-6 col-xl-4"
+        key="3"
+      >
+        <DocumentUploadTile
+          details={
+            Object {
+              "dateTime": "2020-03-09T16:56:36.217421",
+              "projectName": "Test Project 123",
+              "signedAt": "2020-03-09T16:56:36.217421",
+              "type": "DOCUMENT_UPLOADED",
+            }
+          }
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Should render with different date time supplied to signed documents 1`] = `
+<div
+  className="tab-pane active"
+>
+  <div
+    id="history-tab-container"
+  >
+    <div
+      className="history-list row"
+    >
+      <div
+        className="col-md-12 col-lg-6 col-xl-4"
+        key="0"
+      >
+        <DocumentSignedTile
+          details={
+            Object {
+              "dateTime": "2020-03-12T16:56:36.217421",
+              "filename": "Test File 1.txt",
+              "projectName": "Test Project 123",
+              "signedAt": "2020-03-12T16:56:36.217421",
+              "type": "DOCUMENT_SIGNED",
+            }
+          }
+        />
+      </div>
+      <div
+        className="col-md-12 col-lg-6 col-xl-4"
+        key="1"
+      >
+        <ProjectJoinTile
+          details={
+            Object {
+              "dateTime": "2020-03-11T16:56:36.217421",
+              "projectName": "Test Project 123",
+              "type": "PROJECT_JOINED",
+            }
+          }
+        />
+      </div>
+      <div
+        className="col-md-12 col-lg-6 col-xl-4"
+        key="2"
+      >
+        <ProjectCreateTile
+          details={
+            Object {
+              "dateTime": "2020-03-10T16:56:36.217421",
+              "projectName": "Test Project 123",
+              "type": "PROJECT_CREATED",
+            }
+          }
+        />
+      </div>
+      <div
+        className="col-md-12 col-lg-6 col-xl-4"
+        key="3"
+      >
+        <DocumentUploadTile
+          details={
+            Object {
+              "dateTime": "2020-03-09T16:56:36.217421",
+              "projectName": "Test Project 123",
+              "type": "DOCUMENT_UPLOADED",
+            }
+          }
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Should render with no history at all 1`] = `
+<div
+  className="tab-pane active"
+>
+  <div
+    id="history-tab-container"
+  >
+    <div
+      className="history-list row"
+    >
+      You haven't done anything that will be stored in your history yet.  This will soon contain all the projects you have created and have joined, all the documents you have uploaded, and all the documents you have signed.
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Should render with no history elements 1`] = `
+<div
+  className="tab-pane active"
+>
+  <div
+    id="history-tab-container"
+  >
+    <div
+      className="history-list row"
+    >
+      You haven't done anything that will be stored in your history yet.  This will soon contain all the projects you have created and have joined, all the documents you have uploaded, and all the documents you have signed.
+    </div>
+  </div>
+</div>
+`;

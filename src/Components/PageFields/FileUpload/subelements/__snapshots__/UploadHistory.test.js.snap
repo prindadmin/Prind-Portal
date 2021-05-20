@@ -1,0 +1,358 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UploadHistory - Click download button 1`] = `
+<div
+  id="upload-history-container"
+>
+  <div
+    className="element-title"
+  >
+    Upload History
+  </div>
+  <div
+    className="details-table"
+  >
+    <h4>
+      File Name: 
+    </h4>
+    <h4>
+      Uploaded By: 
+    </h4>
+    <h4>
+      Version: 
+    </h4>
+    <h4>
+      Uploaded At: 
+    </h4>
+    <h4>
+      Proof: 
+    </h4>
+    <h4>
+      Download:
+    </h4>
+    <div
+      key="uploadName-0"
+    >
+      Test File One.txt
+    </div>
+    <div
+      key="uploadedBy-0"
+    >
+      Testy McTesterson
+    </div>
+    <div
+      key="ver-0"
+    >
+      1
+    </div>
+    <div
+      key="uploadDateTime-0"
+    >
+      2021-04-05T08:38:32
+    </div>
+    <div
+      key="proof-0"
+    >
+      <a
+        href="https://prind.tech"
+        id="proof-link"
+        onClick={[Function]}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        Link to Proof
+      </a>
+    </div>
+    <div
+      key="downloadButton-0"
+    >
+      <Spinner
+        size={16}
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`UploadHistory - Should render 1`] = `
+<div
+  id="upload-history-container"
+>
+  <div
+    className="element-title"
+  >
+    Upload History
+  </div>
+  <div
+    className="details-table"
+  >
+    <h4>
+      File Name: 
+    </h4>
+    <h4>
+      Uploaded By: 
+    </h4>
+    <h4>
+      Version: 
+    </h4>
+    <h4>
+      Uploaded At: 
+    </h4>
+    <h4>
+      Proof: 
+    </h4>
+    <h4>
+      Download:
+    </h4>
+    <div
+      key="uploadName-0"
+    >
+      Test File One.txt
+    </div>
+    <div
+      key="uploadedBy-0"
+    >
+      Testy McTesterson
+    </div>
+    <div
+      key="ver-0"
+    >
+      1
+    </div>
+    <div
+      key="uploadDateTime-0"
+    >
+      2021-04-05T08:38:32
+    </div>
+    <div
+      key="proof-0"
+    >
+      <a
+        href="https://prind.tech"
+        id="proof-link"
+        onClick={[Function]}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        Link to Proof
+      </a>
+    </div>
+    <div
+      key="downloadButton-0"
+    >
+      <div
+        id="download-box-container"
+        onClick={[Function]}
+      >
+        <withRouter(Connect(DownloadBox))
+          fieldID="1"
+          fileVersionDetails={
+            Object {
+              "proofLink": "https://prind.tech",
+              "uploadName": "Test File One.txt",
+              "uploadedBy": "Testy McTesterson",
+              "uploadedDateTime": "2021-04-05T08:38:32",
+              "ver": "1",
+            }
+          }
+          onDownloadFailure={[Function]}
+          onDownloadSuccess={[Function]}
+          pageName="design"
+          projectId="123"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`UploadHistory - Should render with no proof link 1`] = `
+<div
+  id="upload-history-container"
+>
+  <div
+    className="element-title"
+  >
+    Upload History
+  </div>
+  <div
+    className="details-table"
+  >
+    <h4>
+      File Name: 
+    </h4>
+    <h4>
+      Uploaded By: 
+    </h4>
+    <h4>
+      Version: 
+    </h4>
+    <h4>
+      Uploaded At: 
+    </h4>
+    <h4>
+      Proof: 
+    </h4>
+    <h4>
+      Download:
+    </h4>
+    <div
+      key="uploadName-0"
+    >
+      Test File One.txt
+    </div>
+    <div
+      key="uploadedBy-0"
+    >
+      Testy McTesterson
+    </div>
+    <div
+      key="ver-0"
+    >
+      1
+    </div>
+    <div
+      key="uploadDateTime-0"
+    >
+      2021-04-05T08:38:32
+    </div>
+    <div
+      key="proof-0"
+    >
+      <a
+        href="https://prind.tech"
+        id="proof-link"
+        onClick={[Function]}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        Link to Proof
+      </a>
+    </div>
+    <div
+      key="downloadButton-0"
+    >
+      <div
+        id="download-box-container"
+        onClick={[Function]}
+      >
+        <withRouter(Connect(DownloadBox))
+          fieldID="1"
+          fileVersionDetails={
+            Object {
+              "proofLink": "https://prind.tech",
+              "uploadName": "Test File One.txt",
+              "uploadedBy": "Testy McTesterson",
+              "uploadedDateTime": "2021-04-05T08:38:32",
+              "ver": "1",
+            }
+          }
+          onDownloadFailure={[Function]}
+          onDownloadSuccess={[Function]}
+          pageName="design"
+          projectId="123"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`UploadHistory - Should render without history 1`] = `
+<div
+  id="upload-history-container"
+>
+  <div
+    className="element-title"
+  >
+    Upload History
+  </div>
+  <div>
+    There are no previous version of this file
+  </div>
+</div>
+`;
+
+exports[`UploadHistory - Should render without proof link 1`] = `
+<div
+  id="upload-history-container"
+>
+  <div
+    className="element-title"
+  >
+    Upload History
+  </div>
+  <div
+    className="details-table"
+  >
+    <h4>
+      File Name: 
+    </h4>
+    <h4>
+      Uploaded By: 
+    </h4>
+    <h4>
+      Version: 
+    </h4>
+    <h4>
+      Uploaded At: 
+    </h4>
+    <h4>
+      Proof: 
+    </h4>
+    <h4>
+      Download:
+    </h4>
+    <div
+      key="uploadName-0"
+    >
+      Test File One.txt
+    </div>
+    <div
+      key="uploadedBy-0"
+    >
+      Testy McTesterson
+    </div>
+    <div
+      key="ver-0"
+    >
+      1
+    </div>
+    <div
+      key="uploadDateTime-0"
+    >
+      2021-04-05T08:38:32
+    </div>
+    <div
+      key="proof-0"
+    >
+      Proof still processing
+    </div>
+    <div
+      key="downloadButton-0"
+    >
+      <div
+        id="download-box-container"
+        onClick={[Function]}
+      >
+        <withRouter(Connect(DownloadBox))
+          fieldID="1"
+          fileVersionDetails={
+            Object {
+              "proofLink": undefined,
+              "uploadName": "Test File One.txt",
+              "uploadedBy": "Testy McTesterson",
+              "uploadedDateTime": "2021-04-05T08:38:32",
+              "ver": "1",
+            }
+          }
+          onDownloadFailure={[Function]}
+          onDownloadSuccess={[Function]}
+          pageName="design"
+          projectId="123"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

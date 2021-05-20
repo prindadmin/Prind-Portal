@@ -1,25 +1,12 @@
-import getAccessibleProjectsDispatcher from './getAccessibleProjects'
-import createNewProjectDispatcher from './createNewProject'
-import updateProjectDetailsDispatcher from './updateProjectDetails'
-import fetchProjectDetailsDispatcher from './fetchProjectDetails'
-import getCurrentMembersDispatcher from './getCurrentMembers'
-import uploadFileDispatcher from './uploadFile'
-import downloadFileDispatcher from './downloadFile'
-import createFieldDispatcher from './createField'
-import updateFieldDispatcher from './updateField'
-import requestSignatureDispatcher from './requestSignature'
-import deleteProjectDispatcher from './deleteProject'
 
-export {
-  getAccessibleProjectsDispatcher,
-  createNewProjectDispatcher,
-  updateProjectDetailsDispatcher,
-  fetchProjectDetailsDispatcher,
-  getCurrentMembersDispatcher,
-  uploadFileDispatcher,
-  downloadFileDispatcher,
-  createFieldDispatcher,
-  updateFieldDispatcher,
-  requestSignatureDispatcher,
-  deleteProjectDispatcher,
-}
+export { default as getAccessibleProjects } from './getAccessibleProjects';
+export { default as createNewProject } from './createNewProject';
+export { default as updateProjectDetails } from './updateProjectDetails';
+export { default as fetchProjectDetails } from './fetchProjectDetails';
+export { default as getCurrentMembers } from './getCurrentMembers';
+export { default as uploadFile } from './uploadFile';
+export { default as downloadFile } from './downloadFile';
+export { default as createField } from './createField';
+export { default as updateField } from './updateField';
+export { default as requestSignature } from './requestSignature';
+export { default as deleteProject } from './deleteProject';

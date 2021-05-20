@@ -3,11 +3,10 @@ import { withRouter } from 'react-router-dom'
 
 import Element from './UserDetailsPopOver'
 
-import * as memberReducer from '../../Reducers/memberReducer'
+import * as members from '../../Reducers/members'
 
 const mapStatetoProps = state => {
   return {
-    projects: state.projects,
     members: state.members,
   }
 }
@@ -15,7 +14,7 @@ const mapStatetoProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     tempGetUserAccreditations: (username, resolve, reject) => {
-      dispatch(memberReducer.tempGetUserAccreditations(username, resolve, reject))
+      dispatch(members.tempGetUserAccreditations(username, resolve, reject))
     },
   }
 }

@@ -1,0 +1,202 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render with signatures and invitations 1`] = `
+<div
+  className="tab-pane active"
+>
+  <div
+    className="row"
+  >
+    <div
+      id="requests-tab-container"
+    >
+      <div
+        className="requests-section project-invitations"
+      >
+        <div
+          className="element-title"
+        >
+          Project Invitations
+        </div>
+        <div
+          className="col-md-12 col-lg-6 col-xl-4"
+          key="0"
+        >
+          <withRouter(Connect(ProjectInvitationTile))
+            requestDetails={
+              Object {
+                "projectId": "123",
+                "projectName": "Test Project 123",
+                "requestedAt": "2021-03-30T08:13:45",
+                "requestedBy": "bbbb-bbbb-bbbbbbbb-bbbb-bbbb",
+                "requestedByUser": "Test Testerson",
+                "roleId": "client",
+              }
+            }
+          />
+        </div>
+      </div>
+      <div
+        className="horizontal-line"
+      />
+      <div
+        className="requests-section signature-requests"
+      >
+        <div
+          className="element-title"
+        >
+          Signature Requests
+        </div>
+        <div
+          className="signature-request-container"
+        >
+          <withRouter(Connect(SignatureRequestTile))
+            key="0"
+            requestDetails={
+              Object {
+                "fieldID": "1",
+                "fieldTitle": "Brief Description",
+                "filename": "Demo Project V1.3.2 - Brief Description.pdf",
+                "pageName": "occupation",
+                "projectID": "DemoProjectV1322021-02-16",
+                "projectName": "Demo Project V1.3.2",
+                "requestedAt": "1613474390",
+                "requestedBy": Object {
+                  "firstName": "Ben",
+                  "lastName": "Jeater",
+                  "username": "cb8c0582-fbca-4178-b23d-44bb4096262b",
+                },
+                "requesterFirstName": "Ben",
+                "requesterLastName": "Jeater",
+              }
+            }
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`should render with signatures and without invitations 1`] = `
+<div
+  className="tab-pane active"
+>
+  <div
+    className="row"
+  >
+    <div
+      id="requests-tab-container"
+    >
+      <div
+        className="requests-section project-invitations"
+      />
+      <div
+        className="requests-section signature-requests"
+      >
+        <div
+          className="element-title"
+        >
+          Signature Requests
+        </div>
+        <div
+          className="signature-request-container"
+        >
+          <withRouter(Connect(SignatureRequestTile))
+            key="0"
+            requestDetails={
+              Object {
+                "fieldID": "1",
+                "fieldTitle": "Brief Description",
+                "filename": "Demo Project V1.3.2 - Brief Description.pdf",
+                "pageName": "occupation",
+                "projectID": "DemoProjectV1322021-02-16",
+                "projectName": "Demo Project V1.3.2",
+                "requestedAt": "1613474390",
+                "requestedBy": Object {
+                  "firstName": "Ben",
+                  "lastName": "Jeater",
+                  "username": "cb8c0582-fbca-4178-b23d-44bb4096262b",
+                },
+                "requesterFirstName": "Ben",
+                "requesterLastName": "Jeater",
+              }
+            }
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`should render without signatures and invitations 1`] = `
+<div
+  className="tab-pane active"
+>
+  <div
+    className="row"
+  >
+    <div
+      id="requests-tab-container"
+    >
+      <div
+        className="no-requests-container fill"
+      >
+        <div
+          className="no-requests"
+        >
+          <ItemIcon
+            size="6x"
+            type="ticked"
+          />
+          <p>
+            You have no requests right now
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`should render without signatures and with invitations 1`] = `
+<div
+  className="tab-pane active"
+>
+  <div
+    className="row"
+  >
+    <div
+      id="requests-tab-container"
+    >
+      <div
+        className="requests-section project-invitations"
+      >
+        <div
+          className="element-title"
+        >
+          Project Invitations
+        </div>
+        <div
+          className="col-md-12 col-lg-6 col-xl-4"
+          key="0"
+        >
+          <withRouter(Connect(ProjectInvitationTile))
+            requestDetails={
+              Object {
+                "projectId": "123",
+                "projectName": "Test Project 123",
+                "requestedAt": "2021-03-30T08:13:45",
+                "requestedBy": "bbbb-bbbb-bbbbbbbb-bbbb-bbbb",
+                "requestedByUser": "Test Testerson",
+                "roleId": "client",
+              }
+            }
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -1,7 +1,5 @@
-import React, { lazy, Component } from 'react'
+import React, { lazy, Component, Suspense } from 'react'
 import PropTypes from 'prop-types'
-import { reduxForm } from 'redux-form'
-
 import ReactGA from 'react-ga';
 
 import {
@@ -9,19 +7,32 @@ import {
   ButtonGroup,
 } from '@blueprintjs/core'
 
-import Spinner from '../../Components/Common/LoadingSpinnerCSS'
-
+// Data
 import * as Strings from '../../Data/Strings'
 import * as PageStates from '../PageStates'
 
-const NoProjectSelected = lazy(() => import('../../Components/Common/NoProjectSelected'));
-const ContactTile = lazy(() => import('../../Components/ContactTile'));
-const AddNewMemberForm = lazy(() => import('../../Components/AddNewTeamMember'));
+// Components
+import Spinner from '../../Components/Common/LoadingSpinnerCSS'
+import NoProjectSelected from '../../Components/Common/NoProjectSelected'
+import ContactTile from '../../Components/ContactTile'
+import AddNewMemberForm from '../../Components/AddNewTeamMember'
+import FullScreenTile from '../../Components/FullScreenTile'
 
+// TODO: FUTURE: Refactor component without redux form and blueprintjs
 
 export class ProjectTeamPage extends Component {
   static propTypes = {
-    handleSubmit: PropTypes.func.isRequired,
+    projects: PropTypes.shape({
+      chosenProject: PropTypes.shape({
+        projectId: PropTypes.string
+      }).isRequired
+    }).isRequired,
+    location: PropTypes.shape({
+      pathname: PropTypes.string.isRequired
+    }).isRequired,
+    getCurrentMembers: PropTypes.func.isRequired,
+    getRoles: PropTypes.func.isRequired,
+    //reset: PropTypes.func.isRequired,
   }
 
   constructor(props) {
@@ -67,7 +78,7 @@ export class ProjectTeamPage extends Component {
   }
 
   addMemberResolve = () => {
-    this.props.reset()
+    //this.props.reset()
     this.setState({
       state: PageStates.FETCHING_CURRENT_PROJECT_MEMBERS,
     })
@@ -79,8 +90,8 @@ export class ProjectTeamPage extends Component {
 
   addMemberReject = () => {
     this.setState({
-      state: PageStates.ADDING_MEMBER_TO_PROJECT_FAILED,
-      errorText: Strings.ERROR_ADDING_MEMBER_TO_PROJECT
+      state: PageStates.ADDING_MEMBERS_TO_PROJECT_FAILED,
+      errorText: Strings.ERROR_ADDING_MEMBERS_TO_PROJECT
     })
   }
 
@@ -103,7 +114,7 @@ export class ProjectTeamPage extends Component {
 
 
   cancelNewMember = () => {
-    this.props.reset()
+    //this.props.reset()
     this.setState({
       state: PageStates.QUIESCENT
     })
@@ -121,9 +132,9 @@ export class ProjectTeamPage extends Component {
     return (
       <ButtonGroup fill>
         <Button
-          onClick={(e) => this.setState({state: PageStates.SHOW_NEW_MEMBER_SETTINGS})}
+          onClick={(e) => this.setState({state: PageStates.SHOW_NEW_MEMBERS_SETTINGS})}
           intent='primary'
-          text={Strings.BUTTON_ADD_MEMBER_TO_PROJECT}
+          text={Strings.BUTTON_ADD_MEMBERS_TO_PROJECT}
         />
       </ButtonGroup>
     )
@@ -206,17 +217,19 @@ export class ProjectTeamPage extends Component {
       onCancelAddMember={this.closeAddMemberForm} />
   }
 
-  // TODO: code this
   getFailedTeamMemberFetch = () => {
     return (
-      <p>failed to fetch team members</p>
+      <FullScreenTile
+        text={Strings.FULL_SCREEN_FAILED_FETCHING_TEAM_MEMBERS}
+        icon='times-circle' />
     )
   }
 
-  // TODO: code this
   getFailedTeamMemberAdd = () => {
     return (
-      <p>failed to fetch team members</p>
+      <FullScreenTile
+        text={Strings.FULL_SCREEN_FAILED_FETCHING_TEAM_MEMBERS}
+        icon='times-circle' />
     )
   }
 
@@ -231,30 +244,32 @@ export class ProjectTeamPage extends Component {
   teamDetails = () => {
     return (
       <div className="form-container">
-        {
-          this.state.state === PageStates.SHOW_NEW_MEMBER_SETTINGS ? this.newMemberPageHeader() : this.pageHeader()
-        }
-        {
-          this.state.state === PageStates.QUIESCENT ? this.memberList() : null
-        }
-        {
-          this.state.state === PageStates.SHOW_NEW_MEMBER_SETTINGS ? this.getAddNewMemberForm() : null
-        }
-        {
-          this.state.state === PageStates.ADDING_MEMBER_TO_PROJECT ? <Spinner /> : null
-        }
-        {
-          this.state.state === PageStates.ADDING_MEMBER_TO_PROJECT_FAILED ? this.getFailedTeamMemberAdd() : null
-        }
-        {
-          this.state.state === PageStates.FETCHING_CURRENT_PROJECT_MEMBERS ? <Spinner /> : null
-        }
-        {
-          this.state.state === PageStates.FETCHING_CURRENT_PROJECT_MEMBERS_FAILED ? this.getFailedTeamMemberFetch() : null
-        }
-        {
-          this.pageFooter()
-        }
+        <Suspense fallback={<Spinner />}>
+          {
+            this.state.state === PageStates.SHOW_NEW_MEMBERS_SETTINGS ? this.newMemberPageHeader() : this.pageHeader()
+          }
+          {
+            this.state.state === PageStates.QUIESCENT ? this.memberList() : null
+          }
+          {
+            this.state.state === PageStates.SHOW_NEW_MEMBERS_SETTINGS ? this.getAddNewMemberForm() : null
+          }
+          {
+            this.state.state === PageStates.ADDING_MEMBERS_TO_PROJECT ? <Spinner /> : null
+          }
+          {
+            this.state.state === PageStates.ADDING_MEMBERS_TO_PROJECT_FAILED ? this.getFailedTeamMemberAdd() : null
+          }
+          {
+            this.state.state === PageStates.FETCHING_CURRENT_PROJECT_MEMBERS ? <Spinner /> : null
+          }
+          {
+            this.state.state === PageStates.FETCHING_CURRENT_PROJECT_MEMBERS_FAILED ? this.getFailedTeamMemberFetch() : null
+          }
+          {
+            this.pageFooter()
+          }
+        </Suspense>
       </div>
     )
   }
@@ -287,6 +302,4 @@ export class ProjectTeamPage extends Component {
   }
 }
 
-export default reduxForm({
-  form: 'projectTeam'
-})(ProjectTeamPage)
+export default ProjectTeamPage

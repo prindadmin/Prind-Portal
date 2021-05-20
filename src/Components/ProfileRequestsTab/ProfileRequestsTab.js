@@ -12,7 +12,10 @@ import ItemIcon from '../Common/ItemIcon'
 
 export class ProfileRequestsTab extends Component {
   static propTypes = {
-    user: PropTypes.object.isRequired,
+    user: PropTypes.shape({
+      projectInvitations: PropTypes.array.isRequired,
+      signatureRequests: PropTypes.array.isRequired
+    }).isRequired
   }
 
 
@@ -26,7 +29,7 @@ export class ProfileRequestsTab extends Component {
         <div className='signature-request-container'>
           {
             user.signatureRequests.map((request, index) => {
-              return <SignatureRequestTile requestDetails={request} />
+              return <SignatureRequestTile key={index} requestDetails={request} />
             })
           }
         </div>

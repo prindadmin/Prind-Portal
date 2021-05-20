@@ -1,0 +1,722 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render 1`] = `
+<Suspense
+  fallback={
+    <p>
+      error
+    </p>
+  }
+>
+  <Provider
+    store={
+      Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      }
+    }
+  >
+    <HashRouter>
+      <Router
+        history={
+          Object {
+            "action": "POP",
+            "block": [Function],
+            "createHref": [Function],
+            "go": [Function],
+            "goBack": [Function],
+            "goForward": [Function],
+            "length": 1,
+            "listen": [Function],
+            "location": Object {
+              "hash": "",
+              "pathname": "/",
+              "search": "",
+              "state": undefined,
+            },
+            "push": [Function],
+            "replace": [Function],
+          }
+        }
+      >
+        <withRouter(Connect(ProfileRequestsTab))>
+          <Connect(ProfileRequestsTab)
+            history={
+              Object {
+                "action": "POP",
+                "block": [Function],
+                "createHref": [Function],
+                "go": [Function],
+                "goBack": [Function],
+                "goForward": [Function],
+                "length": 1,
+                "listen": [Function],
+                "location": Object {
+                  "hash": "",
+                  "pathname": "/",
+                  "search": "",
+                  "state": undefined,
+                },
+                "push": [Function],
+                "replace": [Function],
+              }
+            }
+            location={
+              Object {
+                "hash": "",
+                "pathname": "/",
+                "search": "",
+                "state": undefined,
+              }
+            }
+            match={
+              Object {
+                "isExact": true,
+                "params": Object {},
+                "path": "/",
+                "url": "/",
+              }
+            }
+          >
+            <ProfileRequestsTab
+              history={
+                Object {
+                  "action": "POP",
+                  "block": [Function],
+                  "createHref": [Function],
+                  "go": [Function],
+                  "goBack": [Function],
+                  "goForward": [Function],
+                  "length": 1,
+                  "listen": [Function],
+                  "location": Object {
+                    "hash": "",
+                    "pathname": "/",
+                    "search": "",
+                    "state": undefined,
+                  },
+                  "push": [Function],
+                  "replace": [Function],
+                }
+              }
+              location={
+                Object {
+                  "hash": "",
+                  "pathname": "/",
+                  "search": "",
+                  "state": undefined,
+                }
+              }
+              match={
+                Object {
+                  "isExact": true,
+                  "params": Object {},
+                  "path": "/",
+                  "url": "/",
+                }
+              }
+              user={
+                Object {
+                  "projectInvitations": Array [
+                    Object {
+                      "projectId": "123",
+                      "projectName": "Test Project 123",
+                      "requestedAt": "2021-03-30T08:13:45",
+                      "requestedBy": "bbbb-bbbb-bbbbbbbb-bbbb-bbbb",
+                      "requestedByUser": "Test Testerson",
+                      "roleId": "client",
+                    },
+                  ],
+                  "signatureRequests": Array [
+                    Object {
+                      "fieldID": "1",
+                      "fieldTitle": "Brief Description",
+                      "filename": "Demo Project V1.3.2 - Brief Description.pdf",
+                      "pageName": "occupation",
+                      "projectID": "DemoProjectV1322021-02-16",
+                      "projectName": "Demo Project V1.3.2",
+                      "requestedAt": "1613474390",
+                      "requestedBy": Object {
+                        "firstName": "Ben",
+                        "lastName": "Jeater",
+                        "username": "cb8c0582-fbca-4178-b23d-44bb4096262b",
+                      },
+                      "requesterFirstName": "Ben",
+                      "requesterLastName": "Jeater",
+                    },
+                  ],
+                }
+              }
+            >
+              <div
+                className="tab-pane active"
+              >
+                <div
+                  className="row"
+                >
+                  <div
+                    id="requests-tab-container"
+                  >
+                    <div
+                      className="requests-section project-invitations"
+                    >
+                      <div
+                        className="element-title"
+                      >
+                        Project Invitations
+                      </div>
+                      <div
+                        className="col-md-12 col-lg-6 col-xl-4"
+                        key="0"
+                      >
+                        <withRouter(Connect(ProjectInvitationTile))
+                          requestDetails={
+                            Object {
+                              "projectId": "123",
+                              "projectName": "Test Project 123",
+                              "requestedAt": "2021-03-30T08:13:45",
+                              "requestedBy": "bbbb-bbbb-bbbbbbbb-bbbb-bbbb",
+                              "requestedByUser": "Test Testerson",
+                              "roleId": "client",
+                            }
+                          }
+                        >
+                          <Connect(ProjectInvitationTile)
+                            history={
+                              Object {
+                                "action": "POP",
+                                "block": [Function],
+                                "createHref": [Function],
+                                "go": [Function],
+                                "goBack": [Function],
+                                "goForward": [Function],
+                                "length": 1,
+                                "listen": [Function],
+                                "location": Object {
+                                  "hash": "",
+                                  "pathname": "/",
+                                  "search": "",
+                                  "state": undefined,
+                                },
+                                "push": [Function],
+                                "replace": [Function],
+                              }
+                            }
+                            location={
+                              Object {
+                                "hash": "",
+                                "pathname": "/",
+                                "search": "",
+                                "state": undefined,
+                              }
+                            }
+                            match={
+                              Object {
+                                "isExact": true,
+                                "params": Object {},
+                                "path": "/",
+                                "url": "/",
+                              }
+                            }
+                            requestDetails={
+                              Object {
+                                "projectId": "123",
+                                "projectName": "Test Project 123",
+                                "requestedAt": "2021-03-30T08:13:45",
+                                "requestedBy": "bbbb-bbbb-bbbbbbbb-bbbb-bbbb",
+                                "requestedByUser": "Test Testerson",
+                                "roleId": "client",
+                              }
+                            }
+                          >
+                            <ProjectInvitationTile
+                              history={
+                                Object {
+                                  "action": "POP",
+                                  "block": [Function],
+                                  "createHref": [Function],
+                                  "go": [Function],
+                                  "goBack": [Function],
+                                  "goForward": [Function],
+                                  "length": 1,
+                                  "listen": [Function],
+                                  "location": Object {
+                                    "hash": "",
+                                    "pathname": "/",
+                                    "search": "",
+                                    "state": undefined,
+                                  },
+                                  "push": [Function],
+                                  "replace": [Function],
+                                }
+                              }
+                              location={
+                                Object {
+                                  "hash": "",
+                                  "pathname": "/",
+                                  "search": "",
+                                  "state": undefined,
+                                }
+                              }
+                              match={
+                                Object {
+                                  "isExact": true,
+                                  "params": Object {},
+                                  "path": "/",
+                                  "url": "/",
+                                }
+                              }
+                              requestDetails={
+                                Object {
+                                  "projectId": "123",
+                                  "projectName": "Test Project 123",
+                                  "requestedAt": "2021-03-30T08:13:45",
+                                  "requestedBy": "bbbb-bbbb-bbbbbbbb-bbbb-bbbb",
+                                  "requestedByUser": "Test Testerson",
+                                  "roleId": "client",
+                                }
+                              }
+                              respondToProjectInvitation={[Function]}
+                            >
+                              <div
+                                id="project-invitation-request"
+                              >
+                                <h4
+                                  className="bp3-heading"
+                                >
+                                  Project Invitation
+                                </h4>
+                                <div
+                                  className="bp3-heading"
+                                >
+                                  Project Name: Test Project 123
+                                </div>
+                                <div
+                                  className="row button-row"
+                                >
+                                  <Blueprint3.Button
+                                    icon="tick"
+                                    id="accept-button"
+                                    intent="primary"
+                                    onClick={[Function]}
+                                    text="Accept"
+                                  >
+                                    <button
+                                      className="bp3-button bp3-intent-primary"
+                                      id="accept-button"
+                                      onBlur={[Function]}
+                                      onClick={[Function]}
+                                      onKeyDown={[Function]}
+                                      onKeyUp={[Function]}
+                                      type="button"
+                                    >
+                                      <Blueprint3.Icon
+                                        icon="tick"
+                                        key="leftIcon"
+                                      >
+                                        <span
+                                          className="bp3-icon bp3-icon-tick"
+                                          icon="tick"
+                                        >
+                                          <svg
+                                            data-icon="tick"
+                                            height={16}
+                                            viewBox="0 0 16 16"
+                                            width={16}
+                                          >
+                                            <desc>
+                                              tick
+                                            </desc>
+                                            <path
+                                              d="M14 3c-.28 0-.53.11-.71.29L6 10.59l-3.29-3.3a1.003 1.003 0 00-1.42 1.42l4 4c.18.18.43.29.71.29s.53-.11.71-.29l8-8A1.003 1.003 0 0014 3z"
+                                              fillRule="evenodd"
+                                              key="0"
+                                            />
+                                          </svg>
+                                        </span>
+                                      </Blueprint3.Icon>
+                                      <span
+                                        className="bp3-button-text"
+                                        key="text"
+                                      >
+                                        Accept
+                                      </span>
+                                      <Blueprint3.Icon
+                                        key="rightIcon"
+                                      />
+                                    </button>
+                                  </Blueprint3.Button>
+                                  <Blueprint3.Button
+                                    icon="cross"
+                                    id="reject-button"
+                                    intent="danger"
+                                    onClick={[Function]}
+                                    text="Reject"
+                                  >
+                                    <button
+                                      className="bp3-button bp3-intent-danger"
+                                      id="reject-button"
+                                      onBlur={[Function]}
+                                      onClick={[Function]}
+                                      onKeyDown={[Function]}
+                                      onKeyUp={[Function]}
+                                      type="button"
+                                    >
+                                      <Blueprint3.Icon
+                                        icon="cross"
+                                        key="leftIcon"
+                                      >
+                                        <span
+                                          className="bp3-icon bp3-icon-cross"
+                                          icon="cross"
+                                        >
+                                          <svg
+                                            data-icon="cross"
+                                            height={16}
+                                            viewBox="0 0 16 16"
+                                            width={16}
+                                          >
+                                            <desc>
+                                              cross
+                                            </desc>
+                                            <path
+                                              d="M9.41 8l3.29-3.29c.19-.18.3-.43.3-.71a1.003 1.003 0 00-1.71-.71L8 6.59l-3.29-3.3a1.003 1.003 0 00-1.42 1.42L6.59 8 3.3 11.29c-.19.18-.3.43-.3.71a1.003 1.003 0 001.71.71L8 9.41l3.29 3.29c.18.19.43.3.71.3a1.003 1.003 0 00.71-1.71L9.41 8z"
+                                              fillRule="evenodd"
+                                              key="0"
+                                            />
+                                          </svg>
+                                        </span>
+                                      </Blueprint3.Icon>
+                                      <span
+                                        className="bp3-button-text"
+                                        key="text"
+                                      >
+                                        Reject
+                                      </span>
+                                      <Blueprint3.Icon
+                                        key="rightIcon"
+                                      />
+                                    </button>
+                                  </Blueprint3.Button>
+                                </div>
+                              </div>
+                            </ProjectInvitationTile>
+                          </Connect(ProjectInvitationTile)>
+                        </withRouter(Connect(ProjectInvitationTile))>
+                      </div>
+                    </div>
+                    <div
+                      className="horizontal-line"
+                    />
+                    <div
+                      className="requests-section signature-requests"
+                    >
+                      <div
+                        className="element-title"
+                      >
+                        Signature Requests
+                      </div>
+                      <div
+                        className="signature-request-container"
+                      >
+                        <withRouter(Connect(SignatureRequestTile))
+                          key="0"
+                          requestDetails={
+                            Object {
+                              "fieldID": "1",
+                              "fieldTitle": "Brief Description",
+                              "filename": "Demo Project V1.3.2 - Brief Description.pdf",
+                              "pageName": "occupation",
+                              "projectID": "DemoProjectV1322021-02-16",
+                              "projectName": "Demo Project V1.3.2",
+                              "requestedAt": "1613474390",
+                              "requestedBy": Object {
+                                "firstName": "Ben",
+                                "lastName": "Jeater",
+                                "username": "cb8c0582-fbca-4178-b23d-44bb4096262b",
+                              },
+                              "requesterFirstName": "Ben",
+                              "requesterLastName": "Jeater",
+                            }
+                          }
+                        >
+                          <Connect(SignatureRequestTile)
+                            history={
+                              Object {
+                                "action": "POP",
+                                "block": [Function],
+                                "createHref": [Function],
+                                "go": [Function],
+                                "goBack": [Function],
+                                "goForward": [Function],
+                                "length": 1,
+                                "listen": [Function],
+                                "location": Object {
+                                  "hash": "",
+                                  "pathname": "/",
+                                  "search": "",
+                                  "state": undefined,
+                                },
+                                "push": [Function],
+                                "replace": [Function],
+                              }
+                            }
+                            location={
+                              Object {
+                                "hash": "",
+                                "pathname": "/",
+                                "search": "",
+                                "state": undefined,
+                              }
+                            }
+                            match={
+                              Object {
+                                "isExact": true,
+                                "params": Object {},
+                                "path": "/",
+                                "url": "/",
+                              }
+                            }
+                            requestDetails={
+                              Object {
+                                "fieldID": "1",
+                                "fieldTitle": "Brief Description",
+                                "filename": "Demo Project V1.3.2 - Brief Description.pdf",
+                                "pageName": "occupation",
+                                "projectID": "DemoProjectV1322021-02-16",
+                                "projectName": "Demo Project V1.3.2",
+                                "requestedAt": "1613474390",
+                                "requestedBy": Object {
+                                  "firstName": "Ben",
+                                  "lastName": "Jeater",
+                                  "username": "cb8c0582-fbca-4178-b23d-44bb4096262b",
+                                },
+                                "requesterFirstName": "Ben",
+                                "requesterLastName": "Jeater",
+                              }
+                            }
+                          >
+                            <SignatureRequestTile
+                              history={
+                                Object {
+                                  "action": "POP",
+                                  "block": [Function],
+                                  "createHref": [Function],
+                                  "go": [Function],
+                                  "goBack": [Function],
+                                  "goForward": [Function],
+                                  "length": 1,
+                                  "listen": [Function],
+                                  "location": Object {
+                                    "hash": "",
+                                    "pathname": "/",
+                                    "search": "",
+                                    "state": undefined,
+                                  },
+                                  "push": [Function],
+                                  "replace": [Function],
+                                }
+                              }
+                              location={
+                                Object {
+                                  "hash": "",
+                                  "pathname": "/",
+                                  "search": "",
+                                  "state": undefined,
+                                }
+                              }
+                              match={
+                                Object {
+                                  "isExact": true,
+                                  "params": Object {},
+                                  "path": "/",
+                                  "url": "/",
+                                }
+                              }
+                              rejectSignatureRequest={[Function]}
+                              requestDetails={
+                                Object {
+                                  "fieldID": "1",
+                                  "fieldTitle": "Brief Description",
+                                  "filename": "Demo Project V1.3.2 - Brief Description.pdf",
+                                  "pageName": "occupation",
+                                  "projectID": "DemoProjectV1322021-02-16",
+                                  "projectName": "Demo Project V1.3.2",
+                                  "requestedAt": "1613474390",
+                                  "requestedBy": Object {
+                                    "firstName": "Ben",
+                                    "lastName": "Jeater",
+                                    "username": "cb8c0582-fbca-4178-b23d-44bb4096262b",
+                                  },
+                                  "requesterFirstName": "Ben",
+                                  "requesterLastName": "Jeater",
+                                }
+                              }
+                              updateChosenProject={[Function]}
+                            >
+                              <div
+                                id="signature-request"
+                              >
+                                <div
+                                  className="signature-tile-content-container"
+                                >
+                                  <h4>
+                                    Requested By:
+                                  </h4>
+                                  <div>
+                                    Ben Jeater
+                                  </div>
+                                  <h4>
+                                    Project Name:
+                                  </h4>
+                                  <div>
+                                    Demo Project V1.3.2
+                                  </div>
+                                  <h4>
+                                    Project Stage:
+                                  </h4>
+                                  <div>
+                                    Occupation
+                                  </div>
+                                  <h4>
+                                    Field Title:
+                                  </h4>
+                                  <div>
+                                    Brief Description
+                                  </div>
+                                  <h4>
+                                    File Name:
+                                  </h4>
+                                  <div>
+                                    Demo Project V1.3.2 - Brief Description.pdf
+                                  </div>
+                                </div>
+                                <div
+                                  className="row button-row"
+                                >
+                                  <Blueprint3.Button
+                                    icon="document"
+                                    id="go-to-document-button"
+                                    intent="primary"
+                                    onClick={[Function]}
+                                    text="Go To Document"
+                                  >
+                                    <button
+                                      className="bp3-button bp3-intent-primary"
+                                      id="go-to-document-button"
+                                      onBlur={[Function]}
+                                      onClick={[Function]}
+                                      onKeyDown={[Function]}
+                                      onKeyUp={[Function]}
+                                      type="button"
+                                    >
+                                      <Blueprint3.Icon
+                                        icon="document"
+                                        key="leftIcon"
+                                      >
+                                        <span
+                                          className="bp3-icon bp3-icon-document"
+                                          icon="document"
+                                        >
+                                          <svg
+                                            data-icon="document"
+                                            height={16}
+                                            viewBox="0 0 16 16"
+                                            width={16}
+                                          >
+                                            <desc>
+                                              document
+                                            </desc>
+                                            <path
+                                              d="M9 0H3c-.55 0-1 .45-1 1v14c0 .55.45 1 1 1h10c.55 0 1-.45 1-1V5L9 0zm3 14H4V2h4v4h4v8z"
+                                              fillRule="evenodd"
+                                              key="0"
+                                            />
+                                          </svg>
+                                        </span>
+                                      </Blueprint3.Icon>
+                                      <span
+                                        className="bp3-button-text"
+                                        key="text"
+                                      >
+                                        Go To Document
+                                      </span>
+                                      <Blueprint3.Icon
+                                        key="rightIcon"
+                                      />
+                                    </button>
+                                  </Blueprint3.Button>
+                                  <Blueprint3.Button
+                                    icon="cross"
+                                    id="reject-signature-request-button"
+                                    intent="danger"
+                                    onClick={[Function]}
+                                    text="Reject"
+                                  >
+                                    <button
+                                      className="bp3-button bp3-intent-danger"
+                                      id="reject-signature-request-button"
+                                      onBlur={[Function]}
+                                      onClick={[Function]}
+                                      onKeyDown={[Function]}
+                                      onKeyUp={[Function]}
+                                      type="button"
+                                    >
+                                      <Blueprint3.Icon
+                                        icon="cross"
+                                        key="leftIcon"
+                                      >
+                                        <span
+                                          className="bp3-icon bp3-icon-cross"
+                                          icon="cross"
+                                        >
+                                          <svg
+                                            data-icon="cross"
+                                            height={16}
+                                            viewBox="0 0 16 16"
+                                            width={16}
+                                          >
+                                            <desc>
+                                              cross
+                                            </desc>
+                                            <path
+                                              d="M9.41 8l3.29-3.29c.19-.18.3-.43.3-.71a1.003 1.003 0 00-1.71-.71L8 6.59l-3.29-3.3a1.003 1.003 0 00-1.42 1.42L6.59 8 3.3 11.29c-.19.18-.3.43-.3.71a1.003 1.003 0 001.71.71L8 9.41l3.29 3.29c.18.19.43.3.71.3a1.003 1.003 0 00.71-1.71L9.41 8z"
+                                              fillRule="evenodd"
+                                              key="0"
+                                            />
+                                          </svg>
+                                        </span>
+                                      </Blueprint3.Icon>
+                                      <span
+                                        className="bp3-button-text"
+                                        key="text"
+                                      >
+                                        Reject
+                                      </span>
+                                      <Blueprint3.Icon
+                                        key="rightIcon"
+                                      />
+                                    </button>
+                                  </Blueprint3.Button>
+                                </div>
+                              </div>
+                            </SignatureRequestTile>
+                          </Connect(SignatureRequestTile)>
+                        </withRouter(Connect(SignatureRequestTile))>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ProfileRequestsTab>
+          </Connect(ProfileRequestsTab)>
+        </withRouter(Connect(ProfileRequestsTab))>
+      </Router>
+    </HashRouter>
+  </Provider>
+</Suspense>
+`;

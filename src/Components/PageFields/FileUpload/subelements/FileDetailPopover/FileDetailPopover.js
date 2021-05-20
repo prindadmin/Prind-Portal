@@ -12,7 +12,7 @@ import SignatureHistory from '../SignatureHistory'
 
 import * as Strings from '../../../../../Data/Strings'
 
-export class Element extends Component {
+export class FileDetailPopover extends Component {
   static propTypes = {
     chosenFileDetails: PropTypes.shape({
       uploadName: PropTypes.string.isRequired,
@@ -20,7 +20,11 @@ export class Element extends Component {
       uploadedBy: PropTypes.string.isRequired,
       proofLink: PropTypes.string,
     }).isRequired,
-    projectID: PropTypes.any.isRequired,
+    projects: PropTypes.shape({
+      chosenProject: PropTypes.shape({
+        projectId: PropTypes.string.isRequired
+      }).isRequired
+    }).isRequired,
     pageName: PropTypes.any.isRequired,
     fieldID: PropTypes.any.isRequired,
     onClosePopover: PropTypes.func.isRequired,
@@ -77,7 +81,7 @@ export class Element extends Component {
             {
               chosenFileDetails.proofLink === undefined ?
                 Strings.NO_PROOF_AVAILABLE :
-                <div onClick={e => e.stopPropagation()}>
+                <div id='proof-link-container' onClick={e => e.stopPropagation()}>
                   <a href={chosenFileDetails.proofLink} target="_blank" rel="noopener noreferrer">{Strings.LINK_TO_PROOF}</a>
                 </div>
             }
@@ -105,7 +109,8 @@ export class Element extends Component {
 
   getContent = () => {
 
-    const { projectID, pageName, fieldID, chosenFileDetails } = this.props
+    const { pageName, fieldID, chosenFileDetails } = this.props
+    const { projectId } = this.props.projects.chosenProject
     const { fetchError, errorText } = this.state
 
     return (
@@ -118,7 +123,7 @@ export class Element extends Component {
 
           <div className="col download-box-cell">
             <DownloadBox
-              projectID={projectID}
+              projectId={projectId}
               pageName={pageName}
               fieldID={fieldID}
               fileVersionDetails={chosenFileDetails}
@@ -172,7 +177,6 @@ export class Element extends Component {
       </PopOverHandler>
     )
   }
-
 }
 
-export default Element
+export default FileDetailPopover

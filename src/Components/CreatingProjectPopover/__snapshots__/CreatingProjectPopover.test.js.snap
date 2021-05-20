@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreatingProjectPopover - should render 1`] = `
+<PopOverHandler>
+  <div
+    id="popup-greyer"
+    onClick={[Function]}
+  >
+    <div
+      id="project-creation-popover"
+    >
+      <div
+        id="popup-box"
+      >
+        <div
+          className="project-creation-popover-container"
+          onClick={[Function]}
+        >
+          <div
+            className="element-title"
+          >
+            Project Creation In Progress
+          </div>
+          <div
+            className="element-description"
+          >
+            You will only be billed for the project you once you begin uploading data to one of the project tabs (e.g. inception, feasibility, design, etc)
+            <Blueprint3.Spinner
+              intent="danger"
+              size="150"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</PopOverHandler>
+`;

@@ -29,7 +29,10 @@ async function AddMemberToProject(projectID, memberDetails) {
     // Send the request
     API.post(apiName, path, myInit)
       .then(response => {
-        console.log(response)
+        if (response.Error) {
+          reject(response)
+          return;
+        }
         resolve(response)
       })
       .catch(error => {

@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render 1`] = `
+<div
+  className="full-height full-width center-content"
+  id="full-screen-tile"
+  style={
+    Object {
+      "minHeight": "50vh",
+    }
+  }
+>
+  <img
+    alt=""
+    src="/images/icons/file-search.svg"
+  />
+  Hello, Full Screen
+</div>
+`;
+
+exports[`Should render with default text 1`] = `
+<div
+  className="full-height full-width center-content"
+  id="full-screen-tile"
+  style={
+    Object {
+      "minHeight": "50vh",
+    }
+  }
+>
+  <img
+    alt=""
+    src="/images/icons/file-search.svg"
+  />
+</div>
+`;

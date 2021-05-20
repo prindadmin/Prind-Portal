@@ -8,3 +8,11 @@ it('Should render', () => {
   const component = shallow(<Component {...props} />);
   expect(component).toMatchSnapshot();
 });
+
+it('Should render with custom text', () => {
+  const props = {
+    text: "custom text"
+  }
+  const component = shallow(<Component {...props} />);
+  expect(component).toMatchSnapshot();
+});

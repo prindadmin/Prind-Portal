@@ -1,31 +1,36 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import * as userReducer from '../../Reducers/userReducer'
-import * as projectsReducer from '../../Reducers/projectsReducer'
+import * as auth from '../../Reducers/auth'
+import * as user from '../../Reducers/user'
+import * as projects from '../../Reducers/projects'
 
 import PageComponent from './LoggedInContent'
 
 const mapStatetoProps = state => {
   return {
-    user: state.user,
     projects: state.projects,
+    procore: state.procore,
+    user: state.user
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
+    resetSite: () => {
+      dispatch(auth.init())
+    },
     getProjectDetails: (project, resolve) => {
-      dispatch(projectsReducer.updateChosenProject(project, resolve))
+      dispatch(projects.updateChosenProject(project, resolve))
     },
     saveProjectID: (projectID) => {
-      dispatch(projectsReducer.saveProjectID(projectID))
-    },
-    requestS3ProjectFileUploadToken: (project_id, pageName) => {
-      dispatch(userReducer.requestS3ProjectFileUploadToken(project_id, pageName))
+      dispatch(projects.saveProjectID(projectID))
     },
     getProjectMembers: (projectID) => {
-      dispatch(projectsReducer.getCurrentMembers(projectID))
+      dispatch(projects.getCurrentMembers(projectID))
+    },
+    checkServerAccessToProcore: (resolve, reject) => {
+      dispatch(user.checkServerAccessToProcore(resolve, reject))
     }
   }
 }

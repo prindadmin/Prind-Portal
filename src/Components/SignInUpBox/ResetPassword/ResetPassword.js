@@ -1,28 +1,33 @@
 import React, { Component } from 'react'
-import qs from 'stringquery'
 import PropTypes from 'prop-types'
 
 import ReactGA from 'react-ga';
-
+/*
 import {
   Callout
 } from '@blueprintjs/core'
+*/
+// Functions
+import CanUseWebP from '../../../Functions/CheckIfWebpSupported'
+import GetObjectFromParameters from '../../../Functions/GetObjectFromParameters'
 
-// Components
-import { CanUseWebP } from '../../../Functions/CheckIfWebpSupported'
- 
 import * as Endpoints from '../../../Data/Endpoints'
 import * as Strings from '../../../Data/Strings'
-import * as ComponentState from '../States'
+import * as ComponentStates from '../../ComponentStates'
 
-// TODO: Test error message
+// TODO: FUTURE: Test error message
 
 class ResetPassword extends Component {
   static propTypes = {
     toggleVisibleForm: PropTypes.func.isRequired,
     setNewPassword: PropTypes.func.isRequired,
-    init: PropTypes.func,
-    history: PropTypes.object,
+    history: PropTypes.shape({
+      push: PropTypes.func.isRequired,
+    }).isRequired,
+    location: PropTypes.shape({
+      search: PropTypes.string.isRequired,
+      pathname: PropTypes.string.isRequired,
+    }).isRequired
   }
 
   constructor() {
@@ -31,7 +36,7 @@ class ResetPassword extends Component {
       password: '',
       confirmPassword: '',
       errorMessage: '',
-      state: ComponentState.QUIESCENT,
+      state: ComponentStates.QUIESCENT,
     }
   }
 
@@ -42,42 +47,35 @@ class ResetPassword extends Component {
 
   handleInputChange = (event) => {
     const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
-
     this.setState({
-      [name]: value
+      [target.name]: target.value
     });
   }
 
   resetPassword = (e) => {
     e.preventDefault();
 
-    const confirmPassword =  e.target.elements.confirmPassword.value
-    const password = e.target.elements.password.value
+    const confirmPassword =  this.state.confirmPassword
+    const password = this.state.password
 
     // If passwords do not match
     if (password !== confirmPassword) {
       this.setState({
-        state: ComponentState.PASSWORD_RESET_FAILED,
+        state: ComponentStates.PASSWORD_RESET_FAILED,
         errorMessage: Strings.PASSWORDS_DO_NOT_MATCH,
       })
       return;
     }
 
-    const query = qs(this.props.location.search)
-
-    console.log(query)
+    const query = GetObjectFromParameters(this.props.location.search)
 
     const values = {
       password,
       ...query
     }
 
-    console.log(values)
-
     this.setState({
-      state: ComponentState.LOADING,
+      state: ComponentStates.LOADING,
       errorMessage: ''
     })
 
@@ -85,28 +83,28 @@ class ResetPassword extends Component {
   }
 
   passwordResetSuccess = (result) => {
-    console.log(result)
+    //console.log(result)
     this.setState({
-      state: ComponentState.PASSWORD_RESET_SUCCESS,
+      state: ComponentStates.PASSWORD_RESET_SUCCESS,
     })
   }
 
   passwordResetFailed = (result) => {
-    console.log(result)
+    //console.log(result)
     this.setState({
-      state: ComponentState.PASSWORD_RESET_FAILED,
+      state: ComponentStates.PASSWORD_RESET_FAILED,
       errorMessage: result.message,
     })
   }
 
   getLogo = () => {
-    const logoName = "/images/logos/prind-tech-logo"
-    const logoLocation = CanUseWebP ? `${logoName}.webp` : `${logoName}.png`
+    const logoName = "/images/logos/buildingim-logo"
+    const logoLocation = CanUseWebP() ? `${logoName}.webp` : `${logoName}.png`
 
     return (
       <React.Fragment>
         <div className="logo-container">
-          <a href="https://prind.tech" target="_blank" rel="noopener noreferrer"><img src={logoLocation} alt="Prin D Tech logo"></img></a>
+          <a href="https://buildingim.com" target="_blank" rel="noopener noreferrer"><img src={logoLocation} alt="BuildingIM logo"></img></a>
         </div>
         <div className="welcome-text-heading">
           { Strings.WELCOME_TEXT }
@@ -134,6 +132,7 @@ class ResetPassword extends Component {
       <div className='auth-form' style={style}>
         <h3>{Strings.YOUR_PASSWORD_WAS_SUCCESSFULLY_CHANGED}</h3>
         <input
+          id="submit"
           type="submit"
           value={ Strings.ACCOUNT_BACK_TO_LOGIN_PAGE }
           className="submit-button"
@@ -145,7 +144,7 @@ class ResetPassword extends Component {
 
   getResetPassword = () => {
     return (
-      <form onSubmit={this.resetPassword} className='sign-in-form form'>
+      <form id="reset-password-form" onSubmit={(e) => e.preventDefault()} className='sign-in-form form'>
 
         <input
           id="password"
@@ -154,7 +153,7 @@ class ResetPassword extends Component {
           placeholder={ Strings.PLACEHOLDER_PASSWORD }
           value={this.state.password}
           onChange={this.handleInputChange}
-          className={ this.state.password === null ? "default" : "filled" }/>
+          className={ this.state.password === '' ? "default" : "filled" }/>
 
         <input
           id="confirmPassword"
@@ -163,14 +162,16 @@ class ResetPassword extends Component {
           placeholder={ Strings.PLACEHOLDER_REPEAT_PASSWORD }
           value={this.state.confirmPassword}
           onChange={this.handleInputChange}
-          className={ this.state.confirmPassword === null ? "default" : "filled" }/>
+          className={ this.state.confirmPassword === '' ? "default" : "filled" }/>
 
         <div className='spacer' />
 
         <input
+          id="submit"
           type="submit"
           value={ Strings.BUTTON_CHANGE_PASSWORD }
-          className="submit-button" />
+          className="submit-button"
+          onClick={(e) => this.resetPassword(e)}/>
 
       </form>
     )
@@ -179,11 +180,11 @@ class ResetPassword extends Component {
   getResetPasswordFailed = () => {
     return (
       <React.Fragment>
-        <Callout style={{marginBottom: '15px'}} intent='danger'>
+        <div className='error-callout'>
           <div>
             { this.state.errorMessage }
           </div>
-        </Callout>
+        </div>
         {
           this.getResetPassword()
         }
@@ -196,16 +197,16 @@ class ResetPassword extends Component {
       <React.Fragment>
         { this.getLogo() }
         {
-          this.state.state === ComponentState.QUIESCENT ? this.getResetPassword() :  null
+          this.state.state === ComponentStates.QUIESCENT ? this.getResetPassword() :  null
         }
         {
-          this.state.state === ComponentState.LOADING ? this.getSpinner() : null
+          this.state.state === ComponentStates.LOADING ? this.getSpinner() : null
         }
         {
-          this.state.state === ComponentState.PASSWORD_RESET_SUCCESS ? this.getSuccess() : null
+          this.state.state === ComponentStates.PASSWORD_RESET_SUCCESS ? this.getSuccess() : null
         }
         {
-          this.state.state === ComponentState.PASSWORD_RESET_FAILED ? this.getResetPasswordFailed(): null
+          this.state.state === ComponentStates.PASSWORD_RESET_FAILED ? this.getResetPasswordFailed(): null
         }
       </React.Fragment>
     )

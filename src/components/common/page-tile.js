@@ -1,8 +1,5 @@
 import React from 'react'
-
 import { Callout } from '@blueprintjs/core'
-
-// TODO: Move this into Sidebar (only use)
 
 const ListItem = props => {
   const { pageName, selected, linkTo, history } = props

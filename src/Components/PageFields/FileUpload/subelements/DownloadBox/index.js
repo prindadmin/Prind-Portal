@@ -1,3 +1,3 @@
-import Container from './Container'
+import DownloadBoxContainer from './DownloadBoxContainer'
 
-export default Container
+export default DownloadBoxContainer

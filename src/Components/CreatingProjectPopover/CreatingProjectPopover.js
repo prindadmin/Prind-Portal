@@ -10,7 +10,7 @@ import {
 
 import * as Strings from '../../Data/Strings'
 
-export class Element extends Component {
+export class CreatingProjectPopover extends Component {
   static propTypes = {
   }
 
@@ -46,4 +46,4 @@ export class Element extends Component {
 
 }
 
-export default Element
+export default CreatingProjectPopover

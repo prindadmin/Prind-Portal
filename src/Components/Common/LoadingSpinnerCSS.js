@@ -2,10 +2,14 @@ import React from 'react'
 
 function Spinner(props) {
 
-  var style = {}
+  var style = {
+    width: 100,
+    height: 100,
+    margin: 100 / 8,
+    borderWidth: 100 / 8,
+  }
 
   if (props.size !== undefined) {
-    console.log("spinner size provided")
     style = {
       width: props.size,
       height: props.size,

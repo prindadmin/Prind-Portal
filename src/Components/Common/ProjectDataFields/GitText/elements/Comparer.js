@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { Editor } from '@tinymce/tinymce-react';
-import LoadingSpinner from '../../../LoadingSpinner'
+import LoadingSpinner from '../../../LoadingSpinnerCSS'
 import * as ComponentState from '../../ComponentStates'
 
 import * as Strings from '../../../../../Data/Strings'
@@ -148,8 +148,8 @@ export class Comparer extends Component {
   }
 
 
-  // TODO: Load the latest version in componentDidMount for both old and new
-  // TODO: Add "Please select version" as hidden option to the drop down
+  // TODO: FUTURE: Load the latest version in componentDidMount for both old and new
+  // TODO: FUTURE: Add "Please select version" as hidden option to the drop down
   getVersionSelectSystem = (selectorName) => {
     const { fileVersions } = this.props
     const { oldVersion, newVersion } = this.state

@@ -13,7 +13,7 @@ function UpdatePassword(payload) {
         return Auth.changePassword(username, oldPassword, newPassword);
     })
     .then(data => {
-      console.log(data)
+      //console.log(data)
       resolve(data)
     })
     .catch(err => {

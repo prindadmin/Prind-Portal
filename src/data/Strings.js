@@ -2,11 +2,12 @@
 export const ERROR_404_MESSAGE = "Error 404: This resource was not found"
 
 export const ERROR_CONFIRMING_USER = "There was an error confirming your email address.  Please check that the link has not expired and try again."
+export const ERROR_CONFIRMING_USER_NO_SEARCH_TERMS = "There was an error confirming your email address.  Please close this tab, find the confirmation email, and click the link again."
 export const CONFIRMING_EMAIL_PLEASE_WAIT = "Confirming your email address, please wait..."
 export const DONT_HAVE_AN_ACCOUNT = "Haven't got an account yet?  Click here to sign up"
 export const ALREADY_HAVE_AN_ACCOUNT = "Already have an account?  Click here to sign in"
 export const PLEASE_SIGN_UP_TEXT = "Fill in the form below to sign up to the Foundations portal"
-export const PLEASE_SIGN_IN_TEXT = "Fil in your login details to access the portal"
+export const PLEASE_SIGN_IN_TEXT = "Fill in your login details to access the portal"
 export const THANK_YOU_FOR_SIGNING_UP = "Thank you for signing up; please check your email for a confirmation email."
 export const BUTTON_CONTINUE = "Continue"
 export const BUTTON_SIGN_UP = "Sign up"
@@ -57,9 +58,12 @@ export const IF_XXX_PROVIDE_DETAILS_BELOW = "If XXX, please provide extra detail
 export const PLEASE_PROVIDE_DETAILS_HERE = "Please provide extra details here..."
 
 export const PROJECT_LOADING = "Project loading, please wait..."
+export const STAGE_LOADING_PLEASE_WAIT = "Stage loading, please wait..."
 export const UNABLE_TO_FETCH_CONTENT = "Unable to load the content for this page.  Please try again.  If this problem persists, please contact technical support."
 export const NO_PROJECT_SELECTED = "Please select a project"
-export const PROJECT_FETCH_ERROR_OCCURED = "The requested project ID was not found in the system or you do not have access to the requested project.  Please select a project from the project drop down or contact the project administrator to request access."
+export const PROJECT_FETCH_ERROR_DOES_NOT_EXIST = "The requested project ID was not found in the system.  Please select or create a project using the project drop down."
+export const PROJECT_FETCH_ERROR_INSUFFICICENT_PERMISSIONS = "You do not have access to the requested project.  Please select a different project from the project drop down or contact the project administrator to request access."
+
 export const NO_PROJECTS = "You do not have any projects, please create a project or ask to be invited to one."
 export const PROJECTS_LOADING = "Loading projects, please wait..."
 export const NO_ITEM_CHOSEN = "Please select an option"
@@ -140,26 +144,29 @@ export const PROJECT_DIRECTORY_TITLE = "Project Directory"
 
 export const PROJECT_DIRECTORY_ADD_NEW_TITLE = "Add New Project Member"
 
-export const BUTTON_ADD_MEMBER_TO_PROJECT = "Add New Member"
-export const ERROR_ADDING_MEMBER_TO_PROJECT = "There was an error adding member to the project, please try again.  If the problem persists, please contact technical support."
-export const ERROR_REMOVING_MEMBER_FROM_PROJECT = "There was an error removing a member from the project, please try again.  If the problem persists, please contact technical support."
+export const BUTTON_ADD_MEMBERS_TO_PROJECT = "Add New Member"
+export const ERROR_ADDING_MEMBERS_TO_PROJECT = "There was an error adding member to the project, please try again.  If the problem persists, please contact technical support."
+export const ERROR_REMOVING_MEMBERS_FROM_PROJECT = "There was an error removing a member from the project, please try again.  If the problem persists, please contact technical support."
 export const ERROR_DELETING_PROJECT = "There was an error deleting the project, please try again.  If the problem persists, please contact technical support."
 
-export const MEMBER_DETAILS = "Member Details"
-export const MEMBER_FIRST_NAME = "First Name"
-export const MEMBER_LAST_NAME = "Surname"
-export const MEMBER_LANDLINE_PHONE_NUMBER_WORK = "Phone"
-export const MEMBER_MOBILE_PHONE_NUMBER_WORK = "Mobile"
-export const MEMBER_EMAIL_ADDRESS = "Email"
-export const MEMBER_POSTAL_ADDRESS_WORK = "Address"
-export const MEMBER_PROJECT_ROLE = "Role"
-export const MEMBER_PROJECT_ROLE_SELECT_ROLE = "Please select a role"
-export const MEMBER_STATUS = "Status"
-export const MEMBER_NAME = "Name"
-export const MEMBER_UPLOAD_DIFFERENT_AVATAR = "Upload a different photo..."
-export const MEMBER_FOUNDATIONS_ID = "Foundations ID"
-export const MEMBER_FOUNDATIONS_ID_NOT_FOUND = "No Foundations ID for this Email"
+// Team Members Page
+
+export const MEMBERS_DETAILS = "Member Details"
+export const MEMBERS_FIRST_NAME = "First Name"
+export const MEMBERS_LAST_NAME = "Surname"
+export const MEMBERS_LANDLINE_PHONE_NUMBER_WORK = "Phone"
+export const MEMBERS_MOBILE_PHONE_NUMBER_WORK = "Mobile"
+export const MEMBERS_EMAIL_ADDRESS = "Email"
+export const MEMBERS_POSTAL_ADDRESS_WORK = "Address"
+export const MEMBERS_PROJECT_ROLE = "Role"
+export const MEMBERS_PROJECT_ROLE_SELECT_ROLE = "Please select a role"
+export const MEMBERS_STATUS = "Status"
+export const MEMBERS_NAME = "Name"
+export const MEMBERS_UPLOAD_DIFFERENT_AVATAR = "Upload a different photo..."
+export const MEMBERS_FOUNDATIONS_ID = "Foundations ID"
+export const MEMBERS_FOUNDATIONS_ID_NOT_FOUND = "No Foundations ID for this Email"
 export const BUTTON_REMOVE_MEMBER = "Remove From Project"
+export const FULL_SCREEN_FAILED_FETCHING_TEAM_MEMBERS = "Failed when updating team member list"
 
 export const USER_DETAILS_LOADING = "Fetching details, please wait..."
 
@@ -192,6 +199,7 @@ export const NO_CURRENT_VERSION = "There is no current version of this file."
 export const NO_SIGNATURES = "There are no signatures for this file"
 export const NO_PROOF_AVAILABLE = "Proof still processing"
 export const FILE_UPLOAD_UPLOADER_HAS_NO_NAME = "User without Foundations"
+export const ERROR_DATE_UNAVAILABLE = "Date not available!"
 
 
 export const BUTTON_SELF_SIGN_FILE = "Self Sign Document"
@@ -238,6 +246,9 @@ export const DOWNLOAD = "Download"
 export const NO_UPLOAD_NAME = "No name supplied"
 export const ERROR_FETCHING_DOWNLOAD_LINK = "There was an error fetching the file, please try again.  If the problem persists, please contact technical support."
 
+
+// Profile Page
+export const ERROR_UPLOADING_AVATAR = "Error uploading image; please try again."
 export const PROFILE_PAGE_TITLE = "Profile"
 export const PROFILE_PAGE_DESCRIPTION = ""
 
@@ -288,7 +299,11 @@ export const BUTTON_GO_TO_DOCUMENT = "Go To Document"
 export const NO_FOUNDATIONS_ID_BANNER_TEXT = "You do not have a Foundations ID and therefore cannot sign any documents.  Click here to find out more..."
 export const FOUNDATIONS_DESCRIPTION = "Foundations allows users to enter their data into a single system and control the access to it. By using Foundations as the single source of data, you keep complete control of your personally identifiable information while allowing those granted access to it to receive the most up-to-date information automatically while protecting against GDPR violations."
 
+
+// Profile History Tab
 export const NO_HISTORY_YET = "You haven't done anything that will be stored in your history yet.  This will soon contain all the projects you have created and have joined, all the documents you have uploaded, and all the documents you have signed."
+export const ERROR_CHANGING_TO_PROJECT = "Unable to change project.  Please try again."
+export const ERROR_REJECTING_SIGNATURE_REQUEST = "Unable to reject signature request at this time.  Please try again."
 
 export const TILE_PROJECT_CREATED = "Project Created"
 export const TILE_PROJECT_JOINED = "Project Joined"
@@ -300,10 +315,10 @@ export const JOINED_PROJECT_TEXT = "You joined a project called XXX on the YYY"
 export const UPLOADED_DOCUMENT_TEXT = "You uploaded a document called XXX to project YYY on the ZZZ"
 export const SIGNED_DOCUMENT_TEXT = "You signed a document called XXX for project YYY on the ZZZ"
 
-export const MEMBER_IS_CONFIRMED = "Joined"
-export const MEMBER_ISNT_YET_CONFIRMED = "Invited"
-export const MEMBER_NEEDS_FOUNDATIONS_TO_SIGN = "Needs Foundations To Sign"
-export const MEMBER_NOT_YET_SIGNED_UP_TO_PRIND = "Awaiting Sign Up"
+export const MEMBERS_IS_CONFIRMED = "Joined"
+export const MEMBERS_ISNT_YET_CONFIRMED = "Invited"
+export const MEMBERS_NEEDS_FOUNDATIONS_TO_SIGN = "Needs Foundations To Sign"
+export const MEMBERS_NOT_YET_SIGNED_UP_TO_PRIND = "Awaiting Sign Up"
 
 export const PROFILE_DATA_IS_MANAGED_IN_FOUNDATIONS_NO_APP = "For data security, we manage profile data in the secure Foundations app. Please download the Foundations app by clicking the red bar at the top of the screen."
 export const PROFILE_DATA_IS_MANAGED_IN_FOUNDATIONS_WITH_APP = "For data security, your profile data is managed in the secure Foundations app. Please open the Foundations app to change your profile details."
@@ -341,3 +356,46 @@ export const YOUR_CHANGE_PASSWORD_REQUEST_WAS_SUCCESS = "Your change password re
 export const YOUR_PASSWORD_WAS_SUCCESSFULLY_CHANGED = "Your password has been successfully changed."
 export const LOADING_DATA_FOR_PAGE = "Loading page data"
 export const LOADING = "Loading"
+
+// Procore Auth Process
+export const AUTHORISE_WITH_PROCORE = "Authorise with Procore"
+export const ERROR_GETTING_PROCORE_ACCESS = "There was an error authorising access with Procore.  Would you like to try again?"
+
+// Procore Projects
+export const PROCORE_PROJECT_DOES_NOT_EXIST_IN_PRIND = "This project does not exist in the CDM Compliance Platform.  Would you like to create it?"
+export const BUTTON_PROCORE_PROJECT_CREATE = "Create Project"
+
+// Procore File Select Process
+export const BUTTON_SELECT_FILE = 'Select file'
+export const BUTTON_CLOSE = 'Close'
+
+// Procore Document Table
+export const PROCORE_DOCUMENT_NAME = "Document Name"
+export const PROCORE_DOCUMENT_VERSION_NAME = "Version Name"
+export const PROCORE_DOCUMENT_DESCRIPTION = "Description"
+export const PROCORE_DOCUMENT_DOWNLOAD = "Download"
+export const PROCORE_DOCUMENT_SELECT = "Select"
+export const PROCORE_DOCUMENT_ANCHOR = "Anchor"
+export const PROCORE_DOCUMENT_ANCHOR_LATEST = "Anchor Latest Version"
+export const PROCORE_DOCUMENT_SIGN = "Sign"
+export const PROCORE_DOCUMENT_SIGNATURES = "Signatures"
+export const PROCORE_DOCUMENT_SIGN_LATEST = "Sign Latest Version"
+export const PROCORE_DOCUMENT_NUMBER_OF_VERSIONS = "Versions"
+export const PROCORE_DOCUMENT_VIEW_VERSIONS = "View Versions"
+export const BUTTON_ANCHOR = "Anchor"
+export const BUTTON_VIEW_ANCHOR = "View Anchor"
+export const BUTTON_SIGN = "Sign"
+export const BUTTON_DOWNLOAD = "Download"
+export const BUTTON_VIEW_VERSIONS = "Versions"
+export const BUTTON_CLOSE_VERSIONS = "Close Versions"
+export const FULL_SCREEN_NO_FILES = "There are no files in this folder"
+export const FULL_SCREEN_FILTER_TOO_HARSH = "No files found with given filter"
+export const ERROR_FETCHING_DATA = "Error fetching data"
+export const ERROR_ANCHORING_FAILED = "Error when anchoring file; please try again"
+export const ERROR_SIGNING_FAILED = "Error when signing file; please try again"
+
+// Misc
+export const DEFAULT_FULL_SCREEN_TILE = ""
+export const MENU_PROFILE = "Profile"
+export const MENU_NOTIFICATIONS = "Notifications"
+export const MENU_SIGN_OUT = "Sign Out"

@@ -1,0 +1,44 @@
+.downloadBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-weight: bold;
+  width: 35px;
+  height: 35px;
+  margin-left: auto;
+  border: 1px solid grey;
+  border-radius: var(--standard-border-radius-button);
+  position: relative;
+  font-size: 12px;
+}
+
+.downloadBox:hover {
+  transition: background-color 0.3s ease-in;
+  background-color: var(--field-element-green);
+}
+
+.downloadBox p {
+  margin-top: 0.3em;
+  margin-bottom: 0;
+}
+
+.downloadBox svg {
+  height: 1.2rem;
+  width: 1.2rem;
+}
+
+@media only screen and (min-width: 992px) {
+  .downloadBox {
+    width: 100px;
+    height: 100px;
+    border-radius: var(--standard-border-radius);
+    font-size: 14px;
+  }
+
+  .downloadBox svg {
+    height: 2.5rem;
+    width: 2.5rem;
+  }
+}

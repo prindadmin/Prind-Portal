@@ -1,3 +1,3 @@
-import Container from './Container'
+import PasswordFormContainer from './PasswordFormContainer'
 
-export default Container
+export default PasswordFormContainer

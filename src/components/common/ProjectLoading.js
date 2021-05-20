@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { Spinner, Intent } from '@blueprintjs/core'
+import LoadingSpinner from './LoadingSpinnerCSS'
 
 import * as Strings from '../../Data/Strings'
 
@@ -31,7 +32,7 @@ export class ProjectLoading extends Component {
       <div className='project-loading-container fill'>
         <div className='project-loading'>
           <div className='section-spinner'>
-            <Spinner size='100' intent={Intent.PRIMARY}/>
+            <LoadingSpinner size={100}/>
           </div>
           <div>
             {this.state.text}

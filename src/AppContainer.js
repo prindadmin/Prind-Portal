@@ -2,7 +2,8 @@ import { connect } from 'react-redux'
 
 import AppComponent from './App'
 
-import * as authReducer from './Reducers/authReducer'
+import * as auth from './Reducers/auth'
+import * as procore from './Reducers/procore'
 
 const mapStatetoProps = state => {
   return {
@@ -14,8 +15,11 @@ const mapStatetoProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     refreshSession: () => {
-      dispatch(authReducer.refreshSession())
+      dispatch(auth.refreshSession())
     },
+    storeProcoreDetails: (parameters) => {
+      dispatch(procore.storeProcoreDetails(parameters))
+    }
   }
 }
 

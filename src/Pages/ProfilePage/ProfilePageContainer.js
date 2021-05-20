@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import * as userReducer from '../../Reducers/userReducer'
+import * as user from '../../Reducers/user'
 
 import PageComponent from './ProfilePage'
 
@@ -14,16 +14,16 @@ const mapStatetoProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getUserDetails: (resolve, reject) => {
-      dispatch(userReducer.getUserDetails(resolve, reject))
+      dispatch(user.getUserDetails(resolve, reject))
     },
-    getProjectInvitations: () => {
-      dispatch(userReducer.getProjectInvitations())
+    getProjectInvitations: (resolve, reject) => {
+      dispatch(user.getProjectInvitations(resolve, reject))
     },
-    getSignatureRequests: () => {
-      dispatch(userReducer.getSignatureRequests())
+    getSignatureRequests: (resolve, reject) => {
+      dispatch(user.getSignatureRequests(resolve, reject))
     },
     getHistory: (resolve, reject) => {
-      dispatch(userReducer.getHistory(resolve, reject))
+      dispatch(user.getHistory(resolve, reject))
     }
   }
 }

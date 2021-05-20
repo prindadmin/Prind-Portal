@@ -1,3 +1,3 @@
-import Element from './ElementContainer'
+import FileDetailPopoverContainer from './FileDetailPopoverContainer'
 
-export default Element
+export default FileDetailPopoverContainer

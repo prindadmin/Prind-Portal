@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import * as projectsReducer from '../../../../../Reducers/projectsReducer'
+import * as projects from '../../../../../Reducers/projects'
 
 import ProjectSelectorPopUp from './ProjectSelectorPopUp'
 
@@ -15,10 +15,13 @@ const mapStatetoProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getAccessibleProjects: (resolve, reject) => {
-      dispatch(projectsReducer.getAccessibleProjects(resolve, reject))
+      dispatch(projects.getAccessibleProjects(resolve, reject))
     },
     updateChosenProject: (project, resolve, reject) => {
-      dispatch(projectsReducer.updateChosenProject(project, resolve, reject))
+      dispatch(projects.updateChosenProject(project, resolve, reject))
+    },
+    resetChosenProject: () => {
+      dispatch(projects.resetChosenProject())
     }
   }
 }

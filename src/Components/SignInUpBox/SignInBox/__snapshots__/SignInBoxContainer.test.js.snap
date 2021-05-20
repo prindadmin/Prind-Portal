@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render with given state 1`] = `
+Array [
+  <div
+    className="logo-container"
+  >
+    <a
+      href="https://buildingim.com"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      <img
+        alt="BuildingIM logo"
+        src="/images/logos/prind-tech-logo.webp"
+      />
+    </a>
+  </div>,
+  <div
+    className="welcome-text-heading"
+  >
+    Welcome
+  </div>,
+  <div
+    className="welcome-text-body"
+  >
+    Fil in your login details to access the portal
+  </div>,
+  <form
+    className="sign-in-form"
+  >
+    <input
+      className="default"
+      id="email"
+      name="email"
+      onChange={[Function]}
+      placeholder="Email"
+      type="email"
+      value=""
+    />
+    <input
+      className="default"
+      id="password"
+      name="password"
+      onChange={[Function]}
+      placeholder="Password"
+      type="password"
+      value=""
+    />
+    <p
+      className="forgot-your-password-text"
+      onClick={[Function]}
+    >
+      Forgot your password?
+    </p>
+    <div
+      className="spacer"
+    />
+    <input
+      id="signInButton"
+      name="signInButton"
+      onClick={[Function]}
+      type="submit"
+      value="Login"
+    />
+    <div
+      className="spacer"
+    />
+    <p
+      className="sign-up-in-text"
+      onClick={[Function]}
+    >
+      Haven't got an account yet?  Click here to sign up
+    </p>
+  </form>,
+]
+`;

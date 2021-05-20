@@ -6,14 +6,21 @@ import Spinner from '../../../Common/LoadingSpinnerCSS'
 
 import * as Strings from '../../../../Data/Strings'
 
-// TODO: Improve structuring of propTypes to ensure errors are captured
-// TODO: Do something with error text state string
+// TODO: FUTURE: Do something with error text state string
 export class UploadHistory extends Component {
   static propTypes = {
-    details: PropTypes.array.isRequired,
-    projectID: PropTypes.any.isRequired,
-    pageName: PropTypes.any.isRequired,
-    fieldID: PropTypes.any.isRequired,
+    details: PropTypes.arrayOf(
+      PropTypes.shape({
+        uploadName: PropTypes.string.isRequired,
+        uploadedBy: PropTypes.string.isRequired,
+        ver: PropTypes.string.isRequired,
+        uploadedDateTime: PropTypes.number.isRequired,
+        proofLink: PropTypes.string
+      })
+    ).isRequired,
+    projectId: PropTypes.string.isRequired,
+    pageName: PropTypes.string.isRequired,
+    fieldID: PropTypes.string.isRequired,
   }
 
   constructor(props) {
@@ -56,7 +63,7 @@ export class UploadHistory extends Component {
       )
     } else {
       return(
-        <a target="_blank" rel="noopener noreferrer" onClick={e => this.openProof(e)} href={proofLink}>{Strings.LINK_TO_PROOF}</a>
+        <a id='proof-link' target="_blank" rel="noopener noreferrer" onClick={e => this.openProof(e)} href={proofLink}>{Strings.LINK_TO_PROOF}</a>
       )
     }
   }
@@ -68,7 +75,7 @@ export class UploadHistory extends Component {
   }
 
   getDownloadButton = (fileUpload) => {
-    const { projectID, pageName, fieldID } = this.props
+    const { projectId, pageName, fieldID } = this.props
 
     if (this.state.downloadInProgress) {
       return (
@@ -77,20 +84,22 @@ export class UploadHistory extends Component {
     }
 
     return (
-      <div onClick={this.startDownload}>
+      <div id='download-box-container' onClick={this.startDownload}>
         <DownloadBox
-          projectID={projectID}
+          projectId={projectId}
           pageName={pageName}
           fieldID={fieldID}
           fileVersionDetails={fileUpload}
           onDownloadSuccess={this.downloadResolve}
           onDownloadFailure={this.downloadReject}
+          size="small"
+          style={{ border: "0px black solid", height: "1.5em", width: "1.5em", alignItems: "flex-start", margin: "auto" }}
         />
       </div>
     )
   }
 
-  // TODO: Fix the displaying of this details table at mobile widths
+  // TODO: BUG: Fix the displaying of this details table at mobile widths
   getDetailsTable = () => {
     const { details } = this.props
     var reversedDetails = details.filter(function(fileUpload) {
@@ -107,12 +116,14 @@ export class UploadHistory extends Component {
         <h4>{Strings.DOWNLOAD_WITH_COLON}</h4>
         {
           reversedDetails.map((fileUpload, index) => {
+            const uploadedDate = !fileUpload.uploadedDateTime ? undefined : new Date(fileUpload.uploadedDateTime * 1000)
+
             return (
-              <React.Fragment>
-                <div key={`uploadName-${index}`}>{fileUpload.uploadName === undefined ? Strings.NO_UPLOAD_NAME : fileUpload.uploadName}</div>
+              <React.Fragment key={index}>
+                <div key={`uploadName-${index}`}>{fileUpload.uploadName? fileUpload.uploadName : Strings.NO_UPLOAD_NAME }</div>
                 <div key={`uploadedBy-${index}`}>{fileUpload.uploadedBy === "None None" ? Strings.FILE_UPLOAD_UPLOADER_HAS_NO_NAME : fileUpload.uploadedBy}</div>
                 <div key={`ver-${index}`}>{fileUpload.ver}</div>
-                <div key={`uploadDateTime-${index}`}>{fileUpload.uploadedDateTime}</div>
+                <div key={`uploadDateTime-${index}`}>{!uploadedDate ? Strings.ERROR_DATE_UNAVAILABLE : uploadedDate.toLocaleString()}</div>
                 <div key={`proof-${index}`}>
                   {
                     this.getProof(fileUpload.proofLink)

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import * as Strings from '../../../Data/Strings'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
 
@@ -11,8 +12,6 @@ import {
 } from '@blueprintjs/core'
 
 const ico = <FontAwesomeIcon icon={faUserCircle} size='3x' />
-
-// TODO: Use Strings rather than hard coded text for menu items
 
 class UserMenu extends Component {
   static propTypes = {
@@ -109,11 +108,11 @@ class UserMenu extends Component {
 
 
   dropdownContent = <Menu>
-    <Menu.Item text='Profile' onClick={this.openProfile}/>
+    <Menu.Item text={Strings.MENU_PROFILE} onClick={this.openProfile}/>
     {
-      this.hasNotifications() ? <Menu.Item text='Notifications' onClick={this.openNotifications}/> : null
+      this.hasNotifications() ? <Menu.Item text={Strings.MENU_NOTIFICATIONS} onClick={this.openNotifications}/> : null
     }
-    <Menu.Item text='Sign Out' onClick={this.signOut} />
+    <Menu.Item text={Strings.MENU_SIGN_OUT} onClick={this.signOut} />
   </Menu>
 
 

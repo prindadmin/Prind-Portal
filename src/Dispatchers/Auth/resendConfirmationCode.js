@@ -4,7 +4,7 @@ This dispatcher uses AWS Amplify's Auth class to send the user their confirmatio
 code again if there is an issue receiving it the first time.
 */
 
-// TODO: Implement this (2 hours)
+// TODO: FUTURE: Implement this (2 hours)
 
 import { Auth } from 'aws-amplify';
 

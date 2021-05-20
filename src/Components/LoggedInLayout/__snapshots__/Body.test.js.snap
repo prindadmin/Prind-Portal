@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoggedInLayout - Body - Should render 1`] = `
+<div
+  className="row"
+  id="logged-in-body-section"
+>
+  <div
+    id="hello-body"
+    key="1"
+  />
+</div>
+`;

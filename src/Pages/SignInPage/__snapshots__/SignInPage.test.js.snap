@@ -1,0 +1,149 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sign In Page - Should render sign in page 1`] = `
+<div
+  className="full-width full-height"
+  id="sign-in-up-page"
+  style={
+    Object {
+      "backgroundImage": "url(/images/backgrounds/building-site-1.png)",
+    }
+  }
+>
+  <withRouter(Connect(SignInUpBox))
+    backgroundColor="#FFFFFF"
+    isForgotPassword={false}
+    isPasswordReset={false}
+    isSignIn={true}
+    isSignUp={false}
+    reference="sign-in-up-box"
+  />
+</div>
+`;
+
+exports[`Sign In Page - Should render sign in page without state 1`] = `
+<div
+  className="full-width full-height"
+  id="sign-in-up-page"
+  style={
+    Object {
+      "backgroundImage": "url(/images/backgrounds/building-site-1.png)",
+    }
+  }
+>
+  <withRouter(Connect(SignInUpBox))
+    backgroundColor="#FFFFFF"
+    isForgotPassword={false}
+    isPasswordReset={false}
+    isSignIn={true}
+    isSignUp={false}
+    reference="sign-in-up-box"
+  />
+</div>
+`;
+
+exports[`Sign In Page - Should render sign in page without state then add state 1`] = `
+<div
+  className="full-width full-height"
+  id="sign-in-up-page"
+  style={
+    Object {
+      "backgroundImage": "url(/images/backgrounds/building-site-1.png)",
+    }
+  }
+>
+  <withRouter(Connect(SignInUpBox))
+    backgroundColor="#FFFFFF"
+    isForgotPassword={false}
+    isPasswordReset={false}
+    isSignIn={true}
+    isSignUp={false}
+    reference="sign-in-up-box"
+  />
+</div>
+`;
+
+exports[`Sign In Page - Should render sign in page without state then add state 2`] = `
+<div
+  className="full-width full-height"
+  id="sign-in-up-page"
+  style={
+    Object {
+      "backgroundImage": "url(/images/backgrounds/building-site-1.png)",
+    }
+  }
+>
+  <withRouter(Connect(SignInUpBox))
+    backgroundColor="#FFFFFF"
+    isForgotPassword={false}
+    isPasswordReset={false}
+    isSignIn={true}
+    isSignUp={false}
+    reference="sign-in-up-box"
+    username="aaaa-aaaa-aaaaaaaa-aaaa-aaaa"
+  />
+</div>
+`;
+
+exports[`Sign In Page - Should render sign in page without state then change page 1`] = `
+<div
+  className="full-width full-height"
+  id="sign-in-up-page"
+  style={
+    Object {
+      "backgroundImage": "url(/images/backgrounds/building-site-1.png)",
+    }
+  }
+>
+  <withRouter(Connect(SignInUpBox))
+    backgroundColor="#FFFFFF"
+    isForgotPassword={false}
+    isPasswordReset={false}
+    isSignIn={true}
+    isSignUp={false}
+    reference="sign-in-up-box"
+  />
+</div>
+`;
+
+exports[`Sign In Page - Should render sign in page without state then change page 2`] = `
+<div
+  className="full-width full-height"
+  id="sign-in-up-page"
+  style={
+    Object {
+      "backgroundImage": "url(/images/backgrounds/building-site-1.png)",
+    }
+  }
+>
+  <withRouter(Connect(SignInUpBox))
+    backgroundColor="#FFFFFF"
+    isForgotPassword={false}
+    isPasswordReset={false}
+    isSignIn={false}
+    isSignUp={true}
+    reference="sign-in-up-box"
+  />
+</div>
+`;
+
+exports[`Sign In Page - Should render with webp 1`] = `
+<div
+  className="full-width full-height"
+  id="sign-in-up-page"
+  style={
+    Object {
+      "backgroundImage": "url(/images/backgrounds/building-site-1.webp)",
+    }
+  }
+>
+  <withRouter(Connect(SignInUpBox))
+    backgroundColor="#FFFFFF"
+    isForgotPassword={false}
+    isPasswordReset={false}
+    isSignIn={true}
+    isSignUp={false}
+    reference="sign-in-up-box"
+  />
+</div>
+`;

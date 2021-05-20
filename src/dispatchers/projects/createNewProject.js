@@ -1,13 +1,7 @@
 import { Auth } from 'aws-amplify';
 import API from '@aws-amplify/api';
 
-// Fixed values for the API request
-const apiName = process.env.REACT_APP_API_NAME
-
 async function CreateNewProject(newProjectDetails) {
-
-  // Build path for request
-  const path = `/project/create`
 
   // Get the current session and the identity jwtToken
   const identityToken = await Auth.currentSession()
@@ -15,21 +9,24 @@ async function CreateNewProject(newProjectDetails) {
         return credentials.idToken.jwtToken
       })
 
-  return new Promise((resolve, reject) => {
+  // Fixed values for the API request
+  const apiName = process.env.REACT_APP_API_NAME
+  const path = `/project/create`
+  const myInit = {
+    headers: {  Authorization: identityToken },
+    body: newProjectDetails,
+    response: false,
+  }
 
-    // Create the header for the request
-    const myInit = {
-        headers: {
-          Authorization: identityToken
-        },
-        body: newProjectDetails,
-        response: false,
-    }
+  return new Promise((resolve, reject) => {
 
     // Send the request
     API.post(apiName, path, myInit)
       .then(response => {
-        console.log(response)
+        if (response.Error) {
+          reject(response)
+          return;
+        }
         resolve(response)
       })
       .catch(error => {

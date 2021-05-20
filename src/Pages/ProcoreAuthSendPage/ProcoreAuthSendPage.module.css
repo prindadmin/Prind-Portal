@@ -1,0 +1,27 @@
+.authorisingProcoreContainer {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  max-width: 400px;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2rem;
+}
+
+.errorPresentation {
+  max-width: 70ch;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.procoreButton {
+  margin-top: 2rem;
+  width: 200px !important;
+  background: #ff7325 !important;
+  border-radius: 0 !important;
+  border: 1px black solid !important;
+  font-weight: bold !important;
+}

@@ -2,10 +2,10 @@
 import { Auth } from 'aws-amplify';
 import API from '@aws-amplify/api';
 
-// Fixed values for the API request
-const apiName = process.env.REACT_APP_API_NAME
-
 async function GetCurrentMembers(projectId) {
+
+  // Fixed values for the API request
+  const apiName = process.env.REACT_APP_API_NAME
 
   // Build path for request
   const path = `/project/${projectId}/members`
@@ -29,20 +29,15 @@ async function GetCurrentMembers(projectId) {
     // Send the request
     API.get(apiName, path, myInit)
       .then(response => {
-        console.log(response)
-
-        if (response.errorMessage !== undefined) {
+        //console.log(response)
+        if (response.Error) {
           reject(response)
+          return;
         }
-
-        if (response.Error !== undefined) {
-          reject(response)
-        }
-
         resolve(response)
       })
       .catch(error => {
-        console.log(error.response);
+        //console.log(error.response);
         reject(error)
      })
    })

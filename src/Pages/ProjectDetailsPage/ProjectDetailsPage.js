@@ -1,27 +1,56 @@
+<<<<<<< Updated upstream
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
+=======
+import { Component, Fragment } from 'react'
+import PropTypes from 'prop-types'
+import classes from './ProjectDetailsPage.module.css'
+>>>>>>> Stashed changes
 
 import ReactGA from 'react-ga';
 
-import {
-  FormGroup,
-  Button,
-  ButtonGroup,
-  Callout,
-} from '@blueprintjs/core'
-
-import NoProjectSelected from '../../Components/Common/NoProjectSelected'
-import PopOverHandler from '../../Components/Common/popOverHandler'
-import * as FormInputs from '../../Components/Common/formInputs'
-
+// Data
 import * as Strings from '../../Data/Strings'
 import * as Validators from '../../Validators'
 import * as Endpoints from '../../Data/Endpoints'
 
-// TODO: Add ability to upload thumbnails or pick icon for a project
+// Components
+import NoProjectSelected from '../../Components/Common/NoProjectSelected'
+import PopOverHandler from '../../Components/Common/popOverHandler'
+import * as FormInputs from '../../Components/Common/formInputs'
+import ProjectDetailsSection from '../../Components/ProjectDetailsSection'
+import ProjectTemplatesSection from '../../Components/ProjectTemplatesSection'
+
+
+// TODO: FUTURE: Add ability to upload thumbnails or pick icon for a project
+<<<<<<< Updated upstream
+// TODO: FUTURE: Refactor component without redux form and blueprintjs
+=======
+>>>>>>> Stashed changes
 
 export class ProjectDetailsPage extends Component {
   static propTypes = {
+    projects: PropTypes.shape({
+      chosenProject: PropTypes.shape({
+        projectId: PropTypes.string,
+        projectType: PropTypes.string,
+        projectName: PropTypes.string,
+        projectDescription: PropTypes.string,
+        projectReference: PropTypes.string,
+        projectAddressLine1: PropTypes.string,
+        projectAddressLine2: PropTypes.string,
+        projectAddressLine3: PropTypes.string,
+        projectAddressTown: PropTypes.string,
+        projectAddressRegion: PropTypes.string,
+        projectAddressPostalCode: PropTypes.string,
+        projectAddressCountry: PropTypes.string,
+      })
+    }).isRequired,
+<<<<<<< Updated upstream
+    updateProjectDetails: PropTypes.func.isRequired,
+    deleteProject: PropTypes.func.isRequired,
+    resetChosenProject: PropTypes.func.isRequired,
   }
 
   constructor() {
@@ -32,32 +61,15 @@ export class ProjectDetailsPage extends Component {
       errorText: "",
     }
     console.log("loading edit project page")
+=======
+    updateProjectDetails: PropTypes.func.isRequired
+>>>>>>> Stashed changes
   }
 
   componentDidMount() {
     const { location } = this.props
-
     // Register pageview with GA
-    ReactGA.pageview(location.pathname + location.search);
-
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.projects.chosenProject.projectId !== prevProps.projects.chosenProject.projectId) {
-      this.props.reset()
-    }
-  }
-
-  updateProject = async (values) => {
-
-    const { updateProjectDetails, history, projects } = this.props
-
-    await updateProjectDetails(
-      projects.chosenProject.projectId,
-      values
-    )
-
-    history.push(Endpoints.DEFAULTLOGGEDINPAGE)
+    ReactGA.pageview(location.pathname);
   }
 
   projectPageHeader = () => {
@@ -68,6 +80,7 @@ export class ProjectDetailsPage extends Component {
     )
   }
 
+<<<<<<< Updated upstream
   confirmProjectDelete = () => {
     console.log("confirm project delete")
     this.setState({
@@ -158,7 +171,7 @@ export class ProjectDetailsPage extends Component {
         </ButtonGroup>
 
 
-
+        {/*
         <ButtonGroup fill>
           <Button
             loading={this.props.submitting}
@@ -170,7 +183,7 @@ export class ProjectDetailsPage extends Component {
             })}
           />
         </ButtonGroup>
-
+        */}
 
 
       </form>
@@ -258,6 +271,8 @@ export class ProjectDetailsPage extends Component {
   }
 
 
+=======
+>>>>>>> Stashed changes
   projectPageFooter = () => {
     return (
       <div>
@@ -266,22 +281,12 @@ export class ProjectDetailsPage extends Component {
     )
   }
 
-  projectDetails = () => {
-
-    const { showDeleteProjectConfirmation } = this.state
-
+  showProjectDetails = () => {
     return (
-      <React.Fragment>
-        {
-          showDeleteProjectConfirmation ?
-          this.showDeleteConfirmationOverlay() : null
-        }
-        <div className="form-container">
-          {this.projectPageHeader()}
-          {this.projectForm()}
-          {this.projectPageFooter()}
-        </div>
-      </React.Fragment>
+      <div className={classes.pageContent}>
+        <ProjectDetailsSection />
+        <ProjectTemplatesSection />
+      </div>
     )
   }
 
@@ -294,24 +299,17 @@ export class ProjectDetailsPage extends Component {
 
 
   render() {
-
     return (
-      <div id='new-project-page'>
-        <div className='page-content-section row'>
-          {
-            this.props.projects !== undefined ?
-              this.props.projects.chosenProject.projectName === Strings.NO_PROJECT_SELECTED ?
-                this.showEmptyPage() :
-                this.projectDetails() :
-            this.showEmptyPage()
-          }
-        </div>
+      <div id='new-project-page' className="page-content">
+        {
+          this.props.projects === {} ? this.showEmptyPage() : null
+        }
+        {
+          this.props.projects.chosenProject.projectName === Strings.NO_PROJECT_SELECTED ? this.showEmptyPage() : this.showProjectDetails()
+        }
       </div>
     )
   }
 }
 
-export default reduxForm({
-  enableReinitialize: true,
-  form: 'editproject'
-})(ProjectDetailsPage)
+export default ProjectDetailsPage

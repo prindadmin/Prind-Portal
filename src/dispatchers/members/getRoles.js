@@ -1,7 +1,7 @@
 import { Auth } from 'aws-amplify';
 import API from '@aws-amplify/api';
 
-// TODO: Work out why projectId is not being used here
+// TODO: FUTURE: Work out why projectId is not being used here
 
 // Fixed values for the API request
 const apiName = process.env.REACT_APP_API_NAME
@@ -30,7 +30,10 @@ async function GetRoles(projectId) {
     // Send the request
     API.get(apiName, path, myInit)
       .then(response => {
-        console.log(response)
+        if (response.Error) {
+          reject(response)
+          return;
+        }
         resolve(response)
       })
       .catch(error => {

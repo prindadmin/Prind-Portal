@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import classes from './SideBarMobile.module.css'
 
 import ItemIcon from '../Common/ItemIcon'
 import { Button, MenuItem } from "@blueprintjs/core";
 import { Select } from "@blueprintjs/select";
 
 import PAGENAMES from '../../Data/pageNames'
-
-// TODO: work out why the popover arrow isn't pointing to the menu button (4 hours)
 
 export class SideBar extends Component {
   static propTypes = {
@@ -59,6 +58,7 @@ export class SideBar extends Component {
 
     const pageNameList = Object.keys(menuEntries).map(page => {
       return {
+        id: menuEntries[page].id,
         name: menuEntries[page].name,
         linkTo: menuEntries[page].linkTo
       }
@@ -101,16 +101,14 @@ export class SideBar extends Component {
     this.pageAllowedCheck(pageName, sidebarEntries, pageRequested)
 
     return (
-        <div className='chooser-section col-12'>
-          <div className='sidebar'>
-            <Select
-              items={this.pageNamesToList()}
-              itemRenderer={this.itemRenderer}
-              filterable={false}
-              >
-              <Button icon={<ItemIcon size='1x' type='burger' />} />
-            </Select>
-          </div>
+        <div className={classes.chooserContainer}>
+          <Select
+            items={this.pageNamesToList()}
+            itemRenderer={this.itemRenderer}
+            filterable={false}
+            >
+            <Button icon={<ItemIcon size='1x' type='burger' />} />
+          </Select>
         </div>
     )
   }

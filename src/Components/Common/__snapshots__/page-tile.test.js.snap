@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render not selected 1`] = `
+<Blueprint3.Callout
+  className="list-item-container"
+  onClick={[Function]}
+>
+  <div
+    className="details"
+  >
+    <h2>
+      Design
+    </h2>
+  </div>
+</Blueprint3.Callout>
+`;
+
+exports[`Should render selected 1`] = `
+<Blueprint3.Callout
+  className="list-item-container selected"
+  onClick={[Function]}
+>
+  <div
+    className="details"
+  >
+    <h2>
+      Design
+    </h2>
+  </div>
+</Blueprint3.Callout>
+`;

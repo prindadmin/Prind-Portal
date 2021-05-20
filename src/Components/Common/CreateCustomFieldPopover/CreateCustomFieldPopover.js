@@ -50,7 +50,7 @@ const fieldTypes = process.env.REACT_APP_FUNCTIONALITY_GIT_TEXT_V1 === "True" ?
   }
 ]
 
-// TODO: Add functionality that clicking tick box next to a drop down option sets optionOpensTextBox to true:
+// TODO: FUTURE: Add functionality that clicking tick box next to a drop down option sets optionOpensTextBox to true:
 /*
 {
   title,
@@ -119,7 +119,7 @@ export class Element extends Component {
     }
 
     // If it's not a drop down, send the simple version
-    // TODO: Fix this so it doesn't always return false for the tick boxes
+    // TODO: FUTURE: Fix this so it doesn't always return false for the tick boxes
     if (type === 'dropdown') {
       newFieldDetails['fieldDetails'] = {
         dropDownOptions: fieldDropDownOptions.split(",").map(item => item.trim()),

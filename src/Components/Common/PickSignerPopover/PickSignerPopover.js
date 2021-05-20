@@ -43,7 +43,7 @@ export class PickSignerPopover extends Component {
       s3VersionId: PropTypes.string.isRequired,
       uploadName: PropTypes.string.isRequired,
     }).isRequired,
-    projectID: PropTypes.string.isRequired,
+    projectId: PropTypes.string.isRequired,
     pageName: PropTypes.string.isRequired,
     fieldID: PropTypes.string.isRequired,
     onClosePopover: PropTypes.func.isRequired,
@@ -63,11 +63,11 @@ export class PickSignerPopover extends Component {
   // When the user wants to send the signing request, this is called
   sendSigningRequest = (e) => {
     e.preventDefault()
-    const { projectID, pageName, fieldID } = this.props
+    const { projectId, pageName, fieldID } = this.props
     const { selectedMembers } = this.state
     var members = selectedMembers.map(value => value.username);
     this.props.requestSignature(
-      projectID,
+      projectId,
       pageName,
       fieldID,
       members,
@@ -122,7 +122,7 @@ export class PickSignerPopover extends Component {
 
   getName = (memberDetails) => {
     if (memberDetails.firstName === null || memberDetails.lastName === null) {
-      return Strings.MEMBER_NEEDS_FOUNDATIONS_TO_SIGN
+      return Strings.MEMBERS_NEEDS_FOUNDATIONS_TO_SIGN
     }
     return `${memberDetails.firstName} ${memberDetails.lastName}`
   }
@@ -142,9 +142,9 @@ export class PickSignerPopover extends Component {
 
     return(
       <div id='contact-tile' className={className} key={index} onClick={(e) => this.tileClicked(e, memberDetails, canSign)}>
-        <h4>{`${Strings.MEMBER_NAME}:`}</h4>
+        <h4>{`${Strings.MEMBERS_NAME}:`}</h4>
         <p>{this.getName(memberDetails)}</p>
-        <h4>{`${Strings.MEMBER_EMAIL_ADDRESS}:`}</h4>
+        <h4>{`${Strings.MEMBERS_EMAIL_ADDRESS}:`}</h4>
         <p>{`${memberDetails.emailAddress}`}</p>
         <div className="member-tile-tickbox">
           {isSelected ? <ItemIcon size='2x' type='ticked' /> : <ItemIcon size='2x' type='unticked' />}

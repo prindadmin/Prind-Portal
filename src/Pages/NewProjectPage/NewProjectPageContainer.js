@@ -1,14 +1,13 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import * as reducer from '../../Reducers/projectsReducer'
+import * as reducer from '../../Reducers/projects'
 
 import PageComponent from './NewProjectPage'
 
 const mapStatetoProps = state => {
   return {
-    projects: state.projects,
-    pageContent: state.pageContent,
+    procore: state.procore
   }
 }
 

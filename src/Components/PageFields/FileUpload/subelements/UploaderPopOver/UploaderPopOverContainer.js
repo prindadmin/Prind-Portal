@@ -1,8 +1,8 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import * as projectsReducer from '../../../../../Reducers/projectsReducer'
-import * as userReducer from '../../../../../Reducers/userReducer'
+import * as projects from '../../../../../Reducers/projects'
+import * as user from '../../../../../Reducers/user'
 
 import UploaderPopOver from './UploaderPopOver'
 
@@ -16,10 +16,10 @@ const mapStatetoProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     uploadFile: (projectID, pageName, fieldID, fileDetails, fieldType) => {
-      dispatch(projectsReducer.uploadFile(projectID, pageName, fieldID, fileDetails, fieldType))
+      dispatch(projects.uploadFile(projectID, pageName, fieldID, fileDetails, fieldType))
     },
     requestS3ProjectFileUploadToken: (project_id, pageName) => {
-      dispatch(userReducer.requestS3ProjectFileUploadToken(project_id, pageName))
+      dispatch(user.requestS3ProjectFileUploadToken(project_id, pageName))
     },
   }
 }

@@ -7,7 +7,7 @@ import Spinner from '../Common/LoadingSpinnerCSS'
 
 import * as ComponentStates from './ComponentStates'
 
-// TODO: Improve look of select box
+// TODO: FUTURE: Improve look of select box
 
 export class AddNewTeamMember extends Component {
   static propTypes = {
@@ -68,11 +68,10 @@ export class AddNewTeamMember extends Component {
     this.props.onSuccessAddingMember()
   }
 
-  // TODO: Check that error.message is the right key for the error text
   failedAddingUser = (error) => {
-    console.error(`failed to add a new user to the system with email: ${this.state.emailAddress}`)
+    //console.error(`failed to add a new user to the system with email: ${this.state.emailAddress}`)
     this.setState({
-      errorText: error.message,
+      errorText: error.ErrorMessage,
       state: ComponentStates.CREATING_NEW_USER_FAILED
     })
   }
@@ -110,7 +109,7 @@ export class AddNewTeamMember extends Component {
     return (
       <form className='add-member-form'>
 
-        <label htmlFor="emailAddress">{Strings.MEMBER_DETAILS}</label>
+        <label htmlFor="emailAddress">{Strings.MEMBERS_DETAILS}</label>
         <input
           id="emailAddress"
           name="emailAddress"
@@ -120,7 +119,7 @@ export class AddNewTeamMember extends Component {
           onChange={this.handleInputChange}
           className={ this.state.emailAddress === '' ? "default" : "filled" }/>
 
-        <label htmlFor="roleId">{Strings.MEMBER_PROJECT_ROLE}</label>
+        <label htmlFor="roleId">{Strings.MEMBERS_PROJECT_ROLE}</label>
         <select
           id="roleId"
           name="roleId"

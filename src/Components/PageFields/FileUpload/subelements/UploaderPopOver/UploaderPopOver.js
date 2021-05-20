@@ -11,44 +11,67 @@ import {
 
 import AWS from 'aws-sdk';
 import * as Strings from '../../../../../Data/Strings'
+import * as ComponentStates from '../../../../ComponentStates'
 
 const windowCloseDelay = 1500
 
-// TODO: After success, this should change the page that called it to the loading spinner, not just sit there
+// TODO: FUTURE: Do something with the QUIESCENT state
 
 export class UploaderPopOver extends Component {
   static propTypes = {
-    fileDetails: PropTypes.object.isRequired,
-    projectID: PropTypes.any.isRequired,
-    pageName: PropTypes.any.isRequired,
-    fieldID: PropTypes.any.isRequired,
+    fileDetails: PropTypes.shape({
+      files: PropTypes.arrayOf(
+        PropTypes.shape({
+          name: PropTypes.string.isRequired,
+          type: PropTypes.string.isRequired,
+          size: PropTypes.number.isRequired,
+          value: PropTypes.string.isRequired
+        }).isRequired
+      ).isRequired
+    }).isRequired,
+    projectID: PropTypes.string.isRequired,
+    pageName: PropTypes.string.isRequired,
+    fieldID: PropTypes.number.isRequired,
     fieldType: PropTypes.string.isRequired,
     onCancelPopup: PropTypes.func.isRequired,
+    user: PropTypes.shape({
+      projectS3Token: PropTypes.shape({
+        AccessKeyId: PropTypes.string.isRequired,
+        SecretAccessKey: PropTypes.string.isRequired,
+        SessionToken: PropTypes.string.isRequired
+      })
+    }).isRequired,
+    uploadFile: PropTypes.func.isRequired,
+    requestS3ProjectFileUploadToken: PropTypes.func.isRequired
   }
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       uploadProgress: 0,
-      uploadError: false,
+      state: ComponentStates.UPLOAD_IN_PROGESS
     }
   }
 
   componentDidMount() {
     const { projectID, pageName } = this.props
-
     // Upload the file to S3
     this.uploadToS3()
-    this.props.requestS3ProjectFileUploadToken(projectID, pageName)
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.user.projectS3Token !== prevProps.user.projectS3Token) {
+      this.uploadToS3()
+    }
   }
 
   getValidS3Token = () => {
-    // TODO: Make this refresh the token if required; stops fetching if not present
-    const { user } = this.props
+    const { user, projectID, pageName } = this.props
     if (user.projectS3Token === undefined) {
       this.setState({
-        uploadFileError: true
+        state: ComponentStates.ERROR_WHEN_LOADING
       })
+      this.props.requestS3ProjectFileUploadToken(projectID, pageName)
       return undefined;
     }
     return user.projectS3Token
@@ -72,17 +95,15 @@ export class UploaderPopOver extends Component {
     const file = fileDetails.files[0]
 
     const token = this.getValidS3Token()
-    if (token === undefined) {
-      console.log("there was an issue getting an S3 token")
+    if (!token) {
       this.setState({
-        uploadError: true
+        state: ComponentStates.ERROR_WHEN_LOADING
       })
       return;
     }
 
     // Update the s3 credentials to allow upload of file to S3
     this.configureAWSAuthorisation(token)
-
 
     // Create an S3 service provider
     const s3 = new AWS.S3()
@@ -110,24 +131,24 @@ export class UploaderPopOver extends Component {
         that.setState({
           uploadProgress: progress.loaded
         })
-
       })
 
       .on('success', function(response) {
         // Timer to keep the window open for a few seconds after upload completes
-
         setTimeout(() => {
+          that.setState({
+            state: ComponentStates.QUIESCENT
+          })
           that.informServer(response)
         }, windowCloseDelay);
 
       })
 
       .on('error', function(error, response) {
-        console.log("Error!");
-        console.error(error)
-
+        //console.log("Error!");
+        //console.error(error)
         that.setState({
-          uploadError: true
+          state: ComponentStates.ERROR_WHEN_LOADING
         })
       })
 
@@ -171,6 +192,7 @@ export class UploaderPopOver extends Component {
         </div>
         <div>
           <Button
+            id="close-button"
             text={Strings.CLOSE_WINDOW}
             onClick={(e) => this.cancelPopup()}
             intent={Intent.DANGER}
@@ -182,14 +204,17 @@ export class UploaderPopOver extends Component {
 
 
   render() {
+    //console.log(this.props.fileDetails)
+    //console.log(this.props.fileDetails.files)
 
     const { fileDetails } = this.props
-    const { uploadProgress, uploadError } = this.state
+    const { uploadProgress } = this.state
 
-    var fileSize = fileDetails.files[0].size
+    const file = fileDetails.files[0]
+    var fileSize = file.size
 
     const progressValue = uploadProgress / fileSize
-    const uploadStatus = uploadError ? "error" : ""
+    const uploadStatus = this.state.state === ComponentStates.ERROR_WHEN_LOADING ? "error" : ""
 
 
     return(
@@ -202,15 +227,15 @@ export class UploaderPopOver extends Component {
                   {Strings.UPLOAD_IN_PROGESS}
                 </div>
                 <div className='element-description'>
-                  <p><b>{Strings.FILE_NAME}</b> {fileDetails.value.replace("C:\\fakepath\\", "")}</p>
+                  <p><b>{Strings.FILE_NAME}</b> {file.name}</p>
                   <p><b>{Strings.UPLOADED_SIZE}</b> {uploadProgress + " / " + fileSize + " bytes"}</p>
                 </div>
                 <ProgressBar
-                  intent={uploadError? Intent.DANGER : Intent.PRIMARY}
+                  intent={this.state.state === ComponentStates.ERROR_WHEN_LOADING ? Intent.DANGER : Intent.PRIMARY}
                   value={progressValue}
                   />
                 {
-                  uploadError ? this.getErrorBlock() : null
+                  this.state.state === ComponentStates.ERROR_WHEN_LOADING ? this.getErrorBlock() : null
                 }
               </div>
             </div>

@@ -9,12 +9,33 @@ import {
 
 import * as Strings from '../../Data/Strings'
 
-const PopOverHandler = lazy(() => import('../Common/popOverHandler'));
-const UserDetailsPopOver = lazy(() => import('../UserDetailsPopOver'));
+import PopOverHandler from '../Common/popOverHandler'
+import UserDetailsPopOver from '../UserDetailsPopOver'
 
 export class ContactTile extends Component {
   static propTypes = {
-    memberDetails: PropTypes.object.isRequired,
+    projects: PropTypes.shape({
+      chosenProject: PropTypes.shape({
+        projectId: PropTypes.string
+      }).isRequired,
+      memberList: PropTypes.shape({
+        confirmed: PropTypes.arrayOf(
+          PropTypes.shape({
+            username: PropTypes.string.isRequired,
+            roleID: PropTypes.string.isRequired,
+          })
+        ).isRequired
+      }).isRequired
+    }).isRequired,
+    user: PropTypes.shape({
+      username: PropTypes.string.isRequired
+    }).isRequired,
+    memberDetails: PropTypes.shape({
+      username: PropTypes.string,
+      emailAddress: PropTypes.string.isRequired,
+      firstName: PropTypes.string,
+      lastName: PropTypes.string,
+    }).isRequired,
     onMemberRemove: PropTypes.func.isRequired,
     removeMember: PropTypes.func.isRequired,
     confirmed: PropTypes.bool.isRequired
@@ -84,7 +105,6 @@ export class ContactTile extends Component {
     this.setState({
       removingMember: false,
     })
-
     this.props.onMemberRemove()
   }
 
@@ -93,7 +113,7 @@ export class ContactTile extends Component {
     this.setState({
       removingMember: false,
       removeMemberError: true,
-      errorText: Strings.ERROR_REMOVING_MEMBER_FROM_PROJECT
+      errorText: Strings.ERROR_REMOVING_MEMBERS_FROM_PROJECT
     })
   }
 
@@ -114,7 +134,7 @@ export class ContactTile extends Component {
 
   showUserDetails = () => {
     if (process.env.REACT_APP_FUNCTIONALITY_USER_ACCREDITATIONS_LIST_V1 === "True") {
-      console.log("hello, user")
+      //console.log("hello, user")
       this.setState({
         showUserDetailsPopover: true,
       })
@@ -130,10 +150,10 @@ export class ContactTile extends Component {
 
   getUsername = () => {
     const { memberDetails } = this.props
-    if (memberDetails.username === null) {
+    if (!memberDetails.username) {
       return memberDetails.emailAddress
     }
-    if (memberDetails.firstName === null && memberDetails.lastName === null) {
+    if (!memberDetails.firstName && !memberDetails.lastName) {
       return memberDetails.emailAddress
     }
     return `${memberDetails.firstName} ${memberDetails.lastName}`
@@ -141,25 +161,25 @@ export class ContactTile extends Component {
 
   getStatus = () => {
     const { memberDetails, confirmed } = this.props
-    if (memberDetails.username === null) {
-      return Strings.MEMBER_NOT_YET_SIGNED_UP_TO_PRIND
+    if (!memberDetails.username) {
+      return Strings.MEMBERS_NOT_YET_SIGNED_UP_TO_PRIND
     }
     if (confirmed) {
-      return Strings.MEMBER_IS_CONFIRMED
+      return Strings.MEMBERS_IS_CONFIRMED
     }
-    return Strings.MEMBER_ISNT_YET_CONFIRMED
+    return Strings.MEMBERS_ISNT_YET_CONFIRMED
   }
 
 
   render() {
 
-    const { auth, projects, memberDetails, confirmed } = this.props
+    const { user, projects, memberDetails, confirmed } = this.props
     const { avatarLink, removeMemberError, errorText, showUserDetailsPopover } = this.state
 
     // See if the current User is the client, and can therefore remove people
     const editableMemberList = projects.memberList.confirmed.filter(member => {
       return (
-        member.username === auth.username &&
+        member.username === user.username &&
         (member.roleID === 'client' || member.roleID === 'clientTeamRepresentative' || member.roleID === 'creator') &&
         memberDetails.username !== member.username
       )
@@ -184,7 +204,7 @@ export class ContactTile extends Component {
 
             <div className="row">
               <div className="col-lg-2 col-md-4">
-                <b>{Strings.MEMBER_EMAIL_ADDRESS + ": "}</b>
+                <b>{Strings.MEMBERS_EMAIL_ADDRESS + ": "}</b>
               </div>
               <div className="col-lg-10 col-md-8">
                 {memberDetails.emailAddress}
@@ -193,7 +213,7 @@ export class ContactTile extends Component {
 
             <div className="row">
               <div className="col-lg-2 col-md-4">
-                <b>{Strings.MEMBER_PROJECT_ROLE + ": "}</b>
+                <b>{Strings.MEMBERS_PROJECT_ROLE + ": "}</b>
               </div>
               <div className="col-lg-10 col-md-8">
                 {memberDetails.roleName}
@@ -202,7 +222,7 @@ export class ContactTile extends Component {
 
             <div className="row">
               <div className="col-lg-2 col-md-4">
-                <b>{Strings.MEMBER_STATUS + ": "}</b>
+                <b>{Strings.MEMBERS_STATUS + ": "}</b>
               </div>
               <div className="col-lg-10 col-md-8">
                 { this.getStatus() }
@@ -222,6 +242,7 @@ export class ContactTile extends Component {
               editableMemberList.length > 0 ?
               <div className="row">
                 <Button
+                  id='remove-member-button'
                   text={Strings.BUTTON_REMOVE_MEMBER}
                   onClick={(e) => this.removeMember(e)}
                   intent={Intent.DANGER}

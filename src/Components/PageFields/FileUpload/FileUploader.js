@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import classes from './FileUploader.module.css'
 
 import {
   FileInput,
@@ -16,19 +17,47 @@ import {
   SignatureHistory,
 } from './subelements'
 
-import * as Strings from '../../../Data/Strings'
+import LoadingSpinner from '../../LoadingSpinner'
 
-// TODO: Improve propTypes so that errors are captured more easily
-export class Element extends Component {
+import * as Strings from '../../../Data/Strings'
+import * as ComponentStates from '../ComponentStates'
+import ProcoreFilePicker from '../../ProcoreFilePicker'
+
+
+// TODO: FUTURE: Refactor to remove blueprintjs
+// TODO: FUTURE: Fix display at mobile resolutions
+
+export class FileUploader extends Component {
   static propTypes = {
     elementContent: PropTypes.shape({
       id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       description: PropTypes.string,
       editable: PropTypes.bool.isRequired,
-      fileDetails: PropTypes.array.isRequired,
+      fileDetails: PropTypes.arrayOf(
+        PropTypes.shape({
+          uploadName: PropTypes.string.isRequired,
+          uploadedBy: PropTypes.string.isRequired,
+          ver: PropTypes.string.isRequired,
+          uploadedDateTime: PropTypes.number.isRequired,
+          proofLink: PropTypes.string,
+          signatures: PropTypes.arrayOf(
+            PropTypes.shape({
+              signerName: PropTypes.string.isRequired,
+              signatureDateTime: PropTypes.number.isRequired,
+              proofLink: PropTypes.string.isRequired,
+            })
+          ).isRequired
+        })
+      ).isRequired,
     }),
     pageName: PropTypes.string.isRequired,
+    projects: PropTypes.shape({
+      chosenProject: PropTypes.shape({
+        projectId: PropTypes.string.isRequired,
+      }).isRequired,
+    }).isRequired,
+    uploadFile: PropTypes.func.isRequired
   }
 
   constructor() {
@@ -40,13 +69,15 @@ export class Element extends Component {
       uploadFileRequested: false,
       fileState: '',
       activeTab: 'current',
+      state: ComponentStates.QUIESCENT,
+      procoreFilePickerOpen: false
     }
   }
 
   componentDidMount() {
     const { fileDetails } = this.props.elementContent
     if (fileDetails.length !== 0) {
-      if (fileDetails[0].proofLink !== undefined) {
+      if (fileDetails[0].proofLink) {
         this.setState({
           fileState: ' has-anchor'
         })
@@ -77,8 +108,36 @@ export class Element extends Component {
       hasChosenFile: false,
       uploadFileRequested: true,
       fileState: '',
+      state: ComponentStates.UPLOADING_NEW_FILE_TO_SERVER
     })
     e.stopPropagation();
+  }
+
+  uploadProcoreFile = (e) => {
+    e.stopPropagation();
+    console.log("procore file submit clicked")
+    this.setState({
+      hasChosenFile: false,
+      uploadFileRequested: false,
+      fileState: '',
+      state: ComponentStates.UPLOADING_NEW_FILE_TO_SERVER
+    })
+
+    const { fileDetails } = this.state
+    const { projects, pageName, elementContent } = this.props
+
+    const projectId = projects.chosenProject.projectId
+    const fieldId = elementContent.id
+    const uploadDetails = {
+      filename: fileDetails.prostore_file.filename,
+      procoreFileUrl: fileDetails.prostore_file.url
+    }
+    const fieldType = "file"
+
+    console.log(uploadDetails)
+
+    // Send to the reducer
+    this.props.uploadFile(projectId, pageName, fieldId, uploadDetails, fieldType)
   }
 
 
@@ -104,6 +163,10 @@ export class Element extends Component {
           /> :
           <CurrentVersion
             details={null}
+            projectId={projects.chosenProject.projectId}
+            pageName={pageName}
+            fieldID={elementContent.id}
+            editable={elementContent.editable}
           />
         }
       </React.Fragment>
@@ -126,7 +189,7 @@ export class Element extends Component {
     return (
       <UploadHistory
         details={ elementContent.fileDetails }
-        projectID={projects.chosenProject.projectId}
+        projectId={projects.chosenProject.projectId}
         pageName={pageName}
         fieldID={elementContent.id}
         />
@@ -141,6 +204,7 @@ export class Element extends Component {
       <div id='upload-tab-container'>
         <div className='element-title'>{Strings.TAB_UPLOAD_FILE_HEADING}</div>
         <FileInput
+          id='file-input-field'
           className="field bp3-fill"
           ref='fileInput'
           onInputChange={(e) => this.fileChosen(e)}
@@ -148,15 +212,94 @@ export class Element extends Component {
           disabled={!elementContent.editable}
         />
 
-        <Button
-          intent={Intent.PRIMARY}
+        <input
+          id="upload-button"
+          className="button"
+          type="submit"
           onClick={(e) => this.uploadFile(e)}
           disabled={!hasChosenFile}
-          text={Strings.BUTTON_UPLOAD_FILE}
+          value={Strings.BUTTON_UPLOAD_FILE}
         />
 
       </div>
     )
+  }
+
+
+  uploadTabProcore = () => {
+    const { filePrompt, hasChosenFile } = this.state
+    const { elementContent } = this.props
+
+    return (
+      <div id='upload-tab-container'>
+        <div className='element-title'>{Strings.TAB_UPLOAD_FILE_HEADING}</div>
+
+        <div className={classes.uploadTabContainer} >
+          {
+            this.state.fileDetails.prostore_file !== undefined ?
+            <input
+              type="text"
+              disabled={true}
+              value={this.state.fileDetails.prostore_file.filename}
+              /> :
+              null
+          }
+
+          <div className={classes.uploadTabButtonRow} >
+            <input
+              id="procore-file-picker-button"
+              className="button"
+              type="submit"
+              onClick={(e) => this.setState({ procoreFilePickerOpen: true })}
+              value={Strings.BUTTON_SELECT_FILE}
+            />
+
+            <input
+              id="upload-button"
+              className="button"
+              type="submit"
+              onClick={(e) => this.uploadProcoreFile(e)}
+              disabled={!hasChosenFile}
+              value={Strings.BUTTON_UPLOAD_FILE}
+            />
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+
+  getProcoreFileSelectorPopover = () => {
+    return <ProcoreFilePicker onFileSelected={this.fileSelected} handleClose={this.handleCloseProcoreFilePicker} />
+  }
+
+  getLatestFileVersion = (doc) => {
+    // Find if of the latest version of the file uploaded
+    const latestVersion = doc.file_versions.reduce(function(prev, current) {
+      return (Date.parse(prev.created_at) > Date.parse(current.created_at)) ? prev : current
+    })
+    return latestVersion
+  }
+
+
+  fileSelected = (doc) => {
+    console.log(doc)
+    // Get latest version of the file
+    const latestVersion = this.getLatestFileVersion(doc)
+    // Save the latest version
+    this.setState({
+      fileDetails: latestVersion,
+      hasChosenFile: true
+    })
+    // Close the File picker
+    this.handleCloseProcoreFilePicker()
+  }
+
+
+  handleCloseProcoreFilePicker = () => {
+    this.setState({
+      procoreFilePickerOpen: false
+    })
   }
 
 
@@ -174,16 +317,16 @@ export class Element extends Component {
         <Tab id="current" title={Strings.TAB_CURRENT_FILE} panel={this.currentTab()} />
         <Tab id="signatures" title={Strings.TAB_SIGNATURES} panel={this.signatureTab()} />
         <Tab id="versions" title={Strings.TAB_FILE_VERSIONS} panel={this.versionsTab()} />
-        <Tab id="upload" title={Strings.TAB_UPLOAD_FILE} panel={this.uploadTab()} />
+        <Tab id="upload" title={Strings.TAB_UPLOAD_FILE} panel={process.env.REACT_APP_IS_PROCORE === "True" ? this.uploadTabProcore() : this.uploadTab()} />
         <Tabs.Expander />
       </Tabs>
     )
   }
 
-
   render() {
     const { fileState, fileDetails } = this.state
     const { elementContent, pageName, projects } = this.props
+    //console.log(this.state)
     return (
       <div id='file-upload-element'>
         <div className={'file-upload-element-container' + fileState}>
@@ -195,7 +338,10 @@ export class Element extends Component {
           </div>
           <div className='element-file-uploader'>
             {
-              this.getTabs()
+              this.state.state === ComponentStates.QUIESCENT ? this.getTabs() : null
+            }
+            {
+              this.state.state === ComponentStates.UPLOADING_NEW_FILE_TO_SERVER ? <div className={classes.centerChildren}><LoadingSpinner /></div> : null
             }
           </div>
         </div>
@@ -211,9 +357,12 @@ export class Element extends Component {
               /> :
             null
         }
+        {
+          this.state.procoreFilePickerOpen ? this.getProcoreFileSelectorPopover() : null
+        }
       </div>
     )
   }
 }
 
-export default Element
+export default FileUploader

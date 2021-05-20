@@ -1,0 +1,129 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UploaderPopOver - Should render 1`] = `
+<PopOverHandler>
+  <div
+    id="popup-greyer"
+  >
+    <div
+      id="uploader-popover"
+    >
+      <div
+        className="error"
+        id="popup-box"
+      >
+        <div
+          className="uploader-popover-container"
+        >
+          <div
+            className="element-title"
+          >
+            Upload in progress.  Please wait...
+          </div>
+          <div
+            className="element-description"
+          >
+            <p>
+              <b>
+                File Name: 
+              </b>
+               
+              hello.csv
+            </p>
+            <p>
+              <b>
+                Uploaded: 
+              </b>
+               
+              0 / 100 bytes
+            </p>
+          </div>
+          <Blueprint3.ProgressBar
+            intent="danger"
+            value={0}
+          />
+          <div>
+            <div>
+              <b>
+                ERROR: There was an error uploading the file, please try again
+              </b>
+            </div>
+            <div>
+              <Blueprint3.Button
+                id="close-button"
+                intent="danger"
+                onClick={[Function]}
+                text="Close"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</PopOverHandler>
+`;
+
+exports[`UploaderPopOver - Should render with missing upload token 1`] = `
+<PopOverHandler>
+  <div
+    id="popup-greyer"
+  >
+    <div
+      id="uploader-popover"
+    >
+      <div
+        className="error"
+        id="popup-box"
+      >
+        <div
+          className="uploader-popover-container"
+        >
+          <div
+            className="element-title"
+          >
+            Upload in progress.  Please wait...
+          </div>
+          <div
+            className="element-description"
+          >
+            <p>
+              <b>
+                File Name: 
+              </b>
+               
+              hello.csv
+            </p>
+            <p>
+              <b>
+                Uploaded: 
+              </b>
+               
+              0 / 100 bytes
+            </p>
+          </div>
+          <Blueprint3.ProgressBar
+            intent="danger"
+            value={0}
+          />
+          <div>
+            <div>
+              <b>
+                ERROR: There was an error uploading the file, please try again
+              </b>
+            </div>
+            <div>
+              <Blueprint3.Button
+                id="close-button"
+                intent="danger"
+                onClick={[Function]}
+                text="Close"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</PopOverHandler>
+`;
