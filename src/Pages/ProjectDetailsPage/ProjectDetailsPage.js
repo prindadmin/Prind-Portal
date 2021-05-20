@@ -63,10 +63,21 @@ export class ProjectDetailsPage extends Component {
   }
 
   showProjectDetails = () => {
+
+    // If the template section feature is ready for this deployment, show it
+    if (process.env.REACT_APP_FEATURE_0001 === "True") {
+      return (
+        <div className={classes.pageContentDouble}>
+          <ProjectDetailsSection />
+          <ProjectTemplatesSection />
+        </div>
+      )
+    }
+
+    // Otherwise, just show the basic project details
     return (
       <div className={classes.pageContent}>
         <ProjectDetailsSection />
-        <ProjectTemplatesSection />
       </div>
     )
   }

@@ -3,6 +3,14 @@
   max-width: var(--max-width-component);
   margin: auto;
   display: grid;
+  grid-template-columns: 1fr;
+}
+
+.pageContentDouble {
+  width: 90%;
+  max-width: var(--max-width-component);
+  margin: auto;
+  display: grid;
   grid-template-columns: 1fr 1fr;
 }
 
