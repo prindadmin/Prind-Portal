@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 
 import * as projectsReducer from '../../Reducers/projects'
 
-import PageComponent from './ProjectDetailsPage'
+import ProjectDetailsSection from './ProjectDetailsSection'
 
 const mapStatetoProps = state => {
   return {
@@ -15,16 +15,8 @@ const mapDispatchToProps = dispatch => {
   return {
     updateProjectDetails: (projectID, values, resolve, reject) => {
       dispatch(projectsReducer.updateProjectDetails(projectID, values, resolve, reject))
-    },
-    /*
-    deleteProject: (projectID, resolve, reject) => {
-      dispatch(projectsReducer.deleteProject(projectID, resolve, reject))
-    },
-    resetChosenProject: () => {
-      dispatch(projectsReducer.resetChosenProject())
     }
-    */
   }
 }
 
-export default withRouter(connect(mapStatetoProps, mapDispatchToProps)(PageComponent))
+export default withRouter(connect(mapStatetoProps, mapDispatchToProps)(ProjectDetailsSection))

@@ -10,6 +10,15 @@ const defaultChosenProject = {
   projectName: Strings.NO_PROJECT_SELECTED,
   projectId: "",
   projectType: "",
+  projectAddressLine1: "",
+  projectAddressLine2: "",
+  projectAddressLine3: "",
+  projectAddressTown: "",
+  projectAddressRegion: "",
+  projectAddressCountry: "",
+  projectAddressPostalCode: "",
+  projectDescription: "",
+  projectReference: "",
 }
 
 const defaultState = {
@@ -120,8 +129,20 @@ export function * updateChosenProject (action) {
         fetching: true,
       }
     })
+<<<<<<< Updated upstream
     const result = yield call(Dispatchers.fetchProjectDetails, project.projectId)
     const resultBody = result.body
+=======
+
+    const result = yield call(Dispatchers.fetchProjectDetails, project.projectId)
+    var resultBody = result.body
+    for (const key in resultBody) {
+      if (resultBody[key] === null) {
+        resultBody[key] = ''
+      }
+    }
+
+>>>>>>> Stashed changes
     // Post-fetch update to store
     yield put({
       type: Actions.PROJECT_SET_STATE,
