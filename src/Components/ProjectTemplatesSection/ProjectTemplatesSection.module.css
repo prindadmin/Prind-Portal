@@ -10,9 +10,14 @@
 
 }
 
+.formContainer {
+  width: 80%;
+  margin: auto;
+}
+
 .templateHeading {
   text-align: left;
-  font-size: 1.5em;
+  font-size: 1.3em;
   font-weight: bold;
   margin-bottom: 0.5em;
 }

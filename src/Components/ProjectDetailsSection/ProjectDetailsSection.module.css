@@ -1,18 +1,14 @@
-.pageContent {
-  width: 90%;
-  max-width: var(--max-width-component-thin);
-  margin: auto;
-}
-
-.headerSection {
-  margin: 1em 0 1em 0;
-}
 
 .formSection {
   display: flex;
   flex-direction: column;
   width: 100%;
   max-width: var(--max-width-component-thin);
+}
+
+.formContainer {
+  width: 80%;
+  margin: auto;
 }
 
 .formSection input {

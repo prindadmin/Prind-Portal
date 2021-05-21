@@ -39,15 +39,37 @@ export class ProjectTemplatesSection extends Component {
         ).isRequired
       })
     }).isRequired,
+    isCreateProject: PropTypes.bool.isRequired,
+    returnCurrentSelection: PropTypes.func,
     updateProjectDetails: PropTypes.func.isRequired,
   }
 
   constructor(props) {
     super(props)
+    const originalTemplates = props.projects.chosenProject.projectTemplates
+    var projectTemplateIdsInUse = originalTemplates.map((templateCategory, index) => {
+      return this.getSelectedTemplatesInCategory(templateCategory.templates)
+    })
+
+    // Now flaten the array of array
+    projectTemplateIdsInUse = projectTemplateIdsInUse.reduce((total, templateArray) => {
+      return total.concat(templateArray)
+    }, [])
+
     this.state = {
-      projectTemplates: props.projects.chosenProject.projectTemplates
+      projectTemplates: props.projects.chosenProject.projectTemplates,
+      originalProjectTemplateIdsInUse: projectTemplateIdsInUse,
+      currentProjectTemplatesIdsInUse: projectTemplateIdsInUse,
     }
   }
+
+  getSelectedTemplatesInCategory = (templatesInCategory) => {
+    const result = templatesInCategory.map((template, index) => {
+      return template.selected ? template.id : null
+    })
+    return result.filter((entry) => entry !== null)
+  }
+
 
   getHeader = () => {
     return (
@@ -58,19 +80,42 @@ export class ProjectTemplatesSection extends Component {
   }
 
   handleInputChange = (event) => {
+    const { currentProjectTemplatesIdsInUse } = this.state
     const target = event.target;
     console.log(target)
     console.log(target.id)
     // TODO: Change the state of the recorded value
+    var newProjectTemplates = currentProjectTemplatesIdsInUse.slice().sort();
+
+    if (newProjectTemplates.includes(target.id)) {
+      newProjectTemplates.splice(newProjectTemplates.indexOf(target.id))
+    } else {
+      newProjectTemplates.push(target.id)
+    }
+    // Set the state to the new list of projectIds
+    this.setState({
+      currentProjectTemplatesIdsInUse: newProjectTemplates
+    })
+    // If the project editor has been asked to return the selected templates to a parent, do it
+    if (this.props.returnCurrentSelection) {
+      this.props.returnCurrentSelection(newProjectTemplates)
+    }
   }
 
-  // TODO: Check options received from the server
-  // TODO: Disable checked options received from the server
   getTemplates = (templates) => {
     const mappedTemplates = templates.map((template, index) => {
+      const checkedState = this.state.currentProjectTemplatesIdsInUse.includes(template.id) ? 1 : 0
+      const originallyChecked = this.state.originalProjectTemplateIdsInUse.includes(template.id) ? 1 : 0
       return (
         <Fragment key={index}>
-          <input type="checkbox" key={index} id={template.id} name={template.name} value={template.name} onChange={this.handleInputChange}/>
+          <input
+            type="checkbox"
+            key={index}
+            id={template.id}
+            name={template.name}
+            onChange={this.handleInputChange}
+            checked={ checkedState }
+            disabled={ originallyChecked }/>
           <label htmlFor={template.id}> {template.name}</label>
         </Fragment>
       )
@@ -98,23 +143,40 @@ export class ProjectTemplatesSection extends Component {
   }
 
   getFooter = () => {
+    const { originalProjectTemplateIdsInUse, currentProjectTemplatesIdsInUse } = this.state
+    const originalProjectTemplatesSorted = originalProjectTemplateIdsInUse.slice().sort();
+    const currentProjectTemplatesSorted = currentProjectTemplatesIdsInUse.slice().sort();
+    const hasChanged = JSON.stringify(originalProjectTemplatesSorted) !== JSON.stringify(currentProjectTemplatesSorted)
+    // If this is a new project, don't have a save changes button
+    if (this.props.isCreateProject) {
+      return null
+    }
+    // Existing projects have a save changes button
     return (
       <div>
-        {/* footer here */}
+        <input
+          type='submit'
+          className={classes.button}
+          disabled={!hasChanged}
+          value={Strings.BUTTON_SAVE_CHANGES}
+          onClick={this.updateProjectTemplates} />
       </div>
     )
   }
 
-  // TODO: Add in save button
+  updateProjectTemplates = () => {
+    // TODO: Write this function
+    return;
+  }
+
+
   getTemplatesAvailable = () => {
     return (
-      <Fragment>
-        <div className="form-container">
-          {this.getHeader()}
-          {this.getTemplateCategories()}
-          {this.getFooter()}
-        </div>
-      </Fragment>
+      <div className={classes.formContainer}>
+        {this.getHeader()}
+        {this.getTemplateCategories()}
+        {this.getFooter()}
+      </div>
     )
   }
 

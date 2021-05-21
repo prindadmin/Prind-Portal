@@ -68,8 +68,8 @@ export class ProjectDetailsPage extends Component {
     if (process.env.REACT_APP_FEATURE_0001 === "True") {
       return (
         <div className={classes.pageContentDouble}>
-          <ProjectDetailsSection />
-          <ProjectTemplatesSection />
+          <ProjectDetailsSection isCreateProject={false} />
+          <ProjectTemplatesSection isCreateProject={false} />
         </div>
       )
     }
