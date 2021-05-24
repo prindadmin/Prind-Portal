@@ -84,6 +84,7 @@
     "start-cdm": "env-cmd -f .env.developmentCDM react-scripts start",
     "start-dhsf": "env-cmd -f .env.developmentDHSF react-scripts start",
     "start-procore": "env-cmd -f .env.developmentProcore.local react-scripts start",
+    "start-procore-production": "env-cmd -f .env.productionProcore.local react-scripts start",
     "test": "react-scripts test",
     "build": "react-scripts build",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
