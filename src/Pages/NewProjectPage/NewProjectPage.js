@@ -15,6 +15,7 @@ const ErrorTile = lazy(() => import('../../Components/ErrorTile'));
 const CreatingProjectPopover = lazy(() => import('../../Components/CreatingProjectPopover'));
 
 // TODO: FUTURE: Add ability to upload thumbnails or pick icon for a project
+// TODO: Add in the template picker section
 
 export class NewProjectPage extends Component {
   static propTypes = {

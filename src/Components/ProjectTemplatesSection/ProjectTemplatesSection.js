@@ -6,8 +6,6 @@ import classes from './ProjectTemplatesSection.module.css'
 import * as Strings from '../../Data/Strings'
 
 // Components
-import NoProjectSelected from '../Common/NoProjectSelected'
-//import PopOverHandler from '../Common/popOverHandler'
 
 export class ProjectTemplatesSection extends Component {
   static propTypes = {
@@ -25,318 +23,171 @@ export class ProjectTemplatesSection extends Component {
         projectAddressRegion: PropTypes.string,
         projectAddressPostalCode: PropTypes.string,
         projectAddressCountry: PropTypes.string,
+        projectTemplates: PropTypes.arrayOf(
+          PropTypes.shape({
+            id: PropTypes.string.isRequired,
+            name: PropTypes.string.isRequired,
+            templates: PropTypes.arrayOf(
+              PropTypes.shape({
+                id: PropTypes.string.isRequired,
+                name: PropTypes.string.isRequired,
+                selected: PropTypes.bool.isRequired,
+                current: PropTypes.bool.isRequired
+              })
+            ).isRequired
+          })
+        ).isRequired
       })
     }).isRequired,
+    isCreateProject: PropTypes.bool.isRequired,
+    returnCurrentSelection: PropTypes.func,
     updateProjectDetails: PropTypes.func.isRequired,
-    //deleteProject: PropTypes.func.isRequired,
-    //resetChosenProject: PropTypes.func.isRequired,
   }
 
   constructor(props) {
     super(props)
+    const originalTemplates = props.projects.chosenProject.projectTemplates
+    var projectTemplateIdsInUse = originalTemplates.map((templateCategory, index) => {
+      return this.getSelectedTemplatesInCategory(templateCategory.templates)
+    })
+
+    // Now flaten the array of array
+    projectTemplateIdsInUse = projectTemplateIdsInUse.reduce((total, templateArray) => {
+      return total.concat(templateArray)
+    }, [])
+
     this.state = {
-      projectValues: { ...props.projects.chosenProject },
-      showDeleteProjectConfirmation: false,
-      deleteError: false,
-      errorText: "",
-    }
-    console.log("loading edit project page")
-  }
-
-
-  componentDidUpdate(prevProps) {
-    //console.log("updating")
-    //console.log("props", this.props.projects.chosenProject)
-    //console.log("prevProps", prevProps.projects.chosenProject)
-    if (this.props.projects.chosenProject !== prevProps.projects.chosenProject) {
-      //console.log("updating project values")
-      //console.log("chosenProject", this.props.projects.chosenProject)
-      this.setState({
-        projectValues: { ...this.props.projects.chosenProject }
-      })
+      projectTemplates: props.projects.chosenProject.projectTemplates,
+      originalProjectTemplateIdsInUse: projectTemplateIdsInUse,
+      currentProjectTemplatesIdsInUse: projectTemplateIdsInUse,
     }
   }
 
-  updateProject = () => {
-    const { updateProjectDetails, projects } = this.props
-    const { projectValues } = this.state
-
-    updateProjectDetails(projects.chosenProject.projectId, projectValues)
+  getSelectedTemplatesInCategory = (templatesInCategory) => {
+    const result = templatesInCategory.map((template, index) => {
+      return template.selected ? template.id : null
+    })
+    return result.filter((entry) => entry !== null)
   }
 
-  projectPageHeader = () => {
+
+  getHeader = () => {
     return (
       <div className='header-section'>
-        <h2>{Strings.EDIT_PROJECT_DETAILS}</h2>
+        <h2>{Strings.EDIT_PROJECT_TEMPLATES}</h2>
       </div>
     )
   }
 
-  confirmProjectDelete = () => {
-    console.log("confirm project delete")
-    this.setState({
-      showDeleteProjectConfirmation: true,
-    })
-  }
-
-
-
   handleInputChange = (event) => {
+    const { currentProjectTemplatesIdsInUse } = this.state
     const target = event.target;
-    this.setState({
-      projectValues: {
-        ...this.state.projectValues,
-        [target.name]: target.value
-      }
-    });
-  }
+    console.log(target)
+    console.log(target.id)
+    // TODO: Change the state of the recorded value
+    var newProjectTemplates = currentProjectTemplatesIdsInUse.slice().sort();
 
-  hasChanged = () => {
-    var hasChanged = false
-    for (const key in this.state.projectValues) {
-      hasChanged = hasChanged || this.state.projectValues[key] !== this.props.projects.chosenProject[key]
+    if (newProjectTemplates.includes(target.id)) {
+      newProjectTemplates.splice(newProjectTemplates.indexOf(target.id))
+    } else {
+      newProjectTemplates.push(target.id)
     }
-    return hasChanged
+    // Set the state to the new list of projectIds
+    this.setState({
+      currentProjectTemplatesIdsInUse: newProjectTemplates
+    })
+    // If the project editor has been asked to return the selected templates to a parent, do it
+    if (this.props.returnCurrentSelection) {
+      this.props.returnCurrentSelection(newProjectTemplates)
+    }
+  }
+
+  getTemplates = (templates) => {
+    const mappedTemplates = templates.map((template, index) => {
+      const checkedState = this.state.currentProjectTemplatesIdsInUse.includes(template.id) ? 1 : 0
+      const originallyChecked = this.state.originalProjectTemplateIdsInUse.includes(template.id) ? 1 : 0
+      return (
+        <Fragment key={index}>
+          <input
+            type="checkbox"
+            key={index}
+            id={template.id}
+            name={template.name}
+            onChange={this.handleInputChange}
+            checked={ checkedState }
+            disabled={ originallyChecked }/>
+          <label htmlFor={template.id}> {template.name}</label>
+        </Fragment>
+      )
+    })
+    return mappedTemplates
   }
 
 
-  projectForm = () => {
-    const { projectValues } = this.state
-    const hasChanged = this.hasChanged()
+  getTemplateCategories = () => {
+    const { projectTemplates } = this.props.projects.chosenProject
+    const categories = projectTemplates.map((templateCategory, index) => {
+      return (
+        <div key={index} className={classes.templateCategory}>
+          <div className={classes.templateHeading}>{templateCategory.name}</div>
+          <div className={classes.templateHolder}>
+            {
+              this.getTemplates(templateCategory.templates)
+            }
+          </div>
+        </div>
+      )
+    });
+
+    return categories
+  }
+
+  getFooter = () => {
+    const { originalProjectTemplateIdsInUse, currentProjectTemplatesIdsInUse } = this.state
+    const originalProjectTemplatesSorted = originalProjectTemplateIdsInUse.slice().sort();
+    const currentProjectTemplatesSorted = currentProjectTemplatesIdsInUse.slice().sort();
+    const hasChanged = JSON.stringify(originalProjectTemplatesSorted) !== JSON.stringify(currentProjectTemplatesSorted)
+    // If this is a new project, don't have a save changes button
+    if (this.props.isCreateProject) {
+      return null
+    }
+    // Existing projects have a save changes button
     return (
-      <div className={classes.formSection}>
-        <div className={classes.sectionLabel}>{Strings.PROJECT_NAME}</div>
-        <input
-          id="projectName"
-          name="projectName"
-          type="text"
-          required
-          disabled={process.env.REACT_APP_IS_PROCORE === "True"}
-          placeholder={Strings.PROJECT_NAME}
-          onChange={this.handleInputChange}
-          value={ projectValues.projectName }
-          className={ !projectValues.projectName ? "default" : "filled" }
-        />
-
-        <div className={classes.sectionLabel}>{Strings.PROJECT_REFERENCE}</div>
-        <input
-          id="projectReference"
-          name="projectReference"
-          type="text"
-          placeholder={Strings.PROJECT_REFERENCE}
-          onChange={this.handleInputChange}
-          value={ projectValues.projectReference }
-          className={ !projectValues.projectReference ? "default" : "filled" }
-        />
-
-        <div className={classes.sectionLabel}>{Strings.PROJECT_ADDRESS}</div>
-        <input
-          id="projectAddressLine1"
-          name="projectAddressLine1"
-          type="text"
-          placeholder={Strings.ADDRESS_LINE_1}
-          onChange={this.handleInputChange}
-          value={ projectValues.projectAddressLine1 }
-          className={ !projectValues.projectAddressLine1 ? "default" : "filled" }
-        />
-        <input
-          id="projectAddressLine2"
-          name="projectAddressLine2"
-          type="text"
-          placeholder={Strings.ADDRESS_LINE_2}
-          onChange={this.handleInputChange}
-          value={ projectValues.projectAddressLine2 }
-          className={ !projectValues.projectAddressLine2 ? "default" : "filled" }
-        />
-        <input
-          id="projectAddressLine3"
-          name="projectAddressLine3"
-          type="text"
-          placeholder={Strings.ADDRESS_LINE_3}
-          onChange={this.handleInputChange}
-          value={ projectValues.projectAddressLine3 }
-          className={ !projectValues.projectAddressLine3 ? "default" : "filled" }
-        />
-        <input
-          id="projectAddressTown"
-          name="projectAddressTown"
-          type="text"
-          placeholder={Strings.ADDRESS_LINE_TOWN}
-          onChange={this.handleInputChange}
-          value={ projectValues.projectAddressTown }
-          className={ !projectValues.projectAddressTown ? "default" : "filled" }
-        />
-        <input
-          id="projectAddressRegion"
-          name="projectAddressRegion"
-          type="text"
-          placeholder={Strings.ADDRESS_LINE_REGION}
-          onChange={this.handleInputChange}
-          value={ projectValues.projectAddressRegion }
-          className={ !projectValues.projectAddressRegion ? "default" : "filled" }
-        />
-        <input
-          id="projectAddressPostalCode"
-          name="projectAddressPostalCode"
-          type="text"
-          placeholder={Strings.ADDRESS_LINE_POSTAL_CODE}
-          onChange={this.handleInputChange}
-          value={ projectValues.projectAddressPostalCode }
-          className={ !projectValues.projectAddressPostalCode ? "default" : "filled" }
-        />
-        <input
-          id="projectAddressCountry"
-          name="projectAddressCountry"
-          type="text"
-          placeholder={Strings.ADDRESS_LINE_COUNTRY}
-          onChange={this.handleInputChange}
-          value={ projectValues.projectAddressCountry }
-          className={ !projectValues.projectAddressCountry ? `default ${classes.lastInput}` : `filled ${classes.lastInput}` }
-        />
-
+      <div>
         <input
           type='submit'
           className={classes.button}
           disabled={!hasChanged}
-          value={Strings.BUTTON_CREATE_PROJECT}
-          onClick={this.updateProject} />
+          value={Strings.BUTTON_SAVE_CHANGES}
+          onClick={this.updateProjectTemplates} />
+      </div>
+    )
+  }
 
+  updateProjectTemplates = () => {
+    // TODO: Write this function
+    return;
+  }
+
+
+  getTemplatesAvailable = () => {
+    return (
+      <div className={classes.formContainer}>
+        {this.getHeader()}
+        {this.getTemplateCategories()}
+        {this.getFooter()}
       </div>
     )
   }
 
 
-  confirmDeleteProject = () => {
-
-    const { projectId } = this.props.projects.chosenProject
-
-    this.props.deleteProject(
-      projectId,
-      this.resolveDelete,
-      this.rejectDelete,
-    )
-
-  }
-  /*
-  resolveDelete = () => {
-    this.props.resetChosenProject()
-    this.props.history.push('/profile')
-  }
-
-  rejectDelete = () => {
-
-    console.log("reject delete")
-
-    this.setState({
-      deleteError: true,
-      errorText: Strings.ERROR_DELETING_PROJECT
-    })
-  }
-  */
-
-  /*
-  showDeleteConfirmationOverlay = () => {
-
-    const { deleteError, errorText } = this.state
-
-    return(
-      <PopOverHandler>
-        <div id='popup-greyer' onClick={(e) => {
-          this.setState({showDeleteProjectConfirmation: false})
-          e.stopPropagation()
-          }}>
-          <div id='delete-project-popover'>
-            <div id='popup-box'>
-              <div className='delete-project-popover-container' onClick={(e) => e.stopPropagation()}>
-                <div className='element-title'>
-                  {Strings.DELETE_PROJECT}
-                </div>
-                {
-                  deleteError ?
-                  <Callout style={{marginBottom: '15px'}} intent='danger'>
-                    <div>{errorText}</div>
-                  </Callout> :
-                  null
-                }
-
-                <div className='element-description'>
-                  {Strings.CONFIRM_PROJECT_DELETE}
-                  <ButtonGroup fill>
-                    <Button
-                      loading={this.props.submitting}
-                      intent='danger'
-                      text={Strings.BUTTON_DELETE_PROJECT}
-                      onClick={this.confirmDeleteProject}
-                    />
-                  </ButtonGroup>
-
-                  <ButtonGroup fill>
-                    <Button
-                      loading={this.props.submitting}
-                      intent='none'
-                      text={Strings.BUTTON_CANCEL}
-                      onClick={(e) => this.setState({showDeleteProjectConfirmation: false})}
-                    />
-                  </ButtonGroup>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </PopOverHandler>
-    )
-  }
-  */
-
-  projectPageFooter = () => {
-    return (
-      <div>
-        {/*new project page footer here*/}
-      </div>
-    )
-  }
-
-  projectDetails = () => {
-
-    const { showDeleteProjectConfirmation } = this.state
-
-    return (
-      <Fragment>
-        {
-          /*
-          showDeleteProjectConfirmation ?
-          this.showDeleteConfirmationOverlay() : null
-          */
-        }
-        <div className="form-container">
-          {this.projectPageHeader()}
-          {this.projectForm()}
-          {this.projectPageFooter()}
-        </div>
-      </Fragment>
-    )
-  }
-
-
-  showEmptyPage = () => {
-    return(
-      <NoProjectSelected />
-    )
-  }
-
-
+  // TODO: Make scrollable
   render() {
-
     return (
-      <div id='new-project-page'>
-        <div className='page-content-section'>
-          {
-            this.props.projects === {} ? this.showEmptyPage() : null
-          }
-          {
-            this.props.projects.chosenProject.projectName === Strings.NO_PROJECT_SELECTED ? this.showEmptyPage() : this.projectDetails()
-          }
-        </div>
+      <div id='project-templates-section' className={classes.projectTemplatesSection}>
+        {
+          this.getTemplatesAvailable()
+        }
       </div>
     )
   }

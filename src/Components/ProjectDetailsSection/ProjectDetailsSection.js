@@ -28,6 +28,7 @@ export class ProjectDetailsSection extends Component {
       })
     }).isRequired,
     updateProjectDetails: PropTypes.func.isRequired,
+    isCreateProject: PropTypes.bool,
     //deleteProject: PropTypes.func.isRequired,
     //resetChosenProject: PropTypes.func.isRequired,
   }
@@ -198,7 +199,7 @@ export class ProjectDetailsSection extends Component {
           type='submit'
           className={classes.button}
           disabled={!hasChanged}
-          value={Strings.BUTTON_CREATE_PROJECT}
+          value={this.props.isCreateProject ? Strings.BUTTON_CREATE_PROJECT : Strings.BUTTON_SAVE_CHANGES }
           onClick={this.updateProject} />
 
       </div>
@@ -308,7 +309,7 @@ export class ProjectDetailsSection extends Component {
           this.showDeleteConfirmationOverlay() : null
           */
         }
-        <div className="form-container">
+        <div className={classes.formContainer}>
           {this.projectPageHeader()}
           {this.projectForm()}
           {this.projectPageFooter()}
@@ -328,15 +329,10 @@ export class ProjectDetailsSection extends Component {
   render() {
 
     return (
-      <div id='new-project-page'>
-        <div className='page-content-section'>
-          {
-            this.props.projects === {} ? this.showEmptyPage() : null
-          }
-          {
-            this.props.projects.chosenProject.projectName === Strings.NO_PROJECT_SELECTED ? this.showEmptyPage() : this.projectDetails()
-          }
-        </div>
+      <div id='project-details-section' className={classes.projectDetailsSection}>
+        {
+          this.projectDetails()
+        }
       </div>
     )
   }

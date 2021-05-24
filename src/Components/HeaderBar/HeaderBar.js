@@ -39,7 +39,7 @@ export class HeaderBar extends Component {
 
   getMenu = () => {
     return (
-      <div className='menu-container'>
+      <div className={classes.menuContainer}>
         <UserMenu />
       </div>
     )
@@ -53,8 +53,8 @@ export class HeaderBar extends Component {
     const { openProjectSelector } = this.props
     return (
       <Fragment>
-        <div id='header-bar' className='full-width row'>
-          <div className='header-content row'>
+        <div id='header-bar' className={classes.headerBar}>
+          <div className={classes.content}>
             {
               process.env.REACT_APP_IS_PROCORE !== "True" ? <ProjectSelector openProjectSelector={openProjectSelector} /> : this.getLogo()
             }
