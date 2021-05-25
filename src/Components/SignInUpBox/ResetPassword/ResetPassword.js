@@ -98,13 +98,12 @@ class ResetPassword extends Component {
   }
 
   getLogo = () => {
-    const logoName = "/images/logos/buildingim-logo"
-    const logoLocation = CanUseWebP() ? `${logoName}.webp` : `${logoName}.png`
+    const logoLocation = CanUseWebP() ? "/images/logos/prind-tech-logo.webp" : "/images/logos/prind-tech-logo.png"
 
     return (
       <React.Fragment>
         <div className="logo-container">
-          <a href="https://buildingim.com" target="_blank" rel="noopener noreferrer"><img src={logoLocation} alt="BuildingIM logo"></img></a>
+          <a href="https://prind.tech" target="_blank" rel="noopener noreferrer"><img src={logoLocation} alt="Prin-D Technology logo"></img></a>
         </div>
         <div className="welcome-text-heading">
           { Strings.WELCOME_TEXT }
@@ -130,14 +129,13 @@ class ResetPassword extends Component {
     }
     return (
       <div className='auth-form' style={style}>
-        <h3>{Strings.YOUR_PASSWORD_WAS_SUCCESSFULLY_CHANGED}</h3>
+        <h3 style={{ marginBottom: "1em" }}>{Strings.YOUR_PASSWORD_WAS_SUCCESSFULLY_CHANGED}</h3>
         <input
           id="submit"
           type="submit"
           value={ Strings.ACCOUNT_BACK_TO_LOGIN_PAGE }
           className="submit-button"
-          onClick={() => {this.props.history.push(Endpoints.SIGNINPAGE)}}/>
-        />
+          onClick={() => {this.props.history.push(Endpoints.SIGNINPAGE)}} />
       </div>
     )
   }
@@ -206,7 +204,7 @@ class ResetPassword extends Component {
           this.state.state === ComponentStates.PASSWORD_RESET_SUCCESS ? this.getSuccess() : null
         }
         {
-          this.state.state === ComponentStates.PASSWORD_RESET_FAILED ? this.getResetPasswordFailed(): null
+          this.state.state === ComponentStates.PASSWORD_RESET_FAILED ? this.getResetPasswordFailed() : null
         }
       </React.Fragment>
     )

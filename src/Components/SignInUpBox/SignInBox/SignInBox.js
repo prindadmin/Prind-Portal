@@ -93,7 +93,7 @@ export class SignInBox extends Component {
     return (
       <React.Fragment>
         <div className="logo-container">
-          <a href="https://buildingim.com" target="_blank" rel="noopener noreferrer"><img src={logoLocation} alt="BuildingIM logo"></img></a>
+          <a href="https://prind.tech" target="_blank" rel="noopener noreferrer"><img src={logoLocation} alt="Prin-D Technology logo"></img></a>
         </div>
         <div className="welcome-text-heading">
           { Strings.WELCOME_TEXT }
@@ -101,7 +101,7 @@ export class SignInBox extends Component {
         <div className="welcome-text-body">
           { Strings.PLEASE_SIGN_IN_TEXT }
         </div>
-      </React.Fragment>
+      </React.Fragment> 
     )
   }
 
