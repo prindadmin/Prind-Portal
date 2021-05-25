@@ -80,11 +80,12 @@ class ConfirmEmailPage extends Component {
 
   resolveRegister = (username) => {
     //console.log("confirmation succeeded")
+    if (process.env.REACT_APP_IS_PROCORE === "True") {
+      window.open(encodeURI(process.env.REACT_APP_PROCORE_LOGIN_URL), "_self")
+      return;
+    }
     this.props.history.push({
       pathname: Endpoints.SIGNINPAGE,
-      state: {
-        username
-      }
     })
   }
 

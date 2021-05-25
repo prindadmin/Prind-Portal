@@ -131,6 +131,14 @@ export class ForgotPasswordBox extends Component {
     )
   }
 
+  onPasswordSuccessClick = () => {
+    if (process.env.REACT_APP_IS_PROCORE === "True") {
+      window.open(encodeURI(process.env.REACT_APP_PROCORE_LOGIN_URL), "_self")
+      return;
+    }
+    this.props.toggleVisibleForm(States.SIGNINFORM)
+  }
+
   getForgotPasswordSuccess = () => {
     return (
       <div className='password-request-success'>
@@ -141,7 +149,7 @@ export class ForgotPasswordBox extends Component {
           type="submit"
           value={ Strings.ACCOUNT_BACK_TO_LOGIN_PAGE }
           className="submit-button"
-          onClick={() => this.props.toggleVisibleForm(States.SIGNINFORM)}/>
+          onClick={() => this.onPasswordSuccessClick()}/>
       </div>
     )
   }
