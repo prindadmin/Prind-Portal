@@ -842,9 +842,6 @@ background-color: var(--field-element-grey);
   to {max-height: 441px;}
 }
 
-#file-upload-element {
-  overflow-y: hidden;
-}
 
 #file-upload-element .file-upload-element-container,
 #drop-down-element .drop-down-element-container,

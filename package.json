@@ -76,7 +76,7 @@
     "deploy:all-dev": "npm run deploy:dev-cdm && npm run deploy:dev-dhsf",
     "deploy:all-staging": "npm run deploy:staging-cdm && npm run deploy:staging-dhsf",
     "deploy:all-production": "npm run deploy:production-cdm && npm run deploy:production-dhsf",
-    "deploy:all": "npm run deploy:all-dhsf && npm run deploy:all-cdm",
+    "deploy:all": "npm run deploy:all-dhsf && npm run deploy:all-cdm && npm run deploy:all-procore",
     "deploy:dev-procore": "npm run build:dev-procore && npm run s3Sync:dev-procore && npm run cfInvalidate:dev-procore",
     "deploy:production-procore": "npm run build:production-procore && npm run s3Sync:production-procore && npm run cfInvalidate:production-procore",
     "deploy:all-procore": "npm run deploy:dev-procore && npm run deploy:production-procore",
