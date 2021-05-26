@@ -23,6 +23,12 @@ const PROJECTTEMPLATES = [
         name: "Government Soft Landings (2016)",
         selected: false,
         current: true
+      },
+      {
+        id: "blah",
+        name: "Crap Golden Thread Definition",
+        selected: false,
+        current: true
       }
     ]
   },
@@ -33,6 +39,12 @@ const PROJECTTEMPLATES = [
       {
         id: "icms2019",
         name: "International Construction Measurement Standards (2019)",
+        selected: false,
+        current: true
+      },
+      {
+        id: "iso196502019",
+        name: "ISO 19650",
         selected: false,
         current: true
       }
