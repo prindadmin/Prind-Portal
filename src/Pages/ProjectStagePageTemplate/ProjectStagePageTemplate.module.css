@@ -1,0 +1,22 @@
+
+.contentContainer {
+  box-sizing: border-box;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: var(--standard-padding);
+  margin-bottom: var(--footer-height);
+}
+
+.customFieldButtonHolder {
+  padding-bottom: var(--standard-padding);
+  margin-bottom: var(--footer-height);
+  width: 100%;
+}
+
+.customFieldButtonHolder button {
+  width: 100%;
+  max-width: 400px;
+}

@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import classes from './ProjectStagePageTemplate.module.css'
 
 import ReactGA from 'react-ga';
 
 import ProjectLoading from '../../Components/Common/ProjectLoading'
 import * as ComponentState from './States'
+import * as Endpoints from '../../Data/Endpoints'
 
 import CreateCustomFieldPopover from '../../Components/Common/CreateCustomFieldPopover'
 import NoProjectSelected from '../../Components/Common/NoProjectSelected'
@@ -106,7 +108,7 @@ export class StagePage extends Component {
 
   getCreateFieldButton = () => {
     return (
-      <div className="create-custom-field-button-container">
+      <div className={classes.customFieldButtonHolder}>
         <Button
           id='create-field-button'
           text={Strings.CREATE_CUSTOM_FIELD}
@@ -153,11 +155,10 @@ export class StagePage extends Component {
     */
 
     const textObject = `PAGE_TITLES_AND_DESCRIPTIONS_${process.env.REACT_APP_PORTAL}`
-
     const { title, description } = Strings[textObject][pageName]
 
     return(
-      <div className='page-content'>
+      <div className={classes.contentContainer}>
         <div className='page-title'>
           <h1>{title}</h1>
           <span>{description}</span>
@@ -171,7 +172,7 @@ export class StagePage extends Component {
               singleField={singleField} />
           })
         }
-        {this.getCreateFieldButton()}
+        { this.props.location.pathname.startsWith(Endpoints.REFURBISHMENTPAGE) ? null : this.getCreateFieldButton() }
       </div>
     )
   }

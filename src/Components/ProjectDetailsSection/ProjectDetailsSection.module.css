@@ -4,6 +4,7 @@
   flex-direction: column;
   width: 100%;
   max-width: var(--max-width-component-thin);
+  margin: auto;
 }
 
 .formContainer {

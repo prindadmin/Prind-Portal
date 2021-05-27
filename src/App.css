@@ -111,22 +111,10 @@ hr {
     width: 90%;
 }
 
-
 .content-with-sidebar {
   display: flex;
   flex-direction: row;
   margin: auto 0px;
-}
-
-
-.create-custom-field-button-container {
-  margin-bottom: 2em;
-  width: 100%;
-}
-
-.create-custom-field-button-container button {
-  width: 100%;
-  max-width: 400px;
 }
 
 .horizontal-line {

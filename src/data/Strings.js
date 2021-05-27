@@ -105,7 +105,7 @@ export const PAGE_TITLES_AND_DESCRIPTIONS_CDM2015Project = {
   },
   design: {
     title: "Project Design",
-    description: "The Appointed design team will be collectively identifying hazards and considering mitagations for potential risks.  The assessment of risks will be complied into a single Design Risk Register.",
+    description: "The appointed design team will be collectively identifying hazards and considering mitagations for potential risks.  The assessment of risks will be complied into a single Design Risk Register.",
   },
   tender: {
     title: "Project Tender",
@@ -125,7 +125,7 @@ export const PAGE_TITLES_AND_DESCRIPTIONS_CDM2015Project = {
   },
   refurbishment: {
     title: "Project Refurbishment",
-    description: "Time for refurbishment? If your project will last more that 30 days, start new project.  Demolition? - look forward to helping you.\n\nStart new project",
+    description: "Time for refurbishment? If your project will last more that 30 days, start new project.",
   },
 }
 
