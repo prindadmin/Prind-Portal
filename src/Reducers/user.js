@@ -137,10 +137,11 @@ export const authoriseWithProcoreServer = ( parameters, resolve, reject ) => {
   }
 }
 
-export const checkServerAccessToProcore = ( resolve, reject ) => {
+export const checkServerAccessToProcore = ( parameters, resolve, reject ) => {
   return {
     type: Actions.USER_CHECK_SERVER_PROCORE_ACCESS_REQUESTED,
     payload: {
+      parameters,
       resolve,
       reject,
     }

@@ -1,7 +1,7 @@
 import { Auth } from 'aws-amplify';
 import API from '@aws-amplify/api';
 
-async function CheckServerAccessToProcore() {
+async function CheckServerAccessToProcore(parameters) {
 
   // Removed so that procore uses real function
   /*
@@ -21,6 +21,7 @@ async function CheckServerAccessToProcore() {
   // Fixed values for the API request
   const apiName = process.env.REACT_APP_API_NAME
   const path = `/user/checkprocoreaccess`
+  //const path = `/user/checkprocoreaccess/${parameters.companyId}/${parameters.projectId}`
   const myInit = {
     headers: { Authorization: identityToken },
     response: false,

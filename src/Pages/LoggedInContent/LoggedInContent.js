@@ -89,7 +89,13 @@ export class LoggedInContent extends Component {
   }
 
   procoreMount = () => {
-    this.props.checkServerAccessToProcore(this.onServerHasAccess, this.onServerDoesNotHaveAccess)
+    // Get the parameters from procore to check access with
+    const parameters = {
+      companyId: this.props.procore.companyId,
+      projectId: this.props.procore.projectId
+    }
+    // Send the request to the server
+    this.props.checkServerAccessToProcore(parameters, this.onServerHasAccess, this.onServerDoesNotHaveAccess)
   }
 
   webPortalMount = () => {

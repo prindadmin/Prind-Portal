@@ -381,7 +381,8 @@ export function * checkServerAccessToProcore (action) {
         fetching: true,
       }
     })
-    yield call(Dispatchers.checkServerAccessToProcore)
+    const result = yield call(Dispatchers.checkServerAccessToProcore, action.payload.parameters)
+    console.log(result)
     // Post-fetch update to store
     yield put({
       type: Actions.USER_SET_STATE,
