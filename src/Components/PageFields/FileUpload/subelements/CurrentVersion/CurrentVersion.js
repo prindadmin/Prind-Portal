@@ -25,6 +25,7 @@ export class CurrentVersion extends Component {
       uploadName: PropTypes.string.isRequired,
       uploadedDateTime: PropTypes.number.isRequired,
       uploadedBy: PropTypes.string.isRequired,
+      hash: PropTypes.string.isRequired,
       proofLink: PropTypes.string,
     }),
     projects: PropTypes.shape({
@@ -115,7 +116,7 @@ export class CurrentVersion extends Component {
             !details.proofLink ?
               Strings.NO_PROOF_AVAILABLE :
               <div id='proof-link-container' onClick={e => e.stopPropagation()}>
-                <a id="proof-link" href={details.proofLink} target="_blank" rel="noopener noreferrer">{Strings.LINK_TO_PROOF}</a>
+                <a id="proof-link" href={`${process.env.REACT_APP_FACTOM_EXPLORER_SITE}/entries/${details.proofLink.split("/").slice(-1)[0]}`} target="_blank" rel="noopener noreferrer">{Strings.LINK_TO_PROOF}</a>
               </div>
           }
         </div>
