@@ -20,8 +20,8 @@ async function CheckServerAccessToProcore(parameters) {
 
   // Fixed values for the API request
   const apiName = process.env.REACT_APP_API_NAME
-  const path = `/user/checkprocoreaccess`
-  //const path = `/user/checkprocoreaccess/${parameters.companyId}/${parameters.projectId}`
+  //const path = `/user/checkprocoreaccess`
+  const path = `/user/checkprocoreaccess/${parameters.companyId}/${parameters.projectId}`
   const myInit = {
     headers: { Authorization: identityToken },
     response: false,

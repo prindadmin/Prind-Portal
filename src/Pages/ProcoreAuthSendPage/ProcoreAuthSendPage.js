@@ -35,6 +35,10 @@ class ProcoreAuthSendPage extends Component {
     history: PropTypes.shape({
       push: PropTypes.func.isRequired,
     }).isRequired,
+    procore: PropTypes.shape({
+      companyId: PropTypes.string.isRequired,
+      projectId: PropTypes.string.isRequired
+    }).isRequired,
     authoriseWithProcoreServer: PropTypes.func.isRequired
   }
 
@@ -81,6 +85,8 @@ class ProcoreAuthSendPage extends Component {
     var parameters = { ...payload }
     //console.log(this.props.user.currentRouteObject)
     parameters.redirectURI = process.env.REACT_APP_PROCORE_REDIRECT_URL
+    parameters.companyId = this.props.procore.companyId
+    parameters.projectId = this.props.procore.projectId
     //console.log(parameters)
     this.props.authoriseWithProcoreServer(parameters, this.onServerGrantedAccess, this.onServerNotGrantedAccess)
   }

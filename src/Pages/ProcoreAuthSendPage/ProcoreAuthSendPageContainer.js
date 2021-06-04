@@ -7,7 +7,8 @@ import ProcoreAuthSendPage from './ProcoreAuthSendPage'
 
 const mapStatetoProps = state => {
   return {
-    user: state.user
+    user: state.user,
+    procore: state.procore
   }
 }
 
