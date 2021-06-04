@@ -1,5 +1,6 @@
 import React, { Component, lazy, Suspense } from 'react'
 import PropTypes from 'prop-types'
+import classes from './LoggedInContent.module.css'
 
 // Data
 import PAGENAMES from '../../Data/pageNames'
@@ -89,6 +90,9 @@ export class LoggedInContent extends Component {
   }
 
   procoreMount = () => {
+    this.setState({
+      state: PageStates.LOADING
+    })
     // Get the parameters from procore to check access with
     const parameters = {
       companyId: this.props.procore.companyId,
@@ -164,10 +168,11 @@ export class LoggedInContent extends Component {
 
   onServerDoesNotHaveAccess = () => {
     this.setState({
-      state: PageStates.QUIESCENT
+      state: PageStates.ERROR_NO_PROCORE_ACCESS
     })
     // Push the page that will open the auth window
-    this.props.history.push(Endpoints.PROCOREAUTHSENDPAGE)
+    // TODO: Show button here rather than automatically requesting again as this causes a boot loop!
+    //this.props.history.push(Endpoints.PROCOREAUTHSENDPAGE)
   }
 
   getProjectDataForSpecificStage = () => {
@@ -322,22 +327,46 @@ export class LoggedInContent extends Component {
     this.props.resetSite()
   }
 
+  getProcoreAuthErrorPresentation = () => {
+    return (
+      <div className={classes.errorPresentation}>
+        { Strings.ERROR_GETTING_PROCORE_ACCESS }
+        <input
+          id='procore-authorise-button'
+          type='submit'
+          value={ Strings.AUTHORISE_WITH_PROCORE }
+          className={classes.procoreButton}
+          onClick={(e) => this.procoreMount() }
+          />
+      </div>
+    )
+  }
+
+  getWholePageContent = () => {
+    return (
+      <ErrorBoundary onRetry={this.onRetry}>
+        <Suspense fallback={this.loadingPlaceholder()}>
+          <LayoutBody noFoundationsBannerShowing={!this.props.user.details.foundationsID}>
+            {
+              this.state.width > MOBILE_WIDTH_BREAKPOINT ? <SideBar {...this.props} /> : <SideBarMobile {...this.props} />
+            }
+            {
+              this.state.width > MOBILE_WIDTH_BREAKPOINT ? this.getDesktopContent() : this.getMobileContent()
+            }
+          </LayoutBody>
+        </Suspense>
+      </ErrorBoundary>
+    )
+  }
+
+
   render () {
     return (
       <div id='logged-in-content-container' className='full-width row'>
         <HeaderBar companyName='Prin-D' openProjectSelector={this.shouldOpenProjectSelector()}/>
-        <ErrorBoundary onRetry={this.onRetry}>
-          <Suspense fallback={this.loadingPlaceholder()}>
-            <LayoutBody noFoundationsBannerShowing={!this.props.user.details.foundationsID}>
-              {
-                this.state.width > MOBILE_WIDTH_BREAKPOINT ? <SideBar {...this.props} /> : <SideBarMobile {...this.props} />
-              }
-              {
-                this.state.width > MOBILE_WIDTH_BREAKPOINT ? this.getDesktopContent() : this.getMobileContent()
-              }
-            </LayoutBody>
-          </Suspense>
-        </ErrorBoundary>
+          {
+            this.state.state === PageStates.ERROR_NO_PROCORE_ACCESS ? this.getProcoreAuthErrorPresentation() : this.getWholePageContent()
+          }
         <Footer />
       </div>
     )

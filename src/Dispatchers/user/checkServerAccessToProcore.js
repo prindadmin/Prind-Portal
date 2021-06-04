@@ -32,7 +32,7 @@ async function CheckServerAccessToProcore(parameters) {
     API.get(apiName, path, myInit)
       .then(response => {
         //console.log(response)
-        if (response.Error) {
+        if (response.Error  || response.errorMessage) {
           reject(response)
           return;
         }
