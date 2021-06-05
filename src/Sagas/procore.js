@@ -38,6 +38,7 @@ export function * getProjectFilesAndFolders (action) {
       }
     })
     const result = yield call(Dispatchers.getProjectFilesAndFolders, action.payload.payload)
+    console.log(result)
     yield put({
       type: Actions.PROCORE_SET_STATE,
       payload: {
@@ -51,6 +52,7 @@ export function * getProjectFilesAndFolders (action) {
     }
   }
   catch (error) {
+    console.error(error)
     yield put({
       type: Actions.PROCORE_SET_STATE,
         payload: {

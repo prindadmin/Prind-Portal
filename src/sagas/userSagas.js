@@ -391,7 +391,7 @@ export function * checkServerAccessToProcore (action) {
       }
     })
     if (action.payload.resolve !== undefined) {
-      action.payload.resolve()
+      action.payload.resolve(result)
     }
   }
   catch (error) {
@@ -403,7 +403,7 @@ export function * checkServerAccessToProcore (action) {
         }
     })
     if (action.payload.reject !== undefined) {
-      action.payload.reject()
+      action.payload.reject(error)
     }
   }
 }

@@ -93,10 +93,18 @@ export class LoggedInContent extends Component {
     this.setState({
       state: PageStates.LOADING
     })
+    const { companyId, projectId } = this.props.procore
+    if (companyId === "" || projectId === "") {
+      console.warn("Either companyId or ProjectId is missing")
+      this.setState({
+        state: PageStates.ERROR_NO_PROCORE_ACCESS
+      })
+      return;
+    }
     // Get the parameters from procore to check access with
     const parameters = {
-      companyId: this.props.procore.companyId,
-      projectId: this.props.procore.projectId
+      companyId,
+      projectId
     }
     // Send the request to the server
     this.props.checkServerAccessToProcore(parameters, this.onServerHasAccess, this.onServerDoesNotHaveAccess)
@@ -161,12 +169,14 @@ export class LoggedInContent extends Component {
   }
 
   onServerHasAccess = () => {
+    console.log("Server has access to this project")
     this.setState({
       state: PageStates.QUIESCENT
     })
   }
 
-  onServerDoesNotHaveAccess = () => {
+  onServerDoesNotHaveAccess = (error) => {
+    console.log(error)
     this.setState({
       state: PageStates.ERROR_NO_PROCORE_ACCESS
     })
