@@ -3,15 +3,6 @@ import API from '@aws-amplify/api';
 
 async function CheckServerAccessToProcore(parameters) {
 
-  // Removed so that procore uses real function
-  /*
-  if (process.env.REACT_APP_IS_PROCORE) {
-    return new Promise((resolve, reject) => {
-      resolve()
-    })
-  }
-  */
-
   // Get the current session and the identity jwtToken
   const identityToken = await Auth.currentSession()
     .then(credentials => {
