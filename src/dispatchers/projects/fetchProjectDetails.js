@@ -26,7 +26,7 @@ const PROJECTTEMPLATES = [
       },
       {
         id: "blah",
-        name: "Crap Golden Thread Definition",
+        name: "Golden Thread Definition",
         selected: false,
         current: true
       }

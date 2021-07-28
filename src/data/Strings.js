@@ -139,7 +139,7 @@ export const PAGE_TITLES_AND_DESCRIPTIONS_DHSFProject = {
 
 
 export const EDIT_PROJECT_DETAILS = "Edit Project Details"
-export const EDIT_PROJECT_TEMPLATES = "Edit Project Templates"
+export const EDIT_PROJECT_TEMPLATES = "Select Project Standards"
 
 export const PROJECT_DIRECTORY_TITLE = "Project Directory"
 
