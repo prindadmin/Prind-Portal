@@ -44,7 +44,8 @@
   --project-selector-grid-columns: 1fr;
   --popup-header-height: 80px;
   --popup-footer-height: 80px;
-  --document-table-grid-columns: 1fr
+  --document-table-grid-columns: 1fr;
+  --max-page-field-width: 1140px;
 }
 
 @media (min-width: 1024px) {
@@ -813,10 +814,18 @@ background-color: var(--field-element-grey);
 #long-text-element,
 #git-text-element {
   width: 100%;
-  max-width: 1140px;
+  max-width: var(--max-page-field-width);
   margin-bottom: 40px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: var(--standard-border-radius);
+}
+
+#file-upload-element:last-of-type,
+#drop-down-element:last-of-type,
+#calendar-picker-element:last-of-type,
+#long-text-element:last-of-type,
+#git-text-element:last-of-type {
+  margin-bottom: 0;
 }
 
 /* The animation code */

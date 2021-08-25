@@ -1,0 +1,31 @@
+
+.standard {
+  margin-bottom: var(--standard-margin);
+}
+
+.heading {
+  background-color: #ddd;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  z-index: 100;
+}
+
+.fields {
+  max-height: 0;
+  opacity: 0;
+  transition: all .3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  padding: var(--standard-padding);
+  border-radius: 0 0 var(--standard-border-radius) var(--standard-border-radius);
+  width: 100%;
+  overflow: hidden;
+  background-color: #f0f0f0;
+}

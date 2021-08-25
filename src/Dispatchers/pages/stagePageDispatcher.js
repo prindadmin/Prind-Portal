@@ -59,20 +59,22 @@ const testPageDataFetch = [
     "fields": [
       {
         "description": "Description for Custom Field 1",
+        "default": false,
         "editable": true,
         "fieldDetails": {},
         "id": "CustomField_1",
         "title": "File field",
-        "type": "gitText",
+        "type": "file",
         "fileDetails": []
       },
       {
         "description": "Description for Custom Field 2",
+        "default": false,
         "editable": true,
         "fieldDetails": {},
         "id": "CustomField_2",
         "title": "File field",
-        "type": "gitText",
+        "type": "file",
         "fileDetails": []
       }
     ]

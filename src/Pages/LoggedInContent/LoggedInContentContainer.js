@@ -11,7 +11,8 @@ const mapStatetoProps = state => {
   return {
     projects: state.projects,
     procore: state.procore,
-    user: state.user
+    user: state.user,
+    pageContent: state.pageContent
   }
 }
 

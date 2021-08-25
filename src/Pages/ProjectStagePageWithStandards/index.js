@@ -1,0 +1,3 @@
+import ProjectStagePageWithStandardsContainer from './ProjectStagePageWithStandardsContainer'
+
+export default ProjectStagePageWithStandardsContainer

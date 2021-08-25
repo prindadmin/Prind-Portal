@@ -20,6 +20,7 @@ import HeaderBar from '../../Components/HeaderBar'
 import ProjectDetailsPage from '../ProjectDetailsPage'
 import ProjectTeamPage from '../ProjectTeamPage'
 import ProjectStagePage from '../ProjectStagePageTemplate'
+import ProjectStagePageWithStandards from '../ProjectStagePageWithStandards'
 import FoundationsPage from '../FoundationsPage'
 import NewProjectPage from '../NewProjectPage'
 import ProfilePage from '../ProfilePage'
@@ -253,6 +254,11 @@ export class LoggedInContent extends Component {
       }
       return null
     })
+
+    // TODO: Remove this and make it the defacto return for stage pages
+    if (pageName === 'test') {
+      return <ProjectStagePageWithStandards pageName={pageName} projectId={projectName} currentPageContent={this.props.pageContent[pageName]}/>
+    }
 
     if (stagePageNames.includes(pageName)) {
       return <ProjectStagePage pageName={pageName} projectId={projectName}/>
