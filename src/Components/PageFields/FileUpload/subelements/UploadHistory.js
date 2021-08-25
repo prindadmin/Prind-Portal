@@ -6,6 +6,7 @@ import Spinner from '../../../Common/LoadingSpinnerCSS'
 
 import * as Strings from '../../../../Data/Strings'
 
+// TODO: When there are more than 9 versions (e.g version 10, 11, 12), the order of the versions is wrong because it calcs order based on string no numeric value
 // TODO: FUTURE: Do something with error text state string
 export class UploadHistory extends Component {
   static propTypes = {

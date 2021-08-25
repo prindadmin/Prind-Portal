@@ -7,7 +7,7 @@ const apiName = process.env.REACT_APP_API_NAME
 const testPageDataFetch = [
   {
     "id": "TestStandard1v1",
-    "name": "Test Standard 1",
+    "name": "CDM 2015",
     "fields": [
       {
         "default": true,
@@ -31,7 +31,7 @@ const testPageDataFetch = [
   },
   {
     "id": "TestStandard2v1",
-    "name": "Test Standard 2",
+    "name": "NESMA Process",
     "fields": [
       {
         "default": true,

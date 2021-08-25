@@ -98,7 +98,7 @@ export class CurrentVersion extends Component {
     })
   }
 
-
+  // TODO: URGENT: This link to the proof isn't working but the link in the versions tab is
   getDetailsTable = () => {
     const { details } = this.props
     const uploadedDate = !details.uploadedDateTime ? undefined : new Date(details.uploadedDateTime * 1000)
