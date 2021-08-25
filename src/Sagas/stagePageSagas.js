@@ -24,15 +24,31 @@ export function * getPageContent (action) {
       }
     })
     const result = yield call(StagePageDispatchers.getPageContent, projectID, pageName )
-    yield put({
-      type: Actions.PAGE_SET_STATE,
-      payload: {
-        [pageName]: {
-          ...defaultState,
-          fields: result.body,
+
+    // If this is the test page (i.e. not a real page)
+    if (pageName === "test") {
+      yield put({
+        type: Actions.PAGE_SET_STATE,
+        payload: {
+          [pageName]: {
+            fetching: false,
+            error: null,
+            standards: result.body,
+          }
         }
-      }
-    })
+      })
+    } else {
+      yield put({
+        type: Actions.PAGE_SET_STATE,
+        payload: {
+          [pageName]: {
+            ...defaultState,
+            fields: result.body,
+          }
+        }
+      })
+    }
+    // if there is a resolve function passed, call it
     if (action.payload.resolve !== undefined) {
       action.payload.resolve(result)
     }

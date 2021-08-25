@@ -127,6 +127,10 @@ export const PAGE_TITLES_AND_DESCRIPTIONS_CDM2015Project = {
     title: "Project Refurbishment",
     description: "Time for refurbishment? If your project will last more that 30 days, start new project.",
   },
+  test: {
+    title: "Test Page",
+    description: "Testing page for the website",
+  },
 }
 
 

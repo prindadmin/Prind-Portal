@@ -18,6 +18,7 @@ export const CONSTRUCTIONPAGE = '/construction'
 export const HANDOVERPAGE = '/handover'
 export const OCCUPATIONPAGE = '/occupation'
 export const REFURBISHMENTPAGE = '/refurbishment'
+export const TESTPAGE = '/test'
 
 export const PROFILEPAGE = '/profile'
 export const FOUNDATIONSPAGE = '/foundations'

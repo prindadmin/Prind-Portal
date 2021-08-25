@@ -185,6 +185,9 @@ class App extends Component{
               <PrivateRoute path={Endpoints.REFURBISHMENTPAGE} component={LoggedInContent} />
               <PrivateRoute path={`${Endpoints.REFURBISHMENTPAGE}/:id`} component={LoggedInContent} />
 
+              <PrivateRoute path={Endpoints.TESTPAGE} component={LoggedInContent} />
+              <PrivateRoute path={`${Endpoints.TESTPAGE}/:id`} component={LoggedInContent} />
+
               <PrivateRoute path={Endpoints.NEWPROJECTPAGE} component={LoggedInContent} />
 
               <PrivateRoute path={Endpoints.PROFILEPAGE} component={LoggedInContent} />

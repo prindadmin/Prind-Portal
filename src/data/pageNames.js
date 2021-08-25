@@ -62,6 +62,12 @@ const PAGENAMES = {
       name: "Refurbishment",
       linkTo: Endpoints.REFURBISHMENTPAGE,
       isStagePage: true,
+    },
+    test: {
+      id: "stageTest",
+      name: "Test",
+      linkTo: Endpoints.TESTPAGE,
+      isStagePage: true,
     }
   },
   DHSFProject: {
@@ -83,6 +89,12 @@ const PAGENAMES = {
       linkTo: Endpoints.OCCUPATIONPAGE,
       isStagePage: true,
     },
+    test: {
+      id: "stageTest",
+      name: "Test",
+      linkTo: Endpoints.TESTPAGE,
+      isStagePage: true,
+    }
   },
   CommonPages: [
     'newproject', 'profile', 'foundations', 'team', 'project'

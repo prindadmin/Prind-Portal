@@ -31,6 +31,9 @@ const defaultState = {
   refurbishment: {
     ...defaultPageState
   },
+  test: {
+    ...defaultPageState
+  },
 }
 
 export const init = () => {
