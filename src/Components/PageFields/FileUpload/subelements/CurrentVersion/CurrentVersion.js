@@ -101,6 +101,10 @@ export class CurrentVersion extends Component {
   getDetailsTable = () => {
     const { details } = this.props
     const uploadedDate = !details.uploadedDateTime ? undefined : new Date(details.uploadedDateTime * 1000)
+
+    const endOfProofLink = details.proofLink.split("/").slice(-1)[0]
+    const entryHash = endOfProofLink.replace("entry?hash=", "")
+
     return (
       <div className='details-table'>
         <h4>{Strings.FILE_NAME}</h4>
@@ -115,7 +119,7 @@ export class CurrentVersion extends Component {
             !details.proofLink ?
               Strings.NO_PROOF_AVAILABLE :
               <div id='proof-link-container' onClick={e => e.stopPropagation()}>
-                <a id="proof-link" href={`${process.env.REACT_APP_FACTOM_EXPLORER_SITE}/entries/${details.proofLink.split("/").slice(-1)[0]}`} target="_blank" rel="noopener noreferrer">{Strings.LINK_TO_PROOF}</a>
+                <a id="proof-link" href={`${process.env.REACT_APP_FACTOM_EXPLORER_SITE}/entries/${entryHash}`} target="_blank" rel="noopener noreferrer">{Strings.LINK_TO_PROOF}</a>
               </div>
           }
         </div>

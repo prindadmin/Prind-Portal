@@ -57,13 +57,19 @@ export class UploadHistory extends Component {
 
 
   getProof = (proofLink) => {
+
     if (proofLink === undefined) {
       return(
         Strings.NO_PROOF_AVAILABLE
       )
     } else {
+
+
+      const endOfProofLink = proofLink.split("/").slice(-1)[0]
+      const entryHash = endOfProofLink.replace("entry?hash=", "")
+
       return(
-        <a id='proof-link' target="_blank" rel="noopener noreferrer" onClick={e => this.openProof(e)} href={`${process.env.REACT_APP_FACTOM_EXPLORER_SITE}/entries/${proofLink.split("/").slice(-1)[0]}`}>{Strings.LINK_TO_PROOF}</a>
+        <a id='proof-link' target="_blank" rel="noopener noreferrer" onClick={e => this.openProof(e)} href={`${process.env.REACT_APP_FACTOM_EXPLORER_SITE}/entries/${entryHash}`}>{Strings.LINK_TO_PROOF}</a>
       )
     }
   }

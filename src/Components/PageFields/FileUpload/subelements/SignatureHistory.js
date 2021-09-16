@@ -29,11 +29,14 @@ export class SignatureHistory extends Component {
           details.map((signature, index) => {
             const signatureDateTime = !signature.signatureDateTime ? undefined : new Date(signature.signatureDateTime * 1000)
 
+            const endOfProofLink = signature.proofLink.split("/").slice(-1)[0]
+            const entryHash = endOfProofLink.replace("entry?hash=", "")
+
             return (
               <React.Fragment key={index}>
                 <div key={`signer-${index}`}>{signature.signerName}</div>
                 <div key={`signatureDateTime-${index}`}>{!signatureDateTime ? Strings.ERROR_DATE_UNAVAILABLE : signatureDateTime.toLocaleString()}</div>
-                <div key={`proofLink-${index}`}><a href={`${process.env.REACT_APP_FACTOM_EXPLORER_SITE}/entries/${signature.proofLink.split("/").slice(-1)[0]}`} target="_blank" rel="noopener noreferrer">{Strings.LINK_TO_PROOF}</a></div>
+                <div key={`proofLink-${index}`}><a href={`${process.env.REACT_APP_FACTOM_EXPLORER_SITE}/entries/${entryHash}`} target="_blank" rel="noopener noreferrer">{Strings.LINK_TO_PROOF}</a></div>
               </React.Fragment>
             )
           })

@@ -64,6 +64,9 @@ export class FileDetailPopover extends Component {
 
     const { chosenFileDetails } = this.props
 
+    const endOfProofLink = chosenFileDetails.proofLink.split("/").slice(-1)[0]
+    const entryHash = endOfProofLink.replace("entry?hash=", "")
+
     return (
       <div className="file-details">
         <div className='row'>
@@ -82,7 +85,7 @@ export class FileDetailPopover extends Component {
               chosenFileDetails.proofLink === undefined ?
                 Strings.NO_PROOF_AVAILABLE :
                 <div id='proof-link-container' onClick={e => e.stopPropagation()}>
-                  <a href={`${process.env.REACT_APP_FACTOM_EXPLORER_SITE}/entries/${chosenFileDetails.proofLink.split("/").slice(-1)[0]}`} target="_blank" rel="noopener noreferrer">{Strings.LINK_TO_PROOF}</a>
+                  <a href={`${process.env.REACT_APP_FACTOM_EXPLORER_SITE}/entries/${entryHash}`} target="_blank" rel="noopener noreferrer">{Strings.LINK_TO_PROOF}</a>
                 </div>
             }
           </div>
