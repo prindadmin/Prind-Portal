@@ -82,7 +82,7 @@ export class FileDetailPopover extends Component {
               chosenFileDetails.proofLink === undefined ?
                 Strings.NO_PROOF_AVAILABLE :
                 <div id='proof-link-container' onClick={e => e.stopPropagation()}>
-                  <a href={chosenFileDetails.proofLink} target="_blank" rel="noopener noreferrer">{Strings.LINK_TO_PROOF}</a>
+                  <a href={`${process.env.REACT_APP_FACTOM_EXPLORER_SITE}/entries/${chosenFileDetails.proofLink.split("/").slice(-1)[0]}`} target="_blank" rel="noopener noreferrer">{Strings.LINK_TO_PROOF}</a>
                 </div>
             }
           </div>

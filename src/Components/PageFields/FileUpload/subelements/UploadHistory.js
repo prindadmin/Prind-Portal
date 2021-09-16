@@ -63,7 +63,7 @@ export class UploadHistory extends Component {
       )
     } else {
       return(
-        <a id='proof-link' target="_blank" rel="noopener noreferrer" onClick={e => this.openProof(e)} href={proofLink}>{Strings.LINK_TO_PROOF}</a>
+        <a id='proof-link' target="_blank" rel="noopener noreferrer" onClick={e => this.openProof(e)} href={`${process.env.REACT_APP_FACTOM_EXPLORER_SITE}/entries/${proofLink.split("/").slice(-1)[0]}`}>{Strings.LINK_TO_PROOF}</a>
       )
     }
   }
