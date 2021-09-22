@@ -83,6 +83,7 @@ exports[`should render 1`] = `
             }
           >
             <LoggedInContent
+              checkServerAccessToProcore={[Function]}
               getProjectDetails={[Function]}
               getProjectMembers={[Function]}
               history={
@@ -121,6 +122,56 @@ exports[`should render 1`] = `
                   "url": "/",
                 }
               }
+              pageContent={
+                Object {
+                  "construction": Object {
+                    "error": null,
+                    "fetching": false,
+                    "fields": Array [],
+                  },
+                  "design": Object {
+                    "error": null,
+                    "fetching": false,
+                    "fields": Array [],
+                  },
+                  "feasibility": Object {
+                    "error": null,
+                    "fetching": false,
+                    "fields": Array [],
+                  },
+                  "handover": Object {
+                    "error": null,
+                    "fetching": false,
+                    "fields": Array [],
+                  },
+                  "inception": Object {
+                    "error": null,
+                    "fetching": false,
+                    "fields": Array [],
+                  },
+                  "occupation": Object {
+                    "error": null,
+                    "fetching": false,
+                    "fields": Array [],
+                  },
+                  "refurbishment": Object {
+                    "error": null,
+                    "fetching": false,
+                    "fields": Array [],
+                  },
+                  "tender": Object {
+                    "error": null,
+                    "fetching": false,
+                    "fields": Array [],
+                  },
+                }
+              }
+              procore={
+                Object {
+                  "companyId": "TestCompanyId",
+                  "projectId": "TestProjectId",
+                }
+              }
               projects={
                 Object {
                   "accessibleProjects": Object {
@@ -139,12 +190,1115 @@ exports[`should render 1`] = `
                   "memberList": Array [],
                 }
               }
+              resetSite={[Function]}
               saveProjectID={[Function]}
+              user={
+                Object {
+                  "currentRoute": undefined,
+                  "details": Object {},
+                  "fetching": false,
+                  "history": Object {},
+                  "projectInvitations": Array [],
+                  "projectS3Token": Object {},
+                  "signatureRequests": Array [],
+                  "userS3Token": Object {},
+                }
+              }
             >
               <div
                 className="full-width row"
                 id="logged-in-content-container"
-              />
+              >
+                <withRouter(Connect(HeaderBar))
+                  companyName="Prin-D"
+                  openProjectSelector={true}
+                >
+                  <Connect(HeaderBar)
+                    companyName="Prin-D"
+                    history={
+                      Object {
+                        "action": "POP",
+                        "block": [Function],
+                        "createHref": [Function],
+                        "go": [Function],
+                        "goBack": [Function],
+                        "goForward": [Function],
+                        "length": 1,
+                        "listen": [Function],
+                        "location": Object {
+                          "hash": "",
+                          "pathname": "/",
+                          "search": "",
+                          "state": undefined,
+                        },
+                        "push": [Function],
+                        "replace": [Function],
+                      }
+                    }
+                    location={
+                      Object {
+                        "hash": "",
+                        "pathname": "/",
+                        "search": "",
+                        "state": undefined,
+                      }
+                    }
+                    match={
+                      Object {
+                        "isExact": true,
+                        "params": Object {},
+                        "path": "/",
+                        "url": "/",
+                      }
+                    }
+                    openProjectSelector={true}
+                  >
+                    <HeaderBar
+                      companyName="Prin-D"
+                      getUserDetails={[Function]}
+                      history={
+                        Object {
+                          "action": "POP",
+                          "block": [Function],
+                          "createHref": [Function],
+                          "go": [Function],
+                          "goBack": [Function],
+                          "goForward": [Function],
+                          "length": 1,
+                          "listen": [Function],
+                          "location": Object {
+                            "hash": "",
+                            "pathname": "/",
+                            "search": "",
+                            "state": undefined,
+                          },
+                          "push": [Function],
+                          "replace": [Function],
+                        }
+                      }
+                      location={
+                        Object {
+                          "hash": "",
+                          "pathname": "/",
+                          "search": "",
+                          "state": undefined,
+                        }
+                      }
+                      match={
+                        Object {
+                          "isExact": true,
+                          "params": Object {},
+                          "path": "/",
+                          "url": "/",
+                        }
+                      }
+                      openProjectSelector={true}
+                      projects={
+                        Object {
+                          "accessibleProjects": Object {
+                            "projectCreator": Array [],
+                            "projectRole": Array [],
+                          },
+                          "chosenProject": Object {
+                            "projectId": "",
+                            "projectName": "Please select a project",
+                            "projectType": "",
+                          },
+                          "downloadURL": "",
+                          "error": null,
+                          "fetching": false,
+                          "fileDetails": Object {},
+                          "memberList": Array [],
+                        }
+                      }
+                      user={
+                        Object {
+                          "currentRoute": undefined,
+                          "details": Object {},
+                          "fetching": false,
+                          "history": Object {},
+                          "projectInvitations": Array [],
+                          "projectS3Token": Object {},
+                          "signatureRequests": Array [],
+                          "userS3Token": Object {},
+                        }
+                      }
+                    >
+                      <div
+                        className="headerBar"
+                        id="header-bar"
+                      >
+                        <div
+                          className="content"
+                        >
+                          <withRouter(Connect(ProjectSelector))
+                            openProjectSelector={true}
+                          >
+                            <Connect(ProjectSelector)
+                              history={
+                                Object {
+                                  "action": "POP",
+                                  "block": [Function],
+                                  "createHref": [Function],
+                                  "go": [Function],
+                                  "goBack": [Function],
+                                  "goForward": [Function],
+                                  "length": 1,
+                                  "listen": [Function],
+                                  "location": Object {
+                                    "hash": "",
+                                    "pathname": "/",
+                                    "search": "",
+                                    "state": undefined,
+                                  },
+                                  "push": [Function],
+                                  "replace": [Function],
+                                }
+                              }
+                              location={
+                                Object {
+                                  "hash": "",
+                                  "pathname": "/",
+                                  "search": "",
+                                  "state": undefined,
+                                }
+                              }
+                              match={
+                                Object {
+                                  "isExact": true,
+                                  "params": Object {},
+                                  "path": "/",
+                                  "url": "/",
+                                }
+                              }
+                              openProjectSelector={true}
+                            >
+                              <ProjectSelector
+                                history={
+                                  Object {
+                                    "action": "POP",
+                                    "block": [Function],
+                                    "createHref": [Function],
+                                    "go": [Function],
+                                    "goBack": [Function],
+                                    "goForward": [Function],
+                                    "length": 1,
+                                    "listen": [Function],
+                                    "location": Object {
+                                      "hash": "",
+                                      "pathname": "/",
+                                      "search": "",
+                                      "state": undefined,
+                                    },
+                                    "push": [Function],
+                                    "replace": [Function],
+                                  }
+                                }
+                                location={
+                                  Object {
+                                    "hash": "",
+                                    "pathname": "/",
+                                    "search": "",
+                                    "state": undefined,
+                                  }
+                                }
+                                match={
+                                  Object {
+                                    "isExact": true,
+                                    "params": Object {},
+                                    "path": "/",
+                                    "url": "/",
+                                  }
+                                }
+                                openProjectSelector={true}
+                                projects={
+                                  Object {
+                                    "accessibleProjects": Object {
+                                      "projectCreator": Array [],
+                                      "projectRole": Array [],
+                                    },
+                                    "chosenProject": Object {
+                                      "projectId": "",
+                                      "projectName": "Please select a project",
+                                      "projectType": "",
+                                    },
+                                    "downloadURL": "",
+                                    "error": null,
+                                    "fetching": false,
+                                    "fileDetails": Object {},
+                                    "memberList": Array [],
+                                  }
+                                }
+                              >
+                                <div
+                                  className="project-selector"
+                                >
+                                  <button
+                                    className="search-field"
+                                    id="search-field"
+                                    onClick={[Function]}
+                                  >
+                                    <span>
+                                      <FontAwesomeIcon
+                                        border={false}
+                                        className=""
+                                        fixedWidth={false}
+                                        flip={null}
+                                        icon={
+                                          Object {
+                                            "icon": Array [
+                                              512,
+                                              512,
+                                              Array [],
+                                              "f009",
+                                              "M296 32h192c13.255 0 24 10.745 24 24v160c0 13.255-10.745 24-24 24H296c-13.255 0-24-10.745-24-24V56c0-13.255 10.745-24 24-24zm-80 0H24C10.745 32 0 42.745 0 56v160c0 13.255 10.745 24 24 24h192c13.255 0 24-10.745 24-24V56c0-13.255-10.745-24-24-24zM0 296v160c0 13.255 10.745 24 24 24h192c13.255 0 24-10.745 24-24V296c0-13.255-10.745-24-24-24H24c-13.255 0-24 10.745-24 24zm296 184h192c13.255 0 24-10.745 24-24V296c0-13.255-10.745-24-24-24H296c-13.255 0-24 10.745-24 24v160c0 13.255 10.745 24 24 24z",
+                                            ],
+                                            "iconName": "th-large",
+                                            "prefix": "fas",
+                                          }
+                                        }
+                                        inverse={false}
+                                        listItem={false}
+                                        mask={null}
+                                        pull={null}
+                                        pulse={false}
+                                        rotation={null}
+                                        size="1x"
+                                        spin={false}
+                                        swapOpacity={false}
+                                        symbol={false}
+                                        title=""
+                                        transform={null}
+                                      >
+                                        <svg
+                                          aria-hidden="true"
+                                          className="svg-inline--fa fa-th-large fa-w-16 fa-1x "
+                                          data-icon="th-large"
+                                          data-prefix="fas"
+                                          focusable="false"
+                                          role="img"
+                                          style={Object {}}
+                                          viewBox="0 0 512 512"
+                                          xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                          <path
+                                            d="M296 32h192c13.255 0 24 10.745 24 24v160c0 13.255-10.745 24-24 24H296c-13.255 0-24-10.745-24-24V56c0-13.255 10.745-24 24-24zm-80 0H24C10.745 32 0 42.745 0 56v160c0 13.255 10.745 24 24 24h192c13.255 0 24-10.745 24-24V56c0-13.255-10.745-24-24-24zM0 296v160c0 13.255 10.745 24 24 24h192c13.255 0 24-10.745 24-24V296c0-13.255-10.745-24-24-24H24c-13.255 0-24 10.745-24 24zm296 184h192c13.255 0 24-10.745 24-24V296c0-13.255-10.745-24-24-24H296c-13.255 0-24 10.745-24 24v160c0 13.255 10.745 24 24 24z"
+                                            fill="currentColor"
+                                            style={Object {}}
+                                          />
+                                        </svg>
+                                      </FontAwesomeIcon>
+                                      Please select a project
+                                    </span>
+                                  </button>
+                                  <PopOverHandler>
+                                    <Portal
+                                      containerInfo={
+                                        <div
+                                          id="popOver"
+                                        >
+                                          <div
+                                            id="popup-greyer"
+                                          >
+                                            <div
+                                              id="popup-box"
+                                            >
+                                              <div
+                                                class="projects-pop-up-header"
+                                              >
+                                                <h2>
+                                                  Select a project
+                                                </h2>
+                                              </div>
+                                              <div
+                                                class="project-scroll-box"
+                                              >
+                                                <div
+                                                  class="projects-loading-container fill"
+                                                >
+                                                  <div
+                                                    class="loading-spinner"
+                                                  >
+                                                    <div
+                                                      class="bp3-spinner bp3-intent-danger"
+                                                      role="progressbar"
+                                                    >
+                                                      <div
+                                                        class="bp3-spinner-animation"
+                                                      >
+                                                        <svg
+                                                          height="100"
+                                                          stroke-width="4.00"
+                                                          viewBox="3.00 3.00 94.00 94.00"
+                                                          width="100"
+                                                        >
+                                                          <path
+                                                            class="bp3-spinner-track"
+                                                            d="M 50,50 m 0,-45 a 45,45 0 1 1 0,90 a 45,45 0 1 1 0,-90"
+                                                          />
+                                                          <path
+                                                            class="bp3-spinner-head"
+                                                            d="M 50,50 m 0,-45 a 45,45 0 1 1 0,90 a 45,45 0 1 1 0,-90"
+                                                            pathLength="280"
+                                                            stroke-dasharray="280 280"
+                                                            stroke-dashoffset="210"
+                                                          />
+                                                        </svg>
+                                                      </div>
+                                                    </div>
+                                                    <p>
+                                                      Loading projects, please wait...
+                                                    </p>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div
+                                                class="projects-pop-up-footer"
+                                              >
+                                                <button
+                                                  class="bp3-button bp3-active bp3-large bp3-intent-success"
+                                                  type="button"
+                                                >
+                                                  <span
+                                                    class="bp3-icon bp3-icon-cube-add"
+                                                    icon="cube-add"
+                                                  >
+                                                    <svg
+                                                      data-icon="cube-add"
+                                                      height="16"
+                                                      viewBox="0 0 16 16"
+                                                      width="16"
+                                                    >
+                                                      <desc>
+                                                        cube-add
+                                                      </desc>
+                                                      <path
+                                                        d="M14 2h1a1 1 0 010 2h-1v1a1 1 0 01-2 0V4h-1a1 1 0 010-2h1V1a1 1 0 012 0v1zM9.136.65a3.001 3.001 0 00.992 5.222c.018.058.038.115.059.172L8 7.41 1.806 3.54 7.504.283a1 1 0 01.992 0l.64.365zM15 7.235v4.184a1 1 0 01-.504.868L8.5 15.714V8.277l2.187-1.367A2.994 2.994 0 0013 8c.768 0 1.47-.289 2-.764zM1.056 4.25L7.5 8.277v7.437l-5.996-3.426A1 1 0 011 11.42V4.58a1 1 0 01.056-.33z"
+                                                        fill-rule="evenodd"
+                                                      />
+                                                    </svg>
+                                                  </span>
+                                                  <span
+                                                    class="bp3-button-text"
+                                                  >
+                                                    Create a new project
+                                                  </span>
+                                                </button>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      }
+                                    >
+                                      <withRouter(Connect(ProjectSelectorPopUp))
+                                        onCancelPopup={[Function]}
+                                      >
+                                        <Connect(ProjectSelectorPopUp)
+                                          history={
+                                            Object {
+                                              "action": "POP",
+                                              "block": [Function],
+                                              "createHref": [Function],
+                                              "go": [Function],
+                                              "goBack": [Function],
+                                              "goForward": [Function],
+                                              "length": 1,
+                                              "listen": [Function],
+                                              "location": Object {
+                                                "hash": "",
+                                                "pathname": "/",
+                                                "search": "",
+                                                "state": undefined,
+                                              },
+                                              "push": [Function],
+                                              "replace": [Function],
+                                            }
+                                          }
+                                          location={
+                                            Object {
+                                              "hash": "",
+                                              "pathname": "/",
+                                              "search": "",
+                                              "state": undefined,
+                                            }
+                                          }
+                                          match={
+                                            Object {
+                                              "isExact": true,
+                                              "params": Object {},
+                                              "path": "/",
+                                              "url": "/",
+                                            }
+                                          }
+                                          onCancelPopup={[Function]}
+                                        >
+                                          <ProjectSelectorPopUp
+                                            auth={
+                                              Object {
+                                                "hasChangedPassword": "AUTH_UNKNOWN",
+                                                "hasSentCode": "AUTH_UNKNOWN",
+                                                "hasSignedUp": "AUTH_UNKNOWN",
+                                                "isConfirmed": "AUTH_UNKNOWN",
+                                                "isSignedIn": "AUTH_UNKNOWN",
+                                                "passwordResetRequired": "AUTH_UNKNOWN",
+                                              }
+                                            }
+                                            getAccessibleProjects={[Function]}
+                                            history={
+                                              Object {
+                                                "action": "POP",
+                                                "block": [Function],
+                                                "createHref": [Function],
+                                                "go": [Function],
+                                                "goBack": [Function],
+                                                "goForward": [Function],
+                                                "length": 1,
+                                                "listen": [Function],
+                                                "location": Object {
+                                                  "hash": "",
+                                                  "pathname": "/",
+                                                  "search": "",
+                                                  "state": undefined,
+                                                },
+                                                "push": [Function],
+                                                "replace": [Function],
+                                              }
+                                            }
+                                            location={
+                                              Object {
+                                                "hash": "",
+                                                "pathname": "/",
+                                                "search": "",
+                                                "state": undefined,
+                                              }
+                                            }
+                                            match={
+                                              Object {
+                                                "isExact": true,
+                                                "params": Object {},
+                                                "path": "/",
+                                                "url": "/",
+                                              }
+                                            }
+                                            onCancelPopup={[Function]}
+                                            projects={
+                                              Object {
+                                                "accessibleProjects": Object {
+                                                  "projectCreator": Array [],
+                                                  "projectRole": Array [],
+                                                },
+                                                "chosenProject": Object {
+                                                  "projectId": "",
+                                                  "projectName": "Please select a project",
+                                                  "projectType": "",
+                                                },
+                                                "downloadURL": "",
+                                                "error": null,
+                                                "fetching": false,
+                                                "fileDetails": Object {},
+                                                "memberList": Array [],
+                                              }
+                                            }
+                                            resetChosenProject={[Function]}
+                                            updateChosenProject={[Function]}
+                                          >
+                                            <div
+                                              id="popup-greyer"
+                                              onClick={[Function]}
+                                            >
+                                              <div
+                                                id="popup-box"
+                                                onClick={[Function]}
+                                              >
+                                                <div
+                                                  className="projects-pop-up-header"
+                                                >
+                                                  <h2>
+                                                    Select a project
+                                                  </h2>
+                                                </div>
+                                                <div
+                                                  className="project-scroll-box"
+                                                >
+                                                  <div
+                                                    className="projects-loading-container fill"
+                                                  >
+                                                    <div
+                                                      className="loading-spinner"
+                                                    >
+                                                      <Blueprint3.Spinner
+                                                        intent="danger"
+                                                        size={100}
+                                                      >
+                                                        <div
+                                                          className="bp3-spinner bp3-intent-danger"
+                                                          role="progressbar"
+                                                        >
+                                                          <div
+                                                            className="bp3-spinner-animation"
+                                                          >
+                                                            <svg
+                                                              height={100}
+                                                              strokeWidth="4.00"
+                                                              viewBox="3.00 3.00 94.00 94.00"
+                                                              width={100}
+                                                            >
+                                                              <path
+                                                                className="bp3-spinner-track"
+                                                                d="M 50,50 m 0,-45 a 45,45 0 1 1 0,90 a 45,45 0 1 1 0,-90"
+                                                              />
+                                                              <path
+                                                                className="bp3-spinner-head"
+                                                                d="M 50,50 m 0,-45 a 45,45 0 1 1 0,90 a 45,45 0 1 1 0,-90"
+                                                                pathLength={280}
+                                                                strokeDasharray="280 280"
+                                                                strokeDashoffset={210}
+                                                              />
+                                                            </svg>
+                                                          </div>
+                                                        </div>
+                                                      </Blueprint3.Spinner>
+                                                      <p>
+                                                        Loading projects, please wait...
+                                                      </p>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <div
+                                                  className="projects-pop-up-footer"
+                                                >
+                                                  <Blueprint3.Button
+                                                    active={true}
+                                                    icon="cube-add"
+                                                    intent="success"
+                                                    large={true}
+                                                    onClick={[Function]}
+                                                    text="Create a new project"
+                                                  >
+                                                    <button
+                                                      className="bp3-button bp3-active bp3-large bp3-intent-success"
+                                                      onBlur={[Function]}
+                                                      onClick={[Function]}
+                                                      onKeyDown={[Function]}
+                                                      onKeyUp={[Function]}
+                                                      type="button"
+                                                    >
+                                                      <Blueprint3.Icon
+                                                        icon="cube-add"
+                                                        key="leftIcon"
+                                                      >
+                                                        <span
+                                                          className="bp3-icon bp3-icon-cube-add"
+                                                          icon="cube-add"
+                                                        >
+                                                          <svg
+                                                            data-icon="cube-add"
+                                                            height={16}
+                                                            viewBox="0 0 16 16"
+                                                            width={16}
+                                                          >
+                                                            <desc>
+                                                              cube-add
+                                                            </desc>
+                                                            <path
+                                                              d="M14 2h1a1 1 0 010 2h-1v1a1 1 0 01-2 0V4h-1a1 1 0 010-2h1V1a1 1 0 012 0v1zM9.136.65a3.001 3.001 0 00.992 5.222c.018.058.038.115.059.172L8 7.41 1.806 3.54 7.504.283a1 1 0 01.992 0l.64.365zM15 7.235v4.184a1 1 0 01-.504.868L8.5 15.714V8.277l2.187-1.367A2.994 2.994 0 0013 8c.768 0 1.47-.289 2-.764zM1.056 4.25L7.5 8.277v7.437l-5.996-3.426A1 1 0 011 11.42V4.58a1 1 0 01.056-.33z"
+                                                              fillRule="evenodd"
+                                                              key="0"
+                                                            />
+                                                          </svg>
+                                                        </span>
+                                                      </Blueprint3.Icon>
+                                                      <span
+                                                        className="bp3-button-text"
+                                                        key="text"
+                                                      >
+                                                        Create a new project
+                                                      </span>
+                                                      <Blueprint3.Icon
+                                                        key="rightIcon"
+                                                      />
+                                                    </button>
+                                                  </Blueprint3.Button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </ProjectSelectorPopUp>
+                                        </Connect(ProjectSelectorPopUp)>
+                                      </withRouter(Connect(ProjectSelectorPopUp))>
+                                    </Portal>
+                                  </PopOverHandler>
+                                </div>
+                              </ProjectSelector>
+                            </Connect(ProjectSelector)>
+                          </withRouter(Connect(ProjectSelector))>
+                          <div
+                            className="nav-links"
+                          >
+                            <div
+                              className="menuContainer"
+                            >
+                              <withRouter(Connect(UserMenu))>
+                                <Connect(UserMenu)
+                                  history={
+                                    Object {
+                                      "action": "POP",
+                                      "block": [Function],
+                                      "createHref": [Function],
+                                      "go": [Function],
+                                      "goBack": [Function],
+                                      "goForward": [Function],
+                                      "length": 1,
+                                      "listen": [Function],
+                                      "location": Object {
+                                        "hash": "",
+                                        "pathname": "/",
+                                        "search": "",
+                                        "state": undefined,
+                                      },
+                                      "push": [Function],
+                                      "replace": [Function],
+                                    }
+                                  }
+                                  location={
+                                    Object {
+                                      "hash": "",
+                                      "pathname": "/",
+                                      "search": "",
+                                      "state": undefined,
+                                    }
+                                  }
+                                  match={
+                                    Object {
+                                      "isExact": true,
+                                      "params": Object {},
+                                      "path": "/",
+                                      "url": "/",
+                                    }
+                                  }
+                                >
+                                  <UserMenu
+                                    getUserProjectInvitations={[Function]}
+                                    getUserSignatureRequests={[Function]}
+                                    history={
+                                      Object {
+                                        "action": "POP",
+                                        "block": [Function],
+                                        "createHref": [Function],
+                                        "go": [Function],
+                                        "goBack": [Function],
+                                        "goForward": [Function],
+                                        "length": 1,
+                                        "listen": [Function],
+                                        "location": Object {
+                                          "hash": "",
+                                          "pathname": "/",
+                                          "search": "",
+                                          "state": undefined,
+                                        },
+                                        "push": [Function],
+                                        "replace": [Function],
+                                      }
+                                    }
+                                    location={
+                                      Object {
+                                        "hash": "",
+                                        "pathname": "/",
+                                        "search": "",
+                                        "state": undefined,
+                                      }
+                                    }
+                                    match={
+                                      Object {
+                                        "isExact": true,
+                                        "params": Object {},
+                                        "path": "/",
+                                        "url": "/",
+                                      }
+                                    }
+                                    signOut={[Function]}
+                                    user={
+                                      Object {
+                                        "currentRoute": undefined,
+                                        "details": Object {},
+                                        "fetching": false,
+                                        "history": Object {},
+                                        "projectInvitations": Array [],
+                                        "projectS3Token": Object {},
+                                        "signatureRequests": Array [],
+                                        "userS3Token": Object {},
+                                      }
+                                    }
+                                  >
+                                    <Blueprint3.Popover
+                                      boundary="scrollParent"
+                                      captureDismiss={false}
+                                      content={
+                                        <Blueprint3.Menu>
+                                          <Blueprint3.MenuItem
+                                            disabled={false}
+                                            multiline={false}
+                                            onClick={[Function]}
+                                            popoverProps={Object {}}
+                                            shouldDismissPopover={true}
+                                            text="Profile"
+                                          />
+                                          <Blueprint3.MenuItem
+                                            disabled={false}
+                                            multiline={false}
+                                            onClick={[Function]}
+                                            popoverProps={Object {}}
+                                            shouldDismissPopover={true}
+                                            text="Sign Out"
+                                          />
+                                        </Blueprint3.Menu>
+                                      }
+                                      defaultIsOpen={false}
+                                      disabled={false}
+                                      fill={false}
+                                      hasBackdrop={false}
+                                      hoverCloseDelay={300}
+                                      hoverOpenDelay={150}
+                                      id="popover"
+                                      inheritDarkTheme={true}
+                                      interactionKind="click"
+                                      minimal={false}
+                                      modifiers={Object {}}
+                                      openOnTargetFocus={true}
+                                      position="bottom"
+                                      targetTagName="span"
+                                      transitionDuration={300}
+                                      usePortal={true}
+                                      wrapperTagName="span"
+                                    >
+                                      <Manager>
+                                        <span
+                                          className="bp3-popover-wrapper"
+                                        >
+                                          <Reference
+                                            innerRef={[Function]}
+                                          >
+                                            <InnerReference
+                                              innerRef={[Function]}
+                                              setReferenceNode={[Function]}
+                                            >
+                                              <Blueprint3.ResizeSensor
+                                                onResize={[Function]}
+                                              >
+                                                <span
+                                                  aria-haspopup="true"
+                                                  className="bp3-popover-target"
+                                                  onClick={[Function]}
+                                                >
+                                                  <span
+                                                    className=""
+                                                  >
+                                                    <Blueprint3.Icon
+                                                      icon={
+                                                        <FontAwesomeIcon
+                                                          border={false}
+                                                          className=""
+                                                          fixedWidth={false}
+                                                          flip={null}
+                                                          icon={
+                                                            Object {
+                                                              "icon": Array [
+                                                                496,
+                                                                512,
+                                                                Array [],
+                                                                "f2bd",
+                                                                "M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 96c48.6 0 88 39.4 88 88s-39.4 88-88 88-88-39.4-88-88 39.4-88 88-88zm0 344c-58.7 0-111.3-26.6-146.5-68.2 18.8-35.4 55.6-59.8 98.5-59.8 2.4 0 4.8.4 7.1 1.1 13 4.2 26.6 6.9 40.9 6.9 14.3 0 28-2.7 40.9-6.9 2.3-.7 4.7-1.1 7.1-1.1 42.9 0 79.7 24.4 98.5 59.8C359.3 421.4 306.7 448 248 448z",
+                                                              ],
+                                                              "iconName": "user-circle",
+                                                              "prefix": "fas",
+                                                            }
+                                                          }
+                                                          inverse={false}
+                                                          listItem={false}
+                                                          mask={null}
+                                                          pull={null}
+                                                          pulse={false}
+                                                          rotation={null}
+                                                          size="3x"
+                                                          spin={false}
+                                                          swapOpacity={false}
+                                                          symbol={false}
+                                                          title=""
+                                                          transform={null}
+                                                        />
+                                                      }
+                                                    >
+                                                      <FontAwesomeIcon
+                                                        border={false}
+                                                        className=""
+                                                        fixedWidth={false}
+                                                        flip={null}
+                                                        icon={
+                                                          Object {
+                                                            "icon": Array [
+                                                              496,
+                                                              512,
+                                                              Array [],
+                                                              "f2bd",
+                                                              "M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 96c48.6 0 88 39.4 88 88s-39.4 88-88 88-88-39.4-88-88 39.4-88 88-88zm0 344c-58.7 0-111.3-26.6-146.5-68.2 18.8-35.4 55.6-59.8 98.5-59.8 2.4 0 4.8.4 7.1 1.1 13 4.2 26.6 6.9 40.9 6.9 14.3 0 28-2.7 40.9-6.9 2.3-.7 4.7-1.1 7.1-1.1 42.9 0 79.7 24.4 98.5 59.8C359.3 421.4 306.7 448 248 448z",
+                                                            ],
+                                                            "iconName": "user-circle",
+                                                            "prefix": "fas",
+                                                          }
+                                                        }
+                                                        inverse={false}
+                                                        listItem={false}
+                                                        mask={null}
+                                                        pull={null}
+                                                        pulse={false}
+                                                        rotation={null}
+                                                        size="3x"
+                                                        spin={false}
+                                                        swapOpacity={false}
+                                                        symbol={false}
+                                                        title=""
+                                                        transform={null}
+                                                      >
+                                                        <svg
+                                                          aria-hidden="true"
+                                                          className="svg-inline--fa fa-user-circle fa-w-16 fa-3x "
+                                                          data-icon="user-circle"
+                                                          data-prefix="fas"
+                                                          focusable="false"
+                                                          role="img"
+                                                          style={Object {}}
+                                                          viewBox="0 0 496 512"
+                                                          xmlns="http://www.w3.org/2000/svg"
+                                                        >
+                                                          <path
+                                                            d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 96c48.6 0 88 39.4 88 88s-39.4 88-88 88-88-39.4-88-88 39.4-88 88-88zm0 344c-58.7 0-111.3-26.6-146.5-68.2 18.8-35.4 55.6-59.8 98.5-59.8 2.4 0 4.8.4 7.1 1.1 13 4.2 26.6 6.9 40.9 6.9 14.3 0 28-2.7 40.9-6.9 2.3-.7 4.7-1.1 7.1-1.1 42.9 0 79.7 24.4 98.5 59.8C359.3 421.4 306.7 448 248 448z"
+                                                            fill="currentColor"
+                                                            style={Object {}}
+                                                          />
+                                                        </svg>
+                                                      </FontAwesomeIcon>
+                                                    </Blueprint3.Icon>
+                                                  </span>
+                                                </span>
+                                              </Blueprint3.ResizeSensor>
+                                            </InnerReference>
+                                          </Reference>
+                                          <Blueprint3.Overlay
+                                            autoFocus={true}
+                                            backdropClassName="bp3-popover-backdrop"
+                                            backdropProps={Object {}}
+                                            canEscapeKeyClose={true}
+                                            canOutsideClickClose={true}
+                                            enforceFocus={true}
+                                            hasBackdrop={false}
+                                            isOpen={false}
+                                            lazy={true}
+                                            onClose={[Function]}
+                                            transitionDuration={300}
+                                            transitionName="bp3-popover"
+                                            usePortal={true}
+                                          />
+                                        </span>
+                                      </Manager>
+                                    </Blueprint3.Popover>
+                                  </UserMenu>
+                                </Connect(UserMenu)>
+                              </withRouter(Connect(UserMenu))>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <withRouter(Connect(NoFoundationsIDBanner))>
+                        <Connect(NoFoundationsIDBanner)
+                          history={
+                            Object {
+                              "action": "POP",
+                              "block": [Function],
+                              "createHref": [Function],
+                              "go": [Function],
+                              "goBack": [Function],
+                              "goForward": [Function],
+                              "length": 1,
+                              "listen": [Function],
+                              "location": Object {
+                                "hash": "",
+                                "pathname": "/",
+                                "search": "",
+                                "state": undefined,
+                              },
+                              "push": [Function],
+                              "replace": [Function],
+                            }
+                          }
+                          location={
+                            Object {
+                              "hash": "",
+                              "pathname": "/",
+                              "search": "",
+                              "state": undefined,
+                            }
+                          }
+                          match={
+                            Object {
+                              "isExact": true,
+                              "params": Object {},
+                              "path": "/",
+                              "url": "/",
+                            }
+                          }
+                        >
+                          <NoFoundationsIDBanner
+                            history={
+                              Object {
+                                "action": "POP",
+                                "block": [Function],
+                                "createHref": [Function],
+                                "go": [Function],
+                                "goBack": [Function],
+                                "goForward": [Function],
+                                "length": 1,
+                                "listen": [Function],
+                                "location": Object {
+                                  "hash": "",
+                                  "pathname": "/",
+                                  "search": "",
+                                  "state": undefined,
+                                },
+                                "push": [Function],
+                                "replace": [Function],
+                              }
+                            }
+                            location={
+                              Object {
+                                "hash": "",
+                                "pathname": "/",
+                                "search": "",
+                                "state": undefined,
+                              }
+                            }
+                            match={
+                              Object {
+                                "isExact": true,
+                                "params": Object {},
+                                "path": "/",
+                                "url": "/",
+                              }
+                            }
+                            user={
+                              Object {
+                                "currentRoute": undefined,
+                                "details": Object {},
+                                "fetching": false,
+                                "history": Object {},
+                                "projectInvitations": Array [],
+                                "projectS3Token": Object {},
+                                "signatureRequests": Array [],
+                                "userS3Token": Object {},
+                              }
+                            }
+                          >
+                            <div
+                              className="row full-width"
+                              id="no-foundations-id-banner"
+                              onClick={[Function]}
+                            >
+                              <p>
+                                You do not have a Foundations ID and therefore cannot sign any documents.  Click here to find out more...
+                              </p>
+                            </div>
+                          </NoFoundationsIDBanner>
+                        </Connect(NoFoundationsIDBanner)>
+                      </withRouter(Connect(NoFoundationsIDBanner))>
+                    </HeaderBar>
+                  </Connect(HeaderBar)>
+                </withRouter(Connect(HeaderBar))>
+                <ErrorBoundary
+                  onRetry={[Function]}
+                >
+                  <Suspense
+                    fallback={
+                      <ProjectLoading
+                        text="Loading page data"
+                      />
+                    }
+                  >
+                    <ProjectLoading
+                      text="Loading page data"
+                    >
+                      <div
+                        className="project-loading-container fill"
+                      >
+                        <div
+                          className="project-loading"
+                        >
+                          <div
+                            className="section-spinner"
+                          >
+                            <Spinner
+                              size={100}
+                            >
+                              <div
+                                className="lds-ring"
+                                style={
+                                  Object {
+                                    "borderWidth": 12.5,
+                                    "height": 100,
+                                    "margin": 12.5,
+                                    "width": 100,
+                                  }
+                                }
+                              >
+                                <div
+                                  style={
+                                    Object {
+                                      "borderWidth": 12.5,
+                                      "height": 100,
+                                      "margin": 12.5,
+                                      "width": 100,
+                                    }
+                                  }
+                                />
+                                <div
+                                  style={
+                                    Object {
+                                      "borderWidth": 12.5,
+                                      "height": 100,
+                                      "margin": 12.5,
+                                      "width": 100,
+                                    }
+                                  }
+                                />
+                                <div
+                                  style={
+                                    Object {
+                                      "borderWidth": 12.5,
+                                      "height": 100,
+                                      "margin": 12.5,
+                                      "width": 100,
+                                    }
+                                  }
+                                />
+                                <div
+                                  style={
+                                    Object {
+                                      "borderWidth": 12.5,
+                                      "height": 100,
+                                      "margin": 12.5,
+                                      "width": 100,
+                                    }
+                                  }
+                                />
+                              </div>
+                            </Spinner>
+                          </div>
+                          <div>
+                            Loading page data
+                          </div>
+                        </div>
+                      </div>
+                    </ProjectLoading>
+                  </Suspense>
+                </ErrorBoundary>
+              </div>
             </LoggedInContent>
           </Connect(LoggedInContent)>
         </withRouter(Connect(LoggedInContent))>

@@ -19,8 +19,11 @@ export class ProcoreBreadcrumbs extends Component {
       folderHistory: PropTypes.shape({
         chain: PropTypes.array.isRequired
       }).isRequired,
-    }).isRequired
+    }).isRequired,
+    updateCurrentFolder: PropTypes.func.isRequired,
+    updateFolderHistory: PropTypes.func.isRequired
   }
+
 
   onCrumbClick = (folder) => {
     //var folderHistory = this.props.procore.folderHistory

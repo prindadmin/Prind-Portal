@@ -2,7 +2,30 @@
 
 exports[`ProcoreBreadcrumbs - Render and click a crumb 1`] = `
 <div
-  id="breadcrumb-table"
+  className="breadcrumbTable"
+>
+  <div
+    className="crumb"
+    id="root"
+    key="root-crumb"
+    onClick={[Function]}
+  >
+    &gt; root
+  </div>
+  <div
+    className="crumb"
+    id="TestFolder"
+    key="0"
+    onClick={[Function]}
+  >
+    &gt; Test Folder
+  </div>
+</div>
+`;
+
+exports[`ProcoreBreadcrumbs - Render and click a crumb 2`] = `
+<div
+  className="breadcrumbTable"
 >
   <div
     className="crumb"
@@ -25,7 +48,7 @@ exports[`ProcoreBreadcrumbs - Render and click a crumb 1`] = `
 
 exports[`ProcoreBreadcrumbs - Render and click root crumb 1`] = `
 <div
-  id="breadcrumb-table"
+  className="breadcrumbTable"
 >
   <div
     className="crumb"
