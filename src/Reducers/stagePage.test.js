@@ -35,6 +35,9 @@ let defaultState = {
   refurbishment: {
     ...defaultPageState
   },
+  test: {
+    ...defaultPageState
+  },
 }
 
 

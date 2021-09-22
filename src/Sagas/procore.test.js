@@ -9,10 +9,14 @@ import * as ProcoreDispatchers from '../Dispatchers/Procore'
 
 const defaultState = {
   fetching: false,
-  companyId: "28592",
+  companyId: "",
   companyName: "",
-  projectId: "1234",
+  projectId: "",
   projectName: "",
+  currentFolder: null,
+  folderHistory: {
+    chain: []
+  },
   folders: [],
   files: [],
   error: {},
@@ -30,6 +34,13 @@ const dispatcherError = new Error({
 
 const mockResolve = jest.fn()
 const mockReject = jest.fn()
+
+
+beforeAll(() => {
+  process.env = Object.assign(process.env, {
+    REACT_APP_STAGE: "",
+  });
+})
 
 // https://github.com/antoinejaussoin/redux-saga-testing
 // You start by overidding the "it" function of your test framework, in this scope.
@@ -209,16 +220,6 @@ it('test all procore sagas - init', (result) => {
 });
 it('test all procore sagas - getProjectFilesAndFolders', (result) => {
   var expectedResult = fork(takeLatest, Actions.PROCORE_GET_PROJECT_FILES_AND_FOLDERS, ProcoreSagas.getProjectFilesAndFolders);
-  result.payload.fn = takeLatest
-  expect(result).toEqual(expectedResult);
-});
-it('test all procore sagas - anchorProjectFile', (result) => {
-  var expectedResult = fork(takeLatest, Actions.PROCORE_REQUEST_DOCUMENT_ANCHOR, ProcoreSagas.anchorProjectFile);
-  result.payload.fn = takeLatest
-  expect(result).toEqual(expectedResult);
-});
-it('test all procore sagas - signProjectFile', (result) => {
-  var expectedResult = fork(takeLatest, Actions.PROCORE_REQUEST_DOCUMENT_SELF_SIGNATURE, ProcoreSagas.signProjectFile);
   result.payload.fn = takeLatest
   expect(result).toEqual(expectedResult);
 });

@@ -8,7 +8,7 @@ exports[`Project Stage Template Page - Should render and click create field butt
     className="page-content-section"
   >
     <div
-      className="page-content"
+      className="contentContainer"
     >
       <div
         className="page-title"
@@ -53,7 +53,7 @@ exports[`Project Stage Template Page - Should render and click create field butt
         }
       />
       <div
-        className="create-custom-field-button-container"
+        className="customFieldButtonHolder"
       >
         <Blueprint3.Button
           id="create-field-button"
@@ -80,7 +80,7 @@ exports[`Project Stage Template Page - Should render and click create field butt
     className="page-content-section"
   >
     <div
-      className="page-content"
+      className="contentContainer"
     >
       <div
         className="page-title"
@@ -125,7 +125,7 @@ exports[`Project Stage Template Page - Should render and click create field butt
         }
       />
       <div
-        className="create-custom-field-button-container"
+        className="customFieldButtonHolder"
       >
         <Blueprint3.Button
           id="create-field-button"
@@ -152,7 +152,7 @@ exports[`Project Stage Template Page - Should render and click create field butt
     className="page-content-section"
   >
     <div
-      className="page-content"
+      className="contentContainer"
     >
       <div
         className="page-title"
@@ -197,7 +197,7 @@ exports[`Project Stage Template Page - Should render and click create field butt
         }
       />
       <div
-        className="create-custom-field-button-container"
+        className="customFieldButtonHolder"
       >
         <Blueprint3.Button
           id="create-field-button"
@@ -219,7 +219,7 @@ exports[`Project Stage Template Page - Should render with a project 1`] = `
     className="page-content-section"
   >
     <div
-      className="page-content"
+      className="contentContainer"
     >
       <div
         className="page-title"
@@ -264,7 +264,7 @@ exports[`Project Stage Template Page - Should render with a project 1`] = `
         }
       />
       <div
-        className="create-custom-field-button-container"
+        className="customFieldButtonHolder"
       >
         <Blueprint3.Button
           id="create-field-button"
@@ -286,7 +286,7 @@ exports[`Project Stage Template Page - Should render with a project but no field
     className="page-content-section"
   >
     <div
-      className="page-content"
+      className="contentContainer"
     >
       <div
         className="page-title"
@@ -299,7 +299,7 @@ exports[`Project Stage Template Page - Should render with a project but no field
         </span>
       </div>
       <div
-        className="create-custom-field-button-container"
+        className="customFieldButtonHolder"
       >
         <Blueprint3.Button
           id="create-field-button"
@@ -321,7 +321,7 @@ exports[`Project Stage Template Page - Should render with a project then change 
     className="page-content-section"
   >
     <div
-      className="page-content"
+      className="contentContainer"
     >
       <div
         className="page-title"
@@ -366,7 +366,7 @@ exports[`Project Stage Template Page - Should render with a project then change 
         }
       />
       <div
-        className="create-custom-field-button-container"
+        className="customFieldButtonHolder"
       >
         <Blueprint3.Button
           id="create-field-button"
@@ -388,7 +388,7 @@ exports[`Project Stage Template Page - Should render with a project then change 
     className="page-content-section"
   >
     <div
-      className="page-content"
+      className="contentContainer"
     >
       <div
         className="page-title"
@@ -433,7 +433,7 @@ exports[`Project Stage Template Page - Should render with a project then change 
         }
       />
       <div
-        className="create-custom-field-button-container"
+        className="customFieldButtonHolder"
       >
         <Blueprint3.Button
           id="create-field-button"
@@ -455,7 +455,7 @@ exports[`Project Stage Template Page - Should render with a project then change 
     className="page-content-section"
   >
     <div
-      className="page-content"
+      className="contentContainer"
     >
       <div
         className="page-title"
@@ -500,7 +500,7 @@ exports[`Project Stage Template Page - Should render with a project then change 
         }
       />
       <div
-        className="create-custom-field-button-container"
+        className="customFieldButtonHolder"
       >
         <Blueprint3.Button
           id="create-field-button"
@@ -534,7 +534,7 @@ exports[`Project Stage Template Page - Should render with a project then change 
     className="page-content-section"
   >
     <div
-      className="page-content"
+      className="contentContainer"
     >
       <div
         className="page-title"
@@ -579,7 +579,7 @@ exports[`Project Stage Template Page - Should render with a project then change 
         }
       />
       <div
-        className="create-custom-field-button-container"
+        className="customFieldButtonHolder"
       >
         <Blueprint3.Button
           id="create-field-button"
@@ -601,7 +601,7 @@ exports[`Project Stage Template Page - Should render with a project then change 
     className="page-content-section"
   >
     <div
-      className="page-content"
+      className="contentContainer"
     >
       <div
         className="page-title"
@@ -610,7 +610,7 @@ exports[`Project Stage Template Page - Should render with a project then change 
           Project Design
         </h1>
         <span>
-          The Appointed design team will be collectively identifying hazards and considering mitagations for potential risks.  The assessment of risks will be complied into a single Design Risk Register.
+          The appointed design team will be collectively identifying hazards and considering mitagations for potential risks.  The assessment of risks will be complied into a single Design Risk Register.
         </span>
       </div>
       <PageFieldMapper
@@ -630,7 +630,7 @@ exports[`Project Stage Template Page - Should render with a project then change 
         }
       />
       <div
-        className="create-custom-field-button-container"
+        className="customFieldButtonHolder"
       >
         <Blueprint3.Button
           id="create-field-button"

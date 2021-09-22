@@ -125,50 +125,6 @@ exports[`should render 1`] = `
                   "url": "/",
                 }
               }
-              pageContent={
-                Object {
-                  "construction": Object {
-                    "error": null,
-                    "fetching": false,
-                    "fields": Array [],
-                  },
-                  "design": Object {
-                    "error": null,
-                    "fetching": false,
-                    "fields": Array [],
-                  },
-                  "feasibility": Object {
-                    "error": null,
-                    "fetching": false,
-                    "fields": Array [],
-                  },
-                  "handover": Object {
-                    "error": null,
-                    "fetching": false,
-                    "fields": Array [],
-                  },
-                  "inception": Object {
-                    "error": null,
-                    "fetching": false,
-                    "fields": Array [],
-                  },
-                  "occupation": Object {
-                    "error": null,
-                    "fetching": false,
-                    "fields": Array [],
-                  },
-                  "refurbishment": Object {
-                    "error": null,
-                    "fetching": false,
-                    "fields": Array [],
-                  },
-                  "tender": Object {
-                    "error": null,
-                    "fetching": false,
-                    "fields": Array [],
-                  },
-                }
-              }
               pageName="construction"
               projectId=""
               requestS3ProjectFileUploadToken={[Function]}

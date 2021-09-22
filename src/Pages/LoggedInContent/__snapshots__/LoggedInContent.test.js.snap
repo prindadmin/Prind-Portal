@@ -5,39 +5,66 @@ exports[`LoggedInContent Page - Should initial load with direct link to profile 
   className="full-width row"
   id="logged-in-content-container"
 >
-  <lazy
+  <withRouter(Connect(HeaderBar))
     companyName="Prin-D"
     openProjectSelector={false}
   />
-  <lazy>
-    <lazy
-      getProjectDetails={[MockFunction]}
-      getProjectMembers={[MockFunction]}
-      location={
-        Object {
-          "pathname": "/profile",
-          "state": Object {},
-        }
+  <ErrorBoundary
+    onRetry={[Function]}
+  >
+    <Suspense
+      fallback={
+        <ProjectLoading
+          text="Loading page data"
+        />
       }
-      projects={
-        Object {
-          "chosenProject": Object {},
-        }
-      }
-      saveProjectID={[MockFunction]}
-    />
-    <lazy>
-      <Suspense
-        fallback={
-          <ProjectLoading
-            text="Loading page data"
-          />
-        }
+    >
+      <lazy
+        noFoundationsBannerShowing={true}
       >
-        <lazy />
-      </Suspense>
-    </lazy>
-  </lazy>
+        <lazy
+          checkServerAccessToProcore={[MockFunction]}
+          getProjectDetails={[MockFunction]}
+          getProjectMembers={[MockFunction]}
+          location={
+            Object {
+              "pathname": "/profile",
+              "state": Object {},
+            }
+          }
+          procore={
+            Object {
+              "companyId": "TestCompanyId",
+              "projectId": "TestProjectId",
+            }
+          }
+          projects={
+            Object {
+              "chosenProject": Object {},
+            }
+          }
+          resetSite={[MockFunction]}
+          saveProjectID={[MockFunction]}
+          user={
+            Object {
+              "details": Object {},
+            }
+          }
+        />
+        <lazy>
+          <Suspense
+            fallback={
+              <ProjectLoading
+                text="Loading page data"
+              />
+            }
+          >
+            <withRouter(Connect(ProfilePage)) />
+          </Suspense>
+        </lazy>
+      </lazy>
+    </Suspense>
+  </ErrorBoundary>
   <lazy />
 </div>
 `;
@@ -47,86 +74,113 @@ exports[`LoggedInContent Page - Should initial load with direct link to project 
   className="full-width row"
   id="logged-in-content-container"
 >
-  <lazy
+  <withRouter(Connect(HeaderBar))
     companyName="Prin-D"
     openProjectSelector={false}
   />
-  <lazy>
-    <lazy
-      getProjectDetails={
-        [MockFunction] {
-          "calls": Array [
-            Array [
-              Object {
-                "projectId": "123",
-              },
-            ],
-          ],
-          "results": Array [
-            Object {
-              "type": "return",
-              "value": undefined,
-            },
-          ],
-        }
+  <ErrorBoundary
+    onRetry={[Function]}
+  >
+    <Suspense
+      fallback={
+        <ProjectLoading
+          text="Loading page data"
+        />
       }
-      getProjectMembers={
-        [MockFunction] {
-          "calls": Array [
-            Array [
-              "123",
-            ],
-          ],
-          "results": Array [
-            Object {
-              "type": "return",
-              "value": undefined,
-            },
-          ],
-        }
-      }
-      location={
-        Object {
-          "pathname": "/inception/123",
-          "state": Object {},
-        }
-      }
-      projects={
-        Object {
-          "chosenProject": Object {},
-        }
-      }
-      saveProjectID={
-        [MockFunction] {
-          "calls": Array [
-            Array [
-              "123",
-            ],
-          ],
-          "results": Array [
-            Object {
-              "type": "return",
-              "value": undefined,
-            },
-          ],
-        }
-      }
-    />
-    <lazy>
-      <Suspense
-        fallback={
-          <ProjectLoading
-            text="Loading page data"
-          />
-        }
+    >
+      <lazy
+        noFoundationsBannerShowing={true}
       >
         <lazy
-          pageName="inception"
-          projectId="123"
+          checkServerAccessToProcore={[MockFunction]}
+          getProjectDetails={
+            [MockFunction] {
+              "calls": Array [
+                Array [
+                  Object {
+                    "projectId": "123",
+                  },
+                ],
+              ],
+              "results": Array [
+                Object {
+                  "type": "return",
+                  "value": undefined,
+                },
+              ],
+            }
+          }
+          getProjectMembers={
+            [MockFunction] {
+              "calls": Array [
+                Array [
+                  "123",
+                ],
+              ],
+              "results": Array [
+                Object {
+                  "type": "return",
+                  "value": undefined,
+                },
+              ],
+            }
+          }
+          location={
+            Object {
+              "pathname": "/inception/123",
+              "state": Object {},
+            }
+          }
+          procore={
+            Object {
+              "companyId": "TestCompanyId",
+              "projectId": "TestProjectId",
+            }
+          }
+          projects={
+            Object {
+              "chosenProject": Object {},
+            }
+          }
+          resetSite={[MockFunction]}
+          saveProjectID={
+            [MockFunction] {
+              "calls": Array [
+                Array [
+                  "123",
+                ],
+              ],
+              "results": Array [
+                Object {
+                  "type": "return",
+                  "value": undefined,
+                },
+              ],
+            }
+          }
+          user={
+            Object {
+              "details": Object {},
+            }
+          }
         />
-      </Suspense>
-    </lazy>
-  </lazy>
+        <lazy>
+          <Suspense
+            fallback={
+              <ProjectLoading
+                text="Loading page data"
+              />
+            }
+          >
+            <withRouter(Connect(StagePage))
+              pageName="inception"
+              projectId="123"
+            />
+          </Suspense>
+        </lazy>
+      </lazy>
+    </Suspense>
+  </ErrorBoundary>
   <lazy />
 </div>
 `;
@@ -136,86 +190,113 @@ exports[`LoggedInContent Page - Should initial load with direct link to project 
   className="full-width row"
   id="logged-in-content-container"
 >
-  <lazy
+  <withRouter(Connect(HeaderBar))
     companyName="Prin-D"
     openProjectSelector={false}
   />
-  <lazy>
-    <lazy
-      getProjectDetails={
-        [MockFunction] {
-          "calls": Array [
-            Array [
-              Object {
-                "projectId": "123",
-              },
-            ],
-          ],
-          "results": Array [
-            Object {
-              "type": "return",
-              "value": undefined,
-            },
-          ],
-        }
+  <ErrorBoundary
+    onRetry={[Function]}
+  >
+    <Suspense
+      fallback={
+        <ProjectLoading
+          text="Loading page data"
+        />
       }
-      getProjectMembers={
-        [MockFunction] {
-          "calls": Array [
-            Array [
-              "123",
-            ],
-          ],
-          "results": Array [
-            Object {
-              "type": "return",
-              "value": undefined,
-            },
-          ],
-        }
-      }
-      location={
-        Object {
-          "pathname": "/inception/123/",
-          "state": Object {},
-        }
-      }
-      projects={
-        Object {
-          "chosenProject": Object {},
-        }
-      }
-      saveProjectID={
-        [MockFunction] {
-          "calls": Array [
-            Array [
-              "123",
-            ],
-          ],
-          "results": Array [
-            Object {
-              "type": "return",
-              "value": undefined,
-            },
-          ],
-        }
-      }
-    />
-    <lazy>
-      <Suspense
-        fallback={
-          <ProjectLoading
-            text="Loading page data"
-          />
-        }
+    >
+      <lazy
+        noFoundationsBannerShowing={true}
       >
         <lazy
-          pageName="inception"
-          projectId="123"
+          checkServerAccessToProcore={[MockFunction]}
+          getProjectDetails={
+            [MockFunction] {
+              "calls": Array [
+                Array [
+                  Object {
+                    "projectId": "123",
+                  },
+                ],
+              ],
+              "results": Array [
+                Object {
+                  "type": "return",
+                  "value": undefined,
+                },
+              ],
+            }
+          }
+          getProjectMembers={
+            [MockFunction] {
+              "calls": Array [
+                Array [
+                  "123",
+                ],
+              ],
+              "results": Array [
+                Object {
+                  "type": "return",
+                  "value": undefined,
+                },
+              ],
+            }
+          }
+          location={
+            Object {
+              "pathname": "/inception/123/",
+              "state": Object {},
+            }
+          }
+          procore={
+            Object {
+              "companyId": "TestCompanyId",
+              "projectId": "TestProjectId",
+            }
+          }
+          projects={
+            Object {
+              "chosenProject": Object {},
+            }
+          }
+          resetSite={[MockFunction]}
+          saveProjectID={
+            [MockFunction] {
+              "calls": Array [
+                Array [
+                  "123",
+                ],
+              ],
+              "results": Array [
+                Object {
+                  "type": "return",
+                  "value": undefined,
+                },
+              ],
+            }
+          }
+          user={
+            Object {
+              "details": Object {},
+            }
+          }
         />
-      </Suspense>
-    </lazy>
-  </lazy>
+        <lazy>
+          <Suspense
+            fallback={
+              <ProjectLoading
+                text="Loading page data"
+              />
+            }
+          >
+            <withRouter(Connect(StagePage))
+              pageName="inception"
+              projectId="123"
+            />
+          </Suspense>
+        </lazy>
+      </lazy>
+    </Suspense>
+  </ErrorBoundary>
   <lazy />
 </div>
 `;
@@ -225,110 +306,137 @@ exports[`LoggedInContent Page - Should initial load with direct link to project 
   className="full-width row"
   id="logged-in-content-container"
 >
-  <lazy
+  <withRouter(Connect(HeaderBar))
     companyName="Prin-D"
     openProjectSelector={false}
   />
-  <lazy>
-    <lazy
-      getProjectDetails={
-        [MockFunction] {
-          "calls": Array [
-            Array [
-              Object {
-                "projectId": "123",
-              },
-            ],
-            Array [
-              Object {
-                "projectId": "123",
-              },
-            ],
-          ],
-          "results": Array [
-            Object {
-              "type": "return",
-              "value": undefined,
-            },
-            Object {
-              "type": "return",
-              "value": undefined,
-            },
-          ],
-        }
+  <ErrorBoundary
+    onRetry={[Function]}
+  >
+    <Suspense
+      fallback={
+        <ProjectLoading
+          text="Loading page data"
+        />
       }
-      getProjectMembers={
-        [MockFunction] {
-          "calls": Array [
-            Array [
-              "123",
-            ],
-            Array [
-              "123",
-            ],
-          ],
-          "results": Array [
-            Object {
-              "type": "return",
-              "value": undefined,
-            },
-            Object {
-              "type": "return",
-              "value": undefined,
-            },
-          ],
-        }
-      }
-      location={
-        Object {
-          "pathname": "/inception/123",
-        }
-      }
-      projects={
-        Object {
-          "chosenProject": Object {
-            "projectId": "123",
-          },
-        }
-      }
-      saveProjectID={
-        [MockFunction] {
-          "calls": Array [
-            Array [
-              "123",
-            ],
-            Array [
-              "123",
-            ],
-          ],
-          "results": Array [
-            Object {
-              "type": "return",
-              "value": undefined,
-            },
-            Object {
-              "type": "return",
-              "value": undefined,
-            },
-          ],
-        }
-      }
-    />
-    <lazy>
-      <Suspense
-        fallback={
-          <ProjectLoading
-            text="Loading page data"
-          />
-        }
+    >
+      <lazy
+        noFoundationsBannerShowing={true}
       >
         <lazy
-          pageName="inception"
-          projectId="123"
+          checkServerAccessToProcore={[MockFunction]}
+          getProjectDetails={
+            [MockFunction] {
+              "calls": Array [
+                Array [
+                  Object {
+                    "projectId": "123",
+                  },
+                ],
+                Array [
+                  Object {
+                    "projectId": "123",
+                  },
+                ],
+              ],
+              "results": Array [
+                Object {
+                  "type": "return",
+                  "value": undefined,
+                },
+                Object {
+                  "type": "return",
+                  "value": undefined,
+                },
+              ],
+            }
+          }
+          getProjectMembers={
+            [MockFunction] {
+              "calls": Array [
+                Array [
+                  "123",
+                ],
+                Array [
+                  "123",
+                ],
+              ],
+              "results": Array [
+                Object {
+                  "type": "return",
+                  "value": undefined,
+                },
+                Object {
+                  "type": "return",
+                  "value": undefined,
+                },
+              ],
+            }
+          }
+          location={
+            Object {
+              "pathname": "/inception/123",
+            }
+          }
+          procore={
+            Object {
+              "companyId": "TestCompanyId",
+              "projectId": "TestProjectId",
+            }
+          }
+          projects={
+            Object {
+              "chosenProject": Object {
+                "projectId": "123",
+              },
+            }
+          }
+          resetSite={[MockFunction]}
+          saveProjectID={
+            [MockFunction] {
+              "calls": Array [
+                Array [
+                  "123",
+                ],
+                Array [
+                  "123",
+                ],
+              ],
+              "results": Array [
+                Object {
+                  "type": "return",
+                  "value": undefined,
+                },
+                Object {
+                  "type": "return",
+                  "value": undefined,
+                },
+              ],
+            }
+          }
+          user={
+            Object {
+              "details": Object {},
+            }
+          }
         />
-      </Suspense>
-    </lazy>
-  </lazy>
+        <lazy>
+          <Suspense
+            fallback={
+              <ProjectLoading
+                text="Loading page data"
+              />
+            }
+          >
+            <withRouter(Connect(StagePage))
+              pageName="inception"
+              projectId="123"
+            />
+          </Suspense>
+        </lazy>
+      </lazy>
+    </Suspense>
+  </ErrorBoundary>
   <lazy />
 </div>
 `;
@@ -338,109 +446,136 @@ exports[`LoggedInContent Page - Should initial load with direct link to project 
   className="full-width row"
   id="logged-in-content-container"
 >
-  <lazy
+  <withRouter(Connect(HeaderBar))
     companyName="Prin-D"
     openProjectSelector={false}
   />
-  <lazy>
-    <lazy
-      getProjectDetails={
-        [MockFunction] {
-          "calls": Array [
-            Array [
-              Object {
-                "projectId": "123",
-              },
-            ],
-            Array [
-              Object {
-                "projectId": "456",
-              },
-            ],
-          ],
-          "results": Array [
-            Object {
-              "type": "return",
-              "value": undefined,
-            },
-            Object {
-              "type": "return",
-              "value": undefined,
-            },
-          ],
-        }
+  <ErrorBoundary
+    onRetry={[Function]}
+  >
+    <Suspense
+      fallback={
+        <ProjectLoading
+          text="Loading page data"
+        />
       }
-      getProjectMembers={
-        [MockFunction] {
-          "calls": Array [
-            Array [
-              "123",
-            ],
-            Array [
-              "456",
-            ],
-          ],
-          "results": Array [
-            Object {
-              "type": "return",
-              "value": undefined,
-            },
-            Object {
-              "type": "return",
-              "value": undefined,
-            },
-          ],
-        }
-      }
-      location={
-        Object {
-          "pathname": "/inception/456",
-          "state": Object {},
-        }
-      }
-      projects={
-        Object {
-          "chosenProject": Object {},
-        }
-      }
-      saveProjectID={
-        [MockFunction] {
-          "calls": Array [
-            Array [
-              "123",
-            ],
-            Array [
-              "456",
-            ],
-          ],
-          "results": Array [
-            Object {
-              "type": "return",
-              "value": undefined,
-            },
-            Object {
-              "type": "return",
-              "value": undefined,
-            },
-          ],
-        }
-      }
-    />
-    <lazy>
-      <Suspense
-        fallback={
-          <ProjectLoading
-            text="Loading page data"
-          />
-        }
+    >
+      <lazy
+        noFoundationsBannerShowing={true}
       >
         <lazy
-          pageName="inception"
-          projectId="456"
+          checkServerAccessToProcore={[MockFunction]}
+          getProjectDetails={
+            [MockFunction] {
+              "calls": Array [
+                Array [
+                  Object {
+                    "projectId": "123",
+                  },
+                ],
+                Array [
+                  Object {
+                    "projectId": "456",
+                  },
+                ],
+              ],
+              "results": Array [
+                Object {
+                  "type": "return",
+                  "value": undefined,
+                },
+                Object {
+                  "type": "return",
+                  "value": undefined,
+                },
+              ],
+            }
+          }
+          getProjectMembers={
+            [MockFunction] {
+              "calls": Array [
+                Array [
+                  "123",
+                ],
+                Array [
+                  "456",
+                ],
+              ],
+              "results": Array [
+                Object {
+                  "type": "return",
+                  "value": undefined,
+                },
+                Object {
+                  "type": "return",
+                  "value": undefined,
+                },
+              ],
+            }
+          }
+          location={
+            Object {
+              "pathname": "/inception/456",
+              "state": Object {},
+            }
+          }
+          procore={
+            Object {
+              "companyId": "TestCompanyId",
+              "projectId": "TestProjectId",
+            }
+          }
+          projects={
+            Object {
+              "chosenProject": Object {},
+            }
+          }
+          resetSite={[MockFunction]}
+          saveProjectID={
+            [MockFunction] {
+              "calls": Array [
+                Array [
+                  "123",
+                ],
+                Array [
+                  "456",
+                ],
+              ],
+              "results": Array [
+                Object {
+                  "type": "return",
+                  "value": undefined,
+                },
+                Object {
+                  "type": "return",
+                  "value": undefined,
+                },
+              ],
+            }
+          }
+          user={
+            Object {
+              "details": Object {},
+            }
+          }
         />
-      </Suspense>
-    </lazy>
-  </lazy>
+        <lazy>
+          <Suspense
+            fallback={
+              <ProjectLoading
+                text="Loading page data"
+              />
+            }
+          >
+            <withRouter(Connect(StagePage))
+              pageName="inception"
+              projectId="456"
+            />
+          </Suspense>
+        </lazy>
+      </lazy>
+    </Suspense>
+  </ErrorBoundary>
   <lazy />
 </div>
 `;
@@ -450,39 +585,66 @@ exports[`LoggedInContent Page - Should render 404 for non-existent page 1`] = `
   className="full-width row"
   id="logged-in-content-container"
 >
-  <lazy
+  <withRouter(Connect(HeaderBar))
     companyName="Prin-D"
     openProjectSelector={true}
   />
-  <lazy>
-    <lazy
-      getProjectDetails={[MockFunction]}
-      getProjectMembers={[MockFunction]}
-      location={
-        Object {
-          "pathname": "/carrot",
-          "state": Object {},
-        }
+  <ErrorBoundary
+    onRetry={[Function]}
+  >
+    <Suspense
+      fallback={
+        <ProjectLoading
+          text="Loading page data"
+        />
       }
-      projects={
-        Object {
-          "chosenProject": Object {},
-        }
-      }
-      saveProjectID={[MockFunction]}
-    />
-    <lazy>
-      <Suspense
-        fallback={
-          <ProjectLoading
-            text="Loading page data"
-          />
-        }
+    >
+      <lazy
+        noFoundationsBannerShowing={true}
       >
-        <lazy />
-      </Suspense>
-    </lazy>
-  </lazy>
+        <lazy
+          checkServerAccessToProcore={[MockFunction]}
+          getProjectDetails={[MockFunction]}
+          getProjectMembers={[MockFunction]}
+          location={
+            Object {
+              "pathname": "/carrot",
+              "state": Object {},
+            }
+          }
+          procore={
+            Object {
+              "companyId": "TestCompanyId",
+              "projectId": "TestProjectId",
+            }
+          }
+          projects={
+            Object {
+              "chosenProject": Object {},
+            }
+          }
+          resetSite={[MockFunction]}
+          saveProjectID={[MockFunction]}
+          user={
+            Object {
+              "details": Object {},
+            }
+          }
+        />
+        <lazy>
+          <Suspense
+            fallback={
+              <ProjectLoading
+                text="Loading page data"
+              />
+            }
+          >
+            <lazy />
+          </Suspense>
+        </lazy>
+      </lazy>
+    </Suspense>
+  </ErrorBoundary>
   <lazy />
 </div>
 `;
@@ -492,39 +654,66 @@ exports[`LoggedInContent Page - Should render foundations page 1`] = `
   className="full-width row"
   id="logged-in-content-container"
 >
-  <lazy
+  <withRouter(Connect(HeaderBar))
     companyName="Prin-D"
     openProjectSelector={false}
   />
-  <lazy>
-    <lazy
-      getProjectDetails={[MockFunction]}
-      getProjectMembers={[MockFunction]}
-      location={
-        Object {
-          "pathname": "/foundations",
-          "state": Object {},
-        }
+  <ErrorBoundary
+    onRetry={[Function]}
+  >
+    <Suspense
+      fallback={
+        <ProjectLoading
+          text="Loading page data"
+        />
       }
-      projects={
-        Object {
-          "chosenProject": Object {},
-        }
-      }
-      saveProjectID={[MockFunction]}
-    />
-    <lazy>
-      <Suspense
-        fallback={
-          <ProjectLoading
-            text="Loading page data"
-          />
-        }
+    >
+      <lazy
+        noFoundationsBannerShowing={true}
       >
-        <lazy />
-      </Suspense>
-    </lazy>
-  </lazy>
+        <lazy
+          checkServerAccessToProcore={[MockFunction]}
+          getProjectDetails={[MockFunction]}
+          getProjectMembers={[MockFunction]}
+          location={
+            Object {
+              "pathname": "/foundations",
+              "state": Object {},
+            }
+          }
+          procore={
+            Object {
+              "companyId": "TestCompanyId",
+              "projectId": "TestProjectId",
+            }
+          }
+          projects={
+            Object {
+              "chosenProject": Object {},
+            }
+          }
+          resetSite={[MockFunction]}
+          saveProjectID={[MockFunction]}
+          user={
+            Object {
+              "details": Object {},
+            }
+          }
+        />
+        <lazy>
+          <Suspense
+            fallback={
+              <ProjectLoading
+                text="Loading page data"
+              />
+            }
+          >
+            <withRouter(Connect(FoundationsPage)) />
+          </Suspense>
+        </lazy>
+      </lazy>
+    </Suspense>
+  </ErrorBoundary>
   <lazy />
 </div>
 `;
@@ -534,39 +723,66 @@ exports[`LoggedInContent Page - Should render newproject page 1`] = `
   className="full-width row"
   id="logged-in-content-container"
 >
-  <lazy
+  <withRouter(Connect(HeaderBar))
     companyName="Prin-D"
     openProjectSelector={false}
   />
-  <lazy>
-    <lazy
-      getProjectDetails={[MockFunction]}
-      getProjectMembers={[MockFunction]}
-      location={
-        Object {
-          "pathname": "/newproject",
-          "state": Object {},
-        }
+  <ErrorBoundary
+    onRetry={[Function]}
+  >
+    <Suspense
+      fallback={
+        <ProjectLoading
+          text="Loading page data"
+        />
       }
-      projects={
-        Object {
-          "chosenProject": Object {},
-        }
-      }
-      saveProjectID={[MockFunction]}
-    />
-    <lazy>
-      <Suspense
-        fallback={
-          <ProjectLoading
-            text="Loading page data"
-          />
-        }
+    >
+      <lazy
+        noFoundationsBannerShowing={true}
       >
-        <lazy />
-      </Suspense>
-    </lazy>
-  </lazy>
+        <lazy
+          checkServerAccessToProcore={[MockFunction]}
+          getProjectDetails={[MockFunction]}
+          getProjectMembers={[MockFunction]}
+          location={
+            Object {
+              "pathname": "/newproject",
+              "state": Object {},
+            }
+          }
+          procore={
+            Object {
+              "companyId": "TestCompanyId",
+              "projectId": "TestProjectId",
+            }
+          }
+          projects={
+            Object {
+              "chosenProject": Object {},
+            }
+          }
+          resetSite={[MockFunction]}
+          saveProjectID={[MockFunction]}
+          user={
+            Object {
+              "details": Object {},
+            }
+          }
+        />
+        <lazy>
+          <Suspense
+            fallback={
+              <ProjectLoading
+                text="Loading page data"
+              />
+            }
+          >
+            <withRouter(Connect(NewProjectPage)) />
+          </Suspense>
+        </lazy>
+      </lazy>
+    </Suspense>
+  </ErrorBoundary>
   <lazy />
 </div>
 `;
@@ -576,41 +792,68 @@ exports[`LoggedInContent Page - Should render no project selected 1`] = `
   className="full-width row"
   id="logged-in-content-container"
 >
-  <lazy
+  <withRouter(Connect(HeaderBar))
     companyName="Prin-D"
     openProjectSelector={true}
   />
-  <lazy>
-    <lazy
-      getProjectDetails={[MockFunction]}
-      getProjectMembers={[MockFunction]}
-      location={
-        Object {
-          "pathname": "/inception",
-          "state": Object {},
-        }
+  <ErrorBoundary
+    onRetry={[Function]}
+  >
+    <Suspense
+      fallback={
+        <ProjectLoading
+          text="Loading page data"
+        />
       }
-      projects={
-        Object {
-          "chosenProject": Object {},
-        }
-      }
-      saveProjectID={[MockFunction]}
-    />
-    <lazy>
-      <Suspense
-        fallback={
-          <ProjectLoading
-            text="Loading page data"
-          />
-        }
+    >
+      <lazy
+        noFoundationsBannerShowing={true}
       >
         <lazy
-          pageName="inception"
+          checkServerAccessToProcore={[MockFunction]}
+          getProjectDetails={[MockFunction]}
+          getProjectMembers={[MockFunction]}
+          location={
+            Object {
+              "pathname": "/inception",
+              "state": Object {},
+            }
+          }
+          procore={
+            Object {
+              "companyId": "TestCompanyId",
+              "projectId": "TestProjectId",
+            }
+          }
+          projects={
+            Object {
+              "chosenProject": Object {},
+            }
+          }
+          resetSite={[MockFunction]}
+          saveProjectID={[MockFunction]}
+          user={
+            Object {
+              "details": Object {},
+            }
+          }
         />
-      </Suspense>
-    </lazy>
-  </lazy>
+        <lazy>
+          <Suspense
+            fallback={
+              <ProjectLoading
+                text="Loading page data"
+              />
+            }
+          >
+            <withRouter(Connect(StagePage))
+              pageName="inception"
+            />
+          </Suspense>
+        </lazy>
+      </lazy>
+    </Suspense>
+  </ErrorBoundary>
   <lazy />
 </div>
 `;
@@ -620,41 +863,68 @@ exports[`LoggedInContent Page - Should render no project selected at mobile reso
   className="full-width row"
   id="logged-in-content-container"
 >
-  <lazy
+  <withRouter(Connect(HeaderBar))
     companyName="Prin-D"
     openProjectSelector={true}
   />
-  <lazy>
-    <lazy
-      getProjectDetails={[MockFunction]}
-      getProjectMembers={[MockFunction]}
-      location={
-        Object {
-          "pathname": "/inception",
-          "state": Object {},
-        }
+  <ErrorBoundary
+    onRetry={[Function]}
+  >
+    <Suspense
+      fallback={
+        <ProjectLoading
+          text="Loading page data"
+        />
       }
-      projects={
-        Object {
-          "chosenProject": Object {},
-        }
-      }
-      saveProjectID={[MockFunction]}
-    />
-    <lazy>
-      <Suspense
-        fallback={
-          <ProjectLoading
-            text="Loading page data"
-          />
-        }
+    >
+      <lazy
+        noFoundationsBannerShowing={true}
       >
         <lazy
-          pageName="inception"
+          checkServerAccessToProcore={[MockFunction]}
+          getProjectDetails={[MockFunction]}
+          getProjectMembers={[MockFunction]}
+          location={
+            Object {
+              "pathname": "/inception",
+              "state": Object {},
+            }
+          }
+          procore={
+            Object {
+              "companyId": "TestCompanyId",
+              "projectId": "TestProjectId",
+            }
+          }
+          projects={
+            Object {
+              "chosenProject": Object {},
+            }
+          }
+          resetSite={[MockFunction]}
+          saveProjectID={[MockFunction]}
+          user={
+            Object {
+              "details": Object {},
+            }
+          }
         />
-      </Suspense>
-    </lazy>
-  </lazy>
+        <lazy>
+          <Suspense
+            fallback={
+              <ProjectLoading
+                text="Loading page data"
+              />
+            }
+          >
+            <withRouter(Connect(StagePage))
+              pageName="inception"
+            />
+          </Suspense>
+        </lazy>
+      </lazy>
+    </Suspense>
+  </ErrorBoundary>
   <lazy />
 </div>
 `;
@@ -664,40 +934,69 @@ exports[`LoggedInContent Page - Should render no project selected at mobile reso
   className="full-width row"
   id="logged-in-content-container"
 >
-  <lazy
+  <withRouter(Connect(HeaderBar))
     companyName="Prin-D"
     openProjectSelector={true}
   />
-  <lazy>
-    <lazy
-      getProjectDetails={[MockFunction]}
-      getProjectMembers={[MockFunction]}
-      location={
-        Object {
-          "pathname": "/inception",
-          "state": Object {},
-        }
+  <ErrorBoundary
+    onRetry={[Function]}
+  >
+    <Suspense
+      fallback={
+        <ProjectLoading
+          text="Loading page data"
+        />
       }
-      projects={
-        Object {
-          "chosenProject": Object {},
-          "error": "There was an error",
-        }
-      }
-      saveProjectID={[MockFunction]}
-    />
-    <lazy>
-      <Suspense
-        fallback={
-          <ProjectLoading
-            text="Loading page data"
-          />
-        }
+    >
+      <lazy
+        noFoundationsBannerShowing={true}
       >
-        <lazy />
-      </Suspense>
-    </lazy>
-  </lazy>
+        <lazy
+          checkServerAccessToProcore={[MockFunction]}
+          getProjectDetails={[MockFunction]}
+          getProjectMembers={[MockFunction]}
+          location={
+            Object {
+              "pathname": "/inception",
+              "state": Object {},
+            }
+          }
+          procore={
+            Object {
+              "companyId": "TestCompanyId",
+              "projectId": "TestProjectId",
+            }
+          }
+          projects={
+            Object {
+              "chosenProject": Object {},
+              "error": "There was an error",
+            }
+          }
+          resetSite={[MockFunction]}
+          saveProjectID={[MockFunction]}
+          user={
+            Object {
+              "details": Object {},
+            }
+          }
+        />
+        <lazy>
+          <Suspense
+            fallback={
+              <ProjectLoading
+                text="Loading page data"
+              />
+            }
+          >
+            <lazy
+              text="The requested project ID was not found in the system.  Please select or create a project using the project drop down."
+            />
+          </Suspense>
+        </lazy>
+      </lazy>
+    </Suspense>
+  </ErrorBoundary>
   <lazy />
 </div>
 `;
@@ -707,39 +1006,66 @@ exports[`LoggedInContent Page - Should render profile page 1`] = `
   className="full-width row"
   id="logged-in-content-container"
 >
-  <lazy
+  <withRouter(Connect(HeaderBar))
     companyName="Prin-D"
     openProjectSelector={false}
   />
-  <lazy>
-    <lazy
-      getProjectDetails={[MockFunction]}
-      getProjectMembers={[MockFunction]}
-      location={
-        Object {
-          "pathname": "/profile",
-          "state": Object {},
-        }
+  <ErrorBoundary
+    onRetry={[Function]}
+  >
+    <Suspense
+      fallback={
+        <ProjectLoading
+          text="Loading page data"
+        />
       }
-      projects={
-        Object {
-          "chosenProject": Object {},
-        }
-      }
-      saveProjectID={[MockFunction]}
-    />
-    <lazy>
-      <Suspense
-        fallback={
-          <ProjectLoading
-            text="Loading page data"
-          />
-        }
+    >
+      <lazy
+        noFoundationsBannerShowing={true}
       >
-        <lazy />
-      </Suspense>
-    </lazy>
-  </lazy>
+        <lazy
+          checkServerAccessToProcore={[MockFunction]}
+          getProjectDetails={[MockFunction]}
+          getProjectMembers={[MockFunction]}
+          location={
+            Object {
+              "pathname": "/profile",
+              "state": Object {},
+            }
+          }
+          procore={
+            Object {
+              "companyId": "TestCompanyId",
+              "projectId": "TestProjectId",
+            }
+          }
+          projects={
+            Object {
+              "chosenProject": Object {},
+            }
+          }
+          resetSite={[MockFunction]}
+          saveProjectID={[MockFunction]}
+          user={
+            Object {
+              "details": Object {},
+            }
+          }
+        />
+        <lazy>
+          <Suspense
+            fallback={
+              <ProjectLoading
+                text="Loading page data"
+              />
+            }
+          >
+            <withRouter(Connect(ProfilePage)) />
+          </Suspense>
+        </lazy>
+      </lazy>
+    </Suspense>
+  </ErrorBoundary>
   <lazy />
 </div>
 `;
@@ -749,39 +1075,66 @@ exports[`LoggedInContent Page - Should render project page 1`] = `
   className="full-width row"
   id="logged-in-content-container"
 >
-  <lazy
+  <withRouter(Connect(HeaderBar))
     companyName="Prin-D"
     openProjectSelector={true}
   />
-  <lazy>
-    <lazy
-      getProjectDetails={[MockFunction]}
-      getProjectMembers={[MockFunction]}
-      location={
-        Object {
-          "pathname": "/project",
-          "state": Object {},
-        }
+  <ErrorBoundary
+    onRetry={[Function]}
+  >
+    <Suspense
+      fallback={
+        <ProjectLoading
+          text="Loading page data"
+        />
       }
-      projects={
-        Object {
-          "chosenProject": Object {},
-        }
-      }
-      saveProjectID={[MockFunction]}
-    />
-    <lazy>
-      <Suspense
-        fallback={
-          <ProjectLoading
-            text="Loading page data"
-          />
-        }
+    >
+      <lazy
+        noFoundationsBannerShowing={true}
       >
-        <lazy />
-      </Suspense>
-    </lazy>
-  </lazy>
+        <lazy
+          checkServerAccessToProcore={[MockFunction]}
+          getProjectDetails={[MockFunction]}
+          getProjectMembers={[MockFunction]}
+          location={
+            Object {
+              "pathname": "/project",
+              "state": Object {},
+            }
+          }
+          procore={
+            Object {
+              "companyId": "TestCompanyId",
+              "projectId": "TestProjectId",
+            }
+          }
+          projects={
+            Object {
+              "chosenProject": Object {},
+            }
+          }
+          resetSite={[MockFunction]}
+          saveProjectID={[MockFunction]}
+          user={
+            Object {
+              "details": Object {},
+            }
+          }
+        />
+        <lazy>
+          <Suspense
+            fallback={
+              <ProjectLoading
+                text="Loading page data"
+              />
+            }
+          >
+            <withRouter(Connect(ProjectDetailsPage)) />
+          </Suspense>
+        </lazy>
+      </lazy>
+    </Suspense>
+  </ErrorBoundary>
   <lazy />
 </div>
 `;
@@ -791,39 +1144,66 @@ exports[`LoggedInContent Page - Should render team page 1`] = `
   className="full-width row"
   id="logged-in-content-container"
 >
-  <lazy
+  <withRouter(Connect(HeaderBar))
     companyName="Prin-D"
     openProjectSelector={true}
   />
-  <lazy>
-    <lazy
-      getProjectDetails={[MockFunction]}
-      getProjectMembers={[MockFunction]}
-      location={
-        Object {
-          "pathname": "/team",
-          "state": Object {},
-        }
+  <ErrorBoundary
+    onRetry={[Function]}
+  >
+    <Suspense
+      fallback={
+        <ProjectLoading
+          text="Loading page data"
+        />
       }
-      projects={
-        Object {
-          "chosenProject": Object {},
-        }
-      }
-      saveProjectID={[MockFunction]}
-    />
-    <lazy>
-      <Suspense
-        fallback={
-          <ProjectLoading
-            text="Loading page data"
-          />
-        }
+    >
+      <lazy
+        noFoundationsBannerShowing={true}
       >
-        <lazy />
-      </Suspense>
-    </lazy>
-  </lazy>
+        <lazy
+          checkServerAccessToProcore={[MockFunction]}
+          getProjectDetails={[MockFunction]}
+          getProjectMembers={[MockFunction]}
+          location={
+            Object {
+              "pathname": "/team",
+              "state": Object {},
+            }
+          }
+          procore={
+            Object {
+              "companyId": "TestCompanyId",
+              "projectId": "TestProjectId",
+            }
+          }
+          projects={
+            Object {
+              "chosenProject": Object {},
+            }
+          }
+          resetSite={[MockFunction]}
+          saveProjectID={[MockFunction]}
+          user={
+            Object {
+              "details": Object {},
+            }
+          }
+        />
+        <lazy>
+          <Suspense
+            fallback={
+              <ProjectLoading
+                text="Loading page data"
+              />
+            }
+          >
+            <withRouter(Connect(ProjectTeamPage)) />
+          </Suspense>
+        </lazy>
+      </lazy>
+    </Suspense>
+  </ErrorBoundary>
   <lazy />
 </div>
 `;
@@ -833,40 +1213,69 @@ exports[`LoggedInContent Page - Should render then have an error fetching a proj
   className="full-width row"
   id="logged-in-content-container"
 >
-  <lazy
+  <withRouter(Connect(HeaderBar))
     companyName="Prin-D"
     openProjectSelector={true}
   />
-  <lazy>
-    <lazy
-      getProjectDetails={[MockFunction]}
-      getProjectMembers={[MockFunction]}
-      location={
-        Object {
-          "pathname": "/inception",
-          "state": Object {},
-        }
+  <ErrorBoundary
+    onRetry={[Function]}
+  >
+    <Suspense
+      fallback={
+        <ProjectLoading
+          text="Loading page data"
+        />
       }
-      projects={
-        Object {
-          "chosenProject": Object {},
-          "error": "There was an error",
-        }
-      }
-      saveProjectID={[MockFunction]}
-    />
-    <lazy>
-      <Suspense
-        fallback={
-          <ProjectLoading
-            text="Loading page data"
-          />
-        }
+    >
+      <lazy
+        noFoundationsBannerShowing={true}
       >
-        <lazy />
-      </Suspense>
-    </lazy>
-  </lazy>
+        <lazy
+          checkServerAccessToProcore={[MockFunction]}
+          getProjectDetails={[MockFunction]}
+          getProjectMembers={[MockFunction]}
+          location={
+            Object {
+              "pathname": "/inception",
+              "state": Object {},
+            }
+          }
+          procore={
+            Object {
+              "companyId": "TestCompanyId",
+              "projectId": "TestProjectId",
+            }
+          }
+          projects={
+            Object {
+              "chosenProject": Object {},
+              "error": "There was an error",
+            }
+          }
+          resetSite={[MockFunction]}
+          saveProjectID={[MockFunction]}
+          user={
+            Object {
+              "details": Object {},
+            }
+          }
+        />
+        <lazy>
+          <Suspense
+            fallback={
+              <ProjectLoading
+                text="Loading page data"
+              />
+            }
+          >
+            <lazy
+              text="The requested project ID was not found in the system.  Please select or create a project using the project drop down."
+            />
+          </Suspense>
+        </lazy>
+      </lazy>
+    </Suspense>
+  </ErrorBoundary>
   <lazy />
 </div>
 `;

@@ -131,7 +131,7 @@ exports[`enter email address and click submit and fail 1`] = `
     >
       <Blueprint3.Icon
         icon="error"
-        iconSize={20}
+        size={20}
       >
         <span
           className="bp3-icon bp3-icon-error"

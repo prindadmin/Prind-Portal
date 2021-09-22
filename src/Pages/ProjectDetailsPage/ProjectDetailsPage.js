@@ -38,6 +38,9 @@ export class ProjectDetailsPage extends Component {
         projectAddressCountry: PropTypes.string,
       })
     }).isRequired,
+    location: PropTypes.shape({
+      pathname: PropTypes.string.isRequired
+    }).isRequired
   }
 
   componentDidMount() {

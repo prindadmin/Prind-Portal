@@ -1,19 +1,28 @@
 
 import * as Functions from './user'
 import * as Actions from '../Actions'
-import * as States from '../States'
-import * as Strings from '../Data/Strings'
+//import * as States from '../States'
+//import * as Strings from '../Data/Strings'
 import * as Endpoints from '../Data/Endpoints'
 
 let defaultState = {
   fetching: false,
   details: {},
-  history: {},
+  history: {
+    documentVersions: []
+  },
   projectInvitations: [],
   signatureRequests: [],
   projectS3Token: {},
   userS3Token: {},
+  error: undefined,
   currentRoute: Endpoints.DEFAULTLOGGEDINPAGE,
+  currentRouteObject: {
+    hash: "",
+    pathname: Endpoints.DEFAULTLOGGEDINPAGE,
+    search: "",
+    state: undefined
+  }
 }
 
 

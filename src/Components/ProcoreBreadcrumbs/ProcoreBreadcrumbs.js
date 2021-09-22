@@ -14,11 +14,16 @@ export class ProcoreBreadcrumbs extends Component {
     }).isRequired,
     location: PropTypes.shape({
       pathname: PropTypes.string.isRequired
+    }).isRequired,
+    procore: PropTypes.shape({
+      folderHistory: PropTypes.shape({
+        chain: PropTypes.array.isRequired
+      }).isRequired,
     }).isRequired
   }
 
   onCrumbClick = (folder) => {
-    var folderHistory = this.props.procore.folderHistory
+    //var folderHistory = this.props.procore.folderHistory
 
     // If the root folder is sent, do something special
     var folderHistory = this.props.procore.folderHistory

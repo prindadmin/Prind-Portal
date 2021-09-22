@@ -113,6 +113,10 @@ beforeEach(() => {
         fields: [],
         error: null,
       },
+    },
+    procore: {
+      companyId: "TestCompanyId",
+      projectId: "TestProjectId"
     }
   });
   const props = {};

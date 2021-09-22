@@ -142,6 +142,7 @@ exports[`should render 1`] = `
                               You will only be billed for the project you once you begin uploading data to one of the project tabs (e.g. inception, feasibility, design, etc)
                               <div
                                 class="bp3-spinner bp3-intent-danger"
+                                role="progressbar"
                               >
                                 <div
                                   class="bp3-spinner-animation"
@@ -203,6 +204,7 @@ exports[`should render 1`] = `
                           >
                             <div
                               className="bp3-spinner bp3-intent-danger"
+                              role="progressbar"
                             >
                               <div
                                 className="bp3-spinner-animation"

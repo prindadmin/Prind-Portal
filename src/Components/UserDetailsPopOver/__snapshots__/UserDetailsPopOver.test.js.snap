@@ -32,7 +32,7 @@ exports[`should render and resolve request for accreditations 1`] = `
         <div
           className="accreditation-list"
         >
-          <lazy
+          <Connect(UserAccreditationTile)
             accreditationID="constructionBasics"
             accreditationName="Construction Basics 101"
             issuedDate="2019-10-01T12:59:12.142216"
@@ -82,7 +82,7 @@ exports[`should render with no accreditations 1`] = `
         <div
           className="accreditation-list"
         >
-          <lazy />
+          <NoAccreditationsAvailable />
         </div>
       </div>
     </div>

@@ -107,6 +107,9 @@ it('does combines reducers', () => {
     refurbishment: {
       ...defaultPageState
     },
+    test: {
+      ...defaultPageState
+    },
   };
 
 
@@ -114,12 +117,21 @@ it('does combines reducers', () => {
   const expectedUser = {
     fetching: false,
     details: {},
-    history: {},
+    history: {
+      documentVersions: []
+    },
     projectInvitations: [],
     signatureRequests: [],
     projectS3Token: {},
     userS3Token: {},
+    error: undefined,
     currentRoute: Endpoints.DEFAULTLOGGEDINPAGE,
+    currentRouteObject: {
+      hash: "",
+      pathname: Endpoints.DEFAULTLOGGEDINPAGE,
+      search: "",
+      state: undefined
+    }
   };
 
 
@@ -129,4 +141,4 @@ it('does combines reducers', () => {
   expect(actualProjects).toEqual(expectedProjects);
   expect(actualStageContent).toEqual(expectedStageContent);
   expect(actualUser).toEqual(expectedUser);
-}); 
+});

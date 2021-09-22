@@ -4,7 +4,7 @@ exports[`Should render logged in 1`] = `
 <div
   className="App full-height container-fluid"
 >
-  <HashRouter>
+  <BrowserRouter>
     <Suspense
       fallback={
         <div
@@ -82,6 +82,32 @@ exports[`Should render logged in 1`] = `
           }
           path="/confirm-email"
         />
+        <Route
+          component={
+            Object {
+              "$$typeof": Symbol(react.lazy),
+              "_init": [Function],
+              "_payload": Object {
+                "_result": [Function],
+                "_status": -1,
+              },
+            }
+          }
+          path="/procore-auth"
+        />
+        <Connect(PrivateRoute)
+          component={
+            Object {
+              "$$typeof": Symbol(react.lazy),
+              "_init": [Function],
+              "_payload": Object {
+                "_result": [Function],
+                "_status": -1,
+              },
+            }
+          }
+          path="/procore-auth-send"
+        />
         <Connect(PrivateRoute)
           component={
             Object {
@@ -106,7 +132,7 @@ exports[`Should render logged in 1`] = `
               },
             }
           }
-          path="/project/:id?"
+          path="/project/:id"
         />
         <Connect(PrivateRoute)
           component={
@@ -132,7 +158,7 @@ exports[`Should render logged in 1`] = `
               },
             }
           }
-          path="/team/:id?"
+          path="/team/:id"
         />
         <Connect(PrivateRoute)
           component={
@@ -158,7 +184,7 @@ exports[`Should render logged in 1`] = `
               },
             }
           }
-          path="/inception/:id?"
+          path="/inception/:id"
         />
         <Connect(PrivateRoute)
           component={
@@ -184,7 +210,7 @@ exports[`Should render logged in 1`] = `
               },
             }
           }
-          path="/feasibility/:id?"
+          path="/feasibility/:id"
         />
         <Connect(PrivateRoute)
           component={
@@ -210,7 +236,7 @@ exports[`Should render logged in 1`] = `
               },
             }
           }
-          path="/design/:id?"
+          path="/design/:id"
         />
         <Connect(PrivateRoute)
           component={
@@ -236,7 +262,7 @@ exports[`Should render logged in 1`] = `
               },
             }
           }
-          path="/tender/:id?"
+          path="/tender/:id"
         />
         <Connect(PrivateRoute)
           component={
@@ -262,7 +288,7 @@ exports[`Should render logged in 1`] = `
               },
             }
           }
-          path="/construction/:id?"
+          path="/construction/:id"
         />
         <Connect(PrivateRoute)
           component={
@@ -288,7 +314,7 @@ exports[`Should render logged in 1`] = `
               },
             }
           }
-          path="/handover/:id?"
+          path="/handover/:id"
         />
         <Connect(PrivateRoute)
           component={
@@ -314,7 +340,7 @@ exports[`Should render logged in 1`] = `
               },
             }
           }
-          path="/occupation/:id?"
+          path="/occupation/:id"
         />
         <Connect(PrivateRoute)
           component={
@@ -340,7 +366,33 @@ exports[`Should render logged in 1`] = `
               },
             }
           }
-          path="/refurbishment/:id?"
+          path="/refurbishment/:id"
+        />
+        <Connect(PrivateRoute)
+          component={
+            Object {
+              "$$typeof": Symbol(react.lazy),
+              "_init": [Function],
+              "_payload": Object {
+                "_result": [Function],
+                "_status": -1,
+              },
+            }
+          }
+          path="/test"
+        />
+        <Connect(PrivateRoute)
+          component={
+            Object {
+              "$$typeof": Symbol(react.lazy),
+              "_init": [Function],
+              "_payload": Object {
+                "_result": [Function],
+                "_status": -1,
+              },
+            }
+          }
+          path="/test/:id"
         />
         <Connect(PrivateRoute)
           component={
@@ -390,7 +442,23 @@ exports[`Should render logged in 1`] = `
         />
       </Switch>
     </Suspense>
-  </HashRouter>
+  </BrowserRouter>
+  <ToastContainer
+    autoClose={5000}
+    closeButton={[Function]}
+    closeOnClick={true}
+    draggable={true}
+    draggableDirection="x"
+    draggablePercent={80}
+    hideProgressBar={false}
+    newestOnTop={false}
+    pauseOnFocusLoss={true}
+    pauseOnHover={true}
+    position="top-center"
+    role="alert"
+    rtl={false}
+    transition={[Function]}
+  />
 </div>
 `;
 
@@ -398,7 +466,7 @@ exports[`Should render not logged in 1`] = `
 <div
   className="App full-height container-fluid"
 >
-  <HashRouter>
+  <BrowserRouter>
     <Suspense
       fallback={
         <div
@@ -476,6 +544,32 @@ exports[`Should render not logged in 1`] = `
           }
           path="/confirm-email"
         />
+        <Route
+          component={
+            Object {
+              "$$typeof": Symbol(react.lazy),
+              "_init": [Function],
+              "_payload": Object {
+                "_result": [Function],
+                "_status": -1,
+              },
+            }
+          }
+          path="/procore-auth"
+        />
+        <Connect(PrivateRoute)
+          component={
+            Object {
+              "$$typeof": Symbol(react.lazy),
+              "_init": [Function],
+              "_payload": Object {
+                "_result": [Function],
+                "_status": -1,
+              },
+            }
+          }
+          path="/procore-auth-send"
+        />
         <Connect(PrivateRoute)
           component={
             Object {
@@ -500,7 +594,7 @@ exports[`Should render not logged in 1`] = `
               },
             }
           }
-          path="/project/:id?"
+          path="/project/:id"
         />
         <Connect(PrivateRoute)
           component={
@@ -526,7 +620,7 @@ exports[`Should render not logged in 1`] = `
               },
             }
           }
-          path="/team/:id?"
+          path="/team/:id"
         />
         <Connect(PrivateRoute)
           component={
@@ -552,7 +646,7 @@ exports[`Should render not logged in 1`] = `
               },
             }
           }
-          path="/inception/:id?"
+          path="/inception/:id"
         />
         <Connect(PrivateRoute)
           component={
@@ -578,7 +672,7 @@ exports[`Should render not logged in 1`] = `
               },
             }
           }
-          path="/feasibility/:id?"
+          path="/feasibility/:id"
         />
         <Connect(PrivateRoute)
           component={
@@ -604,7 +698,7 @@ exports[`Should render not logged in 1`] = `
               },
             }
           }
-          path="/design/:id?"
+          path="/design/:id"
         />
         <Connect(PrivateRoute)
           component={
@@ -630,7 +724,7 @@ exports[`Should render not logged in 1`] = `
               },
             }
           }
-          path="/tender/:id?"
+          path="/tender/:id"
         />
         <Connect(PrivateRoute)
           component={
@@ -656,7 +750,7 @@ exports[`Should render not logged in 1`] = `
               },
             }
           }
-          path="/construction/:id?"
+          path="/construction/:id"
         />
         <Connect(PrivateRoute)
           component={
@@ -682,7 +776,7 @@ exports[`Should render not logged in 1`] = `
               },
             }
           }
-          path="/handover/:id?"
+          path="/handover/:id"
         />
         <Connect(PrivateRoute)
           component={
@@ -708,7 +802,7 @@ exports[`Should render not logged in 1`] = `
               },
             }
           }
-          path="/occupation/:id?"
+          path="/occupation/:id"
         />
         <Connect(PrivateRoute)
           component={
@@ -734,7 +828,33 @@ exports[`Should render not logged in 1`] = `
               },
             }
           }
-          path="/refurbishment/:id?"
+          path="/refurbishment/:id"
+        />
+        <Connect(PrivateRoute)
+          component={
+            Object {
+              "$$typeof": Symbol(react.lazy),
+              "_init": [Function],
+              "_payload": Object {
+                "_result": [Function],
+                "_status": -1,
+              },
+            }
+          }
+          path="/test"
+        />
+        <Connect(PrivateRoute)
+          component={
+            Object {
+              "$$typeof": Symbol(react.lazy),
+              "_init": [Function],
+              "_payload": Object {
+                "_result": [Function],
+                "_status": -1,
+              },
+            }
+          }
+          path="/test/:id"
         />
         <Connect(PrivateRoute)
           component={
@@ -784,7 +904,23 @@ exports[`Should render not logged in 1`] = `
         />
       </Switch>
     </Suspense>
-  </HashRouter>
+  </BrowserRouter>
+  <ToastContainer
+    autoClose={5000}
+    closeButton={[Function]}
+    closeOnClick={true}
+    draggable={true}
+    draggableDirection="x"
+    draggablePercent={80}
+    hideProgressBar={false}
+    newestOnTop={false}
+    pauseOnFocusLoss={true}
+    pauseOnHover={true}
+    position="top-center"
+    role="alert"
+    rtl={false}
+    transition={[Function]}
+  />
 </div>
 `;
 
@@ -792,7 +928,7 @@ exports[`Should render production 1`] = `
 <div
   className="App full-height container-fluid"
 >
-  <HashRouter>
+  <BrowserRouter>
     <Suspense
       fallback={
         <div
@@ -870,6 +1006,32 @@ exports[`Should render production 1`] = `
           }
           path="/confirm-email"
         />
+        <Route
+          component={
+            Object {
+              "$$typeof": Symbol(react.lazy),
+              "_init": [Function],
+              "_payload": Object {
+                "_result": [Function],
+                "_status": -1,
+              },
+            }
+          }
+          path="/procore-auth"
+        />
+        <Connect(PrivateRoute)
+          component={
+            Object {
+              "$$typeof": Symbol(react.lazy),
+              "_init": [Function],
+              "_payload": Object {
+                "_result": [Function],
+                "_status": -1,
+              },
+            }
+          }
+          path="/procore-auth-send"
+        />
         <Connect(PrivateRoute)
           component={
             Object {
@@ -894,7 +1056,7 @@ exports[`Should render production 1`] = `
               },
             }
           }
-          path="/project/:id?"
+          path="/project/:id"
         />
         <Connect(PrivateRoute)
           component={
@@ -920,7 +1082,7 @@ exports[`Should render production 1`] = `
               },
             }
           }
-          path="/team/:id?"
+          path="/team/:id"
         />
         <Connect(PrivateRoute)
           component={
@@ -946,7 +1108,7 @@ exports[`Should render production 1`] = `
               },
             }
           }
-          path="/inception/:id?"
+          path="/inception/:id"
         />
         <Connect(PrivateRoute)
           component={
@@ -972,7 +1134,7 @@ exports[`Should render production 1`] = `
               },
             }
           }
-          path="/feasibility/:id?"
+          path="/feasibility/:id"
         />
         <Connect(PrivateRoute)
           component={
@@ -998,7 +1160,7 @@ exports[`Should render production 1`] = `
               },
             }
           }
-          path="/design/:id?"
+          path="/design/:id"
         />
         <Connect(PrivateRoute)
           component={
@@ -1024,7 +1186,7 @@ exports[`Should render production 1`] = `
               },
             }
           }
-          path="/tender/:id?"
+          path="/tender/:id"
         />
         <Connect(PrivateRoute)
           component={
@@ -1050,7 +1212,7 @@ exports[`Should render production 1`] = `
               },
             }
           }
-          path="/construction/:id?"
+          path="/construction/:id"
         />
         <Connect(PrivateRoute)
           component={
@@ -1076,7 +1238,7 @@ exports[`Should render production 1`] = `
               },
             }
           }
-          path="/handover/:id?"
+          path="/handover/:id"
         />
         <Connect(PrivateRoute)
           component={
@@ -1102,7 +1264,7 @@ exports[`Should render production 1`] = `
               },
             }
           }
-          path="/occupation/:id?"
+          path="/occupation/:id"
         />
         <Connect(PrivateRoute)
           component={
@@ -1128,7 +1290,33 @@ exports[`Should render production 1`] = `
               },
             }
           }
-          path="/refurbishment/:id?"
+          path="/refurbishment/:id"
+        />
+        <Connect(PrivateRoute)
+          component={
+            Object {
+              "$$typeof": Symbol(react.lazy),
+              "_init": [Function],
+              "_payload": Object {
+                "_result": [Function],
+                "_status": -1,
+              },
+            }
+          }
+          path="/test"
+        />
+        <Connect(PrivateRoute)
+          component={
+            Object {
+              "$$typeof": Symbol(react.lazy),
+              "_init": [Function],
+              "_payload": Object {
+                "_result": [Function],
+                "_status": -1,
+              },
+            }
+          }
+          path="/test/:id"
         />
         <Connect(PrivateRoute)
           component={
@@ -1178,7 +1366,23 @@ exports[`Should render production 1`] = `
         />
       </Switch>
     </Suspense>
-  </HashRouter>
+  </BrowserRouter>
+  <ToastContainer
+    autoClose={5000}
+    closeButton={[Function]}
+    closeOnClick={true}
+    draggable={true}
+    draggableDirection="x"
+    draggablePercent={80}
+    hideProgressBar={false}
+    newestOnTop={false}
+    pauseOnFocusLoss={true}
+    pauseOnHover={true}
+    position="top-center"
+    role="alert"
+    rtl={false}
+    transition={[Function]}
+  />
 </div>
 `;
 
@@ -1186,7 +1390,7 @@ exports[`Should render staging 1`] = `
 <div
   className="App full-height container-fluid"
 >
-  <HashRouter>
+  <BrowserRouter>
     <Suspense
       fallback={
         <div
@@ -1264,6 +1468,32 @@ exports[`Should render staging 1`] = `
           }
           path="/confirm-email"
         />
+        <Route
+          component={
+            Object {
+              "$$typeof": Symbol(react.lazy),
+              "_init": [Function],
+              "_payload": Object {
+                "_result": [Function],
+                "_status": -1,
+              },
+            }
+          }
+          path="/procore-auth"
+        />
+        <Connect(PrivateRoute)
+          component={
+            Object {
+              "$$typeof": Symbol(react.lazy),
+              "_init": [Function],
+              "_payload": Object {
+                "_result": [Function],
+                "_status": -1,
+              },
+            }
+          }
+          path="/procore-auth-send"
+        />
         <Connect(PrivateRoute)
           component={
             Object {
@@ -1288,7 +1518,7 @@ exports[`Should render staging 1`] = `
               },
             }
           }
-          path="/project/:id?"
+          path="/project/:id"
         />
         <Connect(PrivateRoute)
           component={
@@ -1314,7 +1544,7 @@ exports[`Should render staging 1`] = `
               },
             }
           }
-          path="/team/:id?"
+          path="/team/:id"
         />
         <Connect(PrivateRoute)
           component={
@@ -1340,7 +1570,7 @@ exports[`Should render staging 1`] = `
               },
             }
           }
-          path="/inception/:id?"
+          path="/inception/:id"
         />
         <Connect(PrivateRoute)
           component={
@@ -1366,7 +1596,7 @@ exports[`Should render staging 1`] = `
               },
             }
           }
-          path="/feasibility/:id?"
+          path="/feasibility/:id"
         />
         <Connect(PrivateRoute)
           component={
@@ -1392,7 +1622,7 @@ exports[`Should render staging 1`] = `
               },
             }
           }
-          path="/design/:id?"
+          path="/design/:id"
         />
         <Connect(PrivateRoute)
           component={
@@ -1418,7 +1648,7 @@ exports[`Should render staging 1`] = `
               },
             }
           }
-          path="/tender/:id?"
+          path="/tender/:id"
         />
         <Connect(PrivateRoute)
           component={
@@ -1444,7 +1674,7 @@ exports[`Should render staging 1`] = `
               },
             }
           }
-          path="/construction/:id?"
+          path="/construction/:id"
         />
         <Connect(PrivateRoute)
           component={
@@ -1470,7 +1700,7 @@ exports[`Should render staging 1`] = `
               },
             }
           }
-          path="/handover/:id?"
+          path="/handover/:id"
         />
         <Connect(PrivateRoute)
           component={
@@ -1496,7 +1726,7 @@ exports[`Should render staging 1`] = `
               },
             }
           }
-          path="/occupation/:id?"
+          path="/occupation/:id"
         />
         <Connect(PrivateRoute)
           component={
@@ -1522,7 +1752,33 @@ exports[`Should render staging 1`] = `
               },
             }
           }
-          path="/refurbishment/:id?"
+          path="/refurbishment/:id"
+        />
+        <Connect(PrivateRoute)
+          component={
+            Object {
+              "$$typeof": Symbol(react.lazy),
+              "_init": [Function],
+              "_payload": Object {
+                "_result": [Function],
+                "_status": -1,
+              },
+            }
+          }
+          path="/test"
+        />
+        <Connect(PrivateRoute)
+          component={
+            Object {
+              "$$typeof": Symbol(react.lazy),
+              "_init": [Function],
+              "_payload": Object {
+                "_result": [Function],
+                "_status": -1,
+              },
+            }
+          }
+          path="/test/:id"
         />
         <Connect(PrivateRoute)
           component={
@@ -1572,6 +1828,22 @@ exports[`Should render staging 1`] = `
         />
       </Switch>
     </Suspense>
-  </HashRouter>
+  </BrowserRouter>
+  <ToastContainer
+    autoClose={5000}
+    closeButton={[Function]}
+    closeOnClick={true}
+    draggable={true}
+    draggableDirection="x"
+    draggablePercent={80}
+    hideProgressBar={false}
+    newestOnTop={false}
+    pauseOnFocusLoss={true}
+    pauseOnHover={true}
+    position="top-center"
+    role="alert"
+    rtl={false}
+    transition={[Function]}
+  />
 </div>
 `;

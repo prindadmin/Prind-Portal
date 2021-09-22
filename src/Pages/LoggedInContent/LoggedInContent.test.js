@@ -27,9 +27,18 @@ beforeEach(() => {
     projects: {
       chosenProject: {}
     },
+    procore: {
+      companyId: "TestCompanyId",
+      projectId: "TestProjectId"
+    },
+    user: {
+      details: {}
+    },
     getProjectDetails: mockGetProjectDetails,
     saveProjectID: mockSaveProjectID,
     getProjectMembers: mockGetProjectMembers,
+    resetSite: jest.fn(),
+    checkServerAccessToProcore: jest.fn()
   }
 });
 

@@ -149,8 +149,8 @@ exports[`FileUploader - Should render 1`] = `
                 disabled={true}
                 id="upload-button"
                 onClick={[Function]}
-                text="Upload File"
                 type="submit"
+                value="Upload File"
               />
             </div>
           }
@@ -312,8 +312,8 @@ exports[`FileUploader - Should render with first element not having a proof link
                 disabled={true}
                 id="upload-button"
                 onClick={[Function]}
-                text="Upload File"
                 type="submit"
+                value="Upload File"
               />
             </div>
           }

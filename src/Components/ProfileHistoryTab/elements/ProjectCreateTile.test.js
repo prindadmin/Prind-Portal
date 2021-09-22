@@ -9,7 +9,7 @@ beforeEach(() => {
     details: {
       filename: "test-file.txt",
       projectName: "test project",
-      dateTime: "2021-03-31T09:01:03"
+      dateTime: new Date("2021-03-31T09:01:03")
     }
   }
 });

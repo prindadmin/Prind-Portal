@@ -26,29 +26,33 @@ beforeEach(() => {
     location: {
       pathname: "/construction"
     },
-    pageContent: {
-      construction: {
-        fields: [
-          {
-            fileDetails: [],
-            editable: true,
-            default: true,
-            description: 'A construction phase plan is a document required under CDM. It is required on all construction projects and is used to plan and manage the construction works in a safe manner.',
-            id: '1',
-            title: 'Please upload your Construction Phase Plan (CPP)',
-            type: 'file'
-          },
-          {
-            fileDetails: [],
-            editable: true,
-            default: true,
-            description: 'Meeting records should be uploaded for the project record to allow all parties to stay informed about progress on the project.',
-            id: '2',
-            title: 'Please upload your Monthly Progress report',
-            type: 'file'
-          }
-        ]
-      }
+    currentPageContent: {
+      standards: [
+        {
+          id: "TestStandardId",
+          name: "Test Standard",
+          fields: [
+            {
+              id: '1',
+              title: 'Please upload your Construction Phase Plan (CPP)',
+              description: 'A construction phase plan is a document required under CDM. It is required on all construction projects and is used to plan and manage the construction works in a safe manner.',
+              type: 'file',
+              default: true,
+              editable: true,
+              fileDetails: []
+            },
+            {
+              id: '2',
+              title: 'Please upload your Monthly Progress report',
+              description: 'Meeting records should be uploaded for the project record to allow all parties to stay informed about progress on the project.',
+              type: 'file',
+              default: true,
+              editable: true,
+              fileDetails: [],
+            }
+          ]
+        }
+      ]
     },
     pageName: "construction",
     projectId: "",
@@ -58,7 +62,7 @@ beforeEach(() => {
 })
 
 
-it('Project Stage Template Page - Should render with no project', () => {
+it('Project Stage Template Page With Standards - Should render with no project', () => {
   const component = shallow(<Component {...props} />);
   expect(component).toMatchSnapshot();
   expect(mockGetContent).not.toHaveBeenCalled()
@@ -66,7 +70,7 @@ it('Project Stage Template Page - Should render with no project', () => {
 });
 
 
-it('Project Stage Template Page - Should render with a project', () => {
+it('Project Stage Template Page With Standards - Should render with a project', () => {
   props.projectId = "123"
   const resolvingGetContent = jest.fn((projectId, pageName, resolve, reject) => {
     resolve("success")
@@ -79,7 +83,7 @@ it('Project Stage Template Page - Should render with a project', () => {
 });
 
 
-it('Project Stage Template Page - Should render with a project then change project', () => {
+it('Project Stage Template Page With Standards - Should render with a project then change project', () => {
   props.projectId = "123"
   const resolvingGetContent = jest.fn((projectId, pageName, resolve, reject) => {
     resolve("success")
@@ -98,7 +102,7 @@ it('Project Stage Template Page - Should render with a project then change proje
 });
 
 
-it('Project Stage Template Page - Should render with a project then change stage', () => {
+it('Project Stage Template Page With Standards - Should render with a project then change stage', () => {
   props.projectId = "123"
   const resolvingGetContent = jest.fn((projectId, pageName, resolve, reject) => {
     resolve("success")
@@ -110,20 +114,24 @@ it('Project Stage Template Page - Should render with a project then change stage
   expect(component).toMatchSnapshot();
   component.setProps({
     pageName: "design",
-    pageContent: {
-      design: {
-        fields: [
-          {
-            fileDetails: [],
-            editable: true,
-            default: true,
-            description: 'This document is required before any design work can start.',
-            id: '1',
-            title: 'Please Upload your Design Risk Assessment (DRA)',
-            type: 'file'
-          }
-        ]
-      }
+    currentPageContent: {
+      standards: [
+        {
+          id: "UpdatedTestStandard",
+          name: "Updated Test Standard",
+          fields: [
+            {
+              id: '1',
+              title: 'Please Upload your Design Risk Assessment (DRA)',
+              description: 'This document is required before any design work can start.',
+              type: 'file',
+              default: true,
+              editable: true,
+              fileDetails: [],
+            }
+          ]
+        }
+      ]
     }
   })
   expect(resolvingGetContent).toHaveBeenCalledWith("123", "design", expect.any(Function), expect.any(Function))
@@ -132,7 +140,7 @@ it('Project Stage Template Page - Should render with a project then change stage
 });
 
 
-it('Project Stage Template Page - Should render with a project then change project to no project', () => {
+it('Project Stage Template Page With Standards - Should render with a project then change project to no project', () => {
   props.projectId = "123"
   const resolvingGetContent = jest.fn((projectId, pageName, resolve, reject) => {
     resolve("success")
@@ -154,7 +162,7 @@ it('Project Stage Template Page - Should render with a project then change proje
 });
 
 
-it('Project Stage Template Page - Should show error fetching page content', () => {
+it('Project Stage Template Page With Standards - Should show error fetching page content', () => {
   props.projectId = "123"
   const resolvingGetContent = jest.fn((projectId, pageName, resolve, reject) => {
     reject({
@@ -172,7 +180,7 @@ it('Project Stage Template Page - Should show error fetching page content', () =
 });
 
 
-it('Project Stage Template Page - Should render and click create field button', () => {
+it('Project Stage Template Page With Standards - Should render and click create field button', () => {
   props.projectId = "123"
   const resolvingGetContent = jest.fn((projectId, pageName, resolve, reject) => {
     resolve("success")
@@ -189,7 +197,7 @@ it('Project Stage Template Page - Should render and click create field button', 
 });
 
 
-it('Project Stage Template Page - Should render and click create field button then close custom field', () => {
+it('Project Stage Template Page With Standards - Should render and click create field button then close custom field', () => {
   props.projectId = "123"
   const resolvingGetContent = jest.fn((projectId, pageName, resolve, reject) => {
     resolve("success")
@@ -210,7 +218,7 @@ it('Project Stage Template Page - Should render and click create field button th
 });
 
 
-it('Project Stage Template Page - Should render with a project but no fields', () => {
+it('Project Stage Template Page With Standards - Should render with a project but no fields', () => {
   props.projectId = "123"
   props.pageContent.construction.fields = []
   const resolvingGetContent = jest.fn((projectId, pageName, resolve, reject) => {
@@ -221,4 +229,4 @@ it('Project Stage Template Page - Should render with a project but no fields', (
   expect(resolvingGetContent).toHaveBeenCalledWith("123", "construction", expect.any(Function), expect.any(Function))
   expect(mockRequestS3ProjectFileUploadToken).toHaveBeenCalledWith("123", "construction")
   expect(component).toMatchSnapshot();
-}); 
+});

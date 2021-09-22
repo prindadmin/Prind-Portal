@@ -14,6 +14,7 @@ beforeEach(() => {
   mockHistoryPush = jest.fn()
 
   props = {
+    getSignatureRequests: jest.fn(),
     rejectSignatureRequest: mockRejectSignatureRequest,
     updateChosenProject: mockUpdateChosenProject,
     requestDetails: {

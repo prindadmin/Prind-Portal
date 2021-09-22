@@ -5,7 +5,7 @@ import * as States from '../States'
 import * as Strings from '../Data/Strings'
 
 // TODO: FUTURE: Remove this once accreditations is working
-import UserAccreditations from '../Components/Temp/UserAccreditations'
+//import UserAccreditations from '../Components/Temp/UserAccreditations'
 
 const defaultChosenProject = {
   projectName: Strings.NO_PROJECT_SELECTED,
@@ -27,7 +27,8 @@ let defaultState = {
 }
 
 const blankChosenState = {
-  chosenProject: defaultChosenProject
+  chosenProject: defaultChosenProject,
+  error: null,
 }
 
 
@@ -127,7 +128,8 @@ it('Projects Reducer - saveProjectID without id provided', () => {
         projectName: Strings.NO_PROJECT_SELECTED,
         projectId: "",
         projectType: "",
-      }
+      },
+      error: null,
     }
   }
   const result = Functions.saveProjectID()

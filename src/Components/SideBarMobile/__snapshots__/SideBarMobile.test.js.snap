@@ -2,121 +2,123 @@
 
 exports[`Should render CDM project Sidebar 1`] = `
 <div
-  className="chooser-section col-12"
+  className="chooserContainer"
 >
-  <div
-    className="sidebar"
+  <Blueprint3.Select
+    filterable={false}
+    itemRenderer={[Function]}
+    items={
+      Array [
+        Object {
+          "id": "projectDetails",
+          "linkTo": "/project",
+          "name": "Project Details",
+        },
+        Object {
+          "id": "projectTeam",
+          "linkTo": "/team",
+          "name": "Project Team",
+        },
+        Object {
+          "id": "stageInception",
+          "linkTo": "/inception",
+          "name": "Inception",
+        },
+        Object {
+          "id": "stageFeasibility",
+          "linkTo": "/feasibility",
+          "name": "Feasibility",
+        },
+        Object {
+          "id": "stageDesign",
+          "linkTo": "/design",
+          "name": "Design",
+        },
+        Object {
+          "id": "stageTender",
+          "linkTo": "/tender",
+          "name": "Tender",
+        },
+        Object {
+          "id": "stageConstruction",
+          "linkTo": "/construction",
+          "name": "Construction",
+        },
+        Object {
+          "id": "stageHandover",
+          "linkTo": "/handover",
+          "name": "Handover",
+        },
+        Object {
+          "id": "stageOccupation",
+          "linkTo": "/occupation",
+          "name": "Occupation",
+        },
+        Object {
+          "id": "stageRefurbishment",
+          "linkTo": "/refurbishment",
+          "name": "Refurbishment",
+        },
+        Object {
+          "id": "stageTest",
+          "linkTo": "/test",
+          "name": "Test",
+        },
+      ]
+    }
   >
-    <Blueprint3.Select
-      filterable={false}
-      itemRenderer={[Function]}
-      items={
-        Array [
-          Object {
-            "id": "projectDetails",
-            "linkTo": "/project",
-            "name": "Project Details",
-          },
-          Object {
-            "id": "projectTeam",
-            "linkTo": "/team",
-            "name": "Project Team",
-          },
-          Object {
-            "id": "stageInception",
-            "linkTo": "/inception",
-            "name": "Inception",
-          },
-          Object {
-            "id": "stageFeasibility",
-            "linkTo": "/feasibility",
-            "name": "Feasibility",
-          },
-          Object {
-            "id": "stageDesign",
-            "linkTo": "/design",
-            "name": "Design",
-          },
-          Object {
-            "id": "stageTender",
-            "linkTo": "/tender",
-            "name": "Tender",
-          },
-          Object {
-            "id": "stageConstruction",
-            "linkTo": "/construction",
-            "name": "Construction",
-          },
-          Object {
-            "id": "stageHandover",
-            "linkTo": "/handover",
-            "name": "Handover",
-          },
-          Object {
-            "id": "stageOccupation",
-            "linkTo": "/occupation",
-            "name": "Occupation",
-          },
-          Object {
-            "id": "stageRefurbishment",
-            "linkTo": "/refurbishment",
-            "name": "Refurbishment",
-          },
-        ]
+    <Blueprint3.Button
+      icon={
+        <ItemIcon
+          size="1x"
+          type="burger"
+        />
       }
-    >
-      <Blueprint3.Button
-        icon={
-          <ItemIcon
-            size="1x"
-            type="burger"
-          />
-        }
-      />
-    </Blueprint3.Select>
-  </div>
+    />
+  </Blueprint3.Select>
 </div>
 `;
 
 exports[`Should render DSHF project Sidebar 1`] = `
 <div
-  className="chooser-section col-12"
+  className="chooserContainer"
 >
-  <div
-    className="sidebar"
+  <Blueprint3.Select
+    filterable={false}
+    itemRenderer={[Function]}
+    items={
+      Array [
+        Object {
+          "id": "projectDetails",
+          "linkTo": "/project",
+          "name": "Project Details",
+        },
+        Object {
+          "id": "projectTeam",
+          "linkTo": "/team",
+          "name": "Project Team",
+        },
+        Object {
+          "id": "stageOccupation",
+          "linkTo": "/occupation",
+          "name": "HSF",
+        },
+        Object {
+          "id": "stageTest",
+          "linkTo": "/test",
+          "name": "Test",
+        },
+      ]
+    }
   >
-    <Blueprint3.Select
-      filterable={false}
-      itemRenderer={[Function]}
-      items={
-        Array [
-          Object {
-            "id": "projectDetails",
-            "linkTo": "/project",
-            "name": "Project Details",
-          },
-          Object {
-            "id": "projectTeam",
-            "linkTo": "/team",
-            "name": "Project Team",
-          },
-          Object {
-            "id": "stageOccupation",
-            "linkTo": "/occupation",
-            "name": "HSF",
-          },
-        ]
+    <Blueprint3.Button
+      icon={
+        <ItemIcon
+          size="1x"
+          type="burger"
+        />
       }
-    >
-      <Blueprint3.Button
-        icon={
-          <ItemIcon
-            size="1x"
-            type="burger"
-          />
-        }
-      />
-    </Blueprint3.Select>
-  </div>
+    />
+  </Blueprint3.Select>
 </div>
 `;

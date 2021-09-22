@@ -2,7 +2,7 @@
 
 exports[`Should render 1`] = `
 <div
-  className="full-height full-width center-content"
+  className="fullScreenTile"
   id="full-screen-tile"
   style={
     Object {
@@ -12,6 +12,7 @@ exports[`Should render 1`] = `
 >
   <img
     alt=""
+    className="icon"
     src="/images/icons/file-search.svg"
   />
   Hello, Full Screen
@@ -20,7 +21,7 @@ exports[`Should render 1`] = `
 
 exports[`Should render with default text 1`] = `
 <div
-  className="full-height full-width center-content"
+  className="fullScreenTile"
   id="full-screen-tile"
   style={
     Object {
@@ -30,6 +31,7 @@ exports[`Should render with default text 1`] = `
 >
   <img
     alt=""
+    className="icon"
     src="/images/icons/file-search.svg"
   />
 </div>

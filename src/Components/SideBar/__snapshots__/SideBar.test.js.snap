@@ -67,6 +67,12 @@ exports[`Should render CDM project Sidebar 1`] = `
       pageName="Refurbishment"
       selected={false}
     />
+    <ListItem
+      key="Testitem"
+      linkTo="/test/1234"
+      pageName="Test"
+      selected={false}
+    />
   </div>
 </div>
 `;
@@ -95,6 +101,12 @@ exports[`Should render DSHF project Sidebar 1`] = `
       linkTo="/occupation/1234"
       pageName="HSF"
       selected={true}
+    />
+    <ListItem
+      key="Testitem"
+      linkTo="/test/1234"
+      pageName="Test"
+      selected={false}
     />
   </div>
 </div>

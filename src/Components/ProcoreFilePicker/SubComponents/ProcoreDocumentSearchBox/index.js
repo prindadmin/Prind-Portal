@@ -1,3 +1,0 @@
-import ProcoreDocumentSearchBoxContainer from './ProcoreDocumentSearchBoxContainer'
-
-export default ProcoreDocumentSearchBoxContainer

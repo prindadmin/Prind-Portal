@@ -66,7 +66,7 @@ export class UserDetailsPopOver extends Component {
   singleAccreditationPresentation = (accreditation, id) => {
     return (
       <UserAccreditationTile
-        {...accreditation}
+        accreditation={accreditation}
         key={id} />
     )
   }
