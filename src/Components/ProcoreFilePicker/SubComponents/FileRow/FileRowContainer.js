@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import FileRow from './FileRow'
-import * as procoreReducer from '../../../../Reducers/procore'
+//import * as procoreReducer from '../../../../Reducers/procore'
 
 const mapStatetoProps = state => {
   return {

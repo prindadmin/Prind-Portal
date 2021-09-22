@@ -1,4 +1,4 @@
-import React, { Component, lazy } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classes from './ProcoreAuthSendPage.module.css'
 import * as procoreIframeHelpers from '@procore/procore-iframe-helpers'

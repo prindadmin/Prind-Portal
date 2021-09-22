@@ -1,5 +1,5 @@
 
-import { Component, Fragment } from 'react'
+import { Component } from 'react'
 import PropTypes from 'prop-types'
 import classes from './ProjectDetailsPage.module.css'
 
@@ -7,13 +7,9 @@ import ReactGA from 'react-ga';
 
 // Data
 import * as Strings from '../../Data/Strings'
-import * as Validators from '../../Validators'
-import * as Endpoints from '../../Data/Endpoints'
 
 // Components
 import NoProjectSelected from '../../Components/Common/NoProjectSelected'
-import PopOverHandler from '../../Components/Common/popOverHandler'
-import * as FormInputs from '../../Components/Common/formInputs'
 import ProjectDetailsSection from '../../Components/ProjectDetailsSection'
 import ProjectTemplatesSection from '../../Components/ProjectTemplatesSection'
 

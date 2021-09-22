@@ -5,8 +5,8 @@ import { Callout } from '@blueprintjs/core'
 import PopOverHandler from '../popOverHandler'
 
 import * as Strings from '../../../Data/Strings'
-import * as Validators from '../../../Validators'
-import * as FormInputs from '../formInputs'
+//import * as Validators from '../../../Validators'
+//import * as FormInputs from '../formInputs'
 
 const fieldTypes = process.env.REACT_APP_FUNCTIONALITY_GIT_TEXT_V1 === "True" ?
 [

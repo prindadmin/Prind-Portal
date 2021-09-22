@@ -6,7 +6,7 @@ import classes from './LoggedInContent.module.css'
 import PAGENAMES from '../../Data/pageNames'
 import * as Strings from '../../Data/Strings'
 import * as PageStates from '../PageStates'
-import * as Endpoints from '../../Data/Endpoints'
+//import * as Endpoints from '../../Data/Endpoints'
 import * as ServerErrors from '../../Data/ServerErrors'
 
 
@@ -187,8 +187,8 @@ export class LoggedInContent extends Component {
   }
 
   getProjectDataForSpecificStage = () => {
-    const pageName = this.getPageName()
-    const projectId = this.getURLProjectId()
+    //const pageName = this.getPageName()
+    //const projectId = this.getURLProjectId()
     // TODO: FUTURE: Move this to the stage page template
     //this.props.requestS3ProjectFileUploadToken(projectId, pageName)
   }

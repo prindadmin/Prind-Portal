@@ -4,8 +4,6 @@ import classes from './FileUploader.module.css'
 
 import {
   FileInput,
-  Button,
-  Intent,
   Tab,
   Tabs,
 } from '@blueprintjs/core'
@@ -227,8 +225,7 @@ export class FileUploader extends Component {
 
 
   uploadTabProcore = () => {
-    const { filePrompt, hasChosenFile } = this.state
-    const { elementContent } = this.props
+    const { hasChosenFile } = this.state
 
     return (
       <div id='upload-tab-container'>

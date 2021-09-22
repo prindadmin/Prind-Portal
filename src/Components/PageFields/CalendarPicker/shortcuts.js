@@ -3,7 +3,7 @@ import * as Strings from '../../../Data/Strings'
 
 const today = new Date()
 
-export default [
+const ShortcutsArray = [
   {
     date: new Date(today.getFullYear() + 3, today.getMonth(), today.getDate()),
     label: Strings.THREE_YEARS_HENCE
@@ -43,3 +43,5 @@ export default [
   }
   */
 ]
+
+export default ShortcutsArray

@@ -12,7 +12,6 @@ import CreateCustomFieldPopover from '../../Components/Common/CreateCustomFieldP
 import NoProjectSelected from '../../Components/Common/NoProjectSelected'
 import ErrorFetchingContent from '../../Components/Common/ErrorFetchingContent'
 import StandardMapper from '../../Components/StandardMapper'
-import PageFieldMapper from '../../Components/PageFieldMapper'
 
 import {
   Button,
@@ -78,7 +77,7 @@ export class StagePage extends Component {
   }
 
   componentDidMount() {
-    const { location, projectId, pageName } = this.props
+    const { location, projectId } = this.props
 
     // Register pageview with GA
     ReactGA.pageview(location.pathname);
@@ -195,6 +194,7 @@ export class StagePage extends Component {
             })
           }
         </div>
+        { this.props.location.pathname.startsWith(Endpoints.REFURBISHMENTPAGE) ? null : this.getCreateFieldButton() }
       </div>
     )
   }

@@ -4,7 +4,7 @@ import classes from './Body.module.css'
 
 const BodySection = props => {
 
-  const bodyClass = props.noFoundationsBannerShowing ? classes.bodySectionWithBanner : classes.bodySection
+  //const bodyClass = props.noFoundationsBannerShowing ? classes.bodySectionWithBanner : classes.bodySection
 
   return (
     <div id='logged-in-body-section' className={classes.bodySection}>

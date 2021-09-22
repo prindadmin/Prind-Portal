@@ -44,7 +44,7 @@ export class StagePage extends Component {
   }
 
   componentDidMount() {
-    const { location, projectId, pageName } = this.props
+    const { location, projectId } = this.props
 
     // Register pageview with GA
     ReactGA.pageview(location.pathname);

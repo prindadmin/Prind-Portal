@@ -2,13 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { InputGroup, Button, Icon, TextArea, MenuItem, RadioGroup, Radio, Checkbox } from '@blueprintjs/core'
-import { DatePicker } from '@blueprintjs/datetime'
+//import { DatePicker } from '@blueprintjs/datetime'
 import { Select } from "@blueprintjs/select";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 
-import * as Strings from '../../Data/Strings'
+//import * as Strings from '../../Data/Strings'
 
 const validationErrorStyle = {
   color: '#db3737',

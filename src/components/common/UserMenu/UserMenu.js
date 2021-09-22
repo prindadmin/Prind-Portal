@@ -73,7 +73,7 @@ class UserMenu extends Component {
   }
 
   getIcon = () => {
-    const { user } = this.props
+    //const { user } = this.props
     const hasNotifications = this.hasNotifications()
     return (
       <React.Fragment>
@@ -99,7 +99,7 @@ class UserMenu extends Component {
 
 
   openNotifications = (values) => {
-    const { user } = this.props
+    //const { user } = this.props
     this.props.history.push({
       pathname: '/profile',
       state: { tabToOpen: 'requests' },

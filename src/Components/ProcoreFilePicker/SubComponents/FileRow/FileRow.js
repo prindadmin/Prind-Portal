@@ -1,4 +1,4 @@
-import React, { Component, lazy } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classes from './FileRow.module.css'
 
@@ -6,10 +6,10 @@ import classes from './FileRow.module.css'
 import * as Strings from '../../../../Data/Strings'
 
 // Functions
-import * as Functions from '../../../../Functions'
+//import * as Functions from '../../../../Functions'
 
 // Components
-import LoadingSpinner from '../../../LoadingSpinner'
+//import LoadingSpinner from '../../../LoadingSpinner'
 
 // TODO: FUTURE: Add icon to the beginning of the file name depending on type
 export class FileRow extends Component {

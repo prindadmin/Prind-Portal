@@ -46,7 +46,7 @@ export class HeaderBar extends Component {
   }
 
   getLogo = () => {
-    return <img className={classes.logoImg} src="/images/logos/prind-tech-logo-white-text.svg" />
+    return <img className={classes.logoImg} src="/images/logos/prind-tech-logo-white-text.svg" alt="Prin-D Technology Logo"/>
   }
 
   render() {

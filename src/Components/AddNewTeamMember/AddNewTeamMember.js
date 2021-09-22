@@ -99,7 +99,6 @@ export class AddNewTeamMember extends Component {
 
 
   getNewMemberForm = () => {
-    const { addMemberError } = this.props
     const { roles } = this.props.members
     // Turn the roles array into options for the drop down
     const roleOptions = roles.map((role, index) => {

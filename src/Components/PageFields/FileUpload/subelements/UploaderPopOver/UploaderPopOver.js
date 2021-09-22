@@ -54,7 +54,6 @@ export class UploaderPopOver extends Component {
   }
 
   componentDidMount() {
-    const { projectID, pageName } = this.props
     // Upload the file to S3
     this.uploadToS3()
   }

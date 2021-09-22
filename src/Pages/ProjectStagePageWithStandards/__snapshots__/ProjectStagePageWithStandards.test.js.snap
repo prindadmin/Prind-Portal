@@ -1,5 +1,219 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Project Stage Template Page With Standards - Should render and click create field button 1`] = `
+<div
+  id="stage-page"
+>
+  <div
+    className="page-content-section"
+  >
+    <div
+      className="contentContainer"
+    >
+      <div
+        className="page-title"
+      >
+        <h1>
+          Project Construction
+        </h1>
+        <span>
+          You have appointed a Principal contractor (PC).  The PC has full responsibility for Health and Safety during this step.  The PC will provide a Construction Phase Plan (CPP).
+        </span>
+      </div>
+      <div
+        className="standardsContainer"
+      >
+        <withRouter(Connect(StandardMapper))
+          fields={
+            Array [
+              Object {
+                "default": true,
+                "description": "A construction phase plan is a document required under CDM. It is required on all construction projects and is used to plan and manage the construction works in a safe manner.",
+                "editable": true,
+                "fileDetails": Array [],
+                "id": "1",
+                "title": "Please upload your Construction Phase Plan (CPP)",
+                "type": "file",
+              },
+              Object {
+                "default": true,
+                "description": "Meeting records should be uploaded for the project record to allow all parties to stay informed about progress on the project.",
+                "editable": true,
+                "fileDetails": Array [],
+                "id": "2",
+                "title": "Please upload your Monthly Progress report",
+                "type": "file",
+              },
+            ]
+          }
+          id="TestStandardId"
+          key="0"
+          name="Test Standard"
+          pageName="construction"
+          projectId="123"
+        />
+      </div>
+      <div
+        className="customFieldButtonHolder"
+      >
+        <Blueprint3.Button
+          id="create-field-button"
+          intent="primary"
+          onClick={[Function]}
+          text="Create Custom Field"
+        />
+      </div>
+    </div>
+    <withRouter(Connect(Element))
+      onClosePopover={[Function]}
+      pageName="construction"
+      projectId="123"
+    />
+  </div>
+</div>
+`;
+
+exports[`Project Stage Template Page With Standards - Should render and click create field button then close custom field 1`] = `
+<div
+  id="stage-page"
+>
+  <div
+    className="page-content-section"
+  >
+    <div
+      className="contentContainer"
+    >
+      <div
+        className="page-title"
+      >
+        <h1>
+          Project Construction
+        </h1>
+        <span>
+          You have appointed a Principal contractor (PC).  The PC has full responsibility for Health and Safety during this step.  The PC will provide a Construction Phase Plan (CPP).
+        </span>
+      </div>
+      <div
+        className="standardsContainer"
+      >
+        <withRouter(Connect(StandardMapper))
+          fields={
+            Array [
+              Object {
+                "default": true,
+                "description": "A construction phase plan is a document required under CDM. It is required on all construction projects and is used to plan and manage the construction works in a safe manner.",
+                "editable": true,
+                "fileDetails": Array [],
+                "id": "1",
+                "title": "Please upload your Construction Phase Plan (CPP)",
+                "type": "file",
+              },
+              Object {
+                "default": true,
+                "description": "Meeting records should be uploaded for the project record to allow all parties to stay informed about progress on the project.",
+                "editable": true,
+                "fileDetails": Array [],
+                "id": "2",
+                "title": "Please upload your Monthly Progress report",
+                "type": "file",
+              },
+            ]
+          }
+          id="TestStandardId"
+          key="0"
+          name="Test Standard"
+          pageName="construction"
+          projectId="123"
+        />
+      </div>
+      <div
+        className="customFieldButtonHolder"
+      >
+        <Blueprint3.Button
+          id="create-field-button"
+          intent="primary"
+          onClick={[Function]}
+          text="Create Custom Field"
+        />
+      </div>
+    </div>
+    <withRouter(Connect(Element))
+      onClosePopover={[Function]}
+      pageName="construction"
+      projectId="123"
+    />
+  </div>
+</div>
+`;
+
+exports[`Project Stage Template Page With Standards - Should render and click create field button then close custom field 2`] = `
+<div
+  id="stage-page"
+>
+  <div
+    className="page-content-section"
+  >
+    <div
+      className="contentContainer"
+    >
+      <div
+        className="page-title"
+      >
+        <h1>
+          Project Construction
+        </h1>
+        <span>
+          You have appointed a Principal contractor (PC).  The PC has full responsibility for Health and Safety during this step.  The PC will provide a Construction Phase Plan (CPP).
+        </span>
+      </div>
+      <div
+        className="standardsContainer"
+      >
+        <withRouter(Connect(StandardMapper))
+          fields={
+            Array [
+              Object {
+                "default": true,
+                "description": "A construction phase plan is a document required under CDM. It is required on all construction projects and is used to plan and manage the construction works in a safe manner.",
+                "editable": true,
+                "fileDetails": Array [],
+                "id": "1",
+                "title": "Please upload your Construction Phase Plan (CPP)",
+                "type": "file",
+              },
+              Object {
+                "default": true,
+                "description": "Meeting records should be uploaded for the project record to allow all parties to stay informed about progress on the project.",
+                "editable": true,
+                "fileDetails": Array [],
+                "id": "2",
+                "title": "Please upload your Monthly Progress report",
+                "type": "file",
+              },
+            ]
+          }
+          id="TestStandardId"
+          key="0"
+          name="Test Standard"
+          pageName="construction"
+          projectId="123"
+        />
+      </div>
+      <div
+        className="customFieldButtonHolder"
+      >
+        <Blueprint3.Button
+          id="create-field-button"
+          intent="primary"
+          onClick={[Function]}
+          text="Create Custom Field"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Project Stage Template Page With Standards - Should render with a project 1`] = `
 <div
   id="stage-page"
@@ -51,6 +265,54 @@ exports[`Project Stage Template Page With Standards - Should render with a proje
           name="Test Standard"
           pageName="construction"
           projectId="123"
+        />
+      </div>
+      <div
+        className="customFieldButtonHolder"
+      >
+        <Blueprint3.Button
+          id="create-field-button"
+          intent="primary"
+          onClick={[Function]}
+          text="Create Custom Field"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Project Stage Template Page With Standards - Should render with a project but no fields 1`] = `
+<div
+  id="stage-page"
+>
+  <div
+    className="page-content-section"
+  >
+    <div
+      className="contentContainer"
+    >
+      <div
+        className="page-title"
+      >
+        <h1>
+          Project Construction
+        </h1>
+        <span>
+          You have appointed a Principal contractor (PC).  The PC has full responsibility for Health and Safety during this step.  The PC will provide a Construction Phase Plan (CPP).
+        </span>
+      </div>
+      <div
+        className="standardsContainer"
+      />
+      <div
+        className="customFieldButtonHolder"
+      >
+        <Blueprint3.Button
+          id="create-field-button"
+          intent="primary"
+          onClick={[Function]}
+          text="Create Custom Field"
         />
       </div>
     </div>
@@ -111,6 +373,16 @@ exports[`Project Stage Template Page With Standards - Should render with a proje
           projectId="123"
         />
       </div>
+      <div
+        className="customFieldButtonHolder"
+      >
+        <Blueprint3.Button
+          id="create-field-button"
+          intent="primary"
+          onClick={[Function]}
+          text="Create Custom Field"
+        />
+      </div>
     </div>
   </div>
 </div>
@@ -169,6 +441,16 @@ exports[`Project Stage Template Page With Standards - Should render with a proje
           projectId="456"
         />
       </div>
+      <div
+        className="customFieldButtonHolder"
+      >
+        <Blueprint3.Button
+          id="create-field-button"
+          intent="primary"
+          onClick={[Function]}
+          text="Create Custom Field"
+        />
+      </div>
     </div>
   </div>
 </div>
@@ -225,6 +507,16 @@ exports[`Project Stage Template Page With Standards - Should render with a proje
           name="Test Standard"
           pageName="construction"
           projectId="123"
+        />
+      </div>
+      <div
+        className="customFieldButtonHolder"
+      >
+        <Blueprint3.Button
+          id="create-field-button"
+          intent="primary"
+          onClick={[Function]}
+          text="Create Custom Field"
         />
       </div>
     </div>
@@ -297,6 +589,16 @@ exports[`Project Stage Template Page With Standards - Should render with a proje
           projectId="123"
         />
       </div>
+      <div
+        className="customFieldButtonHolder"
+      >
+        <Blueprint3.Button
+          id="create-field-button"
+          intent="primary"
+          onClick={[Function]}
+          text="Create Custom Field"
+        />
+      </div>
     </div>
   </div>
 </div>
@@ -344,6 +646,16 @@ exports[`Project Stage Template Page With Standards - Should render with a proje
           name="Updated Test Standard"
           pageName="design"
           projectId="123"
+        />
+      </div>
+      <div
+        className="customFieldButtonHolder"
+      >
+        <Blueprint3.Button
+          id="create-field-button"
+          intent="primary"
+          onClick={[Function]}
+          text="Create Custom Field"
         />
       </div>
     </div>

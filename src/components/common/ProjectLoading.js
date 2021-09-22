@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { Spinner, Intent } from '@blueprintjs/core'
 import LoadingSpinner from './LoadingSpinnerCSS'
 
 import * as Strings from '../../Data/Strings'

@@ -299,7 +299,7 @@ export class ProjectDetailsSection extends Component {
 
   projectDetails = () => {
 
-    const { showDeleteProjectConfirmation } = this.state
+    //const { showDeleteProjectConfirmation } = this.state
 
     return (
       <Fragment>

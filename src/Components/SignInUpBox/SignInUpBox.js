@@ -1,4 +1,4 @@
-import React, { Component, lazy, Suspense } from 'react'
+import React, { Component, Suspense } from 'react'
 import PropTypes from 'prop-types'
 import ReactGA from 'react-ga';
 

@@ -1,9 +1,9 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import ReactGA from 'react-ga';
 
 import Component from './ProjectStagePageWithStandards'
-import * as Strings from "../../Data/Strings"
+//import * as Strings from "../../Data/Strings"
 import * as ComponentState from './States'
 
 var props;
@@ -220,7 +220,7 @@ it('Project Stage Template Page With Standards - Should render and click create 
 
 it('Project Stage Template Page With Standards - Should render with a project but no fields', () => {
   props.projectId = "123"
-  props.pageContent.construction.fields = []
+  props.currentPageContent.standards = []
   const resolvingGetContent = jest.fn((projectId, pageName, resolve, reject) => {
     resolve("success")
   });

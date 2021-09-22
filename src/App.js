@@ -2,7 +2,7 @@ import React, { Component, lazy, Suspense } from 'react';
 import PropTypes from 'prop-types'
 import './App.css';
 
-import Amplify, { Auth } from 'aws-amplify';
+import Amplify from 'aws-amplify';
 import ReactGA from 'react-ga';
 
 import {

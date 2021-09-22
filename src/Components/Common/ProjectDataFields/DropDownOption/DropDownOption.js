@@ -206,9 +206,9 @@ export class DropDownOption extends Component {
 
   render() {
 
-    const { handleSubmit } = this.props
-    const { title, description, fieldDetails, editable } = this.props.elementContent
-    const { dropdownValue, textboxValue } = this.state
+    //const { handleSubmit } = this.props
+    const { title, description, fieldDetails } = this.props.elementContent
+    //const { dropdownValue, textboxValue } = this.state
 
     console.log(this.props.elementContent.fieldDetails)
 

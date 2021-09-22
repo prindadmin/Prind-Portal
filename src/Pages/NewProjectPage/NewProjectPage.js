@@ -6,7 +6,6 @@ import ReactGA from 'react-ga';
 
 // Data
 import * as Strings from '../../Data/Strings'
-import * as Validators from '../../Validators'
 import * as Endpoints from '../../Data/Endpoints'
 import * as PageStates from '../PageStates'
 

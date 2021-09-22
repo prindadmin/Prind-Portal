@@ -2,12 +2,10 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import {
-  Button,
-  Intent,
   Callout,
 } from '@blueprintjs/core'
 
-import * as FormInputs from '../../formInputs'
+//import * as FormInputs from '../../formInputs'
 import * as Strings from '../../../../Data/Strings'
 
 export class LongText extends Component {
@@ -97,7 +95,7 @@ export class LongText extends Component {
 
 
   render() {
-    const { title, description, fieldDetails, editable } = this.props.elementContent
+    const { title, description, editable } = this.props.elementContent
     const { textValue } = this.state
     return (
       <div id='long-text-element'>

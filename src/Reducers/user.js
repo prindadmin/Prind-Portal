@@ -1,20 +1,6 @@
 import * as Actions from '../Actions'
-
-import * as Endpoints from '../Data/Endpoints'
-
 import { defaultState } from '../Sagas/userSagas'
-/*
-let defaultState = {
-  fetching: false,
-  details: {},
-  history: {},
-  projectInvitations: [],
-  signatureRequests: [],
-  projectS3Token: {},
-  userS3Token: {},
-  currentRoute: Endpoints.DEFAULTLOGGEDINPAGE,
-}
-*/
+
 
 export const init = () => {
   return {
