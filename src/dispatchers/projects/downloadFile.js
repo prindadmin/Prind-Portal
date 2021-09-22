@@ -1,4 +1,7 @@
 
+// TODO: Replace this URL with the new URL
+// New URL = /project/{project_id}/page/{page}/standard/{standard_id}/index/{field_index}/version/{version}/get-file-url
+
 import { Auth } from 'aws-amplify';
 import API from '@aws-amplify/api';
 

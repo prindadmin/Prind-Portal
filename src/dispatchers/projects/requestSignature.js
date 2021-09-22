@@ -1,3 +1,7 @@
+
+// TODO: Replace this URL with the new URL
+// New URL = /project/{project_id}/page/{page}/standard/{standard_id}/index/{field_index}/request-signature
+
 import { Auth } from 'aws-amplify';
 import API from '@aws-amplify/api';
 
