@@ -46,6 +46,7 @@ export class CurrentVersion extends Component {
       signerPickerOpen: false,
       fetchError: false,
       errorText: "",
+      showLoadingSpinner: false
     }
   }
 
@@ -76,6 +77,12 @@ export class CurrentVersion extends Component {
     //console.log("Self sign file clicked")
     const { pageName, fieldID } = this.props
     const { projectId } = this.props.projects.chosenProject
+    // TODO: Update state to show the overlay loading spinner
+    /*
+    this.setState({
+      showLoadingSpinner: true
+    })
+    */
     // Send the request
     this.props.selfSignFile(
       projectId,
