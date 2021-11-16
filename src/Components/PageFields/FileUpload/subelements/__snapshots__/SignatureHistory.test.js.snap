@@ -29,13 +29,13 @@ exports[`SignatureHistory - Should render Signature History 1`] = `
     <div
       key="signatureDateTime-0"
     >
-      2021-01-11T11:11:11
+      Invalid Date
     </div>
     <div
       key="proofLink-0"
     >
       <a
-        href="https://testnet.explorer.factom.pro/entries/93ae94fce1d960dc818c049f9a23f8305cdea54dd6954153c57be62179db1fcf"
+        href="undefined/entries/93ae94fce1d960dc818c049f9a23f8305cdea54dd6954153c57be62179db1fcf"
         rel="noopener noreferrer"
         target="_blank"
       >
@@ -50,13 +50,13 @@ exports[`SignatureHistory - Should render Signature History 1`] = `
     <div
       key="signatureDateTime-1"
     >
-      2021-02-22T22:22:22
+      Invalid Date
     </div>
     <div
       key="proofLink-1"
     >
       <a
-        href="https://testnet.explorer.factom.pro/entries/93ae94fce1d960dc818c049f9a23f8305cdea54dd6954153c57be62179db1fcf"
+        href="undefined/entries/93ae94fce1d960dc818c049f9a23f8305cdea54dd6954153c57be62179db1fcf"
         rel="noopener noreferrer"
         target="_blank"
       >

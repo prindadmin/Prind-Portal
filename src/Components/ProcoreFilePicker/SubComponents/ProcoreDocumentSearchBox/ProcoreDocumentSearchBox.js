@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 // Data
 //import * as Endpoints from '../../Data/Endpoints'
-import * as Strings from '../../Data/Strings'
+import * as Strings from '../../../../Data/Strings'
 //import LoadingSpinner from '../../Components/LoadingSpinner'
 
 // Components

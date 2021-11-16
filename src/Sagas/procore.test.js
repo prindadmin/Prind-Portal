@@ -4,15 +4,19 @@ import { call, put, takeLatest, fork } from 'redux-saga/effects'
 
 import * as ProcoreSagas from './procore'
 import * as Actions from '../Actions'
-import * as States from '../States'
+//import * as States from '../States'
 import * as ProcoreDispatchers from '../Dispatchers/Procore'
 
 const defaultState = {
   fetching: false,
-  companyId: "28592",
+  companyId: "",
   companyName: "",
-  projectId: "1234",
+  projectId: "",
   projectName: "",
+  currentFolder: null,
+  folderHistory: {
+    chain: []
+  },
   folders: [],
   files: [],
   error: {},

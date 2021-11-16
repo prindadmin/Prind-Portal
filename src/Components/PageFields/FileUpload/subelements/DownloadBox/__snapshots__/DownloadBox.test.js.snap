@@ -2,9 +2,10 @@
 
 exports[`DownloadBox - Should click download button and resolve 1`] = `
 <div
-  className="download-box"
+  className="downloadBox"
   id="download-box"
   onClick={[Function]}
+  style={Object {}}
 >
   <div>
     <ItemIcon
@@ -20,9 +21,10 @@ exports[`DownloadBox - Should click download button and resolve 1`] = `
 
 exports[`DownloadBox - Should render 1`] = `
 <div
-  className="download-box"
+  className="downloadBox"
   id="download-box"
   onClick={[Function]}
+  style={Object {}}
 >
   <div>
     <ItemIcon
@@ -38,9 +40,10 @@ exports[`DownloadBox - Should render 1`] = `
 
 exports[`DownloadBox - Should render then unmount 1`] = `
 <div
-  className="download-box"
+  className="downloadBox"
   id="download-box"
   onClick={[Function]}
+  style={Object {}}
 >
   <div>
     <ItemIcon

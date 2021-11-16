@@ -116,6 +116,7 @@ exports[`should render 1`] = `
             }
           >
             <SignatureRequestTile
+              getSignatureRequests={[Function]}
               history={
                 Object {
                   "action": "POP",

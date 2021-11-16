@@ -127,7 +127,7 @@ class App extends Component{
       this.setState({
         oldConsoleLog: console.log
       })
-      window['console']['log'] = function() {};
+      //window['console']['log'] = function() {};
   }
 
   loadingPlaceholder = () => {

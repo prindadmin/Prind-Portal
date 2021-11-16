@@ -100,10 +100,21 @@ export class CurrentVersion extends Component {
   // TODO: URGENT: This link to the proof isn't working but the link in the versions tab is
   getDetailsTable = () => {
     const { details } = this.props
+    console.log("Current version details:", details)
+
     const uploadedDate = !details.uploadedDateTime ? undefined : new Date(details.uploadedDateTime * 1000)
 
-    const endOfProofLink = details.proofLink.split("/").slice(-1)[0]
-    const entryHash = endOfProofLink.replace("entry?hash=", "")
+    var endOfProofLink;
+    var entryHash;
+    try {
+      if (details.proofLink) {
+        endOfProofLink = details.proofLink.split("/").slice(-1)[0]
+        entryHash = endOfProofLink.replace("entry?hash=", "")
+      }
+    } catch (err) {
+      console.warn("Error when getting entryhash", err)
+    }
+
 
     return (
       <div className='details-table'>
@@ -117,7 +128,7 @@ export class CurrentVersion extends Component {
         <div>
           {
             !details.proofLink ?
-              Strings.NO_PROOF_AVAILABLE :
+              Strings.PROOF_STILL_PROCESSING :
               <div id='proof-link-container' onClick={e => e.stopPropagation()}>
                 <a id="proof-link" href={`${process.env.REACT_APP_FACTOM_EXPLORER_SITE}/entries/${entryHash}`} target="_blank" rel="noopener noreferrer">{Strings.LINK_TO_PROOF}</a>
               </div>

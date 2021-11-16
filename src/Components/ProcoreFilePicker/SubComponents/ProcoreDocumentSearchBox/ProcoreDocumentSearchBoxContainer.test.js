@@ -9,8 +9,8 @@ import {
 import ReactGA from 'react-ga';
 
 import * as Component from './ProcoreDocumentSearchBoxContainer'
-import * as States from '../../States'
-import * as procoreReducer from '../../Reducers/procore'
+import * as States from '../../../../States'
+import * as procoreReducer from '../../../../Reducers/procore'
 
 // https://www.robinwieruch.de/react-connected-component-test
 

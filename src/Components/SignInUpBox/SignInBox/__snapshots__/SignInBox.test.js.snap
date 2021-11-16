@@ -6,12 +6,12 @@ exports[`Should click forgot password text 1`] = `
     className="logo-container"
   >
     <a
-      href="https://buildingim.com"
+      href="https://prind.tech"
       rel="noopener noreferrer"
       target="_blank"
     >
       <img
-        alt="BuildingIM logo"
+        alt="Prin-D Technology logo"
         src="/images/logos/prind-tech-logo.png"
       />
     </a>
@@ -24,7 +24,7 @@ exports[`Should click forgot password text 1`] = `
   <div
     className="welcome-text-body"
   >
-    Fil in your login details to access the portal
+    Fill in your login details to access the portal
   </div>
   <form
     className="sign-in-form"
@@ -82,12 +82,12 @@ exports[`Should click sign up text 1`] = `
     className="logo-container"
   >
     <a
-      href="https://buildingim.com"
+      href="https://prind.tech"
       rel="noopener noreferrer"
       target="_blank"
     >
       <img
-        alt="BuildingIM logo"
+        alt="Prin-D Technology logo"
         src="/images/logos/prind-tech-logo.png"
       />
     </a>
@@ -100,7 +100,7 @@ exports[`Should click sign up text 1`] = `
   <div
     className="welcome-text-body"
   >
-    Fil in your login details to access the portal
+    Fill in your login details to access the portal
   </div>
   <form
     className="sign-in-form"
@@ -158,12 +158,12 @@ exports[`Should complete login 1`] = `
     className="logo-container"
   >
     <a
-      href="https://buildingim.com"
+      href="https://prind.tech"
       rel="noopener noreferrer"
       target="_blank"
     >
       <img
-        alt="BuildingIM logo"
+        alt="Prin-D Technology logo"
         src="/images/logos/prind-tech-logo.png"
       />
     </a>
@@ -176,7 +176,7 @@ exports[`Should complete login 1`] = `
   <div
     className="welcome-text-body"
   >
-    Fil in your login details to access the portal
+    Fill in your login details to access the portal
   </div>
   <div
     className="lds-ring"
@@ -195,12 +195,12 @@ exports[`Should fail login 1`] = `
     className="logo-container"
   >
     <a
-      href="https://buildingim.com"
+      href="https://prind.tech"
       rel="noopener noreferrer"
       target="_blank"
     >
       <img
-        alt="BuildingIM logo"
+        alt="Prin-D Technology logo"
         src="/images/logos/prind-tech-logo.png"
       />
     </a>
@@ -213,7 +213,7 @@ exports[`Should fail login 1`] = `
   <div
     className="welcome-text-body"
   >
-    Fil in your login details to access the portal
+    Fill in your login details to access the portal
   </div>
   <form
     className="sign-in-form"
@@ -281,12 +281,12 @@ exports[`Should load with username prop 1`] = `
     className="logo-container"
   >
     <a
-      href="https://buildingim.com"
+      href="https://prind.tech"
       rel="noopener noreferrer"
       target="_blank"
     >
       <img
-        alt="BuildingIM logo"
+        alt="Prin-D Technology logo"
         src="/images/logos/prind-tech-logo.png"
       />
     </a>
@@ -299,7 +299,7 @@ exports[`Should load with username prop 1`] = `
   <div
     className="welcome-text-body"
   >
-    Fil in your login details to access the portal
+    Fill in your login details to access the portal
   </div>
   <form
     className="sign-in-form"
@@ -367,12 +367,12 @@ exports[`Should render sign in box 1`] = `
     className="logo-container"
   >
     <a
-      href="https://buildingim.com"
+      href="https://prind.tech"
       rel="noopener noreferrer"
       target="_blank"
     >
       <img
-        alt="BuildingIM logo"
+        alt="Prin-D Technology logo"
         src="/images/logos/prind-tech-logo.png"
       />
     </a>
@@ -385,7 +385,7 @@ exports[`Should render sign in box 1`] = `
   <div
     className="welcome-text-body"
   >
-    Fil in your login details to access the portal
+    Fill in your login details to access the portal
   </div>
   <form
     className="sign-in-form"
@@ -443,12 +443,12 @@ exports[`Should render sign in box with webp 1`] = `
     className="logo-container"
   >
     <a
-      href="https://buildingim.com"
+      href="https://prind.tech"
       rel="noopener noreferrer"
       target="_blank"
     >
       <img
-        alt="BuildingIM logo"
+        alt="Prin-D Technology logo"
         src="/images/logos/prind-tech-logo.webp"
       />
     </a>
@@ -461,7 +461,7 @@ exports[`Should render sign in box with webp 1`] = `
   <div
     className="welcome-text-body"
   >
-    Fil in your login details to access the portal
+    Fill in your login details to access the portal
   </div>
   <form
     className="sign-in-form"

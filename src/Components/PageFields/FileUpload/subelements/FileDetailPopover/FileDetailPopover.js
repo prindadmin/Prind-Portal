@@ -83,7 +83,7 @@ export class FileDetailPopover extends Component {
             <div>{chosenFileDetails.uploadedBy !== undefined ? chosenFileDetails.uploadedBy : <br />}</div>
             {
               chosenFileDetails.proofLink === undefined ?
-                Strings.NO_PROOF_AVAILABLE :
+                Strings.PROOF_STILL_PROCESSING :
                 <div id='proof-link-container' onClick={e => e.stopPropagation()}>
                   <a href={`${process.env.REACT_APP_FACTOM_EXPLORER_SITE}/entries/${entryHash}`} target="_blank" rel="noopener noreferrer">{Strings.LINK_TO_PROOF}</a>
                 </div>

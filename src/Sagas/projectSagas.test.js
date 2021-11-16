@@ -10,16 +10,27 @@ import * as Dispatchers from '../Dispatchers/projects'
 
 // TODO: FUTURE: Test all the rejects from the Sagas
 
+const defaultChosenProject = {
+  projectName: Strings.NO_PROJECT_SELECTED,
+  projectId: "",
+  projectType: "",
+  projectAddressLine1: "",
+  projectAddressLine2: "",
+  projectAddressLine3: "",
+  projectAddressTown: "",
+  projectAddressRegion: "",
+  projectAddressCountry: "",
+  projectAddressPostalCode: "",
+  projectDescription: "",
+  projectReference: "",
+}
+
 const defaultState = {
   accessibleProjects: {
     projectCreator: [],
     projectRole: []
   },
-  chosenProject: {
-    projectName: Strings.NO_PROJECT_SELECTED,
-    projectId: "",
-    projectType: "",
-  },
+  chosenProject: defaultChosenProject,
   memberList: [],
   downloadURL: "",
   fileDetails: {},

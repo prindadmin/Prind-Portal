@@ -6,12 +6,12 @@ Array [
     className="logo-container"
   >
     <a
-      href="https://buildingim.com"
+      href="https://prind.tech"
       rel="noopener noreferrer"
       target="_blank"
     >
       <img
-        alt="BuildingIM logo"
+        alt="Prin-D Technology logo"
         src="/images/logos/prind-tech-logo.webp"
       />
     </a>
@@ -24,7 +24,7 @@ Array [
   <div
     className="welcome-text-body"
   >
-    Fil in your login details to access the portal
+    Fill in your login details to access the portal
   </div>,
   <form
     className="sign-in-form"

@@ -5,6 +5,15 @@ const defaultChosenProject = {
   projectName: Strings.NO_PROJECT_SELECTED,
   projectId: "",
   projectType: "",
+  projectAddressLine1: "",
+  projectAddressLine2: "",
+  projectAddressLine3: "",
+  projectAddressTown: "",
+  projectAddressRegion: "",
+  projectAddressCountry: "",
+  projectAddressPostalCode: "",
+  projectDescription: "",
+  projectReference: "",
 }
 
 const defaultState = {

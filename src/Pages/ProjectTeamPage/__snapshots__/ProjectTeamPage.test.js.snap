@@ -1,39 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`New Project Page - Should render with no project 1`] = `
-<Hoc
-  destroyOnUnmount={true}
-  enableReinitialize={false}
-  forceUnregisterOnUnmount={false}
-  form="projectTeam"
-  forwardedRef={null}
-  getCurrentMembers={[MockFunction]}
-  getFormState={[Function]}
-  getRoles={[MockFunction]}
-  keepDirtyOnReinitialize={false}
-  location={
-    Object {
-      "pathname": "/newproject",
-    }
-  }
-  persistentSubmitErrors={false}
-  projects={
-    Object {
-      "chosenProject": Object {
-        "projectId": "",
-        "projectName": "Please select a project",
-        "projectType": "",
-      },
-    }
-  }
-  pure={true}
-  shouldAsyncValidate={[Function]}
-  shouldError={[Function]}
-  shouldValidate={[Function]}
-  shouldWarn={[Function]}
-  submitAsSideEffect={false}
-  touchOnBlur={true}
-  touchOnChange={false}
-  updateUnregisteredFields={false}
-/>
+<div
+  id="project-team-page"
+>
+  <div
+    className="page-content-section row"
+  >
+    <NoProjectSelected />
+    <NoProjectSelected />
+  </div>
+</div>
 `;

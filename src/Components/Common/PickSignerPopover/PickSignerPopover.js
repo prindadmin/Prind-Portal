@@ -6,6 +6,10 @@ import { InputGroup, Button, Intent, Callout } from '@blueprintjs/core'
 import ItemIcon from '../ItemIcon'
 import PopOverHandler from '../popOverHandler'
 import * as Strings from '../../../Data/Strings'
+//import LoadingOverlay from '../../LoadingOverlay'
+import LoadingSpinner from '../LoadingSpinnerCSS'
+
+import classes from './PickSignerPopover.module.css'
 
 export class PickSignerPopover extends Component {
   static propTypes = {
@@ -33,8 +37,12 @@ export class PickSignerPopover extends Component {
         })
       ),
     }).isRequired,
+    /*
     fileDetails: PropTypes.shape({
-      uploadedDateTime: PropTypes.string.isRequired,
+      uploadedDateTime: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+      ]).isRequired,
       hash: PropTypes.string.isRequired,
       proofLink: PropTypes.string,
       uploadedBy: PropTypes.string.isRequired,
@@ -43,6 +51,7 @@ export class PickSignerPopover extends Component {
       s3VersionId: PropTypes.string.isRequired,
       uploadName: PropTypes.string.isRequired,
     }).isRequired,
+    */
     projectId: PropTypes.string.isRequired,
     pageName: PropTypes.string.isRequired,
     fieldID: PropTypes.string.isRequired,
@@ -66,6 +75,15 @@ export class PickSignerPopover extends Component {
     const { projectId, pageName, fieldID } = this.props
     const { selectedMembers } = this.state
     var members = selectedMembers.map(value => value.username);
+    console.log("Document request to sign details:", {
+      projectId,
+      pageName,
+      fieldID,
+      members
+    })
+    this.setState({
+      isSending: true
+    })
     this.props.requestSignature(
       projectId,
       pageName,
@@ -77,11 +95,15 @@ export class PickSignerPopover extends Component {
   }
 
   sendResolve = () => {
+    this.setState({
+      isSending: false
+    })
     this.closePopover()
   }
 
   sendReject = () => {
     this.setState({
+      isSending: false,
       sendError: true,
       errorText: Strings.ERROR_SENDING_SIGNATURE_REQUEST,
     })
@@ -254,32 +276,40 @@ export class PickSignerPopover extends Component {
   render() {
     return (
       <PopOverHandler>
-        <div id='popup-greyer' onClick={(e) => {
-          this.closePopover()
-          e.stopPropagation()
-          }}>
-          <div id='pick-signer-popover'>
-            <div id='popup-box' onClick={(e) => e.stopPropagation()}>
-              <div className='pick-signer-popover-container'>
-                <div className='element-title'>
-                  {Strings.PICK_DOCUMENT_SIGNERS}
+        <React.Fragment>
+          <div id='popup-greyer' onClick={(e) => {
+            this.closePopover()
+            e.stopPropagation()
+            }}>
+            <div id='pick-signer-popover'>
+              <div id='popup-box' onClick={(e) => e.stopPropagation()}>
+                <div className='pick-signer-popover-container'>
+                  <div className='element-title'>
+                    {Strings.PICK_DOCUMENT_SIGNERS}
+                  </div>
+                  {
+                    this.state.sendError ? this.getSendError() : null
+                  }
+                  {
+                    this.getSearchBar()
+                  }
+                  {
+                    this.getTiles()
+                  }
+                  {
+                    this.getButtons()
+                  }
                 </div>
-                {
-                  this.state.sendError ? this.getSendError() : null
-                }
-                {
-                  this.getSearchBar()
-                }
-                {
-                  this.getTiles()
-                }
-                {
-                  this.getButtons()
-                }
               </div>
             </div>
           </div>
-        </div>
+          {
+            !this.state.isSending ? null :
+              <div className={classes.fullScreenCenterChildren}>
+                <LoadingSpinner size={256} />
+              </div>
+          }
+        </React.Fragment>
       </PopOverHandler>
     )
   }

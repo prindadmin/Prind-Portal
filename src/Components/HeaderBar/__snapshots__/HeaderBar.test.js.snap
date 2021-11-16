@@ -3,11 +3,11 @@
 exports[`Should render with project and with project selector 1`] = `
 <Fragment>
   <div
-    className="full-width row"
+    className="headerBar"
     id="header-bar"
   >
     <div
-      className="header-content row"
+      className="content"
     >
       <withRouter(Connect(ProjectSelector))
         openProjectSelector={true}
@@ -16,7 +16,7 @@ exports[`Should render with project and with project selector 1`] = `
         className="nav-links"
       >
         <div
-          className="menu-container"
+          className="menuContainer"
         >
           <withRouter(Connect(UserMenu)) />
         </div>
@@ -30,11 +30,11 @@ exports[`Should render with project and with project selector 1`] = `
 exports[`Should render with project and without project selector 1`] = `
 <Fragment>
   <div
-    className="full-width row"
+    className="headerBar"
     id="header-bar"
   >
     <div
-      className="header-content row"
+      className="content"
     >
       <withRouter(Connect(ProjectSelector))
         openProjectSelector={false}
@@ -43,7 +43,7 @@ exports[`Should render with project and without project selector 1`] = `
         className="nav-links"
       >
         <div
-          className="menu-container"
+          className="menuContainer"
         >
           <withRouter(Connect(UserMenu)) />
         </div>
@@ -57,11 +57,11 @@ exports[`Should render with project and without project selector 1`] = `
 exports[`Should render without project and without project selector 1`] = `
 <Fragment>
   <div
-    className="full-width row"
+    className="headerBar"
     id="header-bar"
   >
     <div
-      className="header-content row"
+      className="content"
     >
       <withRouter(Connect(ProjectSelector))
         openProjectSelector={false}
@@ -70,7 +70,7 @@ exports[`Should render without project and without project selector 1`] = `
         className="nav-links"
       >
         <div
-          className="menu-container"
+          className="menuContainer"
         >
           <withRouter(Connect(UserMenu)) />
         </div>

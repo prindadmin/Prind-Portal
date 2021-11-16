@@ -20,6 +20,12 @@ beforeEach(() => {
     },
     location: {
       pathname: "/documents"
+    },
+    procore: {
+      folderHistory: {
+        root: true,
+        chain: []
+      }
     }
   }
 })

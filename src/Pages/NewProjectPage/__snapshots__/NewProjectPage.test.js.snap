@@ -1,28 +1,134 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`New Project Page - Should render 1`] = `
-<Hoc
-  destroyOnUnmount={true}
-  enableReinitialize={false}
-  forceUnregisterOnUnmount={false}
-  form="newproject"
-  forwardedRef={null}
-  getFormState={[Function]}
-  keepDirtyOnReinitialize={false}
-  location={
-    Object {
-      "pathname": "/newproject",
-    }
-  }
-  persistentSubmitErrors={false}
-  pure={true}
-  shouldAsyncValidate={[Function]}
-  shouldError={[Function]}
-  shouldValidate={[Function]}
-  shouldWarn={[Function]}
-  submitAsSideEffect={false}
-  touchOnBlur={true}
-  touchOnChange={false}
-  updateUnregisteredFields={false}
-/>
+<div
+  id="new-project-page"
+>
+  <div
+    className="page-content-section pageContent"
+  >
+    <div
+      className="headerSection"
+    >
+      <h2>
+        Create a new project
+      </h2>
+    </div>
+    <div
+      className="formSection"
+    >
+      <div
+        className="sectionLabel"
+      >
+        Project Name
+      </div>
+      <input
+        className="default"
+        disabled={false}
+        id="projectName"
+        name="projectName"
+        onChange={[Function]}
+        placeholder="Project Name"
+        required={true}
+        type="text"
+        value=""
+      />
+      <div
+        className="sectionLabel"
+      >
+        Project Reference
+      </div>
+      <input
+        className="default"
+        id="projectReference"
+        name="projectReference"
+        onChange={[Function]}
+        placeholder="Project Reference"
+        type="text"
+        value=""
+      />
+      <div
+        className="sectionLabel"
+      >
+        Project Address
+      </div>
+      <input
+        className="default"
+        id="projectAddressLine1"
+        name="projectAddressLine1"
+        onChange={[Function]}
+        placeholder="Address Line 1"
+        type="text"
+        value=""
+      />
+      <input
+        className="default"
+        id="projectAddressLine2"
+        name="projectAddressLine2"
+        onChange={[Function]}
+        placeholder="Address Line 2"
+        type="text"
+        value=""
+      />
+      <input
+        className="default"
+        id="projectAddressLine3"
+        name="projectAddressLine3"
+        onChange={[Function]}
+        placeholder="Address Line 3"
+        type="text"
+        value=""
+      />
+      <input
+        className="default"
+        id="projectAddressTown"
+        name="projectAddressTown"
+        onChange={[Function]}
+        placeholder="Town / City"
+        type="text"
+        value=""
+      />
+      <input
+        className="default"
+        id="projectAddressRegion"
+        name="projectAddressRegion"
+        onChange={[Function]}
+        placeholder="County"
+        type="text"
+        value=""
+      />
+      <input
+        className="default"
+        id="projectAddressPostalCode"
+        name="projectAddressPostalCode"
+        onChange={[Function]}
+        placeholder="Post Code"
+        type="text"
+        value=""
+      />
+      <input
+        className="default lastInput"
+        id="projectAddressCountry"
+        name="projectAddressCountry"
+        onChange={[Function]}
+        placeholder="Country"
+        type="text"
+        value=""
+      />
+      <input
+        className="button"
+        disabled={true}
+        onClick={[Function]}
+        type="submit"
+        value="Create Project"
+      />
+      <input
+        className="button cancelButton"
+        onClick={[Function]}
+        type="submit"
+        value="Cancel"
+      />
+    </div>
+  </div>
+</div>
 `;

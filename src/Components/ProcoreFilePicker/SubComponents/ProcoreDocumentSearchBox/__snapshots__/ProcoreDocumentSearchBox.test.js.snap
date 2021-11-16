@@ -10,7 +10,6 @@ exports[`ProcoreDocumentSearchBox - Should render 1`] = `
     id="search"
     name="search"
     onChange={[Function]}
-    placeholder="Search this folder"
     type="text"
     value=""
   />
@@ -27,7 +26,6 @@ exports[`ProcoreDocumentSearchBox - Should update search term 1`] = `
     id="search"
     name="search"
     onChange={[Function]}
-    placeholder="Search this folder"
     type="text"
     value="abc"
   />

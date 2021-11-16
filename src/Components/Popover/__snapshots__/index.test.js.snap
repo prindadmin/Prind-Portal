@@ -11,9 +11,11 @@ exports[`Popover - Should render 1`] = `
           id="popOver"
         >
           <div
+            class="popoverGreyer"
             id="popover-greyer"
           >
             <div
+              class="popoverContainer"
               id="popover-container"
             >
               <div
@@ -25,12 +27,15 @@ exports[`Popover - Should render 1`] = `
       }
     >
       <div
+        className="popoverGreyer"
         id="popover-greyer"
         onClick={[Function]}
       >
         <div
+          className="popoverContainer"
           id="popover-container"
           onClick={[Function]}
+          style={Object {}}
         >
           <div
             id="hello-dom"

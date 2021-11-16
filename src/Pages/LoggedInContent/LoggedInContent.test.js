@@ -8,6 +8,8 @@ var props;
 const mockGetProjectDetails = jest.fn()
 const mockSaveProjectID = jest.fn()
 const mockGetProjectMembers = jest.fn()
+const mockResetSite = jest.fn()
+const mockCheckServerAccessToProcore = jest.fn()
 
 beforeAll(() => {
   ReactGA.initialize('dummy', { testMode: true });
@@ -27,9 +29,18 @@ beforeEach(() => {
     projects: {
       chosenProject: {}
     },
+    procore: {
+      companyId: "",
+      projectId: ""
+    },
+    user: {
+      details: {}
+    },
     getProjectDetails: mockGetProjectDetails,
     saveProjectID: mockSaveProjectID,
     getProjectMembers: mockGetProjectMembers,
+    resetSite: mockResetSite,
+    checkServerAccessToProcore: mockCheckServerAccessToProcore
   }
 });
 

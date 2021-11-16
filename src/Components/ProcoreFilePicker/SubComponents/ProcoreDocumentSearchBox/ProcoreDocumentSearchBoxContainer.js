@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import ProcoreDocumentSearchBox from './ProcoreDocumentSearchBox'
-import * as procoreReducer from '../../Reducers/procore'
+import * as procoreReducer from '../../../../Reducers/procore'
 
 const mapStatetoProps = state => {
   return {

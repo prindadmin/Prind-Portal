@@ -27,7 +27,8 @@ let defaultState = {
 }
 
 const blankChosenState = {
-  chosenProject: defaultChosenProject
+  chosenProject: defaultChosenProject,
+  error: null,
 }
 
 
@@ -127,7 +128,8 @@ it('Projects Reducer - saveProjectID without id provided', () => {
         projectName: Strings.NO_PROJECT_SELECTED,
         projectId: "",
         projectType: "",
-      }
+      },
+      error: null
     }
   }
   const result = Functions.saveProjectID()

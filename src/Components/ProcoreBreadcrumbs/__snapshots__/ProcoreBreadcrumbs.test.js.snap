@@ -48,7 +48,7 @@ exports[`ProcoreBreadcrumbs - Render and click root crumb 1`] = `
 
 exports[`ProcoreBreadcrumbs - Should render 1`] = `
 <div
-  id="breadcrumb-table"
+  className="breadcrumbTable"
 >
   <div
     className="crumb"

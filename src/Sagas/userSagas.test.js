@@ -4,19 +4,29 @@ import { call, put, takeLatest, fork } from 'redux-saga/effects'
 
 import * as UserSagas from './userSagas'
 import * as Actions from '../Actions'
-import * as States from '../States'
-import * as Strings from '../Data/Strings'
+//import * as States from '../States'
+//import * as Strings from '../Data/Strings'
+import * as Endpoints from '../Data/Endpoints'
 import * as UserDispatchers from '../Dispatchers/user'
 
 const defaultState = {
   fetching: false,
   details: {},
-  history: {},
+  history: {
+    documentVersions: []
+  },
   projectInvitations: [],
   signatureRequests: [],
   projectS3Token: {},
   userS3Token: {},
-  error: undefined
+  error: undefined,
+  currentRoute: Endpoints.DEFAULTLOGGEDINPAGE,
+  currentRouteObject: {
+    hash: "",
+    pathname: Endpoints.DEFAULTLOGGEDINPAGE,
+    search: "",
+    state: undefined
+  }
 }
 
 const dispatcherError = new Error({
@@ -428,7 +438,7 @@ it('getProjectInvitations - success - fetching state put', (result) => {
   }));
 });
 it('getProjectInvitations - success - request to dispatcher', (result) => {
-  expect(result).toEqual(call(UserDispatchers.getProjectInvitations, getProjectInvitationsAction.payload.identityToken));
+  expect(result).toEqual(call(UserDispatchers.getProjectInvitations, []));
   return getProjectInvitationsDispatcherReturn
 });
 it('getProjectInvitations - success - end state put', (result) => {

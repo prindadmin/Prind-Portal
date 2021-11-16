@@ -8,12 +8,21 @@ import * as Endpoints from '../Data/Endpoints'
 let defaultState = {
   fetching: false,
   details: {},
-  history: {},
+  history: {
+    documentVersions: []
+  },
   projectInvitations: [],
   signatureRequests: [],
   projectS3Token: {},
   userS3Token: {},
+  error: undefined,
   currentRoute: Endpoints.DEFAULTLOGGEDINPAGE,
+  currentRouteObject: {
+    hash: "",
+    pathname: Endpoints.DEFAULTLOGGEDINPAGE,
+    search: "",
+    state: undefined
+  }
 }
 
 

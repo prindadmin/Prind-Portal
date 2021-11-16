@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import classes from './ProcoreBreadcrumbs.module.css'
 
-import * as Endpoints from '../../Data/Endpoints'
+//import * as Endpoints from '../../Data/Endpoints'
 
 export class ProcoreBreadcrumbs extends Component {
   static propTypes = {
@@ -14,14 +14,18 @@ export class ProcoreBreadcrumbs extends Component {
     }).isRequired,
     location: PropTypes.shape({
       pathname: PropTypes.string.isRequired
-    }).isRequired
+    }).isRequired,
+    procore: PropTypes.shape({
+      folderHistory: PropTypes.shape({
+        root: PropTypes.bool.isRequired,
+        chain: PropTypes.arrayOf(PropTypes.string)
+      }).isRequired
+    }).isRequired,
   }
 
   onCrumbClick = (folder) => {
-    var folderHistory = this.props.procore.folderHistory
-
     // If the root folder is sent, do something special
-    var folderHistory = this.props.procore.folderHistory
+    var folderHistory = {  ...this.props.procore.folderHistory }
     if (folder.root) {
       this.props.updateCurrentFolder()
       folderHistory.chain = []

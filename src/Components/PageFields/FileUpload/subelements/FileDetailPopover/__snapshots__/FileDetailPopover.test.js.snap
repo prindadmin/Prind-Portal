@@ -69,7 +69,7 @@ exports[`FileDetailPopover - render 1`] = `
                         onClick={[Function]}
                       >
                         <a
-                          href="https://prind.tech"
+                          href="undefined/entries/prind.tech"
                           rel="noopener noreferrer"
                           target="_blank"
                         >

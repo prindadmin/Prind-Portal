@@ -62,7 +62,6 @@ exports[`should render with given state 1`] = `
               id="search"
               name="search"
               onChange={[Function]}
-              placeholder="Search this folder"
               type="text"
               value=""
             />

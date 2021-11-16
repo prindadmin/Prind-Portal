@@ -60,7 +60,7 @@ export class UploadHistory extends Component {
 
     if (proofLink === undefined) {
       return(
-        Strings.NO_PROOF_AVAILABLE
+        Strings.PROOF_STILL_PROCESSING
       )
     } else {
 

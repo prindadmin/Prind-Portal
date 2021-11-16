@@ -20,18 +20,11 @@ const windowCloseDelay = 1500
 export class UploaderPopOver extends Component {
   static propTypes = {
     fileDetails: PropTypes.shape({
-      files: PropTypes.arrayOf(
-        PropTypes.shape({
-          name: PropTypes.string.isRequired,
-          type: PropTypes.string.isRequired,
-          size: PropTypes.number.isRequired,
-          value: PropTypes.string.isRequired
-        }).isRequired
-      ).isRequired
+      files: PropTypes.object.isRequired
     }).isRequired,
     projectID: PropTypes.string.isRequired,
     pageName: PropTypes.string.isRequired,
-    fieldID: PropTypes.number.isRequired,
+    fieldID: PropTypes.string.isRequired,
     fieldType: PropTypes.string.isRequired,
     onCancelPopup: PropTypes.func.isRequired,
     user: PropTypes.shape({
@@ -47,6 +40,8 @@ export class UploaderPopOver extends Component {
 
   constructor(props) {
     super(props)
+    console.log("fileDetails:", props.fileDetails)
+    console.log("fileDetails.files:", props.fileDetails.files)
     this.state = {
       uploadProgress: 0,
       state: ComponentStates.UPLOAD_IN_PROGESS
@@ -94,65 +89,75 @@ export class UploaderPopOver extends Component {
     const { fileDetails, projectID, pageName, fieldID } = this.props
     const file = fileDetails.files[0]
 
-    const token = this.getValidS3Token()
-    if (!token) {
+    //console.log("fileDetails:", fileDetails)
+    //console.log("fieldID:", fieldID)
+
+    try {
+      const token = this.getValidS3Token()
+      if (!token) {
+        this.setState({
+          state: ComponentStates.ERROR_WHEN_LOADING
+        })
+        return;
+      }
+
+      // Update the s3 credentials to allow upload of file to S3
+      this.configureAWSAuthorisation(token)
+
+      // Create an S3 service provider
+      const s3 = new AWS.S3()
+
+      // Fetch the parameters
+      const bucketName = process.env.REACT_APP_AWS_S3_USER_UPLOAD_BUCKET_NAME
+      const key = `${projectID}/${pageName}/${fieldID}`
+
+      // Create the parameters to upload the file with
+      var uploadParams = {
+        ACL: 'private',
+        Body: file,
+        Bucket: bucketName,
+        ContentType: file.type,
+        Key: key,
+      };
+
+      // Create a virtual version of the react object so it can be used in the request
+      const that = this;
+
+      // Create a request
+      var request = s3.putObject(uploadParams);
+
+      request.on('httpUploadProgress', function (progress) {
+          that.setState({
+            uploadProgress: progress.loaded
+          })
+        })
+
+        .on('success', function(response) {
+          // Timer to keep the window open for a few seconds after upload completes
+          setTimeout(() => {
+            that.setState({
+              state: ComponentStates.QUIESCENT
+            })
+            that.informServer(response)
+          }, windowCloseDelay);
+
+        })
+
+        .on('error', function(error, response) {
+          //console.log("Error!");
+          //console.error(error)
+          that.setState({
+            state: ComponentStates.ERROR_WHEN_LOADING
+          })
+        })
+
+      request.send();
+    } catch (err) {
+      console.warn("Error uploading file to S3:", err)
       this.setState({
         state: ComponentStates.ERROR_WHEN_LOADING
       })
-      return;
     }
-
-    // Update the s3 credentials to allow upload of file to S3
-    this.configureAWSAuthorisation(token)
-
-    // Create an S3 service provider
-    const s3 = new AWS.S3()
-
-    // Fetch the parameters
-    const bucketName = process.env.REACT_APP_AWS_S3_USER_UPLOAD_BUCKET_NAME
-    const key = `${projectID}/${pageName}/${fieldID}`
-
-    // Create the parameters to upload the file with
-    var uploadParams = {
-      ACL: 'private',
-      Body: file,
-      Bucket: bucketName,
-      ContentType: file.type,
-      Key: key,
-    };
-
-    // Create a virtual version of the react object so it can be used in the request
-    const that = this;
-
-    // Create a request
-    var request = s3.putObject(uploadParams);
-
-    request.on('httpUploadProgress', function (progress) {
-        that.setState({
-          uploadProgress: progress.loaded
-        })
-      })
-
-      .on('success', function(response) {
-        // Timer to keep the window open for a few seconds after upload completes
-        setTimeout(() => {
-          that.setState({
-            state: ComponentStates.QUIESCENT
-          })
-          that.informServer(response)
-        }, windowCloseDelay);
-
-      })
-
-      .on('error', function(error, response) {
-        //console.log("Error!");
-        //console.error(error)
-        that.setState({
-          state: ComponentStates.ERROR_WHEN_LOADING
-        })
-      })
-
-    request.send();
   }
 
   // Tell the Prin-D server that there has been an upload with the following details
@@ -204,8 +209,8 @@ export class UploaderPopOver extends Component {
 
 
   render() {
-    //console.log(this.props.fileDetails)
-    //console.log(this.props.fileDetails.files)
+    //console.log("fileDetails:", this.props.fileDetails)
+    //console.log("fileDetails.files:", this.props.fileDetails.files)
 
     const { fileDetails } = this.props
     const { uploadProgress } = this.state

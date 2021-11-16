@@ -151,7 +151,6 @@ exports[`should render 1`] = `
                     },
                     "signedDocuments": Array [
                       Object {
-                        "dateTime": "2020-03-12T16:56:36.217421",
                         "filename": "Test File 1.txt",
                         "projectName": "Test Project 123",
                         "signedAt": "2020-03-12T16:56:36.217421",
@@ -179,70 +178,10 @@ exports[`should render 1`] = `
                       className="col-md-12 col-lg-6 col-xl-4"
                       key="0"
                     >
-                      <DocumentSignedTile
-                        details={
-                          Object {
-                            "dateTime": "2020-03-12T16:56:36.217421",
-                            "filename": "Test File 1.txt",
-                            "projectName": "Test Project 123",
-                            "signedAt": "2020-03-12T16:56:36.217421",
-                            "type": "DOCUMENT_SIGNED",
-                          }
-                        }
-                      >
-                        <Blueprint3.Callout
-                          icon="tick"
-                          intent="primary"
-                          title="Document Signed"
-                        >
-                          <div
-                            className="bp3-callout bp3-intent-primary bp3-callout-icon"
-                          >
-                            <Blueprint3.Icon
-                              icon="tick"
-                              iconSize={20}
-                            >
-                              <span
-                                className="bp3-icon bp3-icon-tick"
-                                icon="tick"
-                              >
-                                <svg
-                                  data-icon="tick"
-                                  height={20}
-                                  viewBox="0 0 20 20"
-                                  width={20}
-                                >
-                                  <desc>
-                                    tick
-                                  </desc>
-                                  <path
-                                    d="M17 4c-.28 0-.53.11-.71.29L7 13.59 3.71 10.3A.965.965 0 003 10a1.003 1.003 0 00-.71 1.71l4 4c.18.18.43.29.71.29s.53-.11.71-.29l10-10A1.003 1.003 0 0017 4z"
-                                    fillRule="evenodd"
-                                    key="0"
-                                  />
-                                </svg>
-                              </span>
-                            </Blueprint3.Icon>
-                            <Component>
-                              <h4
-                                className="bp3-heading"
-                              >
-                                Document Signed
-                              </h4>
-                            </Component>
-                            You signed a document called Test File 1.txt for project Test Project 123 on the March 12, 2020
-                          </div>
-                        </Blueprint3.Callout>
-                      </DocumentSignedTile>
-                    </div>
-                    <div
-                      className="col-md-12 col-lg-6 col-xl-4"
-                      key="1"
-                    >
                       <ProjectJoinTile
                         details={
                           Object {
-                            "dateTime": "2020-03-11T16:56:36.217421",
+                            "dateTime": 2020-03-11T16:56:36.217Z,
                             "projectName": "Test Project 123",
                             "type": "PROJECT_JOINED",
                           }
@@ -258,7 +197,7 @@ exports[`should render 1`] = `
                           >
                             <Blueprint3.Icon
                               icon="new-person"
-                              iconSize={20}
+                              size={20}
                             >
                               <span
                                 className="bp3-icon bp3-icon-new-person"
@@ -288,19 +227,19 @@ exports[`should render 1`] = `
                                 Project Joined
                               </h4>
                             </Component>
-                            You joined a project called Test Project 123 on the January 1, 1970
+                            You joined a project called Test Project 123 on the March 11, 2020
                           </div>
                         </Blueprint3.Callout>
                       </ProjectJoinTile>
                     </div>
                     <div
                       className="col-md-12 col-lg-6 col-xl-4"
-                      key="2"
+                      key="1"
                     >
                       <ProjectCreateTile
                         details={
                           Object {
-                            "dateTime": "2020-03-10T16:56:36.217421",
+                            "dateTime": 2020-03-10T16:56:36.217Z,
                             "projectName": "Test Project 123",
                             "type": "PROJECT_CREATED",
                           }
@@ -316,7 +255,7 @@ exports[`should render 1`] = `
                           >
                             <Blueprint3.Icon
                               icon="build"
-                              iconSize={20}
+                              size={20}
                             >
                               <span
                                 className="bp3-icon bp3-icon-build"
@@ -346,19 +285,19 @@ exports[`should render 1`] = `
                                 Project Created
                               </h4>
                             </Component>
-                            You created a project called Test Project 123 on the January 1, 1970
+                            You created a project called Test Project 123 on the March 10, 2020
                           </div>
                         </Blueprint3.Callout>
                       </ProjectCreateTile>
                     </div>
                     <div
                       className="col-md-12 col-lg-6 col-xl-4"
-                      key="3"
+                      key="2"
                     >
                       <DocumentUploadTile
                         details={
                           Object {
-                            "dateTime": "2020-03-09T16:56:36.217421",
+                            "dateTime": 2020-03-09T16:56:36.217Z,
                             "projectName": "Test Project 123",
                             "type": "DOCUMENT_UPLOADED",
                           }
@@ -374,7 +313,7 @@ exports[`should render 1`] = `
                           >
                             <Blueprint3.Icon
                               icon="folder-new"
-                              iconSize={20}
+                              size={20}
                             >
                               <span
                                 className="bp3-icon bp3-icon-folder-new"
@@ -408,6 +347,66 @@ exports[`should render 1`] = `
                           </div>
                         </Blueprint3.Callout>
                       </DocumentUploadTile>
+                    </div>
+                    <div
+                      className="col-md-12 col-lg-6 col-xl-4"
+                      key="3"
+                    >
+                      <DocumentSignedTile
+                        details={
+                          Object {
+                            "dateTime": 1970-01-01T00:33:40.000Z,
+                            "filename": "Test File 1.txt",
+                            "projectName": "Test Project 123",
+                            "signedAt": "2020-03-12T16:56:36.217421",
+                            "type": "DOCUMENT_SIGNED",
+                          }
+                        }
+                      >
+                        <Blueprint3.Callout
+                          icon="tick"
+                          intent="primary"
+                          title="Document Signed"
+                        >
+                          <div
+                            className="bp3-callout bp3-intent-primary bp3-callout-icon"
+                          >
+                            <Blueprint3.Icon
+                              icon="tick"
+                              size={20}
+                            >
+                              <span
+                                className="bp3-icon bp3-icon-tick"
+                                icon="tick"
+                              >
+                                <svg
+                                  data-icon="tick"
+                                  height={20}
+                                  viewBox="0 0 20 20"
+                                  width={20}
+                                >
+                                  <desc>
+                                    tick
+                                  </desc>
+                                  <path
+                                    d="M17 4c-.28 0-.53.11-.71.29L7 13.59 3.71 10.3A.965.965 0 003 10a1.003 1.003 0 00-.71 1.71l4 4c.18.18.43.29.71.29s.53-.11.71-.29l10-10A1.003 1.003 0 0017 4z"
+                                    fillRule="evenodd"
+                                    key="0"
+                                  />
+                                </svg>
+                              </span>
+                            </Blueprint3.Icon>
+                            <Component>
+                              <h4
+                                className="bp3-heading"
+                              >
+                                Document Signed
+                              </h4>
+                            </Component>
+                            You signed a document called Test File 1.txt for project Test Project 123 on the January 1, 1970
+                          </div>
+                        </Blueprint3.Callout>
+                      </DocumentSignedTile>
                     </div>
                   </div>
                 </div>

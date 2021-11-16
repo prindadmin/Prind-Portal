@@ -22,13 +22,13 @@ exports[`CurrentVersion - Should click request signatures button 1`] = `
       Uploaded At: 
     </h4>
     <div>
-      2021-04-06T07:06:23
+      Invalid Date
     </div>
     <h4>
       Uploaded By: 
     </h4>
     <div>
-      Testy McTesterson
+      User without Foundations
     </div>
     <h4>
       Proof: 
@@ -39,7 +39,7 @@ exports[`CurrentVersion - Should click request signatures button 1`] = `
         onClick={[Function]}
       >
         <a
-          href="https://prind.tech"
+          href="undefined/entries/prind.tech"
           id="proof-link"
           rel="noopener noreferrer"
           target="_blank"
@@ -133,13 +133,13 @@ exports[`CurrentVersion - Should render 1`] = `
       Uploaded At: 
     </h4>
     <div>
-      2021-04-06T07:06:23
+      Invalid Date
     </div>
     <h4>
       Uploaded By: 
     </h4>
     <div>
-      Testy McTesterson
+      User without Foundations
     </div>
     <h4>
       Proof: 
@@ -150,7 +150,7 @@ exports[`CurrentVersion - Should render 1`] = `
         onClick={[Function]}
       >
         <a
-          href="https://prind.tech"
+          href="undefined/entries/prind.tech"
           id="proof-link"
           rel="noopener noreferrer"
           target="_blank"

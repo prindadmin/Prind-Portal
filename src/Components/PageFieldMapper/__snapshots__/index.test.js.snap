@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PageFieldMapper - Should render calendar 1`] = `
-<withRouter(Connect(ReduxForm))
+<withRouter(Connect(CalendarPicker))
   elementContent={
     Object {
       "id": "1",

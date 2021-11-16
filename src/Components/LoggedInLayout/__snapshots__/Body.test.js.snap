@@ -2,7 +2,7 @@
 
 exports[`LoggedInLayout - Body - Should render 1`] = `
 <div
-  className="row"
+  className="bodySection"
   id="logged-in-body-section"
 >
   <div

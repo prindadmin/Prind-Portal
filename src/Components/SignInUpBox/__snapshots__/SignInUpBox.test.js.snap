@@ -10,7 +10,7 @@ exports[`Should render forgot password 1`] = `
     <div
       className="component-sign-in-up-box-content-container"
     >
-      <lazy
+      <withRouter(Connect(ForgotPasswordBox))
         toggleVisibleForm={[Function]}
       />
     </div>
@@ -28,7 +28,7 @@ exports[`Should render password reset 1`] = `
     <div
       className="component-sign-in-up-box-content-container"
     >
-      <lazy
+      <withRouter(Connect(ResetPassword))
         toggleVisibleForm={[Function]}
       />
     </div>
@@ -46,7 +46,7 @@ exports[`Should render sign in 1`] = `
     <div
       className="component-sign-in-up-box-content-container"
     >
-      <lazy
+      <withRouter(Connect(SignInBox))
         toggleVisibleForm={[Function]}
         username="testing@buildingim.com"
       />
@@ -65,7 +65,7 @@ exports[`Should render sign in, change props to logged in, and update 1`] = `
     <div
       className="component-sign-in-up-box-content-container"
     >
-      <lazy
+      <withRouter(Connect(SignInBox))
         toggleVisibleForm={[Function]}
         username="testing@buildingim.com"
       />
@@ -84,7 +84,7 @@ exports[`Should render sign up 1`] = `
     <div
       className="component-sign-in-up-box-content-container"
     >
-      <lazy
+      <withRouter(Connect(SignUpBox))
         toggleVisibleForm={[Function]}
       />
     </div>

@@ -14,26 +14,10 @@ exports[`Should render 1`] = `
         className="col-md-12 col-lg-6 col-xl-4"
         key="0"
       >
-        <DocumentSignedTile
-          details={
-            Object {
-              "dateTime": "2020-03-12T16:56:36.217421",
-              "filename": "Test File 1.txt",
-              "projectName": "Test Project 123",
-              "signedAt": "2020-03-12T16:56:36.217421",
-              "type": "DOCUMENT_SIGNED",
-            }
-          }
-        />
-      </div>
-      <div
-        className="col-md-12 col-lg-6 col-xl-4"
-        key="1"
-      >
         <ProjectJoinTile
           details={
             Object {
-              "dateTime": "2020-03-11T16:56:36.217421",
+              "dateTime": 2020-03-11T16:56:36.217Z,
               "projectName": "Test Project 123",
               "type": "PROJECT_JOINED",
             }
@@ -42,12 +26,12 @@ exports[`Should render 1`] = `
       </div>
       <div
         className="col-md-12 col-lg-6 col-xl-4"
-        key="2"
+        key="1"
       >
         <ProjectCreateTile
           details={
             Object {
-              "dateTime": "2020-03-10T16:56:36.217421",
+              "dateTime": 2020-03-10T16:56:36.217Z,
               "projectName": "Test Project 123",
               "type": "PROJECT_CREATED",
             }
@@ -56,14 +40,30 @@ exports[`Should render 1`] = `
       </div>
       <div
         className="col-md-12 col-lg-6 col-xl-4"
-        key="3"
+        key="2"
       >
         <DocumentUploadTile
           details={
             Object {
-              "dateTime": "2020-03-09T16:56:36.217421",
+              "dateTime": 2020-03-09T16:56:36.217Z,
               "projectName": "Test Project 123",
               "type": "DOCUMENT_UPLOADED",
+            }
+          }
+        />
+      </div>
+      <div
+        className="col-md-12 col-lg-6 col-xl-4"
+        key="3"
+      >
+        <DocumentSignedTile
+          details={
+            Object {
+              "dateTime": 1970-01-01T00:33:40.000Z,
+              "filename": "Test File 1.txt",
+              "projectName": "Test Project 123",
+              "signedAt": "2020-03-12T16:56:36.217421",
+              "type": "DOCUMENT_SIGNED",
             }
           }
         />
@@ -87,26 +87,10 @@ exports[`Should render with different date time supplied to document versions 1`
         className="col-md-12 col-lg-6 col-xl-4"
         key="0"
       >
-        <DocumentSignedTile
-          details={
-            Object {
-              "dateTime": "2020-03-12T16:56:36.217421",
-              "filename": "Test File 1.txt",
-              "projectName": "Test Project 123",
-              "signedAt": "2020-03-12T16:56:36.217421",
-              "type": "DOCUMENT_SIGNED",
-            }
-          }
-        />
-      </div>
-      <div
-        className="col-md-12 col-lg-6 col-xl-4"
-        key="1"
-      >
         <ProjectJoinTile
           details={
             Object {
-              "dateTime": "2020-03-11T16:56:36.217421",
+              "dateTime": 2020-03-11T16:56:36.217Z,
               "projectName": "Test Project 123",
               "type": "PROJECT_JOINED",
             }
@@ -115,12 +99,12 @@ exports[`Should render with different date time supplied to document versions 1`
       </div>
       <div
         className="col-md-12 col-lg-6 col-xl-4"
-        key="2"
+        key="1"
       >
         <ProjectCreateTile
           details={
             Object {
-              "dateTime": "2020-03-10T16:56:36.217421",
+              "dateTime": 2020-03-10T16:56:36.217Z,
               "projectName": "Test Project 123",
               "type": "PROJECT_CREATED",
             }
@@ -129,15 +113,31 @@ exports[`Should render with different date time supplied to document versions 1`
       </div>
       <div
         className="col-md-12 col-lg-6 col-xl-4"
-        key="3"
+        key="2"
       >
         <DocumentUploadTile
           details={
             Object {
-              "dateTime": "2020-03-09T16:56:36.217421",
+              "dateTime": 1970-01-01T00:33:40.000Z,
               "projectName": "Test Project 123",
               "signedAt": "2020-03-09T16:56:36.217421",
               "type": "DOCUMENT_UPLOADED",
+            }
+          }
+        />
+      </div>
+      <div
+        className="col-md-12 col-lg-6 col-xl-4"
+        key="3"
+      >
+        <DocumentSignedTile
+          details={
+            Object {
+              "dateTime": 1970-01-01T00:33:40.000Z,
+              "filename": "Test File 1.txt",
+              "projectName": "Test Project 123",
+              "signedAt": "2020-03-12T16:56:36.217421",
+              "type": "DOCUMENT_SIGNED",
             }
           }
         />
@@ -164,7 +164,7 @@ exports[`Should render with different date time supplied to signed documents 1`]
         <DocumentSignedTile
           details={
             Object {
-              "dateTime": "2020-03-12T16:56:36.217421",
+              "dateTime": 2020-03-12T16:56:36.217Z,
               "filename": "Test File 1.txt",
               "projectName": "Test Project 123",
               "signedAt": "2020-03-12T16:56:36.217421",
@@ -180,7 +180,7 @@ exports[`Should render with different date time supplied to signed documents 1`]
         <ProjectJoinTile
           details={
             Object {
-              "dateTime": "2020-03-11T16:56:36.217421",
+              "dateTime": 2020-03-11T16:56:36.217Z,
               "projectName": "Test Project 123",
               "type": "PROJECT_JOINED",
             }
@@ -194,7 +194,7 @@ exports[`Should render with different date time supplied to signed documents 1`]
         <ProjectCreateTile
           details={
             Object {
-              "dateTime": "2020-03-10T16:56:36.217421",
+              "dateTime": 2020-03-10T16:56:36.217Z,
               "projectName": "Test Project 123",
               "type": "PROJECT_CREATED",
             }
@@ -208,7 +208,7 @@ exports[`Should render with different date time supplied to signed documents 1`]
         <DocumentUploadTile
           details={
             Object {
-              "dateTime": "2020-03-09T16:56:36.217421",
+              "dateTime": 2020-03-09T16:56:36.217Z,
               "projectName": "Test Project 123",
               "type": "DOCUMENT_UPLOADED",
             }

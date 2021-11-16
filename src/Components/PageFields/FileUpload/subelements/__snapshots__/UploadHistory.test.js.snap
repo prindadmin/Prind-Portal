@@ -48,13 +48,13 @@ exports[`UploadHistory - Click download button 1`] = `
     <div
       key="uploadDateTime-0"
     >
-      2021-04-05T08:38:32
+      Invalid Date
     </div>
     <div
       key="proof-0"
     >
       <a
-        href="https://prind.tech"
+        href="undefined/entries/prind.tech"
         id="proof-link"
         onClick={[Function]}
         rel="noopener noreferrer"
@@ -122,13 +122,13 @@ exports[`UploadHistory - Should render 1`] = `
     <div
       key="uploadDateTime-0"
     >
-      2021-04-05T08:38:32
+      Invalid Date
     </div>
     <div
       key="proof-0"
     >
       <a
-        href="https://prind.tech"
+        href="undefined/entries/prind.tech"
         id="proof-link"
         onClick={[Function]}
         rel="noopener noreferrer"
@@ -159,6 +159,16 @@ exports[`UploadHistory - Should render 1`] = `
           onDownloadSuccess={[Function]}
           pageName="design"
           projectId="123"
+          size="small"
+          style={
+            Object {
+              "alignItems": "flex-start",
+              "border": "0px black solid",
+              "height": "1.5em",
+              "margin": "auto",
+              "width": "1.5em",
+            }
+          }
         />
       </div>
     </div>
@@ -214,13 +224,13 @@ exports[`UploadHistory - Should render with no proof link 1`] = `
     <div
       key="uploadDateTime-0"
     >
-      2021-04-05T08:38:32
+      Invalid Date
     </div>
     <div
       key="proof-0"
     >
       <a
-        href="https://prind.tech"
+        href="undefined/entries/prind.tech"
         id="proof-link"
         onClick={[Function]}
         rel="noopener noreferrer"
@@ -251,6 +261,16 @@ exports[`UploadHistory - Should render with no proof link 1`] = `
           onDownloadSuccess={[Function]}
           pageName="design"
           projectId="123"
+          size="small"
+          style={
+            Object {
+              "alignItems": "flex-start",
+              "border": "0px black solid",
+              "height": "1.5em",
+              "margin": "auto",
+              "width": "1.5em",
+            }
+          }
         />
       </div>
     </div>
@@ -321,7 +341,7 @@ exports[`UploadHistory - Should render without proof link 1`] = `
     <div
       key="uploadDateTime-0"
     >
-      2021-04-05T08:38:32
+      Invalid Date
     </div>
     <div
       key="proof-0"
@@ -350,6 +370,16 @@ exports[`UploadHistory - Should render without proof link 1`] = `
           onDownloadSuccess={[Function]}
           pageName="design"
           projectId="123"
+          size="small"
+          style={
+            Object {
+              "alignItems": "flex-start",
+              "border": "0px black solid",
+              "height": "1.5em",
+              "margin": "auto",
+              "width": "1.5em",
+            }
+          }
         />
       </div>
     </div>
