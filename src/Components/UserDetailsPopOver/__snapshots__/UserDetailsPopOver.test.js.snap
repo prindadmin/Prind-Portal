@@ -33,15 +33,19 @@ exports[`should render and resolve request for accreditations 1`] = `
           className="accreditation-list"
         >
           <Connect(UserAccreditationTile)
-            accreditationID="constructionBasics"
-            accreditationName="Construction Basics 101"
-            issuedDate="2019-10-01T12:59:12.142216"
-            issuer="did:fctr:d85be1f5baa83fa83850d8b58731a7f7c8ba65c33dec107c2e16e0dd65c7bcc7"
+            accreditation={
+              Object {
+                "accreditationID": "constructionBasics",
+                "accreditationName": "Construction Basics 101",
+                "issuedDate": "2019-10-01T12:59:12.142216",
+                "issuer": "did:fctr:d85be1f5baa83fa83850d8b58731a7f7c8ba65c33dec107c2e16e0dd65c7bcc7",
+                "revocationDate": "2019-11-01T12:59:12.142216",
+                "revocationReason": "expired",
+                "status": "revoked",
+                "subject": "did:fnds:31a24b270fe86d9c595e715854028c319cc75957718861eb66996929eb5c8025",
+              }
+            }
             key="0"
-            revocationDate="2019-11-01T12:59:12.142216"
-            revocationReason="expired"
-            status="revoked"
-            subject="did:fnds:31a24b270fe86d9c595e715854028c319cc75957718861eb66996929eb5c8025"
           />
         </div>
       </div>

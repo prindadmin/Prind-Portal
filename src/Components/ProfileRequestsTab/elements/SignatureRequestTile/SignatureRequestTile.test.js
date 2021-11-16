@@ -7,14 +7,17 @@ var props;
 var mockRejectSignatureRequest;
 var mockUpdateChosenProject;
 var mockHistoryPush;
+var mockGetSignatureRequests;
 
 beforeEach(() => {
   mockRejectSignatureRequest = jest.fn(() => { return; });
   mockUpdateChosenProject = jest.fn(() => { return; });
   mockHistoryPush = jest.fn()
+  mockGetSignatureRequests = jest.fn()
 
   props = {
     rejectSignatureRequest: mockRejectSignatureRequest,
+    getSignatureRequests: mockGetSignatureRequests,
     updateChosenProject: mockUpdateChosenProject,
     requestDetails: {
       requestedAt: "2021-03-29T06:53:31",

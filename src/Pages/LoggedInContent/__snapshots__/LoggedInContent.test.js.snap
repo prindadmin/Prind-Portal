@@ -23,6 +23,7 @@ exports[`LoggedInContent Page - Should initial load with direct link to profile 
         noFoundationsBannerShowing={true}
       >
         <lazy
+          checkServerAccessToProcore={[MockFunction]}
           getProjectDetails={[MockFunction]}
           getProjectMembers={[MockFunction]}
           location={
@@ -42,6 +43,7 @@ exports[`LoggedInContent Page - Should initial load with direct link to profile 
               "chosenProject": Object {},
             }
           }
+          resetSite={[MockFunction]}
           saveProjectID={[MockFunction]}
           user={
             Object {
@@ -90,6 +92,7 @@ exports[`LoggedInContent Page - Should initial load with direct link to project 
         noFoundationsBannerShowing={true}
       >
         <lazy
+          checkServerAccessToProcore={[MockFunction]}
           getProjectDetails={
             [MockFunction] {
               "calls": Array [
@@ -139,6 +142,7 @@ exports[`LoggedInContent Page - Should initial load with direct link to project 
               "chosenProject": Object {},
             }
           }
+          resetSite={[MockFunction]}
           saveProjectID={
             [MockFunction] {
               "calls": Array [
@@ -204,6 +208,7 @@ exports[`LoggedInContent Page - Should initial load with direct link to project 
         noFoundationsBannerShowing={true}
       >
         <lazy
+          checkServerAccessToProcore={[MockFunction]}
           getProjectDetails={
             [MockFunction] {
               "calls": Array [
@@ -253,6 +258,7 @@ exports[`LoggedInContent Page - Should initial load with direct link to project 
               "chosenProject": Object {},
             }
           }
+          resetSite={[MockFunction]}
           saveProjectID={
             [MockFunction] {
               "calls": Array [
@@ -318,6 +324,7 @@ exports[`LoggedInContent Page - Should initial load with direct link to project 
         noFoundationsBannerShowing={true}
       >
         <lazy
+          checkServerAccessToProcore={[MockFunction]}
           getProjectDetails={
             [MockFunction] {
               "calls": Array [
@@ -384,6 +391,7 @@ exports[`LoggedInContent Page - Should initial load with direct link to project 
               },
             }
           }
+          resetSite={[MockFunction]}
           saveProjectID={
             [MockFunction] {
               "calls": Array [
@@ -456,6 +464,7 @@ exports[`LoggedInContent Page - Should initial load with direct link to project 
         noFoundationsBannerShowing={true}
       >
         <lazy
+          checkServerAccessToProcore={[MockFunction]}
           getProjectDetails={
             [MockFunction] {
               "calls": Array [
@@ -521,6 +530,7 @@ exports[`LoggedInContent Page - Should initial load with direct link to project 
               "chosenProject": Object {},
             }
           }
+          resetSite={[MockFunction]}
           saveProjectID={
             [MockFunction] {
               "calls": Array [
@@ -593,6 +603,7 @@ exports[`LoggedInContent Page - Should render 404 for non-existent page 1`] = `
         noFoundationsBannerShowing={true}
       >
         <lazy
+          checkServerAccessToProcore={[MockFunction]}
           getProjectDetails={[MockFunction]}
           getProjectMembers={[MockFunction]}
           location={
@@ -612,6 +623,7 @@ exports[`LoggedInContent Page - Should render 404 for non-existent page 1`] = `
               "chosenProject": Object {},
             }
           }
+          resetSite={[MockFunction]}
           saveProjectID={[MockFunction]}
           user={
             Object {
@@ -660,6 +672,7 @@ exports[`LoggedInContent Page - Should render foundations page 1`] = `
         noFoundationsBannerShowing={true}
       >
         <lazy
+          checkServerAccessToProcore={[MockFunction]}
           getProjectDetails={[MockFunction]}
           getProjectMembers={[MockFunction]}
           location={
@@ -679,6 +692,7 @@ exports[`LoggedInContent Page - Should render foundations page 1`] = `
               "chosenProject": Object {},
             }
           }
+          resetSite={[MockFunction]}
           saveProjectID={[MockFunction]}
           user={
             Object {
@@ -727,6 +741,7 @@ exports[`LoggedInContent Page - Should render newproject page 1`] = `
         noFoundationsBannerShowing={true}
       >
         <lazy
+          checkServerAccessToProcore={[MockFunction]}
           getProjectDetails={[MockFunction]}
           getProjectMembers={[MockFunction]}
           location={
@@ -746,6 +761,7 @@ exports[`LoggedInContent Page - Should render newproject page 1`] = `
               "chosenProject": Object {},
             }
           }
+          resetSite={[MockFunction]}
           saveProjectID={[MockFunction]}
           user={
             Object {
@@ -794,6 +810,7 @@ exports[`LoggedInContent Page - Should render no project selected 1`] = `
         noFoundationsBannerShowing={true}
       >
         <lazy
+          checkServerAccessToProcore={[MockFunction]}
           getProjectDetails={[MockFunction]}
           getProjectMembers={[MockFunction]}
           location={
@@ -813,6 +830,7 @@ exports[`LoggedInContent Page - Should render no project selected 1`] = `
               "chosenProject": Object {},
             }
           }
+          resetSite={[MockFunction]}
           saveProjectID={[MockFunction]}
           user={
             Object {
@@ -863,6 +881,7 @@ exports[`LoggedInContent Page - Should render no project selected at mobile reso
         noFoundationsBannerShowing={true}
       >
         <lazy
+          checkServerAccessToProcore={[MockFunction]}
           getProjectDetails={[MockFunction]}
           getProjectMembers={[MockFunction]}
           location={
@@ -882,6 +901,7 @@ exports[`LoggedInContent Page - Should render no project selected at mobile reso
               "chosenProject": Object {},
             }
           }
+          resetSite={[MockFunction]}
           saveProjectID={[MockFunction]}
           user={
             Object {
@@ -932,6 +952,7 @@ exports[`LoggedInContent Page - Should render no project selected at mobile reso
         noFoundationsBannerShowing={true}
       >
         <lazy
+          checkServerAccessToProcore={[MockFunction]}
           getProjectDetails={[MockFunction]}
           getProjectMembers={[MockFunction]}
           location={
@@ -952,6 +973,7 @@ exports[`LoggedInContent Page - Should render no project selected at mobile reso
               "error": "There was an error",
             }
           }
+          resetSite={[MockFunction]}
           saveProjectID={[MockFunction]}
           user={
             Object {
@@ -1002,6 +1024,7 @@ exports[`LoggedInContent Page - Should render profile page 1`] = `
         noFoundationsBannerShowing={true}
       >
         <lazy
+          checkServerAccessToProcore={[MockFunction]}
           getProjectDetails={[MockFunction]}
           getProjectMembers={[MockFunction]}
           location={
@@ -1021,6 +1044,7 @@ exports[`LoggedInContent Page - Should render profile page 1`] = `
               "chosenProject": Object {},
             }
           }
+          resetSite={[MockFunction]}
           saveProjectID={[MockFunction]}
           user={
             Object {
@@ -1069,6 +1093,7 @@ exports[`LoggedInContent Page - Should render project page 1`] = `
         noFoundationsBannerShowing={true}
       >
         <lazy
+          checkServerAccessToProcore={[MockFunction]}
           getProjectDetails={[MockFunction]}
           getProjectMembers={[MockFunction]}
           location={
@@ -1088,6 +1113,7 @@ exports[`LoggedInContent Page - Should render project page 1`] = `
               "chosenProject": Object {},
             }
           }
+          resetSite={[MockFunction]}
           saveProjectID={[MockFunction]}
           user={
             Object {
@@ -1136,6 +1162,7 @@ exports[`LoggedInContent Page - Should render team page 1`] = `
         noFoundationsBannerShowing={true}
       >
         <lazy
+          checkServerAccessToProcore={[MockFunction]}
           getProjectDetails={[MockFunction]}
           getProjectMembers={[MockFunction]}
           location={
@@ -1155,6 +1182,7 @@ exports[`LoggedInContent Page - Should render team page 1`] = `
               "chosenProject": Object {},
             }
           }
+          resetSite={[MockFunction]}
           saveProjectID={[MockFunction]}
           user={
             Object {
@@ -1203,6 +1231,7 @@ exports[`LoggedInContent Page - Should render then have an error fetching a proj
         noFoundationsBannerShowing={true}
       >
         <lazy
+          checkServerAccessToProcore={[MockFunction]}
           getProjectDetails={[MockFunction]}
           getProjectMembers={[MockFunction]}
           location={
@@ -1223,6 +1252,7 @@ exports[`LoggedInContent Page - Should render then have an error fetching a proj
               "error": "There was an error",
             }
           }
+          resetSite={[MockFunction]}
           saveProjectID={[MockFunction]}
           user={
             Object {

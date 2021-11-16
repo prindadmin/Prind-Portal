@@ -216,6 +216,7 @@ it('test all procore sagas - getProjectFilesAndFolders', (result) => {
   result.payload.fn = takeLatest
   expect(result).toEqual(expectedResult);
 });
+/*
 it('test all procore sagas - anchorProjectFile', (result) => {
   var expectedResult = fork(takeLatest, Actions.PROCORE_REQUEST_DOCUMENT_ANCHOR, ProcoreSagas.anchorProjectFile);
   result.payload.fn = takeLatest
@@ -226,3 +227,4 @@ it('test all procore sagas - signProjectFile', (result) => {
   result.payload.fn = takeLatest
   expect(result).toEqual(expectedResult);
 });
+*/

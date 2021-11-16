@@ -438,7 +438,7 @@ it('getProjectInvitations - success - fetching state put', (result) => {
   }));
 });
 it('getProjectInvitations - success - request to dispatcher', (result) => {
-  expect(result).toEqual(call(UserDispatchers.getProjectInvitations, []));
+  expect(result).toEqual(call(UserDispatchers.getProjectInvitations));
   return getProjectInvitationsDispatcherReturn
 });
 it('getProjectInvitations - success - end state put', (result) => {
@@ -468,7 +468,7 @@ it('getProjectInvitations - error - fetching state put', (result) => {
   }));
 });
 it('getProjectInvitations - error - request to dispatcher', (result) => {
-  expect(result).toEqual(call(UserDispatchers.getProjectInvitations, getProjectInvitationsAction.payload.identityToken));
+  expect(result).toEqual(call(UserDispatchers.getProjectInvitations));
   return dispatcherError
 });
 it('getProjectInvitations - error - end state put', (result) => {
@@ -498,7 +498,7 @@ it('getProjectInvitations - success without callback - fetching state put', (res
   }));
 });
 it('getProjectInvitations - success without callback - request to dispatcher', (result) => {
-  expect(result).toEqual(call(UserDispatchers.getProjectInvitations, getProjectInvitationsActionWithoutCallbacks.payload.identityToken));
+  expect(result).toEqual(call(UserDispatchers.getProjectInvitations));
   return getProjectInvitationsDispatcherReturn
 });
 it('getProjectInvitations - success without callback - end state put', (result) => {
@@ -528,7 +528,7 @@ it('getProjectInvitations - error without callback - fetching state put', (resul
   }));
 });
 it('getProjectInvitations - error without callback - request to dispatcher', (result) => {
-  expect(result).toEqual(call(UserDispatchers.getProjectInvitations, getProjectInvitationsActionWithoutCallbacks.payload.identityToken));
+  expect(result).toEqual(call(UserDispatchers.getProjectInvitations));
   return dispatcherError
 });
 it('getProjectInvitations - error without callback - end state put', (result) => {

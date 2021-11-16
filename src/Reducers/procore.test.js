@@ -5,10 +5,14 @@ import * as Endpoints from '../Data/Endpoints'
 
 let defaultState = {
   fetching: false,
-  companyId: "28592",
+  companyId: "",
   companyName: "",
-  projectId: "1234",
+  projectId: "",
   projectName: "",
+  currentFolder: null,
+  folderHistory: {
+    chain: []
+  },
   folders: [],
   files: [],
   error: {},

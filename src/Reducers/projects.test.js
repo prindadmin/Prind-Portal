@@ -11,6 +11,15 @@ const defaultChosenProject = {
   projectName: Strings.NO_PROJECT_SELECTED,
   projectId: "",
   projectType: "",
+  projectAddressLine1: "",
+  projectAddressLine2: "",
+  projectAddressLine3: "",
+  projectAddressTown: "",
+  projectAddressRegion: "",
+  projectAddressCountry: "",
+  projectAddressPostalCode: "",
+  projectDescription: "",
+  projectReference: "",
 }
 
 let defaultState = {
@@ -106,6 +115,7 @@ it('Projects Reducer - saveProjectID with id provided', () => {
     type: Actions.PROJECT_SET_STATE,
     payload: {
       chosenProject: {
+        ...defaultChosenProject,
         projectName: Strings.NO_PROJECT_SELECTED,
         projectId: "123",
         projectType: "",
@@ -125,6 +135,7 @@ it('Projects Reducer - saveProjectID without id provided', () => {
     type: Actions.PROJECT_SET_STATE,
     payload: {
       chosenProject: {
+        ...defaultChosenProject,
         projectName: Strings.NO_PROJECT_SELECTED,
         projectId: "",
         projectType: "",

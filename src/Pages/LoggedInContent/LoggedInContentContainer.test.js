@@ -27,6 +27,11 @@ beforeAll(() => {
   process.env = Object.assign(process.env, {
     REACT_APP_PORTAL: 'CDM2015Project',
   });
+  document.body.innerHTML =
+    '<div id="root">' +
+    '</div>' +
+    '<div id="popOver">' +
+    '</div>';
 });
 
 beforeEach(() => {
