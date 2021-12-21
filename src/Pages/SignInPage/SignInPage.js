@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
+import { Route } from 'react-router-dom'
 import PropTypes from 'prop-types'
+
+import classes from './SignInPage.module.css'
 
 // Tools
 import ReactGA from 'react-ga';
 
 // Data
-import * as Endpoints from '../../Data/Endpoints'
+import * as ENDPOINTS from '../../Data/Endpoints'
+import { MOBILE_BREAK_WIDTH } from '../../Data/Constants'
 
 // Components
 import SignInUpBox from '../../Components/SignInUpBox'
@@ -24,14 +28,21 @@ export class SignInPage extends Component {
   constructor() {
     super()
     this.state = {
-      username: undefined
+      username: undefined,
+      screenDimensions: {
+        width: 0,
+        height: 0
+      }
     }
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this)
   }
 
   componentDidMount() {
     const { pathname, state } = this.props.location
     // Register pageview with GA
     ReactGA.pageview(pathname);
+    this.updateWindowDimensions();
+    window.addEventListener('resize', this.updateWindowDimensions);
 
     if (!state) {
       return;
@@ -56,29 +67,66 @@ export class SignInPage extends Component {
     }
   }
 
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWindowDimensions);
+  }
+
+  updateWindowDimensions() {
+    this.setState({
+      screenDimensions: {
+        width: window.innerWidth,
+        height: window.innerHeight
+      }
+    });
+  }
+
+
+  background = () => {
+    // TODO: Customise for larger screen resolutions
+    if (this.state.screenDimensions.width > MOBILE_BREAK_WIDTH) {
+      return {
+        backgroundImage: [
+          'url(/images/elements/strings-cropped.png)'
+        ],
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: '30vw 120%',
+        backgroundPosition: 'left 55vw top 0px'
+      }
+    }
+    return {
+      backgroundImage: [
+        'url(/images/elements/strings-cropped.png)'
+      ],
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: '100vw 120%',
+      backgroundPosition: 'left -30vw top 0px'
+    }
+  }
+
 
   render () {
     const { location } = this.props
-    const pageStyle = CanUseWebP() ? {
-      backgroundImage: `url(/images/backgrounds/building-site-1.webp)`
-    } : {
-      backgroundImage: `url(/images/backgrounds/building-site-1.png)`
-    }
 
     // Work out if the sign-in page should be shown, or the sign up page
     const props = {
-      isSignIn: location.pathname === Endpoints.SIGNINPAGE,
-      isSignUp: location.pathname === Endpoints.SIGNUPPAGE,
-      isForgotPassword: location.pathname === Endpoints.FORGOTPASSWORDPAGE,
-      isPasswordReset: location.pathname === Endpoints.RESETPASSWORDPAGE,
+      isSignIn: location.pathname === ENDPOINTS.SIGNINPAGE,
+      isSignUp: location.pathname === ENDPOINTS.SIGNUPPAGE,
+      isForgotPassword: location.pathname === ENDPOINTS.FORGOTPASSWORDPAGE,
+      isPasswordReset: location.pathname === ENDPOINTS.RESETPASSWORDPAGE,
     }
 
 
     return (
-      <div id='sign-in-up-page' className='full-width full-height' style={pageStyle}>
+      <div id='sign-in-up-page' className={`full-width full-height ${classes.page}`} style={this.background()}>
+        <div className={classes.topRow}>
+          <Route render={({ history }) => (
+            <img src='/images/logos/prin-d-logo-white.png' alt='' className={classes.logoImage} onClick={() => { history.push(ENDPOINTS.DEFAULTPAGE) }}/>
+          )}/>
+        </div>
         <SignInUpBox
           reference='sign-in-up-box'
           backgroundColor="#FFFFFF"
+          screenDimensions={this.state.screenDimensions}
           username={this.state.username}
           {...props}
         />

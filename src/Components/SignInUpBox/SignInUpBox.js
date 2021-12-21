@@ -2,6 +2,8 @@ import React, { Component, lazy, Suspense } from 'react'
 import PropTypes from 'prop-types'
 import ReactGA from 'react-ga';
 
+import classes from './SignInUpBox.module.css'
+
 import LoadingSpinner from '../LoadingSpinner'
 
 import * as Endpoints from '../../Data/Endpoints'
@@ -33,7 +35,11 @@ export class SignInUpBox extends Component {
     }).isRequired,
     user: PropTypes.shape({
       currentRoute: PropTypes.string.isRequired
-    }).isRequired
+    }).isRequired,
+    screenDimensions: PropTypes.shape({
+      width: PropTypes.number.isRequired,
+      height: PropTypes.number.isRequired
+    })
   }
 
 
@@ -151,9 +157,9 @@ export class SignInUpBox extends Component {
 
   render () {
     return (
-      <div id='component-sign-in-up-box'>
+      <div id='component-sign-in-up-box' className={classes.signInUpBox}>
         <Suspense fallback={<LoadingSpinner />}>
-          <div className="component-sign-in-up-box-content-container">
+          <div className={classes.signInUpBoxContainer}>
               {
                 this.state.showSignInForm ? this.showSignInForm() : null
               }
