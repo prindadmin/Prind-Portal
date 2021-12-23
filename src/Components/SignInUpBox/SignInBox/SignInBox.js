@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import classes from '../SignInUpBox.module.css'
+
 // Data
-import * as Strings from '../../../Data/Strings'
+import * as STRINGS from '../../../Data/Strings'
 import * as FormOptions from '../../../States'
 import * as ComponentStates from '../../ComponentStates'
 
 // Components
-import CanUseWebP from '../../../Functions/CheckIfWebpSupported'
+//import CanUseWebP from '../../../Functions/CheckIfWebpSupported'
 
 // TODO: FUTURE: Add icons to username and password boxes
 
@@ -88,27 +90,21 @@ export class SignInBox extends Component {
   }
 
   getLogo = () => {
-    const logoLocation = CanUseWebP() ? "/images/logos/prind-tech-logo.webp" : "/images/logos/prind-tech-logo.png"
+    const logoLocation = "/images/logos/prin-d-logo-white.png"
 
     return (
       <React.Fragment>
         <div className="logo-container">
           <a href="https://prind.tech" target="_blank" rel="noopener noreferrer"><img src={logoLocation} alt="Prin-D Technology logo"></img></a>
         </div>
-        <div className="welcome-text-heading">
-          { Strings.WELCOME_TEXT }
-        </div>
-        <div className="welcome-text-body">
-          { Strings.PLEASE_SIGN_IN_TEXT }
-        </div>
-      </React.Fragment> 
+      </React.Fragment>
     )
   }
 
   getSpinner = () => {
     return (
       <React.Fragment>
-        <div className='lds-ring'><div></div><div></div><div></div><div></div></div>
+        <div className={`lds-ring ${classes.spinnerRing}`}><div></div><div></div><div></div><div></div></div>
       </React.Fragment>
     )
   }
@@ -126,29 +122,28 @@ export class SignInBox extends Component {
 
   getSignInForm = () => {
     return (
-      <form className="sign-in-form">
+      <form className={classes.form}>
 
+        <label htmlFor='email'>{STRINGS.PLACEHOLDER_EMAIL}</label>
         <input
           id="email"
           name="email"
           type="email"
-          placeholder={ Strings.PLACEHOLDER_EMAIL }
+          placeholder={ STRINGS.PLACEHOLDER_EMAIL }
           value={this.state.email}
           onChange={this.handleInputChange}
           className={ this.state.email === '' ? "default" : "filled" }/>
 
+        <label htmlFor='email'>{STRINGS.PLACEHOLDER_PASSWORD}</label>
         <input
           id="password"
           name="password"
           type="password"
-          placeholder={ Strings.PLACEHOLDER_PASSWORD }
+          placeholder={ STRINGS.PLACEHOLDER_PASSWORD }
           value={this.state.password}
           onChange={this.handleInputChange}
           className={ this.state.password === '' ? "default" : "filled" }/>
 
-        <p className="forgot-your-password-text" onClick={this.forgotPasswordClicked}>{Strings.BUTTON_FORGOT_PASSWORD}</p>
-
-        <div className='spacer' />
         {
           this.state.state === ComponentStates.SIGN_IN_FAILED ? this.getErrorCallout() : null
         }
@@ -157,12 +152,15 @@ export class SignInBox extends Component {
           id="signInButton"
           name="signInButton"
           type="submit"
-          value={ Strings.BUTTON_LOGIN }
+          className={`${classes.button} ${classes.submitButton}`}
+          value={ STRINGS.BUTTON_LOGIN }
           onClick={(e) => this.signIn(e)}/>
 
         <div className='spacer' />
 
-        <p className="sign-up-in-text" onClick={(e) => this.props.toggleVisibleForm(FormOptions.SIGNUPFORM)}>{Strings.DONT_HAVE_AN_ACCOUNT}</p>
+        <p className={classes.linkText} onClick={this.forgotPasswordClicked}>{STRINGS.BUTTON_FORGOT_PASSWORD}</p>
+
+        <p className={classes.linkText} onClick={(e) => this.props.toggleVisibleForm(FormOptions.SIGNUPFORM)}>{STRINGS.DONT_HAVE_AN_ACCOUNT}</p>
 
       </form>
     )

@@ -2272,9 +2272,7 @@ mark.grey {
 /* ======== Sign In and Up Box ======= */
 /* =================================== */
 
-#create-custom-field-popover input[type=text],
-#component-sign-in-up-box input[type=text],
-#component-sign-in-up-box input[type=password]  {
+#create-custom-field-popover input[type=text] {
   width: 100%;
   appearance: none;
   background: #ffffff;
@@ -2293,89 +2291,15 @@ mark.grey {
   margin-bottom: calc(var(--standard-margin) / 2);
 }
 
-#component-sign-in-up-box .logo-container {
+.logo-container {
   padding: 0 10%;
   margin-bottom: 20px;
 }
 
-#component-sign-in-up-box .logo-container img {
+.logo-container img {
   width: 100%;
 }
 
-#component-sign-in-up-box .welcome-text-heading {
-  width: 100%;
-  font-size: 22px;
-  font-weight: var(--font-raleway-weight-semibold);
-  margin-bottom: 10px;
-}
-
-#component-sign-in-up-box .welcome-text-body {
-  width: 100%;
-  font-size: 16px;
-  font-weight: var(--font-raleway-weight-regular);
-  margin-bottom: 30px;
-}
-
-#component-sign-in-up-box .password-request-success {
-  width: 100%;
-  text-align: center;
-}
-
-#component-sign-in-up-box .form {
-  width: 100%;
-  padding: 0 5%;
-}
-
-#component-sign-in-up-box .form-row {
-}
-
-#component-sign-in-up-box .form-row p {
-  padding: 0px 5px;
-}
-
-#component-sign-in-up-box .alert p {
-  padding: 0px;
-  margin: 0px;
-}
-
-#component-sign-in-up-box .sign-in-form {
-}
-
-#component-sign-in-up-box .sign-up-form {
-}
-
-#component-sign-in-up-box .forgot-your-password-text {
-  font-size: 14px;
-  font-weight: var(--font-raleway-weight-bold);
-  text-align: left;
-}
-
-#component-sign-in-up-box .forgot-your-password-text:hover {
-  text-decoration: underline;
-  cursor:pointer;
-}
-
-#component-sign-in-up-box .sign-up-in-text {
-  font-size: 14px;
-  font-weight: var(--font-raleway-weight-bold);
-  text-align: center;
-}
-
-#component-sign-in-up-box .sign-up-in-text:hover {
-  text-decoration: underline;
-  cursor:pointer;
-}
-
-#component-sign-in-up-box .form .btn-primary {
-  width: 100%;
-  background-color: #CCCCCC;
-  color: white;
-  font-size: 20px;
-  font-weight: var(--font-raleway-weight-medium);
-  margin-bottom: 20px;
-  background: transparent linear-gradient(90deg, #194174 0%, #6394CC 100%) 0% 0% no-repeat padding-box;
-  border-radius: 10px;
-}
 
 /* ============================================== */
 /* ========= Git Commit Message Popover ========= */

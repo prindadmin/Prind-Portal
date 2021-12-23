@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import classes from '../SignInUpBox.module.css'
+
 // Data
-import * as Strings from '../../../Data/Strings'
+import * as STRINGS from '../../../Data/Strings'
 import * as States from '../../../States'
 import * as ComponentStates from '../../ComponentStates'
 
 // Components
-import CanUseWebP from '../../../Functions/CheckIfWebpSupported'
+//import CanUseWebP from '../../../Functions/CheckIfWebpSupported'
 
 export class ForgotPasswordBox extends Component {
   static propTypes = {
@@ -63,17 +65,11 @@ export class ForgotPasswordBox extends Component {
 
   // TODO: FUTURE: Can we fake this test to show with and without webp version
   getLogo = () => {
-    const logoLocation = CanUseWebP() ? "/images/logos/prind-tech-logo.webp" : "/images/logos/prind-tech-logo.png"
+    const logoLocation = "/images/logos/prin-d-logo-white.png"
     return (
       <React.Fragment>
         <div className="logo-container">
-          <a href="https://prind.tech" target="_blank" rel="noopener noreferrer"><img src={logoLocation} alt="Prin-D Technology logo"></img></a> 
-        </div>
-        <div className="welcome-text-heading">
-          { Strings.WELCOME_TEXT }
-        </div>
-        <div className="welcome-text-body">
-          { Strings.PLEASE_FILL_IN_EMAIL_TO_RESET_PASSWORD }
+          <a href="https://prind.tech" target="_blank" rel="noopener noreferrer"><img src={logoLocation} alt="Prin-D Technology logo"></img></a>
         </div>
       </React.Fragment>
     )
@@ -81,29 +77,28 @@ export class ForgotPasswordBox extends Component {
 
   getForgotPasswordForm = () => {
     return (
-      <form id="forgot-password-form" className="sign-in-form" onSubmit={(e) => e.preventDefault()}>
+      <form id="forgot-password-form" className={classes.form} onSubmit={(e) => e.preventDefault()}>
 
+        <label htmlFor='email'>{STRINGS.PLACEHOLDER_EMAIL}</label>
         <input
           id="email"
           name="email"
           type="text"
-          placeholder={ Strings.PLACEHOLDER_EMAIL }
+          placeholder={ STRINGS.PLACEHOLDER_EMAIL }
           value={this.state.email}
           onChange={this.handleInputChange}
           className={ this.state.email === '' ? "default" : "filled" }/>
 
-        <div className='spacer' />
-
         <input
           id="submit"
           type="submit"
-          value={ Strings.BUTTON_SEND_PASSWORD_RESET_CODE }
-          className="submit-button"
+          value={ STRINGS.BUTTON_SEND_PASSWORD_RESET_CODE }
+          className={`${classes.button} ${classes.submitButton}`}
           onClick={(e) => this.resetPassword(e)}/>
 
         <div className='spacer' />
 
-        <p id="sign-in-form-text" className="sign-up-in-text" onClick={(e) => this.props.toggleVisibleForm(States.SIGNINFORM)}>{Strings.ALREADY_HAVE_AN_ACCOUNT}</p>
+        <p id="sign-in-form-text" className="sign-up-in-text" onClick={(e) => this.props.toggleVisibleForm(States.SIGNINFORM)}>{STRINGS.ALREADY_HAVE_AN_ACCOUNT}</p>
 
       </form>
     )
@@ -126,7 +121,7 @@ export class ForgotPasswordBox extends Component {
   getSpinner = () => {
     return (
       <React.Fragment>
-        <div className='lds-ring'><div></div><div></div><div></div><div></div></div>
+        <div className={`lds-ring ${classes.spinnerRing}`}><div></div><div></div><div></div><div></div></div>
       </React.Fragment>
     )
   }
@@ -142,13 +137,13 @@ export class ForgotPasswordBox extends Component {
   getForgotPasswordSuccess = () => {
     return (
       <div className='password-request-success'>
-        <h3>{Strings.YOUR_CHANGE_PASSWORD_REQUEST_WAS_SUCCESS}</h3>
+        <h3>{STRINGS.YOUR_CHANGE_PASSWORD_REQUEST_WAS_SUCCESS}</h3>
         <div className='spacer' />
         <input
           id="submit"
           type="submit"
-          value={ Strings.ACCOUNT_BACK_TO_LOGIN_PAGE }
-          className="submit-button"
+          value={ STRINGS.ACCOUNT_BACK_TO_LOGIN_PAGE }
+          className={`${classes.button} ${classes.submitButton}`}
           onClick={() => this.onPasswordSuccessClick()}/>
       </div>
     )
