@@ -103,6 +103,22 @@ export class SignInPage extends Component {
     }
   }
 
+  headerLogInButton = () => {
+    if (this.state.screenDimensions.width > MOBILE_BREAK_WIDTH) {
+      return (
+        <button type='submit' className={`${classes.button} ${classes.logInButton}` }>
+          <a href={`${ENDPOINTS.DEFAULTPAGE}`}>
+            <span>
+              Log in
+              <img src='/images/icons/login.svg' alt='Log in' style={{ marginLeft: '0.67em', transform: 'translateY(2px)' }}/>
+            </span>
+          </a>
+        </button>
+      )
+    }
+    return <button className={`${classes.button} secondary ${classes.logInButton}`} style={{ height: '39px', width:'39px', padding: '13px'}}><a href={`${ENDPOINTS.DEFAULTPAGE}`}><img src='/images/icons/login.svg' alt='Log in' /></a></button>
+  }
+
 
   render () {
     const { location } = this.props
@@ -121,6 +137,10 @@ export class SignInPage extends Component {
         <div className={classes.topRow}>
           <Route render={({ history }) => (
             <img src='/images/logos/prin-d-logo-white.png' alt='' className={classes.logoImage} onClick={() => { history.push(ENDPOINTS.DEFAULTPAGE) }}/>
+          )}/>
+          { this.headerLogInButton() }
+          <Route render={() => (
+            <input type='submit' className={`${classes.button} ${classes.arrangeDemoButton}`} value='Arrange a demo' onClick={() => { window.location.href = `https://prind.tech/arrange-demo` }}/>
           )}/>
         </div>
         <SignInUpBox

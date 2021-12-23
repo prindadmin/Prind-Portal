@@ -16,6 +16,12 @@
   margin: 0 -20px 0 0;
 }
 
+.topRow a:link,
+.topRow a:visited,
+.topRow a:hover,
+.topRow a:active {
+  color: var(--prind-colour-3);
+}
 
 @media (min-width: 800px) {
   .topRow {
@@ -29,4 +35,54 @@
   max-width: 207px;
   object-fit: contain;
   margin-right: auto;
+}
+
+.button {
+  box-sizing: border-box;
+  --button-height: 55px;
+  height: var(--button-height) !important;
+  border-radius: calc(var(--button-height) / 2) !important;
+  font-weight: bold !important;
+  font-size: 12px !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 10px 14px !important;
+  margin-top: 14px;
+  background-color: var(--prind-colour-1) !important;
+  border: 1px solid #DCC394 !important;
+  box-shadow: none !important;
+  background-image: none !important;
+  color: var(--prind-colour-3) !important;
+}
+
+.logInButton {
+  --button-height: 55px;
+  width: var(--button-height) !important;
+  height: var(--button-height) !important;
+  margin-right: 2em !important;
+}
+
+@media (min-width: 800px) {
+  .logInButton {
+    font-size: 14px;
+    --button-height: 55px;
+    padding: 10px 24px !important;
+    width: auto !important;
+  }
+}
+
+.arrangeDemoButton {
+  width: 180px !important;
+  color: #131419 !important;
+  background-color: var(--prind-colour-2) !important;
+}
+
+@media (min-width: 800px) {
+  .arrangeDemoButton {
+    margin-right: 2em !important;
+    width: 225px !important;
+  }
 }
