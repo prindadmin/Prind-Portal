@@ -188,7 +188,7 @@ class App extends Component{
               <PrivateRoute path={Endpoints.NEWPROJECTPAGE} component={LoggedInContent} />
 
               <PrivateRoute path={Endpoints.PROFILEPAGE} component={LoggedInContent} />
-              <PrivateRoute path={Endpoints.FOUNDATIONSPAGE} component={LoggedInContent} />
+              {/* <PrivateRoute path={Endpoints.FOUNDATIONSPAGE} component={LoggedInContent} /> */}
 
               <Route path='/'
                 render={() =>

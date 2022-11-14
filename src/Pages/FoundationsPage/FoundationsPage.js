@@ -11,13 +11,13 @@ export class FoundationsPage extends Component {
     ReactGA.pageview(location.pathname);
   }
 
-  androidClicked = () => {
-    window.open(encodeURI("https://play.google.com/store/apps/details?id=com.buildingim.foundations"), "_blank")
-  }
+  // androidClicked = () => {
+  //   window.open(encodeURI("https://play.google.com/store/apps/details?id=com.buildingim.foundations"), "_blank")
+  // }
 
-  iosClicked = () => {
-    window.open(encodeURI("https://apps.apple.com/us/app/foundations/id1499177355#?platform=iphone"), "_blank")
-  }
+  // iosClicked = () => {
+  //   window.open(encodeURI("https://apps.apple.com/us/app/foundations/id1499177355#?platform=iphone"), "_blank")
+  // }
 
   getPageContent = () => {
     return (

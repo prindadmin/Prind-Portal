@@ -85,7 +85,7 @@ const PAGENAMES = {
     },
   },
   CommonPages: [
-    'newproject', 'profile', 'foundations', 'team', 'project'
+    'newproject', 'profile', 'team', 'project'
   ]
 }
 

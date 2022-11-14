@@ -4,7 +4,6 @@ import classes from './HeaderBar.module.css'
 
 import ProjectSelector from '../Common/ProjectSelector';
 import UserMenu from '../Common/UserMenu'
-import NoFoundationsIDBanner from '../Common/NoFoundationsIDBanner'
 
 export class HeaderBar extends Component {
   static propTypes = {
@@ -66,7 +65,7 @@ export class HeaderBar extends Component {
           </div>
         </div>
         {
-          <NoFoundationsIDBanner />
+
         }
       </Fragment>
     )

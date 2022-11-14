@@ -77,11 +77,11 @@ export class CurrentVersion extends Component {
     const { pageName, fieldID } = this.props
     const { projectId } = this.props.projects.chosenProject
     // Send the request
-    this.props.selfSignFile(
-      projectId,
-      pageName,
-      fieldID,
-    )
+    // this.props.selfSignFile(
+    //   projectId,
+    //   pageName,
+    //   fieldID,
+    // )
     // Stop the click propagating up
     e.stopPropagation();
   }
@@ -162,17 +162,6 @@ export class CurrentVersion extends Component {
         }
         {
           this.getDetailsTable()
-        }
-        {
-          noFoundationsID ?
-            <div className='row button-row'>
-              <Callout className='no-foundations-id' intent='danger'>
-                <div>
-                  { Strings.CANNOT_SIGN_WITHOUT_FOUNDATIONS_ID }
-                </div>
-              </Callout>
-            </div> :
-            null
         }
         <div className='row button-row' style={{ marginTop: "1rem" }}>
           <input

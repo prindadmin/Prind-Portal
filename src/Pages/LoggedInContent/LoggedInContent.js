@@ -19,7 +19,6 @@ import HeaderBar from '../../Components/HeaderBar'
 import ProjectDetailsPage from '../ProjectDetailsPage'
 import ProjectTeamPage from '../ProjectTeamPage'
 import ProjectStagePage from '../ProjectStagePageTemplate'
-import FoundationsPage from '../FoundationsPage'
 import NewProjectPage from '../NewProjectPage'
 import ProfilePage from '../ProfilePage'
 
@@ -35,7 +34,7 @@ const Error404 = lazy(() => import('../../Components/Error404'))
 const ProcoreProjectDoesNotExist = lazy(() => import('../../Components/ProcoreProjectDoesNotExist'))
 
 const MOBILE_WIDTH_BREAKPOINT = 992;
-const PAGES_WITHOUT_PROJECT_SELECTOR = ['newproject', 'profile', 'foundations']
+const PAGES_WITHOUT_PROJECT_SELECTOR = ['newproject', 'profile']
 
 export class LoggedInContent extends Component {
   static propTypes = {
@@ -239,7 +238,6 @@ export class LoggedInContent extends Component {
 
     const content = pathname.startsWith('/team') ? <ProjectTeamPage /> :
                     pathname.startsWith('/project') ? <ProjectDetailsPage /> :
-                    pathname.startsWith('/foundations') ? <FoundationsPage /> :
                     pathname.startsWith('/newproject') ? <NewProjectPage /> :
                     pathname.startsWith('/profile') ? <ProfilePage /> :
                     <Error404 />

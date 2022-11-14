@@ -64,8 +64,8 @@ export class SignatureRequestTile extends Component {
   }
 
   rejectSignatureRequest = () => {
-    const { requestDetails } = this.props
-    this.props.rejectSignatureRequest(requestDetails, this.resolveRejectRequest, this.rejectRejectRequest)
+    // const { requestDetails } = this.props
+    // this.props.rejectSignatureRequest(requestDetails, this.resolveRejectRequest, this.rejectRejectRequest)
   }
 
   resolveRejectRequest = () => {
