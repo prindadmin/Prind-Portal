@@ -6,7 +6,7 @@ export class FooterBar extends Component {
       <div id='footer-bar' className='col-12'>
         <div className='footer-content row'>
           <div className='footer-text col'>
-            PrinD © 2022
+            PrinD  2022
           </div>
         </div>
       </div>
