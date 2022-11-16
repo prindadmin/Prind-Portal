@@ -320,7 +320,7 @@ export class LoggedInContent extends Component {
         <HeaderBar companyName='Prin-D' openProjectSelector={this.shouldOpenProjectSelector()}/>
         <ErrorBoundary onRetry={this.onRetry}>
           <Suspense fallback={this.loadingPlaceholder()}>
-            <LayoutBody noFoundationsBannerShowing={!this.props.user.details.foundationsID}>
+            <LayoutBody noFoundationsBannerShowing={false}>
               {
                 this.state.width > MOBILE_WIDTH_BREAKPOINT ? <SideBar {...this.props} /> : <SideBarMobile {...this.props} />
               }

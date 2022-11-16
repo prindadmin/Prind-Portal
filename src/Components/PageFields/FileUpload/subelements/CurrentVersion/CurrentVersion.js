@@ -149,7 +149,7 @@ export class CurrentVersion extends Component {
   currentVersionProvided = () => {
     const { user } = this.props
     const { fetchError, errorText } = this.state
-    const noFoundationsID = user.details.foundationsID === undefined || user.details.foundationsID === null
+    const noFoundationsID = true
 
     return (
       <React.Fragment>

@@ -7,12 +7,12 @@ export function CheckIfCanSign(userRedux) {
   }
 
   try {
-    const { foundationsId } = userRedux.details
+    // const { foundationsId } = userRedux.details
 
-    if (foundationsId === undefined) {
+    // if (foundationsId === undefined) {
       return false
-    }
-    return true
+    // }
+    // return true
   }
   catch (e) {
     return false;

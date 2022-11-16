@@ -131,7 +131,7 @@ export class PickSignerPopover extends Component {
   memberTileRenderer = (memberDetails, index) => {
     const { selectedMembers } = this.state
     const isSelected = selectedMembers.includes(memberDetails)
-    const canSign = memberDetails.foundationsID !== null
+    const canSign = false
 
     var className = "member-tile"
     if(!canSign) {

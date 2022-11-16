@@ -255,7 +255,7 @@ export class UserDetailsForm extends Component {
               <Callout className='foundations-info' intent='primary'>
                 <div>
                   {
-                    initialValues.foundationsID !== null ?
+                    false ?
                     Strings.PROFILE_DATA_IS_MANAGED_IN_FOUNDATIONS_WITH_APP :
                     Strings.PROFILE_DATA_IS_MANAGED_IN_FOUNDATIONS_NO_APP
                   }
